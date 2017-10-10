@@ -10,12 +10,20 @@ pod 'IQKeyboardManager', '~> 5.0.2'
 
 pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
-    'RCTText',
+    'ART',
+    'RCTActionSheet',
+    'RCTAdSupport',
+    'RCTGeolocation',
+    'RCTImage',
     'RCTNetwork',
+    'RCTPushNotification',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
     'RCTWebSocket',
+    'RCTLinkingIOS',
     'DevSupport',
     'BatchedBridge',
-    'RCTImage',
     'RCTAnimation',
 ]
 pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
