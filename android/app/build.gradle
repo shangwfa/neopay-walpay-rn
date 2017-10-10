@@ -1,0 +1,111 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'walle'
+apply from: "../../node_modules/react-native/react.gradle"
+
+import com.android.build.OutputFile
+def enableSeparateBuildPerCPUArchitecture = false
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    defaultConfig {
+        applicationId "cn.neopay.walpay.android"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner rootProject.ext.android["testInstrumentationRunner"]
+
+        multiDexEnabled true
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'x86', 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+    }
+    compileOptions {
+        targetCompatibility rootProject.ext.android["JavaVersion"]
+        sourceCompatibility rootProject.ext.android["JavaVersion"]
+    }
+    signingConfigs {
+        walpay {
+            storeFile file("./neopay_walpay_android.jks")
+            storePassword storePwd
+            keyAlias "walpay"
+            keyPassword keyPwd
+            v2SigningEnabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.walpay
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.walpay
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+    productFlavors {
+        walpayTest {}
+        walpayDevelop {}
+        walpayProduct {}
+    }
+
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            // For each separate APK per architecture, set a unique version code as described here:
+            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2]
+            def abi = output.getFilter(OutputFile.ABI)
+            if (abi != null) {  // null for the universal-debug, universal-release variants
+                output.versionCodeOverride =
+                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+            }
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+}
+
+walle {
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels")
+    apkFileNameFormat = 'walpay${versionName}@${channel}.apk'
+    channelFile = new File("${project.getProjectDir()}/channel.txt")
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(':commonlib')
+    compile rootProject.ext.dependencies["appcompatv7"]
+    compile rootProject.ext.dependencies["constraint_layout"]
+    annotationProcessor rootProject.ext.dependencies["aroutercompiler"]
+    testCompile 'junit:junit:4.12'
+
+}
