@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 
 import com.xgjk.common.lib.utils.DensityUtils;
 import com.xgjk.common.lib.utils.HandlerUtils;
+import com.xgjk.common.lib.utils.ScreenUtils;
 import com.xgjk.common.lib.view.rollViewPager.hintview.IconHintView;
 
 import java.util.ArrayList;
@@ -66,6 +67,9 @@ public class HomePromotionsView extends FrameLayout {
         mBinding.homeMetingBannersRpv.setHintView(hintView);
         HandlerUtils.runOnUiThread(() -> hintView.setmDotsMargin(DensityUtils.dip2px(context, 10), 0, DensityUtils.dip2px(context, 10), 0));
         mBinding.homeMetingBannersRpv.setHintPadding(DensityUtils.dip2px(context, 10), 0, 0, DensityUtils.dip2px(context, 20));
+        if (ScreenUtils.hasSoftKeys((Activity) context)) {
+            mBinding.homeMetingBannersRpv.setHintPadding(DensityUtils.dip2px(context, 10), 0, 0, DensityUtils.dip2px(context, 23));
+        }
         requestBannerUrls(context);
     }
 
@@ -80,9 +84,9 @@ public class HomePromotionsView extends FrameLayout {
     private void setBannerData(List<BannerResponseBean> bannerList) {
 
         List<String> urls = new ArrayList<>();
-            urls.add("http://img2.imgtn.bdimg.com/it/u=3259946169,3752632959&fm=27&gp=0.jpg");
-            urls.add("http://img4.imgtn.bdimg.com/it/u=227953490,3054069314&fm=27&gp=0.jpg");
-            urls.add("http://img1.imgtn.bdimg.com/it/u=391390601,3860916026&fm=11&gp=0.jpg");
+        urls.add("http://img2.imgtn.bdimg.com/it/u=3259946169,3752632959&fm=27&gp=0.jpg");
+        urls.add("http://img4.imgtn.bdimg.com/it/u=227953490,3054069314&fm=27&gp=0.jpg");
+        urls.add("http://img1.imgtn.bdimg.com/it/u=391390601,3860916026&fm=11&gp=0.jpg");
 //        if (null == bannerList) {
 //            return;
 //        }

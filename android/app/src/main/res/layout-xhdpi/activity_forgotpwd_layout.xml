@@ -12,39 +12,41 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginTop="10dp"
-            android:visibility="gone"
-            android:background="@color/item_space" />
+            android:background="@color/item_space"
+            android:visibility="gone" />
         <!--手机号-->
         <cn.neopay.walpay.android.view.commoninputview.CommonInputView
             android:id="@+id/common_input_phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_48dp" />
         <!--验证码-->
         <cn.neopay.walpay.android.view.commoninputview.CommonInputView
             android:id="@+id/common_input_verification"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_34dp" />
         <!--支付密码common_input_verification-->
         <cn.neopay.walpay.android.view.commoninputview.CommonInputView
             android:id="@+id/common_input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp" />
+            android:layout_marginTop="@dimen/size_34dp" />
 
         <!--确认按钮-->
         <TextView
             android:id="@+id/password_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_52dp"
-            android:layout_marginLeft="@dimen/size_20dp"
-            android:layout_marginRight="@dimen/size_20dp"
-            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginLeft="@dimen/size_13dp"
+            android:layout_marginRight="@dimen/size_13dp"
+            android:layout_marginTop="@dimen/size_52dp"
             android:background="@mipmap/img_login_btn"
             android:gravity="center"
             android:paddingBottom="@dimen/size_3dp"
             android:text="@string/str_sure"
             android:textColor="@color/common_white"
-            android:textSize="17sp" />
+            android:textSize="@dimen/size_15sp" />
 
     </LinearLayout>
 </layout>
