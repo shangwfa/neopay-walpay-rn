@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.xgjk.aggregate.pay.MainActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/common_icon"
+            android:layout_width="@dimen/size_20dp"
+            android:layout_height="@dimen/size_20dp"
+            android:background="@mipmap/img_checkbox_unselected" />
+
+        <TextView
+            android:id="@+id/common_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_5dp"
+            android:textSize="@dimen/text_normal"
+            tools:text="@string/str_agreement" />
+    </LinearLayout>
+</layout>
+

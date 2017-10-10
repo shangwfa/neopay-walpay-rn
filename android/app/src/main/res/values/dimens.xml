@@ -1,0 +1,85 @@
+<resources>
+    <!--common-->
+    <dimen name="one_px">1px</dimen>
+    <!--登录页面-->
+    <dimen name="text_normal">12sp</dimen>
+    <dimen name="text_middle">15sp</dimen>
+    <dimen name="text_large">20sp</dimen>
+    <!--header-->
+    <dimen name="common_header">45dp</dimen>
+
+    <!--homepage-->
+    <dimen name="home_tab_height">54dp</dimen>
+    <dimen name="home_top_icon_width">55dp</dimen>
+    <dimen name="home_top_icon_height">55dp</dimen>
+
+
+    <dimen name="size_225dp">225dp</dimen>
+    <dimen name="size_210dp">210dp</dimen>
+    <dimen name="size_200dp">200dp</dimen>
+    <dimen name="size_184dp">184dp</dimen>
+    <dimen name="size_148dp">148dp</dimen>
+    <dimen name="size_130dp">130dp</dimen>
+    <dimen name="size_155dp">155dp</dimen>
+    <dimen name="size_104dp">104dp</dimen>
+    <dimen name="size_100dp">100dp</dimen>
+    <dimen name="size_80dp">80dp</dimen>
+    <dimen name="size_75dp">75dp</dimen>
+    <dimen name="size_60dp">60dp</dimen>
+    <dimen name="size_69dp">69dp</dimen>
+    <dimen name="size_65dp">65dp</dimen>
+    <dimen name="size_58dp">58dp</dimen>
+    <dimen name="size_56dp">56dp</dimen>
+    <dimen name="size_52dp">52dp</dimen>
+    <dimen name="size_54dp">54dp</dimen>
+    <dimen name="size_51dp">51dp</dimen>
+    <dimen name="size_50dp">50dp</dimen>
+    <dimen name="size_48dp">48dp</dimen>
+    <dimen name="size_45dp">45dp</dimen>
+    <dimen name="size_43dp">43dp</dimen>
+    <dimen name="size_44dp">44dp</dimen>
+    <dimen name="size_40dp">40dp</dimen>
+    <dimen name="size_35dp">35dp</dimen>
+    <dimen name="size_34dp">34dp</dimen>
+    <dimen name="size_32dp">32dp</dimen>
+    <dimen name="size_30dp">30dp</dimen>
+    <dimen name="size_26dp">26dp</dimen>
+    <dimen name="size_25dp">25dp</dimen>
+    <dimen name="size_24dp">24dp</dimen>
+    <dimen name="size_23dp">23dp</dimen>
+    <dimen name="size_22dp">22dp</dimen>
+    <dimen name="size_21dp">21dp</dimen>
+    <dimen name="size_20dp">20dp</dimen>7
+    <dimen name="size_19dp">19dp</dimen>
+    <dimen name="size_18dp">18dp</dimen>
+    <dimen name="size_17dp">17dp</dimen>
+    <dimen name="size_16dp">16dp</dimen>
+    <dimen name="size_15dp">15dp</dimen>
+    <dimen name="size_14dp">14dp</dimen>
+    <dimen name="size_13dp">13dp</dimen>
+    <dimen name="size_10dp">10dp</dimen>
+    <dimen name="size_12dp">12dp</dimen>
+    <dimen name="size_9dp">9dp</dimen>
+    <dimen name="size_8dp">8dp</dimen>
+    <dimen name="size_5dp">5dp</dimen>
+    <dimen name="size_6dp">6dp</dimen>
+    <dimen name="size_3dp">3dp</dimen>
+    <dimen name="size_2dp">2dp</dimen>
+    <dimen name="size_1dp">1dp</dimen>
+
+
+    <dimen name="size_24sp">24sp</dimen>
+    <dimen name="size_20sp">20sp</dimen>
+    <dimen name="size_15sp">15sp</dimen>
+    <dimen name="size_14sp">14sp</dimen>
+    <dimen name="size_13sp">13sp</dimen>
+    <dimen name="size_12sp">12sp</dimen>
+    <dimen name="size_10sp">10sp</dimen>
+    <dimen name="size_26sp">26sp</dimen>
+
+
+    //------------------------------特殊页面适配----------------------------------------------------//
+    <dimen name="auth_result_icon_width">150dp</dimen>
+    <dimen name="auth_result_icon_height">150dp</dimen>
+    <dimen name="auth_result_icon_top_margin">40dp</dimen>
+</resources>

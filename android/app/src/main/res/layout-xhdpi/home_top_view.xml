@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_155dp"
+        android:background="@mipmap/img_home_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_13dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_22dp"
+                android:layout_marginLeft="@dimen/size_12dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/img_home_logo" />
+
+            <ImageView
+                android:id="@+id/home_sign_iv"
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_12dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/img_home_sign" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_54dp"
+            android:layout_marginRight="@dimen/size_54dp"
+            android:layout_marginTop="@dimen/size_26dp">
+
+            <LinearLayout
+                android:id="@+id/home_scan_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_43dp"
+                    android:layout_height="@dimen/size_43dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_scan" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16dp"
+
+                    android:text="@string/str_scan"
+                    android:textColor="@color/common_white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_pay_code_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_43dp"
+                    android:layout_height="@dimen/size_43dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_pay_code" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:text="@string/str_pay_code"
+                    android:textColor="@color/common_white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_balance_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_43dp"
+                    android:layout_height="@dimen/size_43dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_balance" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:text="@string/str_balance"
+                    android:textColor="@color/common_white" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

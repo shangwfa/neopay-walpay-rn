@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_btn"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_52dp"
+    android:layout_marginLeft="@dimen/size_20dp"
+    android:layout_marginRight="@dimen/size_20dp"
+    android:layout_marginTop="@dimen/size_60dp"
+    android:background="@mipmap/img_login_btn"
+    android:gravity="center"
+    android:paddingBottom="@dimen/size_3dp"
+    android:textColor="@color/common_white"
+    android:textSize="17sp" />

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">@color/common_white</color>
+    <color name="colorPrimaryDark">@color/common_white</color>
+    <color name="colorAccent">#3D4767</color>
+
+    <color name="transparent">#80ffffff</color>
+    <color name="item_space">#CCCDCE</color>
+    <color name="common_white">#ffffff</color>
+    <color name="common_orange">#FF7900</color>
+    <color name="common_little_white">#F5F5F5</color>
+    <color name="common_orange_deep">#FF5308</color>
+    <color name="common_header">@color/color_two_type</color>
+    <color name="common_black">#333333</color>
+    <color name="common_color_black">#000000</color>
+    <color name="common_black_light">#666666</color>
+    <color name="common_black_color">#888888</color>
+    <color name="common_dark_gray">#B2B2B2</color>
+    <color name="common_gray_light">#999999</color>
+    <color name="background_gray">#efefef</color>
+    <color name="common_btn_gray">#BFC0C2</color>
+    <color name="input_hint">#CCCCCC</color>
+
+    <color name="receipt_btn_bg">#D6D7D9</color>
+    <color name="line">#cccccc</color>
+    <color name="home_top_background">#333A48</color>
+    <color name="home_top_text">#D7BC51</color>
+    <color name="home_tab_bg">#F6F7F9</color>
+    <color name="dialog_tips_btn">#0071FF</color>
+
+    <color name="withdrawals_log_sucess">#5CCA7A</color>
+    <color name="withdrawals_log_failed">#E63A41</color>
+    <color name="color_red_login">#E83042</color>
+
+    <!--财务流水-->
+    <color name="flow_txt_gray">#6C6D6F</color>
+
+    <color name="realname_limit_amount_bg">#C0C1C2</color>
+    <color name="mask">#87000000</color>
+
+    <color name="color_one_type">#339cfe</color>
+    <color name="color_two_type">#D93638</color>
+    <color name="color_three_type">#C4C5C6</color>
+    <color name="color_four_type">#434a5a</color>
+    <color name="color_five_type">#fcde66</color>
+    <color name="color_six_type">#66D93638</color>
+
+    <color name="test">#ab2324</color>
+</resources>

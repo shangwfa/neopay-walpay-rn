@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_210dp"
+        android:background="@color/common_white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/home_card_bag_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_card_bag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_card_bag"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_big_red_bag_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_card_bag" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_big_red_bag"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_recharge_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_recharge" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_recharge"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_seasons_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_seasons" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_seasons"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/home_cate_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_cate" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_cate"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_express_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_express" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_express"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_employee_loans_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_employee_loans" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_employee_loans"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_credit_card_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_44dp"
+                    android:layout_height="@dimen/size_44dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_credit_card" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="@string/str_credit_card"
+                    android:textColor="@color/common_color_black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

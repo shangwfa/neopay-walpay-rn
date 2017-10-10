@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_30dp"
+            android:background="@mipmap/img_login_logo"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:background="@color/item_space" />
+        <!--手机号-->
+        <cn.neopay.walpay.android.view.commoninputview.CommonInputView
+            android:id="@+id/register_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!--验证码-->
+        <cn.neopay.walpay.android.view.commoninputview.CommonInputView
+            android:id="@+id/register_verification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!--登录密码-->
+        <cn.neopay.walpay.android.view.commoninputview.CommonInputView
+            android:id="@+id/register_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!--支付密码-->
+        <cn.neopay.walpay.android.view.commoninputview.CommonInputView
+            android:id="@+id/register_pay_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!--协议-->
+        <cn.neopay.walpay.android.view.actionview.CommonCheckBoxView
+            android:id="@+id/register_agreement_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone" />
+        <!--注册按钮-->
+        <TextView
+            android:id="@+id/register_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_52dp"
+            android:layout_marginLeft="@dimen/size_20dp"
+            android:layout_marginRight="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:background="@mipmap/img_login_btn"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size_3dp"
+            android:text="@string/str_common_register"
+            android:textColor="@color/common_white"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+</layout>

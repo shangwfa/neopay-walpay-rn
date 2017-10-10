@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/common_white"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/icon_img"
+                android:layout_width="@dimen/size_25dp"
+                android:layout_height="@dimen/size_25dp"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_10dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/key"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:textColor="@color/common_black_light"
+                android:textSize="@dimen/size_15dp"
+                android:visibility="visible"
+                tools:text="手机号" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.2"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5">
+
+                        <EditText
+                            android:id="@+id/value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_5dp"
+                            android:background="@null"
+                            android:singleLine="true"
+                            android:textColor="@color/common_black"
+                            android:textColorHint="@color/common_gray_light"
+                            android:textSize="@dimen/size_15dp"
+                            tools:hint="请输入手机号" />
+
+                        <TextView
+                            android:id="@+id/no_edit_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:singleLine="true"
+                            android:textColor="@color/common_black"
+                            android:textColorHint="@color/common_gray_light"
+                            android:textSize="@dimen/size_15dp"
+                            android:visibility="invisible"
+                            tools:hint="请输入手机号" />
+                    </FrameLayout>
+
+                    <View
+                        android:id="@+id/common_input_close"
+                        android:layout_width="@dimen/size_18dp"
+                        android:layout_height="@dimen/size_18dp"
+                        android:layout_marginLeft="@dimen/size_2dp"
+                        android:layout_marginRight="@dimen/size_10dp"
+                        android:background="@mipmap/img_input_clear"
+                        android:visibility="invisible" />
+
+                    <View
+                        android:id="@+id/pass_word_eye"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="@dimen/size_5dp"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_verification_code"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
+                        <cn.neopay.walpay.android.view.actionview.CommonVerificationCodeView
+                            android:id="@+id/verification_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/common_input_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/item_space" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,10 @@
+neopay # 官网
+anzhi  # 安智
+xiaomi # 小米
+huawei # 华为
+oppo   # oppo
+meizu  # 魅族
+vivo   # vivo
+wandoujia # 豌豆荚
+tencent # 腾讯
+
