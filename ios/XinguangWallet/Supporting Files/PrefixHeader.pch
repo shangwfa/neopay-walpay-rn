@@ -1,0 +1,60 @@
+//
+//  PrefixHeader.pch
+//  MiAiApp
+//
+//  Created by 徐阳 on 2017/5/18.
+//  Copyright © 2017年 徐阳. All rights reserved.
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//全局宏
+#import "UtilsMacros.h"
+#import "FontAndColorMacros.h"
+#import "ThirdMacros.h"
+#import "CommonMacros.h"
+
+//基础类
+#import "AppDelegate.h"
+#import "AppDelegate+AppService.h"
+#import "XGQBRootViewController.h"
+#import "XGQBRootNavigationController.h"
+#import "XGQBRootWebViewController.h"
+#import "XGQBAppManager.h"
+
+//#import "MBProgressHUD+XY.h"
+//#import "PPNetworkHelper.h"
+//#import "ShareManager.h"
+//#import "UserManager.h"
+//#import "IMManager.h"
+//#import "UIButton+XYButton.h"
+
+//工具类
+#import "IphoneDevice.h"
+#import "SystemMethods.h"
+#import "GVUserDefaults.h"
+#import "GVUserDefaults+PropertyList.h"
+#import "NSString+checkContent.h"
+
+//第三方
+#import <YYKit.h>
+//#import <JSONKit.h>
+#import "SVProgressHUD.h"
+//#import <MBProgressHUD.h>
+#import <Masonry.h>
+//#import <SDWebImage/UIImageView+WebCache.h>
+#import "IQKeyboardManager.h"
+
+//通用视图组件
+#import "XGQBTextField.h"
+
+//网络类
+#import "ABNetworkCofing.h"
+#import "ABNetworkManager.h"
+#import "AssistCoreService.h"
+#import "BalanceCoreService.h"
+#import "BankCardCoreService.h"
+#import "MemberCoreService.h"
+#import "MerchantCoreService.h"
+
+#endif /* PrefixHeader_pch */
