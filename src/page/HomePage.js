@@ -8,7 +8,6 @@ import {
     DeviceEventEmitter
 } from 'react-native';
 
-import Resolution from '../utils/Resolution'
 import Header from "../components/Header"
 import colors from '../constants/colors'
 import MineTopView from '../components/MineTopView'
@@ -33,11 +32,11 @@ class Home extends Component {
 
     componentWillMount() {
         console.log(this.props)
-        NetUtil.postJson('employee/get_employee_info', {}, (data) => {
-            this.setState({
-                data: data
-            })
-        })
+        // NetUtil.postJson('employee/get_employee_info', {}, (data) => {
+        //     this.setState({
+        //         data: data
+        //     })
+        // })
     }
 
     /**
@@ -56,7 +55,7 @@ class Home extends Component {
 
     render() {
         return (
-            <Resolution.FixWidthView style={styles.container}>
+            <View style={styles.container}>
                 <StatusBar barStyle={'default'}/>
                 <Header navigation={this.props.navigation} title='我的'/>
                 <ScrollView contentContainerStyle={styles.scroller}>
@@ -77,7 +76,7 @@ class Home extends Component {
                         退出登录
                     </Button>
                 </ScrollView>
-            </Resolution.FixWidthView>
+            </View>
         );
     }
 

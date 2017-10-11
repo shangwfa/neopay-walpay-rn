@@ -1,5 +1,5 @@
 //
-//  XGQBLoginBtn.h
+//  XGQBPureColorBtn.h
 //  XinguangWallet
 //
 //  Created by Neopay-iOS on 27/09/2017.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XGQBLoginBtn : UIButton
+@interface XGQBPureColorBtn : UIButton
 
 +(instancetype)buttonWithText:(NSString*)text andColor:(UIColor*)color;
 

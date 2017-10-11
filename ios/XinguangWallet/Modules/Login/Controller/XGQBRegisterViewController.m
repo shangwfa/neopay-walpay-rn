@@ -8,7 +8,7 @@
 
 #import "XGQBRegisterViewController.h"
 #import "XGQBLoginInputView.h"
-#import "XGQBLoginBtn.h"
+#import "XGQBPureColorBtn.h"
 #import "XGQBCountTimeBtn.h"
 
 @interface XGQBRegisterViewController ()
@@ -80,7 +80,7 @@
     [self.view addSubview:paypwdIV];
     
     //注册按钮
-    XGQBLoginBtn *regBtn = [XGQBLoginBtn buttonWithText:@"注册" andColor:[UIColor redColor]];
+    XGQBPureColorBtn *regBtn = [XGQBPureColorBtn buttonWithText:@"注册" andColor:[UIColor redColor]];
     [self.view addSubview:regBtn];
     [regBtn addTarget:self action:@selector(registerBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     

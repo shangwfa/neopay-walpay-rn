@@ -1,5 +1,5 @@
 //
-//  XGQBRCTModules.h
+//  commModule.h
 //  XinguangWallet
 //
 //  Created by Neopay-iOS on 30/09/2017.
@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "RCTBridgeModule.h"
 
-@interface XGQBRCTModules : NSObject <RCTBridgeModule>
+@interface commModule : NSObject <RCTBridgeModule>
 
 @end

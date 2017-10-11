@@ -6,6 +6,7 @@ import JsonUtil from './utils/JsonUtil'
 import Splash from './page/SplashPage'
 import Home from "./page/HomePage"
 import ChangeName from './page/ChangeNamePage'
+import ScreenUtils from './utils/ScreenUtils'
 
 class App extends Component {
     constructor(props) {
@@ -19,8 +20,9 @@ class App extends Component {
 
     render() {
         console.log(this.props)
-        let params = JsonUtil.strToJson(this.props.params)
-        console.log(params.page)
+        let params=ScreenUtils.isIOS?this.props.params:JsonUtil.strToJson(this.props.params)
+
+        console.log(this.props.params.page)
         const Navigator = StackNavigator(
             {
                 splash: {screen: Splash},
@@ -40,8 +42,8 @@ class App extends Component {
                     },
                     headerTintColor: '#fff'
                 },
-                transitionConfig:()=>({
-                    screenInterpolator:CardStackStyleInterpolator.forHorizontal,//设置跳转动画左右滑动
+                transitionConfig: () => ({
+                    screenInterpolator: CardStackStyleInterpolator.forHorizontal,//设置跳转动画左右滑动
                 })
 
             }

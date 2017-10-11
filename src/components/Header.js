@@ -7,6 +7,7 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 import colors from '../constants/colors'
+import ScreenUtils from '../utils/ScreenUtils'
 import header_back_img from '../res/img/header_back.png'
 
 class Header extends Component {
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: colors.white,
         height: 48,
+        paddingTop:ScreenUtils.statusBarHeight
 
     },
 });
