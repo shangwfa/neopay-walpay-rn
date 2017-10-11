@@ -34,6 +34,8 @@
     jumpToRN.backgroundColor = [UIColor redColor];
     [jumpToRN addTarget:self action:@selector(jumpToRN) forControlEvents:UIControlEventTouchUpInside];
     
+    //监听RN跳转通知
+    [kNotificationCenter addObserver:self selector:@selector(jumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
     
     NSLog(@"%s",__func__);
     
@@ -60,6 +62,12 @@
     
     [self.navigationController pushViewController:RNVC animated:YES];
     
+}
+
+//从RN跳回原生界面
+-(void)jumpBackToNative
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)pushToLoginVC

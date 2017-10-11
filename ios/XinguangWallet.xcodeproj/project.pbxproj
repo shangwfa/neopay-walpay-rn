@@ -13,7 +13,7 @@
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
 		42DD31DE1F8C748D00B435EA /* XGQBHomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DD31DD1F8C748D00B435EA /* XGQBHomeBannerView.m */; };
 		6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */; };
-		6A0FF9D61F7F3A0E001A66BA /* XGQBRCTModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0FF9D51F7F3A0E001A66BA /* XGQBRCTModules.m */; };
+		6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0FF9D51F7F3A0E001A66BA /* commModule.m */; };
 		6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C68AC1F7A3CF400170E47 /* XGQBAPPBootViewController.m */; };
 		6A3843CC1F79E46600BFE9B4 /* XGQBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3843CB1F79E46600BFE9B4 /* XGQBLoginViewController.m */; };
 		6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4352001F7E22E1009971FD /* YYFPSLabel.m */; };
@@ -87,8 +87,8 @@
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
 		6A01A0191F7A2AC20059D6D3 /* ABNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkManager.h; sourceTree = "<group>"; };
 		6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABNetworkManager.m; sourceTree = "<group>"; };
-		6A0FF9D41F7F3A0E001A66BA /* XGQBRCTModules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRCTModules.h; sourceTree = "<group>"; };
-		6A0FF9D51F7F3A0E001A66BA /* XGQBRCTModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRCTModules.m; sourceTree = "<group>"; };
+		6A0FF9D41F7F3A0E001A66BA /* commModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = commModule.h; sourceTree = "<group>"; };
+		6A0FF9D51F7F3A0E001A66BA /* commModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = commModule.m; sourceTree = "<group>"; };
 		6A1C68AB1F7A3CF400170E47 /* XGQBAPPBootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAPPBootViewController.h; sourceTree = "<group>"; };
 		6A1C68AC1F7A3CF400170E47 /* XGQBAPPBootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAPPBootViewController.m; sourceTree = "<group>"; };
 		6A3843CA1F79E46600BFE9B4 /* XGQBLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginViewController.h; sourceTree = "<group>"; };
@@ -580,8 +580,8 @@
 			children = (
 				6AF9E4841F78EA52005E901C /* XGQBCoinViewController.h */,
 				6AF9E4851F78EA52005E901C /* XGQBCoinViewController.m */,
-				6A0FF9D41F7F3A0E001A66BA /* XGQBRCTModules.h */,
-				6A0FF9D51F7F3A0E001A66BA /* XGQBRCTModules.m */,
+				6A0FF9D41F7F3A0E001A66BA /* commModule.h */,
+				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
 				42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */,
 				42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */,
 			);
@@ -1021,7 +1021,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD95B321F7D064100BFF4DA /* AssistCoreService.m in Sources */,
-				6A0FF9D61F7F3A0E001A66BA /* XGQBRCTModules.m in Sources */,
+				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
 				42DD31DE1F8C748D00B435EA /* XGQBHomeBannerView.m in Sources */,

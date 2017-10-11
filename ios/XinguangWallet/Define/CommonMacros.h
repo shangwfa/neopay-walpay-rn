@@ -15,6 +15,9 @@
 //登录状态改变通知
 #define KNotificationLoginStateChange @"loginStateChange"
 
+//RN跳回原生界面通知
+#define kNotificationRNJumpBackToNative @"RNJumpBackToNative"
+
 //自动登录成功
 //#define KNotificationAutoLoginSuccess @"KNotificationAutoLoginSuccess"
 
