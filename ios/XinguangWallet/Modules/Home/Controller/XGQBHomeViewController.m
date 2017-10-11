@@ -53,6 +53,14 @@
     XGQBHomeTitleBtn *payCodeBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
     XGQBHomeTitleBtn *accountBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
     
+    [scanBtn setImage:[UIImage imageNamed:@"sy_saoyisao"] forState:UIControlStateNormal];
+    [payCodeBtn setImage:[UIImage imageNamed:@"sy_fuqianma"] forState:UIControlStateNormal];
+    [accountBtn setImage:[UIImage imageNamed:@"sy_yue"] forState:UIControlStateNormal];
+    
+    [scanBtn setTitle:@"扫一扫" forState:UIControlStateNormal];
+    [payCodeBtn setTitle:@"二维码" forState:UIControlStateNormal];
+    [accountBtn setTitle:@"余额" forState:UIControlStateNormal];
+    
     [self.view addSubview:scanBtn];
     [self.view addSubview:payCodeBtn];
     [self.view addSubview:accountBtn];
@@ -66,6 +74,12 @@
     //广告视图
     XGQBHomeBottomADView *homeADView = [XGQBHomeBottomADView new];
     [self.view addSubview:homeADView];
+    
+    //实名认证弹窗
+    UIView *popupView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    popupView.backgroundColor = [UIColor grayColor];
+    
+//    [[UIApplication sharedApplication].keyWindow addSubview:popupView];
     
     
     //添加约束
@@ -101,10 +115,21 @@
     
     [scanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(45, 70));
-        make.bottom.equalTo(backgroundImg).with.offset(25);
+        make.bottom.equalTo(backgroundImg).with.offset(-25);
         make.left.equalTo(backgroundImg).with.offset(57);
     }];
     
+    [payCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(scanBtn);
+        make.centerX.equalTo(backgroundImg);
+        make.bottom.equalTo(scanBtn);
+    }];
+    
+    [accountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(scanBtn);
+        make.right.equalTo(backgroundImg).with.offset(-57);
+        make.bottom.equalTo(scanBtn);
+    }];
 }
 
 
