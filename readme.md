@@ -67,9 +67,13 @@
     - 新建RN .js 代码，选择ReactNative 生产模板代码
     
  - 页面编写规范
+ 
     - 使用ES6语法进行编码（http://es6.ruanyifeng.com/）
     
-    - 代码中初始化state因在constructor函数中，而且尽量对每个变量进行注释；
+    - 掌握flexbox布局（http://lib.csdn.net/article/reactnative/41548）
+    
+    - 代码中初始化state因在constructor函数中，而且尽量对每个变量进行注释
+    
     ```
         constructor() {
                 super()
@@ -215,5 +219,29 @@
                         );
     }
     ```
-- 三方开源库（https://js.coach/react-native），多参考别人是怎么写代码的 
+- 三方开源库（https://js.coach/react-native），官网（中文 http://reactnative.cn/  英文 http://facebook.github.io/react-native/）多参考别人是怎么写代码的 
+
+- RN页面与原生页面通信模块
+    - 原生页面跳转RN页面参数传递：
+        - Android： 通过mReactRootView.startReactApplication（）进行传递
+        - IOS：通过 [[RCTRootView alloc] initWithBundleURL  进行传递
+        - 要求其格式{params:{page:"xxxxx",key1:"xxxx",key2:"xxxx",...},page参数必须传递，其他根据RN页面具体需求进行传递
+        - RN页面通过this.props.params进行接收
+    - RN页面要原生提供的功能，模块名称两端（Android和IOS）统一命名为：commModule
+      - 使用示例：NativeModules.commModule.xxxxx()
+      - 目前原生支持的功能有：
+        - 提示性信息展示:NativeModules.commModule.toast()
+        - 关闭原生RN容器页面：NativeModules.commModule.closeRNPage()
+        - 获取请求接口，通用参数：NativeModules.commModule.netCommParas（）
+        - 其他，后续根据具体需要扩展
+    - RN与原生的通信
+        - RN与Android的通信方式（http://lib.csdn.net/article/52/67502）
+        - RN与IOS的通信方式
+        
+- 调试两种方式
+    - 通过打印Log(基本上可以解决大部分的问题)
+    - 通过React Developer Tools用浏览器进行调试（建议用谷歌浏览器），源码查看，相关配置请参考（http://lib.csdn.net/article/reactnative/59313）
     
+- 重新加载RN页面
+    - Android模拟器 cmd+M
+    - IOS 模拟器
