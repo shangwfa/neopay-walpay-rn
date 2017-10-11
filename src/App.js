@@ -19,8 +19,8 @@ class App extends Component {
 
     render() {
         console.log(this.props)
-        let params = JsonUtil.strToJson(this.props.params)
-        console.log(params.page)
+        // let params = JsonUtil.strToJson(this.props.params)
+        // console.log(params.page)
         const Navigator = StackNavigator(
             {
                 splash: {screen: Splash},
@@ -28,7 +28,8 @@ class App extends Component {
                 changeName: {screen: ChangeName},
             },
             {
-                initialRouteName: params.page,
+                // initialRouteName: params.page,
+                initialRouteName: 'home',
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {
