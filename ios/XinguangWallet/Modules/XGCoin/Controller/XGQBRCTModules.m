@@ -18,6 +18,7 @@ RCT_EXPORT_METHOD(JumpBackToLogin:(NSString*)msg){
     dispatch_async(dispatch_get_main_queue(), ^{
         
         NSLog(@"RN传入原生界面的数据为:%@",msg);
+        
         [kNotificationCenter postNotificationName:KNotificationLoginStateChange object:@NO];
         
     });

@@ -89,13 +89,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ActivityLoginLay
 
     private void handleBottomKeyLayout() {
         if (ScreenUtils.hasSoftKeys(this)) {
-            //mPageBinding.baseContainer.scrollTo(0, DensityUtils.dip2px(this,20));
+            mPageBinding.baseContainer.scrollTo(0, DensityUtils.dip2px(this, 10));
             LinearLayout.LayoutParams paramsOne = (LinearLayout.LayoutParams) mViewBinding.loginBtn.getLayoutParams();
-            paramsOne.setMargins(DensityUtils.dip2px(this, 20), DensityUtils.dip2px(this, 50), DensityUtils.dip2px(this, 20), 0);
+            paramsOne.setMargins(DensityUtils.dip2px(this, 20), DensityUtils.dip2px(this, 46), DensityUtils.dip2px(this, 20), 0);
             mViewBinding.loginBtn.setLayoutParams(paramsOne);
 
             LinearLayout.LayoutParams paramsTwo = (LinearLayout.LayoutParams) mViewBinding.loginRegister.getLayoutParams();
-            paramsTwo.setMargins(0, DensityUtils.dip2px(this, 50), 0, 0);
+            paramsTwo.setMargins(0, DensityUtils.dip2px(this, 18), 0, 0);
             mViewBinding.loginRegister.setLayoutParams(paramsTwo);
         }
     }

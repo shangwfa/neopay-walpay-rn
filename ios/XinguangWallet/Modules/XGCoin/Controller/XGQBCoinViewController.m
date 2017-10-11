@@ -8,6 +8,7 @@
 
 #import "XGQBCoinViewController.h"
 #import "XGQBLoginViewController.h"
+#import "XGQBRNTestViewController.h"
 #import "RCTRootView.h"
 
 @interface XGQBCoinViewController ()
@@ -41,6 +42,8 @@
 //跳转进入RN界面
 -(void)jumpToRN
 {
+
+    
     NSLog(@"High Score Button Pressed");
     NSURL *jsCodeLocation = [NSURL
                              URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
@@ -49,9 +52,14 @@
                          moduleName        : @"neopay_walpay"
                          initialProperties :nil
                           launchOptions    : nil];
-
-    rootView.frame = CGRectMake(10, 300, kScreenWidth-20, kScreenHeight-400);
-    [self.view addSubview:rootView];
+    
+    
+    //创建XGQBRNTestVC
+    XGQBRNTestViewController *RNVC = [[XGQBRNTestViewController alloc]init];
+    RNVC.view = rootView;
+    
+    [self.navigationController pushViewController:RNVC animated:YES];
+    
 }
 
 -(void)pushToLoginVC

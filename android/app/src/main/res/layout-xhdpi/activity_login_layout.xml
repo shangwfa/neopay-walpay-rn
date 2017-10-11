@@ -10,7 +10,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size_254dp"
             android:background="@mipmap/img_login_bg"
             android:visibility="visible">
 
@@ -26,22 +26,22 @@
             android:id="@+id/login_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_50dp" />
+            android:layout_marginTop="@dimen/size_79dp" />
 
         <cn.neopay.walpay.android.view.commoninputview.CommonLoginView
             android:id="@+id/login_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_20dp" />
+            android:layout_marginTop="@dimen/size_46dp" />
 
 
         <TextView
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_51dp"
+            android:layout_height="@dimen/size_50dp"
             android:layout_marginLeft="@dimen/size_13dp"
             android:layout_marginRight="@dimen/size_13dp"
-            android:layout_marginTop="@dimen/size_65dp"
+            android:layout_marginTop="@dimen/size_62dp"
             android:background="@mipmap/img_login_btn"
             android:gravity="center"
             android:paddingBottom="@dimen/size_3dp"
@@ -53,7 +53,7 @@
             android:id="@+id/login_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_19dp"
+            android:layout_marginTop="@dimen/size_18dp"
             android:gravity="center"
             android:orientation="horizontal">
 

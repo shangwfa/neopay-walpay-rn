@@ -12,6 +12,7 @@
 
 #import "XGQBHomeCellView.h"
 #import "XGQBHomeBottomADView.h"
+#import "XGQBHomeTitleBtn.h"
 
 
 
@@ -47,6 +48,16 @@
     [self.view addSubview:calenderBtn];
     
     //添加头部功能按键
+    //扫一扫
+    XGQBHomeTitleBtn *scanBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
+    XGQBHomeTitleBtn *payCodeBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
+    XGQBHomeTitleBtn *accountBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
+    
+    [self.view addSubview:scanBtn];
+    [self.view addSubview:payCodeBtn];
+    [self.view addSubview:accountBtn];
+
+    
     
     //主业务图标视图
     XGQBHomeCellView *homeCellView = [XGQBHomeCellView new];
@@ -86,6 +97,12 @@
         make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.557+49));
         make.bottom.equalTo(self.view);
         make.left.equalTo(self.view);
+    }];
+    
+    [scanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(45, 70));
+        make.bottom.equalTo(backgroundImg).with.offset(25);
+        make.left.equalTo(backgroundImg).with.offset(57);
     }];
     
 }

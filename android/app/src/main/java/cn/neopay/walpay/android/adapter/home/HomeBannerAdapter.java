@@ -30,7 +30,7 @@ public class HomeBannerAdapter extends LoopPagerAdapter {
     public View getView(ViewGroup container, int position) {
         ImageView view = new ImageView(container.getContext());
         GlideManager.loadNetImage(view, mUrls.get(position));
-        view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        view.setScaleType(ImageView.ScaleType.FIT_XY);
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         return view;
     }

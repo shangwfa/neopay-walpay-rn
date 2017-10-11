@@ -9,11 +9,13 @@
 
         <cn.neopay.walpay.android.view.actionview.HomeTopView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_155dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1.1" />
 
         <cn.neopay.walpay.android.view.actionview.HomeMiddleView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_210dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1.4" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -22,7 +24,8 @@
 
         <cn.neopay.walpay.android.view.actionview.HomePromotionsView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_200dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1.3" />
 
     </LinearLayout>
 </layout>

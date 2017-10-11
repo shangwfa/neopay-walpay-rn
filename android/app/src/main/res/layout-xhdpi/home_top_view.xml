@@ -9,7 +9,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size_22dp"
             android:layout_marginTop="@dimen/size_13dp">
 
             <ImageView
@@ -31,10 +31,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="@dimen/size_54dp"
             android:layout_marginRight="@dimen/size_54dp"
-            android:layout_marginTop="@dimen/size_26dp">
+            android:layout_marginTop="@dimen/size_26dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/home_scan_ll"
@@ -62,6 +63,7 @@
                 android:id="@+id/home_pay_code_ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:orientation="vertical">
