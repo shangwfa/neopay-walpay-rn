@@ -81,7 +81,7 @@ public class CommModule extends ReactContextBaseJavaModule {
     }
 
     /**
-     * INowCertificationCallback 方式
+     * Callback 方式
      * rn调用Native,并获取返回值
      *
      * @param msg
