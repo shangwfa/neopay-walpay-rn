@@ -13,13 +13,13 @@
 #import "XGQBRestPwdViewController.h"
 #import "XGQBRegisterViewController.h"
 
-#import "XGQBLoginBtn.h"
+#import "XGQBPureColorBtn.h"
 #import "XGQBLoginInputView.h"
 
 @interface XGQBLoginViewController () <UITextFieldDelegate>
 @property (nonatomic,strong) XGQBLoginInputView *userNameIV;
 @property (nonatomic,strong) XGQBLoginInputView *pwdIV;
-@property (nonatomic,strong) XGQBLoginBtn *loginBtn;
+@property (nonatomic,strong) XGQBPureColorBtn *loginBtn;
 @end
 
 @implementation XGQBLoginViewController
@@ -106,7 +106,7 @@
     }];
     
     //登录按钮
-    XGQBLoginBtn *btn = [XGQBLoginBtn buttonWithText:@"登录" andColor:[UIColor redColor]];
+    XGQBPureColorBtn *btn = [XGQBPureColorBtn buttonWithText:@"登录" andColor:[UIColor redColor]];
     self.loginBtn = btn;
     
     [self.view addSubview:btn];
@@ -156,7 +156,7 @@
 
     
     //跳过按钮
-    XGQBLoginBtn *skipBtn = [XGQBLoginBtn buttonWithText:@"skip" andColor:[UIColor redColor]];
+    XGQBPureColorBtn *skipBtn = [XGQBPureColorBtn buttonWithText:@"skip" andColor:[UIColor redColor]];
     [self.view addSubview:skipBtn];
     [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.4, 20));
@@ -175,7 +175,7 @@
 }
 -(void)skipButtonClicked
 {
-    kPostNotification(KNotificationLoginStateChange, @YES)
+    kPostNotification(kNotificationLoginStateChange, @YES)
 }
 
 -(void)registerButtonClicked
@@ -233,7 +233,7 @@
             [GVUserDefaults standardUserDefaults].avatarUrl = [responseAfter objectForKey:@"avatarUrl"];
             
             //发送登录成功通知
-            kPostNotification(KNotificationLoginStateChange, @YES);
+            kPostNotification(kNotificationLoginStateChange, @YES);
             
         }
     } andFailerFn:^(NSError *error) {

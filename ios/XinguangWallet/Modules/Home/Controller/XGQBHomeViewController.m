@@ -8,30 +8,44 @@
 
 #import "XGQBHomeViewController.h"
 #import "XGQBLoginViewController.h"
-#import "RCTRootView.h"
 
 #import "XGQBHomeCellView.h"
 #import "XGQBHomeBottomADView.h"
 #import "XGQBHomeTitleBtn.h"
 
+#import "XGQBIDAlertViewController.h"
+#import "XGQBIDAlertTransiton.h"
 
 
-@interface XGQBHomeViewController ()
+
+@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate>
 
 @end
 
 @implementation XGQBHomeViewController
 
-
+#pragma mark - VC生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = [UIColor colorWithHexString:@"F5F5F5"];
     
     [self setUpViewComponents];
+    [self checkIDStatus];
 
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 设置视图组件
 -(void)setUpViewComponents
 {
     //首页背景
@@ -46,6 +60,7 @@
     UIButton *calenderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [calenderBtn setBackgroundImage:[UIImage imageNamed:@"sy_qiandao"] forState:UIControlStateNormal];
     [self.view addSubview:calenderBtn];
+    [calenderBtn addTarget:self action:@selector(calenderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
     //添加头部功能按键
     //扫一扫
@@ -74,13 +89,6 @@
     //广告视图
     XGQBHomeBottomADView *homeADView = [XGQBHomeBottomADView new];
     [self.view addSubview:homeADView];
-    
-    //实名认证弹窗
-    UIView *popupView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    popupView.backgroundColor = [UIColor grayColor];
-    
-//    [[UIApplication sharedApplication].keyWindow addSubview:popupView];
-    
     
     //添加约束
     kWeakSelf(self);
@@ -130,12 +138,41 @@
         make.right.equalTo(backgroundImg).with.offset(-57);
         make.bottom.equalTo(scanBtn);
     }];
+
+}
+
+#pragma mark - 处理按钮点击
+-(void)calenderBtnClicked
+{
+    
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 实名认证弹框
+//检查是否需要实名认证弹框
+-(void)checkIDStatus
+{
+    //检查实名认证信息
+    if (YES) {
+        XGQBIDAlertViewController *alertIDVC = [XGQBIDAlertViewController new];
+        
+        alertIDVC.transitioningDelegate = self;
+
+        
+        alertIDVC.modalPresentationStyle = UIModalPresentationCustom;
+        
+        [self presentViewController:alertIDVC animated:YES completion:nil];
+    }
+}
+//transition代理方法
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return [[XGQBIDAlertTransiton alloc] init];
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [[XGQBIDAlertTransiton alloc] init];
 }
 
 /*

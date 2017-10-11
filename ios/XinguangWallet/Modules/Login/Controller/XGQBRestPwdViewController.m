@@ -8,7 +8,7 @@
 
 #import "XGQBRestPwdViewController.h"
 #import "XGQBLoginInputView.h"
-#import "XGQBLoginBtn.h"
+#import "XGQBPureColorBtn.h"
 #import "XGQBCountTimeBtn.h"
 
 @interface XGQBRestPwdViewController ()
@@ -63,7 +63,7 @@
     [self.view addSubview:pwdIV];
     
     //确认按钮
-    XGQBLoginBtn *confirmBtn = [XGQBLoginBtn buttonWithText:@"确认" andColor:[UIColor redColor]];
+    XGQBPureColorBtn *confirmBtn = [XGQBPureColorBtn buttonWithText:@"确认" andColor:[UIColor redColor]];
     [self.view addSubview:confirmBtn];
     [confirmBtn addTarget:self action:@selector(confirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
