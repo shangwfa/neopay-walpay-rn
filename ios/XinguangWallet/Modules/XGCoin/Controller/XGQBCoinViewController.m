@@ -46,10 +46,10 @@
                              URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
-                         moduleName        : @"RNTestView"
+                         moduleName        : @"neopay_walpay"
                          initialProperties :nil
                           launchOptions    : nil];
-    
+
     rootView.frame = CGRectMake(10, 300, kScreenWidth-20, kScreenHeight-400);
     [self.view addSubview:rootView];
 }
