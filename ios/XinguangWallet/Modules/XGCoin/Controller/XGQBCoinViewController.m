@@ -43,20 +43,20 @@
 -(void)jumpToRN
 {
 
-    
-    NSLog(@"High Score Button Pressed");
     NSURL *jsCodeLocation = [NSURL
                              URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
                          moduleName        : @"neopay_walpay"
-                         initialProperties :nil
+                         initialProperties :@{@"params": @{@"page":@"home",@"time":@"2017-10-11"}}
                           launchOptions    : nil];
     
     
     //创建XGQBRNTestVC
     XGQBRNTestViewController *RNVC = [[XGQBRNTestViewController alloc]init];
     RNVC.view = rootView;
+    
+//    rootView.appProperties = @{@"params_updated": @{@"page":@"home",@"time":@"2017-10-11"}};
     
     [self.navigationController pushViewController:RNVC animated:YES];
     
