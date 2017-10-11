@@ -652,8 +652,6 @@
 				6AF9E47C1F78EA0B005E901C /* XGQBHomeViewController.m */,
 				42395CEC1F8E00F900D20130 /* XGQBIDAlertViewController.h */,
 				42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */,
-				42395CEF1F8E069300D20130 /* XGQBIDAlertTransiton.h */,
-				42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -661,6 +659,8 @@
 		6AF9E4671F78E962005E901C /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				42395CEF1F8E069300D20130 /* XGQBIDAlertTransiton.h */,
+				42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */,
 			);
 			path = Logic;
 			sourceTree = "<group>";

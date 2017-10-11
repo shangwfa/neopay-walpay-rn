@@ -27,6 +27,8 @@
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     self.backView = backView;
     
+    kViewRadius(alertView,5);
+    
     [self.view addSubview:backView];
     [self.view addSubview:alertView];
     

@@ -83,7 +83,7 @@
     }];
    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
     
-    ViewBorderRadius(self, 3.0, 1, kBlackColor);
+    kViewBorderRadius(self, 3.0, 1, kBlackColor);
     return self;
 }
 

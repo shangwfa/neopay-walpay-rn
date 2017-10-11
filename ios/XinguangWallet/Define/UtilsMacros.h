@@ -41,7 +41,7 @@
 #define kStrongSelf(type) __strong typeof(type) type = weak##type;
 
 //View 圆角和加边框
-#define ViewBorderRadius(View, Radius, Width, Color)\
+#define kViewBorderRadius(View, Radius, Width, Color)\
 \
 [View.layer setCornerRadius:(Radius)];\
 [View.layer setMasksToBounds:YES];\
@@ -49,7 +49,7 @@
 [View.layer setBorderColor:[Color CGColor]]
 
 // View 圆角
-#define ViewRadius(View, Radius)\
+#define kViewRadius(View, Radius)\
 \
 [View.layer setCornerRadius:(Radius)];\
 [View.layer setMasksToBounds:YES]
