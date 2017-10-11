@@ -11,6 +11,7 @@
     <color name="common_orange">#FF7900</color>
     <color name="common_little_white">#F5F5F5</color>
     <color name="common_orange_deep">#FF5308</color>
+    <color name="certification_btn_color">#F34646</color>
     <color name="common_header">@color/color_two_type</color>
     <color name="common_black">#333333</color>
     <color name="common_color_black">#000000</color>

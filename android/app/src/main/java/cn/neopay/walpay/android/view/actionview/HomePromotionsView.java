@@ -61,6 +61,12 @@ public class HomePromotionsView extends FrameLayout {
     }
 
     private void initBannerView(Context context) {
+        handleBannerView(context);
+        requestBannerUrls(context);
+        handleViewClick();
+    }
+
+    private void handleBannerView(Context context) {
         mHomeBannerAdapter = new HomeBannerAdapter(mBinding.homeMetingBannersRpv);
         mBinding.homeMetingBannersRpv.setAdapter(mHomeBannerAdapter);
         final IconHintView hintView = new IconHintView(context, R.mipmap.img_banner_select, R.mipmap.img_banner_unselect, DensityUtils.dip2px(context, 16));
@@ -70,7 +76,13 @@ public class HomePromotionsView extends FrameLayout {
         if (ScreenUtils.hasSoftKeys((Activity) context)) {
             mBinding.homeMetingBannersRpv.setHintPadding(DensityUtils.dip2px(context, 10), 0, 0, DensityUtils.dip2px(context, 23));
         }
-        requestBannerUrls(context);
+        mBinding.homeMetingBannersRpv.setPlayDelay(2000);
+    }
+
+    private void handleViewClick() {
+        mBinding.homeMeetingMoreTv.setOnClickListener(v -> {
+            //TODO 跳转活动中心
+        });
     }
 
     private void requestBannerUrls(Context context) {
@@ -84,6 +96,7 @@ public class HomePromotionsView extends FrameLayout {
     private void setBannerData(List<BannerResponseBean> bannerList) {
 
         List<String> urls = new ArrayList<>();
+        //TODO 接口返回数据
         urls.add("http://img2.imgtn.bdimg.com/it/u=3259946169,3752632959&fm=27&gp=0.jpg");
         urls.add("http://img4.imgtn.bdimg.com/it/u=227953490,3054069314&fm=27&gp=0.jpg");
         urls.add("http://img1.imgtn.bdimg.com/it/u=391390601,3860916026&fm=11&gp=0.jpg");

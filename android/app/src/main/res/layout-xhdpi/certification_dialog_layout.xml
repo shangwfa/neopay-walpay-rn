@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_round_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_38dp"
+            android:text="账户实名认证"
+            android:textColor="@color/common_color_black"
+            android:textSize="@dimen/size_15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_21dp"
+            android:gravity="center"
+            android:text="为了您的账户安全，\n 实名认证用户才可以使用支付转账等功能。\n请添加银行卡完成实名认证"
+            android:textColor="@color/common_black"
+            android:textSize="@dimen/size_13sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_28dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_auth" />
+
+        <TextView
+            android:id="@+id/now_certification_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp"
+            android:layout_marginLeft="@dimen/size_39dp"
+            android:layout_marginRight="@dimen/size_39dp"
+            android:layout_marginTop="@dimen/size_44dp"
+            android:background="@mipmap/img_login_btn"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size_3dp"
+            android:text="@string/str_certification"
+            android:textColor="@color/common_white"
+            android:textSize="@dimen/size_15sp" />
+
+        <TextView
+            android:id="@+id/not_certification_tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp"
+            android:layout_marginLeft="@dimen/size_39dp"
+            android:layout_marginRight="@dimen/size_39dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:gravity="center"
+            android:paddingBottom="@dimen/size_3dp"
+            android:text="@string/str_not_certification"
+            android:textColor="@color/certification_btn_color"
+            android:textSize="@dimen/size_15sp" />
+    </LinearLayout>
+</layout>

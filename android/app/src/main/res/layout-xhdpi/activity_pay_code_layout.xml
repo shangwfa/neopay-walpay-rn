@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_round_white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/pay_code_qr_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/img_home_bg" />
+
+            <View
+                style="@style/horizontal_line"
+                android:layout_height="@dimen/size_2dp"
+                android:layout_marginLeft="@dimen/size_5dp"
+                android:layout_marginRight="@dimen/size_5dp" />
+
+            <RelativeLayout
+                android:id="@+id/pay_mode_rl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size_10dp">
+
+                <TextView
+                    android:id="@+id/pay_mode_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="付款方式" />
+
+                <TextView
+                    android:id="@+id/pay_mode_back_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/size_5dp"
+                    android:drawableRight="@mipmap/img_right_arrow"
+                    android:gravity="center"
+                    android:text="中信银行卡（8970）" />
+
+            </RelativeLayout>
+
+            <include layout="@layout/common_support_info_layout" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/user_avatar_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_home_big_red_bag" />
+
+    </RelativeLayout>
+</layout>

@@ -44,10 +44,13 @@
     <dimen name="size_43dp">43dp</dimen>
     <dimen name="size_44dp">44dp</dimen>
     <dimen name="size_40dp">40dp</dimen>
+    <dimen name="size_39dp">39dp</dimen>
+    <dimen name="size_38dp">38dp</dimen>
     <dimen name="size_35dp">35dp</dimen>
     <dimen name="size_34dp">34dp</dimen>
     <dimen name="size_32dp">32dp</dimen>
     <dimen name="size_30dp">30dp</dimen>
+    <dimen name="size_28dp">28dp</dimen>
     <dimen name="size_26dp">26dp</dimen>
     <dimen name="size_25dp">25dp</dimen>
     <dimen name="size_24dp">24dp</dimen>

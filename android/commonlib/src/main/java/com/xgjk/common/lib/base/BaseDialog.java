@@ -132,7 +132,7 @@ public class BaseDialog extends Dialog {
 
     @Override
     public void onBackPressed() {
-        if(isCanBack){
+        if (isCanBack) {
             super.onBackPressed();
         }
     }
