@@ -41,8 +41,9 @@ public class PayCodeActivity extends BaseActivity<PayCodePresenter, ActivityPayC
         mPageBinding.commonHeader.setHeaderLeftImgAndRighImg("向商家付钱", R.mipmap.img_right_arrows, v -> {
             DialogManager.getSingleton().showScanBottomDialog(this, () -> MainRouter.getSingleton().jumpToExplainPage("向商家付钱"));
         });
-
-        UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(true, IWalpayConstants.USER_INFO, UserInfoResponseBean.class);
+        mViewBinding.commonSelectLl.payModeTv.setText("付款方式");
+        mViewBinding.commonSelectLl.payModeIconIv.setBackgroundResource(R.mipmap.img_right_arrow);
+        UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(false, IWalpayConstants.USER_INFO_AUTH, UserInfoResponseBean.class);
         if (userInfoBean != null) {
             GlideManager.loadNetImage(mViewBinding.userAvatarIv, userInfoBean.getAvatarUrl());
         }
@@ -53,17 +54,23 @@ public class PayCodeActivity extends BaseActivity<PayCodePresenter, ActivityPayC
             setBankNickName((RecentPayTypeResponseBean) o);
         }));
 
-        mViewBinding.payModeRl.setOnClickListener(v -> {
+        mViewBinding.commonSelectLl.payModeRl.setOnClickListener(v -> {
             //TODO 选择银行卡
+            DialogManager.getSingleton().showSelectBankDialog(this);
         });
     }
 
     private void setBankNickName(RecentPayTypeResponseBean payTypeBean) {
+        //TODO 测试
+        payTypeBean = new RecentPayTypeResponseBean();
+        payTypeBean.setBankName("中国银行");
+        payTypeBean.setBankCardNo("12345670");
+
         if (payTypeBean == null) {
             return;
         }
         String bankNickName = BusniessUtils.handleBankNickName(payTypeBean.getBankName(), payTypeBean.getBankCardNo());
-        mViewBinding.payModeBackNameTv.setText(bankNickName);
+        mViewBinding.commonSelectLl.payModeBackNameTv.setText(bankNickName);
     }
 
     @Override

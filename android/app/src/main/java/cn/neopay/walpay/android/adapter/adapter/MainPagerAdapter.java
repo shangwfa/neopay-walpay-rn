@@ -1,4 +1,4 @@
-package cn.neopay.walpay.android.adapter.home;
+package cn.neopay.walpay.android.adapter.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

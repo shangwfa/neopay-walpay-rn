@@ -21,7 +21,7 @@ public class CommonBottomDialog extends BaseDialog {
     private CommonBottomDialogLayoutBinding mBinding;
 
     public CommonBottomDialog(@NonNull Context context) {
-        super(context, R.style.dialog);
+        super(context);
         initView(context);
     }
 
@@ -30,6 +30,7 @@ public class CommonBottomDialog extends BaseDialog {
         final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.common_bottom_dialog_layout, null, false);
         setContentView(mBinding.getRoot());
+        setFullScreen();
         mLayoutParams.gravity = Gravity.BOTTOM;
         handleViewClick();
     }

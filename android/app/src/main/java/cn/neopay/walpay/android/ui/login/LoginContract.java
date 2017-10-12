@@ -21,6 +21,8 @@ public interface LoginContract {
 
         public abstract void register(String name);
 
+        public abstract void verifyRegisterPhone(String phone);
+
         @Override
         public void onAttached() {
 

@@ -10,7 +10,7 @@ import com.xgjk.common.lib.utils.HandlerUtils;
 import com.xgjk.common.lib.view.rollViewPager.hintview.IconHintView;
 
 import cn.neopay.walpay.android.R;
-import cn.neopay.walpay.android.adapter.spalsh.SpalshAdapter;
+import cn.neopay.walpay.android.adapter.adapter.SpalshAdapter;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivitySplashLayoutBinding;
 

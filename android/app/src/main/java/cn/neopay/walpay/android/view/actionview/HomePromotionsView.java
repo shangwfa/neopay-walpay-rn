@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.neopay.walpay.android.R;
-import cn.neopay.walpay.android.adapter.home.HomeBannerAdapter;
+import cn.neopay.walpay.android.adapter.adapter.HomeBannerAdapter;
 import cn.neopay.walpay.android.databinding.HomePromotionsViewBinding;
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;

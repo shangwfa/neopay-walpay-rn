@@ -2,10 +2,8 @@ package com.xgjk.common.lib.adapter.slimadapter;
 
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.xgjk.common.lib.adapter.CommonAdapter;
 import com.xgjk.common.lib.adapter.slimadapter.viewinjector.IViewInjector;
 
 import java.lang.reflect.ParameterizedType;
@@ -30,6 +28,7 @@ public class SlimAdapter extends AbstractSlimAdapter {
         } else {
             DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new SlimDiffUtil(this.data, data, diffCallback));
             this.data = data;
+            notifyDataSetChanged();
             diffResult.dispatchUpdatesTo(this);
         }
         return this;

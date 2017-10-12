@@ -8,16 +8,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.xgjk.common.lib.base.BaseActivity;
 import com.xgjk.common.lib.utils.DensityUtils;
 import com.xgjk.common.lib.utils.ScreenUtils;
-import com.xgjk.common.lib.utils.ToastUtils;
 import com.xgjk.common.lib.utils.ViewUtils;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityLoginLayoutBinding;
-import cn.neopay.walpay.android.http.BaseSubscriber;
-import cn.neopay.walpay.android.manager.apimanager.ApiManager;
-import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
-import cn.neopay.walpay.android.module.response.VerifyRegisterPhoneResponseBean;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 import cn.neopay.walpay.android.view.commoninputview.CommonLoginView;
 
@@ -75,14 +70,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ActivityLoginLay
         if (hasFocus) {
             String phone = mViewBinding.loginPhone.getEditText();
             if (InputCheckUtils.checkPhone(phone)) {
-                VerifyRegisterPhoneRequestBean requestBean = new VerifyRegisterPhoneRequestBean();
-                requestBean.setPhone(phone);
-                ApiManager.getSingleton().verifyRegisterPhone(requestBean, new BaseSubscriber(this, o -> {
-                    VerifyRegisterPhoneResponseBean responseBean = (VerifyRegisterPhoneResponseBean) o;
-                    if (!responseBean.getRegistered()) {
-                        ToastUtils.show(getString(R.string.str_go_register));
-                    }
-                }, false));
+                mPresenter.verifyRegisterPhone(phone);
             }
         }
     }

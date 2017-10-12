@@ -6,6 +6,7 @@ import android.view.WindowManager;
 
 import com.xgjk.common.lib.manager.storage.StoreManager;
 import com.xgjk.common.lib.utils.HandlerUtils;
+import com.xgjk.common.lib.utils.StringUtils;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
@@ -36,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return;
             }
-//            if (StringUtils.isEmpty(BusniessUtils.getAccessToken())) {
+            if (StringUtils.isEmpty(BusniessUtils.getAccessToken())) {
                 MainRouter.getSingleton().jumpToLoginPage(BusniessUtils.getUserName());
-//                finish();
-//                return;
-//            }
+                finish();
+                return;
+            }
             MainRouter.getSingleton().jumpToHomePage("");
             finish();
         }, IWalpayConstants.DELAY_TIME);
