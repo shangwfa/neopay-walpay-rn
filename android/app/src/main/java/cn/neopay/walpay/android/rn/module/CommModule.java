@@ -12,14 +12,17 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.gson.Gson;
 import com.xgjk.common.lib.utils.HandlerUtils;
+import com.xgjk.common.lib.utils.StringUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
+import cn.neopay.walpay.android.view.dialog.LoadingDialog;
 
 /**
  * Created by shangwf on 2017/9/14.
@@ -211,5 +214,35 @@ public class CommModule extends ReactContextBaseJavaModule {
     public void nativeCallRnUpdateHeadImg(String imgUrl) {
         mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(EVENT_UPDATE_HEAD_IMG, imgUrl);
+    }
+
+
+    private LoadingDialog mLoadingDialog;
+    /**
+     * 功能显示加载弹窗
+     */
+    @ReactMethod
+    public void showLoadingDialog(String msg) {
+        HandlerUtils.runOnUiThread(() -> {
+            if(null==mLoadingDialog){
+                mLoadingDialog=new LoadingDialog(mContext.getCurrentActivity(), R.style.LoadingDialog);
+            }
+
+            if(StringUtils.isNoEmpty(msg)){
+                mLoadingDialog.setMessage(msg);
+            }
+            mLoadingDialog.show();
+        });
+
+    }
+
+    @ReactMethod
+    public void hideLoadingDialog(String msg) {
+        HandlerUtils.runOnUiThread(() -> {
+            if(null!=mLoadingDialog&&mLoadingDialog.isShowing()){
+                mLoadingDialog.hide();
+            }
+        });
+
     }
 }

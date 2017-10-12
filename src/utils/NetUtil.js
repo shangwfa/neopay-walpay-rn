@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
-import {NativeModules} from 'react-native';
+import {NativeModules} from 'react-native'
+import netCode from '../constants/netCode'
 
 class NetUtil extends Component {
 
     static baseUrl = 'https://shopay.dneopay.cn/shopay-web/'
+
     // static baseUrl = 'http://139.224.11.160:8101/shopay-web/'
 
 
@@ -16,7 +18,7 @@ class NetUtil extends Component {
     static post(urlPath, callback) {
         NativeModules.commModule.netCommParas((originalata) => {
             let params = JSON.parse(originalata)
-            console.log(NetUtil.transform(NetUtil.baseUrl,urlPath,params))
+            console.log(NetUtil.transform(NetUtil.baseUrl, urlPath, params))
             var fetchOption = {
                 method: 'POST',
                 headers: {
@@ -26,11 +28,52 @@ class NetUtil extends Component {
                 body: JSON.stringify(data)
             };
 
-            fetch(NetUtil.transform(NetUtil.baseUrl,urlPath,data), fetchOption)
+            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
                 .then((response) => response.text())
                 .then((responseText) => {
                     console.log(responseText)
                     callback(JSON.parse(responseText).data)
+                })
+                .done()
+        })
+
+    }
+
+
+    static post(urlPath, successCallbak, failedCallback, errorCallback, isShowLoading) {
+        if (isShowLoading) {
+            NativeModules.commModule.showLoadingDialog('')
+        }
+
+        NativeModules.commModule.netCommParas((originalata) => {
+            let params = JSON.parse(originalata)
+            console.log(NetUtil.transform(NetUtil.baseUrl, urlPath, params))
+            var fetchOption = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            };
+
+            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
+                .then((response) => response.text())
+                .then((responseText) => {
+                    console.log(responseText)
+                    let response = JSON.parse(responseText);
+                    if (netCode.netOk == response.retCode) {
+                        successCallbak(response.data)
+                    } else {
+                        //TODO 异常处理
+                        failedCallback(response.netCode, response.retMsg)
+                    }
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                })
+                .catch((err) => {
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                    console.log(err)
+                    errorCallback(err)
                 })
                 .done()
         })
@@ -49,7 +92,7 @@ class NetUtil extends Component {
             let params = JSON.parse(originalata)
             Object.assign(data, params);
             console.log(data)
-            console.log(NetUtil.transform(NetUtil.baseUrl,urlPath,data))
+            console.log(NetUtil.transform(NetUtil.baseUrl, urlPath, data))
             var fetchOption = {
                 method: 'POST',
                 headers: {
@@ -59,7 +102,7 @@ class NetUtil extends Component {
                 body: JSON.stringify(data)
             };
 
-            fetch(NetUtil.transform(NetUtil.baseUrl,urlPath,data), fetchOption)
+            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
                 .then((response) => response.text())
                 .then((responseText) => {
                     console.log(responseText)
@@ -85,7 +128,7 @@ class NetUtil extends Component {
                     'Content-Type': 'application/json'
                 }
             };
-            fetch(NetUtil.transform(NetUtil.baseUrl,urlPath,params), fetchOptions)
+            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, params), fetchOptions)
                 .then((response) => response.text())
                 .then((responseText) => {
                     callback(JSON.parse(responseText));
@@ -117,9 +160,9 @@ class NetUtil extends Component {
                 },
                 body: JSON.stringify(data)//服务器不支持，body传参数
             };
-            fetch(NetUtil.transform(NetUtil.baseUrl,urlPath,data), fetchOption)
+            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
                 .then((response) => {
-                console.log(response)
+                    console.log(response)
                     console.log(response)
                     return response.text()
                 })
@@ -132,14 +175,14 @@ class NetUtil extends Component {
 
     }
 
-    static transform(hostUrl, methodUrl, obj){
+    static transform(hostUrl, methodUrl, obj) {
 
-        let responseUrl = hostUrl+ methodUrl+'?';
-        for(var key in obj){//用javascript的for/in循环遍历对象的属性
-            responseUrl += key+"="+obj[key]+"&";
+        let responseUrl = hostUrl + methodUrl + '?';
+        for (var key in obj) {//用javascript的for/in循环遍历对象的属性
+            responseUrl += key + "=" + obj[key] + "&";
         }
         let index = responseUrl.lastIndexOf('&');
-        responseUrl = responseUrl.substring(0,index);
+        responseUrl = responseUrl.substring(0, index);
         console.log(responseUrl)
         return responseUrl;
 
