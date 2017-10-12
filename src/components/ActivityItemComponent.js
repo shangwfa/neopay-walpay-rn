@@ -9,6 +9,7 @@ import {
 import ScreenUtils from '../utils/ScreenUtils'
 import colors from "../constants/colors";
 import activity_tip_icon from '../res/img/activity_tip_icon.png'
+import * as RouterPaths from '../constants/RouterPaths'
 
 class ActivityItemCompontent extends Component {
 
@@ -19,6 +20,7 @@ class ActivityItemCompontent extends Component {
     onPress=()=>{
         //TODO 处理点击事件
         console.log("点击Item")
+        this.props.navigation.navigate(RouterPaths.HOME_PAGE)
     }
     render() {
         return (

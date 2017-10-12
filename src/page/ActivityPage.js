@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {
     StyleSheet,
     View,
-    Text,
-    Image,
     FlatList
 } from 'react-native'
 import Header from "../components/Header"
@@ -15,10 +13,13 @@ class ActivityPage extends Component {
         header: null
     };
 
-    renderItem = ({item}) => (
-        <ActivityItemComponent itemData={item}/>
-    )
+    componentWillMount() {
 
+    }
+
+    renderItem = ({item}) => (
+        <ActivityItemComponent itemData={item} navigation={this.props.navigation}/>
+    )
 
     render() {
         const itemArray = [

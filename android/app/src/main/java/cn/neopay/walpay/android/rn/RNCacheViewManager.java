@@ -1,10 +1,6 @@
 package cn.neopay.walpay.android.rn;
 
-import android.app.Activity;
-import android.view.ViewParent;
-
 import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
 
