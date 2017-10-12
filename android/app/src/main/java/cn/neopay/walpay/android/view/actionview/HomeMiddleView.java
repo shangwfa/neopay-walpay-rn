@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeMiddleViewBinding;
+import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
  * @author carlos.guo
@@ -41,20 +42,24 @@ public class HomeMiddleView extends FrameLayout {
         final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.home_middle_view, null, false);
         addView(mBinding.getRoot());
-        handleView();
+        handleView(context);
     }
 
-    private void handleView() {
+    private void handleView(Context context) {
         mBinding.homeCardBagLl.setOnClickListener(v -> {
             //TODO 跳转 卡包
         });
 
         mBinding.homeBigRedBagLl.setOnClickListener(v -> {
             // //TODO 跳转 大红包
+            BusniessUtils.handleCertification(context, () -> {
+            });
         });
 
         mBinding.homeRechargeLl.setOnClickListener(v -> {
             //TODO 跳转 手机充值
+            BusniessUtils.handleCertification(context, () -> {
+            });
         });
 
         mBinding.homeSeasonsLl.setOnClickListener(v -> {

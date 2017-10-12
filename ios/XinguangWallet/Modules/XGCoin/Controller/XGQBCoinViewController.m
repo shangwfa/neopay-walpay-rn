@@ -72,7 +72,7 @@
 
 -(void)pushToLoginVC
 {
-    [kNotificationCenter postNotificationName:KNotificationLoginStateChange object:@NO];
+    [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
 }
 
 - (void)didReceiveMemoryWarning {

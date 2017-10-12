@@ -17,6 +17,8 @@
 
 #import "XGQBLoginViewController.h"
 
+
+
 #import "XGQBTabBarItem.h"
 
 
@@ -36,10 +38,9 @@
     
     //添加子控制器
     [self setUpAllChildViewControllers];
-    
-    JKLog(@"%s",__func__);
-    
 }
+
+
 
 #pragma mark - 初始化TabBar
 -(void)setUpTabBar{
@@ -149,5 +150,7 @@
 {
     self.selectedIndex = to;
 }
+
+
 
 @end

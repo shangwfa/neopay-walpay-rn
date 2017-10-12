@@ -1,14 +1,14 @@
 //
-//  XGQBLoginBtn.m
+//  XGQBPureColorBtn.m
 //  XinguangWallet
 //
 //  Created by Neopay-iOS on 27/09/2017.
 //  Copyright © 2017 Hangzhou Neopay Co.,Ltd. All rights reserved.
 //
 
-#import "XGQBLoginBtn.h"
+#import "XGQBPureColorBtn.h"
 
-@implementation XGQBLoginBtn
+@implementation XGQBPureColorBtn
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -20,7 +20,7 @@
 
 +(instancetype)buttonWithText:(NSString *)text andColor:(UIColor *)color
 {
-    XGQBLoginBtn *btn = [XGQBLoginBtn buttonWithType:UIButtonTypeCustom];
+    XGQBPureColorBtn *btn = [XGQBPureColorBtn buttonWithType:UIButtonTypeCustom];
     [btn setTitle:text forState:UIControlStateNormal];
     btn.layer.masksToBounds = YES;
     btn.layer.cornerRadius = 3.0;

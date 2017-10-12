@@ -28,7 +28,7 @@
     
     [logoutLabel setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         [GVUserDefaults standardUserDefaults].accessToken = nil;
-        [kNotificationCenter postNotificationName:KNotificationLoginStateChange object:@NO];
+        [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
     }];
     
     YYLabel *restRunCount = [YYLabel new];

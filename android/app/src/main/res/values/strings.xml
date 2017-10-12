@@ -43,7 +43,7 @@
     <string name="str_input_smscode">请输入验证码</string>
     <string name="str_user_authentication">实名认证</string>
     <string name="str_scan">扫一扫</string>
-    <string name="str_pay_code">付钱码</string>
+    <string name="str_pay_code">付款码</string>
     <string name="str_balance">余额</string>
     <string name="str_card_bag">卡包</string>
     <string name="str_big_red_bag">大红包</string>
@@ -54,6 +54,8 @@
     <string name="str_employee_loans">员工贷款</string>
     <string name="str_credit_card">信用卡申请</string>
     <string name="str_more">更多</string>
+    <string name="str_certification">立即认证</string>
+    <string name="str_not_certification">暂不认证</string>
 
     <!--其他end-->
 

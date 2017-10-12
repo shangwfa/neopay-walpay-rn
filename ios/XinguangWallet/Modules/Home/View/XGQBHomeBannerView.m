@@ -69,7 +69,6 @@
     
     //添加pageControl
     UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0, 100, 10)];
-    pageControl.backgroundColor = kBlueColor;
     pageControl.pageIndicatorTintColor = kWhiteColor;
     pageControl.currentPageIndicatorTintColor = kBlackColor;
     pageControl.currentPage = 1;
@@ -84,7 +83,7 @@
     }];
    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
     
-    ViewBorderRadius(self, 3.0, 1, kBlackColor);
+    kViewBorderRadius(self, 3.0, 1, kBlackColor);
     return self;
 }
 

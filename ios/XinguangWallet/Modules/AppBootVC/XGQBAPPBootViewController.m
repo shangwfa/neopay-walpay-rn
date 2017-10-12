@@ -34,9 +34,9 @@
 -(void)btnclicked
 {
     if ([GVUserDefaults standardUserDefaults].accessToken) {
-        kPostNotification(KNotificationLoginStateChange, @YES);
+        kPostNotification(kNotificationLoginStateChange, @YES);
     }else{
-        kPostNotification(KNotificationLoginStateChange, @NO);
+        kPostNotification(kNotificationLoginStateChange, @NO);
     }
 }
 

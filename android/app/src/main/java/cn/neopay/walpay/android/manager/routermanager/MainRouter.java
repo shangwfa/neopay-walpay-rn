@@ -66,9 +66,9 @@ public class MainRouter {
                 .navigation();
     }
 
-    public  void jumpToRNPage(Context context, RNActivityParams activityParams) {
+    public void jumpToRNPage(Context context, RNActivityParams activityParams) {
 
-        if (Build.VERSION.SDK_INT >= 23&& BuildConfig.DEBUG) {
+        if (Build.VERSION.SDK_INT >= 23 && BuildConfig.DEBUG) {
             if (!Settings.canDrawOverlays(context)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                 context.startActivity(intent);
@@ -80,4 +80,27 @@ public class MainRouter {
                 .withParcelable("activityParams", activityParams)
                 .navigation();
     }
+
+    public void jumpToSignInWebPage() {
+        ARouter.getInstance().build(IWalpayConstants.TO_SIGNINWEB_PAGE)
+                .navigation();
+    }
+
+    public void jumpToScanPage() {
+        ARouter.getInstance().build(IWalpayConstants.TO_SCAN_PAGE)
+                .navigation();
+    }
+
+    public void jumpToExplainPage(String titleType) {
+        ARouter.getInstance().build(IWalpayConstants.TO_EXPLAIN_PAGE)
+                .withString("titleType", titleType)
+                .navigation();
+    }
+
+    public void jumpToPayCodePage() {
+        ARouter.getInstance().build(IWalpayConstants.TO_PAYCODE_PAGE)
+                .navigation();
+    }
+
+
 }

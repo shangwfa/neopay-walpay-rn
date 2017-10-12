@@ -19,7 +19,7 @@
     //注册登录状态监听
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loginStateChange:)
-                                                 name:KNotificationLoginStateChange
+                                                 name:kNotificationLoginStateChange
                                                object:nil];
 
 }
@@ -73,7 +73,7 @@
         //判断是否含有登录信息
         if (![GVUserDefaults standardUserDefaults].accessToken) {
             //没有Token,自动进入主界面
-            kPostNotification(KNotificationLoginStateChange, @NO);
+            kPostNotification(kNotificationLoginStateChange, @NO);
         }else{
             self.mainTabBarVC = [XGQBMainTabBarViewController new];
             self.window.rootViewController = self.mainTabBarVC;

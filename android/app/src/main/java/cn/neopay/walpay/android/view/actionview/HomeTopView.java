@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeTopViewBinding;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.utils.BusniessUtils;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 
 /**
@@ -43,14 +45,14 @@ public class HomeTopView extends FrameLayout {
         final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.home_top_view, null, false);
         addView(mBinding.getRoot());
-        handleView();
+        handleView(context);
     }
 
-    private void handleView() {
-        mBinding.homeSignIv.setOnClickListener(v -> {
-            //TODO 跳转签到页面
-        });
+    private void handleView(Context context) {
+        mBinding.homeSignIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToSignInWebPage());
 
+        mBinding.homeScanLl.setOnClickListener(v ->
+                MainRouter.getSingleton().jumpToScanPage());
         mBinding.homeScanLl.setOnClickListener(v -> {
             //TODO 跳转扫一扫页面
             RNActivityParams activityParams=new RNActivityParams();
@@ -58,12 +60,15 @@ public class HomeTopView extends FrameLayout {
             MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
         });
 
-        mBinding.homePayCodeLl.setOnClickListener(v -> {
-            //TODO 跳转收钱码页面
-        });
+        mBinding.homePayCodeLl.setOnClickListener(v ->
+                BusniessUtils.handleCertification(context, () -> MainRouter.getSingleton().jumpToPayCodePage()));
 
         mBinding.homeBalanceLl.setOnClickListener(v -> {
+            BusniessUtils.handleCertification(context, () -> {
+            });
             //TODO 跳转余额页面
         });
     }
+
+
 }

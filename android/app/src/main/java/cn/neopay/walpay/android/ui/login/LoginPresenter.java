@@ -1,6 +1,5 @@
 package cn.neopay.walpay.android.ui.login;
 
-import com.orhanobut.logger.Logger;
 import com.xgjk.common.lib.manager.ActivityManager;
 import com.xgjk.common.lib.manager.storage.StoreManager;
 
@@ -28,9 +27,7 @@ public class LoginPresenter extends LoginContract.Presenter {
     }
 
     private void handleLogin(UserInfoResponseBean userInfoResponseBean) {
-        Logger.d("userInfoResponseBean------->"+userInfoResponseBean.toString());
-        UserInfoResponseBean infoResponseBean = userInfoResponseBean;
-        StoreManager.getSingleton().put(true, IWalpayConstants.USER_INFO, infoResponseBean);
+        StoreManager.getSingleton().put(true, IWalpayConstants.USER_INFO, userInfoResponseBean);
         ActivityManager.getInstance().killAllActivity();
         MainRouter.getSingleton().jumpToHomePage("");
     }

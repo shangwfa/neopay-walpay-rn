@@ -13,7 +13,7 @@
 
 #pragma mark - ——————— 用户相关 ————————
 //登录状态改变通知
-#define KNotificationLoginStateChange @"loginStateChange"
+#define kNotificationLoginStateChange @"loginStateChange"
 
 //RN跳回原生界面通知
 #define kNotificationRNJumpBackToNative @"RNJumpBackToNative"
