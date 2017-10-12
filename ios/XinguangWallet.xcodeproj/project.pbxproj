@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */; };
 		42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */; };
 		42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */; };
 		42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */; };
@@ -78,6 +79,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		422A2D801F8F02F500485DB5 /* XGQBHomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleView.h; sourceTree = "<group>"; };
+		422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleView.m; sourceTree = "<group>"; };
 		42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDAlertView.m; sourceTree = "<group>"; };
 		42395CEA1F8E00A700D20130 /* XGQBIDAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDAlertView.h; sourceTree = "<group>"; };
 		42395CEC1F8E00F900D20130 /* XGQBIDAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDAlertViewController.h; sourceTree = "<group>"; };
@@ -222,6 +225,34 @@
 				DFE03A9FABCE2475826A5708 /* libPods-XinguangWallet.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		422A2D831F8F033800485DB5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				42395CEA1F8E00A700D20130 /* XGQBIDAlertView.h */,
+				42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */,
+				422A2D801F8F02F500485DB5 /* XGQBHomeTitleView.h */,
+				422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */,
+				6AF78B8E1F8B617E002EAAB2 /* XGQBHomeCellView.h */,
+				6AF78B8F1F8B617E002EAAB2 /* XGQBHomeCellView.m */,
+				42DD31DC1F8C748D00B435EA /* XGQBHomeBannerView.h */,
+				42DD31DD1F8C748D00B435EA /* XGQBHomeBannerView.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		422A2D841F8F033F00485DB5 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */,
+				42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */,
+				6AF78B8B1F8B60ED002EAAB2 /* XGQBHomeCellBtn.h */,
+				6AF78B8C1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m */,
+				6AF78B911F8B76CD002EAAB2 /* XGQBHomeBottomADView.h */,
+				6AF78B921F8B76CD002EAAB2 /* XGQBHomeBottomADView.m */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		6A01A0171F7A2AC20059D6D3 /* NetworkingConfig */ = {
@@ -689,18 +720,8 @@
 		6AF9E46B1F78E962005E901C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */,
-				42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */,
-				6AF78B8B1F8B60ED002EAAB2 /* XGQBHomeCellBtn.h */,
-				6AF78B8C1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m */,
-				6AF78B8E1F8B617E002EAAB2 /* XGQBHomeCellView.h */,
-				6AF78B8F1F8B617E002EAAB2 /* XGQBHomeCellView.m */,
-				6AF78B911F8B76CD002EAAB2 /* XGQBHomeBottomADView.h */,
-				6AF78B921F8B76CD002EAAB2 /* XGQBHomeBottomADView.m */,
-				42DD31DC1F8C748D00B435EA /* XGQBHomeBannerView.h */,
-				42DD31DD1F8C748D00B435EA /* XGQBHomeBannerView.m */,
-				42395CEA1F8E00A700D20130 /* XGQBIDAlertView.h */,
-				42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */,
+				422A2D831F8F033800485DB5 /* Main */,
+				422A2D841F8F033F00485DB5 /* SubViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1056,6 +1077,7 @@
 				6AF9E4541F78E675005E901C /* XGQBTabBarItem.m in Sources */,
 				42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */,
 				6AF78B8D1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m in Sources */,
+				422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */,
 				6A792B991F7F6E53009039AF /* XGQBLoginInputView.m in Sources */,
 				6A792B9C1F7F98A2009039AF /* XGQBTextField.m in Sources */,
 				6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */,

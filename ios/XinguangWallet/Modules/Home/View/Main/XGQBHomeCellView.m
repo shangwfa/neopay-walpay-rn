@@ -38,7 +38,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, kScreenWidth, 219/2.0)];
+    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, kScreenWidth, kScreenWidth*0.584)];
     
     if (self) {
         self.backgroundColor = kWhiteColor;
@@ -54,17 +54,18 @@
             
             kWeakSelf(self);
             [homeCellBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(kScreenWidth/4.0, 219/2.0));
+                make.size.mas_equalTo(CGSizeMake(weakself.width/4.0, weakself.height/2.0));
                 
                 if (i<4) {
                     make.top.equalTo(weakself);
                     make.left.mas_equalTo(weakself).with.offset(kScreenWidth/4.0*i);
                 }else{
-                    make.top.equalTo(weakself).with.offset(219/2.0);
+                    make.top.equalTo(weakself).with.offset(weakself.height/2.0);
                     make.left.mas_equalTo(weakself).with.offset(kScreenWidth/4.0*(i-4));
                 }
                 
             }];
+//            NSLog(@"homecellbtnframe:%@",NSStringFromCGRect(homeCellBtn.frame));
         }
 
     }
