@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import colors from '../constants/colors'
 import ScreenUtils from '../utils/ScreenUtils'
-import header_back_img from '../res/img/header_back.png'
+import img_left_arrow from '../res/img/img_left_arrow.png'
 
 class Header extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class Header extends Component {
                 {/*header左侧*/}
                 <TouchableWithoutFeedback style={styles.header_left} onPress={()=>this.goback()}>
                     <View style={styles.header_left}>
-                        <Image style={styles.header_back_img} source={header_back_img}/>
+                        <Image style={styles.header_back_img} source={img_left_arrow}/>
                     </View>
                 </TouchableWithoutFeedback>
 
@@ -47,7 +47,7 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
     header_back_img: {
-        width: 18,
+        width: 10,
         height: 18,
     },
     header_left: {
@@ -66,13 +66,13 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     title: {
-        fontSize: 15,
-        color: colors.one_color,
+        fontSize: 16,
+        color: colors.black,
     },
     container: {
         flexDirection: 'row',
         backgroundColor: colors.white,
-        height: 48,
+        height: ScreenUtils.headerHeight,
         paddingTop:ScreenUtils.statusBarHeight
 
     },

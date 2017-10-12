@@ -5,5 +5,6 @@ export default {
     height: Dimensions.get('window').height,
     onePixel: 1 / PixelRatio.get(),
     statusBarHeight: (Platform.OS === 'ios' ? 20 : 0),
+    headerHeight:(Platform.OS === 'ios' ? 60 : 48),
     isIOS:Platform.OS === 'ios'
 }

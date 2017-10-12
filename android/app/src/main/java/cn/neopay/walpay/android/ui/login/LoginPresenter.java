@@ -24,6 +24,7 @@ public class LoginPresenter extends LoginContract.Presenter {
                 new BaseSubscriber(mActivity, userInfoResponseBean -> {
                     handleLogin((UserInfoResponseBean) userInfoResponseBean);
                 }));
+        MainRouter.getSingleton().jumpToHomePage("");
     }
 
     private void handleLogin(UserInfoResponseBean userInfoResponseBean) {

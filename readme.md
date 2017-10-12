@@ -237,6 +237,10 @@
     - RN与原生的通信
         - RN与Android的通信方式（http://lib.csdn.net/article/52/67502）
         - RN与IOS的通信方式
+        - RN页面通信：（http://www.cnblogs.com/shaoting/p/6565339.html）
+            - 事件监听
+            - 函数回调
+          
         
 - 调试两种方式
     - 通过打印Log(基本上可以解决大部分的问题)
@@ -245,3 +249,6 @@
 - 重新加载RN页面
     - Android模拟器 cmd+M
     - IOS 模拟器
+    
+    
+备注：相关内容来自网络整理，欢迎指正，欢迎补充

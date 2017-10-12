@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import {NativeModules} from 'react-native'
+import {NativeModules,View,StatusBar} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import JsonUtil from './utils/JsonUtil'
 import Splash from './page/SplashPage'
 import Home from "./page/HomePage"
 import ChangeName from './page/ChangeNamePage'
+import Activity from './page/ActivityPage'
 import ScreenUtils from './utils/ScreenUtils'
 
 class App extends Component {
@@ -28,9 +29,11 @@ class App extends Component {
                 splash: {screen: Splash},
                 home: {screen: Home},
                 changeName: {screen: ChangeName},
+                activity:{screen:Activity}
             },
             {
-                initialRouteName: params.page,
+                // initialRouteName: params.page,
+                initialRouteName: 'activity',
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {
@@ -66,7 +69,14 @@ class App extends Component {
         };
 
         return (
-            <Navigator screenProps={this.props.params}/>
+            <View style={{flex:1}}>
+                <StatusBar
+                    barStyle={'dark-content'}
+                    backgroundColor={'white'}
+                    translucent={true}/>
+                <Navigator screenProps={this.props.params}/>
+            </View>
+
         );
     }
 }

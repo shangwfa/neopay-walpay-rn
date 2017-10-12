@@ -17,6 +17,7 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.adapter.home.MainPagerAdapter;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityHomeLayoutBinding;
+import cn.neopay.walpay.android.rn.RNCacheViewManager;
 import cn.neopay.walpay.android.ui.fragment.homefragment.HomeFragment;
 import cn.neopay.walpay.android.ui.fragment.minefragment.MineFragment;
 import cn.neopay.walpay.android.ui.fragment.newsfragment.NewsFragment;
@@ -53,6 +54,7 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
         mPresenter.saveBaseInfo();
         mPresenter.updateApp();
         Beta.downloadPatch();
+        RNCacheViewManager.init();
     }
 
     @Override

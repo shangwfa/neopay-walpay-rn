@@ -56,7 +56,6 @@ class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar barStyle={'default'}/>
                 <Header navigation={this.props.navigation} title='我的'/>
                 <ScrollView contentContainerStyle={styles.scroller}>
                     <MineTopView imgUrl={this.state.data.headImgUrl} onPress={() => this.onUpdateHeadImg()}/>

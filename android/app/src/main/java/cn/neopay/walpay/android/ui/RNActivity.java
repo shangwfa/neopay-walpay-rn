@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
 import com.google.gson.Gson;
@@ -24,6 +25,9 @@ import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.rnParams.TestParams;
+import cn.neopay.walpay.android.rn.RNCacheViewManager;
+
+import static com.tencent.bugly.beta.tinker.TinkerManager.getApplication;
 
 /**
  * Created by shangwf on 2017/9/12.
@@ -42,18 +46,7 @@ public class RNActivity extends BaseRNActivity {
 
     @Override
     public ReactInstanceManager initReactInstanceManager() {
-        if (null == mReactInstanceManager) {
-            mReactInstanceManager = ReactInstanceManager.builder()
-                    .setApplication(getApplication())
-                    .setBundleAssetName("index.android.bundle")
-                    .setJSMainModuleName("index.android")
-                    .addPackage(new MainReactPackage())
-                    .addPackage(WalpayApp.rnPackage)
-                    .setUseDeveloperSupport(BuildConfig.DEBUG)
-                    .setInitialLifecycleState(LifecycleState.RESUMED)
-                    .build();
-        }
-        return mReactInstanceManager;
+        return RNCacheViewManager.getReactInstanceManager();
     }
 
     @Nullable
