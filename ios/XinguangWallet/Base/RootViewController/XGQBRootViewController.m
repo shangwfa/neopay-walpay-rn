@@ -32,12 +32,7 @@
     }];
     label.text = NSStringFromClass(self.class);
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication].keyWindow endEditing:YES];

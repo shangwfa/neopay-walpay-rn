@@ -71,7 +71,7 @@
     [logoImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(162/2, 217/2));
         make.centerX.equalTo(weakself.view);
-        make.top.equalTo(weakself.view).with.offset(87);
+        make.top.equalTo(weakself.view).with.offset(kScreenHeight*0.13);
     }];
     
     //userNameIV
@@ -84,7 +84,7 @@
         make.width.mas_equalTo(kScreenSize.width*0.9);
         make.height.mas_equalTo(40);
         make.centerX.equalTo(weakself.view);
-        make.top.equalTo(backgroundImageV.mas_bottom).with.offset(66);
+        make.top.equalTo(backgroundImageV.mas_bottom).with.offset(kScreenHeight*0.1);
     }];
     
     //pwdIV
@@ -102,7 +102,7 @@
     [_pwdIV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(_userNameIV);
         make.centerX.equalTo(weakself.view);
-        make.top.equalTo(_userNameIV.mas_top).with.offset(69);
+        make.top.equalTo(_userNameIV.mas_top).with.offset(kScreenHeight*0.1);
     }];
     
     //登录按钮
@@ -111,9 +111,9 @@
     
     [self.view addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(350, 51));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.93, 51));
         make.centerX.equalTo(weakself.view);
-        make.top.equalTo(pwdIV.mas_bottom).with.offset(60);
+        make.top.equalTo(pwdIV.mas_bottom).with.offset(kScreenHeight*0.1);
     }];
     [btn addTarget:self action:@selector(loginBtnClicked) forControlEvents:UIControlEventTouchUpInside];
    
@@ -124,7 +124,7 @@
     [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(1, 12));
         make.centerX.equalTo(weakself.view);
-        make.top.equalTo(btn.mas_bottom).with.offset(20);
+        make.top.equalTo(btn.mas_bottom).with.offset(kScreenHeight*0.03);
     }];
     
     //忘记密码
@@ -161,7 +161,7 @@
     [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.4, 20));
         make.centerX.equalTo(weakself.view);
-        make.top.equalTo(btn.mas_bottom).with.offset(70);
+        make.top.equalTo(btn.mas_bottom).with.offset(kScreenHeight*0.1);
     }];
     [skipBtn addTarget:self action:@selector(skipButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 
@@ -218,7 +218,7 @@
     
     //发送登录请求
     [MemberCoreService loginUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
-        NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+//        NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
         if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
 //            [responseBefore writeToFile:@"/Users/iosdev/Desktop/responseBefore.plist" atomically:YES];
         {

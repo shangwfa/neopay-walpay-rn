@@ -38,7 +38,7 @@
     kWeakSelf(self);
     
     [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(316, 390));
+        make.size.mas_equalTo(CGSizeMake(0.84*kScreenWidth, 0.585*kScreenHeight));
         make.centerX.equalTo(weakself.view);
         make.centerY.equalTo(weakself.view);
     }];

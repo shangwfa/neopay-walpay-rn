@@ -37,7 +37,7 @@
     //监听RN跳转通知
     [kNotificationCenter addObserver:self selector:@selector(jumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
     
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     
     
 }

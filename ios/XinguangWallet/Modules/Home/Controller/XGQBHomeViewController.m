@@ -9,9 +9,9 @@
 #import "XGQBHomeViewController.h"
 #import "XGQBLoginViewController.h"
 
+#import "XGQBHomeTitleView.h"
 #import "XGQBHomeCellView.h"
 #import "XGQBHomeBottomADView.h"
-#import "XGQBHomeTitleBtn.h"
 
 #import "XGQBIDAlertViewController.h"
 #import "XGQBIDAlertTransiton.h"
@@ -48,39 +48,11 @@
 #pragma mark - 设置视图组件
 -(void)setUpViewComponents
 {
-    //首页背景
-    UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_beijing"]];
-    [self.view addSubview:backgroundImg];
+    
 
-    //左上方logo
-    UIImageView *leftTopLogoImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_logo"]];
-    [self.view addSubview:leftTopLogoImg];
-    
-    //右上方日历图标
-    UIButton *calenderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [calenderBtn setBackgroundImage:[UIImage imageNamed:@"sy_qiandao"] forState:UIControlStateNormal];
-    [self.view addSubview:calenderBtn];
-    [calenderBtn addTarget:self action:@selector(calenderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    //添加头部功能按键
-    //扫一扫
-    XGQBHomeTitleBtn *scanBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
-    XGQBHomeTitleBtn *payCodeBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
-    XGQBHomeTitleBtn *accountBtn = [XGQBHomeTitleBtn buttonWithType:UIButtonTypeCustom];
-    
-    [scanBtn setImage:[UIImage imageNamed:@"sy_saoyisao"] forState:UIControlStateNormal];
-    [payCodeBtn setImage:[UIImage imageNamed:@"sy_fuqianma"] forState:UIControlStateNormal];
-    [accountBtn setImage:[UIImage imageNamed:@"sy_yue"] forState:UIControlStateNormal];
-    
-    [scanBtn setTitle:@"扫一扫" forState:UIControlStateNormal];
-    [payCodeBtn setTitle:@"二维码" forState:UIControlStateNormal];
-    [accountBtn setTitle:@"余额" forState:UIControlStateNormal];
-    
-    [self.view addSubview:scanBtn];
-    [self.view addSubview:payCodeBtn];
-    [self.view addSubview:accountBtn];
-
-    
+    //顶部视图
+    XGQBHomeTitleView *homeTitleView = [XGQBHomeTitleView new];
+    [self.view addSubview:homeTitleView];
     
     //主业务图标视图
     XGQBHomeCellView *homeCellView = [XGQBHomeCellView new];
@@ -92,51 +64,24 @@
     
     //添加约束
     kWeakSelf(self);
-    [backgroundImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth/2));
-        make.left.equalTo(weakself.view);
+    
+    [homeTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth/2.0));
         make.top.equalTo(weakself.view);
+        make.left.equalTo(weakself.view);
     }];
-    
-    [leftTopLogoImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(181/2, 47/2));
-        make.left.equalTo(weakself.view).with.offset(12);
-        make.top.equalTo(weakself.view).with.offset(34);
-    }];
-    
-    [calenderBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(20, 20));
-        make.right.equalTo(weakself.view).with.offset(-12);
-        make.centerY.equalTo(leftTopLogoImg);
-    }];
+
     [homeCellView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, 219));
-        make.top.equalTo(backgroundImg.mas_bottom);
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.584));
+        make.top.equalTo(homeTitleView.mas_bottom);
         make.left.equalTo(weakself.view);
     }];
     
     [homeADView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.557+49));
-        make.bottom.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.557));
+        make.top.equalTo(homeCellView.mas_bottom).with.offset(10);
         make.left.equalTo(self.view);
-    }];
-    
-    [scanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(45, 70));
-        make.bottom.equalTo(backgroundImg).with.offset(-25);
-        make.left.equalTo(backgroundImg).with.offset(57);
-    }];
-    
-    [payCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(scanBtn);
-        make.centerX.equalTo(backgroundImg);
-        make.bottom.equalTo(scanBtn);
-    }];
-    
-    [accountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(scanBtn);
-        make.right.equalTo(backgroundImg).with.offset(-57);
-        make.bottom.equalTo(scanBtn);
     }];
 
 }

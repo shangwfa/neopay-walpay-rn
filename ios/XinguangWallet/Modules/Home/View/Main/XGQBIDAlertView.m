@@ -28,7 +28,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 316, 390)];
+    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 316/375.0*kScreenWidth, 390/667.0*kScreenHeight)];
     self.backgroundColor = kWhiteColor;
 
     [self setupViewComponents];
@@ -75,31 +75,31 @@
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(98, 16));
         make.centerX.equalTo(weakself);
-        make.top.equalTo(weakself).with.offset(38);
+        make.top.equalTo(weakself).with.offset(weakself.height*0.097);
     }];
     
     [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(262, 62));
+        make.size.mas_equalTo(CGSizeMake(300/316.0*weakself.width, 62/390.0*weakself.height));
         make.centerX.equalTo(weakself);
-        make.top.equalTo(weakself).with.offset(75);
+        make.top.equalTo(weakself).with.offset(weakself.height*0.192);
     }];
     
     [logoImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(264/2, 163/2));
+        make.size.mas_equalTo(CGSizeMake(264/2/316.0*weakself.width, 264/2/316.0*weakself.width*0.617));
         make.centerX.equalTo(weakself);
-        make.top.equalTo(weakself).with.offset(164);
+        make.top.equalTo(weakself).with.offset(weakself.height*0.42);
     }];
     
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(239, 45));
+        make.size.mas_equalTo(CGSizeMake(239/316.0*weakself.width, 45/390.0*weakself.height));
         make.centerX.equalTo(weakself);
-        make.top.equalTo(weakself).with.offset(290);
+        make.top.equalTo(weakself).with.offset(weakself.height*0.74);
     }];
     
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60, 14));
+        make.size.mas_equalTo(CGSizeMake(150/316.0*weakself.width, 14/390.0*weakself.height));
         make.centerX.equalTo(weakself);
-        make.top.equalTo(weakself).with.offset(355);
+        make.top.equalTo(weakself).with.offset(weakself.height*0.91);
     }];
     
 }

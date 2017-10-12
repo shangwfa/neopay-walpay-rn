@@ -24,12 +24,14 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    CGFloat midX = self.frame.size.width / 2;
-    CGFloat midY = self.frame.size.height/ 2 ;
-    self.titleLabel.width = self.frame.size.width;
+    CGFloat midX = self.frame.size.width / 2.0;
+    CGFloat midY = self.frame.size.height/ 2.0 ;
+    self.imageView.size = CGSizeMake(self.frame.size.width, self.frame.size.width*98/90.0);
+    self.titleLabel.width = self.frame.size.width*1.2;
+    self.titleLabel.height = self.frame.size.height*0.3;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.center = CGPointMake(midX, midY + 30);
-    self.imageView.center = CGPointMake(midX, midY - 10);
+    self.titleLabel.center = CGPointMake(midX, midY + 30/40.0*self.frame.size.width);
+    self.imageView.center = CGPointMake(midX, midY - 10/40.0*self.frame.size.width);
 }
 
 @end

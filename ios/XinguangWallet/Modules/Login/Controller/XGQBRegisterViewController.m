@@ -90,7 +90,7 @@
         make.width.mas_equalTo(kScreenSize.width*0.9);
         make.height.mas_equalTo(40);
         make.centerX.equalTo(weakself.view);
-        make.top.equalTo(weakself.view).with.offset(94);
+        make.top.equalTo(weakself.view).with.offset([UIApplication sharedApplication].statusBarFrame.size.height+64);
     }];
     [regCodeIV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(userNameIV);
@@ -111,7 +111,7 @@
     }];
     
     [regBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(350, 51));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.93, 51));
         make.centerX.equalTo(weakself.view);
         make.top.equalTo(paypwdIV.mas_bottom).with.offset(54);
     }];
@@ -167,7 +167,7 @@
         body[@"phone"]=self.userNameIV.textField.text;
         
         [MemberCoreService sendRegisterCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
-            NSLog(@"retCodeis:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+//            NSLog(@"retCodeis:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
              {
                  [btn startCountDown];
