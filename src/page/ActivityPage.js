@@ -4,9 +4,8 @@ import {
     View,
     FlatList
 } from 'react-native'
-import Header from "../components/Header"
-import colors from "../constants/colors"
-import ActivityItemComponent from '../components/ActivityItemComponent'
+import {colors} from '../constants/index'
+import {Header,ActivityItemComponent} from '../components/index'
 
 class ActivityPage extends Component {
     static navigationOptions = {

@@ -219,6 +219,39 @@
                         );
     }
     ```
+    - 如何获取ref属性
+    ```
+    componentDidMount() {
+            this._input.focus()
+          },
+    render() {
+        return <TextInput ref={(c) => this._input = c} />
+      },
+      
+    ```
+    - React Native setNativeProps使用
+    有时候我们需要直接改动组件并触发局部的刷新，但不使用state或是props。 setNativeProps 方法可以理解为web的直接修改dom。使用该方法修改 View 、 Text 等 RN自带的组件 ，则不会触发组件的 componentWillReceiveProps 、 shouldComponentUpdate 、componentWillUpdate 等组件生命周期中的方法。
+    ```
+    class MyButton extends React.Component({
+    	setNativeProps(nativeProps) {
+    	     this._root.setNativeProps({   //这里输入你要修改的组件style
+    	     	height:48,
+    	     	backgroundColor:'red'
+    	     })
+    	},
+    	render() {
+    	     return (
+    	     	<View ref={component => this._root = component} {...this.props} style={styles.button}>
+    	 	        <Text>{this.props.label}</Text>
+    	 	    </View>
+    	     )
+    	},
+      })
+    ```
+    - React Native 读取本地的json文件
+    ```
+        import langsData from '../res/data/langs.json'
+    ```
 - 三方开源库（https://js.coach/react-native），官网（中文 http://reactnative.cn/  英文 http://facebook.github.io/react-native/）多参考别人是怎么写代码的 
 
 - RN页面与原生页面通信模块
