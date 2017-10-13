@@ -4,12 +4,8 @@ const maxHeight = Dimensions.get('window').height
 const maxWidth = Dimensions.get('window').width
 const splashImg = require('../res/img/splash.png')
 import * as RouterPaths from '../constants/RouterPaths'
-
-class Splash extends React.PureComponent {
-
-    static navigationOptions = {
-        header: null
-    };
+import BasePage from './BasePage'
+class Splash extends BasePage {
 
     constructor(props) {
         super(props)

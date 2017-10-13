@@ -16,11 +16,10 @@ import Divider from '../components/Divider'
 import Button from 'apsl-react-native-button'
 import NetUtil from '../utils/NetUtil'
 import * as RouterPaths from '../constants/RouterPaths'
+import BasePage from './BasePage'
+import {events} from '../constants/index'
 
-class Home extends Component {
-    static navigationOptions = {
-        header: null
-    };
+class Home extends BasePage {
 
     constructor() {
         super()
@@ -80,8 +79,9 @@ class Home extends Component {
     }
 
     onUpdateHeadImg = () => {
-        NativeModules.commModule.showCommDialog('updateHeadImg', () => {
-        })
+        DeviceEventEmitter.emit(events.MODAL_TYPE_EVENT,events.DEMO_MODAL_EVENT); //显示弹窗
+        // NativeModules.commModule.showCommDialog('updateHeadImg', () => {
+        // })
     }
     onToChangePayPassWord = () => {
         let params = {page: 'changePayPassWord', phone: this.state.data.phone}
