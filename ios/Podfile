@@ -7,6 +7,7 @@ pod 'GVUserDefaults', '~> 1.0.2'
 pod 'SVProgressHUD', '~> 2.2.1'
 pod 'Masonry', '~> 1.1.0'
 pod 'IQKeyboardManager', '~> 5.0.2'
+pod 'JPush', '~> 3.0.6'
 
 pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',

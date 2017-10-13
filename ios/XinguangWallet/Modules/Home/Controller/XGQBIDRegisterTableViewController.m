@@ -9,7 +9,10 @@
 #import "XGQBIDRegisterTableViewController.h"
 #import "XGQBPureColorBtn.h"
 
-@interface XGQBIDRegisterTableViewController ()
+#import "XGQBTextField.h"
+#import "XGQBCountTimeBtn.h"
+
+@interface XGQBIDRegisterTableViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong)NSArray *itemNameArray;
 @property(nonatomic,strong)NSArray *placeHolderArray;
@@ -102,24 +105,42 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"test"];
-    
     cell.backgroundColor = kWhiteColor;
     
+    //itemLabel
     UILabel *itemName = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth*0.04, 0, kScreenWidth*0.29, cell.contentView.frame.size.height)];
     itemName.text = self.itemNameArray[indexPath.section*4 +indexPath.row];
     itemName.textColor = [UIColor colorWithHexString:@"666666"];
     itemName.font = kSYSTEMFONT(14.0);
-    
-    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(kScreenWidth*0.29, 0, kScreenWidth*0.67, cell.contentView.frame.size.height)];
-    textField.placeholder = self.placeHolderArray[indexPath.section*4+indexPath.row];
-    textField.font = kSYSTEMFONT(14.0);
-    
     [cell.contentView addSubview: itemName];
+
+    //添加textfield
+    XGQBTextField *textField = [[XGQBTextField alloc]init];
+    textField.frame = CGRectMake(kScreenWidth*0.29, 0, kScreenWidth*0.67, cell.contentView.frame.size.height);
+    textField.placeholder = self.placeHolderArray[indexPath.section*4 +indexPath.row];
+    
+    if (indexPath.section ==0 &&indexPath.row ==1) {//身份证号
+        textField.type = XGQBTextFieldTypeIDNo;
+    }else if(indexPath.section ==0&&indexPath.row==2){//银行卡号
+        textField.type = XGQBTextFieldTypeBankCard;
+    }else if(indexPath.section==1 &&indexPath.row ==0){//手机号
+        textField.type = XGQBTextFieldTypeSecurityPhoneNo;
+    }else if(indexPath.section==1&&indexPath.row==1){//验证码
+        textField.frame = CGRectMake(kScreenWidth*0.29, 0, kScreenWidth*0.45, cell.contentView.frame.size.height);
+        textField.type = XGQBTextFieldTypeRegisterCode;
+        //添加倒计时按钮
+        XGQBCountTimeBtn *regCodeBtn = [[XGQBCountTimeBtn alloc]init];
+        regCodeBtn.frame = CGRectMake(kScreenWidth*0.78, cell.contentView.frame.size.height*0.2, kScreenWidth*0.19, cell.contentView.frame.size.height*0.6);
+        [cell.contentView addSubview:regCodeBtn];
+        
+    }
     [cell.contentView addSubview:textField];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
+
+
 
 @end

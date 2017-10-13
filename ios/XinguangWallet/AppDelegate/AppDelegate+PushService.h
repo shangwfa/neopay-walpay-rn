@@ -11,6 +11,8 @@
 /**
  推送相关在这里处理
  */
-@interface AppDelegate (PushService)
+@interface AppDelegate (PushService) 
+
+-(void)initJpushServiceWithOptions:(NSDictionary *)launchOptions;
 
 @end

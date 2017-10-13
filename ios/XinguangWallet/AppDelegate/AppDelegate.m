@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+
+
+@interface AppDelegate () 
 
 @end
 
@@ -29,10 +31,13 @@
     
     //初始化第三方控件 SVProgressHUD/IQKeyboardManager
     [self initThirdPartComponents];
-    ///显示广告页
-//    [XGQBAppManager appStart];
     
-
+    ///显示广告页
+    //[XGQBAppManager appStart];
+    
+    //初始化Jpush推送服务
+    [self initJpushServiceWithOptions:launchOptions];
+    
     
     return YES;
 }
