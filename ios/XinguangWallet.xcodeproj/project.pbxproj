@@ -58,7 +58,6 @@
 		6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E45D1F78E858005E901C /* XGQBRootViewController.m */; };
 		6AF9E4801F78EA2F005E901C /* XGQBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E47F1F78EA2F005E901C /* XGQBMessageViewController.m */; };
 		6AF9E4831F78EA3B005E901C /* XGQBMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */; };
-		6AF9E4861F78EA52005E901C /* XGQBCoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4851F78EA52005E901C /* XGQBCoinViewController.m */; };
 		6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E48A1F78EDA9005E901C /* XGQBRootNavigationController.m */; };
 		E7A419D64D389536228DE027 /* libPods-XinguangWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFE03A9FABCE2475826A5708 /* libPods-XinguangWallet.a */; };
 /* End PBXBuildFile section */
@@ -190,8 +189,6 @@
 		6AF9E47F1F78EA2F005E901C /* XGQBMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMessageViewController.m; sourceTree = "<group>"; };
 		6AF9E4811F78EA3B005E901C /* XGQBMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineViewController.h; sourceTree = "<group>"; };
 		6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineViewController.m; sourceTree = "<group>"; };
-		6AF9E4841F78EA52005E901C /* XGQBCoinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCoinViewController.h; sourceTree = "<group>"; };
-		6AF9E4851F78EA52005E901C /* XGQBCoinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCoinViewController.m; sourceTree = "<group>"; };
 		6AF9E4891F78EDA9005E901C /* XGQBRootNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRootNavigationController.h; sourceTree = "<group>"; };
 		6AF9E48A1F78EDA9005E901C /* XGQBRootNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRootNavigationController.m; sourceTree = "<group>"; };
 		A1D6E6C49142EAB9057AFA1A /* Pods-XinguangWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinguangWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XinguangWallet/Pods-XinguangWallet.debug.xcconfig"; sourceTree = "<group>"; };
@@ -562,7 +559,6 @@
 				6AF9E4651F78E962005E901C /* Home */,
 				6AF9E46C1F78E962005E901C /* Message */,
 				6AF9E4731F78E963005E901C /* Mine */,
-				6AF9E45E1F78E962005E901C /* XGCoin */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -608,67 +604,6 @@
 				6AF9E45D1F78E858005E901C /* XGQBRootViewController.m */,
 			);
 			path = RootViewController;
-			sourceTree = "<group>";
-		};
-		6AF9E45E1F78E962005E901C /* XGCoin */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E45F1F78E962005E901C /* Controller */,
-				6AF9E4601F78E962005E901C /* Logic */,
-				6AF9E4611F78E962005E901C /* Model */,
-				6AF9E4621F78E962005E901C /* Resource */,
-				6AF9E4631F78E962005E901C /* Service */,
-				6AF9E4641F78E962005E901C /* View */,
-			);
-			path = XGCoin;
-			sourceTree = "<group>";
-		};
-		6AF9E45F1F78E962005E901C /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E4841F78EA52005E901C /* XGQBCoinViewController.h */,
-				6AF9E4851F78EA52005E901C /* XGQBCoinViewController.m */,
-				6A0FF9D41F7F3A0E001A66BA /* commModule.h */,
-				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
-				42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */,
-				42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		6AF9E4601F78E962005E901C /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		6AF9E4611F78E962005E901C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		6AF9E4621F78E962005E901C /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resource;
-			sourceTree = "<group>";
-		};
-		6AF9E4631F78E962005E901C /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		6AF9E4641F78E962005E901C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		6AF9E4651F78E962005E901C /* Home */ = {
@@ -811,6 +746,10 @@
 			children = (
 				6AF9E4811F78EA3B005E901C /* XGQBMineViewController.h */,
 				6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */,
+				6A0FF9D41F7F3A0E001A66BA /* commModule.h */,
+				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
+				42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */,
+				42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1094,7 +1033,6 @@
 				6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */,
 				6AF9E4511F78E659005E901C /* XGQBTabBar.m in Sources */,
 				6AF9E4801F78EA2F005E901C /* XGQBMessageViewController.m in Sources */,
-				6AF9E4861F78EA52005E901C /* XGQBCoinViewController.m in Sources */,
 				42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */,
 				6AF78B931F8B76CD002EAAB2 /* XGQBHomeBottomADView.m in Sources */,
 				6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */,
