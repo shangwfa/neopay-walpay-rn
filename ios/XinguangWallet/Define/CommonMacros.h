@@ -18,8 +18,8 @@
 //RN跳回原生界面通知
 #define kNotificationRNJumpBackToNative @"RNJumpBackToNative"
 
-//自动登录成功
-//#define KNotificationAutoLoginSuccess @"KNotificationAutoLoginSuccess"
+//进行实名认证通知
+#define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"
 
 //被踢下线
 //#define KNotificationOnKick @"KNotificationOnKick"
