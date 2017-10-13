@@ -16,6 +16,9 @@ PODS:
     - AFNetworking/NSURLSession
   - GVUserDefaults (1.0.2)
   - IQKeyboardManager (5.0.2)
+  - JCore (1.1.5)
+  - JPush (3.0.6):
+    - JCore (~> 1.1.1)
   - Masonry (1.1.0)
   - React/ART (0.48.3):
     - React/Core
@@ -68,6 +71,7 @@ DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - GVUserDefaults (~> 1.0.2)
   - IQKeyboardManager (~> 5.0.2)
+  - JPush (~> 3.0.6)
   - Masonry (~> 1.1.0)
   - React/ART (from `../node_modules/react-native`)
   - React/BatchedBridge (from `../node_modules/react-native`)
@@ -99,12 +103,14 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   GVUserDefaults: 52d48cf8ba578b40a1a76312b196dfc9134ba36a
   IQKeyboardManager: 5ab84749f20f682f784160c2c63bef4f19d10d26
+  JCore: 9bd9c770c877c583d98b90a68792b8361974c231
+  JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   React: 748a63a3a08cef2864657ad752a5ca7393e07fc2
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   Yoga: b3337798e426de90f48662cf0fe2ee1a844075e1
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: a60a386e54fd0640e8ca6d5d7453c05c948803e7
+PODFILE CHECKSUM: 91a22314e0365743195ef080cd61c99184737baf
 
 COCOAPODS: 1.3.1
