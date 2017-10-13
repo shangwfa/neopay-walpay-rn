@@ -27,7 +27,7 @@ public class BusniessUtils {
     }
 
     public static void handleCertification(Context context, ICertificationCallBack iCertificationCallBack) {
-        UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(true, IWalpayConstants.USER_INFO, UserInfoResponseBean.class);
+        UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(false, IWalpayConstants.USER_INFO_AUTH, UserInfoResponseBean.class);
         if (null == userInfoBean) {
             return;
         }
@@ -54,7 +54,11 @@ public class BusniessUtils {
     }
 
     public static String handleBankNickName(String bankName, String bankNum) {
-        String bankNumStr = TextUtils.substring(bankNum, bankNum.length() - 5, bankNum.length() - 1);
+        String bankNumStr = TextUtils.substring(bankNum, bankNum.length() - 4, bankNum.length());
         return String.format("%s(%s)", bankName, bankNumStr);
+    }
+
+    public static String handleBalanceNickName(String balanceName, String balanceNum) {
+        return String.format("%s(%s)", balanceName, balanceNum);
     }
 }

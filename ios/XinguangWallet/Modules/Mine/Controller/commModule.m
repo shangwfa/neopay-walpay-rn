@@ -8,7 +8,6 @@
 
 #import "commModule.h"
 #import "RCTBridgeModule.h"
-#import "XGQBCoinViewController.h"
 
 @implementation commModule
 

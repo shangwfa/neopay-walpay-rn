@@ -31,6 +31,7 @@ public interface IWalpayConstants {
 
     //---------------------------sp---------------------//
     String USER_INFO = "user_info";
+    String USER_INFO_AUTH = "user_info_auth";
     String IS_FIRST_INSTALL = "is_install_state";
     String IS_FIRST_CERTIFICATION = "is_certification_state";
     String ACCESS_TOKEN = "accessToken";
@@ -70,4 +71,7 @@ public interface IWalpayConstants {
     String HOME_TABTYPE_SUNBEAMCOIN = "sunbeamCoinFragment";
     String HOME_TABTYPE_NEWS = "newsFragment";
     String HOME_TABTYPE_MINE = "mineFragment";
+    String SELECTBANKPAY_BALANCE_TYPE = "balance_type";
+    String SELECTBANKPAY_BANK_TYPE = "bank_type";
+
 }

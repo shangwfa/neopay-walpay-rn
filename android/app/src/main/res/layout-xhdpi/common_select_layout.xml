@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/pay_mode_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/pay_mode_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/size_10dp">
+
+            <TextView
+                android:id="@+id/pay_mode_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:text=""
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/pay_mode_back_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/size_30dp"
+                android:text="" />
+
+            <ImageView
+                android:id="@+id/pay_mode_icon_iv"
+                android:layout_width="@dimen/size_15dp"
+                android:layout_height="@dimen/size_25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/horizontal_line_iv"
+            style="@style/horizontal_line"
+            android:visibility="visible" />
+    </LinearLayout>
+</layout>

@@ -32,7 +32,9 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter, FragmentHo
 
     private void saveUserInfo() {
         ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(),
-                new BaseSubscriber(getActivity(), o -> StoreManager.getSingleton().put(true, IWalpayConstants.USER_INFO, (UserInfoResponseBean) o)));
+                new BaseSubscriber(getActivity(), o ->
+                        StoreManager.getSingleton().put(false, IWalpayConstants.USER_INFO_AUTH, (UserInfoResponseBean) o))
+        );
     }
 
     private void isFirstCertificationShow() {

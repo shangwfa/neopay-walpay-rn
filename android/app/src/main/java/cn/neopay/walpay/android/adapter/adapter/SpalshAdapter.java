@@ -1,4 +1,4 @@
-package cn.neopay.walpay.android.adapter.spalsh;
+package cn.neopay.walpay.android.adapter.adapter;
 
 import android.app.Activity;
 import android.view.View;

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.neopay.walpay.android.R;
-import cn.neopay.walpay.android.adapter.home.MainPagerAdapter;
+import cn.neopay.walpay.android.adapter.adapter.MainPagerAdapter;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityHomeLayoutBinding;
 import cn.neopay.walpay.android.rn.RNCacheViewManager;

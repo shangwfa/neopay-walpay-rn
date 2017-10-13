@@ -5,6 +5,7 @@ import android.content.Context;
 import cn.neopay.walpay.android.view.dialog.CertificationDialog;
 import cn.neopay.walpay.android.view.dialog.CommonBottomDialog;
 import cn.neopay.walpay.android.view.dialog.CommonDialog;
+import cn.neopay.walpay.android.view.dialog.SelectBankDialog;
 
 /**
  * @author carlos.guo
@@ -47,6 +48,11 @@ public class DialogManager {
         dialog.setEnsureText("使用说明");
         dialog.setCancelText("关闭弹窗");
         dialog.setEnsureTvCallBackListener(iEnsureTvCallback);
+        dialog.show();
+    }
+
+    public void showSelectBankDialog(Context context) {
+        SelectBankDialog dialog = new SelectBankDialog(context);
         dialog.show();
     }
 }

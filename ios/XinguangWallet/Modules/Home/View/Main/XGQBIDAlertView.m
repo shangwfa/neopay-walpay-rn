@@ -60,6 +60,7 @@
     
     //立即认证
     XGQBPureColorBtn *confirmBtn =[XGQBPureColorBtn buttonWithText:@"立即认证" andColor:[UIColor colorWithHexString:@"F34646"]];
+    [confirmBtn addTarget:self action:@selector(registerBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:confirmBtn];
     
     //暂不认证
@@ -102,6 +103,12 @@
         make.top.equalTo(weakself).with.offset(weakself.height*0.91);
     }];
     
+}
+
+-(void)registerBtnClicked
+{
+    [kNotificationCenter postNotificationName:kNotificationRegisterIDAction object:nil];
+    [self.superview.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)dismissVC

@@ -1,4 +1,4 @@
-package cn.neopay.walpay.android.adapter.home;
+package cn.neopay.walpay.android.adapter.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
