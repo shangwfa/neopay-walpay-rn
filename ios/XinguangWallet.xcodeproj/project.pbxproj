@@ -346,8 +346,6 @@
 			children = (
 				6A792B971F7F6E53009039AF /* XGQBLoginInputView.h */,
 				6A792B981F7F6E53009039AF /* XGQBLoginInputView.m */,
-				42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */,
-				42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,6 +377,8 @@
 				6A792B9B1F7F98A2009039AF /* XGQBTextField.m */,
 				6A5F69C51F7B930200B16B31 /* XGQBPureColorBtn.h */,
 				6A5F69C61F7B930200B16B31 /* XGQBPureColorBtn.m */,
+				42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */,
+				42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
