@@ -9,6 +9,7 @@ import com.xgjk.common.lib.utils.DeviceUtils;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
+import cn.neopay.walpay.android.manager.environmentmanager.EnvironmentConfigManager;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -39,6 +40,7 @@ public class CommonInterceptor implements Interceptor {
     @NonNull
     private HttpUrl getHttpUrl(Request oldRequest) {
         // 添加新的参数
+        HttpUrl currentEnVironmentHttpUrl = HttpUrl.parse(EnvironmentConfigManager.getSingleton().getCurrentEnvHttpUrl());
         return oldRequest
                 .url()
                 .newBuilder()
@@ -49,12 +51,9 @@ public class CommonInterceptor implements Interceptor {
                 .addQueryParameter("operator", DeviceUtils.getSimOperatorName(BaseApp.application))
                 .addQueryParameter("deviceId", DeviceUtils.getSerialNumber())
                 .addQueryParameter("accessToken", BusniessUtils.getAccessToken())
-//                .addQueryParameter("mock", "true")
-//                .scheme(oldRequest.url().scheme())
-//                .host(oldRequest.url().host())
-                .scheme(oldRequest.url().scheme())
-                .host(oldRequest.url().host())
-                .port(oldRequest.url().port())
+                .scheme(currentEnVironmentHttpUrl.scheme())
+                .host(currentEnVironmentHttpUrl.host())
+                .port(currentEnVironmentHttpUrl.port())
                 .build();
     }
 

@@ -4,6 +4,7 @@ apply plugin: 'walle'
 apply from: "../../node_modules/react-native/react.gradle"
 
 import com.android.build.OutputFile
+
 def enableSeparateBuildPerCPUArchitecture = false
 
 android {
@@ -28,6 +29,11 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "13dcf601d46a529f33bd1d5f",
+                JPUSH_CHANNEL: "developer-default",
+        ]
 
     }
     compileOptions {
@@ -105,6 +111,8 @@ dependencies {
     compile project(':commonlib')
     compile rootProject.ext.dependencies["appcompatv7"]
     compile rootProject.ext.dependencies["constraint_layout"]
+    compile rootProject.ext.dependencies["jpush"]
+    compile rootProject.ext.dependencies["jcore"]
     annotationProcessor rootProject.ext.dependencies["aroutercompiler"]
     testCompile 'junit:junit:4.12'
 

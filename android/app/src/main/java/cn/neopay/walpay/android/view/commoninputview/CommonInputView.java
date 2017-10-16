@@ -159,12 +159,10 @@ public class CommonInputView extends FrameLayout {
 
     private void setPayPwd() {
         mBinding.value.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
-        //TODO 登录眼睛的imgId
         handleActionEyeState(R.mipmap.img_pwd_close, R.mipmap.img_pwd_show, true);
     }
 
     private void setPay() {
-        //TODO  登录眼睛的imgId 多次使用该函数 需要进行提取处理
         setPayEye(R.mipmap.img_pwd_close, R.mipmap.img_pwd_show);
     }
 
@@ -191,7 +189,6 @@ public class CommonInputView extends FrameLayout {
 
     private void setPassword() {
         mBinding.value.setFilters(new InputFilter[]{new InputFilter.LengthFilter(18)});
-        //TODO 登录眼睛的imgId
         handleActionEyeState(R.mipmap.img_pwd_close, R.mipmap.img_pwd_show, false);
     }
 

@@ -42,8 +42,8 @@
 
         <ImageView
             android:id="@+id/user_avatar_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/size_52dp"
+            android:layout_height="@dimen/size_52dp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:scaleType="fitXY"

@@ -1,5 +1,6 @@
 package cn.neopay.walpay.android.http;
 
+import java.util.List;
 import java.util.Map;
 
 import cn.neopay.walpay.android.module.response.AppVersionResponseBean;
@@ -124,7 +125,7 @@ public interface ApiService {
      * 获取首页banner列表
      */
     @POST("merchant/query_banner_list")
-    Observable<Result<BannerResponseBean>> queryBannerList(@QueryMap Map<String, String> queryBannerListRequestBean);
+    Observable<Result<List<BannerResponseBean>>> queryBannerList(@QueryMap Map<String, String> queryBannerListRequestBean);
 
     /**
      * 获取我的中奖统计
@@ -184,7 +185,7 @@ public interface ApiService {
      * 获取用户银行卡列表
      */
     @POST("bank/get_user_bank_card_list")
-    Observable<Result<BankCardResponseBean>> getUserBankCardList(@QueryMap Map<String, String> getUserBankCardListRequestBean);
+    Observable<Result<List<BankCardResponseBean>>> getUserBankCardList(@QueryMap Map<String, String> getUserBankCardListRequestBean);
 
     /**
      * 获取上次提现银行卡

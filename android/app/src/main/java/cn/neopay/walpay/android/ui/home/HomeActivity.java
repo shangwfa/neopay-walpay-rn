@@ -21,7 +21,6 @@ import cn.neopay.walpay.android.rn.RNCacheViewManager;
 import cn.neopay.walpay.android.ui.fragment.homefragment.HomeFragment;
 import cn.neopay.walpay.android.ui.fragment.minefragment.MineFragment;
 import cn.neopay.walpay.android.ui.fragment.newsfragment.NewsFragment;
-import cn.neopay.walpay.android.ui.fragment.sunbeamcoinfragment.SunbeamCoinFragment;
 
 /**
  * @author carlos.guo
@@ -113,7 +112,7 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
     private List<BaseFragment> getFragments() {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-        fragments.add(new SunbeamCoinFragment());
+//        fragments.add(new SunbeamCoinFragment());
         fragments.add(new NewsFragment());
         fragments.add(new MineFragment());
         return fragments;
@@ -128,9 +127,9 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
             case IWalpayConstants.HOME_TABTYPE_NEWS:
                 mViewBinding.homeViewpager.setCurrentItem(2);
                 break;
-            case IWalpayConstants.HOME_TABTYPE_SUNBEAMCOIN:
-                mViewBinding.homeViewpager.setCurrentItem(1);
-                break;
+//            case IWalpayConstants.HOME_TABTYPE_SUNBEAMCOIN:
+//                mViewBinding.homeViewpager.setCurrentItem(1);
+//                break;
             default:
                 mViewBinding.homeViewpager.setCurrentItem(0);
                 break;

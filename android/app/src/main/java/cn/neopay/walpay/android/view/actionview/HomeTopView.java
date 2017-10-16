@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
+import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeTopViewBinding;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
@@ -47,16 +48,14 @@ public class HomeTopView extends FrameLayout {
     }
 
     private void handleView(Context context) {
+
+        if (BuildConfig.DEBUG) {
+            mBinding.walpayIconIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToEnvironmentSettingActivityPage());
+        }
+
         mBinding.homeSignIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToSignInWebPage());
 
-        mBinding.homeScanLl.setOnClickListener(v ->
-                MainRouter.getSingleton().jumpToScanPage());
-//        mBinding.homeScanLl.setOnClickListener(v -> {
-//            //TODO 跳转扫一扫页面
-//            RNActivityParams activityParams=new RNActivityParams();
-//            activityParams.setRnPage("home");
-//            MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
-//        });
+        mBinding.homeScanLl.setOnClickListener(v -> MainRouter.getSingleton().jumpToScanPage());
 
         mBinding.homePayCodeLl.setOnClickListener(v ->
                 BusniessUtils.handleCertification(context, () -> MainRouter.getSingleton().jumpToPayCodePage()));

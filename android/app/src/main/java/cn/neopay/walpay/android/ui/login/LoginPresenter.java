@@ -29,7 +29,6 @@ public class LoginPresenter extends LoginContract.Presenter {
                 new BaseSubscriber(mActivity, userInfoResponseBean -> {
                     handleLogin((UserInfoResponseBean) userInfoResponseBean);
                 }));
-        MainRouter.getSingleton().jumpToHomePage("");
     }
 
     private void handleLogin(UserInfoResponseBean userInfoResponseBean) {
@@ -48,11 +47,15 @@ public class LoginPresenter extends LoginContract.Presenter {
         VerifyRegisterPhoneRequestBean requestBean = new VerifyRegisterPhoneRequestBean();
         requestBean.setPhone(phone);
         ApiManager.getSingleton().verifyRegisterPhone(requestBean, new BaseSubscriber(mActivity, o -> {
-            VerifyRegisterPhoneResponseBean responseBean = (VerifyRegisterPhoneResponseBean) o;
-            if (!responseBean.getRegistered()) {
-                ToastUtils.show(getString(R.string.str_go_register));
-            }
+            handleRegisterPhone((VerifyRegisterPhoneResponseBean) o);
         }, false));
+    }
+
+    private void handleRegisterPhone(VerifyRegisterPhoneResponseBean o) {
+        VerifyRegisterPhoneResponseBean responseBean = o;
+        if (!responseBean.getRegistered()) {
+            ToastUtils.show(getString(R.string.str_go_register));
+        }
     }
 
     @Override

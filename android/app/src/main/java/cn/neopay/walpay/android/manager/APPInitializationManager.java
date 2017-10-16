@@ -8,6 +8,7 @@ import com.xgjk.common.lib.base.BaseApp;
 import com.xgjk.common.lib.manager.PushManager;
 import com.xgjk.common.lib.utils.ToastUtils;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
@@ -28,6 +29,14 @@ public class APPInitializationManager {
 //        initPush(context);
         initHttpEnv();
         initToastUtils();
+        initJPush(context);
+    }
+
+    private static void initJPush(Context context) {
+        if (BuildConfig.DEBUG) {
+            JPushInterface.setDebugMode(true);
+        }
+        JPushInterface.init(context);
     }
 
     private static void initToastUtils() {

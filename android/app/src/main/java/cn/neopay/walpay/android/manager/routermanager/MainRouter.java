@@ -102,5 +102,10 @@ public class MainRouter {
                 .navigation();
     }
 
+    public void jumpToEnvironmentSettingActivityPage() {
+        ARouter.getInstance().build(IWalpayConstants.TO_ENVIRONMENTSETTING_PAGE)
+                .navigation();
+    }
+
 
 }
