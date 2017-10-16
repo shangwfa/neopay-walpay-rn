@@ -13,7 +13,6 @@
 #import "XGQBHomeViewController.h"
 #import "XGQBMessageViewController.h"
 #import "XGQBMineViewController.h"
-#import "XGQBCoinViewController.h"
 
 #import "XGQBLoginViewController.h"
 
@@ -62,9 +61,9 @@
     XGQBHomeViewController *homeVC = [[XGQBHomeViewController alloc]init];
     [self setupChildViewController:homeVC title:@"首页" imageName:@"sy_shouye2" seleceImageName:@"sy_shouye1"];
     
-    
-    XGQBCoinViewController *iconVC = [[XGQBCoinViewController alloc]init];
-    [self setupChildViewController:iconVC title:@"新光币" imageName:@"sy_xinguangbi2" seleceImageName:@"sy_xinguangbi1"];
+//    删除新光币相关页
+//    XGQBCoinViewController *iconVC = [[XGQBCoinViewController alloc]init];
+//    [self setupChildViewController:iconVC title:@"新光币" imageName:@"sy_xinguangbi2" seleceImageName:@"sy_xinguangbi1"];
     
     XGQBMessageViewController *msgVC = [XGQBMessageViewController new];
     [self setupChildViewController:msgVC title:@"消息" imageName:@"sy_xiaoxi2" seleceImageName:@"sy_xiaoxi1"];
@@ -75,11 +74,6 @@
     
     self.viewControllers = _VCs;
     
-//    //checkLoginState
-//    if(![GVUserDefaults standardUserDefaults].accessToken)
-//    {
-//        [homeVC goLogin];
-//    }
 }
 
 -(void)setupChildViewController:(UIViewController*)controller title:(NSString *)title imageName:(NSString *)imageName seleceImageName:(NSString *)selectImageName{

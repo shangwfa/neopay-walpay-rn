@@ -2,8 +2,8 @@
 //  PrefixHeader.pch
 //  MiAiApp
 //
-//  Created by 徐阳 on 2017/5/18.
-//  Copyright © 2017年 徐阳. All rights reserved.
+//  Created by JK on 2017/5/18.
+//  Copyright © 2017年 JK. All rights reserved.
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
@@ -17,6 +17,7 @@
 //基础类
 #import "AppDelegate.h"
 #import "AppDelegate+AppService.h"
+#import "AppDelegate+PushService.h"
 #import "XGQBRootViewController.h"
 #import "XGQBRootNavigationController.h"
 #import "XGQBRootWebViewController.h"

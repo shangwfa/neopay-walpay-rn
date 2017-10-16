@@ -13,12 +13,9 @@ import TextWithLeftImge from '../components/TextWithLeftImge'
 import asterisk from '../res/img/asterisk.png'
 import Button from 'apsl-react-native-button'
 import NetUtil from '../utils/NetUtil'
+import BasePage from './BasePage'
 
- class ChangeNamePage extends Component {
-    static navigationOptions = {
-        header: null
-    };
-
+ class ChangeNamePage extends BasePage {
     constructor() {
         super()
         this.state = {

@@ -8,15 +8,56 @@
 
 #import "XGQBTextField.h"
 
+@interface XGQBTextField()
+
+@end
+
+
 @implementation XGQBTextField
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
++(instancetype)textFieldWithType:(XGQBTextFieldType)textFieldType
+{
+    XGQBTextField *textField = [[XGQBTextField alloc]init];
+    
+    textField.type = textFieldType;
+    return textField;
+    
 }
-*/
+
+-(void)setType:(XGQBTextFieldType)type
+{
+    _type = type;
+    
+    switch (type) {
+        case XGQBTextFieldTypePhoneNo:
+            self.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+            
+        case XGQBTextFieldTypeIDNo:
+            self.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+            
+        case XGQBTextFieldTypeSecurityPhoneNo:
+            self.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+            
+        case XGQBTextFieldTypeBankCard:
+            self.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+            
+        case XGQBTextFieldTypeRegisterCode:
+            self.keyboardType = UIKeyboardTypeNumberPad;
+            break;
+            
+        case XGQBTextFieldTypePassword:
+            self.secureTextEntry = YES;
+            break;
+            
+        default:
+            break;
+    }
+}
+
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -26,6 +67,8 @@
         
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.font = [UIFont systemFontOfSize:15.0f];
+        
+    self.delegate = self;
     }
     return self;
 }
@@ -35,10 +78,62 @@
 {
     [super setPlaceholder:placeholder];
     
-    self.attributedPlaceholder = [[NSAttributedString alloc]initWithString:placeholder attributes:@{
-                                                                                                         NSForegroundColorAttributeName :[UIColor colorWithHexString:@"CACACF"],
-                                                                                                         NSFontAttributeName:kSYSTEMFONT(14.0)
+    self.attributedPlaceholder = [[NSAttributedString alloc]initWithString:placeholder
+                                                                attributes:@{
+                                                                             NSForegroundColorAttributeName :[UIColor colorWithHexString:@"CACACF"],
+                                                                                         NSFontAttributeName:kSYSTEMFONT(14.0)
                                                                                                          }];
 }
+
+
+-(BOOL)textField:(XGQBTextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL returnValue = YES;
+    //处理银行卡输入框分隔符
+    if (textField.type == XGQBTextFieldTypeBankCard) {
+        
+        NSMutableString* newText = [NSMutableString stringWithCapacity:0];
+        [newText appendString:textField.text];// 拿到原有text,根据下面判断可能给它添加" "(空格);
+        
+        NSString * noBlankStr = [textField.text stringByReplacingOccurrencesOfString:@" "withString:@""];
+        NSInteger textLength = [noBlankStr length];
+        
+        
+        if (string.length) {
+            if (textLength < 25) {//这个25是控制实际字符串长度,比如银行卡号长度
+                if (textLength > 0 && textLength %4 == 0) {
+                    newText = [NSMutableString stringWithString:[newText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                    [newText appendString:@" "];
+                    [newText appendString:string];
+                    textField.text = newText;
+                    returnValue = NO;//为什么return NO?因为textField.text = newText;text已经被我们替换好了,那么就不需要系统帮我们添加了,如果你ruturnYES的话,你会发现会多出一个字符串
+                }else {
+                    [newText appendString:string];
+                }
+            }else { // 比25长的话 return NO这样输入就无效了
+                returnValue =NO;
+            }
+        }else { // 如果输入为空,该怎么地怎么地
+            [newText replaceCharactersInRange:range withString:string];
+        }
+    }
+    return returnValue;
+}
+
+-(void)textFieldDidEndEditing:(XGQBTextField *)textField
+{
+    //处理私密手机号
+    if (textField.type == XGQBTextFieldTypeSecurityPhoneNo) {
+        if(textField.text.length==11)
+        {
+        NSString *newStr = [textField.text stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+        [textField setText:newStr];
+            
+        }
+    }
+}
+
+
+
 
 @end

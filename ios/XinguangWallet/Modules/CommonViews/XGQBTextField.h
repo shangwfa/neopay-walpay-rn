@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XGQBTextField : UITextField
+typedef NS_ENUM(NSInteger, XGQBTextFieldType) {
+    XGQBTextFieldTypeNormal = 0,
+    XGQBTextFieldTypeIDNo,
+    XGQBTextFieldTypeBankCard,
+    XGQBTextFieldTypeSecurityPhoneNo,
+    XGQBTextFieldTypePhoneNo,
+    XGQBTextFieldTypeRegisterCode,
+    XGQBTextFieldTypePassword,
+};
+
+
+@interface XGQBTextField : UITextField  <UITextFieldDelegate>
+
+@property (nonatomic,assign) XGQBTextFieldType type;
+
++(instancetype)textFieldWithType:(XGQBTextFieldType)textFieldType;
 
 @end

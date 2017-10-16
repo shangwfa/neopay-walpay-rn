@@ -1,21 +1,14 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {
     StyleSheet,
     View,
     FlatList
 } from 'react-native'
-import Header from "../components/Header"
-import colors from "../constants/colors"
-import ActivityItemComponent from '../components/ActivityItemComponent'
+import {colors} from '../constants/index'
+import {Header,ActivityItemComponent} from '../components/index'
+import BasePage from './BasePage'
 
-class ActivityPage extends Component {
-    static navigationOptions = {
-        header: null
-    };
-
-    componentWillMount() {
-
-    }
+class ActivityPage extends BasePage {
 
     renderItem = ({item}) => (
         <ActivityItemComponent itemData={item} navigation={this.props.navigation}/>

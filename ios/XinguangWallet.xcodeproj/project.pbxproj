@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */; };
+		422895731F8F5152005E16E1 /* XGQBRegisterTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 422895721F8F5152005E16E1 /* XGQBRegisterTVCell.m */; };
 		422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */; };
 		42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */; };
 		42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */; };
 		42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */; };
+		425586681F9453A5002E039B /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 425586661F9452E0002E039B /* index.ios.jsbundle */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
-		42DD31DE1F8C748D00B435EA /* XGQBHomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DD31DD1F8C748D00B435EA /* XGQBHomeBannerView.m */; };
+		42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */; };
 		6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */; };
 		6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0FF9D51F7F3A0E001A66BA /* commModule.m */; };
 		6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C68AC1F7A3CF400170E47 /* XGQBAPPBootViewController.m */; };
@@ -41,7 +44,7 @@
 		6AF4A75B1F7A31EF006AE5E8 /* SystemMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF4A7591F7A31D8006AE5E8 /* SystemMethods.m */; };
 		6AF78B8D1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF78B8C1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m */; };
 		6AF78B901F8B617E002EAAB2 /* XGQBHomeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF78B8F1F8B617E002EAAB2 /* XGQBHomeCellView.m */; };
-		6AF78B931F8B76CD002EAAB2 /* XGQBHomeBottomADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF78B921F8B76CD002EAAB2 /* XGQBHomeBottomADView.m */; };
+		6AF78B931F8B76CD002EAAB2 /* XGQBHomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF78B921F8B76CD002EAAB2 /* XGQBHomeBannerView.m */; };
 		6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */; };
 		6AF9E40D1F78DDB6005E901C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E40C1F78DDB6005E901C /* main.m */; };
 		6AF9E4171F78DDB6005E901C /* XinguangWalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4161F78DDB6005E901C /* XinguangWalletTests.m */; };
@@ -56,7 +59,6 @@
 		6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E45D1F78E858005E901C /* XGQBRootViewController.m */; };
 		6AF9E4801F78EA2F005E901C /* XGQBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E47F1F78EA2F005E901C /* XGQBMessageViewController.m */; };
 		6AF9E4831F78EA3B005E901C /* XGQBMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */; };
-		6AF9E4861F78EA52005E901C /* XGQBCoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4851F78EA52005E901C /* XGQBCoinViewController.m */; };
 		6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E48A1F78EDA9005E901C /* XGQBRootNavigationController.m */; };
 		E7A419D64D389536228DE027 /* libPods-XinguangWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFE03A9FABCE2475826A5708 /* libPods-XinguangWallet.a */; };
 /* End PBXBuildFile section */
@@ -79,6 +81,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4228956E1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDRegisterTableViewController.h; sourceTree = "<group>"; };
+		4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDRegisterTableViewController.m; sourceTree = "<group>"; };
+		422895711F8F5152005E16E1 /* XGQBRegisterTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegisterTVCell.h; sourceTree = "<group>"; };
+		422895721F8F5152005E16E1 /* XGQBRegisterTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRegisterTVCell.m; sourceTree = "<group>"; };
 		422A2D801F8F02F500485DB5 /* XGQBHomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleView.h; sourceTree = "<group>"; };
 		422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleView.m; sourceTree = "<group>"; };
 		42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDAlertView.m; sourceTree = "<group>"; };
@@ -88,14 +94,17 @@
 		42395CEF1F8E069300D20130 /* XGQBIDAlertTransiton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDAlertTransiton.h; sourceTree = "<group>"; };
 		42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDAlertTransiton.m; sourceTree = "<group>"; };
 		424F391E1F8C67CD00079543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		425586661F9452E0002E039B /* index.ios.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = SOURCE_ROOT; };
+		425586671F9452E8002E039B /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
+		425881101F909EFB005566A6 /* XinguangWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinguangWallet.entitlements; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
 		42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNTestViewController.h; sourceTree = "<group>"; };
 		42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRNTestViewController.m; sourceTree = "<group>"; };
 		42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleBtn.h; sourceTree = "<group>"; };
 		42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleBtn.m; sourceTree = "<group>"; };
-		42DD31DC1F8C748D00B435EA /* XGQBHomeBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBannerView.h; sourceTree = "<group>"; };
-		42DD31DD1F8C748D00B435EA /* XGQBHomeBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBannerView.m; sourceTree = "<group>"; };
+		42DD31DC1F8C748D00B435EA /* XGQBHomeBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBanner.h; sourceTree = "<group>"; };
+		42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBanner.m; sourceTree = "<group>"; };
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
 		6A01A0191F7A2AC20059D6D3 /* ABNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkManager.h; sourceTree = "<group>"; };
 		6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABNetworkManager.m; sourceTree = "<group>"; };
@@ -145,8 +154,8 @@
 		6AF78B8C1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeCellBtn.m; sourceTree = "<group>"; };
 		6AF78B8E1F8B617E002EAAB2 /* XGQBHomeCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeCellView.h; sourceTree = "<group>"; };
 		6AF78B8F1F8B617E002EAAB2 /* XGQBHomeCellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeCellView.m; sourceTree = "<group>"; };
-		6AF78B911F8B76CD002EAAB2 /* XGQBHomeBottomADView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBottomADView.h; sourceTree = "<group>"; };
-		6AF78B921F8B76CD002EAAB2 /* XGQBHomeBottomADView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBottomADView.m; sourceTree = "<group>"; };
+		6AF78B911F8B76CD002EAAB2 /* XGQBHomeBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBannerView.h; sourceTree = "<group>"; };
+		6AF78B921F8B76CD002EAAB2 /* XGQBHomeBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBannerView.m; sourceTree = "<group>"; };
 		6AF9E3FA1F78DDB6005E901C /* XinguangWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XinguangWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF9E4091F78DDB6005E901C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AF9E40B1F78DDB6005E901C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -184,8 +193,6 @@
 		6AF9E47F1F78EA2F005E901C /* XGQBMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMessageViewController.m; sourceTree = "<group>"; };
 		6AF9E4811F78EA3B005E901C /* XGQBMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineViewController.h; sourceTree = "<group>"; };
 		6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineViewController.m; sourceTree = "<group>"; };
-		6AF9E4841F78EA52005E901C /* XGQBCoinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCoinViewController.h; sourceTree = "<group>"; };
-		6AF9E4851F78EA52005E901C /* XGQBCoinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCoinViewController.m; sourceTree = "<group>"; };
 		6AF9E4891F78EDA9005E901C /* XGQBRootNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRootNavigationController.h; sourceTree = "<group>"; };
 		6AF9E48A1F78EDA9005E901C /* XGQBRootNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRootNavigationController.m; sourceTree = "<group>"; };
 		A1D6E6C49142EAB9057AFA1A /* Pods-XinguangWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinguangWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XinguangWallet/Pods-XinguangWallet.debug.xcconfig"; sourceTree = "<group>"; };
@@ -236,8 +243,8 @@
 				422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */,
 				6AF78B8E1F8B617E002EAAB2 /* XGQBHomeCellView.h */,
 				6AF78B8F1F8B617E002EAAB2 /* XGQBHomeCellView.m */,
-				42DD31DC1F8C748D00B435EA /* XGQBHomeBannerView.h */,
-				42DD31DD1F8C748D00B435EA /* XGQBHomeBannerView.m */,
+				6AF78B911F8B76CD002EAAB2 /* XGQBHomeBannerView.h */,
+				6AF78B921F8B76CD002EAAB2 /* XGQBHomeBannerView.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -245,12 +252,14 @@
 		422A2D841F8F033F00485DB5 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				42DD31DC1F8C748D00B435EA /* XGQBHomeBanner.h */,
+				42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */,
 				42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */,
 				42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */,
 				6AF78B8B1F8B60ED002EAAB2 /* XGQBHomeCellBtn.h */,
 				6AF78B8C1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m */,
-				6AF78B911F8B76CD002EAAB2 /* XGQBHomeBottomADView.h */,
-				6AF78B921F8B76CD002EAAB2 /* XGQBHomeBottomADView.m */,
+				422895711F8F5152005E16E1 /* XGQBRegisterTVCell.h */,
+				422895721F8F5152005E16E1 /* XGQBRegisterTVCell.m */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -341,8 +350,6 @@
 			children = (
 				6A792B971F7F6E53009039AF /* XGQBLoginInputView.h */,
 				6A792B981F7F6E53009039AF /* XGQBLoginInputView.m */,
-				42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */,
-				42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -374,6 +381,8 @@
 				6A792B9B1F7F98A2009039AF /* XGQBTextField.m */,
 				6A5F69C51F7B930200B16B31 /* XGQBPureColorBtn.h */,
 				6A5F69C61F7B930200B16B31 /* XGQBPureColorBtn.m */,
+				42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */,
+				42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -451,6 +460,7 @@
 		6AF9E3FC1F78DDB6005E901C /* XinguangWallet */ = {
 			isa = PBXGroup;
 			children = (
+				425881101F909EFB005566A6 /* XinguangWallet.entitlements */,
 				6AF9E42F1F78DE2B005E901C /* AppDelegate */,
 				6AF9E4471F78E281005E901C /* Manager */,
 				6AF9E4491F78E281005E901C /* Base */,
@@ -497,6 +507,8 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				425586671F9452E8002E039B /* assets */,
+				425586661F9452E0002E039B /* index.ios.jsbundle */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
@@ -554,7 +566,6 @@
 				6AF9E4651F78E962005E901C /* Home */,
 				6AF9E46C1F78E962005E901C /* Message */,
 				6AF9E4731F78E963005E901C /* Mine */,
-				6AF9E45E1F78E962005E901C /* XGCoin */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -602,67 +613,6 @@
 			path = RootViewController;
 			sourceTree = "<group>";
 		};
-		6AF9E45E1F78E962005E901C /* XGCoin */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E45F1F78E962005E901C /* Controller */,
-				6AF9E4601F78E962005E901C /* Logic */,
-				6AF9E4611F78E962005E901C /* Model */,
-				6AF9E4621F78E962005E901C /* Resource */,
-				6AF9E4631F78E962005E901C /* Service */,
-				6AF9E4641F78E962005E901C /* View */,
-			);
-			path = XGCoin;
-			sourceTree = "<group>";
-		};
-		6AF9E45F1F78E962005E901C /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E4841F78EA52005E901C /* XGQBCoinViewController.h */,
-				6AF9E4851F78EA52005E901C /* XGQBCoinViewController.m */,
-				6A0FF9D41F7F3A0E001A66BA /* commModule.h */,
-				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
-				42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */,
-				42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		6AF9E4601F78E962005E901C /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		6AF9E4611F78E962005E901C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		6AF9E4621F78E962005E901C /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resource;
-			sourceTree = "<group>";
-		};
-		6AF9E4631F78E962005E901C /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		6AF9E4641F78E962005E901C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		6AF9E4651F78E962005E901C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +633,8 @@
 				6AF9E47C1F78EA0B005E901C /* XGQBHomeViewController.m */,
 				42395CEC1F8E00F900D20130 /* XGQBIDAlertViewController.h */,
 				42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */,
+				4228956E1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.h */,
+				4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -801,6 +753,10 @@
 			children = (
 				6AF9E4811F78EA3B005E901C /* XGQBMineViewController.h */,
 				6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */,
+				6A0FF9D41F7F3A0E001A66BA /* commModule.h */,
+				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
+				42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */,
+				42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -937,6 +893,14 @@
 					6AF9E3F91F78DDB6005E901C = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					6AF9E4111F78DDB6005E901C = {
 						CreatedOnToolsVersion = 9.0;
@@ -975,6 +939,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				425586681F9453A5002E039B /* index.ios.jsbundle in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);
@@ -1060,10 +1025,11 @@
 				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
-				42DD31DE1F8C748D00B435EA /* XGQBHomeBannerView.m in Sources */,
+				42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */,
 				6AD95B351F7D064100BFF4DA /* MemberCoreService.m in Sources */,
 				6AD95B361F7D064100BFF4DA /* MerchantCoreService.m in Sources */,
 				6AE813A81F7B52D40044B072 /* XGQBHomeViewController.m in Sources */,
+				422895731F8F5152005E16E1 /* XGQBRegisterTVCell.m in Sources */,
 				6A5F69C71F7B930200B16B31 /* XGQBPureColorBtn.m in Sources */,
 				6AE813A71F7B52960044B072 /* XGQBAppManager.m in Sources */,
 				42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */,
@@ -1083,12 +1049,12 @@
 				6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */,
 				6AF9E4511F78E659005E901C /* XGQBTabBar.m in Sources */,
 				6AF9E4801F78EA2F005E901C /* XGQBMessageViewController.m in Sources */,
-				6AF9E4861F78EA52005E901C /* XGQBCoinViewController.m in Sources */,
 				42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */,
-				6AF78B931F8B76CD002EAAB2 /* XGQBHomeBottomADView.m in Sources */,
+				6AF78B931F8B76CD002EAAB2 /* XGQBHomeBannerView.m in Sources */,
 				6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */,
 				42D44AA11F8CCF060064A32D /* XGQBRNTestViewController.m in Sources */,
 				6AF9E4371F78E039005E901C /* AppDelegate.m in Sources */,
+				422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */,
 				6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */,
 				6AF9E43D1F78E0E9005E901C /* AppDelegate+AppService.m in Sources */,
 				6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */,
@@ -1259,6 +1225,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = XinguangWallet/XinguangWallet.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XinguangWallet/Supporting Files/PrefixHeader.pch";
@@ -1266,8 +1234,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xinguang.XinguangWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Neopay-Wallet.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/React/**";
 			};
@@ -1279,6 +1248,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_ENTITLEMENTS = XinguangWallet/XinguangWallet.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XinguangWallet/Supporting Files/PrefixHeader.pch";
@@ -1286,8 +1257,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xinguang.XinguangWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Neopay-Wallet.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/React/**";
 			};

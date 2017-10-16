@@ -11,7 +11,7 @@ import colors from "../constants/colors";
 import activity_tip_icon from '../res/img/activity_tip_icon.png'
 import * as RouterPaths from '../constants/RouterPaths'
 
-class ActivityItemCompontent extends Component {
+class ActivityItemComponent extends Component {
 
     static defaultProps = {
         itemData: {},
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ActivityItemCompontent
+export default ActivityItemComponent

@@ -11,10 +11,12 @@
 
 #import "XGQBHomeTitleView.h"
 #import "XGQBHomeCellView.h"
-#import "XGQBHomeBottomADView.h"
+#import "XGQBHomeBannerView.h"
 
 #import "XGQBIDAlertViewController.h"
 #import "XGQBIDAlertTransiton.h"
+
+#import "XGQBIDRegisterTableViewController.h"
 
 
 
@@ -32,12 +34,16 @@
     
     [self setUpViewComponents];
     [self checkIDStatus];
+    
+    //接受实名认证通知,跳转至实名认证页面
+    [kNotificationCenter addObserver:self selector:@selector(registerID) name:kNotificationRegisterIDAction object:nil];
 
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 
 }
 - (void)didReceiveMemoryWarning {
@@ -59,7 +65,7 @@
     [self.view addSubview:homeCellView];
     
     //广告视图
-    XGQBHomeBottomADView *homeADView = [XGQBHomeBottomADView new];
+    XGQBHomeBannerView *homeADView = [XGQBHomeBannerView new];
     [self.view addSubview:homeADView];
     
     //添加约束
@@ -120,14 +126,12 @@
     return [[XGQBIDAlertTransiton alloc] init];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - 实名认证页面
+-(void)registerID
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+{
+    XGQBIDRegisterTableViewController *registerVC = [[XGQBIDRegisterTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
+    [self.navigationController pushViewController:registerVC animated:YES];
 }
-*/
 
 @end
