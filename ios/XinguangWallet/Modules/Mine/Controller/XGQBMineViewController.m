@@ -7,15 +7,12 @@
 //
 
 #import "XGQBMineViewController.h"
+#import "XGQBMineTableView.h"
 
-#import "XGQBRNTestViewController.h"
-#import "RCTRootView.h"
-#import "RCTDevLoadingView.h"
+#import "XGQBMineHeaderView.h"
+#import "XGQBMineItemCell.h"
 
-
-@interface XGQBMineViewController ()
-
-@property (nonatomic,strong)RCTRootView *rctRootV;
+@interface XGQBMineViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -23,107 +20,59 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = kViewBgColor;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    //预先加载RN页面
-    NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
-    
-    //隐藏顶部loading from 提示
-    [RCTDevLoadingView setEnabled:NO];
-    
-    //RCT初始化方法必须在主线程执行,开子线程报错
-    
-    [SVProgressHUD show];
-
-        RCTRootView *rootView =
-        [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
-                             moduleName        : @"neopay_walpay"
-                             initialProperties :@{@"params": @{@"page":@"home",@"time":@"2017-10-11"}}
-                              launchOptions    : nil];
-        
-        self.rctRootV = rootView;
-    
- 
-    [SVProgressHUD dismiss];
-
-    
-    //临时退出登录按钮
-    YYLabel *logoutLabel = [YYLabel new];
-    logoutLabel.text = @"Logout";
-    logoutLabel.textAlignment = NSTextAlignmentCenter;
-    logoutLabel.backgroundColor = [UIColor redColor];
- 
-    logoutLabel.frame = CGRectMake(100, 100, 100, 50);
-    [self.view addSubview:logoutLabel];
-    
-    [logoutLabel setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-        [GVUserDefaults standardUserDefaults].accessToken = nil;
-        [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
-    }];
-    
-    //临时充值app运行次数按钮
-    YYLabel *restRunCount = [YYLabel new];
-    restRunCount.text = @"ResetRunCount";
-    restRunCount.textAlignment = NSTextAlignmentCenter;
-    restRunCount.backgroundColor = [UIColor redColor];
-    
-    restRunCount.frame = CGRectMake(100, 200, 100, 50);
-    [self.view addSubview:restRunCount];
-    
-    [restRunCount setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-        [GVUserDefaults standardUserDefaults].runCount = 0;
-    }];
-    
-    self.view.backgroundColor = [UIColor yellowColor];
-    
-    //临时跳转登录页面按钮
-    UIButton *button = [[UIButton alloc]initWithFrame:(CGRectMake(100, 300, 100, 50))];
-    [button setTitle:@"Login" forState:UIControlStateNormal];
-    [self.view addSubview:button];
-    button.backgroundColor = [UIColor redColor];
-    [button addTarget:self action:@selector(pushToLoginVC) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    //临时跳转RN页面按钮
-    UIButton *jumpToRN = [[UIButton alloc]initWithFrame:(CGRectMake(100, 400, 100, 50))];
-    [jumpToRN setTitle:@"jumpToRN" forState:UIControlStateNormal];
-    [self.view addSubview:jumpToRN];
-    jumpToRN.backgroundColor = [UIColor redColor];
-    [jumpToRN addTarget:self action:@selector(jumpToRN) forControlEvents:UIControlEventTouchUpInside];
-    
-    //监听RN跳转通知
-    [kNotificationCenter addObserver:self selector:@selector(jumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
-    
-    //    NSLog(@"%s",__func__);
-    
-    
+    [self setUpViewComponents];
 }
-//跳转进入RN界面
--(void)jumpToRN
+
+-(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+#pragma mark - setUp view components
+-(void)setUpViewComponents
+{
+    UIImageView *bgImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_beijing"]];
+    [self.view addSubview:bgImg];
     
-   
-    //创建XGQBRNTestVC
-    XGQBRNTestViewController *RNVC = [[XGQBRNTestViewController alloc]init];
-    RNVC.view = self.rctRootV;
+    XGQBMineTableView *mineTableView = [[XGQBMineTableView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 59/375.0*kScreenWidth, 353/375.0*kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+    mineTableView.backgroundColor = kGreenColor;
+    mineTableView.delegate = self;
     
-    //    rootView.appProperties = @{@"params_updated": @{@"page":@"home",@"time":@"2017-10-11"}};
+    XGQBMineHeaderView *headerView = [[XGQBMineHeaderView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 59/375.0*kScreenWidth, 353/375.0*kScreenWidth, 161/375.0*kScreenWidth)];
     
-    [self.navigationController pushViewController:RNVC animated:YES];
+    mineTableView.tableHeaderView = headerView;
+    
+    [self.view addSubview:mineTableView];
     
 }
 
-//从RN跳回原生界面
--(void)jumpBackToNative
+
+#pragma mark - tableView delegate
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    return 2;
 }
 
--(void)pushToLoginVC
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
+    return 44;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XGQBMineItemCell *cell = [XGQBMineItemCell cellWithImageNamed:@"wd_zhangdan" title:@"我的账单"];
+    return cell;
 }
 
 @end
