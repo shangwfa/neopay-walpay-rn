@@ -92,7 +92,7 @@
     }];
     //扫一扫
     [scanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(45/375.0*kScreenWidth, 65/375.0*kScreenWidth));
+        make.size.mas_equalTo(CGSizeMake(45/375.0*kScreenWidth, 75/375.0*kScreenWidth));
         make.bottom.equalTo(backgroundImg).with.offset(-25/375.0*kScreenWidth);
         make.left.equalTo(backgroundImg).with.offset(57/375.0*kScreenWidth);
     }];
