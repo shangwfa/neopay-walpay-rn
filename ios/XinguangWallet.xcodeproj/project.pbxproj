@@ -13,6 +13,7 @@
 		42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */; };
 		42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */; };
 		42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */; };
+		425586681F9453A5002E039B /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 425586661F9452E0002E039B /* index.ios.jsbundle */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
@@ -93,6 +94,8 @@
 		42395CEF1F8E069300D20130 /* XGQBIDAlertTransiton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDAlertTransiton.h; sourceTree = "<group>"; };
 		42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDAlertTransiton.m; sourceTree = "<group>"; };
 		424F391E1F8C67CD00079543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		425586661F9452E0002E039B /* index.ios.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = SOURCE_ROOT; };
+		425586671F9452E8002E039B /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		425881101F909EFB005566A6 /* XinguangWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinguangWallet.entitlements; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
@@ -504,6 +507,8 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				425586671F9452E8002E039B /* assets */,
+				425586661F9452E0002E039B /* index.ios.jsbundle */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
@@ -934,6 +939,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				425586681F9453A5002E039B /* index.ios.jsbundle in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);

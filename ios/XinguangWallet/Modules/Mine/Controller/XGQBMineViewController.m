@@ -10,9 +10,12 @@
 
 #import "XGQBRNTestViewController.h"
 #import "RCTRootView.h"
+#import "RCTDevLoadingView.h"
 
 
 @interface XGQBMineViewController ()
+
+@property (nonatomic,strong)RCTRootView *rctRootV;
 
 @end
 
@@ -22,6 +25,27 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor greenColor];
     
+    //预先加载RN页面
+    NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
+    
+    //隐藏顶部loading from 提示
+    [RCTDevLoadingView setEnabled:NO];
+    
+    //RCT初始化方法必须在主线程执行,开子线程报错
+    
+    [SVProgressHUD show];
+
+        RCTRootView *rootView =
+        [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
+                             moduleName        : @"neopay_walpay"
+                             initialProperties :@{@"params": @{@"page":@"home",@"time":@"2017-10-11"}}
+                              launchOptions    : nil];
+        
+        self.rctRootV = rootView;
+    
+ 
+    [SVProgressHUD dismiss];
+
     
     //临时退出登录按钮
     YYLabel *logoutLabel = [YYLabel new];
@@ -78,18 +102,12 @@
 -(void)jumpToRN
 {
     
-    NSURL *jsCodeLocation = [NSURL
-                             URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
-    RCTRootView *rootView =
-    [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
-                         moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":@"home",@"time":@"2017-10-11"}}
-                          launchOptions    : nil];
+//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
     
-    
+   
     //创建XGQBRNTestVC
     XGQBRNTestViewController *RNVC = [[XGQBRNTestViewController alloc]init];
-    RNVC.view = rootView;
+    RNVC.view = self.rctRootV;
     
     //    rootView.appProperties = @{@"params_updated": @{@"page":@"home",@"time":@"2017-10-11"}};
     
