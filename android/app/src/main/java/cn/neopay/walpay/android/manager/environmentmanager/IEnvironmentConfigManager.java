@@ -9,6 +9,7 @@ package cn.neopay.walpay.android.manager.environmentmanager;
 public interface IEnvironmentConfigManager {
 
     ApplicationEnvironment getCurrentEnvironment();
+
     void setCurrentEnvironment(ApplicationEnvironment env);
 
     ApplicationEnvironment parseCurrentEnvironment(String id);
@@ -22,8 +23,9 @@ public interface IEnvironmentConfigManager {
 
     String getCurrentEnvBuglyId(ApplicationEnvironment env);
 
+    String getCurrentEnvType();
 
     enum ApplicationEnvironment {
-        TEST, DEVELOP, PRODUCT, UNKNOWN
+        TEST, DEVELOP, PRODUCT, MOCK, UNKNOWN
     }
 }

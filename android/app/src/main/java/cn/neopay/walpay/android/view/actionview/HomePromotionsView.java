@@ -96,17 +96,12 @@ public class HomePromotionsView extends FrameLayout {
     private void setBannerData(List<BannerResponseBean> bannerList) {
 
         List<String> urls = new ArrayList<>();
-        //TODO 接口返回数据
-        urls.add("http://img2.imgtn.bdimg.com/it/u=3259946169,3752632959&fm=27&gp=0.jpg");
-        urls.add("http://img4.imgtn.bdimg.com/it/u=227953490,3054069314&fm=27&gp=0.jpg");
-        urls.add("http://img1.imgtn.bdimg.com/it/u=391390601,3860916026&fm=11&gp=0.jpg");
-//        if (null == bannerList) {
-//            return;
-//        }
-//        List<String> urls = new ArrayList<>();
-//        for (int i = 0; i < bannerList.size(); i++) {
-//            urls.add(bannerList.get(i).getImageUrl());
-//        }
+        if (null == bannerList) {
+            return;
+        }
+        for (int i = 0; i < bannerList.size(); i++) {
+            urls.add(bannerList.get(i).getImageUrl());
+        }
         mHomeBannerAdapter.setBannerUrls(urls);
     }
 }

@@ -11,7 +11,7 @@
 
 #import "XGQBHomeTitleView.h"
 #import "XGQBHomeCellView.h"
-#import "XGQBHomeBottomADView.h"
+#import "XGQBHomeBannerView.h"
 
 #import "XGQBIDAlertViewController.h"
 #import "XGQBIDAlertTransiton.h"
@@ -65,7 +65,7 @@
     [self.view addSubview:homeCellView];
     
     //广告视图
-    XGQBHomeBottomADView *homeADView = [XGQBHomeBottomADView new];
+    XGQBHomeBannerView *homeADView = [XGQBHomeBannerView new];
     [self.view addSubview:homeADView];
     
     //添加约束

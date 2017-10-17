@@ -51,6 +51,8 @@ ext {
             agentweb               : 'com.just.agentweb:agentweb:1.2.6',
             slice                  : 'com.github.mthli:Slice:v1.2',
             multidex               : 'com.android.support:multidex:1.0.1',
+            jpush                  : 'cn.jiguang.sdk:jpush:3.0.9',
+            jcore                  : 'cn.jiguang.sdk:jcore:1.1.7'
     ]
     //------------------------------------------------------------------------------------//
 }

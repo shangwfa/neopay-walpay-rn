@@ -2,8 +2,8 @@
 //  FontAndColorMacros.h
 //  MiAiApp
 //
-//  Created by 徐阳 on 2017/5/18.
-//  Copyright © 2017年 徐阳. All rights reserved.
+//  Created by JK on 2017/5/18.
+//  Copyright © 2017年 JK. All rights reserved.
 //
 
 //字体大小和颜色配置
@@ -28,7 +28,7 @@
 //#define CNavBgColor    [UIColor colorWithHexString:@"ffffff"]
 //#define CNavBgFontColor  [UIColor colorWithHexString:@"000000"]
 //默认页面背景色
-#define CViewBgColor [UIColor colorWithHexString:@"f2f2f2"]
+#define kViewBgColor [UIColor colorWithHexString:@"f2f2f2"]
 
 //分割线颜色
 #define kLineColor [UIColor colorWithHexString:@"DCDCDC"]
@@ -42,7 +42,7 @@
 //颜色
 #define kClearColor [UIColor clearColor]
 #define kYellowColor [UIColor yellowColor]
-
+#define kGreenColor [UIColor greenColor]
 #define kWhiteColor [UIColor whiteColor]
 #define kBlackColor [UIColor blackColor]
 #define kGrayColor [UIColor grayColor]

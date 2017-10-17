@@ -25,9 +25,11 @@ public abstract class DataBindingFragment<B extends ViewDataBinding> extends Fra
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         mViewBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        mContext=getActivity();
+        mContext = getActivity();
         initPresenter();
         initView();
         return mViewBinding.getRoot();
@@ -50,5 +52,6 @@ public abstract class DataBindingFragment<B extends ViewDataBinding> extends Fra
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(DataBindingActivity.MessageEvent event) {/* Do something */}
 
-    public static class MessageEvent { /* Additional fields if needed */ }
+    public static class MessageEvent { /* Additional fields if needed */
+    }
 }

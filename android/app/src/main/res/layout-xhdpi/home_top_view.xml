@@ -13,6 +13,7 @@
             android:layout_marginTop="@dimen/size_13dp">
 
             <ImageView
+                android:id="@+id/walpay_icon_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_22dp"
                 android:layout_marginLeft="@dimen/size_12dp"

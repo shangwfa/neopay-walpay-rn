@@ -24,6 +24,7 @@ public class SelectBankPaySlimInjector implements SlimInjector<BankCardResponseB
         } else {
             injector.text(R.id.pay_mode_tv, BusniessUtils.handleBankNickName(data.getBankName(), data.getBankCardNo()));
         }
+        injector.background(R.id.pay_mode_icon_iv, R.mipmap.img_right_arrow);
         injector.clicked(R.id.pay_mode_rl, data.getOnClickListener());
     }
 

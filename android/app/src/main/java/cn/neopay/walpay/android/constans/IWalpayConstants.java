@@ -10,12 +10,14 @@ public interface IWalpayConstants {
     //---------------------------EnvironmentConfig---------------------//
     String HTTP_URL_KEY = "http_url";
     String BASE_HTTPURL_TEST = "http://139.224.11.160:8202/walpay-web/";
-    String BASE_HTTPURL_DEVELOP = "http://139.224.11.160:8101/shopay-web/";
-    String BASE_HTTPURL_PRODUCT = "https://shopay.neopay.cn/shopay-web/";
+    String BASE_HTTPURL_DEVELOP = "http://139.224.11.160:8101/walpay-web/";
+    String BASE_HTTPURL_PRODUCT = "https://shopay.neopay.cn/walpay-web/";
+    String BASE_HTTPURL_MOCK = "http://172.16.33.151:8888/walpay-web/";
     String TEST_TAG = "0";
     String DEVELOP_TAG = "1";
     String PRODUCT_TAG = "2";
-    String UNKNOWN_TAG = "3";
+    String MOCK_TAG = "3";
+    String UNKNOWN_TAG = "4";
     String FLAVOR_TEST = "walpayTest";
     String FLAVOR_DEVELOP = "walpayDevelop";
     String FLAVOR_PRODUCT = "walpayProduct";
@@ -50,6 +52,7 @@ public interface IWalpayConstants {
     String TO_SCAN_PAGE = "/appModule/ScanActivity";
     String TO_EXPLAIN_PAGE = "/appModule/ExplainActivity";
     String TO_PAYCODE_PAGE = "/appModule/PayCodeActivity";
+    String TO_ENVIRONMENTSETTING_PAGE = "/appModule/EnvironmentSettingActivity";
 
     //---------------------------view---------------------//
     String COMMONINPUTVIEW_TYPE_DEFAULT = "default";

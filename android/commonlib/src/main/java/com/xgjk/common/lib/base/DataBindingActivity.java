@@ -49,7 +49,9 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
                 .init();
         ActivityManager.getInstance().addActivity(this);
         ARouter.getInstance().inject(this);
-        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         mPageBinding = DataBindingUtil.setContentView(this, R.layout.activity_base);
         initBaseView();
         mContext = this;

@@ -47,25 +47,14 @@ public class PayCodeActivity extends BaseActivity<PayCodePresenter, ActivityPayC
         if (userInfoBean != null) {
             GlideManager.loadNetImage(mViewBinding.userAvatarIv, userInfoBean.getAvatarUrl());
         }
-        //TODO 去除掉本地图片
-        GlideManager.loadLocalResCircleImage(mViewBinding.userAvatarIv, R.mipmap.img_home_big_red_bag);
-
         ApiManager.getSingleton().getRecentPayType(new GetRecentPayTypeRequestBean(), new BaseSubscriber(this, o -> {
             setBankNickName((RecentPayTypeResponseBean) o);
         }));
 
-        mViewBinding.commonSelectLl.payModeRl.setOnClickListener(v -> {
-            //TODO 选择银行卡
-            DialogManager.getSingleton().showSelectBankDialog(this);
-        });
+        mViewBinding.commonSelectLl.payModeRl.setOnClickListener(v -> DialogManager.getSingleton().showSelectBankDialog(this));
     }
 
     private void setBankNickName(RecentPayTypeResponseBean payTypeBean) {
-        //TODO 测试
-        payTypeBean = new RecentPayTypeResponseBean();
-        payTypeBean.setBankName("中国银行");
-        payTypeBean.setBankCardNo("12345670");
-
         if (payTypeBean == null) {
             return;
         }

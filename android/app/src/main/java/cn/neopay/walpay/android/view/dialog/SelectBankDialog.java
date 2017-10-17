@@ -36,6 +36,7 @@ public class SelectBankDialog extends BaseDialog {
     private SelectBankDialogLayoutBinding mBinding;
     private SlimAdapter mSelectBankPayAdapter;
     private List<Object> mData;
+    private BankCardResponseBean mBalancebean;
 
     public SelectBankDialog(@NonNull Context context) {
         super(context);
@@ -74,7 +75,6 @@ public class SelectBankDialog extends BaseDialog {
         mBinding.payModeListRv.setLayoutManager(layoutManager);
         requestBalance((Activity) context);
         requestBankCard((Activity) context);
-        mSelectBankPayAdapter.updateData(mData);
     }
 
     private void requestBankCard(Activity context) {
@@ -84,18 +84,10 @@ public class SelectBankDialog extends BaseDialog {
     }
 
     private void handleBankCard(List<BankCardResponseBean> beanList) {
-        //TODO 测试
-        beanList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            BankCardResponseBean bean = new BankCardResponseBean();
-            bean.setBankName("中国银行--" + i);
-            bean.setBankCardNo("1234567" + i);
-            beanList.add(bean);
-        }
-
         if (beanList == null) {
             return;
         }
+        mData.add(mBalancebean);
         for (int i = 0; i < beanList.size(); i++) {
             BankCardResponseBean bankCardBean = beanList.get(i);
             bankCardBean.setOnClickListener(v -> {
@@ -105,6 +97,7 @@ public class SelectBankDialog extends BaseDialog {
             });
             mData.add(bankCardBean);
         }
+        mSelectBankPayAdapter.updateData(mData);
     }
 
     private void requestBalance(Activity context) {
@@ -114,23 +107,18 @@ public class SelectBankDialog extends BaseDialog {
     }
 
     private void handleBalance(UserBalanceResponseBean balanceBean) {
-        //TODO 测试
-        balanceBean = new UserBalanceResponseBean();
-        balanceBean.setBalance(new BigDecimal("88.08"));
-
         if (balanceBean == null) {
             return;
         }
         BigDecimal balance = balanceBean.getBalance();
-        BankCardResponseBean bean = new BankCardResponseBean();
-        bean.setBankName("余额");
-        bean.setBankCardNo(balance.toString());
-        bean.setOnClickListener(v -> {
+        mBalancebean = new BankCardResponseBean();
+        mBalancebean.setBankName("余额");
+        mBalancebean.setBankCardNo(balance.toString());
+        mBalancebean.setOnClickListener(v -> {
             // TODO 选择了余额
             ToastUtils.show("余额");
             dismiss();
         });
-        mData.add(bean);
     }
 
 }
