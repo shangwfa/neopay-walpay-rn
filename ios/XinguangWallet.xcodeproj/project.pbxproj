@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4210AF401F95CE6D008132C5 /* XGQBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF3F1F95CE6D008132C5 /* XGQBSettingsViewController.m */; };
+		4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */; };
+		4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */; };
 		422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */; };
 		422895731F8F5152005E16E1 /* XGQBRegisterTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 422895721F8F5152005E16E1 /* XGQBRegisterTVCell.m */; };
 		422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */; };
@@ -84,6 +87,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4210AF3E1F95CE6D008132C5 /* XGQBSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSettingsViewController.h; sourceTree = "<group>"; };
+		4210AF3F1F95CE6D008132C5 /* XGQBSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSettingsViewController.m; sourceTree = "<group>"; };
+		4210AF411F95D1ED008132C5 /* XGQBActiMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBActiMessTVC.h; sourceTree = "<group>"; };
+		4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiMessTVC.m; sourceTree = "<group>"; };
+		4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCommMessTVC.h; sourceTree = "<group>"; };
+		4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCommMessTVC.m; sourceTree = "<group>"; };
 		4228956E1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDRegisterTableViewController.h; sourceTree = "<group>"; };
 		4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDRegisterTableViewController.m; sourceTree = "<group>"; };
 		422895711F8F5152005E16E1 /* XGQBRegisterTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegisterTVCell.h; sourceTree = "<group>"; };
@@ -740,6 +749,10 @@
 		6AF9E4721F78E962005E901C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4210AF411F95D1ED008132C5 /* XGQBActiMessTVC.h */,
+				4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */,
+				4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */,
+				4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -766,6 +779,8 @@
 				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
 				42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */,
 				42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */,
+				4210AF3E1F95CE6D008132C5 /* XGQBSettingsViewController.h */,
+				4210AF3F1F95CE6D008132C5 /* XGQBSettingsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1038,6 +1053,7 @@
 			files = (
 				6AD95B321F7D064100BFF4DA /* AssistCoreService.m in Sources */,
 				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
+				4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
 				42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */,
@@ -1052,6 +1068,7 @@
 				6AF78B901F8B617E002EAAB2 /* XGQBHomeCellView.m in Sources */,
 				6AF4A75A1F7A31EF006AE5E8 /* IphoneDevice.m in Sources */,
 				6AF4A75B1F7A31EF006AE5E8 /* SystemMethods.m in Sources */,
+				4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */,
 				6A8758E21F7A2D0300F480EF /* GVUserDefaults+PropertyList.m in Sources */,
 				6A5F69C41F7B7AB200B16B31 /* XGQBRegisterViewController.m in Sources */,
 				6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */,
@@ -1069,6 +1086,7 @@
 				6AF78B931F8B76CD002EAAB2 /* XGQBHomeBannerView.m in Sources */,
 				6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */,
 				42D44AA11F8CCF060064A32D /* XGQBRNTestViewController.m in Sources */,
+				4210AF401F95CE6D008132C5 /* XGQBSettingsViewController.m in Sources */,
 				6AF9E4371F78E039005E901C /* AppDelegate.m in Sources */,
 				422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */,
 				6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */,

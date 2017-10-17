@@ -12,6 +12,9 @@
 #import "XGQBMineHeaderView.h"
 #import "XGQBMineItemCell.h"
 
+//temp
+#import "XGQBSettingsViewController.h"
+
 @interface XGQBMineViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray *cellItemArray;
@@ -39,6 +42,7 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 #pragma mark - 懒加载相关
@@ -74,7 +78,7 @@
     mineTableView.sectionFooterHeight = 8;
     mineTableView.showsVerticalScrollIndicator = NO;
     mineTableView.showsHorizontalScrollIndicator = NO;
-    mineTableView.scrollEnabled = NO;
+//    mineTableView.scrollEnabled = NO;
     mineTableView.rowHeight = 50;
     
     //tableview头部试图
@@ -114,6 +118,14 @@
 {
     XGQBMineItemCell *cell = [XGQBMineItemCell cellWithImageNamed:self.cellImgArray[indexPath.section*4+indexPath.row] title:self.cellItemArray[indexPath.row+indexPath.section*4]];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section==1&&indexPath.row==2) {
+        XGQBSettingsViewController *sVC = [XGQBSettingsViewController new];
+        [self.navigationController pushViewController:sVC animated:YES];
+    }
 }
 
 @end

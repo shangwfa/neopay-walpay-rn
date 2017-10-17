@@ -1,13 +1,13 @@
 //
-//  XGQBMessageViewController.h
+//  XGQBSettingsViewController.h
 //  XinguangWallet
 //
-//  Created by Neopay-iOS on 25/09/2017.
+//  Created by BossKing on 17/10/2017.
 //  Copyright © 2017 Hangzhou Neopay Co.,Ltd. All rights reserved.
 //
 
 #import "XGQBRootViewController.h"
 
-@interface XGQBMessageViewController : UITableViewController
+@interface XGQBSettingsViewController : XGQBRootViewController
 
 @end
