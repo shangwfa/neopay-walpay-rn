@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4210AF401F95CE6D008132C5 /* XGQBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF3F1F95CE6D008132C5 /* XGQBSettingsViewController.m */; };
+		4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */; };
+		4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */; };
 		422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */; };
 		422895731F8F5152005E16E1 /* XGQBRegisterTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 422895721F8F5152005E16E1 /* XGQBRegisterTVCell.m */; };
 		422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */; };
@@ -14,6 +17,9 @@
 		42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */; };
 		42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */; };
 		425586681F9453A5002E039B /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 425586661F9452E0002E039B /* index.ios.jsbundle */; };
+		4255866B1F94A85B002E039B /* XGQBMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866A1F94A85B002E039B /* XGQBMineHeaderView.m */; };
+		4255866E1F94A879002E039B /* XGQBMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866D1F94A879002E039B /* XGQBMineItemCell.m */; };
+		425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425586701F94C84D002E039B /* XGQBMineTableView.m */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
@@ -81,6 +87,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4210AF3E1F95CE6D008132C5 /* XGQBSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSettingsViewController.h; sourceTree = "<group>"; };
+		4210AF3F1F95CE6D008132C5 /* XGQBSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSettingsViewController.m; sourceTree = "<group>"; };
+		4210AF411F95D1ED008132C5 /* XGQBActiMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBActiMessTVC.h; sourceTree = "<group>"; };
+		4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiMessTVC.m; sourceTree = "<group>"; };
+		4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCommMessTVC.h; sourceTree = "<group>"; };
+		4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCommMessTVC.m; sourceTree = "<group>"; };
 		4228956E1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDRegisterTableViewController.h; sourceTree = "<group>"; };
 		4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDRegisterTableViewController.m; sourceTree = "<group>"; };
 		422895711F8F5152005E16E1 /* XGQBRegisterTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegisterTVCell.h; sourceTree = "<group>"; };
@@ -96,6 +108,12 @@
 		424F391E1F8C67CD00079543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		425586661F9452E0002E039B /* index.ios.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = SOURCE_ROOT; };
 		425586671F9452E8002E039B /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
+		425586691F94A85B002E039B /* XGQBMineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineHeaderView.h; sourceTree = "<group>"; };
+		4255866A1F94A85B002E039B /* XGQBMineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineHeaderView.m; sourceTree = "<group>"; };
+		4255866C1F94A879002E039B /* XGQBMineItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineItemCell.h; sourceTree = "<group>"; };
+		4255866D1F94A879002E039B /* XGQBMineItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineItemCell.m; sourceTree = "<group>"; };
+		4255866F1F94C84D002E039B /* XGQBMineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineTableView.h; sourceTree = "<group>"; };
+		425586701F94C84D002E039B /* XGQBMineTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineTableView.m; sourceTree = "<group>"; };
 		425881101F909EFB005566A6 /* XinguangWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinguangWallet.entitlements; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
@@ -731,6 +749,10 @@
 		6AF9E4721F78E962005E901C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4210AF411F95D1ED008132C5 /* XGQBActiMessTVC.h */,
+				4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */,
+				4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */,
+				4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -757,6 +779,8 @@
 				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
 				42D44A9F1F8CCF060064A32D /* XGQBRNTestViewController.h */,
 				42D44AA01F8CCF060064A32D /* XGQBRNTestViewController.m */,
+				4210AF3E1F95CE6D008132C5 /* XGQBSettingsViewController.h */,
+				4210AF3F1F95CE6D008132C5 /* XGQBSettingsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -792,6 +816,12 @@
 		6AF9E4791F78E963005E901C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4255866F1F94C84D002E039B /* XGQBMineTableView.h */,
+				425586701F94C84D002E039B /* XGQBMineTableView.m */,
+				425586691F94A85B002E039B /* XGQBMineHeaderView.h */,
+				4255866A1F94A85B002E039B /* XGQBMineHeaderView.m */,
+				4255866C1F94A879002E039B /* XGQBMineItemCell.h */,
+				4255866D1F94A879002E039B /* XGQBMineItemCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1023,11 +1053,13 @@
 			files = (
 				6AD95B321F7D064100BFF4DA /* AssistCoreService.m in Sources */,
 				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
+				4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
 				42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */,
 				6AD95B351F7D064100BFF4DA /* MemberCoreService.m in Sources */,
 				6AD95B361F7D064100BFF4DA /* MerchantCoreService.m in Sources */,
+				425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */,
 				6AE813A81F7B52D40044B072 /* XGQBHomeViewController.m in Sources */,
 				422895731F8F5152005E16E1 /* XGQBRegisterTVCell.m in Sources */,
 				6A5F69C71F7B930200B16B31 /* XGQBPureColorBtn.m in Sources */,
@@ -1036,6 +1068,7 @@
 				6AF78B901F8B617E002EAAB2 /* XGQBHomeCellView.m in Sources */,
 				6AF4A75A1F7A31EF006AE5E8 /* IphoneDevice.m in Sources */,
 				6AF4A75B1F7A31EF006AE5E8 /* SystemMethods.m in Sources */,
+				4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */,
 				6A8758E21F7A2D0300F480EF /* GVUserDefaults+PropertyList.m in Sources */,
 				6A5F69C41F7B7AB200B16B31 /* XGQBRegisterViewController.m in Sources */,
 				6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */,
@@ -1053,10 +1086,12 @@
 				6AF78B931F8B76CD002EAAB2 /* XGQBHomeBannerView.m in Sources */,
 				6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */,
 				42D44AA11F8CCF060064A32D /* XGQBRNTestViewController.m in Sources */,
+				4210AF401F95CE6D008132C5 /* XGQBSettingsViewController.m in Sources */,
 				6AF9E4371F78E039005E901C /* AppDelegate.m in Sources */,
 				422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */,
 				6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */,
 				6AF9E43D1F78E0E9005E901C /* AppDelegate+AppService.m in Sources */,
+				4255866B1F94A85B002E039B /* XGQBMineHeaderView.m in Sources */,
 				6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */,
 				6A5F69C11F7B7A3A00B16B31 /* XGQBRestPwdViewController.m in Sources */,
 				42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */,
@@ -1067,6 +1102,7 @@
 				6A3843CC1F79E46600BFE9B4 /* XGQBLoginViewController.m in Sources */,
 				6AE813A41F7B4D550044B072 /* XGQBAdViewController.m in Sources */,
 				6AF9E4831F78EA3B005E901C /* XGQBMineViewController.m in Sources */,
+				4255866E1F94A879002E039B /* XGQBMineItemCell.m in Sources */,
 				6AE813961F7B48640044B072 /* XGQBRootWebViewController.m in Sources */,
 				6AD95AED1F7CB47900BFF4DA /* NSString+checkContent.m in Sources */,
 			);

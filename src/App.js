@@ -10,6 +10,8 @@ import Activity from './page/ActivityPage'
 import ModalDemo from './page/ModalDemoPage'
 import ScreenUtils from './utils/ScreenUtils'
 import DemoModal from './modal/DemoModal'
+import QRCode from './page/QRCodePage'
+import PersonalInfo from "./page/PersonalInfoPage"
 import {events} from './constants/index'
 
 class App extends Component {
@@ -60,11 +62,13 @@ class App extends Component {
                 home: {screen: Home},
                 changeName: {screen: ChangeName},
                 activity: {screen: Activity},
-                modal: {screen: ModalDemo}
+                modal: {screen: ModalDemo},
+                qrCode:{screen:QRCode},
+                personalInfo:{screen:PersonalInfo}
             },
             {
                 // initialRouteName: params.page,
-                initialRouteName: 'modal',
+                initialRouteName: 'personalInfo',
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {

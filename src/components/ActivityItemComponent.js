@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.page_background
     }
-});
+})
 
 export default ActivityItemComponent

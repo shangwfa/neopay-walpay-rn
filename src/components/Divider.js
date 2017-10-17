@@ -14,7 +14,7 @@ Divider.propTypes = {
 
 styles = StyleSheet.create({
     container: {
-        height: 1,
+        height: 0.5,
         backgroundColor: colors.divider,
     },
 });

@@ -7,123 +7,125 @@
 //
 
 #import "XGQBMineViewController.h"
+#import "XGQBMineTableView.h"
 
-#import "XGQBRNTestViewController.h"
-#import "RCTRootView.h"
-#import "RCTDevLoadingView.h"
+#import "XGQBMineHeaderView.h"
+#import "XGQBMineItemCell.h"
 
+//temp
+#import "XGQBSettingsViewController.h"
 
-@interface XGQBMineViewController ()
+@interface XGQBMineViewController () <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong)RCTRootView *rctRootV;
+@property (nonatomic,strong) NSArray *cellItemArray;
+
+@property (nonatomic,strong) NSArray *cellImgArray;
 
 @end
 
 @implementation XGQBMineViewController
 
+#pragma mark - VC生命周期
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
     
-    //预先加载RN页面
-    NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
+    self.view.backgroundColor = kViewBgColor;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    self.navigationController.navigationBarHidden = YES;
     
-    //隐藏顶部loading from 提示
-    [RCTDevLoadingView setEnabled:NO];
-    
-    //RCT初始化方法必须在主线程执行,开子线程报错
-    
-    [SVProgressHUD show];
+    [self setUpViewComponents];
+}
 
-        RCTRootView *rootView =
-        [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
-                             moduleName        : @"neopay_walpay"
-                             initialProperties :@{@"params": @{@"page":@"home",@"time":@"2017-10-11"}}
-                              launchOptions    : nil];
-        
-        self.rctRootV = rootView;
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
- 
-    [SVProgressHUD dismiss];
+    self.navigationController.navigationBarHidden = YES;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
 
+#pragma mark - 懒加载相关
+-(NSArray *)cellItemArray{
+    if (!_cellItemArray) {
+        _cellItemArray = @[@"我的账单",@"我的资产",@"我的银行卡",@"我的中奖纪录",@"邀请好友",@"关于我们",@"设置"];
+    }
+    return _cellItemArray;
+}
+
+-(NSArray *)cellImgArray{
+    if (!_cellImgArray) {
+        _cellImgArray = @[@"wd_zhangdan",@"wd_zichan",@"wd_yinghangka",@"wd_zhongjiang",@"wd_yaoqing",@"wd_guanyu",@"wd_shezhi"];
+    }
+    return _cellImgArray;
+}
+
+#pragma mark - setUp view components
+-(void)setUpViewComponents
+{
+    //背景图片
+    UIImageView *bgImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_beijing"]];
+    [self.view addSubview:bgImg];
     
-    //临时退出登录按钮
-    YYLabel *logoutLabel = [YYLabel new];
-    logoutLabel.text = @"Logout";
-    logoutLabel.textAlignment = NSTextAlignmentCenter;
-    logoutLabel.backgroundColor = [UIColor redColor];
- 
-    logoutLabel.frame = CGRectMake(100, 100, 100, 50);
-    [self.view addSubview:logoutLabel];
+    //tableview
+    XGQBMineTableView *mineTableView = [[XGQBMineTableView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 0, 353/375.0*kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
     
-    [logoutLabel setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-        [GVUserDefaults standardUserDefaults].accessToken = nil;
-        [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
+    mineTableView.backgroundColor = kClearColor;
+    mineTableView.delegate = self;
+    mineTableView.dataSource = self;
+    mineTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    mineTableView.sectionHeaderHeight = 0;
+    mineTableView.sectionFooterHeight = 8;
+    mineTableView.showsVerticalScrollIndicator = NO;
+    mineTableView.showsHorizontalScrollIndicator = NO;
+//    mineTableView.scrollEnabled = NO;
+    mineTableView.rowHeight = 50;
+    
+    //tableview头部试图
+    XGQBMineHeaderView *headerView = [[XGQBMineHeaderView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 59/375.0*kScreenWidth, 353/375.0*kScreenWidth, 161/375.0*kScreenWidth+70)];
+    
+    mineTableView.tableHeaderView = headerView;
+    
+    [self.view addSubview:mineTableView];
+    
+    kWeakSelf(self);
+    //添加约束
+    [bgImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*187.0/375.0));
+        make.top.equalTo(weakself.view);
+        make.left.equalTo(weakself.view);
     }];
     
-    //临时充值app运行次数按钮
-    YYLabel *restRunCount = [YYLabel new];
-    restRunCount.text = @"ResetRunCount";
-    restRunCount.textAlignment = NSTextAlignmentCenter;
-    restRunCount.backgroundColor = [UIColor redColor];
-    
-    restRunCount.frame = CGRectMake(100, 200, 100, 50);
-    [self.view addSubview:restRunCount];
-    
-    [restRunCount setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-        [GVUserDefaults standardUserDefaults].runCount = 0;
-    }];
-    
-    self.view.backgroundColor = [UIColor yellowColor];
-    
-    //临时跳转登录页面按钮
-    UIButton *button = [[UIButton alloc]initWithFrame:(CGRectMake(100, 300, 100, 50))];
-    [button setTitle:@"Login" forState:UIControlStateNormal];
-    [self.view addSubview:button];
-    button.backgroundColor = [UIColor redColor];
-    [button addTarget:self action:@selector(pushToLoginVC) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    //临时跳转RN页面按钮
-    UIButton *jumpToRN = [[UIButton alloc]initWithFrame:(CGRectMake(100, 400, 100, 50))];
-    [jumpToRN setTitle:@"jumpToRN" forState:UIControlStateNormal];
-    [self.view addSubview:jumpToRN];
-    jumpToRN.backgroundColor = [UIColor redColor];
-    [jumpToRN addTarget:self action:@selector(jumpToRN) forControlEvents:UIControlEventTouchUpInside];
-    
-    //监听RN跳转通知
-    [kNotificationCenter addObserver:self selector:@selector(jumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
-    
-    //    NSLog(@"%s",__func__);
-    
-    
-}
-//跳转进入RN界面
--(void)jumpToRN
-{
-    
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
-    
-   
-    //创建XGQBRNTestVC
-    XGQBRNTestViewController *RNVC = [[XGQBRNTestViewController alloc]init];
-    RNVC.view = self.rctRootV;
-    
-    //    rootView.appProperties = @{@"params_updated": @{@"page":@"home",@"time":@"2017-10-11"}};
-    
-    [self.navigationController pushViewController:RNVC animated:YES];
-    
 }
 
-//从RN跳回原生界面
--(void)jumpBackToNative
+
+#pragma mark - tableView delegate and data source
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    return 2;
 }
 
--(void)pushToLoginVC
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
+    if (section==0) {
+        return 4;
+    }
+    return 3;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XGQBMineItemCell *cell = [XGQBMineItemCell cellWithImageNamed:self.cellImgArray[indexPath.section*4+indexPath.row] title:self.cellItemArray[indexPath.row+indexPath.section*4]];
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section==1&&indexPath.row==2) {
+        XGQBSettingsViewController *sVC = [XGQBSettingsViewController new];
+        [self.navigationController pushViewController:sVC animated:YES];
+    }
 }
 
 @end

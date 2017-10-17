@@ -75,7 +75,7 @@ class Home extends BasePage {
                     </Button>
                 </ScrollView>
             </View>
-        );
+        )
     }
 
     onUpdateHeadImg = () => {

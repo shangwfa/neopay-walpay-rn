@@ -7,7 +7,8 @@ import CommonItemOne from './CommonItemOne'
 import CommonInput from './CommonInput'
 import ButtonNormal from './ButtonNormal'
 import ActivityItemComponent from './ActivityItemComponent'
-module.exports = {
+import CommonKeyValueItem from './CommonKeyValueItem'
+export {
     TextWithLeftImge,
     Space,
     MineTopView,
@@ -16,5 +17,6 @@ module.exports = {
     CommonItemOne,
     CommonInput,
     ButtonNormal,
-    ActivityItemComponent
+    ActivityItemComponent,
+    CommonKeyValueItem,
 };

@@ -25,11 +25,11 @@ class CommonInput extends Component {
         let keybordType = (undefined == data.keyboard) ? 'default' : data.keyboard
         return (
             <View style={styles.container}>
-                <Text style={{marginLeft: 10}}>
+                <Text style={{marginLeft: 10,fontSize:15}}>
                     {data.key}
                 </Text>
                 <TextInput
-                    style={{marginLeft: 10, flex: 1}}
+                    style={{marginLeft: 10, flex: 1,fontSize:15}}
                     underlineColorAndroid={'transparent'}
                     placeholder={data.placeholder}
                     numberOfLines={1}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'row',
-        height: 48,
+        height: 50,
         backgroundColor: colors.white,
         justifyContent: 'center',
         alignItems: 'center',

@@ -8,6 +8,6 @@
 
 #import "XGQBRootViewController.h"
 
-@interface XGQBMessageViewController : XGQBRootViewController
+@interface XGQBMessageViewController : UITableViewController
 
 @end
