@@ -1,4 +1,4 @@
 @echo off
-gradlew  clean  assembleWalpayProductReleaseChannels 
+gradlew  clean  assembleReleaseChannels
 echo "多渠道打包命令"
 pause

@@ -1,6 +1,7 @@
 package cn.neopay.walpay.android.ui.home;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 
@@ -9,6 +10,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.tencent.bugly.beta.Beta;
 import com.xgjk.common.lib.base.BaseActivity;
 import com.xgjk.common.lib.base.BaseFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,18 +76,21 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
         mViewBinding.homeViewpager.setOffscreenPageLimit(4);
         mViewBinding.homeTabs.setupWithViewPager(mViewBinding.homeViewpager);
         mViewBinding.homeTabs.setTabMode(TabLayout.MODE_FIXED);
-        mViewBinding.homeTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+        mViewBinding.homeTabs.addOnTabSelectedListener(getListener());
+        for (int i = 0; i < mViewBinding.homeTabs.getTabCount(); i++) {
+            TabLayout.Tab tab = mViewBinding.homeTabs.getTabAt(i);
+            tab.setCustomView(mAdapter.getTabView(this, i));
+        }
+        setTab(tabType);
+    }
+
+    @NonNull
+    private TabLayout.OnTabSelectedListener getListener() {
+        return new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                if(0==tab.getPosition()){
-//                    EventBus.getDefault().post(new UpdateHomeFragmentEvent());
-//                }
-//                if(1==tab.getPosition()){
-//                    EventBus.getDefault().post(new UpdateFlowListEvent());
-//                }
-//                if(2==tab.getPosition()){
-//                    EventBus.getDefault().post(new UpdateMineFragmentEvent());
-//                }
+//                handleTabSelected(tab);
             }
 
             @Override
@@ -96,12 +102,19 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });
-        for (int i = 0; i < mViewBinding.homeTabs.getTabCount(); i++) {
-            TabLayout.Tab tab = mViewBinding.homeTabs.getTabAt(i);
-            tab.setCustomView(mAdapter.getTabView(this, i));
+        };
+    }
+
+    private void handleTabSelected(TabLayout.Tab tab) {
+        if (0 == tab.getPosition()) {
+            EventBus.getDefault().post("");
         }
-        setTab(tabType);
+        if (1 == tab.getPosition()) {
+            EventBus.getDefault().post("");
+        }
+        if (2 == tab.getPosition()) {
+            EventBus.getDefault().post("");
+        }
     }
 
     /**
@@ -135,7 +148,6 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
                 break;
         }
     }
-
 
     @Override
     protected void onNewIntent(Intent intent) {

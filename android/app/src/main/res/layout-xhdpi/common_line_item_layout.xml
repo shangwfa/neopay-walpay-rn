@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/line_item_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_10dp"
-        android:background="@color/line" />
+        android:layout_height="@dimen/size_9dp"
+        android:background="@color/common_black_gray" />
 </FrameLayout>
 

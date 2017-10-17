@@ -6,28 +6,19 @@ import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.ReactRootView;
-import com.facebook.react.common.LifecycleState;
-import com.facebook.react.shell.MainReactPackage;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.xgjk.common.lib.base.BaseRNActivity;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import cn.neopay.walpay.android.BuildConfig;
-import cn.neopay.walpay.android.WalpayApp;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
-import cn.neopay.walpay.android.module.rnParams.TestParams;
+import cn.neopay.walpay.android.module.rnparams.TestParams;
 import cn.neopay.walpay.android.rn.RNCacheViewManager;
-
-import static com.tencent.bugly.beta.tinker.TinkerManager.getApplication;
 
 /**
  * Created by shangwf on 2017/9/12.

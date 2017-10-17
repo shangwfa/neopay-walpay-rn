@@ -2,10 +2,17 @@ package cn.neopay.walpay.android.manager.dialogmanager;
 
 import android.content.Context;
 
+import com.xgjk.common.lib.manager.ActivityManager;
+
+import cn.neopay.walpay.android.R;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
 import cn.neopay.walpay.android.view.dialog.CertificationDialog;
 import cn.neopay.walpay.android.view.dialog.CommonBottomDialog;
 import cn.neopay.walpay.android.view.dialog.CommonDialog;
 import cn.neopay.walpay.android.view.dialog.SelectBankDialog;
+
+import static com.xgjk.common.lib.utils.StringUtils.getString;
 
 /**
  * @author carlos.guo
@@ -41,6 +48,19 @@ public class DialogManager {
         dialog.setCancelText("取消");
         dialog.setEnsureText("");
         dialog.show();
+    }
+
+    public void showVerfyPhoneDialog(Context context, VerifyRegisterPhoneRequestBean requestBean) {
+        CommonDialog loginDialog = new CommonDialog(context);
+        loginDialog.setTitle(String.format(getString(R.string.str_phone_exist_tips)))
+                .setEnsureText(getString(R.string.str_go_login))
+                .setEnsureListener(v1 -> {
+                    loginDialog.dismiss();
+                    ActivityManager.getInstance().killAllActivity();
+                    MainRouter.getSingleton().jumpToLoginPage(requestBean.getPhone());
+                })
+                .HideCancelLayout()
+                .show();
     }
 
     public void showScanBottomDialog(Context context, CommonBottomDialog.IEnsureTvCallback iEnsureTvCallback) {

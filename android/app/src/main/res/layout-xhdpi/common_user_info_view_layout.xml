@@ -1,79 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <View style="@style/line_horizontal" />
+    android:layout_height="@dimen/size_202dp"
+    android:background="@color/common_black_gray">
 
     <ImageView
-        android:id="@+id/user_sign_in"
-        android:layout_width="@dimen/size_25dp"
-        android:layout_height="@dimen/size_25dp"
-        android:layout_gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_162dp"
+        android:background="@mipmap/img_mine_bg"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_126dp"
+        android:layout_marginLeft="@dimen/size_10dp"
         android:layout_marginRight="@dimen/size_10dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/img_default_user_photo" />
+        android:layout_marginTop="@dimen/size_69dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/img_mine_info_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_75dp"
-        android:background="@color/common_white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/mine_user_rl"
+            android:layout_width="@dimen/size_70dp"
+            android:layout_height="@dimen/size_70dp">
+
+            <ImageView
+                android:id="@+id/mine_user_avatar_iv"
+                android:layout_width="@dimen/size_70dp"
+                android:layout_height="@dimen/size_70dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/mine_auth_state_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/mine_user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:text=""
+            android:textColor="@color/common_color_black"
+            android:textSize="@dimen/size_17sp" />
+
+        <TextView
+            android:id="@+id/mine_user_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:drawableLeft="@mipmap/img_red_phone"
+            android:drawablePadding="@dimen/size_6dp"
+            android:text=""
+            android:textColor="@color/common_black_light"
+            android:textSize="@dimen/size_14sp"
+            android:visibility="visible" />
 
         <ImageView
-            android:id="@+id/user_avatar_iv"
-            android:layout_width="@dimen/size_52dp"
-            android:layout_height="@dimen/size_52dp"
-            android:layout_marginLeft="@dimen/size_10dp"
-            android:src="@mipmap/img_default_user_photo" />
-
-        <LinearLayout
-            style="@style/wc_and_wc"
-            android:layout_marginLeft="@dimen/size_18dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:textColor="@color/common_black"
-                android:textSize="@dimen/size_18dp"
-                tools:text="" />
-
-            <TextView
-                android:id="@+id/user_phone"
-                style="@style/wc_and_wc"
-                android:layout_marginTop="@dimen/size_5dp"
-                android:maxLines="1"
-                android:textColor="@color/color_one_type"
-                android:textSize="@dimen/size_14dp"
-                tools:text="" />
-        </LinearLayout>
-
-        <View
-            style="@style/horizontal_weight"
+            android:id="@+id/mine_go_auth_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/size_20dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_go_auth"
+            android:visibility="visible" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/real_name_certification_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/size_10dp"
-        android:background="@drawable/shape_round_gray"
-        android:padding="@dimen/size_10dp"
-        android:text="@string/str_user_authentication" />
-
-    <View style="@style/line_horizontal" />
-</LinearLayout>
+</FrameLayout>
 
 

@@ -64,7 +64,6 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
     }
 
     private void handleViewClick() {
-        //确认按钮
         mViewBinding.passwordBtn.setOnClickListener((v) -> {
             ResetPwdParameterBean resetPwdParameterBean = new ResetPwdParameterBean(forgotPwdType, mViewBinding.commonInputPhone.getText(), mViewBinding.commonInputVerification.getText(), mViewBinding.commonInputPassword.getText());
             mPresenter.resetPassword(resetPwdParameterBean);
@@ -95,7 +94,11 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
                         if (18 == s.length()) {
                             InputCheckUtils.checkPassword(s.toString());
                         }
-                        //TODO 输入6为后 确认按钮生效
+                        if (6 <= s.length()) {
+                            mViewBinding.passwordBtn.setEnabled(true);
+                        } else {
+                            mViewBinding.passwordBtn.setEnabled(false);
+                        }
                         break;
                     case IWalpayConstants.FORGOTPWD_TYPE_PAY:
                         break;

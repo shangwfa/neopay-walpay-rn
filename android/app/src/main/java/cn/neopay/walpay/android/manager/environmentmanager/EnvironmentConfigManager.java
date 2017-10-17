@@ -37,7 +37,7 @@ public class EnvironmentConfigManager implements IEnvironmentConfigManager {
     @Override
     public ApplicationEnvironment getCurrentEnvironment() {
         if (null == env) {
-            String envId = StoreManager.getSingleton().getString(false, IWalpayConstants.HTTP_URL_KEY, TEST_TAG);
+            String envId = StoreManager.getSingleton().getString(false, IWalpayConstants.HTTP_URL_KEY, PRODUCT_TAG);
             this.env = parseCurrentEnvironment(envId);
         }
         return env;
