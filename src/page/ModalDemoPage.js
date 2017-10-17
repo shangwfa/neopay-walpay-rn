@@ -29,6 +29,10 @@ class ModalDemoPage extends BasePage {
                         点击弹窗
                     </Text>
                 </TouchableHighlight>
+                <Text>
+                    <Text>First part and </Text>
+                    <Text>second part</Text>
+                </Text>
                 <DemoModal/>
             </View>
         )

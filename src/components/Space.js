@@ -3,8 +3,8 @@ import {View, StyleSheet} from 'react-native';
 
 let styles = {};
 
-const Space = () =>
-    <View style={[styles.container]}/>;
+const Space = ({style}) =>
+    <View style={[styles.container,style&style]}/>;
 
 styles = StyleSheet.create({
     container: {
