@@ -26,12 +26,28 @@
     self.view.backgroundColor = kWhiteColor;
     self.navigationController.navigationBarHidden = NO;
     self.title = @"重置登录密码";
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 120;
     [self setUpViewComponents];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    
+//    UIScrollView *sv =(UIScrollView*)self.view;
+//    
+//    sv.contentOffset = CGPointZero;
+
+}
+
+-(void)loadView
+{
+    ///设置IQKeyboardManager防止navigationbar往上移
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight); //You may not need this code if you are working with Autolayout and scrollView is able to get it's contentSize from constraints.
+//    scrollView.scrollEnabled =NO;
+    self.view = scrollView;
+    
 }
 
 #pragma mark - 设置视图组件

@@ -32,7 +32,7 @@
     [self setUpViewComponents];
     
     ///设置键盘不挡住登录按钮
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 150;
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 180;
     
 }
 
@@ -100,7 +100,7 @@
     readPwdBtn.selected = NO;
     XGQBLoginInputView *pwdIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_mima"] placeHolder:@"请输入登录密码" rightBtn:readPwdBtn];
     pwdIV.textField.type = XGQBTextFieldTypePassword;
-    pwdIV.textField.returnKeyType = UIReturnKeyDone;
+    pwdIV.textField.returnKeyType = UIReturnKeyDefault;
     self.pwdIV = pwdIV;
     pwdIV.textField.secureTextEntry = YES;
     [self.view addSubview:pwdIV];

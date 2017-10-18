@@ -55,13 +55,20 @@
     UILabel *desLabel = [[UILabel alloc]init];
     desLabel.text = @"这是描述文字,这是描述文字";
     desLabel.font = kSYSTEMFONT(13.0);
-    desLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    desLabel.textColor = [UIColor colorWithHexString:@"999999"];
     [cell.contentView addSubview:desLabel];
     
     //增加底部分割线
     UIImage *seperatorLineImg = [cell createImageWithColor:kViewBgColor andFrame:CGRectMake(0, 0, kScreenWidth, 8)];
     UIImageView *seperatorLine = [[UIImageView alloc]initWithImage:seperatorLineImg];
     [cell.contentView addSubview:seperatorLine];
+    
+    //增加未读消息红点
+    UIImage *redDot = [cell createImageWithColor:[UIColor colorWithHexString:@"F34646"] andFrame:CGRectMake(0, 0, 9, 9)];
+    UIImageView *redDotView = [[UIImageView alloc]initWithImage:redDot];
+    kViewRadius(redDotView, 9/2.0);
+    
+    [cell.contentView addSubview:redDotView];
     
     
     //添加约束
@@ -70,13 +77,15 @@
     [logo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(52*sizeRatio, 52*sizeRatio));
         make.left.equalTo(cell.contentView).with.offset(8*sizeRatio);
-        make.centerY.equalTo(cell.contentView);
+        make.centerY.equalTo(cell.contentView).with.offset(-4);
     }];
     
     [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100*sizeRatio, 17*sizeRatio));
+        make.size.mas_equalTo(CGSizeMake(70, 17));
+//        make.size.mas_equalTo(CGSizeMake(80*sizeRatio, 17*sizeRatio));
         make.left.equalTo(logo.mas_right).with.offset(17*sizeRatio);
-        make.top.equalTo(cell.contentView).with.offset(17*sizeRatio);
+//        make.top.equalTo(cell.contentView).with.offset(17*sizeRatio);
+        make.top.equalTo(cell.contentView).with.offset(17);
     }];
     
     [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -86,16 +95,24 @@
     }];
     
     [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(270*sizeRatio, 13*sizeRatio));
+        make.size.mas_equalTo(CGSizeMake(270*sizeRatio, 13));
+//        make.size.mas_equalTo(CGSizeMake(270*sizeRatio, 13*sizeRatio));
         make.left.equalTo(titleLable);
-        make.top.equalTo(titleLable.mas_bottom).with.offset(16*sizeRatio);
+//        make.top.equalTo(titleLable.mas_bottom).with.offset(16*sizeRatio);
+        make.top.equalTo(titleLable.mas_bottom).with.offset(16);
     }];
     
     [seperatorLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth, 8));
         make.left.equalTo(cell.contentView);
-        make.top.equalTo(desLabel.mas_bottom).with.offset(16*sizeRatio);
-//        make.bottom.equalTo(cell.contentView);
+//        make.top.equalTo(desLabel.mas_bottom).with.offset(16*sizeRatio);
+        make.top.equalTo(desLabel.mas_bottom).with.offset(16);
+    }];
+    
+    [redDotView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(9, 9));
+        make.centerX.equalTo(titleLable.mas_right);
+        make.centerY.equalTo(titleLable.mas_top);
     }];
     
     

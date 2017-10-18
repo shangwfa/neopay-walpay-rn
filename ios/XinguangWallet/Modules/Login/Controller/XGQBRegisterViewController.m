@@ -30,6 +30,7 @@
     self.view.backgroundColor = kWhiteColor;
     self.navigationController.navigationBarHidden = NO;
     self.title = @"注册";
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 120;
     [self setUpViewComponents];
 }
 
@@ -38,6 +39,15 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
+
+-(void)loadView
+{
+    ///设置IQKeyboardManager防止navigationbar往上移
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight); //You may not need this code if you are working with Autolayout and scrollView is able to get it's contentSize from constraints.
+    self.view = scrollView;
+}
+
 
 #pragma mark - 设置视图组件
 -(void)setUpViewComponents
