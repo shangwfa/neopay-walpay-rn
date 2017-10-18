@@ -32,6 +32,7 @@ import cn.neopay.walpay.android.module.response.RedPacketRecordResponseBean;
 import cn.neopay.walpay.android.module.response.RedPacketResponseBean;
 import cn.neopay.walpay.android.module.response.RedPacketThemeResponseBean;
 import cn.neopay.walpay.android.module.response.RegisterUserResponseBean;
+import cn.neopay.walpay.android.module.response.SecurityTokenResponseBean;
 import cn.neopay.walpay.android.module.response.UserActivityInfoResponseBean;
 import cn.neopay.walpay.android.module.response.UserActivityResponseBean;
 import cn.neopay.walpay.android.module.response.UserActivityStatisResponseBean;
@@ -46,6 +47,7 @@ import cn.neopay.walpay.android.module.response.VerifyRegisterPhoneResponseBean;
 import cn.neopay.walpay.android.module.response.WithdrawFeeResponseBean;
 import cn.neopay.walpay.android.module.response.WithdrawOrderResponseBean;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -445,4 +447,6 @@ public interface ApiService {
     @POST("user/modify_user_info")
     Observable<Result<BaseResponse>> modifyUserInfo(@QueryMap Map<String, String> modifyUserInfoRequestBean);
 
+    @POST("file/get_security_token")
+    Observable<Result<SecurityTokenResponseBean>> getSecurityToken(@Query("type") int type);
 }

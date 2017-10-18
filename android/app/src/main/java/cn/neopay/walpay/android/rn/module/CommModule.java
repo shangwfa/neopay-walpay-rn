@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.neopay.walpay.android.R;
+import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.view.dialog.LoadingDialog;
@@ -197,13 +198,12 @@ public class CommModule extends ReactContextBaseJavaModule {
                 case "exitApp":
 
                     break;
-                case "updateHeadImg":
-
+                case "updatePersonalAvatar":
+                    DialogManager.getSingleton().showPhotoSelectDialog(context);
                     break;
                 default:
             }
         });
-
     }
 
     /**

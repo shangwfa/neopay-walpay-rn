@@ -6,6 +6,7 @@ import {
     Image,
     TouchableWithoutFeedback
 } from 'react-native';
+import Divider from '../components/Divider'
 import colors from '../constants/colors'
 import ScreenUtils from '../utils/ScreenUtils'
 import img_left_arrow from '../res/img/img_left_arrow.png'
@@ -18,24 +19,28 @@ class Header extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                {/*header左侧*/}
-                <TouchableWithoutFeedback style={styles.header_left} onPress={()=>this.goback()}>
-                    <View style={styles.header_left}>
-                        <Image style={styles.header_back_img} source={img_left_arrow}/>
+            <View>
+                <View style={styles.container}>
+                    {/*header左侧*/}
+                    <TouchableWithoutFeedback style={styles.header_left} onPress={()=>this.goback()}>
+                        <View style={styles.header_left}>
+                            <Image style={styles.header_back_img} source={img_left_arrow}/>
+                        </View>
+                    </TouchableWithoutFeedback>
+
+                    {/*header中间*/}
+                    <View style={styles.header_middle}>
+                        <Text style={styles.title}> {this.props.title}</Text>
                     </View>
-                </TouchableWithoutFeedback>
+                    {/*header右侧*/}
+                    <View style={styles.header_right}>
 
-                {/*header中间*/}
-                <View style={styles.header_middle}>
-                    <Text style={styles.title}> {this.props.title}</Text>
-                </View>
-                {/*header右侧*/}
-                <View style={styles.header_right}>
+                    </View>
 
                 </View>
-
-            </View>)
+                <Divider/>
+            </View>
+            )
     }
 
     goback = () => {

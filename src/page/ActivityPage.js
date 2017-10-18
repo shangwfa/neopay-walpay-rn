@@ -5,7 +5,8 @@ import {
     FlatList
 } from 'react-native'
 import {colors} from '../constants/index'
-import {Header,ActivityItemComponent} from '../components/index'
+import Header from '../components/Header'
+import ActivityItemComponent from '../components/ActivityItemComponent'
 import BasePage from './BasePage'
 
 class ActivityPage extends BasePage {

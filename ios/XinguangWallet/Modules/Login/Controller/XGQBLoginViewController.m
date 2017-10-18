@@ -31,6 +31,9 @@
     
     [self setUpViewComponents];
     
+    ///设置键盘不挡住登录按钮
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 180;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -76,6 +79,7 @@
     
     //userNameIV
     XGQBLoginInputView *userNameIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_shouji"] placeHolder:@"请输入手机号" rightBtn:nil];
+    userNameIV.textField.type = XGQBTextFieldTypePhoneNo;
     self.userNameIV = userNameIV;
     [self.view addSubview:userNameIV];
     userNameIV.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -95,6 +99,8 @@
     [readPwdBtn addTarget:self action:@selector(readPwdBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     readPwdBtn.selected = NO;
     XGQBLoginInputView *pwdIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_mima"] placeHolder:@"请输入登录密码" rightBtn:readPwdBtn];
+    pwdIV.textField.type = XGQBTextFieldTypePassword;
+    pwdIV.textField.returnKeyType = UIReturnKeyDefault;
     self.pwdIV = pwdIV;
     pwdIV.textField.secureTextEntry = YES;
     [self.view addSubview:pwdIV];
@@ -177,14 +183,23 @@
 {
     kPostNotification(kNotificationLoginStateChange, @YES)
 }
-
+///注册按钮点击
 -(void)registerButtonClicked
 {
-    [self.navigationController pushViewController:[XGQBRegisterViewController new] animated:YES];
+    
+    XGQBRegisterViewController *regVC = [XGQBRegisterViewController new];
+    regVC.userName = self.userNameIV.textField.text;
+    
+    [self.navigationController pushViewController:regVC animated:YES];
 }
+
+///忘记密码按钮点击
 -(void)resetPwdButtonClicked
 {
-    [self.navigationController pushViewController:[XGQBRestPwdViewController new] animated:YES];
+    XGQBRestPwdViewController *resetVC = [XGQBRestPwdViewController new];
+    resetVC.userName = self.userNameIV.textField.text;
+    
+    [self.navigationController pushViewController:resetVC animated:YES];
 }
 -(void)loginBtnClicked
 {
@@ -207,7 +222,7 @@
         return;
     }else if (![self.pwdIV.textField.text checkPassword])
     {
-        [SVProgressHUD showInfoWithStatus:@"请输入8至20位字母加数字"];
+        [SVProgressHUD showInfoWithStatus:@"请输入6至20位字母加数字"];
         return;
     }
     
@@ -218,11 +233,12 @@
     
     //发送登录请求
     [MemberCoreService loginUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
-//        NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+        NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
         if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
-//            [responseBefore writeToFile:@"/Users/iosdev/Desktop/responseBefore.plist" atomically:YES];
+//            NSLog(@"responseBefore:%@",responseBefore);
+//            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
         {
-//            [responseAfter writeToFile:@"/Users/iosdev/Desktop/responseAfter.plist" atomically:YES];
+//            [responseAfter writeToFile:@"/Users/bossking/Desktop/responseAfter.plist" atomically:YES];
             [GVUserDefaults standardUserDefaults].accessToken = [responseAfter objectForKey:@"accessToken"];
             [GVUserDefaults standardUserDefaults].phone = [responseAfter objectForKey:@"phone"];
             [GVUserDefaults standardUserDefaults].authStatus = [responseAfter objectForKey:@"authStatus"];
@@ -236,6 +252,7 @@
             kPostNotification(kNotificationLoginStateChange, @YES);
             
         }
+        
     } andFailerFn:^(NSError *error) {
 
     

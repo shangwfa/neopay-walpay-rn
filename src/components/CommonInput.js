@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import colors from '../constants/colors'
 import close_input_img from '../res/img/input_clear.png'
+import {Divider} from '../components/index'
 
 class CommonInput extends Component {
     constructor(props) {
@@ -22,25 +23,32 @@ class CommonInput extends Component {
 
     render() {
         let data = this.props.data
-        let keybordType = (undefined == data.keyboard) ? 'default' : data.keyboard
+        let keybordType = data.keyboard ? 'default' : data.keyboard
+        let isLine=data.isLine&&data.isLine
         return (
             <View style={styles.container}>
-                <Text style={{marginLeft: 10,fontSize:15}}>
-                    {data.key}
-                </Text>
-                <TextInput
-                    style={{marginLeft: 10, flex: 1,fontSize:15}}
-                    underlineColorAndroid={'transparent'}
-                    placeholder={data.placeholder}
-                    numberOfLines={1}
-                    onChangeText={this.onChangeText}
-                    keyboard={keybordType}
-                    value={this.state.inputText}
-                />
-                {this.input_close_img()}
+                <View style={styles.content_container}>
+                    <Text style={styles.title}>
+                        {data.key}
+                    </Text>
+                    <TextInput
+                        style={styles.input}
+                        underlineColorAndroid={'transparent'}
+                        placeholder={data.placeholder}
+                        numberOfLines={1}
+                        onChangeText={this.onChangeText}
+                        keyboard={keybordType}
+                        value={this.state.inputText}
+                    />
+                    {this.input_close_img()}
+                </View>
+                {this.renderLine(isLine)}
             </View>)
     }
 
+    renderLine=(isLine)=>{
+        if(isLine) return <Divider style={{marginLeft:10}}/>
+    }
     onChangeText = (text) => {
         let inputText = ""
         let limitLength = this.props.data.limitlength
@@ -67,8 +75,6 @@ class CommonInput extends Component {
                 </TouchableWithoutFeedback>
             )
 
-        } else {
-            return null
         }
     }
 
@@ -84,20 +90,33 @@ class CommonInput extends Component {
 }
 
 const styles = StyleSheet.create({
+    input:{
+        marginLeft: 10,
+        flex: 1,
+        fontSize:15,
+        color:colors.black
+    },
+    title:{
+        width:80,
+        marginLeft: 10,
+        fontSize:15,
+        color:colors.black
+    },
     close_input_img: {
         height: 18,
         width: 18,
         marginRight: 10
     },
-    container: {
+    content_container: {
         flexDirection: 'row',
         height: 50,
         backgroundColor: colors.white,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
-
     },
-});
+    container:{
+        backgroundColor:colors.white
+    }
+})
 
 export default CommonInput

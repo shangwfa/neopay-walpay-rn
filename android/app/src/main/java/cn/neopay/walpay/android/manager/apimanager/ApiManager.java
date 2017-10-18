@@ -1,11 +1,21 @@
 package cn.neopay.walpay.android.manager.apimanager;
 
-import com.xgjk.common.lib.utils.ReflectUtils;
+import android.app.Activity;
+import android.net.Uri;
 
+import com.alibaba.sdk.android.oss.OSSClient;
+import com.xgjk.common.lib.utils.FileUtils;
+import com.xgjk.common.lib.utils.FormatUtils;
+import com.xgjk.common.lib.utils.ReflectUtils;
+import com.xgjk.common.lib.utils.ToastUtils;
+
+import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import cn.neopay.walpay.android.http.Api;
 import cn.neopay.walpay.android.http.BaseSubscriber;
+import cn.neopay.walpay.android.manager.ossmanager.OssManager;
 import cn.neopay.walpay.android.module.request.AddFeedbackRequestBean;
 import cn.neopay.walpay.android.module.request.AddRedPacketReceiverRequestBean;
 import cn.neopay.walpay.android.module.request.AddShareRequestBean;
@@ -71,6 +81,7 @@ import cn.neopay.walpay.android.module.request.SendResetLoginPasswordCodeRequest
 import cn.neopay.walpay.android.module.request.SendResetPayPasswordCodeRequestBean;
 import cn.neopay.walpay.android.module.request.UnbindBankCardRequestBean;
 import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
+import cn.neopay.walpay.android.module.response.SecurityTokenResponseBean;
 import cn.neopay.walpay.android.utils.RxUtils;
 
 /**
@@ -747,5 +758,50 @@ public class ApiManager {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 上传单张图片
+     */
+    public static void uploadSigleImge(Activity activity, Uri imgUri, UploadSingleImgCallback callback) {
 
+        Api.getInstance().getApiService().getSecurityToken(2)//获取上传图片的Token
+                .compose(RxUtils.rxNet())
+                .subscribe(new BaseSubscriber<SecurityTokenResponseBean>(activity, tokenDTO -> OSSUploadImg(tokenDTO, activity, imgUri, callback)) {
+                    @Override
+                    public boolean isShowLoading() {
+                        return false;
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        callback.failed();
+                    }
+                });
+    }
+
+    private static void OSSUploadImg(SecurityTokenResponseBean tokenDTO, Activity activity, Uri imgUri, UploadSingleImgCallback callback) {
+        OSSClient mOSS = OssManager.initOss(tokenDTO.getAccessKeyId(), tokenDTO.getAccessKeySecret(), tokenDTO.getSecurityToken(), tokenDTO.getEndpoint());
+        final Map<String, String> uploadMap = new HashMap<>();
+        final File file = FileUtils.getFileFromUri(activity, imgUri);
+        String uuidFileName = FileUtils.getUUID() + FileUtils.getPrefixName(file.getAbsolutePath());
+        OssManager.asyncPutObjectFromLocalFile(mOSS, tokenDTO.getBucket(), tokenDTO.getDirectory() + uuidFileName, file.getAbsolutePath(), new OssManager.UploadCallback() {
+            @Override
+            public void onSucess() {
+                final String imgUrl = FormatUtils.uploadOssImgUrl(tokenDTO.getFileTemplateUrl(), tokenDTO.getBucket(), tokenDTO.getDirectory(), uuidFileName);
+                callback.success(imgUrl);
+            }
+
+            @Override
+            public void onFailure() {
+                ToastUtils.show("上传失败");
+                callback.failed();
+            }
+        });
+    }
+
+    public interface UploadSingleImgCallback {
+        void success(String imgUrl);
+
+        void failed();
+    }
 }

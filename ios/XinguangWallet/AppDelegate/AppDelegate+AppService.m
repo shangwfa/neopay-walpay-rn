@@ -27,6 +27,9 @@
 #pragma mark - 初始化window
 -(void)initWindow{
     
+    //初始化标题栏
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = kWhiteColor;
     [self.window makeKeyAndVisible];

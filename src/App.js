@@ -12,6 +12,9 @@ import ScreenUtils from './utils/ScreenUtils'
 import DemoModal from './modal/DemoModal'
 import QRCode from './page/QRCodePage'
 import PersonalInfo from "./page/PersonalInfoPage"
+import BindBankCard from './page/BindBankCardPage'
+import Feedback from './page/FeedbackPage'
+import Setting from './page/SettingPage'
 import {events} from './constants/index'
 
 class App extends Component {
@@ -64,11 +67,14 @@ class App extends Component {
                 activity: {screen: Activity},
                 modal: {screen: ModalDemo},
                 qrCode:{screen:QRCode},
-                personalInfo:{screen:PersonalInfo}
+                personalInfo:{screen:PersonalInfo},
+                bindBankCard:{screen:BindBankCard},
+                feedback:{screen:Feedback},
+                setting:{screen:Setting}
             },
             {
                 // initialRouteName: params.page,
-                initialRouteName: 'personalInfo',
+                initialRouteName: 'setting',
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {
@@ -107,10 +113,10 @@ class App extends Component {
         return (
             <View style={{flex: 1}}>
                 {/*状态栏*/}
-                <StatusBar
-                    barStyle={'dark-content'}
-                    backgroundColor={'white'}
-                    translucent={true}/>
+                {/*<StatusBar*/}
+                    {/*barStyle={'dark-content'}*/}
+                    {/*backgroundColor={'white'}*/}
+                    {/*translucent={true}/>*/}
                 {/*导航器*/}
                 <Navigator screenProps={this.props.params}/>
                 {this.whichModal()}

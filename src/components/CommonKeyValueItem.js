@@ -20,6 +20,7 @@ const CommonKeyValueItem = props => {
         imgUrl,
         isArrow,
         isLine,
+        style,
         ...attributes
     } = props
 
@@ -81,7 +82,7 @@ const CommonKeyValueItem = props => {
         if (imgUrl) return <Image style={styles.avatar} source={{uri:imgUrl}}/>
     }
     return (
-        <TouchableOpacity activeOpacity={0.8} style={styles.container} {...attributes}>
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container,style&&style]} {...attributes}>
             <View style={styles.content_container}>
                 <Text style={styles.key}>
                     {title}

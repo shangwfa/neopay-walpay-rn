@@ -10,6 +10,7 @@ import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
 import cn.neopay.walpay.android.view.dialog.CertificationDialog;
 import cn.neopay.walpay.android.view.dialog.CommonBottomDialog;
 import cn.neopay.walpay.android.view.dialog.CommonDialog;
+import cn.neopay.walpay.android.view.dialog.PhotoSelectDialog;
 import cn.neopay.walpay.android.view.dialog.SelectBankDialog;
 
 import static com.xgjk.common.lib.utils.StringUtils.getString;
@@ -73,6 +74,19 @@ public class DialogManager {
 
     public void showSelectBankDialog(Context context) {
         SelectBankDialog dialog = new SelectBankDialog(context);
+        dialog.show();
+    }
+
+    //选取照片Dialog
+    public static void showPhotoSelectDialog(Context context) {
+        PhotoSelectDialog dialogChooseImage = new PhotoSelectDialog(context);
+        dialogChooseImage.show();
+    }
+
+    public static void showReadSDDialog(Context context) {
+        final CommonDialog dialog = new CommonDialog(context, "SD卡读权限未开启，如需使用请进入设置中开启SD卡读权限");
+        dialog.setCancelText("取消");
+        dialog.setEnsureText("");
         dialog.show();
     }
 }
