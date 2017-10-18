@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_white">
+
+        <LinearLayout
+            android:id="@+id/common_news_red_packet_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_13dp"
+            android:layout_marginRight="@dimen/size_13dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/common_news_title_ll"
+                layout="@layout/common_news_title_layout" />
+
+            <FrameLayout
+                android:id="@+id/red_packet_style_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size_15dp"
+                android:layout_marginTop="@dimen/size_10dp">
+
+                <ImageView
+                    android:id="@+id/red_packet_bg_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_155dp"
+                    android:scaleType="fitXY" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="134dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/red_packet_title_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/red_packet_text"
+                        android:textSize="@dimen/size_17sp" />
+
+                    <TextView
+                        android:id="@+id/red_packet_from_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_17dp"
+                        android:layout_marginTop="@dimen/size_23dp"
+                        android:text=""
+                        android:textColor="@color/red_packet_text"
+                        android:textSize="@dimen/size_13sp" />
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

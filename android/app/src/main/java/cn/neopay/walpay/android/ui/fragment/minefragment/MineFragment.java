@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
+import com.xgjk.common.lib.utils.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -96,6 +97,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyBill.setItemName("我的账单");
         mMyBill.setOnClickListener(v -> {
             //TODO 我的账单
+            ToastUtils.show("我的账单");
         });
         data.add(mMyBill);
         MineTextImgItemBean mAsset = new MineTextImgItemBean();

@@ -1,8 +1,8 @@
 package cn.neopay.walpay.android.ui.fragment.minefragment;
 
-import cn.neopay.walpay.android.http.BaseSubscriber;
-import cn.neopay.walpay.android.manager.apimanager.ApiManager;
-import cn.neopay.walpay.android.module.request.GetUserInfoRequestBean;
+import com.xgjk.common.lib.manager.storage.StoreManager;
+
+import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 
 /**
@@ -14,10 +14,7 @@ import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 public class MineFragmentPresenter extends MineFragmentContract.Presenter {
     @Override
     public void getUserInfoData() {
-        ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(),
-                new BaseSubscriber(mActivity, o -> {
-                    UserInfoResponseBean infoResponseBean = (UserInfoResponseBean) o;
-                    mView.setUserInfoData(infoResponseBean);
-                }));
+        UserInfoResponseBean infoResponseBean = StoreManager.getSingleton().get(true, IWalpayConstants.USER_INFO, UserInfoResponseBean.class);
+        mView.setUserInfoData(infoResponseBean);
     }
 }
