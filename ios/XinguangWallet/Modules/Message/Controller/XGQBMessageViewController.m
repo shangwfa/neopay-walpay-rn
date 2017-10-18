@@ -76,7 +76,7 @@
 
      }else if (!cell)
      {
-                  cell = [XGQBActiMessTVC actiTableViewCellWithType:arc4random()%3 timeLabel:@"06/06 00:00"];
+         cell = [XGQBActiMessTVC actiTableViewCellWithType:arc4random()%3 timeLabel:@"06/06 00:00"];
      }
     
     

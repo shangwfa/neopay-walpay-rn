@@ -53,7 +53,7 @@
     
     //描述文字
     UILabel *desLabel = [[UILabel alloc]init];
-    desLabel.text = @"这是描述文字";
+    desLabel.text = @"这是描述文字,这是描述文字";
     desLabel.font = kSYSTEMFONT(13.0);
     desLabel.textColor = [UIColor colorWithHexString:@"333333"];
     [cell.contentView addSubview:desLabel];
