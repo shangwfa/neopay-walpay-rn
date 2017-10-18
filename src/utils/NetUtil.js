@@ -4,9 +4,7 @@ import netCode from '../constants/netCode'
 
 class NetUtil extends Component {
 
-    static baseUrl = 'https://shopay.dneopay.cn/shopay-web/'
-
-    // static baseUrl = 'http://139.224.11.160:8101/shopay-web/'
+    static baseUrl = 'http://139.224.11.160:8202/walpay-web/'
 
 
     /**

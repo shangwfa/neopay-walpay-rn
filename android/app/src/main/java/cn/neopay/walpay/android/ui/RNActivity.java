@@ -1,6 +1,7 @@
 package cn.neopay.walpay.android.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -14,14 +15,18 @@ import com.facebook.react.shell.MainReactPackage;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.xgjk.common.lib.base.BaseRNActivity;
+import com.xgjk.common.lib.utils.PhotoUtils;
+import com.xgjk.common.lib.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import cn.neopay.walpay.android.BuildConfig;
+import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.WalpayApp;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
+import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.rnParams.TestParams;
@@ -91,6 +96,19 @@ public class RNActivity extends BaseRNActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        PhotoUtils.onActivityResult(this, requestCode, resultCode, data, R.color.colorPrimary, R.color.colorPrimaryDark, (Uri resultUri) -> {
+            ApiManager.getSingleton().uploadSigleImge(this, resultUri, new ApiManager.UploadSingleImgCallback() {
+                @Override
+                public void success(String imgUrl) {
+                    WalpayApp.getRnPackage().mModule.nativeCallRnUpdateHeadImg(imgUrl);
+                }
+
+                @Override
+                public void failed() {
+                    ToastUtils.show("图片上传失败");
+                }
+            });
+        });
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -8,6 +8,7 @@ import CommonInput from './CommonInput'
 import ButtonNormal from './ButtonNormal'
 import ActivityItemComponent from './ActivityItemComponent'
 import CommonKeyValueItem from './CommonKeyValueItem'
+
 export {
     TextWithLeftImge,
     Space,
@@ -18,5 +19,5 @@ export {
     CommonInput,
     ButtonNormal,
     ActivityItemComponent,
-    CommonKeyValueItem,
+    CommonKeyValueItem
 };

@@ -9,8 +9,6 @@ import {
 import Header from "../components/Header"
 import colors from '../constants/colors'
 import CommonInput from '../components/CommonInput'
-import TextWithLeftImge from '../components/TextWithLeftImge'
-import asterisk from '../res/img/asterisk.png'
 import Button from 'apsl-react-native-button'
 import NetUtil from '../utils/NetUtil'
 import BasePage from './BasePage'
@@ -34,6 +32,7 @@ import BasePage from './BasePage'
             <View style={styles.container}>
                 <StatusBar barStyle={'default'}/>
                 <Header navigation={this.props.navigation} title='修改昵称'/>
+                <View style={{height: 10}}/>
                 <CommonInput data={inputData} onChangeText={(text) => this.onChangeText(text)}/>
                 <View style={{height: 50}}/>
                 <Button style={styles.button} textStyle={styles.button_text} onPress={() => this.onEnsure()}>

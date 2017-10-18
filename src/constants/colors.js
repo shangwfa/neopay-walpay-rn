@@ -1,6 +1,6 @@
 export default {
     white: '#ffffff',
-    one_color: '#D93638',
+    one_color: '#F34646',
     orange: '#FF7900',
     page_background: '#efefef',
     black: '#333333',
