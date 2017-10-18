@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.xgjk.common.lib.R;
 import com.xgjk.common.lib.manager.glide.transform.GlideCircleTransform;
 
 /**

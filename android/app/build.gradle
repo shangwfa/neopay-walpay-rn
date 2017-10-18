@@ -64,11 +64,6 @@ android {
     dataBinding {
         enabled true
     }
-    productFlavors {
-        walpayTest {}
-        walpayDevelop {}
-        walpayProduct {}
-    }
 
     splits {
         abi {

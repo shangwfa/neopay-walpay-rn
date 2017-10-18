@@ -5,9 +5,12 @@ import com.xgjk.common.lib.utils.ToastUtils;
 
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
+import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.RegisterParameterBean;
 import cn.neopay.walpay.android.module.request.RegisterUserRequestBean;
+import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
+import cn.neopay.walpay.android.module.response.VerifyRegisterPhoneResponseBean;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 import rx.Observable;
 
@@ -20,19 +23,25 @@ import rx.Observable;
 public class RegisterPresenter extends RegisterContract.Presenter {
     @Override
     public void register(RegisterParameterBean parameterBean) {
-        //TODO 检查类型支付密码
         Observable.just("")
                 .filter(a -> InputCheckUtils.checkPhone(parameterBean.getName()))
                 .filter(b -> InputCheckUtils.checkVerificationCode(parameterBean.getVerification()))
                 .filter(c -> InputCheckUtils.checkLoginPassword(parameterBean.getLoginPassword()))
                 .filter(e -> InputCheckUtils.checkPayPassword(parameterBean.getPayPwd()))
-                .filter(f -> {
-                    if (!parameterBean.isProtocolSelected()) {
-                        ToastUtils.show("未勾选协议");
-                    }
-                    return parameterBean.isProtocolSelected();
-                })
                 .subscribe(s -> loginOperate(parameterBean.getName(), parameterBean.getVerification(), parameterBean.getLoginPassword(), parameterBean.getPayPwd()));
+    }
+
+    @Override
+    public void verifyRegisterPhone(VerifyRegisterPhoneRequestBean requestBean) {
+        ApiManager.getSingleton().verifyRegisterPhone(requestBean, new BaseSubscriber(mActivity, o -> {
+            handleVerifyRegisterPhone(requestBean, (VerifyRegisterPhoneResponseBean) o);
+        }, false));
+    }
+
+    private void handleVerifyRegisterPhone(VerifyRegisterPhoneRequestBean requestBean, VerifyRegisterPhoneResponseBean responseBean) {
+        if (responseBean.getRegistered()) {
+            DialogManager.getSingleton().showVerfyPhoneDialog(mActivity, requestBean);
+        }
     }
 
     private void loginOperate(String phone, String SmsCode, String Password, String payPwd) {

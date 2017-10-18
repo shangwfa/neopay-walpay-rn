@@ -44,6 +44,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
 }
 - (void)didReceiveMemoryWarning {

@@ -10,7 +10,8 @@ import android.view.LayoutInflater;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseDialog;
-import com.xgjk.common.lib.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -90,20 +91,16 @@ public class SelectBankDialog extends BaseDialog {
         mData.add(mBalancebean);
         for (int i = 0; i < beanList.size(); i++) {
             BankCardResponseBean bankCardBean = beanList.get(i);
-            bankCardBean.setOnClickListener(v -> {
-                //todo 选择了银行卡
-                ToastUtils.show("银行卡");
-                dismiss();
-            });
+            bankCardBean.setOnClickListener(v -> handleSelectPayStyleClick(bankCardBean));
             mData.add(bankCardBean);
         }
         mSelectBankPayAdapter.updateData(mData);
     }
 
+
     private void requestBalance(Activity context) {
-        ApiManager.getSingleton().getUserBalance(new GetUserBalanceRequestBean(), new BaseSubscriber(context, o -> {
-            handleBalance((UserBalanceResponseBean) o);
-        }));
+        ApiManager.getSingleton().getUserBalance(new GetUserBalanceRequestBean(),
+                new BaseSubscriber(context, o -> handleBalance((UserBalanceResponseBean) o)));
     }
 
     private void handleBalance(UserBalanceResponseBean balanceBean) {
@@ -115,10 +112,13 @@ public class SelectBankDialog extends BaseDialog {
         mBalancebean.setBankName("余额");
         mBalancebean.setBankCardNo(balance.toString());
         mBalancebean.setOnClickListener(v -> {
-            // TODO 选择了余额
-            ToastUtils.show("余额");
-            dismiss();
+            handleSelectPayStyleClick(mBalancebean);
         });
+    }
+
+    private void handleSelectPayStyleClick(BankCardResponseBean bankCardBean) {
+        dismiss();
+        EventBus.getDefault().post(bankCardBean);
     }
 
 }

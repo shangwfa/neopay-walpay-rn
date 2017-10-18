@@ -32,8 +32,7 @@ public class BusniessUtils {
             return;
         }
         Integer authStatus = userInfoBean.getAuthStatus();
-        authStatus = 1;
-        if (1 != authStatus) { //未认证
+        if (null != authStatus && 1 != authStatus) { //未认证
             DialogManager.getSingleton().showCertificationDialog(context, () -> {
                 //TODO 认证界面 销毁当前页  去掉默认值
                 ToastUtils.show("实名认证");

@@ -5,14 +5,17 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.gyf.barlibrary.ImmersionBar;
 import com.xgjk.common.lib.base.BaseActivity;
 import com.xgjk.common.lib.utils.DensityUtils;
 import com.xgjk.common.lib.utils.ScreenUtils;
 import com.xgjk.common.lib.utils.ViewUtils;
 
+import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityLoginLayoutBinding;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 import cn.neopay.walpay.android.view.commoninputview.CommonLoginView;
 
@@ -44,6 +47,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ActivityLoginLay
         handleView();
     }
 
+    @Override
+    protected void handleStatusBar() {
+        ImmersionBar.with(this)
+                .fullScreen(true)
+                .init();
+    }
+
     private void handleView() {
         ViewUtils.setEditTextValue(mViewBinding.loginPhone.getEditTextView(), userName);
         mViewBinding.loginPhone.setType(CommonLoginView.LoginInputType.LOGIN_PHONE, R.mipmap.img_phone_red);
@@ -53,17 +63,22 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ActivityLoginLay
         //TODO 测试账号 需要清理
         mViewBinding.loginPhone.getEditTextView().setText("15858295625");
         mViewBinding.loginPwd.getEditTextView().setText("m12345678");
-        mViewBinding.loginBtn.setOnClickListener(v -> {
-            String phone = mViewBinding.loginPhone.getEditText();
-            String passWord = mViewBinding.loginPwd.getEditText();
-            if (InputCheckUtils.checkPhone(phone) && InputCheckUtils.checkPassword(passWord)) {
-                mPresenter.login(phone, passWord);
-            }
-        });
 
+        mViewBinding.loginBtn.setOnClickListener(v -> handleLoginClick());
         mViewBinding.loginForgetPwd.setOnClickListener(v -> mPresenter.forgetPassword(mViewBinding.loginPhone.getEditText()));
         mViewBinding.loginRegister.setOnClickListener(v -> mPresenter.register(mViewBinding.loginPhone.getEditText()));
         mViewBinding.loginPwd.getEditTextView().setOnFocusChangeListener((v, hasFocus) -> handleLoginPwdFocus(hasFocus));
+        if (BuildConfig.DEBUG) {
+            mViewBinding.loginIconIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToEnvironmentSettingActivityPage());
+        }
+    }
+
+    private void handleLoginClick() {
+        String phone = mViewBinding.loginPhone.getEditText();
+        String passWord = mViewBinding.loginPwd.getEditText();
+        if (InputCheckUtils.checkPhone(phone) && InputCheckUtils.checkPassword(passWord)) {
+            mPresenter.login(phone, passWord);
+        }
     }
 
     private void handleLoginPwdFocus(boolean hasFocus) {

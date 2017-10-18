@@ -27,7 +27,6 @@ public class APPInitializationManager {
         initARounter();
 //        initBugly(context);
 //        initPush(context);
-        initHttpEnv();
         initToastUtils();
         initJPush(context);
     }
@@ -45,6 +44,17 @@ public class APPInitializationManager {
 
     /**
      * set http env by  build Variant
+     * 关闭此功能原因：
+     * 1、build Variants 自定义会影响其他库的接入（walle 打包工具）
+     * 2、影响环境切换，每次启动都会执行其默认值
+     * 3、若使用在build.gradle添加如下代码 用来设置多种环境状态
+     * ...java
+     * productFlavors {
+     * walpayTest {}
+     * walpayDevelop {}
+     * walpayProduct {}
+     * }
+     * ...java
      */
     private static void initHttpEnv() {
         switch (BuildConfig.FLAVOR) {

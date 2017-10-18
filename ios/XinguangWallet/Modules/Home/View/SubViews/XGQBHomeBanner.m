@@ -87,7 +87,7 @@
     return self;
 }
 
-//创建单色图片
+//创建单色图片 temp
 - (UIImage*)createImageWithColor: (UIColor*)color andFrame:(CGRect)frame
 {
     UIGraphicsBeginImageContext(frame.size);

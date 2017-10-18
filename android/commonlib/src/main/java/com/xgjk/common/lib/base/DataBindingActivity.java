@@ -42,11 +42,7 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        ImmersionBar.with(this)
-                .statusBarColor(R.color.common_white)
-                .fitsSystemWindows(true)
-                .statusBarDarkFont(true, 1) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
-                .init();
+        handleStatusBar();
         ActivityManager.getInstance().addActivity(this);
         ARouter.getInstance().inject(this);
         if (!EventBus.getDefault().isRegistered(this)) {
@@ -58,6 +54,14 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
         initPresenter();
         initView();
         ActivityManager.getInstance().printAllActivity();
+    }
+
+    protected void handleStatusBar() {
+        ImmersionBar.with(this)
+                .statusBarColor(R.color.common_white)
+                .fitsSystemWindows(true)
+                .statusBarDarkFont(true, 1) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                .init();
     }
 
     private void initBaseView() {

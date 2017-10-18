@@ -21,9 +21,9 @@ import cn.neopay.walpay.android.R;
 public class MainPagerAdapter extends BaseFragmentPagerAdapter {
 
 
-    private final String[] tabTitles = {"首页", "新光币", "消息", "我的"};
+    private final String[] tabTitles = {"首页", "消息", "我的"};
 
-    private final int[] imageResId = {R.drawable.home_home_tab_selecter, R.drawable.home_shinkong_currency_tab_selecter, R.drawable.home_msg_tab_selecter, R.drawable.home_mine_tab_selecter};
+    private final int[] imageResId = {R.drawable.home_home_tab_selecter, R.drawable.home_msg_tab_selecter, R.drawable.home_mine_tab_selecter};
 
     public MainPagerAdapter(FragmentManager fm, List<BaseFragment> fragments) {
         super(fm, fragments);

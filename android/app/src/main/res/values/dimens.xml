@@ -18,15 +18,22 @@
     <dimen name="size_254dp">254dp</dimen>
     <dimen name="size_210dp">210dp</dimen>
     <dimen name="size_200dp">200dp</dimen>
+    <dimen name="size_202dp">202dp</dimen>
     <dimen name="size_184dp">184dp</dimen>
+    <dimen name="size_177dp">177dp</dimen>
+    <dimen name="size_161dp">161dp</dimen>
+    <dimen name="size_162dp">162dp</dimen>
     <dimen name="size_148dp">148dp</dimen>
+    <dimen name="size_137dp">137dp</dimen>
     <dimen name="size_130dp">130dp</dimen>
+    <dimen name="size_126dp">126dp</dimen>
     <dimen name="size_155dp">155dp</dimen>
     <dimen name="size_104dp">104dp</dimen>
     <dimen name="size_100dp">100dp</dimen>
     <dimen name="size_80dp">80dp</dimen>
     <dimen name="size_75dp">75dp</dimen>
     <dimen name="size_79dp">79dp</dimen>
+    <dimen name="size_70dp">70dp</dimen>
     <dimen name="size_60dp">60dp</dimen>
     <dimen name="size_69dp">69dp</dimen>
     <dimen name="size_65dp">65dp</dimen>
@@ -78,6 +85,7 @@
 
     <dimen name="size_24sp">24sp</dimen>
     <dimen name="size_20sp">20sp</dimen>
+    <dimen name="size_17sp">17sp</dimen>
     <dimen name="size_15sp">15sp</dimen>
     <dimen name="size_14sp">14sp</dimen>
     <dimen name="size_13sp">13sp</dimen>

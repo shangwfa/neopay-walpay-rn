@@ -1,10 +1,12 @@
 package cn.neopay.walpay.android.adapter.sliminjector;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimInjector;
 import com.xgjk.common.lib.adapter.slimadapter.viewinjector.IViewInjector;
+import com.xgjk.common.lib.manager.glide.GlideManager;
 import com.xgjk.common.lib.utils.FormatUtils;
 import com.xgjk.common.lib.utils.StringUtils;
 
@@ -23,20 +25,24 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
         if (null == data) {
             return;
         }
-        injector.background(R.id.user_sign_in, R.drawable.dd_add_image)
-                .with(R.id.user_avatar_iv, view -> {
-//                    GlideManager.loadNetImage((ImageView) view, StringUtils.authString(data.getAvatarUrl()));
-                })
-                .with(R.id.user_name, view -> setAuthStateShow(data, injector, (TextView) view))
-                .with(R.id.real_name_certification_tv, view -> {
-                    TextView realNameCertifivationTv = (TextView) view;
+        injector.with(R.id.mine_user_avatar_iv, view -> {
+            if (null == data.getAvatarUrl()) {
+                return;
+            }
+            GlideManager.loadNetCircleImage((ImageView) view, data.getAvatarUrl());
+        });
+        injector.with(R.id.mine_user_name_tv, view -> setAuthStateShow(data, injector, (TextView) view))
+                .with(R.id.mine_go_auth_iv, view -> {
                     if (null == data.getAuthStatus()) {
                         return;
                     }
                     if (1 == data.getAuthStatus()) {//实名认证
-                        realNameCertifivationTv.setVisibility(View.GONE);
+                        view.setVisibility(View.INVISIBLE);
+                        injector.background(R.id.mine_auth_state_iv, R.mipmap.img_auth_tag);
                     }
                     if (2 == data.getAuthStatus()) {//未实名认证
+                        view.setVisibility(View.VISIBLE);
+                        injector.background(R.id.mine_auth_state_iv, R.mipmap.img_not_auth_tag);
                         view.setOnClickListener(v -> {
                             //TODO 进行 实名认证
                         });
@@ -47,27 +53,33 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
     }
 
     private void setAuthStateShow(UserInfoResponseBean data, IViewInjector injector, TextView view) {
+        if (null == data) {
+            return;
+        }
         String nickName = StringUtils.authString(data.getNickName());
         String phone = StringUtils.authString(data.getPhone());
         String name = StringUtils.authString(data.getName());
         if (StringUtils.isEmpty(nickName)) {//未设置昵称
             view.setText(FormatUtils.phoneTuomin(phone));
-            injector.visibility(R.id.user_phone, View.GONE);
+            injector.visibility(R.id.mine_user_phone_tv, View.INVISIBLE);
         }
         if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//未设置昵称且实名认证
             view.setText(FormatUtils.nameTuomin(data.getName()));
-            injector.text(R.id.user_phone, FormatUtils.phoneTuomin(phone));
+            injector.visibility(R.id.mine_user_phone_tv, View.VISIBLE);
+            injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
         }
 
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {// 设置昵称且实名认证
-            view.setText(FormatUtils.nameTuomin(nickName + "(" + name + ")"));
-            injector.text(R.id.user_phone, FormatUtils.phoneTuomin(phone));
+            view.setText(nickName + "(" + FormatUtils.nameTuomin(name) + ")");
+            injector.visibility(R.id.mine_user_phone_tv, View.VISIBLE);
+            injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
 
         }
 
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//设置昵称未实名认证
-            view.setText(FormatUtils.nameTuomin(nickName));
-            injector.text(R.id.user_phone, FormatUtils.phoneTuomin(phone));
+            view.setText(nickName);
+            injector.visibility(R.id.mine_user_phone_tv, View.VISIBLE);
+            injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
 
         }
     }

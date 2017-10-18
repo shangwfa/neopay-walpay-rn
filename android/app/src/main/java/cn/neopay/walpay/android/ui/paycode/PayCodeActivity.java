@@ -5,14 +5,16 @@ import com.xgjk.common.lib.base.BaseActivity;
 import com.xgjk.common.lib.manager.glide.GlideManager;
 import com.xgjk.common.lib.manager.storage.StoreManager;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityPayCodeLayoutBinding;
-import cn.neopay.walpay.android.http.BaseSubscriber;
-import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.request.GetRecentPayTypeRequestBean;
+import cn.neopay.walpay.android.module.response.BankCardResponseBean;
 import cn.neopay.walpay.android.module.response.RecentPayTypeResponseBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.utils.BusniessUtils;
@@ -37,28 +39,43 @@ public class PayCodeActivity extends BaseActivity<PayCodePresenter, ActivityPayC
 
     @Override
     public void initView() {
-
-        mPageBinding.commonHeader.setHeaderLeftImgAndRighImg("向商家付钱", R.mipmap.img_right_arrows, v -> {
-            DialogManager.getSingleton().showScanBottomDialog(this, () -> MainRouter.getSingleton().jumpToExplainPage("向商家付钱"));
-        });
+        handleHeaderView();
         mViewBinding.commonSelectLl.payModeTv.setText("付款方式");
         mViewBinding.commonSelectLl.payModeIconIv.setBackgroundResource(R.mipmap.img_right_arrow);
         UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(false, IWalpayConstants.USER_INFO_AUTH, UserInfoResponseBean.class);
         if (userInfoBean != null) {
             GlideManager.loadNetImage(mViewBinding.userAvatarIv, userInfoBean.getAvatarUrl());
         }
-        ApiManager.getSingleton().getRecentPayType(new GetRecentPayTypeRequestBean(), new BaseSubscriber(this, o -> {
-            setBankNickName((RecentPayTypeResponseBean) o);
-        }));
-
+        mPresenter.getRecentPayType(new GetRecentPayTypeRequestBean());
         mViewBinding.commonSelectLl.payModeRl.setOnClickListener(v -> DialogManager.getSingleton().showSelectBankDialog(this));
     }
 
-    private void setBankNickName(RecentPayTypeResponseBean payTypeBean) {
-        if (payTypeBean == null) {
+    private void handleHeaderView() {
+        mPageBinding.commonHeader.setHeaderLeftImgAndRighImg("向商家付钱", R.mipmap.img_right_arrows, v -> {
+            DialogManager.getSingleton().showScanBottomDialog(this, () -> MainRouter.getSingleton().jumpToExplainPage("向商家付钱"));
+        });
+    }
+
+    @Override
+    public void setBankNickName(RecentPayTypeResponseBean payTypeBean) {
+        if (null == payTypeBean) {
             return;
         }
         String bankNickName = BusniessUtils.handleBankNickName(payTypeBean.getBankName(), payTypeBean.getBankCardNo());
+        mViewBinding.commonSelectLl.payModeBackNameTv.setText(bankNickName);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getSelectPayStyleCallBack(BankCardResponseBean bankCardBean) {
+        if (null == bankCardBean) {
+            return;
+        }
+        String bankNickName;
+        if ("余额".equals(bankCardBean.getBankName())) {
+            bankNickName = BusniessUtils.handleBalanceNickName(bankCardBean.getBankName(), bankCardBean.getBankCardNo());
+        } else {
+            bankNickName = BusniessUtils.handleBankNickName(bankCardBean.getBankName(), bankCardBean.getBankCardNo());
+        }
         mViewBinding.commonSelectLl.payModeBackNameTv.setText(bankNickName);
     }
 
@@ -66,4 +83,6 @@ public class PayCodeActivity extends BaseActivity<PayCodePresenter, ActivityPayC
     public boolean isShowExceptionView() {
         return false;
     }
+
+
 }

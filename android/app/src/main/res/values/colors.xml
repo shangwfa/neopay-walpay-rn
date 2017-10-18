@@ -16,6 +16,7 @@
     <color name="common_black">#333333</color>
     <color name="common_color_black">#000000</color>
     <color name="common_black_light">#666666</color>
+    <color name="common_black_gray">#F2F2F2</color>
     <color name="common_black_color">#888888</color>
     <color name="common_dark_gray">#B2B2B2</color>
     <color name="common_gray_light">#999999</color>
