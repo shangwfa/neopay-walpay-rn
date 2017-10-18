@@ -40,7 +40,9 @@
     //手机号输入框
     XGQBLoginInputView *userNameIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_shouji1"] placeHolder:@"请输入手机号" rightBtn:nil];
     _userNameIV = userNameIV;
+    userNameIV.textField.type = XGQBTextFieldTypePhoneNo;
     userNameIV.textField.keyboardType = UIKeyboardTypeNumberPad;
+    userNameIV.textField.text=self.userName;
     [self.view addSubview:userNameIV];
     
     //验证码输入框
@@ -58,6 +60,7 @@
     [readPwdBtn addTarget:self action:@selector(readPwdBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     readPwdBtn.selected = NO;
     XGQBLoginInputView *pwdIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_mima1"] placeHolder:@"设置登录密码，6-18位字母加数字" rightBtn:readPwdBtn];
+    pwdIV.textField.type = XGQBTextFieldTypePassword;
     _pwdIV = pwdIV;
     pwdIV.textField.secureTextEntry = YES;
     [self.view addSubview:pwdIV];

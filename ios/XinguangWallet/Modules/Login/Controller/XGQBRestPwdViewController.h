@@ -10,4 +10,6 @@
 
 @interface XGQBRestPwdViewController : XGQBRootViewController
 
+@property (nonatomic,strong) NSString *userName;
+
 @end

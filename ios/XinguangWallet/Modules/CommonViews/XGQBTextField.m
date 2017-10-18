@@ -117,6 +117,21 @@
             [newText replaceCharactersInRange:range withString:string];
         }
     }
+    //处理手机号输入
+    else if (textField.type == XGQBTextFieldTypePhoneNo){
+        if (textField.text.length>10 && ![string isEqualToString:@""]) {
+            [SVProgressHUD showInfoWithStatus:@"请输入正确手机号"];
+        }
+        
+//        NSLog(@"textfield.text:%@ range:%@ replacementStr:%@",textField.text,NSStringFromRange(range),string);
+    }
+    //处理密码长度
+    else if(textField.type == XGQBTextFieldTypePassword){
+        if (textField.text.length>17 && ![string isEqualToString:@""]) {
+            [SVProgressHUD showInfoWithStatus:@"登录密码为6至18位字母加数字"];
+        }
+    }
+    
     return returnValue;
 }
 
@@ -128,11 +143,19 @@
         {
         NSString *newStr = [textField.text stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
         [textField setText:newStr];
-            
+        }
+    }
+    else if (textField.type == XGQBTextFieldTypePhoneNo){
+        if (textField.text.length!=11 && textField.text.length>0) {
+            [SVProgressHUD showInfoWithStatus:@"请输入正确手机号"];
         }
     }
 }
 
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return YES;
+}
 
 
 
