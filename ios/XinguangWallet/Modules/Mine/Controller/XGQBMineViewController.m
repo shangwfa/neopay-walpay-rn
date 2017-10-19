@@ -12,8 +12,9 @@
 #import "XGQBMineHeaderView.h"
 #import "XGQBMineItemCell.h"
 
-//temp
-#import "XGQBSettingsViewController.h"
+#import "XGQBRNViewController.h"
+
+#import "XGQBIDRegisterTableViewController.h"
 
 @interface XGQBMineViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -73,7 +74,7 @@
     mineTableView.backgroundColor = kClearColor;
     mineTableView.delegate = self;
     mineTableView.dataSource = self;
-    mineTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    mineTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     mineTableView.sectionHeaderHeight = 0;
     mineTableView.sectionFooterHeight = 8;
     mineTableView.showsVerticalScrollIndicator = NO;
@@ -83,6 +84,8 @@
     
     //tableview头部试图
     XGQBMineHeaderView *headerView = [[XGQBMineHeaderView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 59/375.0*kScreenWidth, 353/375.0*kScreenWidth, 161/375.0*kScreenWidth+70)];
+    
+    [headerView.goRegBtn addTarget:self action:@selector(goRegBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
     mineTableView.tableHeaderView = headerView;
     
@@ -124,10 +127,44 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section==1&&indexPath.row==2) {
-        XGQBSettingsViewController *sVC = [XGQBSettingsViewController new];
-        [self.navigationController pushViewController:sVC animated:YES];
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    //我的账单
+    if (indexPath.section==0&&indexPath.row==0) {
+        RNVC.pageType = @"myOrder";
     }
+    //我的资产
+    else if (indexPath.section==0&&indexPath.row==1) {
+        RNVC.pageType = @"setting";
+    }
+    //我的银行卡
+    else if (indexPath.section==0&&indexPath.row==2) {
+        RNVC.pageType = @"setting";
+    }
+    //我的中奖纪录
+    else if (indexPath.section==0&&indexPath.row==3) {
+        RNVC.pageType = @"setting";
+    }
+    //邀请好友
+    else if (indexPath.section==1&&indexPath.row==0) {
+        RNVC.pageType = @"setting";
+    }
+    //关于我们
+    else if (indexPath.section==1&&indexPath.row==1) {
+        RNVC.pageType = @"setting";
+    }
+    //设置
+    else if (indexPath.section==1&&indexPath.row==2) {
+        RNVC.pageType = @"setting";
+    }
+    [self.navigationController pushViewController:RNVC animated:YES];
+
+}
+
+#pragma mark - 处理按钮点击
+-(void)goRegBtnClicked
+{
+    XGQBIDRegisterTableViewController *idRegVC = [[XGQBIDRegisterTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
+    [self.navigationController pushViewController:idRegVC animated:YES];
 }
 
 @end

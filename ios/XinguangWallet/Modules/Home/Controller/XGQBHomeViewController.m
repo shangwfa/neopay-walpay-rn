@@ -18,6 +18,7 @@
 
 #import "XGQBIDRegisterTableViewController.h"
 
+#import "XGQBCommissionViewController.h"
 
 
 @interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate>
@@ -55,11 +56,10 @@
 #pragma mark - 设置视图组件
 -(void)setUpViewComponents
 {
-    
-
     //顶部视图
     XGQBHomeTitleView *homeTitleView = [XGQBHomeTitleView new];
     [self.view addSubview:homeTitleView];
+    [homeTitleView.calenderBtn addTarget:self action:@selector(calenderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
     //主业务图标视图
     XGQBHomeCellView *homeCellView = [XGQBHomeCellView new];
@@ -96,7 +96,8 @@
 #pragma mark - 处理按钮点击
 -(void)calenderBtnClicked
 {
-    
+    XGQBCommissionViewController *sVC = [XGQBCommissionViewController new];
+    [self.navigationController pushViewController:sVC animated:YES];
 }
 
 
