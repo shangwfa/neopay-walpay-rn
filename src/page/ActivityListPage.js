@@ -9,7 +9,7 @@ import Header from '../components/Header'
 import ActivityItemComponent from '../components/ActivityItemComponent'
 import BasePage from './BasePage'
 
-class ActivityPage extends BasePage {
+class ActivityListPage extends BasePage {
 
     renderItem = ({item}) => (
         <ActivityItemComponent itemData={item} navigation={this.props.navigation}/>
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ActivityPage
+export default ActivityListPage

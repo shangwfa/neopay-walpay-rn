@@ -23,8 +23,11 @@ import cn.neopay.walpay.android.adapter.adapter.HomeBannerAdapter;
 import cn.neopay.walpay.android.databinding.HomePromotionsViewBinding;
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.request.QueryBannerListRequestBean;
 import cn.neopay.walpay.android.module.response.BannerResponseBean;
+import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
  * @author carlos.guo
@@ -81,7 +84,9 @@ public class HomePromotionsView extends FrameLayout {
 
     private void handleViewClick() {
         mBinding.homeMeetingMoreTv.setOnClickListener(v -> {
-            //TODO 跳转活动中心
+            RNActivityParams activityParams=new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.ACTIVITY_LIST_PAGE);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
         });
     }
 

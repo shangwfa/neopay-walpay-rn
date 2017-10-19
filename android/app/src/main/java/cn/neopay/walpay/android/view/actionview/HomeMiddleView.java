@@ -52,9 +52,6 @@ public class HomeMiddleView extends FrameLayout {
     private void handleView(Context context) {
         mBinding.homeCardBagLl.setOnClickListener(v -> {
             //TODO 跳转 卡包
-            RNActivityParams activityParams=new RNActivityParams();
-            activityParams.setRnPage("splash");
-            MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
         });
 
         mBinding.homeBigRedBagLl.setOnClickListener(v -> {

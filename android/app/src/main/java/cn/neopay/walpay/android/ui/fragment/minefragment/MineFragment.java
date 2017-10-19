@@ -14,9 +14,12 @@ import cn.neopay.walpay.android.adapter.sliminjector.MineLineSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.MineTextImgSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.MineUserInforSlimInjector;
 import cn.neopay.walpay.android.databinding.FragmentMineLayoutBinding;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.sliminjector.MineTextImgItemBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
+import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
  * @author carlos.guo
@@ -88,7 +91,9 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mSetting.setItemImgId(R.mipmap.img_setting);
         mSetting.setItemName("设置");
         mSetting.setOnClickListener(v -> {
-
+            RNActivityParams activityParams=new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.SETTING_PAGE);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
         });
         data.add(mSetting);
     }
@@ -98,8 +103,9 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyBill.setItemImgId(R.mipmap.img_my_bill);
         mMyBill.setItemName("我的账单");
         mMyBill.setOnClickListener(v -> {
-            //TODO 我的账单
-            ToastUtils.show("我的账单");
+            RNActivityParams activityParams=new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.MY_ORDER_PAGE);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
         });
         data.add(mMyBill);
         MineTextImgItemBean mAsset = new MineTextImgItemBean();

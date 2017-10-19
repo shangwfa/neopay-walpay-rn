@@ -22,7 +22,7 @@ class NetUtil extends Component {
 
         NativeModules.commModule.netCommParas((originalata) => {
             let params = JSON.parse(originalata)
-            console.log(NetUtil.transform(NetUtil.baseUrl, urlPath, params))
+            Object.assign(data, params);
             var fetchOption = {
                 method: 'POST',
                 headers: {
@@ -45,7 +45,7 @@ class NetUtil extends Component {
                     // if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                 })
                 .catch((err) => {
-                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                     console.log(err)
                     // NativeModules.commModule.toast('网络不给力')
                 })
