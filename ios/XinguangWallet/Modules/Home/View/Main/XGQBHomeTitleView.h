@@ -10,4 +10,7 @@
 
 @interface XGQBHomeTitleView : UIView
 
+@property (nonatomic,strong) UIButton *calenderBtn;
+
+
 @end

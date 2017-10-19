@@ -10,7 +10,10 @@
 #import "XGQBHomeTitleBtn.h"
 
 #import "sys/utsname.h"
+@interface XGQBHomeTitleView ()
 
+
+@end
 
 @implementation XGQBHomeTitleView
 
@@ -38,6 +41,7 @@
     UIButton *calenderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [calenderBtn setBackgroundImage:[UIImage imageNamed:@"sy_qiandao"] forState:UIControlStateNormal];
     [self addSubview:calenderBtn];
+    _calenderBtn = calenderBtn;
     
     //添加头部功能按键
     //扫一扫

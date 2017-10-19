@@ -1,5 +1,5 @@
 //
-//  XGQBRNTestViewController.h
+//  XGQBRNViewController.h
 //  XinguangWallet
 //
 //  Created by BossKing on 10/10/2017.
@@ -8,6 +8,8 @@
 
 #import "XGQBRootViewController.h"
 
-@interface XGQBRNTestViewController : XGQBRootViewController
+@interface XGQBRNViewController : XGQBRootViewController
+
+@property (nonatomic,strong) NSString *pageType;
 
 @end

@@ -44,6 +44,7 @@
         
         //前往实名按钮
         UIButton *goRegBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _goRegBtn = goRegBtn;
         [goRegBtn setImage:[UIImage imageNamed:@"wd_shouzhi-1"] forState:UIControlStateNormal];
         goRegBtn.titleLabel.backgroundColor = [UIColor colorWithHexString:@"FF7373"];
         [goRegBtn setTitle:@"前往实名" forState:UIControlStateNormal];

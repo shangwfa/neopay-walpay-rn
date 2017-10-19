@@ -10,4 +10,6 @@
 
 @interface XGQBMineHeaderView : UIView
 
+@property (nonatomic,strong) UIButton *goRegBtn;
+
 @end

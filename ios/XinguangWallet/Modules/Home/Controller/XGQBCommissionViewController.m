@@ -1,51 +1,28 @@
 //
-//  XGQBSettingsViewController.m
+//  XGQBCommissionViewController.m
 //  XinguangWallet
 //
 //  Created by BossKing on 17/10/2017.
 //  Copyright © 2017 Hangzhou Neopay Co.,Ltd. All rights reserved.
 //
 
-#import "XGQBSettingsViewController.h"
-#import "XGQBRNTestViewController.h"
+#import "XGQBCommissionViewController.h"
+#import "XGQBRNViewController.h"
 #import "RCTRootView.h"
 #import "RCTDevLoadingView.h"
 
 
-@interface XGQBSettingsViewController ()
+@interface XGQBCommissionViewController ()
 @property (nonatomic,strong)RCTRootView *rctRootV;
 
 @end
 
-@implementation XGQBSettingsViewController
+@implementation XGQBCommissionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kViewBgColor;
     self.navigationController.navigationBarHidden = NO;
-    
-    //预先加载RN页面
-//    NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
-    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
-
-    
-    //隐藏顶部loading from 提示
-    [RCTDevLoadingView setEnabled:NO];
-    
-    //RCT初始化方法必须在主线程执行,开子线程报错
-    
-    [SVProgressHUD show];
-    
-    RCTRootView *rootView =
-    [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
-                         moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":@"home",@"time":@"2017-10-11"}}
-                          launchOptions    : nil];
-    
-    self.rctRootV = rootView;
-    
-    
-    [SVProgressHUD dismiss];
     
     
     //临时退出登录按钮
@@ -108,14 +85,30 @@
 -(void)jumpToRN
 {
     
-    //    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
+    //    NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
+    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
     
+    
+    //隐藏顶部loading from 提示
+    [RCTDevLoadingView setEnabled:NO];
+    
+    //RCT初始化方法必须在主线程执行,开子线程报错
+    
+    [SVProgressHUD show];
+    
+    RCTRootView *rootView =
+    [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
+                         moduleName        : @"neopay_walpay"
+                         initialProperties :@{@"params": @{@"page":@"home"}}
+                          launchOptions    : nil];
+
+    
+    
+    [SVProgressHUD dismiss];
     
     //创建XGQBRNTestVC
-    XGQBRNTestViewController *RNVC = [[XGQBRNTestViewController alloc]init];
-    RNVC.view = self.rctRootV;
-    
-    //    rootView.appProperties = @{@"params_updated": @{@"page":@"home",@"time":@"2017-10-11"}};
+    XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+    RNVC.view = rootView;
     
     [self.navigationController pushViewController:RNVC animated:YES];
     
