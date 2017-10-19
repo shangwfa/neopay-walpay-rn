@@ -9,6 +9,7 @@
 #import "XGQBHomeBannerView.h"
 #import "XGQBHomeBanner.h"
 
+
 @implementation XGQBHomeBannerView
 
 /*
@@ -29,19 +30,20 @@
         [self addSubview: titleView];
         
         //更多按钮
-        UIButton *rightArrowBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [rightArrowBtn setImage:[UIImage imageNamed:@"sy_jiantoyu"] forState:UIControlStateNormal];
-        [rightArrowBtn setTitle:@"更多" forState:UIControlStateNormal];
-        rightArrowBtn.imageView.size = CGSizeMake(13, 13);
-        rightArrowBtn.titleLabel.font = kSYSTEMFONT(12.0);
-        [rightArrowBtn setTitleColor:[UIColor colorWithHexString:@"666666"] forState:UIControlStateNormal];
+        UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        rightArrowBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 20, 0, -20);
-        rightArrowBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 20);
+        _moreBtn = moreBtn;
         
-        [rightArrowBtn addTarget:self action:@selector(rightArrowBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [moreBtn setImage:[UIImage imageNamed:@"sy_jiantoyu"] forState:UIControlStateNormal];
+        [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
+        moreBtn.imageView.size = CGSizeMake(13, 13);
+        moreBtn.titleLabel.font = kSYSTEMFONT(12.0);
+        [moreBtn setTitleColor:[UIColor colorWithHexString:@"666666"] forState:UIControlStateNormal];
         
-        [self addSubview:rightArrowBtn];
+        moreBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 20, 0, -20);
+        moreBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 20);
+
+        [self addSubview:moreBtn];
         
         //广告页
         XGQBHomeBanner *adView = [[XGQBHomeBanner alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth*0.95, kScreenWidth*0.9*0.44)];
@@ -57,7 +59,7 @@
             make.centerX.equalTo(weakself);
         }];
         
-        [rightArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        [moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(weakself);
             make.top.equalTo(weakself).with.offset(20);
         }];
@@ -72,8 +74,4 @@
     return self;
 }
 
--(void)rightArrowBtnClicked
-{
-    NSLog(@"点击了更多按钮");
-}
 @end
