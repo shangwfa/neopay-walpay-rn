@@ -78,7 +78,7 @@ class App extends Component {
             },
             {
                 // initialRouteName: params.page,
-                initialRouteName: 'myOrder',
+                initialRouteName: 'setting',
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {
