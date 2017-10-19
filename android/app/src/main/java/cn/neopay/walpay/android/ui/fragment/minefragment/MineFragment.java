@@ -57,7 +57,9 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
     @NonNull
     private ArrayList<Object> getMineItemData(UserInfoResponseBean userInfoResponseBean) {
         ArrayList<Object> data = new ArrayList<>();
-        data.add(userInfoResponseBean);
+        if (null != userInfoResponseBean) {
+            data.add(userInfoResponseBean);
+        }
         setTopMineItemData(data);
         data.add(new CommonLineItemBean());
         setNextItemData(data);

@@ -16,6 +16,7 @@ import BindBankCard from './page/BindBankCardPage'
 import Feedback from './page/FeedbackPage'
 import Setting from './page/SettingPage'
 import MyOrder from './page/MyOrderPage'
+import PanResponderDemo from './page/PanResponderDemoPage'
 import {events} from './constants/index'
 
 class App extends Component {
@@ -72,7 +73,8 @@ class App extends Component {
                 bindBankCard:{screen:BindBankCard},
                 feedback:{screen:Feedback},
                 setting:{screen:Setting},
-                myOrder:{screen:MyOrder}
+                myOrder:{screen:MyOrder},
+                panResponderDemo:{screen:PanResponderDemo}
             },
             {
                 // initialRouteName: params.page,
