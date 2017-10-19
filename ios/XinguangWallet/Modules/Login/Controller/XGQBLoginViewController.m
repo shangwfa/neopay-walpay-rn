@@ -70,11 +70,18 @@
 
     //logo
     UIImageView *logoImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dl_logo"]];
+    logoImage.alpha = 0;
     [self.view addSubview:logoImage];
+
     [logoImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(162/2, 217/2));
         make.centerX.equalTo(weakself.view);
         make.top.equalTo(weakself.view).with.offset(kScreenHeight*0.13);
+    }];
+    
+    //添加渐隐效果
+    [UIView animateWithDuration:2.0 animations:^{
+        logoImage.alpha = 1.0;
     }];
     
     //userNameIV

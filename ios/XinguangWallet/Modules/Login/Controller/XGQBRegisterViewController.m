@@ -89,6 +89,7 @@
     readPayPwdBtn.selected = NO;
     XGQBLoginInputView *paypwdIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_zhifumima1"] placeHolder:@"设置支付密码，6位数字" rightBtn:readPayPwdBtn];
     _paypwdIV = paypwdIV;
+    paypwdIV.textField.type = XGQBTextFieldTyepPayPassword;
     paypwdIV.textField.keyboardType = UIKeyboardTypeNumberPad;
     paypwdIV.textField.secureTextEntry = YES;
     [self.view addSubview:paypwdIV];
