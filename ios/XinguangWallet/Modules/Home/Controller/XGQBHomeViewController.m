@@ -102,6 +102,15 @@
 {
     XGQBCommissionViewController *sVC = [XGQBCommissionViewController new];
     [self.navigationController pushViewController:sVC animated:YES];
+    
+//    NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",@"18668180337"]];
+//    [[UIApplication sharedApplication]openURL: phoneURL];
+//
+//    UIWebView * callWebview = [[UIWebView alloc]init];
+//    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:10010"]]];
+//    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
+
+    
 }
 -(void)moreBtnClicked
 {
