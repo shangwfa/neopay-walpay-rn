@@ -16,7 +16,7 @@ import cn.neopay.walpay.android.utils.BusniessUtils;
 public class SelectBankPaySlimInjector implements SlimInjector<BankCardResponseBean> {
     @Override
     public void onInject(BankCardResponseBean data, IViewInjector injector) {
-        if (data == null) {
+        if (null == data) {
             return;
         }
         if ("余额".equals(data.getBankName())) {

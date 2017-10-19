@@ -4,7 +4,9 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
-import com.xgjk.common.lib.listener.RefreshLoadingListener;
+import com.xgjk.common.lib.utils.ToastUtils;
+import com.xgjk.common.lib.view.xrecyclerview.ProgressStyle;
+import com.xgjk.common.lib.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 
@@ -49,11 +51,21 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         ArrayList<Object> data = new ArrayList<>();
         setAdapterData(data);
         mNewsAdapter.updateData(data);
-        mViewBinding.mineNewsXrv.setLoadingMoreEnabled(false);
-        mViewBinding.mineNewsXrv.setLoadingListener(new RefreshLoadingListener() {
+        mViewBinding.mineNewsXrv.setLoadingMoreEnabled(true);
+        mViewBinding.mineNewsXrv.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        mViewBinding.mineNewsXrv.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+
+        mViewBinding.mineNewsXrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                ToastUtils.show("onRefresh");
                 mViewBinding.mineNewsXrv.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
+                ToastUtils.show("onLoadMore");
+                mViewBinding.mineNewsXrv.loadMoreComplete();
             }
         });
     }
