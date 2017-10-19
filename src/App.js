@@ -15,6 +15,7 @@ import PersonalInfo from "./page/PersonalInfoPage"
 import BindBankCard from './page/BindBankCardPage'
 import Feedback from './page/FeedbackPage'
 import Setting from './page/SettingPage'
+import MyOrder from './page/MyOrderPage'
 import {events} from './constants/index'
 
 class App extends Component {
@@ -70,11 +71,12 @@ class App extends Component {
                 personalInfo:{screen:PersonalInfo},
                 bindBankCard:{screen:BindBankCard},
                 feedback:{screen:Feedback},
-                setting:{screen:Setting}
+                setting:{screen:Setting},
+                myOrder:{screen:MyOrder}
             },
             {
                 // initialRouteName: params.page,
-                initialRouteName: 'setting',
+                initialRouteName: 'myOrder',
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {
