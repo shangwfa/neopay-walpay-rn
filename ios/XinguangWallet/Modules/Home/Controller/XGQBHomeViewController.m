@@ -20,6 +20,9 @@
 
 #import "XGQBCommissionViewController.h"
 
+#import "XGQBRNViewController.h"
+
+
 
 @interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate>
 
@@ -67,6 +70,7 @@
     
     //广告视图
     XGQBHomeBannerView *homeADView = [XGQBHomeBannerView new];
+    [homeADView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:homeADView];
     
     //添加约束
@@ -98,6 +102,13 @@
 {
     XGQBCommissionViewController *sVC = [XGQBCommissionViewController new];
     [self.navigationController pushViewController:sVC animated:YES];
+}
+-(void)moreBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"activityList";
+    [self.navigationController pushViewController:RNVC animated:YES];
+    
 }
 
 

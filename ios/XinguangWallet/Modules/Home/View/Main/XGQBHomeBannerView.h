@@ -10,4 +10,6 @@
 
 @interface XGQBHomeBannerView : UIView
 
+@property (nonatomic,strong) UIButton *moreBtn;
+
 @end
