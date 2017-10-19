@@ -1,5 +1,6 @@
 package cn.neopay.walpay.android.adapter.sliminjector;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,8 +27,8 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
             return;
         }
         injector.with(R.id.mine_user_avatar_iv, view -> {
-            if (null == data.getAvatarUrl()) {
-                return;
+            if (null == data.getAvatarUrl() || TextUtils.isEmpty(data.getAvatarUrl())) {
+                injector.background(R.id.mine_user_avatar_iv, R.mipmap.img_default_photo);
             }
             GlideManager.loadNetCircleImage((ImageView) view, data.getAvatarUrl());
         });
@@ -59,28 +60,19 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
         String nickName = StringUtils.authString(data.getNickName());
         String phone = StringUtils.authString(data.getPhone());
         String name = StringUtils.authString(data.getName());
-        if (StringUtils.isEmpty(nickName)) {//未设置昵称
-            view.setText(FormatUtils.phoneTuomin(phone));
-            injector.visibility(R.id.mine_user_phone_tv, View.INVISIBLE);
+
+        if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//未设置昵称未实名认证
+            injector.visibility(R.id.mine_user_name_tv, View.GONE);
         }
         if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//未设置昵称且实名认证
             view.setText(FormatUtils.nameTuomin(data.getName()));
-            injector.visibility(R.id.mine_user_phone_tv, View.VISIBLE);
-            injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
         }
-
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {// 设置昵称且实名认证
-            view.setText(nickName + "(" + FormatUtils.nameTuomin(name) + ")");
-            injector.visibility(R.id.mine_user_phone_tv, View.VISIBLE);
-            injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
-
+            view.setText(String.format("%s(%s)", nickName, FormatUtils.nameTuomin(name)));
         }
-
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//设置昵称未实名认证
             view.setText(nickName);
-            injector.visibility(R.id.mine_user_phone_tv, View.VISIBLE);
-            injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
-
         }
+        injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
     }
 }

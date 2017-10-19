@@ -24,6 +24,7 @@
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
      self.clearsSelectionOnViewWillAppear = NO;
+
     
 //    self.tableView.estimatedRowHeight = 200;
 //    self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -52,7 +53,8 @@
 {
     if (indexPath.row%2==0)
     {
-        return (79*kScreenWidth/375.0+8);
+        return (79+8);
+//        return (79*kScreenWidth/375.0+8);
     }else{
         return (218*kScreenWidth/375.0+8);
     }
@@ -76,9 +78,10 @@
 
      }else if (!cell)
      {
-                  cell = [XGQBActiMessTVC actiTableViewCellWithType:arc4random()%3 timeLabel:@"06/06 00:00"];
+         cell = [XGQBActiMessTVC actiTableViewCellWithType:arc4random()%3 timeLabel:@"06/06 00:00"];
      }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
  }

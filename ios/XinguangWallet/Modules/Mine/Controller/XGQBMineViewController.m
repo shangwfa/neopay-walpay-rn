@@ -117,6 +117,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XGQBMineItemCell *cell = [XGQBMineItemCell cellWithImageNamed:self.cellImgArray[indexPath.section*4+indexPath.row] title:self.cellItemArray[indexPath.row+indexPath.section*4]];
+    ///修改cell的选中样式
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

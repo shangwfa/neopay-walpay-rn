@@ -59,6 +59,14 @@
     UIImageView *seperatorLine = [[UIImageView alloc]initWithImage:seperatorLineImg];
     [cell.contentView addSubview:seperatorLine];
     
+    //增加未读消息红点
+    UIImage *redDot = [cell createImageWithColor:[UIColor colorWithHexString:@"F34646"] andFrame:CGRectMake(0, 0, 9, 9)];
+    UIImageView *redDotView = [[UIImageView alloc]initWithImage:redDot];
+    kViewRadius(redDotView, 9/2.0);
+    
+    [cell.contentView addSubview:redDotView];
+    
+    
     //添加约束
     CGFloat sizeRatio = kScreenWidth/375.0;
     
@@ -69,6 +77,7 @@
     }];
     
     [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(70, 17*sizeRatio));
 //        make.size.mas_equalTo(CGSizeMake(76*sizeRatio, 17*sizeRatio));
         make.left.equalTo(cell.contentView).with.offset(45*sizeRatio);
         make.centerY.equalTo(logo);
@@ -93,6 +102,13 @@
         //autolayout竖直方向报错,因为限制死了
 //        make.bottom.equalTo(cell.contentView);
     }];
+    
+    [redDotView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(9, 9));
+        make.centerX.equalTo(titleLable.mas_right);
+        make.centerY.equalTo(titleLable.mas_top);
+    }];
+    
     
     return cell;
 }

@@ -28,6 +28,7 @@
     <color name="line">#cccccc</color>
     <color name="home_top_background">#333A48</color>
     <color name="home_top_text">#D7BC51</color>
+    <color name="red_packet_text">#FBDEB0</color>
     <color name="home_tab_bg">#F6F7F9</color>
     <color name="dialog_tips_btn">#0071FF</color>
 

@@ -45,7 +45,7 @@
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (self.viewControllers.count > 0) { // 如果push的不是根控制器(不是栈底控制器)
-//        viewController.hidesBottomBarWhenPushed = YES;
+        viewController.hidesBottomBarWhenPushed = YES;
         // 左上角的返回
         UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
         [leftBtn setImage:[UIImage imageNamed:@"jiantou"] forState:0];

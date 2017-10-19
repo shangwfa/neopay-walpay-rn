@@ -30,13 +30,24 @@
     self.view.backgroundColor = kWhiteColor;
     self.navigationController.navigationBarHidden = NO;
     self.title = @"注册";
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 120;
     [self setUpViewComponents];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
+
+-(void)loadView
+{
+    ///设置IQKeyboardManager防止navigationbar往上移
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight); //You may not need this code if you are working with Autolayout and scrollView is able to get it's contentSize from constraints.
+    self.view = scrollView;
+}
+
 
 #pragma mark - 设置视图组件
 -(void)setUpViewComponents
@@ -45,6 +56,8 @@
     XGQBLoginInputView *userNameIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_shouji1"] placeHolder:@"请输入手机号" rightBtn:nil];
     _userNameIV = userNameIV;
     userNameIV.textField.keyboardType = UIKeyboardTypeNumberPad;
+    userNameIV.textField.type = XGQBTextFieldTypePhoneNo;
+    self.userNameIV.textField.text = self.userName;
     [self.view addSubview:userNameIV];
     
     //验证码输入框
@@ -63,6 +76,7 @@
     readPwdBtn.selected = NO;
     XGQBLoginInputView *pwdIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_mima1"] placeHolder:@"设置登录密码，6-18位字母加数字" rightBtn:readPwdBtn];
     _pwdIV = pwdIV;
+    pwdIV.textField.type = XGQBTextFieldTypePassword;
     pwdIV.textField.secureTextEntry = YES;
     [self.view addSubview:pwdIV];
     
