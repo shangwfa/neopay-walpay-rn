@@ -15,6 +15,6 @@
             android:id="@+id/mine_news_xrv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/common_black_light" />
+            android:background="@color/common_white" />
     </LinearLayout>
 </layout>
