@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         fontSize:14,
         padding:10,
-        color:'#999'
+        color:'#999',
+        textAlignVertical:'top'
     },
     container: {
         flex: 1,

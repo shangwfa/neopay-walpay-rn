@@ -5,5 +5,6 @@ export default {
     page_background: '#efefef',
     black: '#333333',
     black_light: '#666666',
+    balck_more_light:'#999999',
     divider:'#cccccc'
 }

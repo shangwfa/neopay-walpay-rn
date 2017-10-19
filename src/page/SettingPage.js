@@ -4,6 +4,7 @@ import {
     View,
     Text,
     Image,
+    NativeModules
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
@@ -21,10 +22,12 @@ class SettingPage extends BasePage {
     }
 
     toLoginPwd=()=>{
-
+        const params = {page: 'resetLoginPwd'}
+        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
     }
     toPayPwd=()=>{
-
+        const params = {page: 'resetPayPwd'}
+        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
     }
     toFeedback=()=>{
         this.props.navigation.navigate(RouterPaths.FEEDBACK_PAGE)

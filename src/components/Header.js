@@ -4,7 +4,8 @@ import {
     Text,
     View,
     Image,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    TouchableOpacity
 } from 'react-native';
 import Divider from '../components/Divider'
 import colors from '../constants/colors'
@@ -12,10 +13,26 @@ import ScreenUtils from '../utils/ScreenUtils'
 import img_left_arrow from '../res/img/img_left_arrow.png'
 
 class Header extends Component {
+    static defaultProps = {
+        onRightPress:()=>{}
+    };
+
     constructor(props) {
         super(props)
     }
 
+
+    renderHeaderRight=()=>{
+        if(this.props.rightTitle){
+           return  <Text style={styles.header_right_title}>{this.props.rightTitle}</Text>
+        }
+    }
+
+    goback = () => {
+        console.log("回退")
+        console.log(this.props.navigation)
+        this.props.navigation.goBack();
+    }
 
     render() {
         return (
@@ -33,24 +50,22 @@ class Header extends Component {
                         <Text style={styles.title}> {this.props.title}</Text>
                     </View>
                     {/*header右侧*/}
-                    <View style={styles.header_right}>
-
-                    </View>
+                    <TouchableOpacity style={styles.header_right} onPress={()=>this.props.onRightPress()}>
+                        {this.renderHeaderRight()}
+                    </TouchableOpacity>
 
                 </View>
                 <Divider/>
             </View>
             )
     }
-
-    goback = () => {
-        console.log("回退")
-        console.log(this.props.navigation)
-        this.props.navigation.goBack();
-    }
 }
 
 const styles = StyleSheet.create({
+    header_right_title:{
+        fontSize: 14,
+        color: colors.black,
+    },
     header_back_img: {
         width: 10,
         height: 18,
@@ -68,6 +83,7 @@ const styles = StyleSheet.create({
     header_right: {
         flex: 1,
         justifyContent: 'center',
+        alignItems:'flex-end',
         marginRight: 10
     },
     title: {

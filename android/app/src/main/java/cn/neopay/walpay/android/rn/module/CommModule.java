@@ -20,7 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.neopay.walpay.android.R;
+import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.view.dialog.LoadingDialog;
@@ -143,11 +145,11 @@ public class CommModule extends ReactContextBaseJavaModule {
 
     private void handlePage(JSONObject jsonObject) throws JSONException {
         switch (jsonObject.getString("page")) {
-            case "changeLoginPassWord"://修改登录密码页面
+            case "resetLoginPwd"://修改登录密码页面
+                MainRouter.getSingleton().jumpToForgotPwdPage("", IWalpayConstants.FORGOTPWD_TYPE_LOGIN);
                 break;
-            case "changePayPassWord"://修改登录密码页面
-                final String phone = jsonObject.getString("phone");
-
+            case "resetPayPwd"://修改登录密码页面
+                MainRouter.getSingleton().jumpToForgotPwdPage("", IWalpayConstants.FORGOTPWD_TYPE_PAY);
                 break;
             default:
                 break;
