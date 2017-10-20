@@ -9,6 +9,8 @@
 #import "commModule.h"
 #import "RCTBridgeModule.h"
 
+#import "XGQBRestPwdViewController.h"
+
 @implementation commModule
 
 RCT_EXPORT_MODULE()
@@ -35,7 +37,6 @@ RCT_EXPORT_METHOD(toast:(NSString*)msg){
 //传递网络参数
 RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
     
-    dispatch_async(dispatch_get_main_queue(), ^{
         NSMutableDictionary *netParas = [NSMutableDictionary dictionary];
         [netParas setObject:[IphoneDevice deviceVersion] forKey:@"deviceType"];
         [netParas setObject:[SystemMethods SystemGetSoftVersion] forKey:@"deviceVersion"];
@@ -45,23 +46,26 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
         [netParas setObject:@"CDMA" forKey:@"operator"];
         
         
-        [netParas setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
-        [netParas setObject:[GVUserDefaults standardUserDefaults].name forKey:@"name"];
-        [netParas setObject:[GVUserDefaults standardUserDefaults].avatarUrl forKey:@"avatarUrl"];
-        [netParas setObject:[GVUserDefaults standardUserDefaults].phone forKey:@"avatarUrl"];
-        
+//        [netParas setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
+//        [netParas setObject:[GVUserDefaults standardUserDefaults].name forKey:@"name"];
+//        [netParas setObject:[GVUserDefaults standardUserDefaults].avatarUrl forKey:@"avatarUrl"];
+//        [netParas setObject:[GVUserDefaults standardUserDefaults].phone forKey:@"avatarUrl"];
+//
         callback(@[[NSNull null],netParas]);
-
-    });
 }
 
 //跳转至原生特定页面
-RCT_EXPORT_METHOD(jumpToNativePage:(NSString*)pageType:(NSString*)params){
+RCT_EXPORT_METHOD(jumpToNativePage:(NSString*)type:(NSDictionary*)params){
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([pageType isEqualToString:@"loginPageType"]) {
-            [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
-        }
+//        if ([params[@"page"] isEqualToString:@"resetLoginPwd"]) {
+//            [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
+//        }else if ([params[@"page"] isEqualToString:@"resetPayPwd"]) {
+//            [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
+//
+//        }
+        
+        NSLog(@"%@",params[@"page"]);
     });
 }
 
