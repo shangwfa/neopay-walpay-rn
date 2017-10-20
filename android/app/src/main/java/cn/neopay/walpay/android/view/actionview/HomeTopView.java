@@ -13,6 +13,7 @@ import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeTopViewBinding;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
@@ -24,6 +25,7 @@ import cn.neopay.walpay.android.utils.BusniessUtils;
 public class HomeTopView extends FrameLayout {
 
     private HomeTopViewBinding mBinding;
+    private UserInfoResponseBean mUserInfoBean;
 
     public HomeTopView(@NonNull Context context) {
         super(context);
@@ -57,15 +59,19 @@ public class HomeTopView extends FrameLayout {
 
         mBinding.homeScanLl.setOnClickListener(v -> MainRouter.getSingleton().jumpToScanPage());
 
-        mBinding.homePayCodeLl.setOnClickListener(v ->
-                BusniessUtils.handleCertification(context, () -> MainRouter.getSingleton().jumpToPayCodePage()));
+        mBinding.homePayCodeLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> MainRouter.getSingleton().jumpToPayCodePage()));
 
-        mBinding.homeBalanceLl.setOnClickListener(v -> {
-            BusniessUtils.handleCertification(context, () -> {
-            });
+        mBinding.homeBalanceLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
             //TODO 跳转余额页面
-        });
+        }));
     }
 
+    public UserInfoResponseBean getmUserInfoBean() {
+        return mUserInfoBean;
+    }
+
+    public void setmUserInfoBean(UserInfoResponseBean mUserInfoBean) {
+        this.mUserInfoBean = mUserInfoBean;
+    }
 
 }

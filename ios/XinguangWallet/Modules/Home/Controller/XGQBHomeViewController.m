@@ -20,6 +20,9 @@
 
 #import "XGQBCommissionViewController.h"
 
+#import "XGQBRNViewController.h"
+
+
 
 @interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate>
 
@@ -67,6 +70,7 @@
     
     //广告视图
     XGQBHomeBannerView *homeADView = [XGQBHomeBannerView new];
+    [homeADView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:homeADView];
     
     //添加约束
@@ -98,6 +102,22 @@
 {
     XGQBCommissionViewController *sVC = [XGQBCommissionViewController new];
     [self.navigationController pushViewController:sVC animated:YES];
+    
+//    NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",@"18668180337"]];
+//    [[UIApplication sharedApplication]openURL: phoneURL];
+//
+//    UIWebView * callWebview = [[UIWebView alloc]init];
+//    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:10010"]]];
+//    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
+
+    
+}
+-(void)moreBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"activityList";
+    [self.navigationController pushViewController:RNVC animated:YES];
+    
 }
 
 

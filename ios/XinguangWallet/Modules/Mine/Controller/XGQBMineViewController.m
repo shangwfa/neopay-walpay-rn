@@ -87,6 +87,10 @@
     
     [headerView.goRegBtn addTarget:self action:@selector(goRegBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
+    UITapGestureRecognizer *tapOnHeader = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tableHeaderClicked)];
+    
+    [headerView addGestureRecognizer:tapOnHeader];
+    
     mineTableView.tableHeaderView = headerView;
     
     [self.view addSubview:mineTableView];
@@ -165,6 +169,13 @@
 {
     XGQBIDRegisterTableViewController *idRegVC = [[XGQBIDRegisterTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:idRegVC animated:YES];
+}
+
+-(void)tableHeaderClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"personalInfo";
+    [self.navigationController pushViewController:RNVC animated:YES];
 }
 
 @end

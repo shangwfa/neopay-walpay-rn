@@ -9,12 +9,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
-import com.xgjk.common.lib.utils.StringUtils;
-
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeMiddleViewBinding;
-import cn.neopay.walpay.android.manager.routermanager.MainRouter;
-import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
@@ -26,6 +23,7 @@ import cn.neopay.walpay.android.utils.BusniessUtils;
 public class HomeMiddleView extends FrameLayout {
 
     private HomeMiddleViewBinding mBinding;
+    private UserInfoResponseBean mUserInfoBean;
 
     public HomeMiddleView(@NonNull Context context) {
         super(context);
@@ -55,14 +53,14 @@ public class HomeMiddleView extends FrameLayout {
         });
 
         mBinding.homeBigRedBagLl.setOnClickListener(v -> {
-            // //TODO 跳转 大红包
-            BusniessUtils.handleCertification(context, () -> {
+            BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
+                //TODO 跳转 大红包
             });
         });
 
         mBinding.homeRechargeLl.setOnClickListener(v -> {
-            //TODO 跳转 手机充值
-            BusniessUtils.handleCertification(context, () -> {
+            BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
+                //TODO 跳转 手机充值
             });
         });
 
@@ -88,4 +86,13 @@ public class HomeMiddleView extends FrameLayout {
             //TODO 跳转 信用卡申请
         });
     }
+
+    public UserInfoResponseBean getmUserInfoBean() {
+        return mUserInfoBean;
+    }
+
+    public void setmUserInfoBean(UserInfoResponseBean mUserInfoBean) {
+        this.mUserInfoBean = mUserInfoBean;
+    }
+
 }
