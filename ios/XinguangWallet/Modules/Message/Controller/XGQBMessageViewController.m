@@ -10,6 +10,9 @@
 #import "XGQBCommMessTVC.h"
 #import "XGQBActiMessTVC.h"
 
+#import "XGQBNoContentViewController.h"
+#import "XGQBNetworkFailureViewController.h"
+
 
 @interface XGQBMessageViewController ()
 
@@ -85,5 +88,17 @@
     
     return cell;
  }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (arc4random()%2) {
+        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
+        [self.navigationController pushViewController:noContentVC animated:YES];
+    }else{
+        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
+        [self.navigationController pushViewController:netWorkFailVC animated:YES];
+    }
+    
+}
 
 @end

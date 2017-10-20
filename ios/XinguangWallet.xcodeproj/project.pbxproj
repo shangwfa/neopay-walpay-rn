@@ -21,6 +21,8 @@
 		4255866E1F94A879002E039B /* XGQBMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866D1F94A879002E039B /* XGQBMineItemCell.m */; };
 		425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425586701F94C84D002E039B /* XGQBMineTableView.m */; };
 		42990E711F987D7E00B20EBA /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42990E701F987D7E00B20EBA /* assets */; };
+		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
+		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
@@ -116,6 +118,10 @@
 		425586701F94C84D002E039B /* XGQBMineTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineTableView.m; sourceTree = "<group>"; };
 		425881101F909EFB005566A6 /* XinguangWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinguangWallet.entitlements; sourceTree = "<group>"; };
 		42990E701F987D7E00B20EBA /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
+		42990E741F998F7C00B20EBA /* XGQBNoContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNoContentViewController.h; sourceTree = "<group>"; };
+		42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNoContentViewController.m; sourceTree = "<group>"; };
+		42990E771F99942000B20EBA /* XGQBNetworkFailureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNetworkFailureViewController.h; sourceTree = "<group>"; };
+		42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNetworkFailureViewController.m; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
 		42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNViewController.h; sourceTree = "<group>"; };
@@ -283,6 +289,30 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		42990E721F998F2C00B20EBA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6A792B9A1F7F98A2009039AF /* XGQBTextField.h */,
+				6A792B9B1F7F98A2009039AF /* XGQBTextField.m */,
+				6A5F69C51F7B930200B16B31 /* XGQBPureColorBtn.h */,
+				6A5F69C61F7B930200B16B31 /* XGQBPureColorBtn.m */,
+				42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */,
+				42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		42990E731F998F3900B20EBA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				42990E741F998F7C00B20EBA /* XGQBNoContentViewController.h */,
+				42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */,
+				42990E771F99942000B20EBA /* XGQBNetworkFailureViewController.h */,
+				42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		6A01A0171F7A2AC20059D6D3 /* NetworkingConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,17 +423,13 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
-		6AD95AE71F7C87BE00BFF4DA /* CommonViews */ = {
+		6AD95AE71F7C87BE00BFF4DA /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6A792B9A1F7F98A2009039AF /* XGQBTextField.h */,
-				6A792B9B1F7F98A2009039AF /* XGQBTextField.m */,
-				6A5F69C51F7B930200B16B31 /* XGQBPureColorBtn.h */,
-				6A5F69C61F7B930200B16B31 /* XGQBPureColorBtn.m */,
-				42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */,
-				42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */,
+				42990E731F998F3900B20EBA /* ViewControllers */,
+				42990E721F998F2C00B20EBA /* Views */,
 			);
-			path = CommonViews;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		6AD95B001F7CF84D00BFF4DA /* API */ = {
@@ -578,7 +604,7 @@
 		6AF9E4481F78E281005E901C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				6AD95AE71F7C87BE00BFF4DA /* CommonViews */,
+				6AD95AE71F7C87BE00BFF4DA /* Common */,
 				6AE813A11F7B4D300044B072 /* AdVC */,
 				6A1C68AA1F7A3CD300170E47 /* AppBootVC */,
 				6A3843C31F79E43C00BFE9B4 /* Login */,
@@ -1053,10 +1079,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */,
 				6AD95B321F7D064100BFF4DA /* AssistCoreService.m in Sources */,
 				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
 				4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
+				42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
 				42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */,
 				6AD95B351F7D064100BFF4DA /* MemberCoreService.m in Sources */,
