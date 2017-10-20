@@ -1,56 +1,49 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {
-    Text,
-    StyleSheet,
     TouchableOpacity,
-    View
 } from 'react-native';
-import {colors} from '../constants/index'
 
+class MoreClickComponet extends Component {
 
-const MoreClickComponet = props => {
-    const {
-        component,
-        ...attributes
-    } = props
-
-    let Component=TouchableOpacity
-
-    if (component) {
-        Component = component;
+    // 构造
+    constructor(props) {
+        super(props)
+        // 初始状态
+        this.state = {
+            isDisable: false
+        };
     }
-    const styles = StyleSheet.create({
-        value:{
-            color: colors.white,
-            fontSize: 15,
-        },
-        container:{
-            backgroundColor: colors.one_color,
-            height: 50,
-            marginLeft: 10,
-            marginRight: 10,
-            justifyContent:'center',
-            alignItems: 'center',
-        },
-    })
 
-    const toPress = async ()=>{
-        const {onPress} = this.props
-        onPress&&onPress()
-        await this.setState({isDisable:true})//防重复点击
-        this.timer = setTimeout(async()=>{
-            await this.setState({isDisable:false})//1.5秒后可点击
-        },1000)
+    componentWillMount() {
+
     }
-    return (
-        <Component
-            onPress={this.toPress()}
-            {...attributes}>
-            {this.props.children}
-        </Component>
-    )
+
+    componentWillUnMount() {
+        this.timer && clearTimeout(this.timer)
+    }
+
+
+    ToPress = async () => {
+        const {onPress} = this.props;
+        if(onPress){
+            onPress && onPress();
+            await this.setState({isDisable: true})
+            this.timer = setTimeout(async () => {
+                await this.setState({isDisable: false})
+            }, 500)
+        }
+    }
+
+    render() {
+        const {onPress, ...attributes} = this.props
+        return (
+            <TouchableOpacity
+                disabled={this.state.isDisable}
+                onPress={this.ToPress} {...attributes}>
+                {this.props.children}
+            </TouchableOpacity>
+        )
+    }
 }
-
-
 
 export default MoreClickComponet
