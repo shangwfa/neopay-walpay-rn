@@ -5,8 +5,7 @@ import netCode from '../constants/netCode'
 class NetUtil extends Component {
 
     static baseUrl = 'http://139.224.11.160:8202/walpay-web/'
-
-
+    
     static handleException(code, msg) {
         switch (code) {
             case "1":
@@ -15,7 +14,7 @@ class NetUtil extends Component {
     }
 
 
-    static post(urlPath, data,successCallbak,isShowLoading = true) {
+    static post(urlPath, data, successCallbak, isShowLoading = true) {
         if (isShowLoading) {
             // NativeModules.commModule.showLoadingDialog('')
         }
@@ -60,7 +59,7 @@ class NetUtil extends Component {
      * data : 参数(Json对象)
      * callback : 回调函数
      * */
-    static put(urlPath, data,successCallbak,isShowLoading = true) {
+    static put(urlPath, data, successCallbak, isShowLoading = true) {
 
         NativeModules.commModule.netCommParas((originalata) => {
             let params = JSON.parse(originalata)
@@ -88,17 +87,16 @@ class NetUtil extends Component {
                     if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                 })
                 .catch((err) => {
-                if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
-                console.log(err)
-                NativeModules.commModule.toast('网络不给力')
-            })
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                    console.log(err)
+                    NativeModules.commModule.toast('网络不给力')
+                })
                 .done();
         })
 
     }
 
     static transform(hostUrl, methodUrl, obj) {
-
         let responseUrl = hostUrl + methodUrl + '?';
         for (var key in obj) {//用javascript的for/in循环遍历对象的属性
             responseUrl += key + "=" + obj[key] + "&";
