@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {NativeModules, View, StatusBar, DeviceEventEmitter} from 'react-native'
+import {NativeModules, View, StatusBar, DeviceEventEmitter,Animated,Easing} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import JsonUtil from './utils/JsonUtil'
@@ -91,6 +91,11 @@ class App extends Component {
                 },
                 transitionConfig: () => ({
                     screenInterpolator: CardStackStyleInterpolator.forHorizontal,//设置跳转动画左右滑动
+                    transitionSpec: {
+                        duration: 250,
+                        easing: Easing.linear,
+                        timing: Animated.timing,
+                    },
                 })
 
             }
