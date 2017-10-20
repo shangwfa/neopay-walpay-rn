@@ -21,11 +21,6 @@ import BasePage from './BasePage'
         }
     }
 
-    componentWillMount() {
-        console.log(this.props)
-
-    }
-
     render() {
         let inputData = {'key': '昵称', "placeholder": "请输入昵称(不能超过8个字)", limitlength: 8, limitTip: '', keyboard: 'numeric'}
         return (
@@ -55,7 +50,7 @@ import BasePage from './BasePage'
         if (nickName.length <= 0) {
             NativeModules.commModule.toast("昵称不能为空")
         }else {
-            NetUtil.postJson('employee/update_employee_info', {nickName: nickName}, (data) => {
+            NetUtil.post('employee/update_employee_info', {nickName: nickName}, (data) => {
                 this.props.navigation.goBack()
             })
         }
