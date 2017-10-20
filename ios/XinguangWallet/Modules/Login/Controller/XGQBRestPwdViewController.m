@@ -11,6 +11,8 @@
 #import "XGQBPureColorBtn.h"
 #import "XGQBCountTimeBtn.h"
 
+#import "XGQBRNViewController.h"
+
 @interface XGQBRestPwdViewController ()
 @property(nonatomic,strong)XGQBLoginInputView *userNameIV;
 @property (nonatomic,strong)XGQBLoginInputView *pwdIV;
@@ -35,6 +37,12 @@
     
     self.navigationController.navigationBarHidden = NO;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    //判断是否是由RN跳转进入的页面
+    if ([self.navigationController.viewControllers[ [self.navigationController.viewControllers indexOfObject:self] -1] isKindOfClass:[XGQBRNViewController class]]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }else{
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 
 }
 

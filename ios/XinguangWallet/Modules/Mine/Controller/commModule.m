@@ -55,29 +55,28 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
 }
 
 //跳转至原生特定页面
-RCT_EXPORT_METHOD(jumpToNativePage:(NSString*)type:(NSDictionary*)params){
+RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
     
     dispatch_async(dispatch_get_main_queue(), ^{
-//        if ([params[@"page"] isEqualToString:@"resetLoginPwd"]) {
-//            [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
-//        }else if ([params[@"page"] isEqualToString:@"resetPayPwd"]) {
+        if ([params[@"page"] isEqualToString:@"resetLoginPwd"]) {
+            [kNotificationCenter postNotificationName:kNotificationRNJumpBackToNativeResetLoginPwd object:@NO];
+        }
+//        else if ([params[@"page"] isEqualToString:@"resetPayPwd"]) {
 //            [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
 //
 //        }
-        
-        NSLog(@"%@",params[@"page"]);
+//
+//        NSLog(@"%@ %@",NSStringFromClass([type class]),NSStringFromClass([params class]));
     });
 }
 
 
 //打电话
 RCT_EXPORT_METHOD(rnCallNative:(NSString*)phoneNo){
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
+
         NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phoneNo]];
         [[UIApplication sharedApplication]openURL: phoneURL];
-    });
+
 }
 
 

@@ -17,6 +17,8 @@
 
 //RN跳回原生界面通知
 #define kNotificationRNJumpBackToNative @"RNJumpBackToNative"
+//RN跳转修改登录密码页面
+#define kNotificationRNJumpBackToNativeResetLoginPwd @"RNJumpBackToNativeResetLoginPwd"
 
 //进行实名认证通知
 #define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"
