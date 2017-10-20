@@ -4,7 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
-import com.xgjk.common.lib.listener.RefreshLoadingListener;
+import com.xgjk.common.lib.view.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 
@@ -50,10 +50,15 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         setAdapterData(data);
         mNewsAdapter.updateData(data);
         mViewBinding.mineNewsXrv.setLoadingMoreEnabled(false);
-        mViewBinding.mineNewsXrv.setLoadingListener(new RefreshLoadingListener() {
+        mViewBinding.mineNewsXrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                //TODO 请求消息数据
                 mViewBinding.mineNewsXrv.refreshComplete();
+            }
+
+            @Override
+            public void onLoadMore() {
             }
         });
     }

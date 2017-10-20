@@ -16,6 +16,8 @@ import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 
 public class BusniessUtils {
 
+    private static UserInfoResponseBean userInfoBean;
+
     public static String getAccessToken() {
         final UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(true, IWalpayConstants.USER_INFO, UserInfoResponseBean.class);
         return null == userInfoBean ? "" : userInfoBean.getAccessToken();
@@ -26,13 +28,12 @@ public class BusniessUtils {
         return null == userInfoBean ? "" : userInfoBean.getPhone();
     }
 
-    public static void handleCertification(Context context, ICertificationCallBack iCertificationCallBack) {
-        UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(false, IWalpayConstants.USER_INFO_AUTH, UserInfoResponseBean.class);
+    public static void handleCertification(Context context, UserInfoResponseBean userInfoBean, ICertificationCallBack iCertificationCallBack) {
         if (null == userInfoBean) {
             return;
         }
-        Integer authStatus = userInfoBean.getAuthStatus();
-        if (null != authStatus && 1 != authStatus) { //未认证
+
+        if (null == userInfoBean.getAuthStatus() || 1 != userInfoBean.getAuthStatus()) { //未认证
             DialogManager.getSingleton().showCertificationDialog(context, () -> {
                 //TODO 认证界面 销毁当前页  去掉默认值
                 ToastUtils.show("实名认证");

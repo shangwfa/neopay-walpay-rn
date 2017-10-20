@@ -15,6 +15,8 @@ public class MineLineSlimInjector implements SlimInjector<CommonLineItemBean> {
 
     @Override
     public void onInject(CommonLineItemBean data, IViewInjector injector) {
-
+        if (null == data) {
+            return;
+        }
     }
 }

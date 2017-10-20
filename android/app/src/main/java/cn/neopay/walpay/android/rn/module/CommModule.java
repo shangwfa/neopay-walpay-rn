@@ -166,7 +166,6 @@ public class CommModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void closeRNPage() {
         HandlerUtils.runOnUiThread(() -> {
-            ToastUtils.show("关闭RN页面容器");
             EventBus.getDefault().post(new CloseRNPageEvent());
         });
     }
@@ -185,10 +184,6 @@ public class CommModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void netCommParas(Callback callback) {
         final NetCommonParamsBean paramsBean = new NetCommonParamsBean();
-        //从Sp中取出的accessToken，被多加了双引号（未找到原因）导致服务器，认为token不存在
-        String accessToken = paramsBean.getAccessToken();
-        String str = accessToken.substring(1, accessToken.length() - 1);
-        paramsBean.setAccessToken(str);
         callback.invoke(new Gson().toJson(paramsBean));
     }
 

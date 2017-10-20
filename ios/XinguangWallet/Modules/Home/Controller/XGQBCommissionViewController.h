@@ -1,5 +1,5 @@
 //
-//  XGQBSettingsViewController.h
+//  XGQBCommissionViewController.h
 //  XinguangWallet
 //
 //  Created by BossKing on 17/10/2017.
@@ -8,6 +8,6 @@
 
 #import "XGQBRootViewController.h"
 
-@interface XGQBSettingsViewController : XGQBRootViewController
+@interface XGQBCommissionViewController : XGQBRootViewController
 
 @end

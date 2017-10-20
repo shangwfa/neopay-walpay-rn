@@ -7,45 +7,22 @@ class NetUtil extends Component {
     static baseUrl = 'http://139.224.11.160:8202/walpay-web/'
 
 
-    /**
-     * post请求
-     * url : 请求地址
-     * data : 参数(Json对象)
-     * callback : 回调函数
-     * */
-    static post(urlPath, callback) {
-        NativeModules.commModule.netCommParas((originalata) => {
-            let params = JSON.parse(originalata)
-            console.log(NetUtil.transform(NetUtil.baseUrl, urlPath, params))
-            var fetchOption = {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            };
-
-            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
-                .then((response) => response.text())
-                .then((responseText) => {
-                    console.log(responseText)
-                    callback(JSON.parse(responseText).data)
-                })
-                .done()
-        })
-
+    static handleException(code, msg) {
+        switch (code) {
+            case "1":
+                break
+        }
     }
 
 
-    static post(urlPath, successCallbak, failedCallback, errorCallback, isShowLoading) {
+    static post(urlPath, data,successCallbak,isShowLoading = true) {
         if (isShowLoading) {
-            NativeModules.commModule.showLoadingDialog('')
+            // NativeModules.commModule.showLoadingDialog('')
         }
 
         NativeModules.commModule.netCommParas((originalata) => {
             let params = JSON.parse(originalata)
-            console.log(NetUtil.transform(NetUtil.baseUrl, urlPath, params))
+            Object.assign(data, params);
             var fetchOption = {
                 method: 'POST',
                 headers: {
@@ -63,78 +40,19 @@ class NetUtil extends Component {
                     if (netCode.netOk == response.retCode) {
                         successCallbak(response.data)
                     } else {
-                        //TODO 异常处理
-                        failedCallback(response.netCode, response.retMsg)
+                        this.handleException(response.netCode, response.retMsg)
                     }
-                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                 })
                 .catch((err) => {
-                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                     console.log(err)
-                    errorCallback(err)
+                    // NativeModules.commModule.toast('网络不给力')
                 })
                 .done()
         })
 
     }
-
-    /**
-     * post请求
-     * url : 请求地址
-     * data : 参数(Json对象)
-     * callback : 回调函数
-     * */
-    static postJson(urlPath, data, callback) {
-        NativeModules.commModule.netCommParas((originalata) => {
-            console.log(originalata)
-            let params = JSON.parse(originalata)
-            Object.assign(data, params);
-            console.log(data)
-            console.log(NetUtil.transform(NetUtil.baseUrl, urlPath, data))
-            var fetchOption = {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            };
-
-            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
-                .then((response) => response.text())
-                .then((responseText) => {
-                    console.log(responseText)
-                    callback(JSON.parse(responseText).data)
-                })
-                .done()
-        })
-
-    }
-
-    /**
-     * get请求
-     * url : 请求地址
-     * callback : 回调函数
-     */
-    static get(urlPath, callback) {
-        NativeModules.commModule.netCommParas((originalata) => {
-            let params = JSON.parse(originalata)
-            var fetchOptions = {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            };
-            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, params), fetchOptions)
-                .then((response) => response.text())
-                .then((responseText) => {
-                    callback(JSON.parse(responseText));
-                }).done()
-        })
-
-    }
-
 
     /**
      * put请求
@@ -142,7 +60,7 @@ class NetUtil extends Component {
      * data : 参数(Json对象)
      * callback : 回调函数
      * */
-    static putJson(urlPath, data, callback) {
+    static put(urlPath, data,successCallbak,isShowLoading = true) {
 
         NativeModules.commModule.netCommParas((originalata) => {
             let params = JSON.parse(originalata)
@@ -159,15 +77,21 @@ class NetUtil extends Component {
                 body: JSON.stringify(data)//服务器不支持，body传参数
             };
             fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
-                .then((response) => {
-                    console.log(response)
-                    console.log(response)
-                    return response.text()
-                })
+                .then((response) => response.text())
                 .then((responseText) => {
-                    console.log(responseText)
-                    callback(JSON.parse(responseText))
+                    let response = JSON.parse(responseText);
+                    if (netCode.netOk == response.retCode) {
+                        successCallbak(response.data)
+                    } else {
+                        this.handleException(response.netCode, response.retMsg)
+                    }
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                 })
+                .catch((err) => {
+                if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                console.log(err)
+                NativeModules.commModule.toast('网络不给力')
+            })
                 .done();
         })
 

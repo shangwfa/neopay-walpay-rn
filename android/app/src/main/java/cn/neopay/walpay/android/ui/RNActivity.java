@@ -50,18 +50,28 @@ public class RNActivity extends BaseRNActivity {
     public Bundle getLaunchOptions() {
         Bundle bundle = new Bundle();
         switch (activityParams.getRnPage()) {
-            case "splash":
+            case PageType.PERSONAL_INFO_PAGE:
+                TestParams personalParams = new TestParams();
+                personalParams.setPage(PageType.PERSONAL_INFO_PAGE);
+                bundle.putString("params", new Gson().toJson(personalParams));
+                break;
+
+            case PageType.SETTING_PAGE:
                 TestParams testParams = new TestParams();
-                testParams.setPage("splash");
-                testParams.setValue("splash");
+                testParams.setPage(PageType.SETTING_PAGE);
                 bundle.putString("params", new Gson().toJson(testParams));
                 break;
 
-            case "home":
+            case PageType.MY_ORDER_PAGE:
                 TestParams homeParams = new TestParams();
-                homeParams.setPage("home");
-                homeParams.setValue("home");
+                homeParams.setPage(PageType.MY_ORDER_PAGE);
                 bundle.putString("params", new Gson().toJson(homeParams));
+                break;
+
+            case PageType.ACTIVITY_LIST_PAGE:
+                TestParams activityParams = new TestParams();
+                activityParams.setPage(PageType.ACTIVITY_LIST_PAGE);
+                bundle.putString("params", new Gson().toJson(activityParams));
                 break;
         }
         return bundle;
@@ -102,5 +112,13 @@ public class RNActivity extends BaseRNActivity {
             });
         });
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    public interface PageType{
+        String SETTING_PAGE="setting";
+        String MY_ORDER_PAGE="myOrder";
+        String PERSONAL_INFO_PAGE="personalInfo";
+        String ACTIVITY_LIST_PAGE="activityList";
     }
 }

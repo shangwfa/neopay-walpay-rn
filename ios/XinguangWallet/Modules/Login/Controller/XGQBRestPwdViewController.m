@@ -32,11 +32,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
     
-//    UIScrollView *sv =(UIScrollView*)self.view;
-//    
-//    sv.contentOffset = CGPointZero;
+    self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 
 }
 

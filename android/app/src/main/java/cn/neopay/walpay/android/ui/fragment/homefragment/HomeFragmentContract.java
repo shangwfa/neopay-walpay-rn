@@ -4,6 +4,8 @@ package cn.neopay.walpay.android.ui.fragment.homefragment;
 import com.xgjk.common.lib.base.BasePresenter;
 import com.xgjk.common.lib.base.BaseView;
 
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
+
 /**
  * @author carlos.guo
  * @date 2017/9/25
@@ -12,10 +14,11 @@ import com.xgjk.common.lib.base.BaseView;
 
 public interface HomeFragmentContract {
     interface IView extends BaseView {
-
+        void isFirstCertificationShow(UserInfoResponseBean userInfoBean);
     }
 
-    class Presenter extends BasePresenter<IView> {
+    abstract class Presenter extends BasePresenter<IView> {
+        public abstract void getUserInfo();
 
         @Override
         public void onAttached() {

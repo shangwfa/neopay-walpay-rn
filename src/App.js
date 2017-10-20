@@ -6,7 +6,7 @@ import JsonUtil from './utils/JsonUtil'
 import Splash from './page/SplashPage'
 import Home from "./page/HomePage"
 import ChangeName from './page/ChangeNamePage'
-import Activity from './page/ActivityPage'
+import ActivityList from './page/ActivityListPage'
 import ModalDemo from './page/ModalDemoPage'
 import ScreenUtils from './utils/ScreenUtils'
 import DemoModal from './modal/DemoModal'
@@ -16,6 +16,7 @@ import BindBankCard from './page/BindBankCardPage'
 import Feedback from './page/FeedbackPage'
 import Setting from './page/SettingPage'
 import MyOrder from './page/MyOrderPage'
+import PanResponderDemo from './page/PanResponderDemoPage'
 import {events} from './constants/index'
 
 class App extends Component {
@@ -65,18 +66,18 @@ class App extends Component {
                 splash: {screen: Splash},
                 home: {screen: Home},
                 changeName: {screen: ChangeName},
-                activity: {screen: Activity},
+                activityList: {screen: ActivityList},
                 modal: {screen: ModalDemo},
                 qrCode:{screen:QRCode},
                 personalInfo:{screen:PersonalInfo},
                 bindBankCard:{screen:BindBankCard},
                 feedback:{screen:Feedback},
                 setting:{screen:Setting},
-                myOrder:{screen:MyOrder}
+                myOrder:{screen:MyOrder},
+                panResponderDemo:{screen:PanResponderDemo}
             },
             {
-                // initialRouteName: params.page,
-                initialRouteName: 'myOrder',
+                initialRouteName: params.page,
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {

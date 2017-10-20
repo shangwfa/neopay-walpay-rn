@@ -12,7 +12,10 @@ import com.xgjk.common.lib.utils.FormatUtils;
 import com.xgjk.common.lib.utils.StringUtils;
 
 import cn.neopay.walpay.android.R;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
+import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
  * @author carlos.guo
@@ -31,7 +34,13 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
                 injector.background(R.id.mine_user_avatar_iv, R.mipmap.img_default_photo);
             }
             GlideManager.loadNetCircleImage((ImageView) view, data.getAvatarUrl());
+            view.setOnClickListener(v -> {
+                RNActivityParams activityParams = new RNActivityParams();
+                activityParams.setRnPage(RNActivity.PageType.PERSONAL_INFO_PAGE);
+                MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+            });
         });
+
         injector.with(R.id.mine_user_name_tv, view -> setAuthStateShow(data, injector, (TextView) view))
                 .with(R.id.mine_go_auth_iv, view -> {
                     if (null == data.getAuthStatus()) {

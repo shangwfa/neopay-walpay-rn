@@ -19,28 +19,14 @@ class PersonalInfoPage extends BasePage {
     constructor() {
         super()
         this.state = {
-            dataList:[
-                {title: '头像', value: '', realNameValue: '', imgUrl: 'http://pic2.ooopic.com/12/22/94/37bOOOPICc7_1024.jpg', isLine: true, isArrow: true, onPress: () => {
-                    NativeModules.commModule.showCommDialog('updatePersonalAvatar', () => {
-                    })
-                }},
-                {title: '昵称', value: '胡萝卜', realNameValue: '', imgUrl: '', isLine: true, isArrow: true, onPress: () => {
-                    this.props.navigation.navigate(RouterPaths.CHANGE_NAME_PAGE)
-                }},
-                {title: '实名认证', value: '', realNameValue: '前往实名', imgUrl: '', isLine: true, isArrow: true, onPress: () => {
-
-                }},
-                {title: '新光钱包账号', value: FormatUtils.tuoMinPhone('15958199303'), realNameValue: '', imgUrl: '', isLine: false, isArrow: false, },
-            ]
+            imgUrl:'http://pic2.ooopic.com/12/22/94/37bOOOPICc7_1024.jpg',
+            nickName:'胡萝卜',
+            phone:'15958199303'
         }
     }
     componentDidMount() {
         DeviceEventEmitter.addListener('updateHeadImg', (imgUrl) => {
-            let dataList=this.state.dataList
-            dataList[0].imgUrl=imgUrl
-            this.setState({
-                dataList:dataList
-            })
+
         })
     }
     render() {
@@ -48,11 +34,15 @@ class PersonalInfoPage extends BasePage {
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='个人信息'/>
                 <View style={{height:10}}/>
-                {
-                    this.state.dataList.map(data=>{
-                        return <CommonKeyValueItem title={data.title}  value={data.value} realNameValue={data.realNameValue} imgUrl={data.imgUrl} isLine={data.isLine} isArrow={data.isArrow} onPress={data.onPress}/>
+                <CommonKeyValueItem  title='头像'   imgUrl={this.state.imgUrl} isLine={true} isArrow={true} onPress={()=>{
+                    NativeModules.commModule.showCommDialog('updatePersonalAvatar', () => {
                     })
-                }
+                }}/>
+                <CommonKeyValueItem  title='昵称'   value={this.state.nickName}  isLine={true} isArrow={true} onPress={()=>{
+                    this.props.navigation.navigate(RouterPaths.CHANGE_NAME_PAGE)
+                }}/>
+                <CommonKeyValueItem  title='实名认证'   realNameValue='前往实名'  isLine={true} isArrow={true} onPress={()=>{}}/>
+                <CommonKeyValueItem  title='新光钱包账号'   value={FormatUtils.tuoMinPhone(this.state.phone)}   />
             </View>
         )
     }

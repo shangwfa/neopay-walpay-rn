@@ -85,7 +85,7 @@ public class SelectBankDialog extends BaseDialog {
     }
 
     private void handleBankCard(List<BankCardResponseBean> beanList) {
-        if (beanList == null) {
+        if (null == beanList) {
             return;
         }
         mData.add(mBalancebean);
@@ -104,7 +104,7 @@ public class SelectBankDialog extends BaseDialog {
     }
 
     private void handleBalance(UserBalanceResponseBean balanceBean) {
-        if (balanceBean == null) {
+        if (null == balanceBean) {
             return;
         }
         BigDecimal balance = balanceBean.getBalance();
