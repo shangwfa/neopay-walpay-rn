@@ -10,11 +10,10 @@
 #import "XGQBRootNavigationController.h"
 #import "XGQBMainTabBarViewController.h"
 
-#import "XGQBRestPwdViewController.h"
-#import "XGQBRegisterViewController.h"
-
 #import "XGQBPureColorBtn.h"
 #import "XGQBLoginInputView.h"
+
+#import "XGQBRegResetPwdTVController.h"
 
 @interface XGQBLoginViewController () <UITextFieldDelegate>
 @property (nonatomic,strong) XGQBLoginInputView *userNameIV;
@@ -85,7 +84,7 @@
     }];
     
     //userNameIV
-    XGQBLoginInputView *userNameIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_shouji"] placeHolder:@"请输入手机号" rightBtn:nil];
+    XGQBLoginInputView *userNameIV = [XGQBLoginInputView viewWithLeftImage:@"dl_shouji" placeHolder:@"请输入手机号" rightBtn:nil];
     userNameIV.textField.type = XGQBTextFieldTypePhoneNo;
     self.userNameIV = userNameIV;
     [self.view addSubview:userNameIV];
@@ -105,7 +104,9 @@
 
     [readPwdBtn addTarget:self action:@selector(readPwdBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     readPwdBtn.selected = NO;
-    XGQBLoginInputView *pwdIV = [XGQBLoginInputView inputViewWithLeftImage:[UIImage imageNamed:@"dl_mima"] placeHolder:@"请输入登录密码" rightBtn:readPwdBtn];
+    
+    
+    XGQBLoginInputView *pwdIV = [XGQBLoginInputView viewWithLeftImage:@"dl_mima" placeHolder:@"请输入登录密码" rightBtn:readPwdBtn];
     pwdIV.textField.type = XGQBTextFieldTypePassword;
     pwdIV.textField.returnKeyType = UIReturnKeyDefault;
     self.pwdIV = pwdIV;
@@ -194,20 +195,21 @@
 -(void)registerButtonClicked
 {
     
-    XGQBRegisterViewController *regVC = [XGQBRegisterViewController new];
+    XGQBRegResetPwdTVController *regVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeRegister];
     regVC.userName = self.userNameIV.textField.text;
-    
+
     [self.navigationController pushViewController:regVC animated:YES];
 }
 
 ///忘记密码按钮点击
 -(void)resetPwdButtonClicked
 {
-    XGQBRestPwdViewController *resetVC = [XGQBRestPwdViewController new];
+    XGQBRegResetPwdTVController *resetVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetLoginPwd];
     resetVC.userName = self.userNameIV.textField.text;
     
     [self.navigationController pushViewController:resetVC animated:YES];
 }
+
 -(void)loginBtnClicked
 {
     [self.view endEditing:YES];

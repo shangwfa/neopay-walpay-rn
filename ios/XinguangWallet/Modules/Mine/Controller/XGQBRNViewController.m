@@ -11,7 +11,6 @@
 #import "RCTRootView.h"
 #import "RCTDevLoadingView.h"
 
-#import "XGQBRestPwdViewController.h"
 
 @interface XGQBRNViewController ()
 
@@ -82,8 +81,8 @@
 
 -(void)RNJumpBackToNativeResetLoginPwd
 {
-    XGQBRestPwdViewController *resetPwdVC = [[XGQBRestPwdViewController alloc]init];
-    [self.navigationController pushViewController:resetPwdVC animated:YES];
+//    XGQBRestPwdViewController *resetPwdVC = [[XGQBRestPwdViewController alloc]init];
+//    [self.navigationController pushViewController:resetPwdVC animated:YES];
 }
 
 /*

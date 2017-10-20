@@ -2,7 +2,7 @@
 //  XGQBLoginInputView.h
 //  XinguangWallet
 //
-//  Created by Neopay-iOS on 30/09/2017.
+//  Created by BossKing on 20/10/2017.
 //  Copyright © 2017 Hangzhou Neopay Co.,Ltd. All rights reserved.
 //
 
@@ -14,6 +14,6 @@
 @property (nonatomic,strong) XGQBTextField *textField;
 @property (nonatomic,strong) UIButton *rightBtn;
 
-+(instancetype)inputViewWithLeftImage:(UIImage*)leftImage placeHolder:(NSString*)placeHolder rightBtn:(UIButton*)rightBtn;
++(instancetype)viewWithLeftImage:(NSString*)leftImage placeHolder:(NSString*)placeHolder rightBtn:(UIButton*)rightBtn;
 
 @end
