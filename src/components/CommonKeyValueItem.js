@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {colors} from '../constants/index'
 import {Divider} from '../components/index'
+import MoreClickComponet from '../components/MoreClickComponet'
 import right_arrow from '../res/img/right_arrow.png'
 
 
@@ -82,7 +83,7 @@ const CommonKeyValueItem = props => {
         if (imgUrl) return <Image style={styles.avatar} source={{uri:imgUrl}}/>
     }
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container,style&&style]} {...attributes}>
+        <MoreClickComponet activeOpacity={0.8} style={[styles.container,style&&style]} {...attributes}>
             <View style={styles.content_container}>
                 <Text style={styles.key}>
                     {title}
@@ -95,7 +96,7 @@ const CommonKeyValueItem = props => {
             </View>
             {renderLine()}
 
-        </TouchableOpacity>
+        </MoreClickComponet>
     );
 };
 
