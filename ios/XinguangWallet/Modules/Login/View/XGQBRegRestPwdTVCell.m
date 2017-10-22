@@ -30,24 +30,29 @@
     [readPwdBtn setImage:[UIImage imageNamed:@"dl_yanjing"] forState:UIControlStateNormal];
     [readPwdBtn setImage:[UIImage imageNamed:@"dl_zhengyan"] forState:UIControlStateSelected];
     
-    [readPwdBtn addTarget:self action:@selector(readPwdBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [readPwdBtn addTarget:cell action:@selector(readPwdBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     readPwdBtn.selected = NO;
     
     switch (type) {
         case XGQBRegResetPwdTVCellTypeIDNo:
             [cell addsubviewsWithLeftImageNamed:@"dl_yanzhengma" placeHolder:@"请输入实名认证的身份证号" rightBtn:nil];
+            cell.textField.type = XGQBTextFieldTypeIDNo;
             break;
         case XGQBRegResetPwdTVCellTypePayPwd:
             [cell addsubviewsWithLeftImageNamed:@"dl_zhifumima1" placeHolder:@"设置支付密码，6位数字" rightBtn:readPwdBtn];
+            cell.textField.type = XGQBTextFieldTypePayPassword;
             break;
         case XGQBRegResetPwdTVCellTypePhoneNo:
             [cell addsubviewsWithLeftImageNamed:@"dl_shouji1" placeHolder:@"请输入手机号" rightBtn:nil];
+            cell.textField.type = XGQBTextFieldTypePhoneNo;
             break;
         case XGQBRegResetPwdTVCellTypeRegCode:
             [cell addsubviewsWithLeftImageNamed:@"dl_yanzhengma" placeHolder:@"请输入验证码" rightBtn:countTimeBtn];
+            cell.textField.type = XGQBTextFieldTypeRegisterCode;
             break;
         case XGQBRegResetPwdTVCellTypeLoginPwd:
             [cell addsubviewsWithLeftImageNamed:@"dl_mima1" placeHolder:@"设置登录密码,6-18位字母加数字" rightBtn:readPwdBtn];
+            cell.textField.type = XGQBTextFieldTypeLoginPassword;
             break;
         default:
             break;
@@ -103,7 +108,7 @@
     }
     if(rightBtn){
         [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(weakself.contentView.width-leftImageView.size.width-rightBtn.size.width-15-30, 32));
+            make.size.mas_equalTo(CGSizeMake(weakself.contentView.width-leftImageView.size.width-rightBtn.size.width-15-45, 32));
             make.bottom.equalTo(weakself.contentView);
             make.left.equalTo(leftImageView.mas_right).with.offset(16);
         }];

@@ -11,6 +11,8 @@
 #import "RCTRootView.h"
 #import "RCTDevLoadingView.h"
 
+#import "XGQBRegResetPwdTVController.h"
+
 
 @interface XGQBRNViewController ()
 
@@ -23,6 +25,7 @@
     
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetLoginPwd) name:kNotificationRNJumpBackToNativeResetLoginPwd object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetPayPwd) name:knotificationRNJumpBackToNativeResetPayPwd object:nil];
 
     
     //RN打包ios命令
@@ -30,8 +33,8 @@
     
     //预先加载RN页面
 //        NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
-    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
+    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
+//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
 
     
     
@@ -81,8 +84,24 @@
 
 -(void)RNJumpBackToNativeResetLoginPwd
 {
-//    XGQBRestPwdViewController *resetPwdVC = [[XGQBRestPwdViewController alloc]init];
-//    [self.navigationController pushViewController:resetPwdVC animated:YES];
+    XGQBRegResetPwdTVController *resetLoginPwdVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetLoginPwd];
+    [self.navigationController pushViewController:resetLoginPwdVC animated:YES];
+}
+
+-(void)RNJumpBackToNativeResetPayPwd
+{
+    if (arc4random()%2) {
+        XGQBRegResetPwdTVController *resetPayPwdVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetPayPwdNoID];
+        [self.navigationController pushViewController:resetPayPwdVC animated:YES];
+
+    }else
+    {
+        XGQBRegResetPwdTVController *resetPayPwdVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetPayPwdWithID];
+        [self.navigationController pushViewController:resetPayPwdVC animated:YES];
+
+    }
+    
+
 }
 
 /*

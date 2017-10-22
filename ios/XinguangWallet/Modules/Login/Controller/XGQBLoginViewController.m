@@ -107,7 +107,7 @@
     
     
     XGQBLoginInputView *pwdIV = [XGQBLoginInputView viewWithLeftImage:@"dl_mima" placeHolder:@"请输入登录密码" rightBtn:readPwdBtn];
-    pwdIV.textField.type = XGQBTextFieldTypePassword;
+    pwdIV.textField.type = XGQBTextFieldTypeLoginPassword;
     pwdIV.textField.returnKeyType = UIReturnKeyDefault;
     self.pwdIV = pwdIV;
     pwdIV.textField.secureTextEntry = YES;

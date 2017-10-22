@@ -40,10 +40,13 @@
             break;
         case XGQBRegResetPwdTVConTypeResetLoginPwd:
             self.title = @"重置登录密码";
+            break;
         case XGQBRegResetPwdTVConTypeResetPayPwdNoID:
             self.title = @"重置支付密码";
+            break;
         case XGQBRegResetPwdTVConTypeResetPayPwdWithID:
             self.title = @"重置支付密码";
+            break;
         default:
             break;
     }

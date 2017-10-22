@@ -49,7 +49,7 @@
             self.keyboardType = UIKeyboardTypeNumberPad;
             break;
             
-        case XGQBTextFieldTypePassword:
+        case XGQBTextFieldTypeLoginPassword:
             self.secureTextEntry = YES;
             break;
             
@@ -126,13 +126,13 @@
 //        NSLog(@"textfield.text:%@ range:%@ replacementStr:%@",textField.text,NSStringFromRange(range),string);
     }
     //处理密码长度
-    else if(textField.type == XGQBTextFieldTypePassword){
+    else if(textField.type == XGQBTextFieldTypeLoginPassword){
         if (textField.text.length>17 && ![string isEqualToString:@""]) {
             [SVProgressHUD showInfoWithStatus:@"登录密码为6至18位字母加数字"];
         }
     }
     //处理支付密码
-    else if(textField.type ==XGQBTextFieldTyepPayPassword){
+    else if(textField.type ==XGQBTextFieldTypePayPassword){
         if(textField.text.length>5 && ! [string isEqualToString:@""]){
             [SVProgressHUD showInfoWithStatus:@"支付密码为六位数字"];
         }

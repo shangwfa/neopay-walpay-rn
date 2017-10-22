@@ -57,6 +57,7 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
 //跳转至原生特定页面
 RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
 
+    //序列化
     NSData *jsonData = [params dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
     [dict writeToFile:(@"/Users/bossking/Desktop/test.plist") atomically:YES];
@@ -66,7 +67,7 @@ RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
             [kNotificationCenter postNotificationName:kNotificationRNJumpBackToNativeResetLoginPwd object:@NO];
         }
         else if ([dict[@"page"]  isEqualToString:@"resetPayPwd"]) {
-            [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
+            [kNotificationCenter postNotificationName:knotificationRNJumpBackToNativeResetPayPwd object:@NO];
         }
     });
 
