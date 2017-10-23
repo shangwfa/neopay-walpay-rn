@@ -81,16 +81,9 @@ class App extends Component {
                 setting: {screen: Setting},
                 myOrder: {screen: MyOrder},
                 panResponderDemo: {screen: PanResponderDemo},
-                redList: {screen: RedList}
-                qrCode:{screen:QRCode},
-                personalInfo:{screen:PersonalInfo},
-                bindBankCard:{screen:BindBankCard},
-                feedback:{screen:Feedback},
-                setting:{screen:Setting},
-                myOrder:{screen:MyOrder},
-                panResponderDemo:{screen:PanResponderDemo},
-                bankCardOrderList:{screen:BackCardOrderList},
-                myLotteryRecord:{screen:MyLotteryRecord}
+                redList: {screen: RedList},
+                bankCardOrderList: {screen: BackCardOrderList},
+                myLotteryRecord: {screen: MyLotteryRecord}
             },
             {
                 initialRouteName: params.page,
