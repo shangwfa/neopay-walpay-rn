@@ -15,6 +15,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.gyf.barlibrary.ImmersionBar;
 import com.xgjk.common.lib.R;
 import com.xgjk.common.lib.databinding.ActivityBaseBinding;
+import com.xgjk.common.lib.databinding.CommonNetworkErrorLayoutBinding;
+import com.xgjk.common.lib.databinding.CommonNoDataLayoutBinding;
 import com.xgjk.common.lib.listener.OnClickEvent;
 import com.xgjk.common.lib.manager.ActivityManager;
 import com.xgjk.common.lib.manager.listenerHook.HookListenerContent;
@@ -36,7 +38,8 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
     public Context mContext;
     public ActivityBaseBinding mPageBinding;
     public B mViewBinding;
-    public ViewDataBinding mExcepitonView;
+    public CommonNetworkErrorLayoutBinding mExcepitonView;
+    private CommonNoDataLayoutBinding mNoDataView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +70,12 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
     private void initBaseView() {
         final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mViewBinding = DataBindingUtil.inflate(inflater, getLayoutId(), null, false);
+        handleNetworkError(inflater);
+        handleNoData(inflater);
+        mPageBinding.baseContainer.addView(mViewBinding.getRoot());
+    }
 
+    private void handleNetworkError(LayoutInflater inflater) {
         if (isShowExceptionView()) {
             mExcepitonView = DataBindingUtil.inflate(inflater, getExceptionLayoutId(), null, false);
             mPageBinding.baseContainer.addView(mExcepitonView.getRoot());
@@ -76,10 +84,19 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
                 @Override
                 public void singleClick(View v) {
                     refreshCurPage();
+                    initView();
                 }
             });
         }
-        mPageBinding.baseContainer.addView(mViewBinding.getRoot());
+    }
+
+    private void handleNoData(LayoutInflater inflater) {
+        if (isShowNoDataView()) {
+            mNoDataView = DataBindingUtil.inflate(inflater, getNoDataLayoutId(), null, false);
+            mPageBinding.baseContainer.addView(mNoDataView.getRoot());
+            mNoDataView.getRoot().setVisibility(isShowNoDataView() ? View.VISIBLE : View.GONE);
+        }
+        mViewBinding.getRoot().setVisibility(isShowNoDataView() ? View.GONE : View.VISIBLE);
     }
 
     protected void initPresenter() {
@@ -87,7 +104,13 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
 
     public abstract int getLayoutId();
 
-    public abstract int getExceptionLayoutId();
+    public int getExceptionLayoutId() {
+        return R.layout.common_network_error_layout;
+    }
+
+    public int getNoDataLayoutId() {
+        return R.layout.common_no_data_layout;
+    }
 
     public abstract void initView();
 
@@ -124,12 +147,18 @@ public abstract class DataBindingActivity<B extends ViewDataBinding> extends App
     public static class MessageEvent { /* Additional fields if needed */
     }
 
-    public void showExceptionPage(boolean isShow) {
+    private void showExceptionPage(boolean isShow) {
         mExcepitonView.getRoot().setVisibility(isShow ? View.VISIBLE : View.GONE);
         mViewBinding.getRoot().setVisibility(isShow ? View.GONE : View.VISIBLE);
     }
 
-    public abstract boolean isShowExceptionView();
+    public boolean isShowExceptionView() {
+        return false;
+    }
+
+    public boolean isShowNoDataView() {
+        return false;
+    }
 
     public void refreshCurPage() {
         showExceptionPage(!NetWorkUtils.isConnectedByState(this));

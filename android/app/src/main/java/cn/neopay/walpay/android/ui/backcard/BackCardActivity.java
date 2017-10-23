@@ -18,17 +18,7 @@ public class BackCardActivity extends BaseActivity<BackCardPresenter, ActivityBa
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
 
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 }

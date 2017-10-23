@@ -1,5 +1,7 @@
 package cn.neopay.walpay.android.ui.fragment.sunbeamcoinfragment;
 
+import android.view.View;
+
 import com.xgjk.common.lib.base.BaseFragment;
 
 import cn.neopay.walpay.android.R;
@@ -19,6 +21,6 @@ public class SunbeamCoinFragment extends BaseFragment<SunbeamCoinFragmentPresent
 
     @Override
     public void initView() {
-
+        mPageBinding.commonHeader.setVisibility(View.GONE);
     }
 }

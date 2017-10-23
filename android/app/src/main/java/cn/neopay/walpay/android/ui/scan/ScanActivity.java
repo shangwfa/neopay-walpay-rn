@@ -48,11 +48,6 @@ public class ScanActivity extends BaseActivity<ScanPresenter, ActivityScanLayout
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         mPageBinding.commonHeader.setHeaderLeftImgAndRighImg("扫一扫", R.mipmap.img_right_arrows, v -> {
             DialogManager.getSingleton().showScanBottomDialog(this, () -> MainRouter.getSingleton().jumpToExplainPage("扫一扫"));
@@ -82,11 +77,6 @@ public class ScanActivity extends BaseActivity<ScanPresenter, ActivityScanLayout
                     }
                 });
 
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 
     public void handleDecode(Result rawResult, Bundle bundle) {
