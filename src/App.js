@@ -20,6 +20,7 @@ import PanResponderDemo from './page/PanResponderDemoPage'
 import {events} from './constants/index'
 
 import BackCardOrderList from './page/BankCardOrderListPage'
+import MyLotteryRecord from './page/MyLotteryRecordPage'
 
 class App extends Component {
     constructor(props) {
@@ -77,7 +78,8 @@ class App extends Component {
                 setting:{screen:Setting},
                 myOrder:{screen:MyOrder},
                 panResponderDemo:{screen:PanResponderDemo},
-                bankCardOrderList:{screen:BackCardOrderList}
+                bankCardOrderList:{screen:BackCardOrderList},
+                myLotteryRecord:{screen:MyLotteryRecord}
             },
             {
                 initialRouteName: params.page,
