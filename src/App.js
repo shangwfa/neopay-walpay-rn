@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {NativeModules, View, StatusBar, DeviceEventEmitter,Animated,Easing} from 'react-native'
+import {NativeModules, View, StatusBar, DeviceEventEmitter, Animated, Easing} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import JsonUtil from './utils/JsonUtil'
@@ -22,6 +22,7 @@ import {events} from './constants/index'
 import BackCardOrderList from './page/BankCardOrderListPage'
 import MyLotteryRecord from './page/MyLotteryRecordPage'
 
+import RedList from "./page/RedListPage"
 class App extends Component {
     constructor(props) {
         super(props)
@@ -35,7 +36,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-       this.emitter= DeviceEventEmitter.addListener(events.MODAL_TYPE_EVENT, (type) => {
+        this.emitter = DeviceEventEmitter.addListener(events.MODAL_TYPE_EVENT, (type) => {
             this.setState({
                 modalTypeEvent: type
             })
@@ -43,7 +44,9 @@ class App extends Component {
     }
 
     whichModal = () => {
-        this.timer = setTimeout(() => {  DeviceEventEmitter.emit(this.state.modalTypeEvent, true) }, 300);//这种处理方式很不好，思考有没有比较好的处理方式
+        this.timer = setTimeout(() => {
+            DeviceEventEmitter.emit(this.state.modalTypeEvent, true)
+        }, 300);//这种处理方式很不好，思考有没有比较好的处理方式
         switch (this.state.modalTypeEvent) {
             case events.DEMO_MODAL_EVENT:
                 return (<DemoModal/>)
@@ -71,6 +74,14 @@ class App extends Component {
                 changeName: {screen: ChangeName},
                 activityList: {screen: ActivityList},
                 modal: {screen: ModalDemo},
+                qrCode: {screen: QRCode},
+                personalInfo: {screen: PersonalInfo},
+                bindBankCard: {screen: BindBankCard},
+                feedback: {screen: Feedback},
+                setting: {screen: Setting},
+                myOrder: {screen: MyOrder},
+                panResponderDemo: {screen: PanResponderDemo},
+                redList: {screen: RedList}
                 qrCode:{screen:QRCode},
                 personalInfo:{screen:PersonalInfo},
                 bindBankCard:{screen:BindBankCard},
@@ -127,9 +138,9 @@ class App extends Component {
             <View style={{flex: 1}}>
                 {/*状态栏*/}
                 {/*<StatusBar*/}
-                    {/*barStyle={'dark-content'}*/}
-                    {/*backgroundColor={'white'}*/}
-                    {/*translucent={true}/>*/}
+                {/*barStyle={'dark-content'}*/}
+                {/*backgroundColor={'white'}*/}
+                {/*translucent={true}/>*/}
                 {/*导航器*/}
                 <Navigator screenProps={this.props.params}/>
                 {this.whichModal()}
