@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetLoginPwd) name:kNotificationRNJumpBackToNativeResetLoginPwd object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetPayPwd) name:knotificationRNJumpBackToNativeResetPayPwd object:nil];
