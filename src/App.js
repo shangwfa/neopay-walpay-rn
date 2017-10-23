@@ -19,6 +19,8 @@ import MyOrder from './page/MyOrderPage'
 import PanResponderDemo from './page/PanResponderDemoPage'
 import {events} from './constants/index'
 
+import BackCardOrderList from './page/BankCardOrderListPage'
+
 class App extends Component {
     constructor(props) {
         super(props)
@@ -74,7 +76,8 @@ class App extends Component {
                 feedback:{screen:Feedback},
                 setting:{screen:Setting},
                 myOrder:{screen:MyOrder},
-                panResponderDemo:{screen:PanResponderDemo}
+                panResponderDemo:{screen:PanResponderDemo},
+                bankCardOrderList:{screen:BackCardOrderList}
             },
             {
                 initialRouteName: params.page,
