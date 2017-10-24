@@ -29,11 +29,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter, ActivitySplash
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         hideHeaderView();
         initAdapter();
@@ -54,8 +49,4 @@ public class SplashActivity extends BaseActivity<SplashPresenter, ActivitySplash
         mPageBinding.commonHeader.setVisibility(View.GONE);
     }
 
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
-    }
 }

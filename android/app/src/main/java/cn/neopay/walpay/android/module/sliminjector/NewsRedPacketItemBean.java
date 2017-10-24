@@ -1,5 +1,7 @@
 package cn.neopay.walpay.android.module.sliminjector;
 
+import android.view.View;
+
 /**
  * @author carlos.guo
  * @date 2017/10/18
@@ -15,6 +17,7 @@ public class NewsRedPacketItemBean {
     private String content;
     private String contentTitle;
     private String contentFrom;
+    private View.OnClickListener onClickListener;
 
     public String getAvatar() {
         return avatar;
@@ -70,5 +73,13 @@ public class NewsRedPacketItemBean {
 
     public void setSelect(boolean select) {
         isSelect = select;
+    }
+
+    public View.OnClickListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }

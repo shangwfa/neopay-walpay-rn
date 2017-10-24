@@ -35,11 +35,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ActivityLoginLay
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         hideHeaderView();
         setDoubleBackExit(true);
@@ -101,11 +96,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ActivityLoginLay
             paramsTwo.setMargins(0, DensityUtils.dip2px(this, 18), 0, 0);
             mViewBinding.loginRegister.setLayoutParams(paramsTwo);
         }
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 
     private void hideHeaderView() {

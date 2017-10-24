@@ -16,6 +16,6 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
     public void getUserInfo() {
         ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(), new BaseSubscriber(mActivity, o -> {
             mView.isFirstCertificationShow((UserInfoResponseBean) o);
-        }));
+        },false));
     }
 }

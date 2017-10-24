@@ -20,9 +20,11 @@
 		4255866B1F94A85B002E039B /* XGQBMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866A1F94A85B002E039B /* XGQBMineHeaderView.m */; };
 		4255866E1F94A879002E039B /* XGQBMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866D1F94A879002E039B /* XGQBMineItemCell.m */; };
 		425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425586701F94C84D002E039B /* XGQBMineTableView.m */; };
+		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
 		42990E711F987D7E00B20EBA /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42990E701F987D7E00B20EBA /* assets */; };
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
 		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
+		42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
@@ -33,10 +35,8 @@
 		6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C68AC1F7A3CF400170E47 /* XGQBAPPBootViewController.m */; };
 		6A3843CC1F79E46600BFE9B4 /* XGQBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3843CB1F79E46600BFE9B4 /* XGQBLoginViewController.m */; };
 		6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4352001F7E22E1009971FD /* YYFPSLabel.m */; };
-		6A5F69C11F7B7A3A00B16B31 /* XGQBRestPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5F69C01F7B7A3A00B16B31 /* XGQBRestPwdViewController.m */; };
-		6A5F69C41F7B7AB200B16B31 /* XGQBRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5F69C31F7B7AB200B16B31 /* XGQBRegisterViewController.m */; };
 		6A5F69C71F7B930200B16B31 /* XGQBPureColorBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5F69C61F7B930200B16B31 /* XGQBPureColorBtn.m */; };
-		6A792B991F7F6E53009039AF /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A792B981F7F6E53009039AF /* XGQBLoginInputView.m */; };
+		6A792B991F7F6E53009039AF /* XGQBRegRestPwdTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A792B981F7F6E53009039AF /* XGQBRegRestPwdTVCell.m */; };
 		6A792B9C1F7F98A2009039AF /* XGQBTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A792B9B1F7F98A2009039AF /* XGQBTextField.m */; };
 		6A8758E21F7A2D0300F480EF /* GVUserDefaults+PropertyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8758E11F7A2CF300F480EF /* GVUserDefaults+PropertyList.m */; };
 		6AD95AED1F7CB47900BFF4DA /* NSString+checkContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD95AEC1F7CB47900BFF4DA /* NSString+checkContent.m */; };
@@ -117,11 +117,15 @@
 		4255866F1F94C84D002E039B /* XGQBMineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineTableView.h; sourceTree = "<group>"; };
 		425586701F94C84D002E039B /* XGQBMineTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineTableView.m; sourceTree = "<group>"; };
 		425881101F909EFB005566A6 /* XinguangWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinguangWallet.entitlements; sourceTree = "<group>"; };
+		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
+		428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
 		42990E701F987D7E00B20EBA /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		42990E741F998F7C00B20EBA /* XGQBNoContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNoContentViewController.h; sourceTree = "<group>"; };
 		42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNoContentViewController.m; sourceTree = "<group>"; };
 		42990E771F99942000B20EBA /* XGQBNetworkFailureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNetworkFailureViewController.h; sourceTree = "<group>"; };
 		42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNetworkFailureViewController.m; sourceTree = "<group>"; };
+		42990E7A1F99D06D00B20EBA /* XGQBRegResetPwdTVController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegResetPwdTVController.h; sourceTree = "<group>"; };
+		42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRegResetPwdTVController.m; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
 		42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNViewController.h; sourceTree = "<group>"; };
@@ -141,14 +145,10 @@
 		6A3843CB1F79E46600BFE9B4 /* XGQBLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginViewController.m; sourceTree = "<group>"; };
 		6A4351FF1F7E22E1009971FD /* YYFPSLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YYFPSLabel.h; sourceTree = "<group>"; };
 		6A4352001F7E22E1009971FD /* YYFPSLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YYFPSLabel.m; sourceTree = "<group>"; };
-		6A5F69BF1F7B7A3A00B16B31 /* XGQBRestPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRestPwdViewController.h; sourceTree = "<group>"; };
-		6A5F69C01F7B7A3A00B16B31 /* XGQBRestPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRestPwdViewController.m; sourceTree = "<group>"; };
-		6A5F69C21F7B7AB200B16B31 /* XGQBRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegisterViewController.h; sourceTree = "<group>"; };
-		6A5F69C31F7B7AB200B16B31 /* XGQBRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRegisterViewController.m; sourceTree = "<group>"; };
 		6A5F69C51F7B930200B16B31 /* XGQBPureColorBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBPureColorBtn.h; sourceTree = "<group>"; };
 		6A5F69C61F7B930200B16B31 /* XGQBPureColorBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBPureColorBtn.m; sourceTree = "<group>"; };
-		6A792B971F7F6E53009039AF /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
-		6A792B981F7F6E53009039AF /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
+		6A792B971F7F6E53009039AF /* XGQBRegRestPwdTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegRestPwdTVCell.h; sourceTree = "<group>"; };
+		6A792B981F7F6E53009039AF /* XGQBRegRestPwdTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRegRestPwdTVCell.m; sourceTree = "<group>"; };
 		6A792B9A1F7F98A2009039AF /* XGQBTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBTextField.h; sourceTree = "<group>"; };
 		6A792B9B1F7F98A2009039AF /* XGQBTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBTextField.m; sourceTree = "<group>"; };
 		6A8758E01F7A2CF300F480EF /* GVUserDefaults+PropertyList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GVUserDefaults+PropertyList.h"; sourceTree = "<group>"; };
@@ -358,10 +358,8 @@
 			children = (
 				6A3843CA1F79E46600BFE9B4 /* XGQBLoginViewController.h */,
 				6A3843CB1F79E46600BFE9B4 /* XGQBLoginViewController.m */,
-				6A5F69BF1F7B7A3A00B16B31 /* XGQBRestPwdViewController.h */,
-				6A5F69C01F7B7A3A00B16B31 /* XGQBRestPwdViewController.m */,
-				6A5F69C21F7B7AB200B16B31 /* XGQBRegisterViewController.h */,
-				6A5F69C31F7B7AB200B16B31 /* XGQBRegisterViewController.m */,
+				42990E7A1F99D06D00B20EBA /* XGQBRegResetPwdTVController.h */,
+				42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -397,8 +395,10 @@
 		6A3843C91F79E43C00BFE9B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6A792B971F7F6E53009039AF /* XGQBLoginInputView.h */,
-				6A792B981F7F6E53009039AF /* XGQBLoginInputView.m */,
+				6A792B971F7F6E53009039AF /* XGQBRegRestPwdTVCell.h */,
+				6A792B981F7F6E53009039AF /* XGQBRegRestPwdTVCell.m */,
+				428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */,
+				428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1081,10 +1081,12 @@
 			files = (
 				42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */,
 				6AD95B321F7D064100BFF4DA /* AssistCoreService.m in Sources */,
+				42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */,
 				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
 				4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
 				42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */,
+				428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
 				42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */,
 				6AD95B351F7D064100BFF4DA /* MemberCoreService.m in Sources */,
@@ -1100,14 +1102,13 @@
 				6AF4A75B1F7A31EF006AE5E8 /* SystemMethods.m in Sources */,
 				4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */,
 				6A8758E21F7A2D0300F480EF /* GVUserDefaults+PropertyList.m in Sources */,
-				6A5F69C41F7B7AB200B16B31 /* XGQBRegisterViewController.m in Sources */,
 				6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */,
 				6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */,
 				6AF9E4541F78E675005E901C /* XGQBTabBarItem.m in Sources */,
 				42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */,
 				6AF78B8D1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m in Sources */,
 				422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */,
-				6A792B991F7F6E53009039AF /* XGQBLoginInputView.m in Sources */,
+				6A792B991F7F6E53009039AF /* XGQBRegRestPwdTVCell.m in Sources */,
 				6A792B9C1F7F98A2009039AF /* XGQBTextField.m in Sources */,
 				6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */,
 				6AF9E4511F78E659005E901C /* XGQBTabBar.m in Sources */,
@@ -1123,7 +1124,6 @@
 				6AF9E43D1F78E0E9005E901C /* AppDelegate+AppService.m in Sources */,
 				4255866B1F94A85B002E039B /* XGQBMineHeaderView.m in Sources */,
 				6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */,
-				6A5F69C11F7B7A3A00B16B31 /* XGQBRestPwdViewController.m in Sources */,
 				42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */,
 				6AF9E40D1F78DDB6005E901C /* main.m in Sources */,
 				42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */,

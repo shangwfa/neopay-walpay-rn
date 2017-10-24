@@ -1,4 +1,4 @@
-package cn.neopay.walpay.android.module.rnParams;
+package cn.neopay.walpay.android.module.rnparams;
 
 /**
  * Created by shangwf on 2017/9/13.

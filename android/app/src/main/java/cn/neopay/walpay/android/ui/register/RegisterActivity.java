@@ -37,11 +37,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, ActivityRe
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         setHeader();
         setViewInit();
@@ -92,11 +87,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, ActivityRe
 
     private void setHeader() {
         mPageBinding.commonHeader.setHeaderLeftImg(getString(R.string.str_common_register));
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 
     @Override

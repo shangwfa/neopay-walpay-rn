@@ -33,11 +33,6 @@ public class PayCodeActivity extends BaseActivity<PayCodePresenter, ActivityPayC
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         handleHeaderView();
         mViewBinding.commonSelectLl.payModeTv.setText("付款方式");
@@ -84,11 +79,5 @@ public class PayCodeActivity extends BaseActivity<PayCodePresenter, ActivityPayC
         }
         mViewBinding.commonSelectLl.payModeBackNameTv.setText(bankNickName);
     }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
-    }
-
 
 }

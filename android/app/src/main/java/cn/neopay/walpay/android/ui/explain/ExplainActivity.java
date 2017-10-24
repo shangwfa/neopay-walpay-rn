@@ -24,17 +24,7 @@ public class ExplainActivity extends BaseActivity<ExplainPresenter, ActivityExpl
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         mPageBinding.commonHeader.setHeaderLeftImg(String.format("%s使用说明", titleType));
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 }

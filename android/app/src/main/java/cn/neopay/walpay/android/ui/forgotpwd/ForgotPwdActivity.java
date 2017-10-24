@@ -33,11 +33,6 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         ViewUtils.setEditTextValue(mViewBinding.commonInputPhone.getEditText(), userName);
         switch (forgotPwdType) {
@@ -105,11 +100,6 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
                 }
             }
         });
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 
     @Override

@@ -31,11 +31,6 @@ public class EnvironmentSettingActivity extends BaseActivity<EnvironmentSettingP
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         mPageBinding.commonHeader.setHeaderLeftImg("环境配置");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -45,11 +40,6 @@ public class EnvironmentSettingActivity extends BaseActivity<EnvironmentSettingP
         mViewBinding.environmentSettingRv.setAdapter(mEnSettingAdapter);
         mData = new ArrayList<>();
         mPresenter.requestEnSettingBean(mData);
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 
     @Override
