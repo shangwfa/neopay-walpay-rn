@@ -117,7 +117,9 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mAsset.setItemImgId(R.mipmap.img_asset);
         mAsset.setItemName("我的资产");
         mAsset.setOnClickListener(v -> {
-
+            RNActivityParams activityParams = new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.MY_ASSET);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mAsset);
         MineTextImgItemBean mMyBank = new MineTextImgItemBean();
@@ -132,7 +134,9 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyWinReCord.setItemImgId(R.mipmap.img_win_record);
         mMyWinReCord.setItemName("我的中奖记录");
         mMyWinReCord.setOnClickListener(v -> {
-
+            RNActivityParams activityParams = new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.MY_LOTTER_RECORD);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyWinReCord);
     }

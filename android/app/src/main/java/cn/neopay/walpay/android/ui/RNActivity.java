@@ -23,7 +23,7 @@ import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
-import cn.neopay.walpay.android.module.rnparams.TestParams;
+import cn.neopay.walpay.android.module.rnParams.TestParams;
 import cn.neopay.walpay.android.rn.RNCacheViewManager;
 
 /**
@@ -78,6 +78,16 @@ public class RNActivity extends BaseRNActivity {
                 redListParams.setPage(PageType.ACTIVITY_RED_LIST_PAGE);
                 bundle.putString("params", new Gson().toJson(redListParams));
                 break;
+            case PageType.MY_LOTTER_RECORD:
+                TestParams myLotterParams = new TestParams();
+                myLotterParams.setPage(PageType.MY_LOTTER_RECORD);
+                bundle.putString("params", new Gson().toJson(myLotterParams));
+                break;
+            case PageType.MY_ASSET:
+                TestParams myAssetParams = new TestParams();
+                myAssetParams.setPage(PageType.MY_ASSET);
+                bundle.putString("params", new Gson().toJson(myAssetParams));
+                break;
         }
         return bundle;
     }
@@ -126,5 +136,7 @@ public class RNActivity extends BaseRNActivity {
         String PERSONAL_INFO_PAGE = "personalInfo";
         String ACTIVITY_LIST_PAGE = "activityList";
         String ACTIVITY_RED_LIST_PAGE = "redList";
+        String MY_LOTTER_RECORD="myLotteryRecord";
+        String MY_ASSET="myAsset";
     }
 }

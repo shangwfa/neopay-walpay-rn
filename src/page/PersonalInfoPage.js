@@ -19,10 +19,12 @@ class PersonalInfoPage extends BasePage {
     constructor() {
         super()
         this.state = {
-            avatarUrl:'http://pic2.ooopic.com/12/22/94/37bOOOPICc7_1024.jpg',
-            nickName:'胡萝卜',
-            phone:'15958199303',
-            authStatus:'1'
+            data:{
+                avatarUrl:'http://pic2.ooopic.com/12/22/94/37bOOOPICc7_1024.jpg',
+                nickName:'胡萝卜',
+                phone:'',
+                authStatus:'1'
+            }
         }
     }
 
@@ -54,13 +56,13 @@ class PersonalInfoPage extends BasePage {
     }
 
     renderRealNameItem=()=>{
-        switch (this.state.authStatus){
-            case '1':
+        switch (this.state.data.authStatus){
+            case 1:
                 return <CommonKeyValueItem  title='实名认证'   realNameValue='前往实名'  isLine={true} isArrow={true} onPress={()=>{
-                    //TODO 跳转实名
+                    this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE)
                 }}/>
                 break
-            case '2':
+            case 2:
                 return <CommonKeyValueItem  title='实名认证'    isLine={true} isArrow={true} onPress={()=>{}}/>
                 break
         }
@@ -70,15 +72,15 @@ class PersonalInfoPage extends BasePage {
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='个人信息'/>
                 <View style={{height:10}}/>
-                <CommonKeyValueItem  title='头像'   imgUrl={this.state.avatarUrl} isLine={true} isArrow={true} onPress={()=>{
+                <CommonKeyValueItem  title='头像'   imgUrl={this.state.data.avatarUrl} isLine={true} isArrow={true} onPress={()=>{
                     NativeModules.commModule.showCommDialog('updatePersonalAvatar', () => {
                     })
                 }}/>
-                <CommonKeyValueItem  title='昵称'   value={this.state.nickName}  isLine={true} isArrow={true} onPress={()=>{
+                <CommonKeyValueItem  title='昵称'   value={this.state.data.nickName}  isLine={true} isArrow={true} onPress={()=>{
                     this.props.navigation.navigate(RouterPaths.CHANGE_NAME_PAGE)
                 }}/>
                 {this.renderRealNameItem()}
-                <CommonKeyValueItem  title='新光钱包账号'   value={FormatUtils.tuoMinPhone(this.state.phone)}   />
+                <CommonKeyValueItem  title='新光钱包账号'   value={FormatUtils.tuoMinPhone(this.state.data.phone)}   />
             </View>
         )
     }

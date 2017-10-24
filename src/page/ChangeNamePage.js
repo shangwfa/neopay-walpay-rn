@@ -9,7 +9,7 @@ import {
 import Header from "../components/Header"
 import colors from '../constants/colors'
 import CommonInput from '../components/CommonInput'
-import Button from 'apsl-react-native-button'
+import CommonButton from '../components/CommonButton'
 import NetUtil from '../utils/NetUtil'
 import BasePage from './BasePage'
 import events from "../constants/events";
@@ -29,10 +29,7 @@ import events from "../constants/events";
                 <Header navigation={this.props.navigation} title='修改昵称'/>
                 <View style={{height: 10}}/>
                 <CommonInput data={inputData} onChangeText={(text) => this.onChangeText(text)}/>
-                <View style={{height: 50}}/>
-                <Button style={styles.button} textStyle={styles.button_text} onPress={() => this.onEnsure()}>
-                    确定
-                </Button>
+                <CommonButton value='确定' style={{marginTop:50}} onPress={()=>this.onEnsure()}/>
 
             </View>
         );
@@ -50,7 +47,7 @@ import events from "../constants/events";
         if (nickName.length <= 0) {
             NativeModules.commModule.toast("昵称不能为空")
         }else {
-            NetUtil.post('user/modify_user_info', {nickName: nickName}, (data) => {
+            NetUtil.post('user/modify_user_nickname', {nickName: nickName}, (data) => {
                 this.props.navigation.goBack()
                 DeviceEventEmitter.emit(events.UPDATE_PERSONAL_INFO_PAGE_EVENT)
             })

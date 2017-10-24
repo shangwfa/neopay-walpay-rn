@@ -17,7 +17,8 @@ import Feedback from './page/FeedbackPage'
 import Setting from './page/SettingPage'
 import MyOrder from './page/MyOrderPage'
 import PanResponderDemo from './page/PanResponderDemoPage'
-import FilterPage from './page/FilterPage'
+import Filter from './page/FilterPage'
+import MyAsset from './page/MyAsset'
 import {events} from './constants/index'
 
 import BackCardOrderList from './page/BankCardOrderListPage'
@@ -85,7 +86,8 @@ class App extends Component {
                 redList: {screen: RedList},
                 bankCardOrderList: {screen: BackCardOrderList},
                 myLotteryRecord: {screen: MyLotteryRecord},
-                filter:{screen:FilterPage}
+                filter:{screen:Filter},
+                myAsset:{screen:MyAsset}
             },
             {
                 initialRouteName: params.page,

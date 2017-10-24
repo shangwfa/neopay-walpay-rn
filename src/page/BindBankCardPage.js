@@ -36,15 +36,15 @@ class BindBankCardPage extends BasePage {
             NativeModules.commModule.toast('身份证号不能为空')
             return
         }
-        if(StringUtils.isEmpty(bankCode)){
-            NativeModules.commModule.toast('银行卡号不能为空')
-            return
-        }
+        // if(StringUtils.isEmpty(bankCode)){
+        //     NativeModules.commModule.toast('银行卡号不能为空')
+        //     return
+        // }
         if(StringUtils.isEmpty(smsCode)){
             NativeModules.commModule.toast('验证码不能为空')
         }
         //提交添加银行卡
-        NetUtil.post('bank/bind_bank_card', {'name':name,'idCardNo':idCardNo,'bankCardNo':bankCardNo,'bankCode':bankCode,'bindPhone':bindPhone,'smsCode':smsCode}, (data) => {
+        NetUtil.post('bank/bind_bank_card', {'name':name,'certNo':idCardNo,'cardNo':bankCardNo,'bankCode':'1234','phone':bindPhone,'smsCode':smsCode}, (data) => {
 
         })
 

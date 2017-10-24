@@ -52,7 +52,7 @@ class TimerButton extends Component {
     }
 
     sendindBankCardCode=()=>{
-        NetUtil.post('bank/send_bind_bank_card_code', {}, (data) => {
+        NetUtil.post('bank/send_bind_bank_card_code', {'phone':this.props.phone}, (data) => {
             this.setState({
                 timerTitle: `重新获取(60s)`,
             })
@@ -76,6 +76,7 @@ class TimerButton extends Component {
             return
         }
 
+        this.sendindBankCardCode()
     }
 
 

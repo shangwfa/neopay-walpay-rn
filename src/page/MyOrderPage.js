@@ -14,6 +14,7 @@ import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
 import LoadMoreFooter from '../components/LoadMoreFooter'
 import NetUtil from '../utils/NetUtil'
+import * as RouterPaths from '../constants/RouterPaths'
 
 const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
 
@@ -183,7 +184,7 @@ class MyOrderPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='我的账单' rightTitle='筛选' onRightPress={() => {
-                    console.log('筛选')
+                    this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
                 <SectionList
                     ListFooterComponent={<LoadMoreFooter isShow={true} isEnd={false}/>}
