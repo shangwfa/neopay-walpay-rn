@@ -216,6 +216,8 @@
             android:name="JPUSH_APPKEY"
             android:value="13dcf601d46a529f33bd1d5f" />
         <!--JPush end-->
+
+        <service android:name=".rn.RNService"/>
     </application>
 
 </manifest>

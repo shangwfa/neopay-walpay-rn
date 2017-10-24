@@ -5,7 +5,7 @@ import netCode from '../constants/netCode'
 class NetUtil extends Component {
 
     static baseUrl = 'http://139.224.11.160:8202/walpay-web/'
-    
+
     static handleException(code, msg) {
         switch (code) {
             case "1":

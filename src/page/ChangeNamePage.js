@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {
-    StatusBar,
     StyleSheet,
     View,
-    NativeModules
+    NativeModules,
+    DeviceEventEmitter
 } from 'react-native';
 
 import Header from "../components/Header"
@@ -12,6 +12,7 @@ import CommonInput from '../components/CommonInput'
 import Button from 'apsl-react-native-button'
 import NetUtil from '../utils/NetUtil'
 import BasePage from './BasePage'
+import events from "../constants/events";
 
  class ChangeNamePage extends BasePage {
     constructor() {
@@ -25,7 +26,6 @@ import BasePage from './BasePage'
         let inputData = {'key': '昵称', "placeholder": "请输入昵称(不能超过8个字)", limitlength: 8, limitTip: '', keyboard: 'numeric'}
         return (
             <View style={styles.container}>
-                <StatusBar barStyle={'default'}/>
                 <Header navigation={this.props.navigation} title='修改昵称'/>
                 <View style={{height: 10}}/>
                 <CommonInput data={inputData} onChangeText={(text) => this.onChangeText(text)}/>
@@ -50,8 +50,9 @@ import BasePage from './BasePage'
         if (nickName.length <= 0) {
             NativeModules.commModule.toast("昵称不能为空")
         }else {
-            NetUtil.post('employee/update_employee_info', {nickName: nickName}, (data) => {
+            NetUtil.post('user/modify_user_info', {nickName: nickName}, (data) => {
                 this.props.navigation.goBack()
+                DeviceEventEmitter.emit(events.UPDATE_PERSONAL_INFO_PAGE_EVENT)
             })
         }
 

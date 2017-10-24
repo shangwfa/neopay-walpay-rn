@@ -17,6 +17,7 @@ import Feedback from './page/FeedbackPage'
 import Setting from './page/SettingPage'
 import MyOrder from './page/MyOrderPage'
 import PanResponderDemo from './page/PanResponderDemoPage'
+import FilterPage from './page/FilterPage'
 import {events} from './constants/index'
 
 class App extends Component {
@@ -74,10 +75,12 @@ class App extends Component {
                 feedback:{screen:Feedback},
                 setting:{screen:Setting},
                 myOrder:{screen:MyOrder},
-                panResponderDemo:{screen:PanResponderDemo}
+                panResponderDemo:{screen:PanResponderDemo},
+                filter:{screen:FilterPage}
             },
             {
-                initialRouteName: params.page,
+                // initialRouteName: params.page,
+                initialRouteName: 'filter',
                 headerMode: 'screen',
                 navigationOptions: {
                     headerStyle: {
@@ -105,7 +108,6 @@ class App extends Component {
         Navigator.router.getStateForAction = (action, state) => {
             if (state && action.type === NavigationActions.BACK && state.routes.length === 1) {
                 console.log("退出RN页面")
-                console.log(NativeModules)
                 NativeModules.commModule.closeRNPage()
                 const routes = [...state.routes];
                 return {

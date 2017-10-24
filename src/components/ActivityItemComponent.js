@@ -31,7 +31,7 @@ class ActivityItemComponent extends Component {
                                source={{uri: this.props.itemData.imgUrl}}/>
                         <View style={styles.content_tip}>
                             <Image style={styles.tip_img} source={activity_tip_icon}/>
-                            <Text style={styles.tip_text}>{this.props.itemData.value}</Text>
+                            <Text style={styles.tip_text}>{this.props.itemData.title}</Text>
                         </View>
                     </View>
                 </View>

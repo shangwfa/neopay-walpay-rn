@@ -56,7 +56,6 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
         mPresenter.saveBaseInfo();
         mPresenter.updateApp();
         Beta.downloadPatch();
-        RNCacheViewManager.init();
     }
 
     @Override
