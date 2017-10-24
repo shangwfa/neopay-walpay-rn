@@ -25,11 +25,10 @@ import static com.xgjk.common.lib.utils.StringUtils.getString;
 public class LoginPresenter extends LoginContract.Presenter {
     @Override
     public void login(String name, String pass) {
-//        ApiManager.getSingleton().loginUser(new LoginUserRequestBean(name, pass),
-//                new BaseSubscriber(mActivity, userInfoResponseBean -> {
-//                    handleLogin((UserInfoResponseBean) userInfoResponseBean);
-//                }));
-        MainRouter.getSingleton().jumpToHomePage("");
+        ApiManager.getSingleton().loginUser(new LoginUserRequestBean(name, pass),
+                new BaseSubscriber(mActivity, userInfoResponseBean -> {
+                    handleLogin((UserInfoResponseBean) userInfoResponseBean);
+                }));
     }
 
     private void handleLogin(UserInfoResponseBean userInfoResponseBean) {
