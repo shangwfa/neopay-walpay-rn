@@ -13,7 +13,6 @@ import colors from '../constants/colors'
 import MineTopView from '../components/MineTopView'
 import CommonItemOne from '../components/CommonItemOne'
 import Divider from '../components/Divider'
-import Button from 'apsl-react-native-button'
 import NetUtil from '../utils/NetUtil'
 import * as RouterPaths from '../constants/RouterPaths'
 import BasePage from './BasePage'
@@ -69,10 +68,6 @@ class Home extends BasePage {
                     <CommonItemOne name='修改登录密码' isShowArrow={true} onPress={() => this.onToChangeLoginPassWord()}/>
                     <Divider style={{backgroundColor: colors.page_background, marginLeft: 10}}/>
                     <CommonItemOne name='设置支付密码' isShowArrow={true} onPress={() => this.onToChangePayPassWord()}/>
-
-                    <Button style={styles.button} textStyle={styles.button_text} onPress={() => this.onExit()}>
-                        退出登录
-                    </Button>
                 </ScrollView>
             </View>
         )
@@ -84,16 +79,14 @@ class Home extends BasePage {
         // })
     }
     onToChangePayPassWord = () => {
-        let params = {page: 'changePayPassWord', phone: this.state.data.phone}
-        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
+        this.props.navigation.navigate(RouterPaths.PERSONAL_INFO_PAGE)
     }
 
     onToChangeLoginPassWord = () => {
-        let params = {page: 'changeLoginPassWord'}
-        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
+        this.props.navigation.navigate(RouterPaths.MY_ORDER_PAGE)
     }
     onToChangeNickName = () => {
-        this.props.navigation.navigate(RouterPaths.CHANGE_NAME_PAGE)
+        this.props.navigation.navigate(RouterPaths.SETTING_PAGE)
     }
     onExit = () => {
         NativeModules.commModule.showCommDialog('exitApp', () => {

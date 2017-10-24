@@ -12,7 +12,6 @@ import {colors} from '../constants/index'
 import CommonKeyValueItem from '../components/CommonKeyValueItem'
 import CommonButton from '../components/CommonButton'
 import * as RouterPaths from '../constants/RouterPaths'
-import NetUtil from '../utils/NetUtil'
 
 class SettingPage extends BasePage {
 
@@ -22,14 +21,6 @@ class SettingPage extends BasePage {
         }
     }
 
-    componentWillMount() {
-        console.log(this.props)
-        NetUtil.post('user/get_user_info', {}, (data) => {
-            this.setState({
-                data: data
-            })
-        })
-    }
     toLoginPwd=()=>{
         const params = {page: 'resetLoginPwd'}
         NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))

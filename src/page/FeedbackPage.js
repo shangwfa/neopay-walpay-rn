@@ -10,6 +10,7 @@ import BasePage from '../page/BasePage'
 import Header from '../components/Header'
 import {colors} from '../constants/index'
 import CommonButton from '../components/CommonButton'
+import NetUtil from '../utils/NetUtil'
 
 class FeedbackPage extends BasePage {
 
@@ -22,7 +23,8 @@ class FeedbackPage extends BasePage {
     }
 
     commit = () => {
-
+        NetUtil.post('assist/add_feedback', {content:this.state.inputText}, (data) => {
+        })
     }
 
     render() {

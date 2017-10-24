@@ -19,8 +19,7 @@ public class BusniessUtils {
     private static UserInfoResponseBean userInfoBean;
 
     public static String getAccessToken() {
-        final UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(true, IWalpayConstants.USER_INFO, UserInfoResponseBean.class);
-        return null == userInfoBean ? "" : userInfoBean.getAccessToken();
+        return StoreManager.getSingleton().getString(false, IWalpayConstants.ACCESS_TOKEN, "");
     }
 
     public static String getUserName() {

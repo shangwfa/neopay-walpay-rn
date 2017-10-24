@@ -15,6 +15,6 @@ public class MineFragmentPresenter extends MineFragmentContract.Presenter {
     @Override
     public void getUserInfoData() {
         ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(),
-                new BaseSubscriber(mActivity, o -> mView.setUserInfoData((UserInfoResponseBean) o)));
+                new BaseSubscriber(mActivity, o -> mView.setUserInfoData((UserInfoResponseBean) o), false));
     }
 }

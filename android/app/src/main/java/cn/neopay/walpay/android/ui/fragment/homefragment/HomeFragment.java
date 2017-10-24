@@ -1,11 +1,17 @@
 package cn.neopay.walpay.android.ui.fragment.homefragment;
 
+import android.view.View;
+
 import com.xgjk.common.lib.base.BaseFragment;
 import com.xgjk.common.lib.manager.storage.StoreManager;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.FragmentHomeLayoutBinding;
+import cn.neopay.walpay.android.module.event.HomeEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 
@@ -23,6 +29,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter, FragmentHo
 
     @Override
     public void initView() {
+        mPageBinding.commonHeader.setVisibility(View.GONE);
         mPresenter.getUserInfo();
     }
 
@@ -42,4 +49,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter, FragmentHo
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void selectCurrentPageCallBack(HomeEventBean homeEventBean) {
+        initView();
+    }
 }

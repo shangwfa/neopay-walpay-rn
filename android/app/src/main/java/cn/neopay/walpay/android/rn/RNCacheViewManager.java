@@ -26,7 +26,7 @@ public class RNCacheViewManager {
 
     public static ReactInstanceManager getReactInstanceManager() {
         if (mReactInstanceManager == null) {
-            throw new RuntimeException("缓存view管理器尚未初始化！");
+           init();
         }
         return mReactInstanceManager;
     }

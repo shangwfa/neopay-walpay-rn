@@ -73,6 +73,21 @@ public class RNActivity extends BaseRNActivity {
                 activityParams.setPage(PageType.ACTIVITY_LIST_PAGE);
                 bundle.putString("params", new Gson().toJson(activityParams));
                 break;
+            case PageType.ACTIVITY_RED_LIST_PAGE:
+                TestParams redListParams = new TestParams();
+                redListParams.setPage(PageType.ACTIVITY_RED_LIST_PAGE);
+                bundle.putString("params", new Gson().toJson(redListParams));
+                break;
+            case PageType.MY_LOTTER_RECORD:
+                TestParams myLotterParams = new TestParams();
+                myLotterParams.setPage(PageType.MY_LOTTER_RECORD);
+                bundle.putString("params", new Gson().toJson(myLotterParams));
+                break;
+            case PageType.MY_ASSET:
+                TestParams myAssetParams = new TestParams();
+                myAssetParams.setPage(PageType.MY_ASSET);
+                bundle.putString("params", new Gson().toJson(myAssetParams));
+                break;
         }
         return bundle;
     }
@@ -115,10 +130,13 @@ public class RNActivity extends BaseRNActivity {
     }
 
 
-    public interface PageType{
-        String SETTING_PAGE="setting";
-        String MY_ORDER_PAGE="myOrder";
-        String PERSONAL_INFO_PAGE="personalInfo";
-        String ACTIVITY_LIST_PAGE="activityList";
+    public interface PageType {
+        String SETTING_PAGE = "setting";
+        String MY_ORDER_PAGE = "myOrder";
+        String PERSONAL_INFO_PAGE = "personalInfo";
+        String ACTIVITY_LIST_PAGE = "activityList";
+        String ACTIVITY_RED_LIST_PAGE = "redList";
+        String MY_LOTTER_RECORD="myLotteryRecord";
+        String MY_ASSET="myAsset";
     }
 }

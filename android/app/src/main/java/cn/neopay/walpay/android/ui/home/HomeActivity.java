@@ -20,6 +20,9 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.adapter.adapter.MainPagerAdapter;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityHomeLayoutBinding;
+import cn.neopay.walpay.android.module.event.HomeEventBean;
+import cn.neopay.walpay.android.module.event.MineEventBean;
+import cn.neopay.walpay.android.module.event.NewsEventBean;
 import cn.neopay.walpay.android.rn.RNCacheViewManager;
 import cn.neopay.walpay.android.ui.fragment.homefragment.HomeFragment;
 import cn.neopay.walpay.android.ui.fragment.minefragment.MineFragment;
@@ -42,11 +45,6 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
     }
 
     @Override
-    public int getExceptionLayoutId() {
-        return 0;
-    }
-
-    @Override
     public void initView() {
         hideHeaderView();
         mPageBinding.commonHeader.setVisibility(View.GONE);
@@ -56,12 +54,6 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
         mPresenter.saveBaseInfo();
         mPresenter.updateApp();
         Beta.downloadPatch();
-        RNCacheViewManager.init();
-    }
-
-    @Override
-    public boolean isShowExceptionView() {
-        return false;
     }
 
     private void hideHeaderView() {
@@ -90,7 +82,7 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
         return new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                handleTabSelected(tab);
+                handleTabSelected(tab);
             }
 
             @Override
@@ -107,13 +99,13 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
 
     private void handleTabSelected(TabLayout.Tab tab) {
         if (0 == tab.getPosition()) {
-            EventBus.getDefault().post("");
+            EventBus.getDefault().post(new HomeEventBean());
         }
         if (1 == tab.getPosition()) {
-            EventBus.getDefault().post("");
+            EventBus.getDefault().post(new NewsEventBean());
         }
         if (2 == tab.getPosition()) {
-            EventBus.getDefault().post("");
+            EventBus.getDefault().post(new MineEventBean());
         }
     }
 
@@ -125,7 +117,6 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
     private List<BaseFragment> getFragments() {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-//        fragments.add(new SunbeamCoinFragment());
         fragments.add(new NewsFragment());
         fragments.add(new MineFragment());
         return fragments;
@@ -135,14 +126,11 @@ public class HomeActivity extends BaseActivity<HomePresenter, ActivityHomeLayout
     private void setTab(String tabType) {
         switch (tabType) {
             case IWalpayConstants.HOME_TABTYPE_MINE:
-                mViewBinding.homeViewpager.setCurrentItem(3);
-                break;
-            case IWalpayConstants.HOME_TABTYPE_NEWS:
                 mViewBinding.homeViewpager.setCurrentItem(2);
                 break;
-//            case IWalpayConstants.HOME_TABTYPE_SUNBEAMCOIN:
-//                mViewBinding.homeViewpager.setCurrentItem(1);
-//                break;
+            case IWalpayConstants.HOME_TABTYPE_NEWS:
+                mViewBinding.homeViewpager.setCurrentItem(1);
+                break;
             default:
                 mViewBinding.homeViewpager.setCurrentItem(0);
                 break;

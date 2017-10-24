@@ -2,10 +2,13 @@ package cn.neopay.walpay.android.ui.fragment.minefragment;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
-import com.xgjk.common.lib.utils.ToastUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -16,9 +19,10 @@ import cn.neopay.walpay.android.adapter.sliminjector.MineUserInforSlimInjector;
 import cn.neopay.walpay.android.databinding.FragmentMineLayoutBinding;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
-import cn.neopay.walpay.android.module.sliminjector.MineTextImgItemBean;
+import cn.neopay.walpay.android.module.event.MineEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
+import cn.neopay.walpay.android.module.sliminjector.MineTextImgItemBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
@@ -38,6 +42,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
 
     @Override
     public void initView() {
+        mPageBinding.commonHeader.setVisibility(View.GONE);
         mMineSlimAdapter = SlimAdapter.create()
                 .register(R.layout.common_user_info_view_layout, new MineUserInforSlimInjector())
                 .register(R.layout.common_line_item_layout, new MineLineSlimInjector())
@@ -91,9 +96,9 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mSetting.setItemImgId(R.mipmap.img_setting);
         mSetting.setItemName("设置");
         mSetting.setOnClickListener(v -> {
-            RNActivityParams activityParams=new RNActivityParams();
+            RNActivityParams activityParams = new RNActivityParams();
             activityParams.setRnPage(RNActivity.PageType.SETTING_PAGE);
-            MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mSetting);
     }
@@ -103,16 +108,18 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyBill.setItemImgId(R.mipmap.img_my_bill);
         mMyBill.setItemName("我的账单");
         mMyBill.setOnClickListener(v -> {
-            RNActivityParams activityParams=new RNActivityParams();
+            RNActivityParams activityParams = new RNActivityParams();
             activityParams.setRnPage(RNActivity.PageType.MY_ORDER_PAGE);
-            MainRouter.getSingleton().jumpToRNPage(v.getContext(),activityParams);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyBill);
         MineTextImgItemBean mAsset = new MineTextImgItemBean();
         mAsset.setItemImgId(R.mipmap.img_asset);
         mAsset.setItemName("我的资产");
         mAsset.setOnClickListener(v -> {
-
+            RNActivityParams activityParams = new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.MY_ASSET);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mAsset);
         MineTextImgItemBean mMyBank = new MineTextImgItemBean();
@@ -127,10 +134,15 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyWinReCord.setItemImgId(R.mipmap.img_win_record);
         mMyWinReCord.setItemName("我的中奖记录");
         mMyWinReCord.setOnClickListener(v -> {
-
+            RNActivityParams activityParams = new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.MY_LOTTER_RECORD);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyWinReCord);
     }
 
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void selectCurrentPageCallBack(MineEventBean mineEventBean) {
+        initView();
+    }
 }

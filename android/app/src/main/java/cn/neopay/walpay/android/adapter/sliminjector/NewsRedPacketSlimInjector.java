@@ -28,7 +28,8 @@ public class NewsRedPacketSlimInjector implements SlimInjector<NewsRedPacketItem
                 .text(R.id.common_news_type_time_tv, data.getTime())
                 .with(R.id.red_packet_bg_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getContent()))
                 .text(R.id.red_packet_title_tv, data.getContentTitle())
-                .text(R.id.red_packet_from_tv, data.getContentFrom());
+                .text(R.id.red_packet_from_tv, data.getContentFrom())
+                .clicked(R.id.common_news_red_packet_ll, data.getOnClickListener());
 
 
     }

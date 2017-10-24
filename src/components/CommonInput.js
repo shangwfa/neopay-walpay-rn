@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import colors from '../constants/colors'
 import close_input_img from '../res/img/input_clear.png'
-import {Divider} from '../components/index'
+import Divider from '../components/Divider'
+import TimerButton from '../components/TimerButton'
+import StringUtils from "../utils/StringUtils";
 
 class CommonInput extends Component {
     constructor(props) {
@@ -20,11 +22,18 @@ class CommonInput extends Component {
         }
     }
 
+    renderVerifyCode=(isVerfyCode)=>{
+        if(isVerfyCode){
+            return <TimerButton phone={this.props.phone}/>
+        }
+    }
 
     render() {
         let data = this.props.data
-        let keybordType = data.keyboard ? 'default' : data.keyboard
+        let keybordType = StringUtils.isEmpty(data.keyboard) ? 'default' : data.keyboard
+        console.log(keybordType)
         let isLine=data.isLine&&data.isLine
+        let isVerfyCode=data.isVerfyCode&&data.isVerfyCode
         return (
             <View style={styles.container}>
                 <View style={styles.content_container}>
@@ -37,10 +46,11 @@ class CommonInput extends Component {
                         placeholder={data.placeholder}
                         numberOfLines={1}
                         onChangeText={this.onChangeText}
-                        keyboard={keybordType}
+                        keyboardType={keybordType}
                         value={this.state.inputText}
                     />
                     {this.input_close_img()}
+                    {this.renderVerifyCode(isVerfyCode)}
                 </View>
                 {this.renderLine(isLine)}
             </View>)
