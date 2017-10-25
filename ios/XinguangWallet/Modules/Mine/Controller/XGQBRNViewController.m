@@ -35,7 +35,7 @@
     
     //预先加载RN页面
 //        NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
-    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
+    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.11:8081/index.ios.bundle?platform=ios"];
 //    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
 
     
@@ -50,7 +50,7 @@
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
                          moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":_pageType}}
+                         initialProperties :@{@"params": @{@"page":@"bankDetail"}}
                           launchOptions    : nil];
     
     self.view = rootView;
