@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XGQBCountTimeBtn.h"
 
 typedef NS_ENUM(NSInteger, XGQBRegResetPwdTVCellType) {
     XGQBRegResetPwdTVCellTypePhoneNo = 0,
@@ -26,6 +27,7 @@ typedef NS_ENUM(NSInteger, XGQBRegResetPwdTVCellType) {
 @property (nonatomic,strong) UIImageView *leftImgView;
 @property (nonatomic,strong) XGQBTextField *textField;
 @property (nonatomic,strong) UIButton *rightBtn;
+@property (nonatomic,strong) XGQBCountTimeBtn* countTimeBtn;
 
 +(instancetype)cellWithType:(XGQBRegResetPwdTVCellType)type;
 

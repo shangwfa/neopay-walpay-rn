@@ -5,157 +5,29 @@
  */
 import React, {Component} from 'react'
 import {
-    StyleSheet, View, Text, Image, SectionList, RefreshControl,
+    StyleSheet, View, Text, Image, RefreshControl, FlatList, TouchableOpacity,
 } from 'react-native'
 import Header from "../components/Header";
 import BasePage from "./BasePage";
 import LoadMoreFooter from "../components/LoadMoreFooter";
-const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
-const data = [
-    {
-        data: [
-            {
-                name: 'nader',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            },
-            {
-                name: 'chris',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            },
-            {
-                name: 'anader',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            },
-            {
-                name: 'bchris',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            },
-            {
-                name: 'cnader',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            },
-            {
-                name: 'dchris',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            },
-            {
-                name: 'ndader',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            },
-            {
-                name: 'cehris',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00',
-                rightBottomValue: '付款处理中'
-            }],
-        key: '本月'
-    },
-    {
-        data: [
-            {
-                name: 'nick',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            },
-            {
-                name: 'amanda',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            },
-            {
-                name: 'enick',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            },
-            {
-                name: 'ramanda',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            },
-            {
-                name: 'tnick',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            },
-            {
-                name: 'yamanda',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            },
-            {
-                name: 'fnick',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            },
-            {
-                name: 'amranda',
-                imgUrl: url,
-                middleUpValue: '胡萝卜的兔子店',
-                middleBottomValue: '08-27 12:23',
-                rightUpValue: '-38.00'
-            }],
-        key: '9月'
-    },
-]
-
+import NetUtil from "../utils/NetUtil";
+import {APIS} from "../constants/API";
 class RedListPage extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
             sourceData: [],
-            isLoadMoreEnd: true
+            isLoadMoreEnd: false
         }
     }
 
     componentWillMount() {
         //请求数据
-        this.setState({
-            sourceData: data,
+        NetUtil.post(APIS.QUERY_RECENT_RED_PACKET_LIST, {}, (data) => {
+            this.setState({
+                sourceData: data,
+            });
         });
     }
 
@@ -165,18 +37,14 @@ class RedListPage extends BasePage {
                 {/*标题栏*/}
                 <Header navigation={this.props.navigation} title='红包来了！'/>
                 {/*消息列表*/}
-                <SectionList
+                <FlatList
+                    ref='FlatList'
                     ListFooterComponent={<LoadMoreFooter isShow={true} isEnd={this.state.isLoadMoreEnd}/>}
                     renderItem={this._renderItem}
-                    sections={this.state.sourceData}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={false}
-                            onRefresh={this._onRefresh}
-                            tintColor="red"
-                            colors={['#ff0000', '#00ff00', '#0000ff']}
-                            progressBackgroundColor="withe"/>
-                    }
+                    keyExtractor={this._keyExtractor}
+                    data={this.state.sourceData}
+                    refreshing={false}
+                    onRefresh={this._onRefresh}
                     onEndReached={this._onLoadMore}
                     onEndReachedThreshold={0.5}
                 />
@@ -184,30 +52,134 @@ class RedListPage extends BasePage {
         );
     }
 
+    _keyExtractor = (item, index) => {
+        return index;
+    };
     _onRefresh = () => {
         console.log("_onRefresh");
-    }
+    };
     _onLoadMore = () => {
         console.log("_onLoadMore");
-    }
-    _renderItem = ({item}) => {
+    };
+    _clickItem = (item, index) => {
+        alert(index + "=" + item.message);
+    };
+    _renderItem = ({item, index}) => {
+        let isShow = true;
         return (
-            <View>
-                <Text>red {item.name}</Text>
-                <Text>red {item.name}</Text>
-                <Text>red {item.name}</Text>
-                <Text>red {item.name}</Text>
-                <Text>red {item.name}</Text>
-                <Text>red {item.name}</Text>
-            </View>
+            <TouchableOpacity key={index} activeOpacity={0.8} onPress={this._clickItem.bind(this, item, index)}>
+                <View style={styles.red_container}>
+                    <View style={[styles.time_container, {height: isShow ? 40 : 10}]}>
+                        {isShow ? (<Text style={[styles.time]}>{item.updateTime}</Text>) : (null)}
+                    </View>
+                    <View >
+                        <Image
+                            style={styles.img}
+                            source={{uri: item.imageUrl}}>
+                            {this._renderTypeView({item})}
+                        </Image>
+                    </View>
+                </View>
+            </TouchableOpacity>
         );
+    };
+
+    //渲染那种类型的红包
+    _renderTypeView = ({item}) => {
+        switch (item.packetType) {
+            case 1:
+                return this._renderRobRedPacketView({item});
+                break;
+            case 2:
+                return this._renderOverdueRedPacketView({item});
+                break;
+            case 3:
+                return this._renderGeneralRedPacketView({item});
+                break;
+
+        }
+    };
+
+    /*待抢红包--类型*/
+    _renderRobRedPacketView = ({item}) => {
+        let isTheme = true;
+        return <View style={{marginLeft: 97}}>
+            <Text style={[isTheme ? styles.message : styles.message_general, {fontSize: 17}]}>{item.message}</Text>
+            <View style={[styles.message_from_container, {marginTop: 23, paddingLeft: 5}]}>
+                <View style={[styles.line]}/>
+                <Text
+                    style={[isTheme ? styles.message : styles.message_general, {fontSize: 14,}]}>来自{item.origin}的红包</Text>
+            </View>
+
+        </View>;
+    };
+    /*红包过期/已领完--类型*/
+    _renderOverdueRedPacketView = ({item}) => {
+        return <View style={{marginLeft: 76}}>
+            <Text style={[styles.message, {fontSize: 14}]}>{item.message}</Text>
+            <Text style={[styles.message, {fontSize: 17, paddingLeft: 22, marginTop: 48}]}>啊哦，这个红包过期了~</Text>
+            <View style={[styles.message_from_container, {paddingLeft: 22, marginTop: 17}]}>
+                <View style={[styles.line]}/>
+                <Text style={[styles.message, {fontSize: 14}]}>来自{item.origin}的红包</Text>
+            </View>
+        </View>;
+    };
+    /*普通红包--类型*/
+    _renderGeneralRedPacketView = ({item}) => {
+        return <View style={{marginLeft: 97}}>
+            <Text style={[styles.message_general, {fontSize: 27, paddingLeft: 33}]}>$898.78</Text>
+            <Text style={[styles.message, {fontSize: 17, marginTop: 18}]}>{item.message}</Text>
+            <View style={[styles.message_from_container, {marginTop: 16}]}>
+                <View style={[styles.line]}/>
+                <Text style={[styles.message, {fontSize: 14}]}>来自{item.origin}的红包</Text>
+            </View>
+        </View>;
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F5F5F5',
+    },
+    red_container: {
+        marginLeft: 13,
+        marginRight: 13,
+        backgroundColor: '#F5F5F5',
+    },
+    time: {
+        color: "#666666",
+        fontSize: 16,
+    },
+    time_container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    time_container_gone: {
+        display: "none",
+        marginBottom: 7,
+    },
+    img: {
+        width: 350,
+        height: 155,
+        resizeMode: "cover",
+        justifyContent: 'center',
+    },
+    message: {
+        color: "#FBDEB0",
+    },
+    message_general: {
+        color: "#FFFFFF",
+    },
+    message_from_container: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 0,
+    },
+    line: {
+        width: 31,
+        height: 1,
+        backgroundColor: "#FBDEB0"
     }
 });
 

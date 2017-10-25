@@ -108,9 +108,7 @@ class BankCardOrderListPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='我的账单' rightTitle='筛选' onRightPress={() => {
-                    console.log('筛选')
-                }}/>
+                <Header navigation={this.props.navigation} title='银行卡交易记录'/>
                 <SectionList
                     ListFooterComponent={<LoadMoreFooter isShow={true} isEnd={false}/>}
                     renderItem={this.renderItem}
