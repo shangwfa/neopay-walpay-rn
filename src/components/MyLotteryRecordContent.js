@@ -11,6 +11,8 @@ import {
 } from 'react-native'
 
 import ActivityList from './MyLotteryRecordActiList'
+import RedPacketList from './MyLotteryRecordRedpList'
+import ScreenUtils from '../utils/ScreenUtils'
 
 const SDimensions = require('Dimensions');
 const {width} = SDimensions.get('window');
@@ -50,10 +52,7 @@ class MyLotteryRecordContent extends Component {
                             onMomentumScrollEnd={(e) => {this.onScrollAnimationEnd(e)}}
                             style={styles.actScrollView}>
                     <View style={styles.page1}>
-                        <ListView
-                            dataSource={this.state.dataSource}
-                            renderRow={(rowData) => <Text>{rowData}</Text>}
-                        />
+                        <RedPacketList/>
                     </View>
                     <View style={styles.page2}>
                         <ActivityList/>
@@ -140,18 +139,15 @@ const styles = StyleSheet.create({
     },
 
     actScrollView:{
-        backgroundColor:'green',
-        height:height -282,
+        height:height -ScreenUtils.headerHeight-208,
     },
     page1:{
-        backgroundColor:'yellow',
         width:width,
-        height:400,
+        height:height -ScreenUtils.headerHeight-220,
     },
     page2:{
-        backgroundColor:'blue',
         width:width,
-        height:400,
+        height:height -ScreenUtils.headerHeight-220,
 
     },
 
