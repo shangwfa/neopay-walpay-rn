@@ -1,7 +1,7 @@
 /**
  * @author: carlos.guo
  * @data:  2017/10/23.
- * @description: 红包列表--组件
+ * @description: 红包列表--页面
  */
 import React, {Component} from 'react'
 import {
@@ -12,8 +12,8 @@ import BasePage from "./BasePage";
 import LoadMoreFooter from "../components/LoadMoreFooter";
 import NetUtil from "../utils/NetUtil";
 import {APIS} from "../constants/API";
+import {RouterPaths} from "../constants/RouterPaths";
 class RedListPage extends BasePage {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -62,7 +62,8 @@ class RedListPage extends BasePage {
         console.log("_onLoadMore");
     };
     _clickItem = (item, index) => {
-        alert(index + "=" + item.message);
+        // 红包详情跳转
+        this.props.navigation.navigate(RouterPaths.TRANSACTION_DETAILS, {info: "0x001"});
     };
     _renderItem = ({item, index}) => {
         let isShow = true;
