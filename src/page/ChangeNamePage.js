@@ -23,7 +23,7 @@ import events from "../constants/events";
     }
 
     render() {
-        let inputData = {'key': '昵称', "placeholder": "请输入昵称(不能超过8个字)", limitlength: 8, limitTip: '', keyboard: 'numeric'}
+        let inputData = {'key': '昵称', "placeholder": "请输入昵称(不能超过8个字)", limitlength: 8, limitTip: ''}
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='修改昵称'/>

@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {NativeModules} from 'react-native'
 import netCode from '../constants/netCode'
-
+const TEST_URL = "http://139.224.11.160:8202/walpay-web/";
+const MOCK_URL = "http://172.16.33.151:8888/walpay-web/";
 class NetUtil extends Component {
 
-    static baseUrl = 'http://139.224.11.160:8202/walpay-web/'
-
+    static baseUrl = TEST_URL;
     static handleException(code, msg) {
         switch (code) {
             case "1":
@@ -36,7 +36,7 @@ class NetUtil extends Component {
                 .then((responseText) => {
                     console.log(responseText)
                     let response = JSON.parse(responseText);
-                    if (netCode.netOk == response.retCode) {
+                    if (netCode.netOk === response.retCode) {
                         successCallbak(response.data)
                     } else {
                         this.handleException(response.netCode, response.retMsg)

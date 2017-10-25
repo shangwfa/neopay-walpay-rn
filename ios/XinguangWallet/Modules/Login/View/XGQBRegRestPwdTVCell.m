@@ -26,6 +26,8 @@
     
     XGQBCountTimeBtn *countTimeBtn = [[XGQBCountTimeBtn alloc]init];
     
+    cell.countTimeBtn = countTimeBtn;
+    
     UIButton *readPwdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [readPwdBtn setImage:[UIImage imageNamed:@"dl_yanjing"] forState:UIControlStateNormal];
     [readPwdBtn setImage:[UIImage imageNamed:@"dl_zhengyan"] forState:UIControlStateSelected];
@@ -137,7 +139,6 @@
     btn.selected =!btn.selected;
     self.textField.secureTextEntry = !btn.selected;
 }
-
 
 
 @end

@@ -126,7 +126,9 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyBank.setItemImgId(R.mipmap.img_bank);
         mMyBank.setItemName("我的银行卡");
         mMyBank.setOnClickListener(v -> {
-
+            RNActivityParams activityParams = new RNActivityParams();
+            activityParams.setRnPage(RNActivity.PageType.MY_BANK);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyBank);
 

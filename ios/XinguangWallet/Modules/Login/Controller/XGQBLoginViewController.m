@@ -243,19 +243,19 @@
     //发送登录请求
     [MemberCoreService loginUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
         NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+        [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
         if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
 //            NSLog(@"responseBefore:%@",responseBefore);
-//            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
         {
 //            [responseAfter writeToFile:@"/Users/bossking/Desktop/responseAfter.plist" atomically:YES];
             [GVUserDefaults standardUserDefaults].accessToken = [responseAfter objectForKey:@"accessToken"];
-            [GVUserDefaults standardUserDefaults].phone = [responseAfter objectForKey:@"phone"];
-            [GVUserDefaults standardUserDefaults].authStatus = [responseAfter objectForKey:@"authStatus"];
-            [GVUserDefaults standardUserDefaults].uuid = [responseAfter objectForKey:@"uuid"];
-            [GVUserDefaults standardUserDefaults].userStatus = [responseAfter objectForKey:@"userStatus"];
-            [GVUserDefaults standardUserDefaults].name = [responseAfter objectForKey:@"name"];
-            [GVUserDefaults standardUserDefaults].nickName = [responseAfter objectForKey:@"nickName"];
-            [GVUserDefaults standardUserDefaults].avatarUrl = [responseAfter objectForKey:@"avatarUrl"];
+//            [GVUserDefaults standardUserDefaults].phone = [responseAfter objectForKey:@"phone"];
+//            [GVUserDefaults standardUserDefaults].authStatus = [responseAfter objectForKey:@"authStatus"];
+//            [GVUserDefaults standardUserDefaults].uuid = [responseAfter objectForKey:@"uuid"];
+//            [GVUserDefaults standardUserDefaults].userStatus = [responseAfter objectForKey:@"userStatus"];
+//            [GVUserDefaults standardUserDefaults].name = [responseAfter objectForKey:@"name"];
+//            [GVUserDefaults standardUserDefaults].nickName = [responseAfter objectForKey:@"nickName"];
+//            [GVUserDefaults standardUserDefaults].avatarUrl = [responseAfter objectForKey:@"avatarUrl"];
             
             //发送登录成功通知
             kPostNotification(kNotificationLoginStateChange, @YES);
