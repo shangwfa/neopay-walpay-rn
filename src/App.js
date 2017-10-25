@@ -53,8 +53,7 @@ class App extends Component {
         let params = ScreenUtils.isIOS ? this.props.params : JsonUtil.strToJson(this.props.params)
         const Navigator = StackNavigator(RouterSetting,
             {
-                // initialRouteName: params.page,
-                initialRouteName: 'myOrder',
+                initialRouteName: params.page,
                 headerMode: 'screen',
                 transitionConfig: () => ({
                     screenInterpolator: CardStackStyleInterpolator.forHorizontal,//设置跳转动画左右滑动
