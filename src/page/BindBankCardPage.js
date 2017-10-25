@@ -44,7 +44,7 @@ class BindBankCardPage extends BasePage {
             NativeModules.commModule.toast('验证码不能为空')
         }
         //提交添加银行卡
-        NetUtil.post('bank/bind_bank_card', {'name':name,'certNo':idCardNo,'cardNo':bankCardNo,'bankCode':'1234','phone':bindPhone,'smsCode':smsCode}, (data) => {
+        NetUtil.post('bank/bind_bank_card', {'name':name,'certNo':idCardNo,'cardNo':bankCardNo,'bankCode':'ABC','phone':bindPhone,'smsCode':smsCode,'bindCardType':2}, (data) => {
 
         })
 

@@ -1,30 +1,14 @@
 import React, {Component} from 'react'
-import {NativeModules, View, StatusBar, DeviceEventEmitter, Animated, Easing} from 'react-native'
+import {NativeModules, View, DeviceEventEmitter, Animated, Easing} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import JsonUtil from './utils/JsonUtil'
-import Splash from './page/SplashPage'
-import Home from "./page/HomePage"
-import ChangeName from './page/ChangeNamePage'
-import ActivityList from './page/ActivityListPage'
-import ModalDemo from './page/ModalDemoPage'
 import ScreenUtils from './utils/ScreenUtils'
 import DemoModal from './modal/DemoModal'
-import QRCode from './page/QRCodePage'
-import PersonalInfo from "./page/PersonalInfoPage"
-import BindBankCard from './page/BindBankCardPage'
-import Feedback from './page/FeedbackPage'
-import Setting from './page/SettingPage'
-import MyOrder from './page/MyOrderPage'
-import PanResponderDemo from './page/PanResponderDemoPage'
-import Filter from './page/FilterPage'
-import MyAsset from './page/MyAsset'
 import {events} from './constants/index'
+import RouterSetting from './constants/RouterSetting'
 
-import BackCardOrderList from './page/BankCardOrderListPage'
-import MyLotteryRecord from './page/MyLotteryRecordPage'
 
-import RedList from "./page/RedListPage"
 class App extends Component {
     constructor(props) {
         super(props)
@@ -67,41 +51,11 @@ class App extends Component {
     render() {
         console.log(this.props)
         let params = ScreenUtils.isIOS ? this.props.params : JsonUtil.strToJson(this.props.params)
-
-        console.log(this.props.params.page)
-        const Navigator = StackNavigator(
+        const Navigator = StackNavigator(RouterSetting,
             {
-                splash: {screen: Splash},
-                home: {screen: Home},
-                changeName: {screen: ChangeName},
-                activityList: {screen: ActivityList},
-                modal: {screen: ModalDemo},
-                qrCode: {screen: QRCode},
-                personalInfo: {screen: PersonalInfo},
-                bindBankCard: {screen: BindBankCard},
-                feedback: {screen: Feedback},
-                setting: {screen: Setting},
-                myOrder: {screen: MyOrder},
-                panResponderDemo: {screen: PanResponderDemo},
-                redList: {screen: RedList},
-                bankCardOrderList: {screen: BackCardOrderList},
-                myLotteryRecord: {screen: MyLotteryRecord},
-                filter:{screen:Filter},
-                myAsset:{screen:MyAsset}
-            },
-            {
-                initialRouteName: params.page,
+                // initialRouteName: params.page,
+                initialRouteName: 'myOrder',
                 headerMode: 'screen',
-                navigationOptions: {
-                    headerStyle: {
-                        backgroundColor: '#3e9ce9'
-                    },
-                    headerTitleStyle: {
-                        color: '#fff',
-                        fontSize: 20
-                    },
-                    headerTintColor: '#fff'
-                },
                 transitionConfig: () => ({
                     screenInterpolator: CardStackStyleInterpolator.forHorizontal,//设置跳转动画左右滑动
                     transitionSpec: {
@@ -132,12 +86,6 @@ class App extends Component {
 
         return (
             <View style={{flex: 1}}>
-                {/*状态栏*/}
-                {/*<StatusBar*/}
-                {/*barStyle={'dark-content'}*/}
-                {/*backgroundColor={'white'}*/}
-                {/*translucent={true}/>*/}
-                {/*导航器*/}
                 <Navigator screenProps={this.props.params}/>
                 {this.whichModal()}
             </View>

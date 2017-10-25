@@ -88,6 +88,11 @@ public class RNActivity extends BaseRNActivity {
                 myAssetParams.setPage(PageType.MY_ASSET);
                 bundle.putString("params", new Gson().toJson(myAssetParams));
                 break;
+            case PageType.MY_BANK:
+                TestParams myBankParams = new TestParams();
+                myBankParams.setPage("bindBankCard");
+                bundle.putString("params", new Gson().toJson(myBankParams));
+                break;
         }
         return bundle;
     }
@@ -138,5 +143,6 @@ public class RNActivity extends BaseRNActivity {
         String ACTIVITY_RED_LIST_PAGE = "redList";
         String MY_LOTTER_RECORD="myLotteryRecord";
         String MY_ASSET="myAsset";
+        String MY_BANK="myBank";
     }
 }

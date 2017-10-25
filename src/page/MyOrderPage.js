@@ -5,157 +5,120 @@ import {
     Text,
     Image,
     SectionList,
-    RefreshControl
+    ListView
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
 import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
-import LoadMoreFooter from '../components/LoadMoreFooter'
 import NetUtil from '../utils/NetUtil'
 import * as RouterPaths from '../constants/RouterPaths'
+import {
+    SwRefreshListView,
+} from 'react-native-swRefresh'
 
 const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
 
 class MyOrderPage extends BasePage {
+    page = 0
+    dataSource = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
 
     constructor(props) {
         super(props);
         this.state = {
-            data: [
+            dataSource: this.dataSource.cloneWithRows([
                 {
-                    data:
-                        [
-                            {
-                                name: 'nader',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            },
-                            {
-                                name: 'chris',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            },
-                            {
-                                name: 'anader',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            },
-                            {
-                                name: 'bchris',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            },
-                            {
-                                name: 'cnader',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            },
-                            {
-                                name: 'dchris',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            },
-                            {
-                                name: 'ndader',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            },
-                            {
-                                name: 'cehris',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00',
-                                rightBottomValue: '付款处理中'
-                            }],
-                    key: '本月'
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-20 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: true
                 },
                 {
-                    data:
-                        [
-                            {
-                                name: 'nick',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            },
-                            {
-                                name: 'amanda',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            },
-                            {
-                                name: 'enick',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            },
-                            {
-                                name: 'ramanda',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            },
-                            {
-                                name: 'tnick',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            },
-                            {
-                                name: 'yamanda',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            },
-                            {
-                                name: 'fnick',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            },
-                            {
-                                name: 'amranda',
-                                imgUrl: url,
-                                middleUpValue: '胡萝卜的兔子店',
-                                middleBottomValue: '08-27 12:23',
-                                rightUpValue: '-38.00'
-                            }],
-                    key: '9月'
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-20 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
                 },
-            ]
-        };
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-20 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
+                },
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-20 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
+                },
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-20 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
+                },
+
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-10 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: true
+                },
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-10 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
+                },
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-10 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
+                },
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-10 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: true
+                },
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-10 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
+                },
+                {
+                    iconUrl: url,
+                    title: '胡萝卜的兔子店',
+                    tradeTime: '2017-10-10 15:31:16',
+                    amount: '-38.00',
+                    status: '付款处理中',
+                    isShowTime: false
+                },
+            ])
+        }
     }
 
     componentWillMount() {
@@ -166,19 +129,39 @@ class MyOrderPage extends BasePage {
         })
     }
 
-    renderItem = (item) => {
-        return <CommonItemTwo imgUrl={item.item.imgUrl}
-                              middleUpValue={item.item.middleUpValue} middleBottomValue={item.item.middleBottomValue}
-                              rightUpValue={item.item.rightUpValue} rightBottomValue={item.item.rightBottomValue}
-                              isLine={true}/>
+
+    onLoadMore = (end) => {
+        let timer = setTimeout(() => {
+            clearTimeout(timer)
+            this.refs.listView.resetStatus() //重置上拉加载的状态
+            end(this._page > 2)//刷新成功后需要调用end结束刷新
+        }, 1500)
     }
 
-    renderHeader = (headerItem) => {
-        return <SectionHeader title={headerItem.section.key} value='查看月账单'/>
+    onRefresh = (end) => {
+        let timer = setTimeout(() => {
+            clearTimeout(timer)
+            end()//刷新成功后需要调用end结束刷新
+        }, 1500)
     }
-    loadMoreData = () => {
-        console.log('加载更多')
+    renderRow = (item) => {
+        return (
+            <View>
+                {this.renderSectionHeader(item)}
+                <CommonItemTwo imgUrl={item.iconUrl}
+                               middleUpValue={item.title} middleBottomValue={item.tradeTime}
+                               rightUpValue={item.amount} rightBottomValue={item.status}
+                               isLine={true}/>
+            </View>
+        )
+
     }
+    renderSectionHeader = (item) => {
+        if (item.isShowTime) {
+            return <SectionHeader title={item.tradeTime} value='查看月账单'/>
+        }
+    }
+
 
     render() {
         return (
@@ -186,14 +169,18 @@ class MyOrderPage extends BasePage {
                 <Header navigation={this.props.navigation} title='我的账单' rightTitle='筛选' onRightPress={() => {
                     this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
-                <SectionList
-                    ListFooterComponent={<LoadMoreFooter isShow={true} isEnd={false}/>}
-                    renderItem={this.renderItem}
-                    renderSectionHeader={this.renderHeader}
-                    sections={this.state.data}
-                    keyExtractor={(item) => item.name}
-                    onEndReached={() => this.loadMoreData()}
-                    onEndReachedThreshold={0.5}
+                <SwRefreshListView
+                    dataSource={this.state.dataSource}
+                    ref="listView"
+                    renderRow={this.renderRow}
+                    onRefresh={this.onRefresh}
+                    onLoadMore={this.onLoadMore}
+                    renderFooter={() => {
+                        return
+                        (<View style={{backgroundColor: 'blue', height: 30}}>
+                            <Text>我是footer</Text>
+                        </View>)
+                    }}
                 />
             </View>
         );
