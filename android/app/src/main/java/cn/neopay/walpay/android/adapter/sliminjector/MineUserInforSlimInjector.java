@@ -82,6 +82,10 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//设置昵称未实名认证
             view.setText(nickName);
         }
-        injector.text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
+        if (StringUtils.isNotEmpty(phone)) {
+            injector.visibility(R.id.mine_user_phone_tv, View.VISIBLE)
+                    .text(R.id.mine_user_phone_tv, FormatUtils.phoneTuomin(phone));
+        }
+
     }
 }

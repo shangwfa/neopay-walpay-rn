@@ -17,7 +17,11 @@ import BackCardOrderList from '../page/BankCardOrderListPage'
 import MyLotteryRecord from '../page/MyLotteryRecordPage'
 import RedList from "../page/RedListPage"
 import PayMessage from "../page/PayMessagePage"
- const  RouterSetting={
+import BankCardList from "../page/BankCardListPage"
+import TransactionDetailsPage from "../page/TransactionDetailsPage"
+import BankCardDetail from "../page/BankCardDetailPage"
+import TopupMsgList from "../page/PhoneTopupMsgListPage"
+const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
     changeName: {screen: ChangeName},
@@ -37,6 +41,13 @@ import PayMessage from "../page/PayMessagePage"
     myAsset:{screen:MyAsset},
     swRefreshScrollView:{screen:SwRefreshScrollView},
     payMessage:{screen:PayMessage}
+    filter: {screen: Filter},
+    myAsset: {screen: MyAsset},
+    swRefreshScrollView: {screen: SwRefreshScrollView},
+    transactionDetails: {screen: TransactionDetailsPage},
+    bankCardList:{screen:BankCardList},
+    bankCardDetail:{screen:BankCardDetail},
+    topupMsgList:{screen:TopupMsgList}
 }
 
 export default RouterSetting

@@ -4,23 +4,41 @@ import {
     View,
     Text,
     TouchableHighlight,
-    DeviceEventEmitter
 } from 'react-native'
 import BasePage from './BasePage'
-import DemoModal from '../modal/DemoModal'
-import {events} from '../constants/index'
+import OperationStatusMoadl from '../modal/OperationStatusMoadl'
+import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import bind_card_failed_icon from '../res/img/bind_card_failed_icon.png'
+import bind_card_success_icon from '../res/img/bind_card_success_icon.png'
 
 class ModalDemoPage extends BasePage {
 
     constructor(props) {
         super(props);
+        this.state={
+            isShow:false
+        }
     }
 
     setModalVisible=()=>{
-        DeviceEventEmitter.emit(events.MODAL_TYPE_EVENT,events.DEMO_MODAL_EVENT); //显示弹窗
+        this.setState({
+            isShow:true
+        })
     }
 
 
+    close=()=>{
+        this.setState({
+            isShow:false
+        })
+    }
+
+    unBind=()=>{
+        this.setState({
+            isShow:false
+        })
+        //解绑操作
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -33,7 +51,14 @@ class ModalDemoPage extends BasePage {
                     <Text>First part and </Text>
                     <Text>second part</Text>
                 </Text>
-                <DemoModal/>
+                {/*<DemoModal isShow={this.state.isShow} callback={(isShow)=>{*/}
+                    {/*this.setState({*/}
+                        {/*isShow:isShow*/}
+                    {/*})*/}
+                {/*}}/>*/}
+                {/*<OperationStatusMoadl  icon={bind_card_success_icon}  tip='解绑成功' isShow={this.state.isShow}/>*/}
+
+                <UnbindBankCardModal isShow={this.state.isShow} close={()=>this.close()} unBind={()=>this.unBind()}/>
             </View>
         )
     }

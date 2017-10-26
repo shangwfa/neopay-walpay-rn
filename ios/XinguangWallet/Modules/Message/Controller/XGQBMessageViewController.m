@@ -9,6 +9,7 @@
 #import "XGQBMessageViewController.h"
 #import "XGQBCommMessTVC.h"
 #import "XGQBActiMessTVC.h"
+#import "XGQBRNViewController.h"
 
 #import "XGQBNoContentViewController.h"
 #import "XGQBNetworkFailureViewController.h"
@@ -145,16 +146,19 @@
         RNVC.pageType = @"payMessage";
         [self.navigationController pushViewController:RNVC animated:YES];
     }
-    
-    
-    else if (arc4random()%2) {
+    else if([messDict[@"type"]isEqualToString:@"mobileMess"])
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"topupMsgList";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }else if (arc4random()%2) {
         XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
         [self.navigationController pushViewController:noContentVC animated:YES];
     }else{
         XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
         [self.navigationController pushViewController:netWorkFailVC animated:YES];
+
     }
-    
 }
 
 @end
