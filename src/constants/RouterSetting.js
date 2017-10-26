@@ -16,6 +16,7 @@ import SwRefreshScrollView from '../page/SwRefreshScrollViewDemo'
 import BackCardOrderList from '../page/BankCardOrderListPage'
 import MyLotteryRecord from '../page/MyLotteryRecordPage'
 import RedList from "../page/RedListPage"
+import PayMessage from "../page/PayMessagePage"
  const  RouterSetting={
     splash: {screen: Splash},
     home: {screen: Home},
@@ -34,7 +35,8 @@ import RedList from "../page/RedListPage"
     myLotteryRecord: {screen: MyLotteryRecord},
     filter:{screen:Filter},
     myAsset:{screen:MyAsset},
-    swRefreshScrollView:{screen:SwRefreshScrollView}
+    swRefreshScrollView:{screen:SwRefreshScrollView},
+    payMessage:{screen:PayMessage}
 }
 
 export default RouterSetting
