@@ -12,22 +12,22 @@ import ScreenUtil from '../utils/ScreenUtils'
 const PayMessageContentCell = props => {
 
     const {
-        type,
-        title,
-        Date,
-        count,
-        paymethod,
-        dealer,
+        createTime,
+        payNoticeType,
+        payBy,
+        payTo,
+        withAttach,
         attach,
+        amount,
         ...attributes
     } = props
 
     renderAttach = () => {
 
-        if (true) {
+        if (withAttach) {
             return(<View style = {styles.detailLabel}>
-                <Text style = {styles.detailItem}>备注:</Text>
-                <Text style = {styles.detailDes}>欠你的钱,还给你啦</Text>
+                <Text style = {styles.detailItem}>备注 :</Text>
+                <Text style = {styles.detailDes}>{attach}</Text>
             </View>)
     }
     }
@@ -36,10 +36,10 @@ const PayMessageContentCell = props => {
             <View style={styles.content_container}>
                 <View style ={styles.titleView}>
                     <Text style = {styles.titleText}>付款成功</Text>
-                    <Text style = {styles.titleDate}>08-24 12:34</Text>
+                    <Text style = {styles.titleDate}>{createTime}</Text>
                 </View>
                 <View style = {styles.countView}>
-                    <Text style = {styles.countText}>-38.00</Text>
+                    <Text style = {styles.countText}>{amount}.00</Text>
                 </View>
                 <View style = {styles.separatorLineView}>
                 <View style = {styles.separatorLine}>
@@ -47,12 +47,12 @@ const PayMessageContentCell = props => {
                 </View>
                 <View style = {styles.detailView}>
                     <View style = {styles.detailLabel}>
-                        <Text style = {styles.detailItem}>付款方式:</Text>
-                        <Text style = {styles.detailDes}>中信银行储蓄卡</Text>
+                        <Text style = {styles.detailItem}>付款方式 :</Text>
+                        <Text style = {styles.detailDes}>{payBy}</Text>
                     </View>
                     <View style = {styles.detailLabel}>
-                        <Text style = {styles.detailItem}>交易对象:</Text>
-                        <Text style = {styles.detailDes}>178果舍</Text>
+                        <Text style = {styles.detailItem}>交易对象 :</Text>
+                        <Text style = {styles.detailDes}>{payTo}</Text>
                     </View>
 
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 
     content_container: {
         backgroundColor: colors.white,
-        width:350,
+        width:ScreenUtil.width - 26,
         marginTop:5,
         marginBottom:5,
         borderRadius:5,
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     countView:{
         alignItems:'center',
         justifyContent:'center',
-        marginTop:25,
-        marginBottom:25,
+        marginTop:10,
+        marginBottom:18,
     },
     countText:{
         fontSize:27,
@@ -112,11 +112,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#DDDDDD',
     },
     detailView:{
-        marginBottom:20,
+        marginBottom:16,
     },
     detailLabel:{
         flexDirection:'row',
-        marginTop:11,
+        marginTop:10,
         marginLeft:13,
     },
     detailItem:{
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     },
     detailDes:{
         color:'#999999',
+        marginLeft:4,
     }
 });
 
