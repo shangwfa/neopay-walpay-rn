@@ -18,7 +18,7 @@ class NetUtil extends Component {
 
     static post(urlPath, data, successCallbak, isShowLoading = true) {
         if (isShowLoading) {
-            NativeModules.commModule.showLoadingDialog('')
+            // NativeModules.commModule.showLoadingDialog('')
         }
         NativeModules.commModule.netCommParas((originalata) => {
             let params = JSON.parse(originalata)
@@ -42,11 +42,11 @@ class NetUtil extends Component {
                     } else {
                         this.handleException(response.netCode, response.retMsg)
                     }
-                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
+                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
                 })
                 .catch((err) => {
                     if(isShowLoading) DeviceEventEmitter.emit(events.LOADING_MODAL_EVENT,false)
-                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
+                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
                     console.log(err)
                     NativeModules.commModule.toast('网络不给力')
                 })
