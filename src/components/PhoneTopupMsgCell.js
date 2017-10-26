@@ -11,7 +11,7 @@ import Divider from '../components/Divider'
 
 const PhoneTopupMsgCell = props => {
     const {
-        topupResultValue,
+        relustTilte,
         dateValue,
         topupTypeValue,
         priceValue,
@@ -21,7 +21,7 @@ const PhoneTopupMsgCell = props => {
     } = props
 
     const styles = StyleSheet.create({
-        reslutTitle: {
+        reslut_Title: {
             marginLeft:15,
             marginTop:15,
             fontSize: 18,
@@ -67,14 +67,22 @@ const PhoneTopupMsgCell = props => {
         },
 
         background_container: {
+            borderRadius:5,
             backgroundColor:colors.white,
-            marginLeft:15
+            marginLeft:15,
+            marginRight:15
+        },
+
+        bottom_view:{
+            backgroundColor:colors.page_background,
+            height:15
         }
     });
 
     const rendercellContent = () => {
-        return <View>
-            <Text style={styles.reslutTitle}>{topupResultValue}</Text>
+        console.log(dateValue)
+        return <View style={styles.background_container}>
+            <Text style={styles.reslut_Title}>{relustTilte}</Text>
             <Text style={styles.dateLab}>{dateValue}</Text>
             <Text style={styles.topupType}>{topupTypeValue}</Text>
             <Text style={styles.priceValue}>{priceValue}</Text>
@@ -86,9 +94,12 @@ const PhoneTopupMsgCell = props => {
     }
 
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.background_container]} {...attributes}>
-            <View style={styles.background_container}>
-                    {rendercellContent()}
+        <TouchableOpacity activeOpacity={0.8} {...attributes}>
+            <View >
+                {rendercellContent()}
+                <View style = {styles.bottom_view}>
+
+                </View>
             </View>
 
         </TouchableOpacity>
