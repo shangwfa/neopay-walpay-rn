@@ -16,6 +16,7 @@ const BankCardCell = props => {
         bankNameValue,
         bankTypeValue,
         cardNoValue,
+        click,
         ...attributes
     } = props
 
@@ -81,7 +82,7 @@ const BankCardCell = props => {
     }
 
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} {...attributes}>
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} onPress ={click} {...attributes}>
             <View style={styles.background_container}>
                 <View style={styles.content_container} >
                     <Image style={styles.avatar} source={{uri:imgIconUrl}}/>

@@ -50,7 +50,7 @@
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
                          moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":@"bankDetail"}}
+                         initialProperties :@{@"params": @{@"page":_pageType}}
                           launchOptions    : nil];
     
     self.view = rootView;

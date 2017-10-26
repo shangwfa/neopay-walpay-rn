@@ -21,73 +21,74 @@ const PhoneTopupMsgCell = props => {
     } = props
 
     const styles = StyleSheet.create({
-        avatar: {
-            width: 34,
-            height: 34,
-            borderRadius: 17,
-            marginLeft: 20,
-            marginTop: 20,
+        reslutTitle: {
+            marginLeft:15,
+            marginTop:15,
+            fontSize: 18,
+            color: colors.black,
+            height: 20
         },
 
-        textAvatar: {
-            marginLeft: 10
+        dateLab: {
+            marginLeft: 15,
+            marginTop:10,
+            fontSize: 14,
+            color: colors.black,
+            height: 20
         },
 
-        right_container: {
-            marginRight: 10
+        topupType: {
+            marginTop:25,
+            color: colors.black,
+            fontSize: 15,
+            height: 20
         },
-        bankName_value: {
-            marginTop: 20,
-            color: colors.white,
-            fontSize: 15
-        },
-        bankType_value: {
-            marginTop: 5,
-            color: colors.white,
-            fontSize: 11
-        },
-        cardNo_value: {
-            marginTop: 10,
-            color: colors.white,
-            fontSize: 15
-        },
-        middle_container: {
-            marginLeft: 20,
-        },
-        content_container: {
-            flexDirection: 'row',
-            height: 130,
-            marginTop: 10,
+
+        priceValue: {
             marginLeft: 10,
-            marginRight: 10,
-            borderRadius:5,
-            backgroundColor:colors.orange
+            color: colors.black,
+            fontSize: 20,
+            height: 30,
         },
-        container: {
-            backgroundColor: colors.black
+
+        bottom_title: {
+            marginTop: 20,
+            marginLeft:15,
+            color: colors.black,
+            height: 20,
+            fontSize: 15
+        },
+
+        bottom_value: {
+            marginLeft:15,
+            color: colors.black,
+            height: 20,
+            fontSize: 15
         },
 
         background_container: {
-            height: 140,
-            backgroundColor:colors.white
+            backgroundColor:colors.white,
+            marginLeft:15
         }
     });
 
-    const renderbankContent = () => {
-        return <View style={styles.textAvatar}>
-            <Text style={styles.bankName_value}>{bankNameValue}</Text>
-            <Text style={styles.bankType_value}>{bankTypeValue}</Text>
-            <Text style={styles.cardNo_value}>{cardNoValue}</Text>
+    const rendercellContent = () => {
+        return <View>
+            <Text style={styles.reslutTitle}>{topupResultValue}</Text>
+            <Text style={styles.dateLab}>{dateValue}</Text>
+            <Text style={styles.topupType}>{topupTypeValue}</Text>
+            <Text style={styles.priceValue}>{priceValue}</Text>
+            <Text style={styles.bottom_title}>{'充值号码'}</Text>
+            <Text style={styles.bottom_value}>{topupPhoneNum}</Text>
+            <Text style={styles.bottom_title}>{'付款方式'}</Text>
+            <Text style={styles.bottom_value}>{payType}</Text>
         </View>
     }
 
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} {...attributes}>
+        <TouchableOpacity activeOpacity={0.8} style={[styles.background_container]} {...attributes}>
             <View style={styles.background_container}>
-                <View style={styles.content_container} >
-                    <Image style={styles.avatar} source={{uri:imgIconUrl}}/>
-                    {renderbankContent()}
-                </View>
+                    {rendercellContent()}
             </View>
 
         </TouchableOpacity>

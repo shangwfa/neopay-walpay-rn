@@ -9,6 +9,7 @@
 #import "XGQBMessageViewController.h"
 #import "XGQBCommMessTVC.h"
 #import "XGQBActiMessTVC.h"
+#import "XGQBRNViewController.h"
 
 #import "XGQBNoContentViewController.h"
 #import "XGQBNetworkFailureViewController.h"
@@ -91,13 +92,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (arc4random()%2) {
-        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
-        [self.navigationController pushViewController:noContentVC animated:YES];
-    }else{
-        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
-        [self.navigationController pushViewController:netWorkFailVC animated:YES];
+    if(indexPath.row == 0)
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"topupMsgList";
+        [self.navigationController pushViewController:RNVC animated:YES];
     }
+//    if (arc4random()%2) {
+//        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
+//        [self.navigationController pushViewController:noContentVC animated:YES];
+//    }else{
+//        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
+//        [self.navigationController pushViewController:netWorkFailVC animated:YES];
+//    }
     
 }
 
