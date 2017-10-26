@@ -23,8 +23,10 @@ import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
+import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
 import cn.neopay.walpay.android.module.rnParams.TestParams;
 import cn.neopay.walpay.android.rn.RNCacheViewManager;
+import cn.neopay.walpay.android.view.dialog.LoadingDialog;
 
 /**
  * Created by shangwf on 2017/9/12.
@@ -114,6 +116,29 @@ public class RNActivity extends BaseRNActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCloseRNPageEvent(CloseRNPageEvent event) {
         finish();
+    }
+
+    private LoadingDialog mLoadingDialog;
+    private boolean isShowLoadingDialog;
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoadingEvent(LoadingDialogEvent event) {
+        if(event.isShow()){
+            if(null==mLoadingDialog){
+                mLoadingDialog=new LoadingDialog(this, R.style.LoadingDialog);
+            }
+            if(isShowLoadingDialog){
+                return;
+            }else {
+                isShowLoadingDialog=true;
+                mLoadingDialog.show();
+            }
+        }else {
+            if(null!=mLoadingDialog&&isShowLoadingDialog){
+                mLoadingDialog.dismiss();
+            }
+        }
+
+
     }
 
     @Override
