@@ -8,41 +8,46 @@ import {
 import BasePage from './BasePage'
 import OperationStatusMoadl from '../modal/OperationStatusMoadl'
 import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import OneButtonModal from '../modal/OneButtonModal'
+import TwoButtonModal from '../modal/TwoButtonModal'
 import bind_card_failed_icon from '../res/img/bind_card_failed_icon.png'
 import bind_card_success_icon from '../res/img/bind_card_success_icon.png'
+
 
 class ModalDemoPage extends BasePage {
 
     constructor(props) {
         super(props);
-        this.state={
-            isShow:false
+        this.state = {
+            isShow: false
         }
     }
 
-    setModalVisible=()=>{
+    setModalVisible = () => {
         this.setState({
-            isShow:true
+            isShow: true
         })
     }
 
 
-    close=()=>{
+    close = () => {
         this.setState({
-            isShow:false
+            isShow: false
         })
     }
 
-    unBind=()=>{
+    unBind = () => {
         this.setState({
-            isShow:false
+            isShow: false
         })
         //解绑操作
     }
+
     render() {
         return (
             <View style={styles.container}>
-                <TouchableHighlight underlayColor='transparent' style={styles.buttonStyle} onPress={()=>this.setModalVisible()}>
+                <TouchableHighlight underlayColor='transparent' style={styles.buttonStyle}
+                                    onPress={() => this.setModalVisible()}>
                     <Text style={styles.buttonText}>
                         点击弹窗
                     </Text>
@@ -52,34 +57,38 @@ class ModalDemoPage extends BasePage {
                     <Text>second part</Text>
                 </Text>
                 {/*<DemoModal isShow={this.state.isShow} callback={(isShow)=>{*/}
-                    {/*this.setState({*/}
-                        {/*isShow:isShow*/}
-                    {/*})*/}
+                {/*this.setState({*/}
+                {/*isShow:isShow*/}
+                {/*})*/}
                 {/*}}/>*/}
                 {/*<OperationStatusMoadl  icon={bind_card_success_icon}  tip='解绑成功' isShow={this.state.isShow}/>*/}
 
-                <UnbindBankCardModal isShow={this.state.isShow} close={()=>this.close()} unBind={()=>this.unBind()}/>
+                {/*<UnbindBankCardModal isShow={this.state.isShow} close={()=>this.close()} unBind={()=>this.unBind()}/>*/}
+                {/*<OneButtonModal isShow={this.state.isShow} content='xxxxxxxxx' btnTitle="确定" onPress={()=>this.close()}/>*/}
+                <TwoButtonModal isShow={this.state.isShow} content='xxxxxxx' oneBtnText='忘记密码' twoBtnText='去登陆'
+                                onePress={() => this.close()} twoPress={() => this.close()}/>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
         backgroundColor: '#ECECF0',
     },
 
-    buttonStyle:{
-        flex:1,
-        height:44,
+    buttonStyle: {
+        flex: 1,
+        height: 44,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
+
     },
-    buttonText:{
-        fontSize:16,
-        color:'#3393F2',
-        textAlign:'center',
+    buttonText: {
+        fontSize: 16,
+        color: '#3393F2',
+        textAlign: 'center',
     },
 });
 
