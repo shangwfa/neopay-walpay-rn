@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>type</key>
+		<string>shopMess</string>
+		<key>unread</key>
+		<true/>
+		<key>des</key>
+		<string>四月活动,红包多多</string>
+		<key>time</key>
+		<string>06/06 12:23</string>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>systemAct</string>
+		<key>unread</key>
+		<true/>
+		<key>url</key>
+		<string>https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1508929095342&amp;di=9515bd1f1b2d1f7fcaa50e1dcddd20ff&amp;imgtype=0&amp;src=http%3A%2F%2Fimg.sc115.com%2Fuploads%2Fsc%2Fjpgs%2F1411%2Fapic7497_sc115.com.jpg</string>
+		<key>time</key>
+		<string>06/06 12:23</string>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>mobileMess</string>
+		<key>unread</key>
+		<true/>
+		<key>des</key>
+		<string>充值100元</string>
+		<key>time</key>
+		<string>06/06 12:23</string>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>shopAct</string>
+		<key>unread</key>
+		<true/>
+		<key>url</key>
+		<string>https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1508929095342&amp;di=9515bd1f1b2d1f7fcaa50e1dcddd20ff&amp;imgtype=0&amp;src=http%3A%2F%2Fimg.sc115.com%2Fuploads%2Fsc%2Fjpgs%2F1411%2Fapic7497_sc115.com.jpg</string>
+		<key>time</key>
+		<string>06/06 12:23</string>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>redPacketAct</string>
+		<key>unread</key>
+		<true/>
+		<key>url</key>
+		<string>https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1508929095342&amp;di=9515bd1f1b2d1f7fcaa50e1dcddd20ff&amp;imgtype=0&amp;src=http%3A%2F%2Fimg.sc115.com%2Fuploads%2Fsc%2Fjpgs%2F1411%2Fapic7497_sc115.com.jpg</string>
+		<key>time</key>
+		<string>06/06 12:23</string>
+	</dict>
+	<dict>
+		<key>type</key>
+		<string>systemMess</string>
+		<key>unread</key>
+		<true/>
+		<key>des</key>
+		<string>四月活动,红包多多</string>
+		<key>time</key>
+		<string>06/06 12:23</string>
+	</dict>
+</array>
+</plist>

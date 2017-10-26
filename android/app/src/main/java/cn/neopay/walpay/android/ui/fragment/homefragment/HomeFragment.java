@@ -51,6 +51,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter, FragmentHo
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectCurrentPageCallBack(HomeEventBean homeEventBean) {
-        initView();
+        mPresenter.getUserInfo();
     }
 }

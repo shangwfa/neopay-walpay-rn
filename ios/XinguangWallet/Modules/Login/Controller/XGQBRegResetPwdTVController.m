@@ -131,6 +131,10 @@
     if (_payPwdTextField.text) {
         [body setObject:_payPwdTextField.text forKey:@"payPassword"];
     }
+    if (_idNoTextField.text) {
+        [body setObject:_idNoTextField.text forKey:@"certNo"];
+    }
+  
     if (self.type == XGQBRegResetPwdTVConTypeRegister) {
         //发送注册请求
         [MemberCoreService registerUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
@@ -145,6 +149,7 @@
             
         }];
     }
+    //发送重置登录密码请求
     else if(self.type == XGQBRegResetPwdTVConTypeResetLoginPwd){
         [MemberCoreService resetLoginPassword:body andSuccessFn:^(id responseAfter, id responseBefore) {
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
@@ -156,7 +161,23 @@
             
         }];
     }
-    
+    //发送重置支付密码请求
+    else if(self.type == XGQBRegResetPwdTVConTypeResetPayPwdWithID ||self.type == XGQBRegResetPwdTVConTypeResetPayPwdNoID)
+    {
+        if ([GVUserDefaults standardUserDefaults].accessToken) {
+            [body setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
+        }
+        [MemberCoreService resetPayPassword:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
+                //            NSLog(@"responseBefore:%@",responseBefore);
+            {
+                [SVProgressHUD showSuccessWithStatus:@"重置支付密码成功"];
+            }
+        } andFailerFn:^(NSError *error) {
+            
+        }];
+        
+    }
 
 }
 
@@ -204,7 +225,19 @@
             
         }];
     }
-    
+    else if(self.type == XGQBRegResetPwdTVConTypeResetPayPwdNoID||self.type == XGQBRegResetPwdTVConTypeResetPayPwdWithID){
+        [MemberCoreService sendResetPayPasswordCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
+            if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
+            {
+                [SVProgressHUD showSuccessWithStatus:@"验证码发送成功"];
+                [btn startCountDown];
+            }
+        } andFailerFn:^(NSError *error) {
+            
+        }];
+    }
 
     
 }

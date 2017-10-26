@@ -28,12 +28,13 @@ import cn.neopay.walpay.android.ui.RNActivity;
 /**
  * @author carlos.guo
  * @date 2017/9/27
- * @describe
+ * @describe MineFragment 我的页面
  */
 
 public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMineLayoutBinding> implements MineFragmentContract.IView {
 
     private SlimAdapter mMineSlimAdapter;
+    private ArrayList<Object> mData;
 
     @Override
     public int getLayoutId() {
@@ -43,6 +44,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
     @Override
     public void initView() {
         mPageBinding.commonHeader.setVisibility(View.GONE);
+        mData = new ArrayList<>();
         mMineSlimAdapter = SlimAdapter.create()
                 .register(R.layout.common_user_info_view_layout, new MineUserInforSlimInjector())
                 .register(R.layout.common_line_item_layout, new MineLineSlimInjector())
@@ -52,7 +54,18 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mViewBinding.mineRecyclerView.setLayoutManager(layoutManager);
         mViewBinding.mineRecyclerView.setAdapter(mMineSlimAdapter);
+        handleInitView();
         mPresenter.getUserInfoData();
+    }
+
+    private void handleInitView() {
+        mData.clear();
+        mData.add(new UserInfoResponseBean());
+        setTopMineItemData(mData);
+        mData.add(new CommonLineItemBean());
+        setNextItemData(mData);
+        mData.add(new CommonLineItemBean());
+        mMineSlimAdapter.updateData(mData);
     }
 
 
@@ -64,15 +77,11 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
 
     @NonNull
     private ArrayList<Object> getMineItemData(UserInfoResponseBean userInfoResponseBean) {
-        ArrayList<Object> data = new ArrayList<>();
         if (null != userInfoResponseBean) {
-            data.add(userInfoResponseBean);
+            mData.remove(0);
+            mData.add(0, userInfoResponseBean);
         }
-        setTopMineItemData(data);
-        data.add(new CommonLineItemBean());
-        setNextItemData(data);
-        data.add(new CommonLineItemBean());
-        return data;
+        return mData;
     }
 
     private void setNextItemData(ArrayList<Object> data) {
@@ -145,6 +154,6 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectCurrentPageCallBack(MineEventBean mineEventBean) {
-        initView();
+        mPresenter.getUserInfoData();
     }
 }
