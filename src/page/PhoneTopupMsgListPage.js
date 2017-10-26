@@ -14,7 +14,7 @@ import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
 import NetUtil from '../utils/NetUtil'
 import * as RouterPaths from '../constants/RouterPaths'
-import msgCell from  '../components/PhoneTopupMsgCell'
+import MsgCell from  '../components/PhoneTopupMsgCell'
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
@@ -111,22 +111,24 @@ class PhoneTopupMsgListPage extends BasePage {
         }, 1500)
     }
     renderRow = (item) => {
+        console.log(item)
         return (
             <View>
                 {this.renderSectionHeader(item)}
-                <msgCell topupResultValue={item.reslutTitle}
-                dateValue = {item.date}
-                topupTypeValue = {item.topupType}
-                priceValue = {item.amount}
-                topupPhoneNum = {item.phone}
-                payType = {item.payText}/>
+                <MsgCell
+                    dateValue = {item.date}
+                    topupTypeValue = {item.topupType}
+                    priceValue = {item.amount}
+                    topupPhoneNum = {item.phone}
+                    payType = {item.payText}
+                    relustTilte = {item.reslutTitle}/>
             </View>
         )
 
     }
     renderSectionHeader = (item) => {
         if (item.isShowTime) {
-            return <SectionHeader title={'xxxx'}/>
+            return <SectionHeader style={styles.list_header} title={'xxxx'}/>
         }
     }
 
@@ -156,7 +158,8 @@ class PhoneTopupMsgListPage extends BasePage {
 const styles = StyleSheet.create({
     list_header: {
         height: 40,
-        backgroundColor: colors.one_color
+        backgroundColor: colors.page_background,
+        alignItems:'center'
     },
     container: {
         flex: 1,

@@ -35,9 +35,8 @@
     
     //预先加载RN页面
 //        NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
-    
-    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
+    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.11:8081/index.ios.bundle?platform=ios"];
+//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
 
 
     
@@ -66,7 +65,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
 }
 

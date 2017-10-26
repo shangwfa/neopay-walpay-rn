@@ -4,6 +4,16 @@
 <array>
 	<dict>
 		<key>type</key>
+		<string>payMess</string>
+		<key>unread</key>
+		<true/>
+		<key>des</key>
+		<string>四月活动,红包多多</string>
+		<key>time</key>
+		<string>06/06 12:23</string>
+	</dict>
+	<dict>
+		<key>type</key>
 		<string>shopMess</string>
 		<key>unread</key>
 		<true/>
