@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import BasePage from './BasePage'
 import OperationStatusMoadl from '../modal/OperationStatusMoadl'
+import UnbindBankCardModal from '../modal/UnbindBankCardModal'
 import bind_card_failed_icon from '../res/img/bind_card_failed_icon.png'
 import bind_card_success_icon from '../res/img/bind_card_success_icon.png'
 
@@ -26,6 +27,18 @@ class ModalDemoPage extends BasePage {
     }
 
 
+    close=()=>{
+        this.setState({
+            isShow:false
+        })
+    }
+
+    unBind=()=>{
+        this.setState({
+            isShow:false
+        })
+        //解绑操作
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -43,7 +56,9 @@ class ModalDemoPage extends BasePage {
                         {/*isShow:isShow*/}
                     {/*})*/}
                 {/*}}/>*/}
-                <OperationStatusMoadl  icon={bind_card_success_icon}  tip='解绑成功' isShow={this.state.isShow}/>
+                {/*<OperationStatusMoadl  icon={bind_card_success_icon}  tip='解绑成功' isShow={this.state.isShow}/>*/}
+
+                <UnbindBankCardModal isShow={this.state.isShow} close={()=>this.close()} unBind={()=>this.unBind()}/>
             </View>
         )
     }
