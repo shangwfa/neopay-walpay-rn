@@ -5,7 +5,7 @@ const TEST_URL = "http://139.224.11.160:8202/walpay-web/";
 const MOCK_URL = "http://172.16.33.151:8888/walpay-web/";
 class NetUtil extends Component {
 
-    static baseUrl = TEST_URL;
+    static baseUrl = MOCK_URL;
     static handleException(code, msg) {
         switch (code) {
             case "1":

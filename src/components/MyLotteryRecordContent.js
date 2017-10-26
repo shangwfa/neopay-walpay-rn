@@ -7,20 +7,30 @@ import {
     Dimensions,
     ScrollView,
     ListView,
+    TouchableWithoutFeedback,
 } from 'react-native'
+
+import ActivityList from './MyLotteryRecordActiList'
+import RedPacketList from './MyLotteryRecordRedpList'
+import ScreenUtils from '../utils/ScreenUtils'
 
 const SDimensions = require('Dimensions');
 const {width} = SDimensions.get('window');
+const {height} = SDimensions.get('window');
 
 
 class MyLotteryRecordContent extends Component {
 
     constructor(props) {
         super(props);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             activePage: 0,
+            dataSource: ds.cloneWithRows(['row 1', 'row 2']),
         };
     }
+
+    _scroll;
 
     render() {
         return (
@@ -28,32 +38,24 @@ class MyLotteryRecordContent extends Component {
                 <View>
                     <View style={styles.sectionController}>
                         {this.renderSectionHeader()}
-                        <View style={styles.sectionItem}>
-                            <Text style={styles.sectionTitle}>
-                                大红包
-                            </Text>
-                        </View>
-                        <View style={styles.sectionItem}>
-                            <Text style={styles.sectionTitle}>
-                                活动
-                            </Text>
-                        </View>
                     </View>
 
                     <View style={styles.indicatorViewStyle}>
                         {this.renderIndicator()}
                     </View>
                 </View>
-                <ScrollView horizontal={true}
+                <ScrollView
+                            ref={(scroll)=>this._scroll = scroll}
+                            horizontal={true}
                             pagingEnabled={true}
-                            showsHorizontalScrollIndicator={true}
+                            showsHorizontalScrollIndicator={false}
                             onMomentumScrollEnd={(e) => {this.onScrollAnimationEnd(e)}}
                             style={styles.actScrollView}>
                     <View style={styles.page1}>
-
+                        <RedPacketList/>
                     </View>
                     <View style={styles.page2}>
-
+                        <ActivityList/>
                     </View>
 
                 </ScrollView>
@@ -74,7 +76,24 @@ class MyLotteryRecordContent extends Component {
 
     //头部按钮
     renderSectionHeader(){
+        //指示器数组
+        let indicatorArr = [], style;
+        const sectionTitleArr = ['大红包','活动'];
 
+        //遍历创建组件
+        for (let i = 0; i < 2; i++) {
+            //设置圆点的样式
+            style = (i === this.state.activePage) ? {color: 'red'} : {color: 'gray'}
+            indicatorArr.push(
+                <TouchableWithoutFeedback key={i} onPress={()=>{this._scroll.scrollTo({x:width*i,y:0,animated:true})}}>
+                <View key={i} style = {[{height:50,width:width/2.0,alignItems:'center',justifyContent:'center'}]} >
+                    <Text style = {[{fontSize:15},style]}>{sectionTitleArr[i]}</Text>
+                </View>
+                </TouchableWithoutFeedback>
+            );
+        }
+        //返回数组
+        return indicatorArr;
     }
 
     //页码（指示器）
@@ -86,7 +105,7 @@ class MyLotteryRecordContent extends Component {
             //设置圆点的样式
             style = (i === this.state.activePage) ? {backgroundColor: 'red'} : {backgroundColor: 'transparent'}
             indicatorArr.push(
-                <View key={i} style = {[{height:2,width:width/2.0},style]}></View>
+                <View key={i} style = {[{height: 2, width: width / 2.0}, style]}/>
             );
         }
         //返回数组
@@ -110,10 +129,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
     },
-    sectionTitle:{
-        fontSize:15,
-        color:'red',
-    },
+
 
     indicatorLine:{
         height:2,
@@ -123,17 +139,15 @@ const styles = StyleSheet.create({
     },
 
     actScrollView:{
-        backgroundColor:'green',
+        height:height -ScreenUtils.headerHeight-208,
     },
     page1:{
-        backgroundColor:'yellow',
         width:width,
-        height:300,
+        height:height -ScreenUtils.headerHeight-220,
     },
     page2:{
-        backgroundColor:'blue',
         width:width,
-        height:300,
+        height:height -ScreenUtils.headerHeight-220,
 
     },
 

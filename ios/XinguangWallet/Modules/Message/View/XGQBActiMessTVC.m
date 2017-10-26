@@ -7,6 +7,7 @@
 //
 
 #import "XGQBActiMessTVC.h"
+#import "XGQBActiRedPView.h"
 
 @implementation XGQBActiMessTVC
 
@@ -51,6 +52,10 @@
     //图片
     UIImage *img = [cell createImageWithColor:kRandomColor andFrame:CGRectMake(0, 0, 350/375.0*kScreenWidth, 155/375.0*kScreenWidth) ];
     UIImageView *imgV = [[UIImageView alloc]initWithImage:img];
+    if (type==XGQBActiMessTypeRedPocket) {
+        imgV = nil;
+        imgV = (UIImageView*) [[XGQBActiRedPView alloc]init];
+    }
     kViewRadius(imgV, 5);
     [cell.contentView addSubview:imgV];
     

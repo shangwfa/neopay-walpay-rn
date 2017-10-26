@@ -17,11 +17,21 @@
 
 @interface XGQBMessageViewController ()
 
-
+@property (nonatomic,strong) NSMutableArray *messArr;
 
 @end
 
 @implementation XGQBMessageViewController
+
+
+-(NSMutableArray*)messArr
+{
+    if (!_messArr) {
+        
+        _messArr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"mess" ofType:@"plist"]];
+    }
+    return _messArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,11 +39,7 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
      self.clearsSelectionOnViewWillAppear = NO;
 
-    
-//    self.tableView.estimatedRowHeight = 200;
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -50,44 +56,83 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 50;
+    return self.messArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row%2==0)
-    {
+    NSDictionary *messDict = self.messArr[indexPath.row];
+    
+    if ([messDict[@"type"]containsString:@"Mess"]) {
         return (79+8);
-//        return (79*kScreenWidth/375.0+8);
-    }else{
+    }
+    else{
         return (218*kScreenWidth/375.0+8);
     }
 }
 
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *messDict = self.messArr[indexPath.row];
     
-    NSString *cellIdentify = [NSString string];
+    if ([messDict[@"type"]isEqualToString:@"shopMess"]) {
+       
+        UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeShopAd timeLabel:@"06/06 00:00"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
     
-    if (indexPath.row%2==0){
-        cellIdentify = @"mess";
-    }else{
-        cellIdentify = @"messCell";
     }
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
-     if (!cell && indexPath.row%2 ==0)
-     {
-         cell = [XGQBCommMessTVC messTableViewCellWithType:arc4random()%4 timeLabel:@"06/06 00:00"];
-
-     }else if (!cell)
-     {
-         cell = [XGQBActiMessTVC actiTableViewCellWithType:arc4random()%3 timeLabel:@"06/06 00:00"];
-     }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
+    else if([messDict[@"type"]isEqualToString:@"mobileMess"]){
+        
+        UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeCellPhone timeLabel:@"06/06 00:00"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }
+    else if([messDict[@"type"]isEqualToString:@"shopAct"]){
+        
+        UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeShop timeLabel:@"06/06 00:00"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }
+    else if([messDict[@"type"]isEqualToString:@"redPacketAct"]){
+        
+        UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeRedPocket timeLabel:@"06/06 00:00"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }
+    else if([messDict[@"type"]isEqualToString:@"systemMess"]){
+        
+        UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeSystem timeLabel:@"06/06 00:00"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }
+    else if([messDict[@"type"]isEqualToString:@"systemAct"]){
+        
+        UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeSystem timeLabel:@"06/06 00:00"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }
+    else if([messDict[@"type"]isEqualToString:@"payMess"]){
+            
+            UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypePayment timeLabel:@"06/06 00:00"];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            return cell;
+    }
+    return nil;
  }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
