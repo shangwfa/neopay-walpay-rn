@@ -40,7 +40,7 @@ const RouterSetting = {
     filter:{screen:Filter},
     myAsset:{screen:MyAsset},
     swRefreshScrollView:{screen:SwRefreshScrollView},
-    payMessage:{screen:PayMessage}
+    payMessage:{screen:PayMessage},
     filter: {screen: Filter},
     myAsset: {screen: MyAsset},
     swRefreshScrollView: {screen: SwRefreshScrollView},
