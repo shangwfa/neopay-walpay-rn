@@ -51,7 +51,7 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
 //        [netParas setObject:[GVUserDefaults standardUserDefaults].avatarUrl forKey:@"avatarUrl"];
 //        [netParas setObject:[GVUserDefaults standardUserDefaults].phone forKey:@"avatarUrl"];
 //
-        callback(@[netParas]);
+        callback(@[[NSNull null],netParas]);
 }
 
 //跳转至原生特定页面

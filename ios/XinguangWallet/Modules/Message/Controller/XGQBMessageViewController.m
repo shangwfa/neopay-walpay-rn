@@ -48,6 +48,7 @@
 {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    self.navigationController.navigationBarHidden = NO;
 
 }
 
@@ -151,7 +152,14 @@
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType = @"topupMsgList";
         [self.navigationController pushViewController:RNVC animated:YES];
-    }else if (arc4random()%2) {
+    }else if([messDict[@"type"]isEqualToString:@"redPacketAct"])
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"redList";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }
+    
+    else if (arc4random()%2) {
         XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
         [self.navigationController pushViewController:noContentVC animated:YES];
     }else{

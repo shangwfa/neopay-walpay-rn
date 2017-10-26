@@ -29,30 +29,79 @@ class PayMessagePage extends BasePage {
                 {
                     "billId":15,
                     "createTime":"2017-10-08 20:49:42",
-                    "createTimeMs":1507466982758,
-                    "dayCode":"UxeEeA",
-                    "id":20,
-                    "msgType":16,
-                    "payDirection":14,
-                    "payNoticeType":11,
-                    "readStatus":19,
-                    "updateTime":"2017-10-10 00:45:36",
-                    "updateTimeMs":1507567536436,
-                    "uuid":"WhXcBuG"
+                    "amount":-38.00,
+                    "payNoticeType":1,
+                    "payBy":'中信银行储蓄卡(9919)',
+                    "payTo":'兔波波178果舍近江时代大厦店',
+                    "withAttach":0,
+                    "attach":'欠你的钱,还给你啦',
+                    "isShowTime":1,
                 },
                 {
-                    "billId":19,
-                    "createTime":"2017-10-22 17:16:51",
-                    "createTimeMs":1508663811079,
-                    "dayCode":"WQYQEe",
-                    "id":19,
-                    "msgType":15,
-                    "payDirection":19,
-                    "payNoticeType":18,
-                    "readStatus":12,
-                    "updateTime":"2017-10-24 22:53:29",
-                    "updateTimeMs":1508856809802,
-                    "uuid":"jocBLWfzq"
+                    "billId":15,
+                    "createTime":"2017-10-08 20:49:42",
+                    "amount":-45.00,
+                    "payNoticeType":1,
+                    "payBy":'中信银行储蓄卡(9919)',
+                    "payTo":'兔波波178果舍近江时代大厦店',
+                    "withAttach":1,
+                    "attach":'欠你的钱,还给你啦',
+                    "isShowTime":1,
+                },
+                {
+                    "billId":15,
+                    "createTime":"2017-10-08 20:49:42",
+                    "amount":-2.00,
+                    "payNoticeType":1,
+                    "payBy":'中信银行储蓄卡(9919)',
+                    "payTo":'兔波波178果舍近江时代大厦店',
+                    "withAttach":1,
+                    "attach":'欠你的钱,还给你啦',
+                    "isShowTime":1,
+                },
+                {
+                    "billId":15,
+                    "createTime":"2017-10-08 20:49:42",
+                    "amount":-38.00,
+                    "payNoticeType":1,
+                    "payBy":'中信银行储蓄卡(9919)',
+                    "payTo":'兔波波178果舍近江时代大厦店',
+                    "withAttach":0,
+                    "attach":'欠你的钱,还给你啦',
+                    "isShowTime":0,
+                },
+                {
+                    "billId":15,
+                    "createTime":"2017-10-08 20:49:42",
+                    "amount":-38,
+                    "payNoticeType":1,
+                    "payBy":'中信银行储蓄卡(9919)',
+                    "payTo":'兔波波178果舍近江时代大厦店',
+                    "withAttach":1,
+                    "attach":'欠你的钱,还给你啦',
+                    "isShowTime":0,
+                },
+                {
+                    "billId":15,
+                    "createTime":"2017-10-08 20:49:42",
+                    "amount":-38,
+                    "payNoticeType":1,
+                    "payBy":'中信银行储蓄卡(9919)',
+                    "payTo":'兔波波178果舍近江时代大厦店',
+                    "withAttach":0,
+                    "attach":'欠你的钱,还给你啦',
+                    "isShowTime":0,
+                },
+                {
+                    "billId":15,
+                    "createTime":"2017-10-08 20:49:42",
+                    "amount":-38,
+                    "payNoticeType":1,
+                    "payBy":'中信银行储蓄卡(9919)',
+                    "payTo":'兔波波178果舍近江时代大厦店',
+                    "withAttach":0,
+                    "attach":'欠你的钱,还给你啦',
+                    "isShowTime":0,
                 }
             ])
         }
@@ -84,17 +133,17 @@ class PayMessagePage extends BasePage {
         return (
             <View>
                 {this.renderSectionHeader(item)}
-                <PayMessageCell imgUrl={item.iconUrl}
-                               middleUpValue={item.title} middleBottomValue={item.tradeTime}
-                               rightUpValue={item.amount} rightBottomValue={item.status}
-                               isLine={true}/>
+                <PayMessageCell createTime={item.createTime}
+                               payNoticeType={item.payNoticeType} payBy={item.payBy}
+                               payTo={item.payTo} withAttach={item.withAttach}
+                               attach={item.attach} amount = {item.amount}/>
             </View>
         )
 
     }
     renderSectionHeader = (item) => {
         if (item.isShowTime) {
-            return <View style={styles.dateHeader}><Text style={styles.dateHeaderText}>DATE</Text></View>
+            return <View style={styles.dateHeader}><Text style={styles.dateHeaderText}>{item.createTime}</Text></View>
         }
     }
 

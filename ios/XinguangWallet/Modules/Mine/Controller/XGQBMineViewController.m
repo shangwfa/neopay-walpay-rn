@@ -138,7 +138,7 @@
     }
     //我的资产
     else if (indexPath.section==0&&indexPath.row==1) {
-        RNVC.pageType = @"setting";
+        RNVC.pageType = @"myAsset";
     }
     //我的银行卡
     else if (indexPath.section==0&&indexPath.row==2) {
