@@ -11,4 +11,4 @@ export const APIS = {
     GET_USER_INFO: 'user/get_user_info',//获取用户信息
     QUERY_USER_BILL_DETAIL: "pay/query_user_bill_detail"//查询用户账单详情
 
-}
+};
