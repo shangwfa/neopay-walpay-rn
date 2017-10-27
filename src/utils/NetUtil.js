@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
-import {NativeModules} from 'react-native'
+import {NativeModules,DeviceEventEmitter} from 'react-native'
 import netCode from '../constants/netCode'
+import {events} from '../constants/index'
 const TEST_URL = "http://139.224.11.160:8202/walpay-web/";
 const MOCK_URL = "http://172.16.33.151:8888/walpay-web/";
+
 class NetUtil extends Component {
 
-    static baseUrl = MOCK_URL;
-
+    static baseUrl = TEST_URL;
     static handleException(code, msg) {
         switch (code) {
             case "1":
@@ -19,8 +20,8 @@ class NetUtil extends Component {
         if (isShowLoading) {
             // NativeModules.commModule.showLoadingDialog('')
         }
-
         NativeModules.commModule.netCommParas((originalata) => {
+            console.log('公共参数'+originalata)
             let params = JSON.parse(originalata)
             Object.assign(data, params);
             var fetchOption = {
@@ -42,12 +43,13 @@ class NetUtil extends Component {
                     } else {
                         this.handleException(response.netCode, response.retMsg)
                     }
-                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
                 })
                 .catch((err) => {
-                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
+                    if(isShowLoading) DeviceEventEmitter.emit(events.LOADING_MODAL_EVENT,false)
+                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
                     console.log(err)
-                    // NativeModules.commModule.toast('网络不给力')
+                    NativeModules.commModule.toast('网络不给力')
                 })
                 .done()
         })

@@ -114,7 +114,6 @@
         make.centerY.equalTo(titleLable.mas_top);
     }];
     
-    
     return cell;
 }
 

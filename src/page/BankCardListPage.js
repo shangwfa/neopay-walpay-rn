@@ -9,8 +9,10 @@ import {
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
+import * as RouterPaths from '../constants/RouterPaths'
 import SectionHeader from '../components/SectionHeader'
 import BankCardCell from '../components/BankCardCell'
+import BankCardDetailPage from "./BankCardDetailPage";
 
 const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
 const dataSource = [
@@ -33,7 +35,8 @@ class BankCardListPage extends BasePage {
         return <BankCardCell imgIconUrl={item.item.imgUrl}
                              bankNameValue={item.item.name}
                              bankTypeValue={item.item.type}
-                             cardNoValue={item.item.cardNo}/>
+                             cardNoValue={item.item.cardNo}
+                             onPress = {()=>this.pushNext()}/>
     }
 
     render() {
@@ -46,6 +49,10 @@ class BankCardListPage extends BasePage {
                 />
             </View>
         );
+    }
+
+    pushNext(){
+        this.props.navigation.navigate(RouterPaths.BANKCARD_DETAIL)
     }
 }
 

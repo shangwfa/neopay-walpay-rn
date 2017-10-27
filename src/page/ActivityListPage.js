@@ -63,6 +63,7 @@ class ActivityListPage extends BasePage {
                 <FlatList
                     data={this.state.data}
                     renderItem={this.renderItem}
+                    keyExtractor={(item,index)=>{return index}}
                 />
             </View>
         );

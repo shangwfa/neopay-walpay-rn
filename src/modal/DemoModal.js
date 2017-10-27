@@ -17,24 +17,15 @@ class DemoModal extends Component {
         }
     }
 
-    componentDidMount() {
-        DeviceEventEmitter.addListener(events.DEMO_MODAL_EVENT, (ishow) => {
-            this.setState({
-                show:ishow
-            })
-        })
-    }
     setModalVisible=()=>{
-        this.setState({
-            show:!this.state.show
-        });
+       this.props.callback(false)
     }
 
     render() {
         return (
             <Modal
                 transparent={true}
-                visible={this.state.show}
+                visible={this.props.isShow}
                 onShow={() => {}}
                 onRequestClose={() => {}} >
                 <View style={styles.modalStyle}>
