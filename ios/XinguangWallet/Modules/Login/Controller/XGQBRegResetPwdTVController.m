@@ -8,10 +8,17 @@
 
 #import "XGQBRegResetPwdTVController.h"
 
+#import "XGQBAccountExistAlertViewController.h"
+#import "XGQBIDAlertTransiton.h"
+
 #import "XGQBRegRestPwdTVCell.h"
 #import "XGQBPureColorBtn.h"
 
-@interface XGQBRegResetPwdTVController ()
+#import "XGQBLoginViewController.h"
+
+#import "XGQBAccountExistAlertView.h"
+
+@interface XGQBRegResetPwdTVController ()<UIViewControllerTransitioningDelegate,XGQBAccountExistAlertViewDelegate>
 
 @property (nonatomic,strong) XGQBTextField *phoneNoTextField;
 @property (nonatomic,strong) XGQBTextField *regCodeTextField;
@@ -40,6 +47,7 @@
 }
 
 
+
 #pragma mark - VC生命周期
 - (void)viewDidLoad {
     
@@ -65,6 +73,8 @@
             break;
         default:
             break;
+            
+
     }
     
     UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
@@ -89,8 +99,19 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    //判断是否需要传手机号会登录界面
+    if ([self.navigationController.viewControllers[0] isKindOfClass:[XGQBLoginViewController class]]) {
+        XGQBLoginViewController *loginVC = self.navigationController.viewControllers[0];
+        loginVC.userName = _phoneNoTextField.text;
+    }
+}
 
 #pragma mark - 处理按钮点击
 -(void)comfirmBtnClicked:(XGQBPureColorBtn*)btn
@@ -196,7 +217,7 @@
     
     NSMutableDictionary* body = [NSMutableDictionary dictionaryWithCapacity:0];
     [body setObject:_phoneNoTextField.text forKey:@"phone"];
-    
+
     //注册页面获取验证码
     if (self.type == XGQBRegResetPwdTVConTypeRegister) {
         [MemberCoreService sendRegisterCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
@@ -206,6 +227,9 @@
             {
                 [SVProgressHUD showSuccessWithStatus:@"验证码发送成功"];
                 [btn startCountDown];
+            }else if ([[responseBefore objectForKey:@"retCode"] intValue] == 2)
+            {
+                [self alertAccountExist];
             }
         } andFailerFn:^(NSError *error) {
             
@@ -269,6 +293,10 @@
         //第一行手机号
       XGQBRegRestPwdTVCell*cell = [XGQBRegRestPwdTVCell cellWithType:XGQBRegResetPwdTVCellTypePhoneNo];
         _phoneNoTextField = cell.textField;
+        //判断是否有手机号输入信息,将其输入
+        if (_userName) {
+            _phoneNoTextField.text = _userName;
+        }
         return cell;
     }else if (indexPath.section==0&&indexPath.row==1) {
         //第二行验证码
@@ -322,6 +350,52 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
+
+
+#pragma mark - 手机号存在弹窗
+-(void)alertAccountExist
+{
+        XGQBAccountExistAlertViewController *alertVC = [XGQBAccountExistAlertViewController new];
+    
+        alertVC.alertviewDelegate = self;
+
+        alertVC.transitioningDelegate = self;
+        
+        alertVC.modalPresentationStyle = UIModalPresentationCustom;
+        
+        [self presentViewController:alertVC animated:YES completion:nil];
+}
+//transition代理方法
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return [[XGQBIDAlertTransiton alloc] init];
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [[XGQBIDAlertTransiton alloc] init];
+}
+
+
+#pragma mark - 手机号存在弹窗代理
+-(void)accountExistAlertView:(XGQBAccountExistAlertView *)alertView btnClicked:(UIButton *)btn
+{
+    
+    if ([btn.titleLabel.text isEqualToString:@"忘记密码"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        XGQBRegResetPwdTVController *restPwdVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetLoginPwd];
+        restPwdVC.userName = _phoneNoTextField.text;
+        [self.navigationController pushViewController:restPwdVC animated:YES];
+        
+    }else if ([btn.titleLabel.text isEqualToString:@"去登陆"]){
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+
 
 
 
