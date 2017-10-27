@@ -7,7 +7,7 @@ const MOCK_URL = "http://172.16.33.151:8888/walpay-web/";
 
 class NetUtil extends Component {
 
-    static baseUrl = MOCK_URL;
+    static baseUrl = TEST_URL;
     static handleException(code, msg) {
         switch (code) {
             case "1":
@@ -21,6 +21,7 @@ class NetUtil extends Component {
             // NativeModules.commModule.showLoadingDialog('')
         }
         NativeModules.commModule.netCommParas((originalata) => {
+            console.log('公共参数'+originalata)
             let params = JSON.parse(originalata)
             Object.assign(data, params);
             var fetchOption = {

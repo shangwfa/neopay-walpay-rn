@@ -42,7 +42,7 @@ class FeedbackPage extends BasePage {
                         }
                     }}
                 />
-                <CommonButton value='提交' style={{marginTop:50}} onPress={this.commit()}/>
+                <CommonButton value='提交' style={{marginTop:50}} onPress={()=>this.commit()}/>
             </View>
         );
     }

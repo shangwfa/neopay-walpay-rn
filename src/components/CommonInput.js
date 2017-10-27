@@ -14,6 +14,11 @@ import TimerButton from '../components/TimerButton'
 import StringUtils from "../utils/StringUtils";
 
 class CommonInput extends Component {
+    static defaultProps = {
+        editable:true,
+        noEditText:''
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -47,7 +52,9 @@ class CommonInput extends Component {
                         numberOfLines={1}
                         onChangeText={this.onChangeText}
                         keyboardType={keybordType}
-                        value={this.state.inputText}
+                        value={this.props.editable?this.state.inputText:this.props.noEditText}
+                        onBlur={this.props.onBlur}
+                        editable={this.props.editable}
                     />
                     {this.input_close_img()}
                     {this.renderVerifyCode(isVerfyCode)}
