@@ -21,7 +21,6 @@ class RedListPage extends BasePage {
             dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
             page: 0,
         };
-        console.log("-------constructor--->");
     }
 
     componentWillMount() {
@@ -30,11 +29,9 @@ class RedListPage extends BasePage {
                 dataSource: this.state.dataSource.cloneWithRows(data),
             });
         });
-        console.log("-------componentWillMount--->");
     }
 
     render() {
-        console.log("-------render--->");
         return (
             <View style={styles.container}>
                 {/*标题栏*/}
@@ -64,7 +61,6 @@ class RedListPage extends BasePage {
         this.props.navigation.navigate(RouterPaths.TRANSACTION_DETAILS, {info: item.packetCode});
     };
     _renderItem = (item) => {
-        console.log("-------_renderItem--->"+item.bossName);
         let isShow = item.disPlayDate;
         return (
             <TouchableOpacity

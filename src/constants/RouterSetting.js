@@ -21,6 +21,8 @@ import BankCardList from "../page/BankCardListPage"
 import TransactionDetailsPage from "../page/TransactionDetailsPage"
 import BankCardDetail from "../page/BankCardDetailPage"
 import TopupMsgList from "../page/PhoneTopupMsgListPage"
+import CardPack from "../page/CardPackPage";
+import PayCode from "../page/PayCodePage";
 import MyBalance from "../page/MyBalancePage"
 import AccountWithdrawPage from "../page/AccountWithdrawPage";
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
@@ -40,20 +42,19 @@ const RouterSetting = {
     redList: {screen: RedList},
     bankCardOrderList: {screen: BackCardOrderList},
     myLotteryRecord: {screen: MyLotteryRecord},
-    filter:{screen:Filter},
-    myAsset:{screen:MyAsset},
-    swRefreshScrollView:{screen:SwRefreshScrollView},
-    payMessage:{screen:PayMessage},
     filter: {screen: Filter},
     myAsset: {screen: MyAsset},
     swRefreshScrollView: {screen: SwRefreshScrollView},
+    payMessage: {screen: PayMessage},
     transactionDetails: {screen: TransactionDetailsPage},
-    bankCardList:{screen:BankCardList},
-    bankCardDetail:{screen:BankCardDetail},
-    topupMsgList:{screen:TopupMsgList},
-    myBalance:{screen:MyBalance},
-    accountWithdraw:{screen:AccountWithdrawPage},
-    accountWithdrawResult:{screen:AccountWithdrawResultPage},
-}
+    bankCardList: {screen: BankCardList},
+    bankCardDetail: {screen: BankCardDetail},
+    topupMsgList: {screen: TopupMsgList},
+    cardPack: {screen: CardPack},
+    payCode: {screen: PayCode},
+    myBalance: {screen: MyBalance},
+    accountWithdraw: {screen: AccountWithdrawPage},
+    accountWithdrawResult: {screen: AccountWithdrawResultPage},
+};
 
 export default RouterSetting

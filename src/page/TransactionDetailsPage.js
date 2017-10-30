@@ -69,7 +69,7 @@ class TransactionDetailsPage extends BasePage {
         );
     }
 
-    _renderItem = ({item, index}) => {
+    _renderItem = (item, index) => {
         if (null !== item) {
             return (
                 <TouchableWithoutFeedback onPress={() => item.onclick()}>
@@ -215,7 +215,7 @@ class TransactionDetailsPage extends BasePage {
     _renderOrderStateTitleView = () => {
         return <View style={[styles.order_state_title_container, {marginTop: 23}]}>
             <Image
-                style={{width: 25, height: 25}}
+                style={{width: 25, height: 25, resizeMode: "cover"}}
                 source={{uri: this.state.sourceData.iconUrl}}/>
             <Text style={{
                 marginLeft: 9, fontSize: 16, color: "#000000"

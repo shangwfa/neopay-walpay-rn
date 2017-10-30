@@ -14,6 +14,7 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeTopViewBinding;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
+import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
@@ -59,7 +60,7 @@ public class HomeTopView extends FrameLayout {
 
         mBinding.homeScanLl.setOnClickListener(v -> MainRouter.getSingleton().jumpToScanPage());
 
-        mBinding.homePayCodeLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> MainRouter.getSingleton().jumpToPayCodePage()));
+        mBinding.homePayCodeLl.setOnClickListener(v -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PAY_CODE_PAGE));
 
         mBinding.homeBalanceLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
             //TODO 跳转余额页面

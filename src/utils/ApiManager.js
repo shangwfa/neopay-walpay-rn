@@ -17,9 +17,26 @@ getRedPacketList = (request, callback) => {
         callback(data);
     });
 };
-
+getMerchantBannerList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_MERCHANT_BANNER_LIST, request, (data) => {
+        callback(data);
+    });
+};
+getMerchantActivityList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_MERCHANT_ACTIVITY_PAGE, request, (data) => {
+        callback(data);
+    });
+};
+getUserMerchantList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_USER_MERCHANT_LIST, request, (data) => {
+        callback(data);
+    });
+};
 export default {
     getUserInfo,
     getUserBillDetail,
     getRedPacketList,
+    getMerchantBannerList,
+    getMerchantActivityList,
+    getUserMerchantList
 }

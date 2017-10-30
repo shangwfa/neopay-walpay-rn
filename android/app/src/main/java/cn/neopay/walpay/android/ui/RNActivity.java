@@ -1,5 +1,6 @@
 package cn.neopay.walpay.android.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.WalpayApp;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
@@ -53,50 +55,43 @@ public class RNActivity extends BaseRNActivity {
         Bundle bundle = new Bundle();
         switch (activityParams.getRnPage()) {
             case PageType.PERSONAL_INFO_PAGE:
-                TestParams personalParams = new TestParams();
-                personalParams.setPage(PageType.PERSONAL_INFO_PAGE);
-                bundle.putString("params", new Gson().toJson(personalParams));
+                initLaunchOptions(bundle, PageType.PERSONAL_INFO_PAGE);
                 break;
-
             case PageType.SETTING_PAGE:
-                TestParams testParams = new TestParams();
-                testParams.setPage(PageType.SETTING_PAGE);
-                bundle.putString("params", new Gson().toJson(testParams));
+                initLaunchOptions(bundle, PageType.SETTING_PAGE);
                 break;
-
             case PageType.MY_ORDER_PAGE:
-                TestParams homeParams = new TestParams();
-                homeParams.setPage(PageType.MY_ORDER_PAGE);
-                bundle.putString("params", new Gson().toJson(homeParams));
+                initLaunchOptions(bundle, PageType.MY_ORDER_PAGE);
                 break;
-
             case PageType.ACTIVITY_LIST_PAGE:
-                TestParams activityParams = new TestParams();
-                activityParams.setPage(PageType.ACTIVITY_LIST_PAGE);
-                bundle.putString("params", new Gson().toJson(activityParams));
+                initLaunchOptions(bundle, PageType.ACTIVITY_LIST_PAGE);
                 break;
             case PageType.ACTIVITY_RED_LIST_PAGE:
-                TestParams redListParams = new TestParams();
-                redListParams.setPage(PageType.ACTIVITY_RED_LIST_PAGE);
-                bundle.putString("params", new Gson().toJson(redListParams));
+                initLaunchOptions(bundle, PageType.ACTIVITY_RED_LIST_PAGE);
                 break;
             case PageType.MY_LOTTER_RECORD:
-                TestParams myLotterParams = new TestParams();
-                myLotterParams.setPage(PageType.MY_LOTTER_RECORD);
-                bundle.putString("params", new Gson().toJson(myLotterParams));
+                initLaunchOptions(bundle, PageType.MY_LOTTER_RECORD);
                 break;
             case PageType.MY_ASSET:
-                TestParams myAssetParams = new TestParams();
-                myAssetParams.setPage(PageType.MY_ASSET);
-                bundle.putString("params", new Gson().toJson(myAssetParams));
+                initLaunchOptions(bundle, PageType.MY_ASSET);
                 break;
             case PageType.MY_BANK:
-                TestParams myBankParams = new TestParams();
-                myBankParams.setPage(PageType.MY_BANK);
-                bundle.putString("params", new Gson().toJson(myBankParams));
+                initLaunchOptions(bundle, PageType.MY_BANK);
+                break;
+            case PageType.CARD_PACK_PAGE:
+                initLaunchOptions(bundle, PageType.CARD_PACK_PAGE);
+                break;
+            case PageType.PAY_CODE_PAGE:
+                initLaunchOptions(bundle, PageType.PAY_CODE_PAGE);
                 break;
         }
         return bundle;
+    }
+
+    private void initLaunchOptions(Bundle bundle, String pageType) {
+        TestParams params = new TestParams();
+        params.setPage(pageType);
+        bundle.putString("params", new Gson().toJson(params));
     }
 
     @Override
@@ -120,20 +115,21 @@ public class RNActivity extends BaseRNActivity {
 
     private LoadingDialog mLoadingDialog;
     private boolean isShowLoadingDialog;
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoadingEvent(LoadingDialogEvent event) {
-        if(event.isShow()){
-            if(null==mLoadingDialog){
-                mLoadingDialog=new LoadingDialog(this, R.style.LoadingDialog);
+        if (event.isShow()) {
+            if (null == mLoadingDialog) {
+                mLoadingDialog = new LoadingDialog(this, R.style.LoadingDialog);
             }
-            if(isShowLoadingDialog){
+            if (isShowLoadingDialog) {
                 return;
-            }else {
-                isShowLoadingDialog=true;
+            } else {
+                isShowLoadingDialog = true;
                 mLoadingDialog.show();
             }
-        }else {
-            if(null!=mLoadingDialog&&isShowLoadingDialog){
+        } else {
+            if (null != mLoadingDialog && isShowLoadingDialog) {
                 mLoadingDialog.dismiss();
             }
         }
@@ -166,8 +162,16 @@ public class RNActivity extends BaseRNActivity {
         String PERSONAL_INFO_PAGE = "personalInfo";
         String ACTIVITY_LIST_PAGE = "activityList";
         String ACTIVITY_RED_LIST_PAGE = "redList";
-        String MY_LOTTER_RECORD="myLotteryRecord";
-        String MY_ASSET="myAsset";
-        String MY_BANK="bankCardList";
+        String MY_LOTTER_RECORD = "myLotteryRecord";
+        String MY_ASSET = "myAsset";
+        String MY_BANK = "bankCardList";
+        String CARD_PACK_PAGE = "cardPack";
+        String PAY_CODE_PAGE = "payCode";
+    }
+
+    public static void jumpToRNPage(Context context, String pageType) {
+        RNActivityParams activityParams = new RNActivityParams();
+        activityParams.setRnPage(pageType);
+        MainRouter.getSingleton().jumpToRNPage(context, activityParams);
     }
 }
