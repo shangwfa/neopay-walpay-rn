@@ -57,6 +57,10 @@
     [payCodeBtn setTitle:@"二维码" forState:UIControlStateNormal];
     [accountBtn setTitle:@"余额" forState:UIControlStateNormal];
     
+    _scanBtn = scanBtn;
+    _codeBtn = payCodeBtn;
+    _accountBtn = accountBtn;
+    
     [self addSubview:scanBtn];
     [self addSubview:payCodeBtn];
     [self addSubview:accountBtn];
