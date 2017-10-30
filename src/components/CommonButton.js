@@ -11,21 +11,25 @@ import {colors} from '../constants/index'
 const CommonButton = props => {
     const {
         value,
+        backgroundColor,
+        textColor,
+        borderRadius,
         ...attributes
     } = props
 
     const styles = StyleSheet.create({
         value:{
-            color: colors.white,
+            color: textColor?textColor:colors.white,
             fontSize: 15,
         },
         container:{
-            backgroundColor: colors.one_color,
+            backgroundColor: backgroundColor?backgroundColor:colors.one_color,
             height: 50,
             marginLeft: 10,
             marginRight: 10,
             justifyContent:'center',
             alignItems: 'center',
+            borderRadius:borderRadius?borderRadius:2,
         },
     });
 

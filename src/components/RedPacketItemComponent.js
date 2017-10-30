@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import ScreenUtils from '../utils/ScreenUtils'
 import colors from "../constants/colors";
-import * as RouterPaths from '../constants/RouterPaths'
+import {RouterPaths} from '../constants/RouterPaths'
 
 class RedPacketItemComponent extends Component {
 

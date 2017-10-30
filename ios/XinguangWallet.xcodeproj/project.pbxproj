@@ -300,6 +300,17 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		423FAB0F1FA6B7300079CB99 /* React Native */ = {
+			isa = PBXGroup;
+			children = (
+				6A0FF9D41F7F3A0E001A66BA /* commModule.h */,
+				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
+				42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */,
+				42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */,
+			);
+			path = "React Native";
+			sourceTree = "<group>";
+		};
 		42990E721F998F2C00B20EBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +630,7 @@
 		6AF9E4481F78E281005E901C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				423FAB0F1FA6B7300079CB99 /* React Native */,
 				6AD95AE71F7C87BE00BFF4DA /* Common */,
 				6AE813A11F7B4D300044B072 /* AdVC */,
 				6A1C68AA1F7A3CD300170E47 /* AppBootVC */,
@@ -822,10 +834,6 @@
 			children = (
 				6AF9E4811F78EA3B005E901C /* XGQBMineViewController.h */,
 				6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */,
-				6A0FF9D41F7F3A0E001A66BA /* commModule.h */,
-				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
-				42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */,
-				42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

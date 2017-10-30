@@ -21,6 +21,9 @@ import BankCardList from "../page/BankCardListPage"
 import TransactionDetailsPage from "../page/TransactionDetailsPage"
 import BankCardDetail from "../page/BankCardDetailPage"
 import TopupMsgList from "../page/PhoneTopupMsgListPage"
+import MyBalance from "../page/MyBalancePage"
+import AccountWithdrawPage from "../page/AccountWithdrawPage";
+import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -47,7 +50,10 @@ const RouterSetting = {
     transactionDetails: {screen: TransactionDetailsPage},
     bankCardList:{screen:BankCardList},
     bankCardDetail:{screen:BankCardDetail},
-    topupMsgList:{screen:TopupMsgList}
+    topupMsgList:{screen:TopupMsgList},
+    myBalance:{screen:MyBalance},
+    accountWithdraw:{screen:AccountWithdrawPage},
+    accountWithdrawResult:{screen:AccountWithdrawResultPage},
 }
 
 export default RouterSetting
