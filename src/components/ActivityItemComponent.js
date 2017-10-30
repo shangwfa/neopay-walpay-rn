@@ -9,7 +9,7 @@ import {
 import ScreenUtils from '../utils/ScreenUtils'
 import colors from "../constants/colors";
 import activity_tip_icon from '../res/img/activity_tip_icon.png'
-import * as RouterPaths from '../constants/RouterPaths'
+import {RouterPaths} from '../constants/RouterPaths'
 
 class ActivityItemComponent extends Component {
 

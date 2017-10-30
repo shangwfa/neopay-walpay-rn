@@ -9,7 +9,7 @@ import {
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
-import * as RouterPaths from '../constants/RouterPaths'
+import {RouterPaths} from '../constants/RouterPaths'
 import SectionHeader from '../components/SectionHeader'
 import BankCardCell from '../components/BankCardCell'
 import BankCardDetailPage from "./BankCardDetailPage";

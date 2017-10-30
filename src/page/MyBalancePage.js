@@ -11,6 +11,7 @@ import BasePage from './BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
 import CommonButton from "../components/CommonButton";
+import {RouterPaths} from "../constants/RouterPaths"
 
 
 class MyBalancePage extends BasePage {
@@ -19,6 +20,7 @@ class MyBalancePage extends BasePage {
 
     }
     withdrawBtnClicked(){
+        this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_PAGE)
     }
 
     render() {
