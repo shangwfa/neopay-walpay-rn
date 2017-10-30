@@ -41,6 +41,9 @@
     [super viewWillAppear:animated];
     //隐藏navigationBar
     self.navigationController.navigationBarHidden = YES;
+    if (_userName) {
+        self.userNameIV.textField.text=_userName;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -247,16 +250,8 @@
         if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
 //            NSLog(@"responseBefore:%@",responseBefore);
         {
-//            [responseAfter writeToFile:@"/Users/bossking/Desktop/responseAfter.plist" atomically:YES];
             [GVUserDefaults standardUserDefaults].accessToken = [responseAfter objectForKey:@"accessToken"];
-//            [GVUserDefaults standardUserDefaults].phone = [responseAfter objectForKey:@"phone"];
-//            [GVUserDefaults standardUserDefaults].authStatus = [responseAfter objectForKey:@"authStatus"];
-//            [GVUserDefaults standardUserDefaults].uuid = [responseAfter objectForKey:@"uuid"];
-//            [GVUserDefaults standardUserDefaults].userStatus = [responseAfter objectForKey:@"userStatus"];
-//            [GVUserDefaults standardUserDefaults].name = [responseAfter objectForKey:@"name"];
-//            [GVUserDefaults standardUserDefaults].nickName = [responseAfter objectForKey:@"nickName"];
-//            [GVUserDefaults standardUserDefaults].avatarUrl = [responseAfter objectForKey:@"avatarUrl"];
-            
+  
             //发送登录成功通知
             kPostNotification(kNotificationLoginStateChange, @YES);
             

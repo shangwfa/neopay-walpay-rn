@@ -27,6 +27,8 @@
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
 		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
 		42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */; };
+		42B98A371FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */; };
+		42B98A3A1FA2FC5B00850FDB /* XGQBAccountExistAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A391FA2FC5B00850FDB /* XGQBAccountExistAlertView.m */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
@@ -131,6 +133,10 @@
 		42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNetworkFailureViewController.m; sourceTree = "<group>"; };
 		42990E7A1F99D06D00B20EBA /* XGQBRegResetPwdTVController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegResetPwdTVController.h; sourceTree = "<group>"; };
 		42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRegResetPwdTVController.m; sourceTree = "<group>"; };
+		42B98A351FA2FC2700850FDB /* XGQBAccountExistAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAccountExistAlertViewController.h; sourceTree = "<group>"; };
+		42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAccountExistAlertViewController.m; sourceTree = "<group>"; };
+		42B98A381FA2FC5B00850FDB /* XGQBAccountExistAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAccountExistAlertView.h; sourceTree = "<group>"; };
+		42B98A391FA2FC5B00850FDB /* XGQBAccountExistAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAccountExistAlertView.m; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
 		42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNViewController.h; sourceTree = "<group>"; };
@@ -365,6 +371,8 @@
 				6A3843CB1F79E46600BFE9B4 /* XGQBLoginViewController.m */,
 				42990E7A1F99D06D00B20EBA /* XGQBRegResetPwdTVController.h */,
 				42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */,
+				42B98A351FA2FC2700850FDB /* XGQBAccountExistAlertViewController.h */,
+				42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -404,6 +412,8 @@
 				6A792B981F7F6E53009039AF /* XGQBRegRestPwdTVCell.m */,
 				428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */,
 				428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */,
+				42B98A381FA2FC5B00850FDB /* XGQBAccountExistAlertView.h */,
+				42B98A391FA2FC5B00850FDB /* XGQBAccountExistAlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1095,6 +1105,7 @@
 				4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
 				42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */,
+				42B98A371FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m in Sources */,
 				428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
 				42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */,
@@ -1121,6 +1132,7 @@
 				6A792B991F7F6E53009039AF /* XGQBRegRestPwdTVCell.m in Sources */,
 				6A792B9C1F7F98A2009039AF /* XGQBTextField.m in Sources */,
 				6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */,
+				42B98A3A1FA2FC5B00850FDB /* XGQBAccountExistAlertView.m in Sources */,
 				6AF9E4511F78E659005E901C /* XGQBTabBar.m in Sources */,
 				6AF9E4801F78EA2F005E901C /* XGQBMessageViewController.m in Sources */,
 				42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */,
