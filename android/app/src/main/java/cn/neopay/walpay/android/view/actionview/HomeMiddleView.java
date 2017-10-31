@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeMiddleViewBinding;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
+import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
@@ -48,9 +49,7 @@ public class HomeMiddleView extends FrameLayout {
     }
 
     private void handleView(Context context) {
-        mBinding.homeCardBagLl.setOnClickListener(v -> {
-            //TODO 跳转 卡包
-        });
+        mBinding.homeCardBagLl.setOnClickListener(v -> RNActivity.jumpToRNPage(context, RNActivity.PageType.CARD_PACK_PAGE));
 
         mBinding.homeBigRedBagLl.setOnClickListener(v -> {
             BusniessUtils.handleCertification(context, mUserInfoBean, () -> {

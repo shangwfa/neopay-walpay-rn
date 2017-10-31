@@ -14,7 +14,7 @@ import MineTopView from '../components/MineTopView'
 import CommonItemOne from '../components/CommonItemOne'
 import Divider from '../components/Divider'
 import NetUtil from '../utils/NetUtil'
-import * as RouterPaths from '../constants/RouterPaths'
+import {RouterPaths} from '../constants/RouterPaths'
 import BasePage from './BasePage'
 import {events} from '../constants/index'
 

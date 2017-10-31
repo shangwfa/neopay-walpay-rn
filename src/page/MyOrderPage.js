@@ -13,7 +13,7 @@ import Header from '../components/Header'
 import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
 import NetUtil from '../utils/NetUtil'
-import * as RouterPaths from '../constants/RouterPaths'
+import {RouterPaths} from '../constants/RouterPaths'
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'

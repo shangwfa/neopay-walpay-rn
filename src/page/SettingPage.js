@@ -11,7 +11,7 @@ import Header from '../components/Header'
 import {colors} from '../constants/index'
 import CommonKeyValueItem from '../components/CommonKeyValueItem'
 import CommonButton from '../components/CommonButton'
-import * as RouterPaths from '../constants/RouterPaths'
+import {RouterPaths} from '../constants/RouterPaths'
 
 class SettingPage extends BasePage {
 

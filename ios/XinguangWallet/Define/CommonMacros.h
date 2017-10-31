@@ -22,6 +22,8 @@
 //RN跳转修改支付密码页面
 #define knotificationRNJumpBackToNativeResetPayPwd @"RNJumpBackToNativeResetPayPwd"
 
+//从注册页面跳转至重置密码页面
+
 
 //进行实名认证通知
 #define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"

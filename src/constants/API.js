@@ -14,4 +14,8 @@ export const APIS = {
     QUERY_BANNER_LIST:'merchant/query_banner_list',
     BIND_BANK_CARD:'bank/bind_bank_card',
     MODIFY_USER_NICKNAME:'user/modify_user_nickname',
-}
+    GET_BANK_INFO_BY_CARD_NO: 'bank/get_bank_info_by_card_no',
+    QUERY_MERCHANT_BANNER_LIST: "merchant/query_merchant_banner_list",//获取商户活动banner列表
+    QUERY_MERCHANT_ACTIVITY_PAGE: "merchant/query_merchant_activity_page",//获取商户活动列表
+    QUERY_USER_MERCHANT_LIST: "merchant/query_user_merchant_list",//获取商户会员列表
+};
