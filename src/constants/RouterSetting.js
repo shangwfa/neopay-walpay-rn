@@ -30,6 +30,7 @@ import PayCode from "../page/PayCodePage";
 import MyBalance from "../page/MyBalancePage"
 import AccountWithdrawPage from "../page/AccountWithdrawPage";
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
+import PayResultPage from "../page/PayResultPage";
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -65,7 +66,8 @@ const RouterSetting = {
     myBalance: {screen: MyBalance},
     accountWithdraw: {screen: AccountWithdrawPage},
     accountWithdrawResult: {screen: AccountWithdrawResultPage},
-    test:{screen:Test}
-}
+    payResult:{screen:PayResultPage},
+    test:{screen:Test},
+};
 
 export default RouterSetting

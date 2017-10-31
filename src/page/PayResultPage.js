@@ -11,8 +11,7 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import ScrnUtil from '../utils/ScreenUtils'
 
-class AccountWithdrawResultPage extends BasePage {
-
+class PayResultPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,9 +21,9 @@ class AccountWithdrawResultPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title={'提现结果'}/>
+                <Header navigation={this.props.navigation} title={'付款结果'}/>
                 <FlatList
-                    data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:'中信银行信用卡(9889)'},{key: '提现服务费',data:'1.23元'}]}
+                    data={[{key: '交易对象',data:'胡萝卜的兔子店'}, {key: '付款方式',data:'中信银行信用卡(9889)'}]}
                     renderItem={this._renderItemComponent}
                     ListHeaderComponent ={this.state.retResult?this._renderListHeaderComponentSuc:this._renderListHeaderComponentFail}
                 />
@@ -57,9 +56,9 @@ class AccountWithdrawResultPage extends BasePage {
     _renderListHeaderComponentFail = ()=>{
         return(
             <View style={styles.headerView}>
-                <Image source={require("../res/img/HomePage/sy_shibai.png")} style={styles.headerViewImg}/>
-                <Text style={styles.headerViewText}>
-                    提现申请提交失败
+                <Image source={require("../res/img/HomePage/sy_shibai.png")} style={sucStyles.headerViewImg}/>
+                <Text style={sucStyles.headerViewText1}>
+                    付款失败
                 </Text>
             </View>
         );
@@ -67,29 +66,14 @@ class AccountWithdrawResultPage extends BasePage {
     _renderListHeaderComponentSuc =()=>{
         return(
             <View style={styles.headerView}>
-                <View style={sucStyles.headerViewTitle}>
-                    <Image source={require("../res/img/HomePage/sy_chulizhong.png")} style={sucStyles.headerViewImg}/>
-                    <View>
-                        <Text style={sucStyles.headerViewText1}>
-                            提现申请提交成功
-                        </Text>
-                        <View style={sucStyles.headerViewTextSep}>
-                        </View>
-                        <Text style={sucStyles.headerViewText2}>
-                            处理中
-                        </Text>
-                    </View>
-                </View>
+                <Image source={require("../res/img/HomePage/sy_shibai.png")} style={styles.headerViewImg}/>
 
-                <View>
-                    <Text style={sucStyles.headerViewNoText}>
-                        +38.00
-                    </Text>
-                </View>
-                    <Text style={sucStyles.headerViewDesText}>
-                        申请成功后,金额最迟2个小时之内到账,请注意查收
-                    </Text>
-
+                <Text style={styles.headerViewText1}>
+                    付款成功
+                </Text>
+                <Text style={styles.headerViewText2}>
+                    -890.89元
+                </Text>
             </View>
         );
     }
@@ -134,46 +118,22 @@ const styles = StyleSheet.create({
         marginTop:16,
         marginBottom:14,
     },
-    headerViewText:{
-        color:'#E94D3D',
+    headerViewText1:{
         fontSize:16,
-        marginBottom:23,
+        color:'#09BB07',
     },
+    headerViewText2:{
+        fontSize:27,
+        marginTop:16,
+        marginBottom:12,
+    },
+
 });
 
 const sucStyles = StyleSheet.create({
-    headerViewTitle:{
-        flexDirection:'row',
-        marginTop:22,
-    },
-    headerViewImg:{
-        marginRight:13,
-    },
-    headerViewText1:{
-        marginTop:2,
-        fontSize:14,
-        color:'#333333',
-    },
-    headerViewTextSep:{
-        flex:1,
-    },
-    headerViewText2:{
-        marginBottom:2,
-        fontSize:14,
-        color:'#999999',
-    },
-    headerViewNoText:{
-        fontSize:30,
-        marginTop:30,
-        marginBottom:20,
-    },
-    headerViewDesText:{
-        fontSize:14,
-        color:'#999999',
-        marginBottom:21,
-    }
+
 
 
 });
 
-export default AccountWithdrawResultPage
+export default PayResultPage

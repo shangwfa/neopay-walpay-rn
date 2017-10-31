@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XGQBHomeCellBtn.h"
+
+@protocol XGQBHomeCellViewDelegate
+
+-(void)btnClicked:(XGQBHomeCellBtn*)btn;
+
+@end
 
 @interface XGQBHomeCellView : UIView
+
+@property (nonatomic,weak) id <XGQBHomeCellViewDelegate> delegate;
 
 @end
