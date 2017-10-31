@@ -106,7 +106,7 @@
 -(void)scanBtnClicked
 {
     XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType =@"payResult";
+    RNVC.pageType =@"qrCodeScan";
     [self.navigationController pushViewController:RNVC animated:YES];
 }
 
