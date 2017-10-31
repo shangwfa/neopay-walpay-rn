@@ -13,6 +13,7 @@ import {RouterPaths} from '../constants/RouterPaths'
 import FormatUtils from '../utils/FormatUtils'
 import NetUtil from '../utils/NetUtil'
 import {events} from '../constants/index'
+import ApiManager from '../utils/ApiManager'
 
 class PersonalInfoPage extends BasePage {
 
@@ -48,7 +49,7 @@ class PersonalInfoPage extends BasePage {
         })
     }
     userInfo=()=>{
-        NetUtil.post('user/get_user_info', {}, (data) => {
+        ApiManager.getUserInfo(data=>{
             this.setState({
                 data: data
             })

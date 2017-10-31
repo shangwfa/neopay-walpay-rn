@@ -3,6 +3,7 @@ package cn.neopay.walpay.android.rn;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 
 import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.WalpayApp;
@@ -50,6 +51,7 @@ public class RNCacheViewManager {
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
                 .addPackage(WalpayApp.rnPackage)
+                .addPackage(new RCTCameraPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();

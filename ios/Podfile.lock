@@ -20,6 +20,10 @@ PODS:
   - JPush (3.0.6):
     - JCore (~> 1.1.1)
   - Masonry (1.1.0)
+  - React (0.48.3):
+    - React/Core (= 0.48.3)
+  - react-native-camera (0.10.0):
+    - React
   - React/ART (0.48.3):
     - React/Core
   - React/BatchedBridge (0.48.3):
@@ -73,6 +77,7 @@ DEPENDENCIES:
   - IQKeyboardManager (~> 5.0.2)
   - JPush (~> 3.0.6)
   - Masonry (~> 1.1.0)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - React/ART (from `../node_modules/react-native`)
   - React/BatchedBridge (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
@@ -96,6 +101,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   React:
     :path: ../node_modules/react-native
+  react-native-camera:
+    :path: ../node_modules/react-native-camera
   Yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
@@ -107,10 +114,11 @@ SPEC CHECKSUMS:
   JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   React: 748a63a3a08cef2864657ad752a5ca7393e07fc2
+  react-native-camera: 16adf5f4a105010e25841711ab6ed8f98499cc09
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   Yoga: b3337798e426de90f48662cf0fe2ee1a844075e1
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 91a22314e0365743195ef080cd61c99184737baf
+PODFILE CHECKSUM: c53e0ca7d30927b49245015c13bae5456bdd739f
 
 COCOAPODS: 1.2.1

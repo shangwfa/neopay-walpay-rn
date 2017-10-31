@@ -6,11 +6,13 @@ import {
     View,
     Image
 } from 'react-native';
-import {colors} from '../constants/index'
-import Divider from '../components/Divider'
+// import {colors} from '../constants/index'
+// import Divider from '../components/Divider'
+import colors from "../constants/colors";
 
 const PhoneTopupMsgCell = props => {
     const {
+        isShow,
         relustTilte,
         dateValue,
         topupTypeValue,
@@ -21,6 +23,18 @@ const PhoneTopupMsgCell = props => {
     } = props
 
     const styles = StyleSheet.create({
+        headr: {
+            flexDirection:'row',
+            height:40,
+            backgroundColor:colors.page_background,
+            justifyContent:'center',
+            alignItems:'center'
+        },
+        headr_bottom: {
+            height:15,
+            backgroundColor:colors.page_background,
+        },
+
         reslut_Title: {
             marginLeft:15,
             marginTop:15,
@@ -40,30 +54,62 @@ const PhoneTopupMsgCell = props => {
         topupType: {
             marginTop:25,
             color: colors.black,
-            fontSize: 15,
-            height: 20
+            fontSize: 15
         },
 
         priceValue: {
+            marginTop:22,
             marginLeft: 10,
             color: colors.black,
-            fontSize: 20,
-            height: 30,
+            fontSize: 25
         },
 
-        bottom_title: {
-            marginTop: 20,
-            marginLeft:15,
-            color: colors.black,
-            height: 20,
-            fontSize: 15
+        middle_view:{
+            flexDirection:'row',
+            justifyContent:'center',
+            alignItems:'center'
         },
 
-        bottom_value: {
+        middle_line:{
+            marginTop:20,
+            marginLeft:15,
+            marginRight:15,
+            height:1,
+            backgroundColor:colors.page_background
+        },
+
+        bottom_view:{
+            flexDirection:'row'
+        },
+
+        bottom_title_top: {
+            marginTop:15,
             marginLeft:15,
             color: colors.black,
-            height: 20,
-            fontSize: 15
+            fontSize: 15,
+        },
+
+        bottom_value_top: {
+            marginTop:15,
+            marginLeft:5,
+            color: colors.balck_more_light,
+            fontSize: 15,
+        },
+
+        bottom_title_bom: {
+            marginTop:10,
+            marginLeft:15,
+            color: colors.black,
+            fontSize: 15,
+            marginBottom:15
+        },
+
+        bottom_value_bom: {
+            marginTop:10,
+            marginLeft:5,
+            color: colors.balck_more_light,
+            fontSize: 15,
+            marginBottom:15
         },
 
         background_container: {
@@ -73,23 +119,50 @@ const PhoneTopupMsgCell = props => {
             marginRight:15
         },
 
-        bottom_view:{
+        bottom_line:{
             backgroundColor:colors.page_background,
             height:15
         }
     });
 
+    renderSectionHeader = () => {
+        if (isShow) {
+            return <View style = {styles.headr}>
+                <Text>xxxx</Text>
+            </View>
+        }else {
+            return <View style={styles.headr_bottom}/>
+        }
+    }
+
     const rendercellContent = () => {
-        console.log(dateValue)
-        return <View style={styles.background_container}>
-            <Text style={styles.reslut_Title}>{relustTilte}</Text>
-            <Text style={styles.dateLab}>{dateValue}</Text>
-            <Text style={styles.topupType}>{topupTypeValue}</Text>
-            <Text style={styles.priceValue}>{priceValue}</Text>
-            <Text style={styles.bottom_title}>{'充值号码'}</Text>
-            <Text style={styles.bottom_value}>{topupPhoneNum}</Text>
-            <Text style={styles.bottom_title}>{'付款方式'}</Text>
-            <Text style={styles.bottom_value}>{payType}</Text>
+        return <View>
+            {renderSectionHeader()}
+
+            <View style={styles.background_container}>
+                <Text style={styles.reslut_Title}>{relustTilte}</Text>
+                <Text style={styles.dateLab}>{dateValue}</Text>
+
+                <View style = {styles.middle_view}>
+                    <Text style={styles.topupType}>{topupTypeValue}</Text>
+                    <Text style={styles.priceValue}>{priceValue}</Text>
+                </View>
+
+                <View style = {styles.middle_line}>
+
+                </View>
+
+                <View style = {styles.bottom_view}>
+                    <Text style={styles.bottom_title_top}>{'充值号码:'}</Text>
+                    <Text style={styles.bottom_value_top}>{topupPhoneNum}</Text>
+                </View>
+
+                <View style = {styles.bottom_view}>
+                    <Text style={styles.bottom_title_bom}>{'付款方式:'}</Text>
+                    <Text style={styles.bottom_value_bom}>{payType}</Text>
+                </View>
+            </View>
+
         </View>
     }
 
@@ -97,9 +170,6 @@ const PhoneTopupMsgCell = props => {
         <TouchableOpacity activeOpacity={0.8} {...attributes}>
             <View >
                 {rendercellContent()}
-                <View style = {styles.bottom_view}>
-
-                </View>
             </View>
 
         </TouchableOpacity>

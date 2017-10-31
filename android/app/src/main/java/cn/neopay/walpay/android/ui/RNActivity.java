@@ -1,6 +1,5 @@
 package cn.neopay.walpay.android.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -84,6 +83,7 @@ public class RNActivity extends BaseRNActivity {
             case PageType.PAY_CODE_PAGE:
                 initLaunchOptions(bundle, PageType.PAY_CODE_PAGE);
                 break;
+
         }
         return bundle;
     }
@@ -162,6 +162,10 @@ public class RNActivity extends BaseRNActivity {
         String PERSONAL_INFO_PAGE = "personalInfo";
         String ACTIVITY_LIST_PAGE = "activityList";
         String ACTIVITY_RED_LIST_PAGE = "redList";
+        String MY_LOTTER_RECORD="myLotteryRecord";
+        String MY_ASSET="myAsset";
+        String MY_BANK="bankCardList";
+        String PAY_SCAN_QR_CODE="pay_scan_qr_code";
         String MY_LOTTER_RECORD = "myLotteryRecord";
         String MY_ASSET = "myAsset";
         String MY_BANK = "bankCardList";

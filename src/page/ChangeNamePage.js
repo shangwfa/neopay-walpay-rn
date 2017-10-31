@@ -13,6 +13,7 @@ import CommonButton from '../components/CommonButton'
 import NetUtil from '../utils/NetUtil'
 import BasePage from './BasePage'
 import events from "../constants/events";
+import ApiManager from "../utils/ApiManager";
 
  class ChangeNamePage extends BasePage {
     constructor() {
@@ -47,7 +48,7 @@ import events from "../constants/events";
         if (nickName.length <= 0) {
             NativeModules.commModule.toast("昵称不能为空")
         }else {
-            NetUtil.post('user/modify_user_nickname', {nickName: nickName}, (data) => {
+            ApiManager.modifyUserNickName({nickName: nickName},data=>{
                 this.props.navigation.goBack()
                 DeviceEventEmitter.emit(events.UPDATE_PERSONAL_INFO_PAGE_EVENT)
             })
