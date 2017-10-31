@@ -31,7 +31,11 @@ class AccountWithdrawPage extends BasePage {
                     <Text style={styles.numberRowViewText}>可提现金额 678.89元</Text>
                     <View style={styles.numberRowViewNoView}>
                         <Text style={styles.numberRowViewRMB}>¥</Text>
-                        <TextInput placeholder='请输入提现金额' style={styles.numberRowViewNumber}/>
+                        <TextInput
+                            placeholder='请输入提现金额'
+                            style={styles.numberRowViewNumber}
+                            keyboardType={'numeric'}
+                        />
                     </View>
                     <View style={styles.numberRowViewUnderlineView}>
                         <View style={styles.numberRowViewUnderline}>

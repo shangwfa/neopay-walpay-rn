@@ -28,7 +28,7 @@ class MyBalancePage extends BasePage {
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录'/>
                 <View style={styles.logoImg}>
-                    <Image source={require("../res/img/sy_yue.png")}/>
+                    <Image source={require("../res/img/HomePage/sy_yue.png")}/>
                 </View>
                 <View style={styles.desTextView}>
                     <Text style ={styles.desText}>
