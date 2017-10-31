@@ -65,6 +65,7 @@ const RouterSetting = {
     myBalance: {screen: MyBalance},
     accountWithdraw: {screen: AccountWithdrawPage},
     accountWithdrawResult: {screen: AccountWithdrawResultPage},
+    test:{screen:Test}
 }
 
 export default RouterSetting
