@@ -21,6 +21,10 @@ import BankCardList from "../page/BankCardListPage"
 import TransactionDetailsPage from "../page/TransactionDetailsPage"
 import BankCardDetail from "../page/BankCardDetailPage"
 import TopupMsgList from "../page/PhoneTopupMsgListPage"
+import QrCodeScan from '../page/QrCodeScanPage'
+import  InvalidQrCode from '../page/InvalidQrCodePage'
+import Payment from '../page/PaymentPage'
+import Test from '../page/Test'
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -47,7 +51,10 @@ const RouterSetting = {
     transactionDetails: {screen: TransactionDetailsPage},
     bankCardList:{screen:BankCardList},
     bankCardDetail:{screen:BankCardDetail},
-    topupMsgList:{screen:TopupMsgList}
+    topupMsgList:{screen:TopupMsgList},
+    qrCodeScan:{screen:QrCodeScan},
+    invalidQrCode:{screen:InvalidQrCode},
+    payment:{screen:Payment}
 }
 
 export default RouterSetting

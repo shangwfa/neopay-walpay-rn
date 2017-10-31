@@ -11,5 +11,7 @@ export const APIS = {
     GET_USER_INFO: 'user/get_user_info',//获取用户信息
     QUERY_USER_BILL_DETAIL: "pay/query_user_bill_detail",//查询用户账单详情
     GET_BANK_INFO_BY_CARD_NO:'bank/get_bank_info_by_card_no',
-
+    QUERY_BANNER_LIST:'merchant/query_banner_list',
+    BIND_BANK_CARD:'bank/bind_bank_card',
+    MODIFY_USER_NICKNAME:'user/modify_user_nickname',
 }

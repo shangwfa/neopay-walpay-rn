@@ -95,6 +95,7 @@ public class RNActivity extends BaseRNActivity {
                 myBankParams.setPage(PageType.MY_BANK);
                 bundle.putString("params", new Gson().toJson(myBankParams));
                 break;
+
         }
         return bundle;
     }
@@ -169,5 +170,6 @@ public class RNActivity extends BaseRNActivity {
         String MY_LOTTER_RECORD="myLotteryRecord";
         String MY_ASSET="myAsset";
         String MY_BANK="bankCardList";
+        String PAY_SCAN_QR_CODE="pay_scan_qr_code";
     }
 }

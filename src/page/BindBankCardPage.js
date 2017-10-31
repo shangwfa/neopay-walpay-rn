@@ -12,7 +12,8 @@ import CommonButton from '../components/CommonButton'
 import {colors} from '../constants/index'
 import NetUtil from '../utils/NetUtil'
 import StringUtils from '../utils/StringUtils'
-import {APIS} from "../constants/API";
+import {APIS} from "../constants/API"
+import ApiManager from '../utils/ApiManager'
 
 class BindBankCardPage extends BasePage {
 
@@ -56,20 +57,19 @@ class BindBankCardPage extends BasePage {
             'smsCode': smsCode,
             'bindCardType': 2
         }
-        NetUtil.post('bank/bind_bank_card', req, (data) => {
+        ApiManager.bindBankCard(req,data=>{
 
         })
 
     }
 
     onBlur = () => {
-        NetUtil.post(APIS.GET_BANK_INFO_BY_CARD_NO, {'cardNo': this.state.cardNo}, (data) => {
+        ApiManager.getBankInfoByCardNo({'cardNo': this.state.cardNo},data=>{
             this.setState({
                     openBankName: data.bankName
                 }
             )
         })
-
     }
 
     render() {
