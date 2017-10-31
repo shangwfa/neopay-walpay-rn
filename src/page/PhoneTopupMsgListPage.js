@@ -73,7 +73,7 @@ class PhoneTopupMsgListPage extends BasePage {
                     amount: '38.00元',
                     phone: '18877778888',
                     payText: '余额',
-                    isShowTime: false
+                    isShowTime: true
                 },{
                     relustTilte: '充值到账成功',
                     date: '09-09 12:12',
@@ -114,24 +114,18 @@ class PhoneTopupMsgListPage extends BasePage {
         console.log(item)
         return (
             <View>
-                {this.renderSectionHeader(item)}
                 <MsgCell
+                    isShow = {item.isShowTime}
                     dateValue = {item.date}
                     topupTypeValue = {item.topupType}
                     priceValue = {item.amount}
                     topupPhoneNum = {item.phone}
                     payType = {item.payText}
-                    relustTilte = {item.reslutTitle}/>
+                    relustTilte = {item.relustTilte}/>
             </View>
         )
 
     }
-    renderSectionHeader = (item) => {
-        if (item.isShowTime) {
-            return <SectionHeader style={styles.list_header} title={'xxxx'}/>
-        }
-    }
-
 
     render() {
         return (
@@ -164,6 +158,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.page_background,
+    },
+    top:{
+        marginTop:15
     }
 });
 
