@@ -390,6 +390,8 @@ export default class QRScannerView extends Component {
                     onBarCodeRead={this.props.onScanResultReceived}
                     style={{flex: 1}}
                 >
+                    {/*绘制顶部标题栏组件*/}
+                    {this.props.renderTopBarView()}
                     {/*绘制扫描遮罩*/}
                     <QRScannerRectView
                         maskColor={this.props.maskColor}
@@ -419,8 +421,6 @@ export default class QRScannerView extends Component {
                     <View style={[styles.buttonsContainer, this.props.bottomMenuStyle]}>
                         {this.props.renderBottomMenuView()}
                     </View>
-                    {/*绘制顶部标题栏组件*/}
-                    {this.props.renderTopBarView()}
                 </Camera>
             </View>
         );

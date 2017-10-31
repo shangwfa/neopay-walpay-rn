@@ -16,8 +16,15 @@ import white_back_arrow from '../res/img/white_back_arrow.png'
 
 class Header extends Component {
     static defaultProps = {
-        isScan:false
+        isShowLine:true,
+        backgroundColor:colors.white,
+        textColor:colors.black,
+        isWhiteArrow:false,
+
     };
+    static propTypes = {
+        rightIcon: React.PropTypes.any,
+    }
 
     constructor(props) {
         super(props)
@@ -28,8 +35,8 @@ class Header extends Component {
     renderHeaderRight=()=>{
         if(this.props.rightTitle){
            return  <Text style={styles.header_right_title}>{this.props.rightTitle}</Text>
-        }else if(this.props.rightIconType){
-            return <Image style={styles.right_icon} source={this.getRightIcon()}/>
+        }else if(this.props.rightIcon){
+            return <Image style={styles.right_icon} source={this.props.rightIcon}/>
         }
     }
     getRightIcon=()=>{
@@ -46,25 +53,25 @@ class Header extends Component {
         this.props.navigation.goBack();
     }
     renderDivider=()=>{
-        if(this.props.isScan){
-            return null
-        }else {
+        if(this.props.isShowLine){
             return <Divider/>
+        }else {
+            return null
         }
     }
 
     render() {
         return (
             <View>
-                <View style={[styles.container,this.props.isScan?{}:{backgroundColor: colors.white}]}>
+                <View style={[styles.container,{backgroundColor: this.props.backgroundColor}]}>
                     {/*header左侧*/}
                     <TouchableOpacity style={styles.header_left} onPress={()=>this.goback()}>
-                        <Image style={styles.header_back_img} source={this.props.isScan?white_back_arrow:img_left_arrow}/>
+                        <Image style={styles.header_back_img} source={this.props.isWhiteArrow?white_back_arrow:img_left_arrow}/>
                     </TouchableOpacity>
 
                     {/*header中间*/}
                     <View style={styles.header_middle}>
-                        <Text style={[styles.title,this.props.isScan?{color:'white'}:{color:colors.black}]}> {this.props.title}</Text>
+                        <Text style={[styles.title,{color:this.props.textColor}]}> {this.props.title}</Text>
                     </View>
                     {/*header右侧*/}
                     <TouchableOpacity style={styles.header_right} onPress={()=>this.props.onRightPress()}>

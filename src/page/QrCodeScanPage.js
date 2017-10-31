@@ -12,24 +12,25 @@ import BasePage from './BasePage'
 import UnbindBankCardModal from '../modal/UnbindBankCardModal'
 import scan_bottom_icon from '../res/img/scan_bottom_icon.png'
 import scan_line from '../res/img/scan_line.png'
-
+import three_points from '../res/img/three_points.png'
 class QrCodeScanPage extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
             isShowBottom: false,
+
         };
     }
 
-    scanResult=(e)=>{
+    scanResult = (e) => {
         console.log('Type: ' + e.type + '\nData: ' + e.data);
     }
 
     close = () => {
         this.setState({isShowBottom: false})
     }
-    onRightPress=()=>{
+    onRightPress = () => {
         console.log('xxxxxxx')
         this.setState({isShowBottom: true})
     }
@@ -37,7 +38,8 @@ class QrCodeScanPage extends BasePage {
 
     renderHeader = () => {
         return (<View>
-            <Header navigation={this.props.navigation} isScan={true} title='扫一扫' rightIconType='1' onRightPress={this.onRightPress.bind(this)}/>
+            <Header navigation={this.props.navigation} backgroundColor={colors.transparent} title='扫一扫' isShowLine={false}
+                    isWhiteArrow={true} textColor={colors.white} rightIcon={three_points} onRightPress={this.onRightPress.bind(this)}/>
             <View style={styles.header_container}>
                 <Text style={{color: 'white'}}>请将下框对准二维码</Text>
             </View>
@@ -49,7 +51,7 @@ class QrCodeScanPage extends BasePage {
         return (
             <View style={styles.bottom_container}>
                 <Image style={styles.bottom_icon} source={scan_bottom_icon}/>
-                <Text style={{color:'white',marginLeft:8}}>支持扫描通宝汇APP付款码付钱</Text>
+                <Text style={{color: 'white', marginLeft: 8}}>支持扫描通宝汇APP付款码付钱</Text>
             </View>)
     }
 
