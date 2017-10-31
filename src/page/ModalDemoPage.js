@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import BasePage from './BasePage'
 import OperationStatusMoadl from '../modal/OperationStatusMoadl'
-import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import UnbindBankCardModal from '../modal/TwoBottomItemModal'
 import OneButtonModal from '../modal/OneButtonModal'
 import TwoButtonModal from '../modal/TwoButtonModal'
 import bind_card_failed_icon from '../res/img/bind_card_failed_icon.png'

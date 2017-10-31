@@ -9,7 +9,7 @@ import {colors} from '../constants/index'
 import QRScannerView from '../components/QRScannerView'
 import Header from '../components/Header'
 import BasePage from './BasePage'
-import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import TwoBottomItemModal from '../modal/TwoBottomItemModal'
 import scan_bottom_icon from '../res/img/scan_bottom_icon.png'
 import scan_line from '../res/img/scan_line.png'
 import three_points from '../res/img/three_points.png'
@@ -70,7 +70,9 @@ class QrCodeScanPage extends BasePage {
                     renderTopBarView={() => this.renderHeader()}
                     renderBottomMenuView={() => this.renderBottom()}
                 />
-                <UnbindBankCardModal isShow={this.state.isShowBottom} close={() => this.close()} unBind={() => {
+                <TwoBottomItemModal oneItemTitle='使用说明' twoItemTitle='关闭弹窗' isShow={this.state.isShowBottom} close={() => this.close()} ensure={() => {
+                    this.close()
+                    // TODO 跳转使用说明页面
                 }}/>
             </View>
         );

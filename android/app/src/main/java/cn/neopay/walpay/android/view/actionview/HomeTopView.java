@@ -1,5 +1,7 @@
 package cn.neopay.walpay.android.view.actionview;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.AttrRes;
@@ -9,10 +11,14 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
+import com.tbruyelle.rxpermissions.RxPermissions;
+
 import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeTopViewBinding;
+import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.BusniessUtils;
@@ -58,7 +64,17 @@ public class HomeTopView extends FrameLayout {
 
         mBinding.homeSignIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToSignInWebPage());
 
-        mBinding.homeScanLl.setOnClickListener(v -> MainRouter.getSingleton().jumpToScanPage());
+        mBinding.homeScanLl.setOnClickListener(v -> new RxPermissions((Activity) getContext())
+                .request(Manifest.permission.CAMERA)
+                .subscribe(granted -> {
+                    if (!granted) {
+                        DialogManager.getSingleton().showCarmerTipDialog(getContext());
+                    }else {
+                        RNActivityParams activityParams = new RNActivityParams();
+                        activityParams.setRnPage(RNActivity.PageType.PAY_SCAN_QR_CODE);
+                        MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+                    }
+                }));
 
         mBinding.homePayCodeLl.setOnClickListener(v -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PAY_CODE_PAGE));
 
