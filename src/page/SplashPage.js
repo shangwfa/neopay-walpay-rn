@@ -3,7 +3,7 @@ import {Dimensions, Animated, StatusBar, View} from 'react-native'
 const maxHeight = Dimensions.get('window').height
 const maxWidth = Dimensions.get('window').width
 const splashImg = require('../res/img/splash.png')
-import * as RouterPaths from '../constants/RouterPaths'
+import {RouterPaths} from '../constants/RouterPaths'
 import BasePage from './BasePage'
 class Splash extends BasePage {
 

@@ -44,14 +44,26 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
         [netParas setObject:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"deviceId"];
         [netParas setObject:@"123" forKey:@"macUrl"];
         [netParas setObject:@"CDMA" forKey:@"operator"];
-        
+    
+    
+    //将字典转换成JSON字符串
+    NSData *netPaData = [NSJSONSerialization dataWithJSONObject:netParas options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSString *netPaStr = [[NSString alloc]initWithData:netPaData encoding:NSUTF8StringEncoding];
+    NSMutableString *netPaStrAfter = [netPaStr mutableCopy];
+
+    [netPaStrAfter replaceOccurrencesOfString:@" " withString:@"" options:(NSLiteralSearch) range:NSMakeRange(0, netPaStr.length)];
+    NSLog(@"%@",netPaStrAfter);
+
+    [netPaStrAfter replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, netPaStrAfter.length)];
+    NSLog(@"%@",netPaStrAfter);
         
 //        [netParas setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
 //        [netParas setObject:[GVUserDefaults standardUserDefaults].name forKey:@"name"];
 //        [netParas setObject:[GVUserDefaults standardUserDefaults].avatarUrl forKey:@"avatarUrl"];
 //        [netParas setObject:[GVUserDefaults standardUserDefaults].phone forKey:@"avatarUrl"];
 //
-        callback(@[[NSNull null],netParas]);
+        callback(@[[NSNull null],netPaStrAfter]);
 }
 
 //跳转至原生特定页面

@@ -1,1 +1,3 @@
 include ':app', ':commonlib'
+include ':react-native-camera'
+project(':react-native-camera').projectDir = new File(settingsDir, '../node_modules/ac-qrcode/node_modules/react-native-camera/android')

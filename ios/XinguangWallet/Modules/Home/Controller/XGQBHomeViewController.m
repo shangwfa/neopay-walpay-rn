@@ -62,6 +62,9 @@
     //顶部视图
     XGQBHomeTitleView *homeTitleView = [XGQBHomeTitleView new];
     [self.view addSubview:homeTitleView];
+    [homeTitleView.scanBtn addTarget:self action:@selector(scanBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [homeTitleView.codeBtn addTarget:self action:@selector(payCodeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [homeTitleView.accountBtn addTarget:self action:@selector(accountBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [homeTitleView.calenderBtn addTarget:self action:@selector(calenderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
     //主业务图标视图
@@ -98,6 +101,27 @@
 }
 
 #pragma mark - 处理按钮点击
+-(void)scanBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType =@"";
+    [self.navigationController pushViewController:RNVC animated:YES];
+}
+
+-(void)payCodeBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType =@"qrCode";
+    [self.navigationController pushViewController:RNVC animated:YES];
+}
+
+-(void)accountBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType =@"myBalance";
+    [self.navigationController pushViewController:RNVC animated:YES];
+}
+
 -(void)calenderBtnClicked
 {
     XGQBCommissionViewController *sVC = [XGQBCommissionViewController new];

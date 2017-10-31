@@ -8,8 +8,7 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import ActivityItemComponent from '../components/ActivityItemComponent'
 import BasePage from './BasePage'
-import NetUtil from '../utils/NetUtil'
-
+import ApiManager from '../utils/ApiManager'
 class ActivityListPage extends BasePage {
 
     constructor() {
@@ -46,7 +45,7 @@ class ActivityListPage extends BasePage {
 
 
     componentWillMount() {
-        NetUtil.post('merchant/query_banner_list', {}, (data) => {
+        ApiManager.queryBannerList(data=>{
             this.setState({
                 data: data
             })
@@ -63,6 +62,7 @@ class ActivityListPage extends BasePage {
                 <FlatList
                     data={this.state.data}
                     renderItem={this.renderItem}
+                    keyExtractor={(item,index)=>{return index}}
                 />
             </View>
         );

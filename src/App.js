@@ -4,52 +4,20 @@ import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import JsonUtil from './utils/JsonUtil'
 import ScreenUtils from './utils/ScreenUtils'
-import DemoModal from './modal/DemoModal'
-import {events} from './constants/index'
 import RouterSetting from './constants/RouterSetting'
 
 
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            modalTypeEvent: ''
-        }
     }
 
     componentWillMount() {
         console.log(this.props)
     }
 
-    componentDidMount() {
-        this.emitter = DeviceEventEmitter.addListener(events.MODAL_TYPE_EVENT, (type) => {
-            this.setState({
-                modalTypeEvent: type
-            })
-        })
-    }
-
-    whichModal = () => {
-        this.timer = setTimeout(() => {
-            DeviceEventEmitter.emit(this.state.modalTypeEvent, true)
-        }, 300);//这种处理方式很不好，思考有没有比较好的处理方式
-        switch (this.state.modalTypeEvent) {
-            case events.DEMO_MODAL_EVENT:
-                return (<DemoModal/>)
-                break
-            default:
-                return null
-                break
-        }
-    }
-
-    componentWillUnmount() {
-        this.timer && clearTimeout(this.timer);
-        this.emitter.remove();
-    }
 
     render() {
-        console.log(this.props)
         let params = ScreenUtils.isIOS ? this.props.params : JsonUtil.strToJson(this.props.params)
         const Navigator = StackNavigator(RouterSetting,
             {
@@ -86,7 +54,6 @@ class App extends Component {
         return (
             <View style={{flex: 1}}>
                 <Navigator screenProps={this.props.params}/>
-                {this.whichModal()}
             </View>
 
         );

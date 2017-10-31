@@ -25,6 +25,7 @@ import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
+import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
 import cn.neopay.walpay.android.view.dialog.LoadingDialog;
 
 /**
@@ -212,34 +213,23 @@ public class CommModule extends ReactContextBaseJavaModule {
         mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(EVENT_UPDATE_HEAD_IMG, imgUrl);
     }
-
-
-    private LoadingDialog mLoadingDialog;
+    
     /**
      * 功能显示加载弹窗
      */
     @ReactMethod
-    public void showLoadingDialog(String msg) {
-        HandlerUtils.runOnUiThread(() -> {
-            if(null==mLoadingDialog){
-                mLoadingDialog=new LoadingDialog(mContext.getCurrentActivity(), R.style.LoadingDialog);
-            }
-
-            if(StringUtils.isNoEmpty(msg)){
-                mLoadingDialog.setMessage(msg);
-            }
-            mLoadingDialog.show();
-        });
+    public void showLoadingDialog() {
+        LoadingDialogEvent event=new LoadingDialogEvent();
+        event.setShow(true);
+        EventBus.getDefault().post(event);
 
     }
 
     @ReactMethod
-    public void hideLoadingDialog(String msg) {
-        HandlerUtils.runOnUiThread(() -> {
-            if(null!=mLoadingDialog&&mLoadingDialog.isShowing()){
-                mLoadingDialog.hide();
-            }
-        });
+    public void hideLoadingDialog() {
+        LoadingDialogEvent event=new LoadingDialogEvent();
+        event.setShow(false);
+        EventBus.getDefault().post(event);
 
     }
 }

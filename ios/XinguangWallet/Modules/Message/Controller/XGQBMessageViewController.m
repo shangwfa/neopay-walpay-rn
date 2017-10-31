@@ -14,6 +14,8 @@
 #import "XGQBNoContentViewController.h"
 #import "XGQBNetworkFailureViewController.h"
 
+#import "XGQBRNViewController.h"
+
 
 @interface XGQBMessageViewController ()
 
@@ -46,6 +48,7 @@
 {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    self.navigationController.navigationBarHidden = NO;
 
 }
 
@@ -137,20 +140,33 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
+    NSDictionary *messDict = self.messArr[indexPath.row];
+
+    if ([messDict[@"type"]isEqualToString:@"payMess"]) {
+        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+        RNVC.pageType = @"payMessage";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }
+    else if([messDict[@"type"]isEqualToString:@"mobileMess"])
     {
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType = @"topupMsgList";
         [self.navigationController pushViewController:RNVC animated:YES];
+    }else if([messDict[@"type"]isEqualToString:@"redPacketAct"])
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"redList";
+        [self.navigationController pushViewController:RNVC animated:YES];
     }
-//    if (arc4random()%2) {
-//        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
-//        [self.navigationController pushViewController:noContentVC animated:YES];
-//    }else{
-//        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
-//        [self.navigationController pushViewController:netWorkFailVC animated:YES];
-//    }
     
+    else if (arc4random()%2) {
+        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
+        [self.navigationController pushViewController:noContentVC animated:YES];
+    }else{
+        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
+        [self.navigationController pushViewController:netWorkFailVC animated:YES];
+
+    }
 }
 
 @end

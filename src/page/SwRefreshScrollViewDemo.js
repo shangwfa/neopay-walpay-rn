@@ -32,6 +32,7 @@ class SwRefreshScrollViewDemo extends BasePage {
 
 
     onLoadMore=(end)=>{
+        console.log('onLoadMore')
         let timer = setTimeout(() => {
             clearTimeout(timer)
             this._page++
@@ -48,6 +49,7 @@ class SwRefreshScrollViewDemo extends BasePage {
     }
 
     onRefersh=(end)=>{
+        console.log('onRefersh')
         let timer = setTimeout(() => {
             clearTimeout(timer)
             this._page = 0
@@ -73,7 +75,6 @@ class SwRefreshScrollViewDemo extends BasePage {
         )
     }
     render() {
-
         return (
             <SwRefreshListView
                 dataSource={this.state.dataSource}
@@ -82,12 +83,6 @@ class SwRefreshScrollViewDemo extends BasePage {
                 onRefresh={this.onRefersh}
                 onLoadMore={this.onLoadMore}
                 //isShowLoadMore={false}
-                renderFooter={() => {
-                    return
-                    (<View style={{backgroundColor: 'blue', height: 30}}>
-                        <Text>我是footer</Text>
-                    </View>)
-                }}
             />)
     }
 

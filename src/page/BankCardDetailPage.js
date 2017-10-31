@@ -14,6 +14,8 @@ import SectionHeader from '../components/SectionHeader'
 import BankCardCell from '../components/BankCardCell'
 import CommonButton from '../components/CommonButton'
 import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import BankCardOrderList from '../page/BankCardOrderListPage'
+import {RouterPaths} from '../constants/RouterPaths'
 
 const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
 const dataSource = {name: 'chris', imgUrl: url, type: '储蓄卡', cardNo: '****   ****   ****   ****   8889'}
@@ -66,7 +68,7 @@ class BankCardDetailPage extends BasePage {
     }
 
     pushRecordPage = () => {
-
+        this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST)
     }
 }
 

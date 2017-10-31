@@ -16,10 +16,20 @@ import SwRefreshScrollView from '../page/SwRefreshScrollViewDemo'
 import BackCardOrderList from '../page/BankCardOrderListPage'
 import MyLotteryRecord from '../page/MyLotteryRecordPage'
 import RedList from "../page/RedListPage"
+import PayMessage from "../page/PayMessagePage"
 import BankCardList from "../page/BankCardListPage"
 import TransactionDetailsPage from "../page/TransactionDetailsPage"
 import BankCardDetail from "../page/BankCardDetailPage"
 import TopupMsgList from "../page/PhoneTopupMsgListPage"
+import QrCodeScan from '../page/QrCodeScanPage'
+import  InvalidQrCode from '../page/InvalidQrCodePage'
+import Payment from '../page/PaymentPage'
+import Test from '../page/Test'
+import CardPack from "../page/CardPackPage";
+import PayCode from "../page/PayCodePage";
+import MyBalance from "../page/MyBalancePage"
+import AccountWithdrawPage from "../page/AccountWithdrawPage";
+import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -39,10 +49,22 @@ const RouterSetting = {
     filter: {screen: Filter},
     myAsset: {screen: MyAsset},
     swRefreshScrollView: {screen: SwRefreshScrollView},
+    payMessage: {screen: PayMessage},
     transactionDetails: {screen: TransactionDetailsPage},
     bankCardList:{screen:BankCardList},
     bankCardDetail:{screen:BankCardDetail},
-    topupMsgList:{screen:TopupMsgList}
+    topupMsgList:{screen:TopupMsgList},
+    qrCodeScan:{screen:QrCodeScan},
+    invalidQrCode:{screen:InvalidQrCode},
+    payment:{screen:Payment},
+    bankCardList: {screen: BankCardList},
+    bankCardDetail: {screen: BankCardDetail},
+    topupMsgList: {screen: TopupMsgList},
+    cardPack: {screen: CardPack},
+    payCode: {screen: PayCode},
+    myBalance: {screen: MyBalance},
+    accountWithdraw: {screen: AccountWithdrawPage},
+    accountWithdrawResult: {screen: AccountWithdrawResultPage},
 }
 
 export default RouterSetting
