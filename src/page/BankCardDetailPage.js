@@ -13,7 +13,7 @@ import Header from '../components/Header'
 import SectionHeader from '../components/SectionHeader'
 import BankCardCell from '../components/BankCardCell'
 import CommonButton from '../components/CommonButton'
-import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import TwoBottomItemModal from '../modal/TwoBottomItemModal'
 import BankCardOrderList from '../page/BankCardOrderListPage'
 import {RouterPaths} from '../constants/RouterPaths'
 
@@ -56,7 +56,7 @@ class BankCardDetailPage extends BasePage {
                               cardNoValue={dataSource.cardNo}/>
                 <CommonButton value='查看该张银行卡交易记录' style={{marginTop:50 }} onPress={()=>this.pushRecordPage()}/>
 
-                <UnbindBankCardModal isShow={this.state.isShow} close={()=>this.close()} unBind={()=>this.unBind()}/>
+                <TwoBottomItemModal oneItemTitle='解绑该张银行卡' twoItemTitle='关闭弹窗' isShow={this.state.isShowBottom} close={() => this.close()} ensure={this.unBind()}/>
             </View>
         );
     }

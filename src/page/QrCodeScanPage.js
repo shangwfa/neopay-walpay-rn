@@ -88,11 +88,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor:colors.transparent
     },
     header_container: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 85
+        marginTop: 85,
+        backgroundColor:colors.transparent
     },
     hint_text_style: {
         color: '#C0C0C0'
