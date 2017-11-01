@@ -29,8 +29,8 @@ class AccountWithdrawPage extends BasePage {
                 <Header navigation={this.props.navigation} title={'提现'} rightTitle={'?'}/>
                 <View style={styles.bankCardRowView}>
                     <Image style={styles.bankCardRowIcon} source={require("../res/img/BankIcon/sy_gongshang.png")}/>
-                    <View style={styles.bankCardRowText}>
-                        <Text>中国工商银行储蓄卡(8988)</Text>
+                    <View style={styles.bankCardRowTextView}>
+                        <Text style={styles.bankCardRowText}>中国工商银行储蓄卡(8988)</Text>
                     </View>
                     <View style={{flex:1}}></View>
                     <Image style={styles.bankCardRowArrow} source={require("../res/img/right_arrow.png")}/>
@@ -87,16 +87,19 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     bankCardRowIcon:{
+        width:20,
+        height:20,
         marginLeft:14,
         marginRight:8,
     },
     bankCardRowText:{
-
+        fontSize:14,
+        color:'#333333',
     },
     bankCardRowArrow:{
         width:7,
         height:12,
-        marginRight:20,
+        marginRight:14,
     },
 
     numberRowView:{

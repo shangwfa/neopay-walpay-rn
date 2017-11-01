@@ -60,9 +60,11 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:68,
         marginBottom:40,
+        // backgroundColor:'purple'
     },
     desTextView:{
         alignItems:'center',
+        // backgroundColor:'yellow'
     },
     desText:{
         fontSize:15,
@@ -72,7 +74,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         flexDirection:'row',
-        marginTop:12,
+        marginTop:19,
+        // backgroundColor:'gray'
     },
     RMBText:{
         fontSize:17,
@@ -84,6 +87,7 @@ const styles = StyleSheet.create({
     },
     topupBtn:{
         marginTop:65,
+        // backgroundColor:'green'
     },
     withDrawBtn:{
         marginTop:20,

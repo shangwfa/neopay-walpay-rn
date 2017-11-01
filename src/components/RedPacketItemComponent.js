@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     content_container: {
         flex: 1,
         backgroundColor: colors.white,
-        marginTop: 8,
-        marginBottom:8,
+        marginTop: 10,
+        marginBottom:0,
         marginLeft:12,
         marginRight:12,
         borderRadius: 8,
