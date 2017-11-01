@@ -13,18 +13,25 @@ import TwoBottomItemModal from '../modal/TwoBottomItemModal'
 import scan_bottom_icon from '../res/img/scan_bottom_icon.png'
 import scan_line from '../res/img/scan_line.png'
 import three_points from '../res/img/three_points.png'
+import {RouterPaths} from '../constants/RouterPaths'
 class QrCodeScanPage extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
             isShowBottom: false,
-
+            isGetScanResult:false,
         };
     }
 
+
     scanResult = (e) => {
         console.log('Type: ' + e.type + '\nData: ' + e.data);
+        if(!this.state.isGetScanResult){
+            this.setState({isGetScanResult:true})
+            this.props.navigation.navigate(RouterPaths.PAYMENT)
+        }
+
     }
 
     close = () => {

@@ -22,7 +22,7 @@ import TransactionDetailsPage from "../page/TransactionDetailsPage"
 import BankCardDetail from "../page/BankCardDetailPage"
 import TopupMsgList from "../page/PhoneTopupMsgListPage"
 import QrCodeScan from '../page/QrCodeScanPage'
-import  InvalidQrCode from '../page/InvalidQrCodePage'
+import InvalidQrCode from '../page/InvalidQrCodePage'
 import Payment from '../page/PaymentPage'
 import Test from '../page/Test'
 import CardPack from "../page/CardPackPage";
@@ -31,6 +31,8 @@ import MyBalance from "../page/MyBalancePage"
 import AccountWithdrawPage from "../page/AccountWithdrawPage";
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
 import PayResultPage from "../page/PayResultPage";
+import MerchantActivityList from '../page/MerchantActivityListPage'
+
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -52,19 +54,26 @@ const RouterSetting = {
     swRefreshScrollView: {screen: SwRefreshScrollView},
     payMessage: {screen: PayMessage},
     transactionDetails: {screen: TransactionDetailsPage},
-    bankCardList:{screen:BankCardList},
-    bankCardDetail:{screen:BankCardDetail},
-    topupMsgList:{screen:TopupMsgList},
-    qrCodeScan:{screen:QrCodeScan},
-    invalidQrCode:{screen:InvalidQrCode},
-    payment:{screen:Payment},
+    bankCardList: {screen: BankCardList},
+    bankCardDetail: {screen: BankCardDetail},
+    topupMsgList: {screen: TopupMsgList},
+    qrCodeScan: {screen: QrCodeScan},
+    invalidQrCode: {screen: InvalidQrCode},
+    payment: {screen: Payment},
+    bankCardList: {screen: BankCardList},
+    bankCardDetail: {screen: BankCardDetail},
+    topupMsgList: {screen: TopupMsgList},
+    qrCodeScan: {screen: QrCodeScan},
+    invalidQrCode: {screen: InvalidQrCode},
+    payment: {screen: Payment},
     cardPack: {screen: CardPack},
     payCode: {screen: PayCode},
     myBalance: {screen: MyBalance},
     accountWithdraw: {screen: AccountWithdrawPage},
     accountWithdrawResult: {screen: AccountWithdrawResultPage},
-    payResult:{screen:PayResultPage},
-    test:{screen:Test},
+    payResult: {screen: PayResultPage},
+    merchantActivityList: {screen: MerchantActivityList},
+    test: {screen: Test},
 };
 
 export default RouterSetting
