@@ -16,6 +16,7 @@ export const RouterPaths = {
       BANKCARD_DETAIL  :'bankCardDetail',
       ACCOUNT_WITHDRAW_PAGE  :'accountWithdraw',
       ACCOUNT_WITHDRAW_RESULT_PAGE  :'accountWithdrawResult',
-      BANKCARD_ORDERLIST  :'bankCardOrderList'
+      BANKCARD_ORDERLIST  :'bankCardOrderList',
+      PAYMENT:'payment'
     }
 
