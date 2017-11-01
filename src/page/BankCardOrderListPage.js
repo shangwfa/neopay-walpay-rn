@@ -16,133 +16,93 @@ import BankOrderListItem from '../components/BankOrderListItem'
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
+import ApiManager from "../utils/ApiManager";
 
 class BankCardOrderListPage extends BasePage {
-    page = 0
-    dataSource = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
         this.state = {
-            dataSource: this.dataSource.cloneWithRows(
-                    [{
-                        name: 'nader',
-                        orderType: 'scan',
-                        middleUpValue: '扫一扫付款',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:true,
-                    },
-                    {
-                        name: 'chris',
-                        orderType: 'payCode',
-                        middleUpValue: '付款码付款',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:false,
-                    },
-                    {
-                        name: 'anader',
-                        orderType: 'redPocket',
-                        middleUpValue: '大红包',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:false,
-                    },
-                    {
-                        name: 'bchris',
-                        orderType: 'mobile',
-                        middleUpValue: '手机充值',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:false,
-                    },
-                    {
-                        name: 'nick',
-                        orderType: 'withDraw',
-                        middleUpValue: '账户提现',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:true,
-                    },
-                    {
-                        name: 'amanda',
-                        orderType: 'mobileWithDraw',
-                        middleUpValue: '手机充值退款',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:false,
-                    },
-                    {
-                        name: 'enick',
-                        orderType: 'shopAct',
-                        middleUpValue: '商户活动-中秋活动',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:false,
-                    },
-                    {
-                        name: 'ramanda',
-                        orderType: 'sysAct',
-                        middleUpValue: '平台活动-国庆活动',
-                        middleBottomValue: '08-27 12:23',
-                        rightUpValue: '-38.00',
-                        isShowTime:false,
-                    }
-                ]),
+            dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
+            page: 0,
+            pageType: this.props.navigation.state.params.pageType,
         }
     }
 
-    renderRow = (item) => {
-        return (
-            <View>
-                {this.renderSectionHeader(item)}
-            <BankOrderListItem orderType={item.orderType}
-                              middleUpValue={item.middleUpValue} middleBottomValue={item.middleBottomValue}
-                              rightUpValue={item.rightUpValue} rightBottomValue={item.rightBottomValue}
-                              isLine={true}/>
-            </View>
-                )
-    }
-    renderSectionHeader = (item)=>{
-        if (item.isShowTime)
-           return <BankOrderListSectionHeader title={'本月'} value='收入:789.78元 支出:-987.65元'/>
+    componentWillMount() {
+        this._handleCurrentPageType();
     }
 
-    onLoadMore = (end) => {
-        let timer = setTimeout(() => {
-            clearTimeout(timer)
-            this.refs.listView.resetStatus() //重置上拉加载的状态
-            end(this._page > 2)//刷新成功后需要调用end结束刷新
-        }, 1500)
-    }
-
-    onRefresh = (end) => {
-        let timer = setTimeout(() => {
-            clearTimeout(timer)
-            end()//刷新成功后需要调用end结束刷新
-        }, 1500)
-    }
     render() {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='银行卡交易记录'/>
                 <SwRefreshListView
                     dataSource={this.state.dataSource}
-                    ref="listView"
+                    ref="swRefreshListView"
                     renderRow={this.renderRow}
                     onRefresh={this.onRefresh}
                     onLoadMore={this.onLoadMore}
-                    renderFooter={() => {
-                        return
-                        (<View style={{backgroundColor: 'blue', height: 30}}>
-                            <Text>我是footer</Text>
-                        </View>)
-                    }}
                 />
             </View>
         );
     }
+
+    renderRow = (item) => {
+        return (
+            <View>
+                {this.renderSectionHeader(item)}
+                <BankOrderListItem
+                    onPress={this._handleItemClick.bind(this, item)}
+                    orderAvatar={item.iconUrl}
+                    middleUpValue={item.title}
+                    middleBottomValue={item.tradeTimeMs}
+                    rightUpValue={item.amount}
+                    rightBottomValue={item.balance}
+                    isLine={true}/>
+            </View>
+        )
+    };
+
+    renderSectionHeader = (item) => {
+        if (item.disPlayDate) {
+            return <BankOrderListSectionHeader
+                title={item.tradeTimeMs}
+                value={"收入:" + item.incomeMoney + "元  " + "支出:" + item.outMoney + "元"}/>
+        }
+    };
+    onLoadMore = (end) => {
+        console.log("_onLoadMore");
+        this.refs.swRefreshListView.resetStatus(); //重置上拉加载的状态
+        end(this._page > 2);//刷新成功后需要调用end结束刷新
+    };
+    onRefresh = (end) => {
+        console.log("_onRefresh");
+        end()//刷新成功后需要调用end结束刷新
+    };
+    _handleItemClick = (item) => {
+        alert(item.title);
+    };
+
+    _handleCurrentPageType = () => {
+        switch (this.state.pageType) {
+            case 0://余额
+                ApiManager.getBalanceRecordList({}, (data) => {
+                    this.setState({
+                        dataSource: this.state.dataSource.cloneWithRows(data),
+                    });
+                });
+                break;
+            case 1://银行卡
+                ApiManager.getBankCardRecordPage({}, (data) => {
+                    this.setState({
+                        dataSource: this.state.dataSource.cloneWithRows(data),
+                    });
+                });
+                break;
+
+        }
+    }
+
 }
 
 const styles = StyleSheet.create({

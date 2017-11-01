@@ -13,6 +13,7 @@ import right_arrow from '../res/img/right_arrow.png';
 import Space from "../components/Space";
 import CommonButton from "../components/CommonButton";
 import ApiManager from "../utils/ApiManager";
+import CommonButtonComponent from "../components/CommonButtonComponent";
 let mData = [];
 class TransactionDetailsPage extends BasePage {
     constructor(props) {
@@ -69,18 +70,13 @@ class TransactionDetailsPage extends BasePage {
         );
     }
 
-    _renderItem = (item, index) => {
+    _renderItem = ({item}, index) => {
         if (null !== item) {
-            return (
-                <TouchableWithoutFeedback onPress={() => item.onclick()}>
-                    <View style={styles.container_item}>
-                        <Text style={[styles.title, {marginLeft: 13}]}>{item.transformType}</Text>
-                        <Space/>
-                        <Text style={[styles.title, {marginRight: 10}]}>{item.transformContent}</Text>
-                        {this._arrowImg(item.isShowArrows)}
-                    </View>
-                </TouchableWithoutFeedback>
-            );
+            return (<CommonButtonComponent
+                btnClick={item.onclick.bind(this)}
+                leftTitle={item.transformType}
+                rightTitle={item.transformContent}
+                isShowRightArrows={item.isShowArrows}/>);
         }
     };
     _keyExtractor = (item, index) => {
@@ -356,8 +352,7 @@ class TransactionDetailsPage extends BasePage {
             alert(incomeType.transformType);
         };
         mData.push(incomeType);
-    }
-    ;
+    };
 
     _tradeTypeItem(item) {
         let tradeType = {
@@ -376,6 +371,7 @@ class TransactionDetailsPage extends BasePage {
         let tradeTime = {
             transformType: "交易时间",
             transformContent: item.tradeTime,
+            isShowArrows: false,
         };
         tradeTime.onclick = () => {
         };
@@ -387,6 +383,7 @@ class TransactionDetailsPage extends BasePage {
         let tradeOrderNo = {
             transformType: "交易订单号",
             transformContent: item.orderNo,
+            isShowArrows: false,
         };
         tradeOrderNo.onclick = () => {
         };
@@ -397,6 +394,7 @@ class TransactionDetailsPage extends BasePage {
         let tradeOrderMoney = {
             transformType: "订单金额",
             transformContent: item.amount,
+            isShowArrows: false,
         };
         tradeOrderMoney.onclick = () => {
         };
@@ -407,6 +405,7 @@ class TransactionDetailsPage extends BasePage {
         let prepaidContent = {
             transformType: "充值内容",
             transformContent: item.productDesc,
+            isShowArrows: false,
         };
         prepaidContent.onclick = () => {
         };
@@ -417,6 +416,7 @@ class TransactionDetailsPage extends BasePage {
         let tipContent = {
             transformType: "备注",
             transformContent: item.remark,
+            isShowArrows: false,
         };
         tipContent.onclick = () => {
         };

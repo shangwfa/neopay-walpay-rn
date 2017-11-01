@@ -1,4 +1,3 @@
-import colors from '../constants/colors'
 import Splash from '../page/SplashPage'
 import Home from "../page/HomePage"
 import ChangeName from '../page/ChangeNamePage'
@@ -33,6 +32,7 @@ import AccountWithdrawPage from "../page/AccountWithdrawPage";
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
 import PayResultPage from "../page/PayResultPage";
 import MerchantActivityList from '../page/MerchantActivityListPage'
+
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -63,6 +63,9 @@ const RouterSetting = {
     bankCardList: {screen: BankCardList},
     bankCardDetail: {screen: BankCardDetail},
     topupMsgList: {screen: TopupMsgList},
+    qrCodeScan: {screen: QrCodeScan},
+    invalidQrCode: {screen: InvalidQrCode},
+    payment: {screen: Payment},
     cardPack: {screen: CardPack},
     payCode: {screen: PayCode},
     myBalance: {screen: MyBalance},
