@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     container:{
         alignItems:'center',
         // backgroundColor:'purple',
+        marginTop:10,
     },
 
     content_container: {
