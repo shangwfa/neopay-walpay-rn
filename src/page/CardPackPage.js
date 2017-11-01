@@ -16,6 +16,7 @@ import ScreenUtils from "../utils/ScreenUtils";
 import BasePage from "./BasePage";
 import img_activity from "../res/img/img_activity.png"
 import ApiManager from "../utils/ApiManager";
+import {RouterPaths} from "../constants/RouterPaths";
 
 class CardPackPage extends BasePage {
 
@@ -114,7 +115,9 @@ class CardPackPage extends BasePage {
         );
     };
     _handleFlatListItemClick = (item, index) => {
-        alert("index= " + index);
+        console.log("index= " + index);
+        //活动跳转详情
+        this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST, {"pageType": 1});
     };
     _keyExtractor = (item, index) => {
         return index;
@@ -159,7 +162,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginTop: 9,
         color: "#000",
-        marginLeft: 4.5,
     }
 
 });

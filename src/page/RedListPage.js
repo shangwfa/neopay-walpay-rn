@@ -52,9 +52,12 @@ class RedListPage extends BasePage {
 
     _onRefresh = () => {
         console.log("_onRefresh");
+        end();//刷新成功后需要调用end结束刷新
     };
     _onLoadMore = () => {
         console.log("_onLoadMore");
+        this.refs.listView.resetStatus(); //重置上拉加载的状态
+        end(this._page > 2)//刷新成功后需要调用end结束刷新
     };
     _clickItem = (item) => {
         // 红包详情跳转
