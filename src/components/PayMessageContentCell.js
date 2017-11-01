@@ -29,7 +29,7 @@ const PayMessageContentCell = props => {
                 <Text style = {styles.detailItem}>备注 :</Text>
                 <Text style = {styles.detailDes}>{attach}</Text>
             </View>)
-    }
+        }
     }
     return (
         <View style = {styles.container}>
@@ -54,11 +54,7 @@ const PayMessageContentCell = props => {
                         <Text style = {styles.detailItem}>交易对象 :</Text>
                         <Text style = {styles.detailDes}>{payTo}</Text>
                     </View>
-
-
                     {renderAttach()}
-
-
                 </View>
 
             </View>
@@ -72,18 +68,22 @@ const styles = StyleSheet.create({
 
     container:{
         alignItems:'center',
+        // backgroundColor:'purple',
     },
 
     content_container: {
         backgroundColor: colors.white,
         width:ScreenUtil.width - 26,
-        marginTop:5,
-        marginBottom:5,
+        marginTop:0,
+        marginBottom:0,
         borderRadius:5,
+        // backgroundColor:'gray',
     },
     titleView:{
         marginTop:11,
+        marginBottom:0,
         marginLeft:13,
+        // backgroundColor:'yellow',
     },
     titleText:{
         fontSize:17,
@@ -96,15 +96,17 @@ const styles = StyleSheet.create({
     countView:{
         alignItems:'center',
         justifyContent:'center',
-        marginTop:10,
-        marginBottom:18,
+        marginTop:25,
+        marginBottom:24,
+        // backgroundColor:'red',
     },
     countText:{
         fontSize:27,
     },
     separatorLineView:{
         alignItems:'center',
-        marginBottom:10,
+        marginBottom:21,
+        // backgroundColor:'tomato'
     },
     separatorLine:{
         height:1,
@@ -112,11 +114,12 @@ const styles = StyleSheet.create({
         backgroundColor:'#DDDDDD',
     },
     detailView:{
-        marginBottom:16,
+        marginBottom:8,
+        // backgroundColor:'pink'
     },
     detailLabel:{
         flexDirection:'row',
-        marginTop:10,
+        marginBottom:11,
         marginLeft:13,
     },
     detailItem:{

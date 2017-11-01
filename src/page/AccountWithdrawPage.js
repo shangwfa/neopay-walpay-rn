@@ -12,9 +12,17 @@ import Header from '../components/Header'
 import ScrnUtil from '../utils/ScreenUtils'
 import CommonButton from "../components/CommonButton";
 import {RouterPaths} from "../constants/RouterPaths"
+import PayPwdModal from '../modal/PayPwdModal'
+
 
 
 class AccountWithdrawPage extends BasePage {
+    constructor(props){
+        super(props);
+        this.state={
+            isPayShow:false,
+        }
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -51,11 +59,18 @@ class AccountWithdrawPage extends BasePage {
                 <View style={styles.confirmBtnView}>
                     <CommonButton value={'提现'} onPress={()=>this.withdrawBtnClicked()}/>
                 </View>
+                <PayPwdModal isShow={this.state.isPayShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
+                             onForgetPwd={()=>{}} onEnd={()=>this.payPwdInputEnd()}/>
             </View>
         );
     }
     withdrawBtnClicked(){
+        this.setState({isPayShow:true})
+    }
+    payPwdInputEnd(){
+        this.setState({isPayShow:false})
         this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE)
+
     }
 }
 
