@@ -4,7 +4,7 @@ import {
     View,
     Text,
     Image,
-    SectionList,
+    ListView,
     RefreshControl
 } from 'react-native'
 
@@ -13,120 +13,132 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import BankOrderListSectionHeader from '../components/BankOrderListSectionHeader'
 import BankOrderListItem from '../components/BankOrderListItem'
-import LoadMoreFooter from '../components/LoadMoreFooter'
-
-const dataSource = [
-    {
-        data:
-            [
-                {
-                    name: 'nader',
-                    orderType: 'scan',
-                    middleUpValue: '扫一扫付款',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00',
-                },
-                {
-                    name: 'chris',
-                    orderType: 'payCode',
-                    middleUpValue: '付款码付款',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00',
-                },
-                {
-                    name: 'anader',
-                    orderType: 'redPocket',
-                    middleUpValue: '大红包',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00',
-                },
-                {
-                    name: 'bchris',
-                    orderType: 'mobile',
-                    middleUpValue: '手机充值',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00',
-                }],
-
-        key: '本月'
-    },
-    {
-        data:
-            [
-                {
-                    name: 'nick',
-                    orderType: 'withDraw',
-                    middleUpValue: '账户提现',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00'
-                },
-                {
-                    name: 'amanda',
-                    orderType: 'mobileWithDraw',
-                    middleUpValue: '手机充值退款',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00'
-                },
-                {
-                    name: 'enick',
-                    orderType: 'shopAct',
-                    middleUpValue: '商户活动-中秋活动',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00'
-                },
-                {
-                    name: 'ramanda',
-                    orderType: 'sysAct',
-                    middleUpValue: '平台活动-国庆活动',
-                    middleBottomValue: '08-27 12:23',
-                    rightUpValue: '-38.00'
-                }],
-        key: '9月'
-    },
-]
+import {
+    SwRefreshListView,
+} from 'react-native-swRefresh'
 
 class BankCardOrderListPage extends BasePage {
-    constructor(props) {
+    page = 0
+    dataSource = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
+    constructor(props)
+    {
         super(props);
-        this.state = {};
+        this.state = {
+            dataSource: this.dataSource.cloneWithRows(
+                    [{
+                        name: 'nader',
+                        orderType: 'scan',
+                        middleUpValue: '扫一扫付款',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:true,
+                    },
+                    {
+                        name: 'chris',
+                        orderType: 'payCode',
+                        middleUpValue: '付款码付款',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:false,
+                    },
+                    {
+                        name: 'anader',
+                        orderType: 'redPocket',
+                        middleUpValue: '大红包',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:false,
+                    },
+                    {
+                        name: 'bchris',
+                        orderType: 'mobile',
+                        middleUpValue: '手机充值',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:false,
+                    },
+                    {
+                        name: 'nick',
+                        orderType: 'withDraw',
+                        middleUpValue: '账户提现',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:true,
+                    },
+                    {
+                        name: 'amanda',
+                        orderType: 'mobileWithDraw',
+                        middleUpValue: '手机充值退款',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:false,
+                    },
+                    {
+                        name: 'enick',
+                        orderType: 'shopAct',
+                        middleUpValue: '商户活动-中秋活动',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:false,
+                    },
+                    {
+                        name: 'ramanda',
+                        orderType: 'sysAct',
+                        middleUpValue: '平台活动-国庆活动',
+                        middleBottomValue: '08-27 12:23',
+                        rightUpValue: '-38.00',
+                        isShowTime:false,
+                    }
+                ]),
+        }
     }
 
-    renderItem = (item) => {
-        return <BankOrderListItem orderType={item.item.orderType}
-                              middleUpValue={item.item.middleUpValue} middleBottomValue={item.item.middleBottomValue}
-                              rightUpValue={item.item.rightUpValue} rightBottomValue={item.item.rightBottomValue}
+    renderRow = (item) => {
+        return (
+            <View>
+                {this.renderSectionHeader(item)}
+            <BankOrderListItem orderType={item.orderType}
+                              middleUpValue={item.middleUpValue} middleBottomValue={item.middleBottomValue}
+                              rightUpValue={item.rightUpValue} rightBottomValue={item.rightBottomValue}
                               isLine={true}/>
+            </View>
+                )
+    }
+    renderSectionHeader = (item)=>{
+        if (item.isShowTime)
+           return <BankOrderListSectionHeader title={'本月'} value='收入:789.78元 支出:-987.65元'/>
     }
 
-    renderHeader = (headerItem) => {
-        return <BankOrderListSectionHeader title={headerItem.section.key} value='收入:789.78元 支出:-987.65元'/>
-    }
-    loadMoreData=()=>{
-        console.log('加载更多')
+    onLoadMore = (end) => {
+        let timer = setTimeout(() => {
+            clearTimeout(timer)
+            this.refs.listView.resetStatus() //重置上拉加载的状态
+            end(this._page > 2)//刷新成功后需要调用end结束刷新
+        }, 1500)
     }
 
+    onRefresh = (end) => {
+        let timer = setTimeout(() => {
+            clearTimeout(timer)
+            end()//刷新成功后需要调用end结束刷新
+        }, 1500)
+    }
     render() {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='银行卡交易记录'/>
-                <SectionList
-                    ListFooterComponent={<LoadMoreFooter isShow={true} isEnd={false}/>}
-                    renderItem={this.renderItem}
-                    renderSectionHeader={this.renderHeader}
-                    sections={dataSource}
-                    keyExtractor={(item) => item.name}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={false}
-                            onRefresh={() => {
-                                console.log('下拉刷新')
-                            }}
-                            tintColor="red"
-                            colors={['#ff0000', '#00ff00', '#0000ff']}
-                            progressBackgroundColor="gray"/>
-                    }
-                    onEndReached={()=>this.loadMoreData()}
-                    onEndReachedThreshold={0.5}
+                <SwRefreshListView
+                    dataSource={this.state.dataSource}
+                    ref="listView"
+                    renderRow={this.renderRow}
+                    onRefresh={this.onRefresh}
+                    onLoadMore={this.onLoadMore}
+                    renderFooter={() => {
+                        return
+                        (<View style={{backgroundColor: 'blue', height: 30}}>
+                            <Text>我是footer</Text>
+                        </View>)
+                    }}
                 />
             </View>
         );

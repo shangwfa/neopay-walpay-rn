@@ -10,7 +10,6 @@ import {colors} from '../constants/index'
 import Divider from '../components/Divider'
 
 
-
 const BankOrderListItem = props => {
     const {
         orderType,
@@ -103,6 +102,7 @@ const BankOrderListItem = props => {
             return <Text style={[styles.middle_bottom_value, rightBottomStyle && rightBottomStyle]}>{rightBottomValue}</Text>
         }
     }
+
     return (
         <TouchableOpacity activeOpacity={0.8} style={[styles.container]} {...attributes}>
             <View style={styles.content_container}>
