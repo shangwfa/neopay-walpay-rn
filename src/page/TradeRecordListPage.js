@@ -18,15 +18,15 @@ import {
 } from 'react-native-swRefresh'
 import ApiManager from "../utils/ApiManager";
 
-class BankCardOrderListPage extends BasePage {
+class TradeRecordListPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
             page: 0,
-            //pageType参数必传
-            pageType:this.props.navigation.state.params.pageType,
-            // pageType:0,
+
+            pageType: this.props.navigation.state.params.pageType,
+            title:''
         }
     }
 
@@ -37,7 +37,8 @@ class BankCardOrderListPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title={this.props.navigation.state.params.pageType?'银行卡交易记录':'余额交易记录'}/>
+
+                <Header navigation={this.props.navigation} title={this.state.title}/>
                 <SwRefreshListView
                     dataSource={this.state.dataSource}
                     ref="swRefreshListView"
@@ -93,6 +94,7 @@ class BankCardOrderListPage extends BasePage {
                         dataSource: this.state.dataSource.cloneWithRows(data),
                     });
                 });
+                this.setState({title:'余额交易记录'})
                 break;
             case 1://银行卡
                 ApiManager.getBankCardRecordPage({}, (data) => {
@@ -100,6 +102,7 @@ class BankCardOrderListPage extends BasePage {
                         dataSource: this.state.dataSource.cloneWithRows(data),
                     });
                 });
+                this.setState({title:'银行卡交易记录'})
                 break;
 
         }
@@ -118,4 +121,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default BankCardOrderListPage
+export default TradeRecordListPage //余额交易记录、银行卡交易记录

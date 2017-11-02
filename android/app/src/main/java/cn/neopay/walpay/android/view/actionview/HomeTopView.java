@@ -78,9 +78,10 @@ public class HomeTopView extends FrameLayout {
 
         mBinding.homePayCodeLl.setOnClickListener(v -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PAY_CODE_PAGE));
 
-        mBinding.homeBalanceLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
-            //TODO 跳转余额页面
-        }));
+        mBinding.homeBalanceLl.setOnClickListener(v -> {
+//            BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BALANCE));
+            RNActivity.jumpToRNPage(context, RNActivity.PageType.BALANCE);
+        });
     }
 
     public UserInfoResponseBean getmUserInfoBean() {

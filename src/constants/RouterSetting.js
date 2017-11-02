@@ -13,7 +13,7 @@ import PanResponderDemo from '../page/PanResponderDemoPage'
 import Filter from '../page/FilterPage'
 import MyAsset from '../page/MyAsset'
 import SwRefreshScrollView from '../page/SwRefreshScrollViewDemo'
-import BackCardOrderList from '../page/BankCardOrderListPage'
+import TradeRecordList from '../page/TradeRecordListPage'
 import MyLotteryRecord from '../page/MyLotteryRecordPage'
 import RedList from "../page/RedListPage"
 import PayMessage from "../page/PayMessagePage"
@@ -47,7 +47,7 @@ const RouterSetting = {
     myOrder: {screen: MyOrder},
     panResponderDemo: {screen: PanResponderDemo},
     redList: {screen: RedList},
-    bankCardOrderList: {screen: BackCardOrderList},
+    tradeRecordList: {screen: TradeRecordList},
     myLotteryRecord: {screen: MyLotteryRecord},
     filter: {screen: Filter},
     myAsset: {screen: MyAsset},
