@@ -148,6 +148,8 @@ const sucStyles = StyleSheet.create({
     },
     headerViewImg:{
         marginRight:13,
+        width:20,
+
     },
     headerViewText1:{
         marginTop:2,
@@ -164,8 +166,8 @@ const sucStyles = StyleSheet.create({
     },
     headerViewNoText:{
         fontSize:30,
-        marginTop:30,
-        marginBottom:20,
+        marginTop:33,
+        marginBottom:26,
     },
     headerViewDesText:{
         fontSize:14,

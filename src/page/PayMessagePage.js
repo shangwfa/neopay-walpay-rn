@@ -178,12 +178,12 @@ const styles = StyleSheet.create({
     },
 
     dateHeader:{
-        height:40,
+        height:30,
         alignItems:'center',
-        justifyContent:'center',
     },
     dateHeaderText:{
         color:'#666666',
+        marginTop:13,
     }
 
 

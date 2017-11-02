@@ -12,17 +12,25 @@ import Header from '../components/Header'
 import ScrnUtil from '../utils/ScreenUtils'
 import CommonButton from "../components/CommonButton";
 import {RouterPaths} from "../constants/RouterPaths"
+import PayPwdModal from '../modal/PayPwdModal'
+
 
 
 class AccountWithdrawPage extends BasePage {
+    constructor(props){
+        super(props);
+        this.state={
+            isPayShow:false,
+        }
+    }
     render() {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title={'提现'} rightTitle={'?'}/>
                 <View style={styles.bankCardRowView}>
                     <Image style={styles.bankCardRowIcon} source={require("../res/img/BankIcon/sy_gongshang.png")}/>
-                    <View style={styles.bankCardRowText}>
-                        <Text>中国工商银行储蓄卡(8988)</Text>
+                    <View style={styles.bankCardRowTextView}>
+                        <Text style={styles.bankCardRowText}>中国工商银行储蓄卡(8988)</Text>
                     </View>
                     <View style={{flex:1}}></View>
                     <Image style={styles.bankCardRowArrow} source={require("../res/img/right_arrow.png")}/>
@@ -51,11 +59,18 @@ class AccountWithdrawPage extends BasePage {
                 <View style={styles.confirmBtnView}>
                     <CommonButton value={'提现'} onPress={()=>this.withdrawBtnClicked()}/>
                 </View>
+                <PayPwdModal isShow={this.state.isPayShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
+                             onForgetPwd={()=>{}} onEnd={()=>this.payPwdInputEnd()}/>
             </View>
         );
     }
     withdrawBtnClicked(){
+        this.setState({isPayShow:true})
+    }
+    payPwdInputEnd(){
+        this.setState({isPayShow:false})
         this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE)
+
     }
 }
 
@@ -72,16 +87,19 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     bankCardRowIcon:{
+        width:20,
+        height:20,
         marginLeft:14,
         marginRight:8,
     },
     bankCardRowText:{
-
+        fontSize:14,
+        color:'#333333',
     },
     bankCardRowArrow:{
         width:7,
         height:12,
-        marginRight:20,
+        marginRight:14,
     },
 
     numberRowView:{
