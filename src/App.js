@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {NativeModules, View, DeviceEventEmitter, Animated, Easing} from 'react-native'
+import {NativeModules, View, DeviceEventEmitter, Animated, Easing,Text} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import JsonUtil from './utils/JsonUtil'
@@ -14,6 +14,7 @@ class App extends Component {
 
     componentWillMount() {
         console.log(this.props)
+        Text.defaultProps.allowFontScaling=false;
     }
 
 
