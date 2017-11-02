@@ -24,7 +24,9 @@ class BankCardOrderListPage extends BasePage {
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
             page: 0,
-            pageType: this.props.navigation.state.params.pageType,
+            //pageType参数必传
+            pageType:this.props.navigation.state.params.pageType,
+            // pageType:0,
         }
     }
 
@@ -35,7 +37,7 @@ class BankCardOrderListPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='银行卡交易记录'/>
+                <Header navigation={this.props.navigation} title={this.props.navigation.state.params.pageType?'银行卡交易记录':'余额交易记录'}/>
                 <SwRefreshListView
                     dataSource={this.state.dataSource}
                     ref="swRefreshListView"

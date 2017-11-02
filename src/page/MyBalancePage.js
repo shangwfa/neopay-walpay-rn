@@ -26,7 +26,7 @@ class MyBalancePage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录'/>
+                <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录' onRightPress={()=>{this.headerRightBtnClicked()}}/>
                 <View style={styles.logoImg}>
                     <Image source={require("../res/img/HomePage/sy_yue.png")}/>
                 </View>
@@ -48,6 +48,12 @@ class MyBalancePage extends BasePage {
                 <CommonButton style={styles.withDrawBtn} backgroundColor={'#FFFFFF'} textColor={'#999999'}  value={'提现'} onPress={()=>this.withdrawBtnClicked()}/>
             </View>
         );
+    }
+
+    headerRightBtnClicked(){
+        return(
+            this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST,{pageType:0})
+        )
     }
 }
 
