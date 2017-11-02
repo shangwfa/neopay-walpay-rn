@@ -10,6 +10,8 @@
 		4210AF401F95CE6D008132C5 /* XGQBCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */; };
 		4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */; };
 		4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */; };
+		4211E8DC1FAAF1EA00C0E5A5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 4211E8DB1FAAF1EA00C0E5A5 /* assets */; };
+		4211E8DE1FAAF24B00C0E5A5 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 4211E8DD1FAAF24B00C0E5A5 /* main.jsbundle */; };
 		421412EA1FA0808500290A06 /* mess.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421412E91FA0808500290A06 /* mess.plist */; };
 		421412ED1FA08FDD00290A06 /* XGQBActiRedPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */; };
 		422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */; };
@@ -18,12 +20,10 @@
 		42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */; };
 		42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */; };
 		42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */; };
-		425586681F9453A5002E039B /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 425586661F9452E0002E039B /* index.ios.jsbundle */; };
 		4255866B1F94A85B002E039B /* XGQBMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866A1F94A85B002E039B /* XGQBMineHeaderView.m */; };
 		4255866E1F94A879002E039B /* XGQBMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866D1F94A879002E039B /* XGQBMineItemCell.m */; };
 		425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425586701F94C84D002E039B /* XGQBMineTableView.m */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
-		42990E711F987D7E00B20EBA /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42990E701F987D7E00B20EBA /* assets */; };
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
 		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
 		42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */; };
@@ -100,6 +100,8 @@
 		4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiMessTVC.m; sourceTree = "<group>"; };
 		4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCommMessTVC.h; sourceTree = "<group>"; };
 		4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCommMessTVC.m; sourceTree = "<group>"; };
+		4211E8DB1FAAF1EA00C0E5A5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
+		4211E8DD1FAAF24B00C0E5A5 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		421412E91FA0808500290A06 /* mess.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mess.plist; sourceTree = "<group>"; };
 		421412EB1FA08FDD00290A06 /* XGQBActiRedPView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBActiRedPView.h; sourceTree = "<group>"; };
 		421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiRedPView.m; sourceTree = "<group>"; };
@@ -116,7 +118,6 @@
 		42395CEF1F8E069300D20130 /* XGQBIDAlertTransiton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDAlertTransiton.h; sourceTree = "<group>"; };
 		42395CF01F8E069300D20130 /* XGQBIDAlertTransiton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDAlertTransiton.m; sourceTree = "<group>"; };
 		424F391E1F8C67CD00079543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		425586661F9452E0002E039B /* index.ios.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = SOURCE_ROOT; };
 		425586691F94A85B002E039B /* XGQBMineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineHeaderView.h; sourceTree = "<group>"; };
 		4255866A1F94A85B002E039B /* XGQBMineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineHeaderView.m; sourceTree = "<group>"; };
 		4255866C1F94A879002E039B /* XGQBMineItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineItemCell.h; sourceTree = "<group>"; };
@@ -126,7 +127,6 @@
 		425881101F909EFB005566A6 /* XinguangWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinguangWallet.entitlements; sourceTree = "<group>"; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
 		428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
-		42990E701F987D7E00B20EBA /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		42990E741F998F7C00B20EBA /* XGQBNoContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNoContentViewController.h; sourceTree = "<group>"; };
 		42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNoContentViewController.m; sourceTree = "<group>"; };
 		42990E771F99942000B20EBA /* XGQBNetworkFailureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNetworkFailureViewController.h; sourceTree = "<group>"; };
@@ -578,8 +578,8 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				42990E701F987D7E00B20EBA /* assets */,
-				425586661F9452E0002E039B /* index.ios.jsbundle */,
+				4211E8DB1FAAF1EA00C0E5A5 /* assets */,
+				4211E8DD1FAAF24B00C0E5A5 /* main.jsbundle */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
@@ -1022,9 +1022,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				425586681F9453A5002E039B /* index.ios.jsbundle in Resources */,
-				42990E711F987D7E00B20EBA /* assets in Resources */,
+				4211E8DC1FAAF1EA00C0E5A5 /* assets in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
+				4211E8DE1FAAF24B00C0E5A5 /* main.jsbundle in Resources */,
 				421412EA1FA0808500290A06 /* mess.plist in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);
