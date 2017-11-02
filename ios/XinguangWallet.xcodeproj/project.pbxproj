@@ -536,7 +536,6 @@
 				6AF9E4471F78E281005E901C /* Manager */,
 				6AF9E4491F78E281005E901C /* Base */,
 				6AF9E4481F78E281005E901C /* Modules */,
-				6AF9E4451F78E281005E901C /* ThirdParty */,
 				6AF9E4461F78E281005E901C /* Utils */,
 				6AF9E43E1F78E1B6005E901C /* Define */,
 				6AF9E4321F78DEFB005E901C /* Supporting Files */,
@@ -598,13 +597,6 @@
 				6AF9E4431F78E1B6005E901C /* UtilsMacros.h */,
 			);
 			path = Define;
-			sourceTree = "<group>";
-		};
-		6AF9E4451F78E281005E901C /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		6AF9E4461F78E281005E901C /* Utils */ = {
