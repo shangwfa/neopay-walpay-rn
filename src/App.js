@@ -15,6 +15,7 @@ class App extends Component {
     componentWillMount() {
         console.log(this.props)
         Text.defaultProps.allowFontScaling=false;
+        Text.defaultProps.fontFamily = 'system font';
     }
 
 
