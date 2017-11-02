@@ -26,7 +26,9 @@ class MyBalancePage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录'/>
+                <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录' onRightPress={()=>{
+                    this.props.navigation.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {"pageType": 0})
+                }}/>
                 <View style={styles.logoImg}>
                     <Image source={require("../res/img/HomePage/sy_yue.png")}/>
                 </View>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {NativeModules, View, DeviceEventEmitter, Animated, Easing} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
-import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
+import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator'
 import JsonUtil from './utils/JsonUtil'
 import ScreenUtils from './utils/ScreenUtils'
 import RouterSetting from './constants/RouterSetting'
@@ -21,14 +21,25 @@ class App extends Component {
         let params = ScreenUtils.isIOS ? this.props.params : JsonUtil.strToJson(this.props.params)
         const Navigator = StackNavigator(RouterSetting,
             {
-                initialRouteName: params.page,
+                initialRouteName: 'payment',
                 headerMode: 'screen',
                 transitionConfig: () => ({
-                    screenInterpolator: CardStackStyleInterpolator.forHorizontal,//设置跳转动画左右滑动
                     transitionSpec: {
-                        duration: 250,
-                        easing: Easing.linear,
+                        duration: 300,
+                        easing: Easing.ease,
                         timing: Animated.timing,
+                    },
+                    screenInterpolator: sceneProps => {
+                        const { layout, position, scene } = sceneProps
+                        const { index } = scene
+                        const width = layout.initWidth
+
+                        const translateX = position.interpolate({
+                            inputRange: [index - 1, index, index + 1],
+                            outputRange: [width, 0, 0],
+                        })
+
+                        return {transform: [{ translateX }] }
                     },
                 })
 

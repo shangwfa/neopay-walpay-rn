@@ -87,6 +87,9 @@ public class RNActivity extends BaseRNActivity {
             case PageType.PAY_SCAN_QR_CODE:
                 initLaunchOptions(bundle, PageType.PAY_SCAN_QR_CODE);
                 break;
+            case PageType.BALANCE:
+                initLaunchOptions(bundle, PageType.BALANCE);
+                break;
         }
         return bundle;
     }
@@ -171,6 +174,7 @@ public class RNActivity extends BaseRNActivity {
         String MY_BANK = "bankCardList";
         String CARD_PACK_PAGE = "cardPack";
         String PAY_CODE_PAGE = "payCode";
+        String BALANCE="myBalance";
     }
 
     public static void jumpToRNPage(Context context, String pageType) {
