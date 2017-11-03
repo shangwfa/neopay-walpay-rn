@@ -24,6 +24,7 @@ class TradeRecordListPage extends BasePage {
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
             page: 0,
+
             pageType: this.props.navigation.state.params.pageType,
             title:''
         }
@@ -36,6 +37,7 @@ class TradeRecordListPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
+
                 <Header navigation={this.props.navigation} title={this.state.title}/>
                 <SwRefreshListView
                     dataSource={this.state.dataSource}

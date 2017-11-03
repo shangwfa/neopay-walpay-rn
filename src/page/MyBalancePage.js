@@ -26,6 +26,7 @@ class MyBalancePage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
+
                 <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录' onRightPress={()=>{
                     this.props.navigation.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {"pageType": 0})
                 }}/>
@@ -50,6 +51,17 @@ class MyBalancePage extends BasePage {
                 <CommonButton style={styles.withDrawBtn} backgroundColor={'#FFFFFF'} textColor={'#999999'}  value={'提现'} onPress={()=>this.withdrawBtnClicked()}/>
             </View>
         );
+    }
+
+
+    topupBtnClicked = () => {
+        this.props.navigation.navigate(RouterPaths.ACCOUNT_TOPUP)
+    }
+
+    headerRightBtnClicked(){
+        return(
+            this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST,{pageType:0})
+        )
     }
 }
 

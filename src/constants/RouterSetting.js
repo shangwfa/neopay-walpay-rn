@@ -30,8 +30,11 @@ import PayCode from "../page/PayCodePage";
 import MyBalance from "../page/MyBalancePage"
 import AccountWithdrawPage from "../page/AccountWithdrawPage";
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
-import PayResultPage from "../page/PayResultPage";
-import MerchantActivityList from '../page/MerchantActivityListPage'
+import AccountTopup from "../page/AccountTopupPage"
+import AccountTopupResult from "../page/AccountTopupResultPage"
+import PayResultPage from "../page/PayResultPage"
+import MerchantActivityList from "../page/MerchantActivityListPage"
+import CreditCardInput from "../page/CreditCardInputPage"
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -71,9 +74,12 @@ const RouterSetting = {
     myBalance: {screen: MyBalance},
     accountWithdraw: {screen: AccountWithdrawPage},
     accountWithdrawResult: {screen: AccountWithdrawResultPage},
+    test:{screen:Test},
+    accountTopup:{screen:AccountTopup},
+    accountTopupResult:{screen:AccountTopupResult},
     payResult: {screen: PayResultPage},
     merchantActivityList: {screen: MerchantActivityList},
-    test: {screen: Test},
-};
+    creditCardInput: {screen: CreditCardInput},
+}
 
 export default RouterSetting

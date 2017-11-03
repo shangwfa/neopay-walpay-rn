@@ -42,16 +42,25 @@
     
     
     //隐藏顶部loading from 提示
-//    [RCTDevLoadingView setEnabled:NO];
+    [RCTDevLoadingView setEnabled:NO];
     
     //RCT初始化方法必须在主线程执行,开子线程报错
+    
+    //获取导航栏高度
+    CGFloat statusBarHeight=[UIApplication sharedApplication].statusBarFrame.size.height;
+    NSString *statusBarHeiStr = [NSString stringWithFormat:@"%.0f",statusBarHeight];
+    
+    //获取iPhone型号
+    NSString *iphoneDevice = [IphoneDevice deviceVersion];
     
     [SVProgressHUD show];
     
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
                          moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":_pageType}}
+                         initialProperties :@{@"params": @{@"page":_pageType,
+                                                           @"statusBarHeight":statusBarHeiStr,
+                                                           @"iphoneDevice":iphoneDevice}}
                           launchOptions    : nil];
     
     self.view = rootView;

@@ -13,6 +13,7 @@ const ChoseBankCardItem = props => {
         imgIconUrl,
         bankNameValue,
         cardNoValue,
+        click,
         ...attributes
     } = props
 
@@ -27,36 +28,36 @@ const ChoseBankCardItem = props => {
         left_value: {
             marginLeft: 10,
             color:colors.black,
-            font:15
+            fontSize:15
         },
 
         right_space: {
-            marginRight: 10
+            width:7,
+            height:12,
+            marginRight:20
         },
 
         backGround:{
             flexDirection:'row',
-            backgroundColor:colors.white
+            backgroundColor:colors.white,
+            height:50,
+            alignItems:'center'
         }
     });
 
     const renderbankContent = () => {
-        return <View style={styles.textAvatar}>
-            <Text style={styles.bankName_value}>{bankNameValue}</Text>
-            <Text style={styles.bankType_value}>{bankTypeValue}</Text>
-            <Text style={styles.cardNo_value}>{cardNoValue}</Text>
+        return <View style={styles.backGround}>
+            <Image style={styles.avatar} source={{uri:imgIconUrl}}/>
+            <Text style={styles.left_value}>{bankNameValue}</Text>
+            <Text style={styles.left_value}>({cardNoValue})</Text>
+            <View style={{flex: 1, height: 1}}/>
+            <Image style={styles.right_space} source={require("../res/img/right_arrow.png")}/>
         </View>
     }
 
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} onPress ={click} {...attributes}>
-            <View style={styles.background_container}>
-                <View style={styles.content_container} >
-                    <Image style={styles.avatar} source={{uri:imgIconUrl}}/>
-                    {renderbankContent()}
-                </View>
-            </View>
-
+        <TouchableOpacity  onPress ={click} {...attributes}>
+            {renderbankContent()}
         </TouchableOpacity>
     );
 };

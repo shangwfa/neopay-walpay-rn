@@ -14,12 +14,15 @@ class App extends Component {
 
     componentWillMount() {
         console.log(this.props)
-        Text.defaultProps.allowFontScaling=false
+        Text.defaultProps.allowFontScaling=false;
+        Text.defaultProps.fontFamily = 'system font';
     }
 
 
     render() {
         let params = ScreenUtils.isIOS ? this.props.params : JsonUtil.strToJson(this.props.params)
+        ScreenUtils.statusBarHeight = Number(params.statusBarHeight)
+        ScreenUtils.headerHeight = Number(params.statusBarHeight)+44
         const Navigator = StackNavigator(RouterSetting,
             {
                 initialRouteName: params.page,
