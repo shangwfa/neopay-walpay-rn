@@ -34,6 +34,7 @@ import AccountTopup from "../page/AccountTopupPage"
 import AccountTopupResult from "../page/AccountTopupResultPage"
 import PayResultPage from "../page/PayResultPage"
 import MerchantActivityList from "../page/MerchantActivityListPage"
+import CreditCardInput from "../page/CreditCardInputPage"
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -78,6 +79,7 @@ const RouterSetting = {
     accountTopupResult:{screen:AccountTopupResult},
     payResult: {screen: PayResultPage},
     merchantActivityList: {screen: MerchantActivityList},
+    creditCardInput: {screen: CreditCardInput},
 }
 
 export default RouterSetting

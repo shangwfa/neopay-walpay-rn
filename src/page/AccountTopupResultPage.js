@@ -72,7 +72,7 @@ class AccountTopupResultPage extends BasePage {
     _renderListHeaderComponent = ()=>{
         return(
             <View style={styles.headerView}>
-                <Image source={require("../res/img/sy_shibai.png")} style={styles.headerViewImg}/>
+                <Image source={require("../res/img/HomePage/sy_shibai.png")} style={styles.headerViewImg}/>
                 <Text style={styles.headerViewText}>
                     充值失败
                 </Text>

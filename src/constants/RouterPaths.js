@@ -21,6 +21,7 @@ export const RouterPaths = {
       ACCOUNT_TOPUP_RESULT : 'accountTopupResult',
       TRADE_RECORD_LIST_PAGE: 'tradeRecordList',
       PAYMENT: 'payment',
+      CREDITINPUT_PAGE:'CreditCardInput',
     }
 
 
