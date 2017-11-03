@@ -17,6 +17,9 @@ class Test extends BasePage {
         console.log('width:'+ScreenUtils.width+' height:'+ScreenUtils.height+' pixelRatio:'+ScreenUtils.pixelRatio)
     }
 
+    componentWillUnmount() {
+        this.ref.
+    }
 
     render() {
         return (
@@ -53,6 +56,7 @@ class Test extends BasePage {
         Picker.init({
             pickerData,
             selectedValue,
+            ref:'pickerView',
             pickerTitleText: '选择日期',
             pickerTitleColor:[1, 186, 245, 1],
             pickerConfirmBtnText:'确认',
