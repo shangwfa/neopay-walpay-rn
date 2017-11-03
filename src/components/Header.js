@@ -26,6 +26,7 @@ class Header extends Component {
     static propTypes = {
         rightIcon: React.PropTypes.any,
         rightIconNormal: React.PropTypes.any,
+        rightIconStyle:React.PropTypes.style
     }
 
     constructor(props) {
@@ -38,7 +39,7 @@ class Header extends Component {
         if(this.props.rightTitle){
            return  <Text style={styles.header_right_title}>{this.props.rightTitle}</Text>
         }else if(this.props.rightIcon){
-            return <Image style={styles.right_icon} source={this.props.rightIcon}/>
+            return <Image style={[styles.right_icon,this.props.rightIconStyle&&this.props.rightIconStyle]} source={this.props.rightIcon}/>
         }else if(this.props.rightIconNormal){
             return <Image style={styles.right_icon_normal} source={this.props.rightIconNormal}/>
         }
