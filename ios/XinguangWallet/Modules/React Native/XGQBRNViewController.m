@@ -50,12 +50,17 @@
     CGFloat statusBarHeight=[UIApplication sharedApplication].statusBarFrame.size.height;
     NSString *statusBarHeiStr = [NSString stringWithFormat:@"%.0f",statusBarHeight];
     
+    //获取iPhone型号
+    NSString *iphoneDevice = [IphoneDevice deviceVersion];
+    
     [SVProgressHUD show];
     
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
                          moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":_pageType,@"statusBarHeight":statusBarHeiStr}}
+                         initialProperties :@{@"params": @{@"page":_pageType,
+                                                           @"statusBarHeight":statusBarHeiStr,
+                                                           @"iphoneDevice":iphoneDevice}}
                           launchOptions    : nil];
     
     self.view = rootView;

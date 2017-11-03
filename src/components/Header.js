@@ -14,6 +14,7 @@ import img_left_arrow from '../res/img/img_left_arrow.png'
 import three_points from '../res/img/three_points.png'
 import white_back_arrow from '../res/img/white_back_arrow.png'
 
+
 class Header extends Component {
     static defaultProps = {
         isShowLine:true,
@@ -63,10 +64,12 @@ class Header extends Component {
     render() {
         return (
             <View>
-                <View style={[styles.container,{backgroundColor: this.props.backgroundColor}]}>
+                <View style={[styles.container,{backgroundColor: this.props.backgroundColor},{height:ScreenUtils.headerHeight,paddingTop:ScreenUtils.statusBarHeight}]}>
                     {/*header左侧*/}
                     <TouchableOpacity style={styles.header_left} onPress={()=>this.goback()}>
+                        <View style={styles.Header_back_img_touchableArea}>
                         <Image style={styles.header_back_img} source={this.props.isWhiteArrow?white_back_arrow:img_left_arrow}/>
+                        </View>
                     </TouchableOpacity>
 
                     {/*header中间*/}
@@ -94,6 +97,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.black,
     },
+    Header_back_img_touchableArea:{
+      width:50,
+    },
     header_back_img: {
         width: 10,
         height: 18,
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     header_left: {
         flex: 1,
         justifyContent: 'center',
-        marginLeft: 10,
+        marginLeft: 13,
     },
     header_middle: {
         flex: 2,
@@ -111,19 +117,21 @@ const styles = StyleSheet.create({
     header_right: {
         flex: 1,
         justifyContent: 'center',
-        marginRight: 10,
+        marginRight: 13,
         alignItems:'flex-end',
     },
     title: {
-        fontSize: 16,
+        fontSize: 18,
         color: colors.white,
     },
     container: {
         flexDirection: 'row',
-        height: ScreenUtils.headerHeight,
-        paddingTop:ScreenUtils.statusBarHeight
+        backgroundColor:'blue',
+        // height: ScreenUtils.headerHeight,
+        // paddingTop:ScreenUtils.statusBarHeight
 
     },
 });
+
 
 export default Header
