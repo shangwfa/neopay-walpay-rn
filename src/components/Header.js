@@ -25,6 +25,7 @@ class Header extends Component {
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
+        rightIconNormal: React.PropTypes.any,
     }
 
     constructor(props) {
@@ -38,6 +39,8 @@ class Header extends Component {
            return  <Text style={styles.header_right_title}>{this.props.rightTitle}</Text>
         }else if(this.props.rightIcon){
             return <Image style={styles.right_icon} source={this.props.rightIcon}/>
+        }else if(this.props.rightIconNormal){
+            return <Image style={styles.right_icon_normal} source={this.props.rightIconNormal}/>
         }
     }
     getRightIcon=()=>{
@@ -90,6 +93,10 @@ const styles = StyleSheet.create({
     right_icon:{
         width: 20,
         height: 4,
+    },
+    right_icon_normal:{
+        width:20,
+        height:20,
     },
     header_right_title:{
         fontSize: 14,

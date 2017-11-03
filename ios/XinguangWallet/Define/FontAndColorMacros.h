@@ -23,12 +23,8 @@
 #define kNavBgColor2    [UIColor colorWithHexString:@"FFFFFF"]
 #define kNavBgFontColor  [UIColor colorWithHexString:@"010101"]
 
-
-//#define CNavBgColor2  [UIColor colorWithHexString:@"00AE68"]
-//#define CNavBgColor    [UIColor colorWithHexString:@"ffffff"]
-//#define CNavBgFontColor  [UIColor colorWithHexString:@"000000"]
 //默认页面背景色
-#define kViewBgColor [UIColor colorWithHexString:@"f2f2f2"]
+#define kViewBgColor [UIColor colorWithHexString:@"F5F5F5"]
 
 //分割线颜色
 #define kLineColor [UIColor colorWithHexString:@"DCDCDC"]

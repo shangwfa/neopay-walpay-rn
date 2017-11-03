@@ -53,16 +53,9 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
     NSMutableString *netPaStrAfter = [netPaStr mutableCopy];
 
     [netPaStrAfter replaceOccurrencesOfString:@" " withString:@"" options:(NSLiteralSearch) range:NSMakeRange(0, netPaStr.length)];
-    NSLog(@"%@",netPaStrAfter);
 
     [netPaStrAfter replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, netPaStrAfter.length)];
-    NSLog(@"%@",netPaStrAfter);
-        
-//        [netParas setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
-//        [netParas setObject:[GVUserDefaults standardUserDefaults].name forKey:@"name"];
-//        [netParas setObject:[GVUserDefaults standardUserDefaults].avatarUrl forKey:@"avatarUrl"];
-//        [netParas setObject:[GVUserDefaults standardUserDefaults].phone forKey:@"avatarUrl"];
-//
+    
         callback(@[[NSNull null],netPaStrAfter]);
 }
 
@@ -79,7 +72,7 @@ RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
             [kNotificationCenter postNotificationName:kNotificationRNJumpBackToNativeResetLoginPwd object:@NO];
         }
         else if ([dict[@"page"]  isEqualToString:@"resetPayPwd"]) {
-            [kNotificationCenter postNotificationName:knotificationRNJumpBackToNativeResetPayPwd object:@NO];
+            [kNotificationCenter postNotificationName:kNotificationRNJumpBackToNativeResetPayPwd object:@NO];
         }
     });
 
@@ -93,6 +86,22 @@ RCT_EXPORT_METHOD(rnCallNative:(NSString*)phoneNo){
 
 }
 
+//RN进入二级页面,禁用系统右划手势
+RCT_EXPORT_METHOD(rnJumpIntoSecondLevel){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [kNotificationCenter postNotificationName:kNotificationRNJumpIntoSecondLevel object:nil];
+    });
+}
+
+
+//RN进入一级页面,开启系统优化手势
+RCT_EXPORT_METHOD(rnJumpBackToFirstLevel){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [kNotificationCenter postNotificationName:kNotificationRNJumpBackToFirstLevel object:nil];
+    });
+}
 
 
 

@@ -47,8 +47,11 @@
     if (self.viewControllers.count > 0) { // 如果push的不是根控制器(不是栈底控制器)
         viewController.hidesBottomBarWhenPushed = YES;
         // 左上角的返回
-        UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 10.5, 18)];
+//        leftBtn.backgroundColor = kRedColor;
         [leftBtn setImage:[UIImage imageNamed:@"jiantou"] forState:0];
+        [leftBtn setTitle:@"        " forState:UIControlStateNormal];
+//        [leftBtn imageRectForContentRect:CGRectMake(0, 0, 30, 30)];
         
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
         [leftBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];

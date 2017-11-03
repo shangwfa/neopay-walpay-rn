@@ -41,7 +41,8 @@ const MyLotteryRecordTab = TabNavigator({
         navigationOptions: ({navigation}) => ({
             tabBarLabel: '活动',
         })},
-}, {
+},
+    {
     tabBarPosition: 'top',
     animationEnabled: true,
     swipeEnabled:true,
