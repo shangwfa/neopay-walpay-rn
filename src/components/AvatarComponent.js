@@ -12,20 +12,24 @@ import {
 } from 'react-native'
 import img_default_photo from "../res/img/img_default_photo.png"
 import StringUtils from "../utils/StringUtils";
-class CommonAvatarComponent extends Component {
+class AvatarComponent extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        if (this.props.avatar === undefined || StringUtils.isEmpty(this.props.avatar)) {
-            return <Image
-                style={styles.img}
-                source={img_default_photo}/>
+        if (this.props.avatar) {
+            return (
+                <Image
+                    style={styles.img}
+                    source={{uri: this.props.avatar}}/>
+            );
         } else {
-            return <Image
-                style={styles.img}
-                source={{uri: this.props.avatar}}/>
+            return (
+                <Image
+                    style={styles.img}
+                    source={img_default_photo}/>
+            );
         }
     };
 }
@@ -44,4 +48,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CommonAvatarComponent
+export default AvatarComponent
