@@ -21,7 +21,8 @@ class OneButtonModal extends Component {
         return (
             <Modal
                 transparent={true}
-                visible={this.props.isShow}>
+                visible={this.props.isShow}
+                onRequestClose={()=>{}}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
                         <Text style={styles.text_content}>{this.props.content}</Text>

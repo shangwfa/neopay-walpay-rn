@@ -9,10 +9,12 @@ class NetUtil extends Component {
 
     static baseUrl = MOCK_URL;
     static handleException(code, msg) {
+        let isShowMsg=true
         switch (code) {
             case "1":
                 break
         }
+        NativeModules.commModule.toast(msg)
     }
 
 
@@ -46,7 +48,6 @@ class NetUtil extends Component {
                     // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
                 })
                 .catch((err) => {
-                    if(isShowLoading) DeviceEventEmitter.emit(events.LOADING_MODAL_EVENT,false)
                     // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
                     console.log(err)
                     NativeModules.commModule.toast('网络不给力')

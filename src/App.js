@@ -21,11 +21,13 @@ class App extends Component {
 
     render() {
         let params = ScreenUtils.isIOS ? this.props.params : JsonUtil.strToJson(this.props.params)
-        ScreenUtils.statusBarHeight = Number(params.statusBarHeight)
-        ScreenUtils.headerHeight = Number(params.statusBarHeight)+44
+        if(ScreenUtils.isIOS){//适配IPhone X 刘海
+            ScreenUtils.statusBarHeight = Number(params.statusBarHeight)
+            ScreenUtils.headerHeight = Number(params.statusBarHeight)+44
+        }
         const Navigator = StackNavigator(RouterSetting,
             {
-                initialRouteName: params.page,
+                initialRouteName: 'test',
                 headerMode: 'screen',
                 transitionConfig: () => ({
                     transitionSpec: {

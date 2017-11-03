@@ -22,7 +22,8 @@ class TwoBottomItemModal extends Component {
         return (
             <Modal
                 transparent={true}
-                visible={this.props.isShow}>
+                visible={this.props.isShow}
+                onRequestClose={()=>{}}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
                         <CommonItemThree title={this.props.oneItemTitle} onPress={this.props.ensure}/>
