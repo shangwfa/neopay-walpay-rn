@@ -27,7 +27,7 @@ class App extends Component {
         }
         const Navigator = StackNavigator(RouterSetting,
             {
-                initialRouteName: 'test',
+                initialRouteName: params.page,
                 headerMode: 'screen',
                 transitionConfig: () => ({
                     transitionSpec: {

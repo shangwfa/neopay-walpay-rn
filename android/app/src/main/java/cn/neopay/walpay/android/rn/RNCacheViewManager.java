@@ -1,5 +1,6 @@
 package cn.neopay.walpay.android.rn;
 
+import com.beefe.picker.PickerViewPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
@@ -52,6 +53,7 @@ public class RNCacheViewManager {
                 .addPackage(new MainReactPackage())
                 .addPackage(WalpayApp.rnPackage)
                 .addPackage(new RCTCameraPackage())
+                .addPackage(new PickerViewPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
