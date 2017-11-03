@@ -49,6 +49,10 @@ class MyBalancePage extends BasePage {
             </View>
         );
     }
+
+    topupBtnClicked = () =>{
+        this.props.navigation.navigate(RouterPaths.ACCOUNT_TOPUP)
+    }
 }
 
 const styles = StyleSheet.create({
