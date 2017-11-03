@@ -68,6 +68,9 @@ isDecimal = (input) => {
     return /^[-+]?(?:0|[1-9]\d*)\.\d+$/.test(input)
 }
 
+isContainChildrenStr = (str, childrenStr) => {
+    return str.indexOf(childrenStr) >= 0;
+};
 
 export default {
     isEmpty,
@@ -86,4 +89,5 @@ export default {
     isAlphanumericSpace,
     isNumeric,
     isDecimal,
+    isContainChildrenStr,
 }

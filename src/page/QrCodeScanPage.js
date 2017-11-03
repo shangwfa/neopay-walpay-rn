@@ -9,22 +9,29 @@ import {colors} from '../constants/index'
 import QRScannerView from '../components/QRScannerView'
 import Header from '../components/Header'
 import BasePage from './BasePage'
-import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import TwoBottomItemModal from '../modal/TwoBottomItemModal'
 import scan_bottom_icon from '../res/img/scan_bottom_icon.png'
 import scan_line from '../res/img/scan_line.png'
 import three_points from '../res/img/three_points.png'
+import {RouterPaths} from '../constants/RouterPaths'
 class QrCodeScanPage extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
             isShowBottom: false,
-
+            isGetScanResult:false,
         };
     }
 
+
     scanResult = (e) => {
         console.log('Type: ' + e.type + '\nData: ' + e.data);
+        if(!this.state.isGetScanResult){
+            this.setState({isGetScanResult:true})
+            this.props.navigation.navigate(RouterPaths.PAYMENT)
+        }
+
     }
 
     close = () => {
@@ -70,7 +77,9 @@ class QrCodeScanPage extends BasePage {
                     renderTopBarView={() => this.renderHeader()}
                     renderBottomMenuView={() => this.renderBottom()}
                 />
-                <UnbindBankCardModal isShow={this.state.isShowBottom} close={() => this.close()} unBind={() => {
+                <TwoBottomItemModal oneItemTitle='使用说明' twoItemTitle='关闭弹窗' isShow={this.state.isShowBottom} close={() => this.close()} ensure={() => {
+                    this.close()
+                    // TODO 跳转使用说明页面
                 }}/>
             </View>
         );
@@ -86,11 +95,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor:colors.transparent
     },
     header_container: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 85
+        marginTop: 85,
+        backgroundColor:colors.transparent
     },
     hint_text_style: {
         color: '#C0C0C0'

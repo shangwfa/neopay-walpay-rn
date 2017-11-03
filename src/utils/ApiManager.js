@@ -1,19 +1,19 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
-modifyUserNickName = (req,callback) => {
+modifyUserNickName = (req, callback) => {
     NetUtil.post(APIS.MODIFY_USER_NICKNAME, req, (data) => {
         callback(data)
     })
 }
 
-getBankInfoByCardNo = (req,callback) => {
+getBankInfoByCardNo = (req, callback) => {
     NetUtil.post(APIS.GET_BANK_INFO_BY_CARD_NO, req, (data) => {
         callback(data)
     })
 }
 
-bindBankCard = (req,callback) => {
+bindBankCard = (req, callback) => {
     NetUtil.post(APIS.BIND_BANK_CARD, req, (data) => {
         callback(data)
     })
@@ -56,6 +56,26 @@ getUserMerchantList = (request, callback) => {
         callback(data);
     });
 };
+getCreatePayQRCode = (request, callback) => {
+    NetUtil.post(APIS.CREATE_PAY_QRCODE, request, (data) => {
+        callback(data);
+    });
+};
+geUserBankCardList = (request, callback) => {
+    NetUtil.post(APIS.GET_USER_BANK_CARD_LIST, request, (data) => {
+        callback(data);
+    });
+};
+getBankCardRecordPage = (request, callback) => {
+    NetUtil.post(APIS.QUERY_BANK_CARD_RECORD_PAGE, request, (data) => {
+        callback(data);
+    });
+};
+getBalanceRecordList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_BALANCE_RECORD_PAGE, request, (data) => {
+        callback(data);
+    });
+};
 export default {
     getUserInfo,
     queryBannerList,
@@ -66,5 +86,9 @@ export default {
     getRedPacketList,
     getMerchantBannerList,
     getMerchantActivityList,
-    getUserMerchantList
+    getUserMerchantList,
+    getCreatePayQRCode,
+    geUserBankCardList,
+    getBankCardRecordPage,
+    getBalanceRecordList,
 }

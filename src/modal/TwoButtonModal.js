@@ -17,6 +17,11 @@ class TwoButtonModal extends Component {
     }
 
 
+    renderTitle=()=>{
+        if(this.props.title){
+            return <Text style={styles.title}>{this.props.title}</Text>
+        }
+    }
     render() {
         return (
             <Modal
@@ -24,6 +29,7 @@ class TwoButtonModal extends Component {
                 visible={this.props.isShow}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
+                        {this.renderTitle()}
                         <Text style={styles.text_content}>{this.props.content}</Text>
                         <View style={styles.btns_container}>
                             <TouchableOpacity style={styles.btn_container} onPress={this.props.onePress}>
@@ -42,6 +48,11 @@ class TwoButtonModal extends Component {
 }
 
 const styles = StyleSheet.create({
+    title:{
+        fontSize: 16,
+        color: colors.black,
+        marginTop: 20,
+    },
     line: {
         backgroundColor: colors.divider,
         height: 15,
@@ -65,7 +76,7 @@ const styles = StyleSheet.create({
     text_content: {
         fontSize: 13,
         color: colors.black,
-        marginTop: 30,
+        marginTop: 20,
         marginLeft: 16,
         marginRight: 16,
     },

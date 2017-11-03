@@ -16,22 +16,7 @@ class AccountWithdrawResultPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            data: {
-                "amount": 13,
-                "createTime": "2017-10-18 21:33:28",
-                "createTimeMs": 1508333608275,
-                "feeCal": 19,
-                "feePay": 11,
-                "incomeTypeDesc": "qcEuJdD",
-                "orderNo": "eCEqL",
-                "orderStatus": 19,
-                "remark": "hDXgWV",
-                "tradeTime": "2017-09-29 14:41:39",
-                "tradeTimeMs": 1506667299053,
-                "updateTime": "2017-10-19 23:53:15",
-                "updateTimeMs": 1508428395950,
-                "uuid": "pmsAohHw"
-            },
+            retResult:true,
         }
     }
     render() {
@@ -41,7 +26,7 @@ class AccountWithdrawResultPage extends BasePage {
                 <FlatList
                     data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:'中信银行信用卡(9889)'},{key: '提现服务费',data:'1.23元'}]}
                     renderItem={this._renderItemComponent}
-                    ListHeaderComponent ={this._renderListHeaderComponent}
+                    ListHeaderComponent ={this.state.retResult?this._renderListHeaderComponentSuc:this._renderListHeaderComponentFail}
                 />
 
             </View>
@@ -69,13 +54,42 @@ class AccountWithdrawResultPage extends BasePage {
             </View>
         );
     }
-    _renderListHeaderComponent = ()=>{
+    _renderListHeaderComponentFail = ()=>{
         return(
             <View style={styles.headerView}>
-                <Image source={require("../res/img/sy_shibai.png")} style={styles.headerViewImg}/>
+                <Image source={require("../res/img/HomePage/sy_shibai.png")} style={styles.headerViewImg}/>
                 <Text style={styles.headerViewText}>
                     提现申请提交失败
                 </Text>
+            </View>
+        );
+    }
+    _renderListHeaderComponentSuc =()=>{
+        return(
+            <View style={styles.headerView}>
+                <View style={sucStyles.headerViewTitle}>
+                    <Image source={require("../res/img/HomePage/sy_chulizhong.png")} style={sucStyles.headerViewImg}/>
+                    <View>
+                        <Text style={sucStyles.headerViewText1}>
+                            提现申请提交成功
+                        </Text>
+                        <View style={sucStyles.headerViewTextSep}>
+                        </View>
+                        <Text style={sucStyles.headerViewText2}>
+                            处理中
+                        </Text>
+                    </View>
+                </View>
+
+                <View>
+                    <Text style={sucStyles.headerViewNoText}>
+                        +38.00
+                    </Text>
+                </View>
+                    <Text style={sucStyles.headerViewDesText}>
+                        申请成功后,金额最迟2个小时之内到账,请注意查收
+                    </Text>
+
             </View>
         );
     }
@@ -124,7 +138,44 @@ const styles = StyleSheet.create({
         color:'#E94D3D',
         fontSize:16,
         marginBottom:23,
+    },
+});
+
+const sucStyles = StyleSheet.create({
+    headerViewTitle:{
+        flexDirection:'row',
+        marginTop:22,
+    },
+    headerViewImg:{
+        marginRight:13,
+        width:20,
+
+    },
+    headerViewText1:{
+        marginTop:2,
+        fontSize:14,
+        color:'#333333',
+    },
+    headerViewTextSep:{
+        flex:1,
+    },
+    headerViewText2:{
+        marginBottom:2,
+        fontSize:14,
+        color:'#999999',
+    },
+    headerViewNoText:{
+        fontSize:30,
+        marginTop:33,
+        marginBottom:26,
+    },
+    headerViewDesText:{
+        fontSize:14,
+        color:'#999999',
+        marginBottom:21,
     }
+
+
 });
 
 export default AccountWithdrawResultPage

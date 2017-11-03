@@ -9,7 +9,7 @@ import {
 import colors from '../constants/colors'
 import CommonItemThree from '../components/CommonItemThree'
 
-class UnbindBankCardModal extends Component {
+class TwoBottomItemModal extends Component {
 
     constructor(props) {
         super(props);
@@ -25,9 +25,9 @@ class UnbindBankCardModal extends Component {
                 visible={this.props.isShow}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
-                        <CommonItemThree title='解绑该银行卡' onPress={this.props.unBind}/>
+                        <CommonItemThree title={this.props.oneItemTitle} onPress={this.props.ensure}/>
                         <View style={{height:10}}/>
-                        <CommonItemThree title='关闭弹窗' onPress={this.props.close}/>
+                        <CommonItemThree title={this.props.twoItemTitle} onPress={this.props.close}/>
                     </View>
 
                 </View>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default UnbindBankCardModal
+export default TwoBottomItemModal

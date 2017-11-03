@@ -75,7 +75,7 @@
 
 -(void)homeCellBtnClicked:(XGQBHomeCellBtn*)btn
 {
-    NSLog(@"点击了%@",btn.titleLabel.text);
+    [self.delegate btnClicked:btn];
 }
 
 @end

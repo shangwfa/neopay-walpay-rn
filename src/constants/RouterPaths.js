@@ -18,6 +18,9 @@ export const RouterPaths = {
       ACCOUNT_WITHDRAW_RESULT_PAGE  :'accountWithdrawResult',
       BANKCARD_ORDERLIST  :'bankCardOrderList',
       ACCOUNT_TOPUP : 'accountTopup',
-      ACCOUNT_TOPUP_RESULT : 'accountTopupResult'
+      ACCOUNT_TOPUP_RESULT : 'accountTopupResult',
+      TRADE_RECORD_LIST_PAGE: 'tradeRecordList',
+      PAYMENT: 'payment',
     }
+
 

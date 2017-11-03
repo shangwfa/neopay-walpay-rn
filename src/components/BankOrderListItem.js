@@ -10,7 +10,6 @@ import {colors} from '../constants/index'
 import Divider from '../components/Divider'
 
 
-
 const BankOrderListItem = props => {
     const {
         orderType,
@@ -20,8 +19,9 @@ const BankOrderListItem = props => {
         rightBottomValue,
         rightBottomStyle,
         isLine,
+        orderAvatar,
         ...attributes
-    } = props
+    } = props;
 
     const styles = StyleSheet.create({
         avatar: {
@@ -59,36 +59,18 @@ const BankOrderListItem = props => {
 
     const renderLine = () => {
         if (isLine) return <Divider style={{marginLeft: 10}}/>
-    }
+    };
 
     const renderOrderAvatar = () => {
-
-        if (orderType === 'scan') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_saosao.png')}/>
-        } else if (orderType === 'payCode') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_fukuan.png')}/>
-        } else if (orderType === 'redPocket') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_dahongbao.png')}/>
-        } else if (orderType === 'mobile') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_chongzhi.png')}/>
-        } else if (orderType === 'withDraw') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_tixian.png')}/>
-        } else if (orderType === 'mobileWithDraw') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_chongzhi.png')}/>
-        } else if (orderType === 'shopAct') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_shangdian.png')}/>
-        } else if (orderType === 'sysAct') {
-            return <Image style={styles.avatar} source={require('../res/img/BankCardOrder/wd_pingtai.png')}/>
-        }
-
-    }
+        return <Image style={styles.avatar} source={{uri: orderAvatar}}/>
+    };
 
     const renderMiddleValue = () => {
         return <View>
             <Text style={styles.middle_up_value}>{middleUpValue}</Text>
             <Text style={styles.middle_bottom_value}>{middleBottomValue}</Text>
         </View>
-    }
+    };
 
     const renderRightValue = () => {
         return <View style={styles.right_container}>
@@ -96,13 +78,15 @@ const BankOrderListItem = props => {
             {renderRightBottom()}
 
         </View>
-    }
+    };
 
-    renderRightBottom=()=>{
-        if(rightBottomValue){
-            return <Text style={[styles.middle_bottom_value, rightBottomStyle && rightBottomStyle]}>{rightBottomValue}</Text>
+    const renderRightBottom = () => {
+        if (rightBottomValue) {
+            return <Text
+                style={[styles.middle_bottom_value, rightBottomStyle && rightBottomStyle]}>余额:{rightBottomValue}</Text>
         }
-    }
+    };
+
     return (
         <TouchableOpacity activeOpacity={0.8} style={[styles.container]} {...attributes}>
             <View style={styles.content_container}>

@@ -26,9 +26,12 @@ class MyBalancePage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录'/>
+
+                <Header navigation={this.props.navigation} title='账户余额' rightTitle='余额交易记录' onRightPress={()=>{
+                    this.props.navigation.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {"pageType": 0})
+                }}/>
                 <View style={styles.logoImg}>
-                    <Image source={require("../res/img/sy_yue.png")}/>
+                    <Image source={require("../res/img/HomePage/sy_yue.png")}/>
                 </View>
                 <View style={styles.desTextView}>
                     <Text style ={styles.desText}>
@@ -50,8 +53,15 @@ class MyBalancePage extends BasePage {
         );
     }
 
-    topupBtnClicked = () =>{
+
+    topupBtnClicked = () => {
         this.props.navigation.navigate(RouterPaths.ACCOUNT_TOPUP)
+    }
+
+    headerRightBtnClicked(){
+        return(
+            this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST,{pageType:0})
+        )
     }
 }
 
@@ -64,9 +74,11 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:68,
         marginBottom:40,
+        // backgroundColor:'purple'
     },
     desTextView:{
         alignItems:'center',
+        // backgroundColor:'yellow'
     },
     desText:{
         fontSize:15,
@@ -76,7 +88,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         flexDirection:'row',
-        marginTop:12,
+        marginTop:19,
+        // backgroundColor:'gray'
     },
     RMBText:{
         fontSize:17,
@@ -88,6 +101,7 @@ const styles = StyleSheet.create({
     },
     topupBtn:{
         marginTop:65,
+        // backgroundColor:'green'
     },
     withDrawBtn:{
         marginTop:20,

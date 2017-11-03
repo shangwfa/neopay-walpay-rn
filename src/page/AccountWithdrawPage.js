@@ -12,6 +12,7 @@ import Header from '../components/Header'
 import ScrnUtil from '../utils/ScreenUtils'
 import CommonButton from "../components/CommonButton";
 import {RouterPaths} from "../constants/RouterPaths"
+import Divider from "../components/Divider";
 
 
 class AccountWithdrawPage extends BasePage {
@@ -31,7 +32,12 @@ class AccountWithdrawPage extends BasePage {
                     <Text style={styles.numberRowViewText}>可提现金额 678.89元</Text>
                     <View style={styles.numberRowViewNoView}>
                         <Text style={styles.numberRowViewRMB}>¥</Text>
-                        <TextInput placeholder='请输入提现金额' style={styles.numberRowViewNumber}/>
+                        <TextInput
+                            placeholder='请输入提现金额'
+                            style={styles.numberRowViewNumber}
+                            keyboardType={'numeric'}
+                            underlineColorAndroid={'transparent'}
+                        />
                     </View>
                     <View style={styles.numberRowViewUnderlineView}>
                         <View style={styles.numberRowViewUnderline}>
@@ -93,17 +99,19 @@ const styles = StyleSheet.create({
     },
     numberRowViewNoView:{
         flexDirection:'row',
+        height:50,
         marginTop:20,
-        alignItems:'flex-end',
     },
     numberRowViewRMB:{
         fontSize:30,
         color:'#000000',
         marginLeft:12,
+        marginTop:ScrnUtil.isIOS?3:0
     },
     numberRowViewNumber:{
         fontSize:14,
         marginLeft:10,
+        flex:1,
     },
     //分割线
     numberRowViewUnderlineView:{

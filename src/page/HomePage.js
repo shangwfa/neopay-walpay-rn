@@ -42,12 +42,12 @@ class Home extends BasePage {
      */
     componentDidMount() {
         DeviceEventEmitter.addListener('updateHeadImg', (imgUrl) => {
-            // let data = this.state.data
-            // data.headImgUrl = imgUrl
-            // this.setState({data: data})
-            this.setState({
-                data:{...data,headImgUrl:imgUrl}
-            })
+                // let data = this.state.data
+                // data.headImgUrl = imgUrl
+                // this.setState({data: data})
+                this.setState({
+                    data:{...data,headImgUrl:imgUrl}
+                })
         })
     }
 

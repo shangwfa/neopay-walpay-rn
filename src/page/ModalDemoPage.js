@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import BasePage from './BasePage'
 import OperationStatusMoadl from '../modal/OperationStatusMoadl'
-import UnbindBankCardModal from '../modal/UnbindBankCardModal'
+import UnbindBankCardModal from '../modal/TwoBottomItemModal'
 import OneButtonModal from '../modal/OneButtonModal'
 import TwoButtonModal from '../modal/TwoButtonModal'
 import bind_card_failed_icon from '../res/img/bind_card_failed_icon.png'
@@ -63,10 +63,11 @@ class ModalDemoPage extends BasePage {
                 {/*}}/>*/}
                 {/*<OperationStatusMoadl  icon={bind_card_success_icon}  tip='解绑成功' isShow={this.state.isShow}/>*/}
 
-                <UnbindBankCardModal isShow={this.state.isShow} close={()=>this.close()} unBind={()=>this.unBind()}/>
+                <UnbindBankCardModal topTitle="解绑银行卡" isShow={this.state.isShow} close={() => this.close()}
+                                     unBind={() => this.unBind()}/>
                 {/*<OneButtonModal isShow={this.state.isShow} content='xxxxxxxxx' btnTitle="确定" onPress={()=>this.close()}/>*/}
                 {/*<TwoButtonModal isShow={this.state.isShow} content='xxxxxxx' oneBtnText='忘记密码' twoBtnText='去登陆'*/}
-                                {/*onePress={() => this.close()} twoPress={() => this.close()}/>*/}
+                {/*onePress={() => this.close()} twoPress={() => this.close()}/>*/}
             </View>
         )
     }

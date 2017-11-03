@@ -12,6 +12,7 @@
 #import "XGQBHomeTitleView.h"
 #import "XGQBHomeCellView.h"
 #import "XGQBHomeBannerView.h"
+#import "XGQBHomeCellBtn.h"
 
 #import "XGQBIDAlertViewController.h"
 #import "XGQBIDAlertTransiton.h"
@@ -24,7 +25,7 @@
 
 
 
-@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate>
+@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate, XGQBHomeCellViewDelegate>
 
 @end
 
@@ -69,6 +70,7 @@
     
     //主业务图标视图
     XGQBHomeCellView *homeCellView = [XGQBHomeCellView new];
+    homeCellView.delegate = self;
     [self.view addSubview:homeCellView];
     
     //广告视图
@@ -104,14 +106,14 @@
 -(void)scanBtnClicked
 {
     XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType =@"";
+    RNVC.pageType =@"qrCodeScan";
     [self.navigationController pushViewController:RNVC animated:YES];
 }
 
 -(void)payCodeBtnClicked
 {
     XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType =@"qrCode";
+    RNVC.pageType =@"payCode";
     [self.navigationController pushViewController:RNVC animated:YES];
 }
 
@@ -144,6 +146,16 @@
     
 }
 
+#pragma mark - 按钮点击代理
+-(void)btnClicked:(XGQBHomeCellBtn *)btn
+{
+    if ([btn.titleLabel.text isEqualToString:@"卡包"]) {
+        
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType =@"cardPack";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }
+}
 
 #pragma mark - 实名认证弹框
 //检查是否需要实名认证弹框

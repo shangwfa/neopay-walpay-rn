@@ -13,7 +13,7 @@ import PanResponderDemo from '../page/PanResponderDemoPage'
 import Filter from '../page/FilterPage'
 import MyAsset from '../page/MyAsset'
 import SwRefreshScrollView from '../page/SwRefreshScrollViewDemo'
-import BackCardOrderList from '../page/BankCardOrderListPage'
+import TradeRecordList from '../page/TradeRecordListPage'
 import MyLotteryRecord from '../page/MyLotteryRecordPage'
 import RedList from "../page/RedListPage"
 import PayMessage from "../page/PayMessagePage"
@@ -22,7 +22,7 @@ import TransactionDetailsPage from "../page/TransactionDetailsPage"
 import BankCardDetail from "../page/BankCardDetailPage"
 import TopupMsgList from "../page/PhoneTopupMsgListPage"
 import QrCodeScan from '../page/QrCodeScanPage'
-import  InvalidQrCode from '../page/InvalidQrCodePage'
+import InvalidQrCode from '../page/InvalidQrCodePage'
 import Payment from '../page/PaymentPage'
 import Test from '../page/Test'
 import CardPack from "../page/CardPackPage";
@@ -32,6 +32,9 @@ import AccountWithdrawPage from "../page/AccountWithdrawPage";
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
 import AccountTopup from "../page/AccountTopupPage"
 import AccountTopupResult from "../page/AccountTopupResultPage"
+import PayResultPage from "../page/PayResultPage"
+import MerchantActivityList from "../page/MerchantActivityListPage"
+
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -46,22 +49,25 @@ const RouterSetting = {
     myOrder: {screen: MyOrder},
     panResponderDemo: {screen: PanResponderDemo},
     redList: {screen: RedList},
-    bankCardOrderList: {screen: BackCardOrderList},
+    tradeRecordList: {screen: TradeRecordList},
     myLotteryRecord: {screen: MyLotteryRecord},
     filter: {screen: Filter},
     myAsset: {screen: MyAsset},
     swRefreshScrollView: {screen: SwRefreshScrollView},
     payMessage: {screen: PayMessage},
     transactionDetails: {screen: TransactionDetailsPage},
-    bankCardList:{screen:BankCardList},
-    bankCardDetail:{screen:BankCardDetail},
-    topupMsgList:{screen:TopupMsgList},
-    qrCodeScan:{screen:QrCodeScan},
-    invalidQrCode:{screen:InvalidQrCode},
-    payment:{screen:Payment},
     bankCardList: {screen: BankCardList},
     bankCardDetail: {screen: BankCardDetail},
     topupMsgList: {screen: TopupMsgList},
+    qrCodeScan: {screen: QrCodeScan},
+    invalidQrCode: {screen: InvalidQrCode},
+    payment: {screen: Payment},
+    bankCardList: {screen: BankCardList},
+    bankCardDetail: {screen: BankCardDetail},
+    topupMsgList: {screen: TopupMsgList},
+    qrCodeScan: {screen: QrCodeScan},
+    invalidQrCode: {screen: InvalidQrCode},
+    payment: {screen: Payment},
     cardPack: {screen: CardPack},
     payCode: {screen: PayCode},
     myBalance: {screen: MyBalance},
@@ -69,7 +75,9 @@ const RouterSetting = {
     accountWithdrawResult: {screen: AccountWithdrawResultPage},
     test:{screen:Test},
     accountTopup:{screen:AccountTopup},
-    accountTopupResult:{screen:AccountTopupResult}
+    accountTopupResult:{screen:AccountTopupResult},
+    payResult: {screen: PayResultPage},
+    merchantActivityList: {screen: MerchantActivityList},
 }
 
 export default RouterSetting

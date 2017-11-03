@@ -5,6 +5,7 @@
  */
 import React, {Component} from 'react';
 import Camera from 'react-native-camera';
+import ScreenUtils from '../utils/ScreenUtils'
 import
 {
     ActivityIndicator,
@@ -219,17 +220,12 @@ class QRScannerRectView extends Component {
     }
 
     render() {
-        const animatedStyle = {
-            transform: [
-                {translateY: this.state.animatedValue}
-            ]
-        };
         const  animate={
             from: {
                 'translateY': -150,
             },
             to: {
-                'translateY': this.props.rectHeight,
+                'translateY': ScreenUtils.isIOS?30:this.props.rectHeight,
             },
         }
 
@@ -383,6 +379,17 @@ export default class QRScannerView extends Component {
         console.disableYellowBox = true;
     }
 
+    renderAndroidTopView=()=>{
+        if(!ScreenUtils.isIOS){
+            return this.props.renderTopBarView()
+        }
+    }
+
+    renderIOSTopView=()=>{
+        if(ScreenUtils.isIOS){
+            return this.props.renderTopBarView()
+        }
+    }
     render() {
         return (
             <View style={{flex: 1}}>
@@ -390,8 +397,7 @@ export default class QRScannerView extends Component {
                     onBarCodeRead={this.props.onScanResultReceived}
                     style={{flex: 1}}
                 >
-                    {/*绘制顶部标题栏组件*/}
-                    {this.props.renderTopBarView()}
+                    {this.renderAndroidTopView()}
                     {/*绘制扫描遮罩*/}
                     <QRScannerRectView
                         maskColor={this.props.maskColor}
@@ -421,6 +427,8 @@ export default class QRScannerView extends Component {
                     <View style={[styles.buttonsContainer, this.props.bottomMenuStyle]}>
                         {this.props.renderBottomMenuView()}
                     </View>
+                    {/*绘制顶部标题栏组件*/}
+                    {this.renderIOSTopView()}
                 </Camera>
             </View>
         );
