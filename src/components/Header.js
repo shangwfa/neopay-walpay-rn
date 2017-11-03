@@ -67,9 +67,7 @@ class Header extends Component {
                 <View style={[styles.container,{backgroundColor: this.props.backgroundColor},{height:ScreenUtils.headerHeight,paddingTop:ScreenUtils.statusBarHeight}]}>
                     {/*header左侧*/}
                     <TouchableOpacity style={styles.header_left} onPress={()=>this.goback()}>
-                        <View style={styles.Header_back_img_touchableArea}>
                         <Image style={styles.header_back_img} source={this.props.isWhiteArrow?white_back_arrow:img_left_arrow}/>
-                        </View>
                     </TouchableOpacity>
 
                     {/*header中间*/}
@@ -96,9 +94,6 @@ const styles = StyleSheet.create({
     header_right_title:{
         fontSize: 14,
         color: colors.black,
-    },
-    Header_back_img_touchableArea:{
-      width:50,
     },
     header_back_img: {
         width: 10,
@@ -127,9 +122,6 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         backgroundColor:'blue',
-        // height: ScreenUtils.headerHeight,
-        // paddingTop:ScreenUtils.statusBarHeight
-
     },
 });
 
