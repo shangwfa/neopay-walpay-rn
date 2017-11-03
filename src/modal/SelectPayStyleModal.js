@@ -41,7 +41,8 @@ class SelectPayStyleModal extends Component {
         return (
             <Modal
                 transparent={true}
-                visible={this.props.isShow}>
+                visible={this.props.isShow}
+                onRequestClose={()=>{}}>
                 <View style={styles.modalStyle}>
                     {/*title*/}
                     {this._renderTitle()}
