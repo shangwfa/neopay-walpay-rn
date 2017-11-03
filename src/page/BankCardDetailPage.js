@@ -26,21 +26,20 @@ class BankCardDetailPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            isShow:false
+            isShowBottom:false
         };
         console.log(props)
     }
 
-
     close=()=>{
         this.setState({
-            isShow:false
+            isShowBottom:false
         })
     }
 
     unBind=()=>{
         this.setState({
-            isShow:false
+            isShowBottom:false
         })
         //解绑操作
     }
@@ -63,7 +62,7 @@ class BankCardDetailPage extends BasePage {
 
     rightClick = () => {
         this.setState({
-            isShow:true
+            isShowBottom:true
         })
     }
 

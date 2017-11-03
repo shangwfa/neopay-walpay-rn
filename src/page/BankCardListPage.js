@@ -43,7 +43,7 @@ class BankCardListPage extends BasePage {
     renderEmptyView = () =>{
         return (<View style = {styles.empty_container}>
             <View style = {{alignItems:'center'}}>
-                <Image style = {styles.top_img}></Image>
+                <Image style = {styles.top_img} source = {require("../res/img/emptyBankCard_img.png")}></Image>
                 <Text style = {styles.middle_text}>添加绑定银行卡进行实名认证</Text>
                 <Text style = {styles.middle_text_bottom}>享受安全便捷的服务</Text>
             </View>
@@ -57,7 +57,7 @@ class BankCardListPage extends BasePage {
         {
             return (
                 <View style={styles.container}>
-                    <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/right_arrow.png")} onRightPress = {()=>this.addBankCard()}/>
+                    <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
 
                     <FlatList
                         renderItem={this.renderItem}
@@ -70,7 +70,7 @@ class BankCardListPage extends BasePage {
         {
             return (
                 <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/right_arrow.png")} onRightPress = {()=>this.addBankCard()}/>
+                <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
                 {this.renderEmptyView()}
                 </View>
             );
@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
         width:130,
         height:130,
         borderRadius:65,
-        backgroundColor:colors.orange
     },
     empty_container:{
         flex:1,

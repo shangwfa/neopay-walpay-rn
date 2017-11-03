@@ -21,7 +21,6 @@ class Header extends Component {
         backgroundColor:colors.white,
         textColor:colors.black,
         isWhiteArrow:false,
-
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
