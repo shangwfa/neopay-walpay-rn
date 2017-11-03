@@ -56,7 +56,7 @@ class BankCardDetailPage extends BasePage {
                               cardNoValue={dataSource.cardNo}/>
                 <CommonButton value='查看该张银行卡交易记录' style={{marginTop:50 }} onPress={()=>this.pushRecordPage()}/>
 
-                <TwoBottomItemModal oneItemTitle='解绑该张银行卡' twoItemTitle='关闭弹窗' isShow={this.state.isShowBottom} close={() => this.close()} ensure={this.unBind()}/>
+                <TwoBottomItemModal oneItemTitle='解绑该张银行卡' twoItemTitle='关闭弹窗' isShow={this.state.isShow} close={() => this.close()} ensure={()=>this.unBind()}/>
             </View>
         );
     }
