@@ -105,6 +105,7 @@ dependencies {
     })
     compile project(':commonlib')
     compile project(':react-native-camera')
+    compile project(':react-native-picker')
     compile rootProject.ext.dependencies["appcompatv7"]
     compile rootProject.ext.dependencies["constraint_layout"]
     compile rootProject.ext.dependencies["jpush"]

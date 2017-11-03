@@ -66,7 +66,7 @@ class PayResultPage extends BasePage {
     _renderListHeaderComponentSuc =()=>{
         return(
             <View style={styles.headerView}>
-                <Image source={require("../res/img/HomePage/sy_shibai.png")} style={styles.headerViewImg}/>
+                <Image source={require("../res/img/HomePage/sy_fasong.png")} style={styles.headerViewImg}/>
 
                 <Text style={styles.headerViewText1}>
                     付款成功
@@ -127,12 +127,6 @@ const styles = StyleSheet.create({
         marginTop:16,
         marginBottom:12,
     },
-
-});
-
-const sucStyles = StyleSheet.create({
-
-
 
 });
 

@@ -27,7 +27,7 @@
     
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetLoginPwd) name:kNotificationRNJumpBackToNativeResetLoginPwd object:nil];
-    [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetPayPwd) name:knotificationRNJumpBackToNativeResetPayPwd object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetPayPwd) name:kNotificationRNJumpBackToNativeResetPayPwd object:nil];
 
     
     //RN打包ios命令
@@ -36,8 +36,8 @@
     //预先加载RN页面
 //        NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
 //    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.11:8081/index.ios.bundle?platform=ios"];
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
-    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
+    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
+//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
     
     
     
@@ -50,12 +50,17 @@
     CGFloat statusBarHeight=[UIApplication sharedApplication].statusBarFrame.size.height;
     NSString *statusBarHeiStr = [NSString stringWithFormat:@"%.0f",statusBarHeight];
     
+    //获取iPhone型号
+    NSString *iphoneDevice = [IphoneDevice deviceVersion];
+    
     [SVProgressHUD show];
     
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
                          moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":_pageType,@"statusBarHeight":statusBarHeiStr}}
+                         initialProperties :@{@"params": @{@"page":_pageType,
+                                                           @"statusBarHeight":statusBarHeiStr,
+                                                           @"iphoneDevice":iphoneDevice}}
                           launchOptions    : nil];
     
     self.view = rootView;
@@ -68,6 +73,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
     self.navigationController.navigationBarHidden = YES;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     

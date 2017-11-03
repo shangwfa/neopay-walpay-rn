@@ -16,46 +16,60 @@ import Divider from "../components/Divider";
 
 
 class AccountWithdrawPage extends BasePage {
+
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title={'提现'} rightTitle={'?'}/>
-                <View style={styles.bankCardRowView}>
-                    <Image style={styles.bankCardRowIcon} source={require("../res/img/BankIcon/sy_gongshang.png")}/>
-                    <View style={styles.bankCardRowText}>
-                        <Text>中国工商银行储蓄卡(8988)</Text>
-                    </View>
-                    <View style={{flex:1}}></View>
-                    <Image style={styles.bankCardRowArrow} source={require("../res/img/right_arrow.png")}/>
-                </View>
-                <View style={styles.numberRowView}>
-                    <Text style={styles.numberRowViewText}>可提现金额 678.89元</Text>
-                    <View style={styles.numberRowViewNoView}>
-                        <Text style={styles.numberRowViewRMB}>¥</Text>
-                        <TextInput
-                            placeholder='请输入提现金额'
-                            style={styles.numberRowViewNumber}
-                            keyboardType={'numeric'}
-                            underlineColorAndroid={'transparent'}
-                        />
-                    </View>
-                    <View style={styles.numberRowViewUnderlineView}>
-                        <View style={styles.numberRowViewUnderline}>
-
-                        </View>
-                    </View>
-                    <View style={styles.numberRowViewAttach}>
-                        <Text style={styles.numberRowViewAttachText}>
-                            收取0.1%的服务费
-                        </Text>
-                    </View>
-                </View>
+                <Header navigation={this.props.navigation} title={'提现'} rightIconNormal={require("../res/img/HomePage/sy_wenhao.png")}/>
+                {this.renderBankCardRow()}
+                {this.renderDetailRow()}
                 <View style={styles.confirmBtnView}>
                     <CommonButton value={'提现'} onPress={()=>this.withdrawBtnClicked()}/>
                 </View>
             </View>
         );
     }
+
+    renderBankCardRow=()=>{
+        return(
+        <View style={styles.bankCardRowView}>
+            <Image style={styles.bankCardRowIcon} source={require("../res/img/BankIcon/sy_gongshang.png")}/>
+            <View style={styles.bankCardRowText}>
+            <Text>中国工商银行储蓄卡(8988)</Text>
+            </View>
+            <View style={{flex: 1}}/>
+            <Image style={styles.bankCardRowArrow} source={require("../res/img/right_arrow.png")}/>
+        </View>
+        )
+    };
+
+    renderDetailRow=()=>{
+        return(
+        <View style={styles.numberRowView}>
+            <Text style={styles.numberRowViewText}>可提现金额 678.89元</Text>
+            <View style={styles.numberRowViewNoView}>
+                <Text style={styles.numberRowViewRMB}>¥</Text>
+                <TextInput
+                    placeholder='请输入提现金额'
+                    style={styles.numberRowViewNumber}
+                    keyboardType={'numeric'}
+                    underlineColorAndroid={'transparent'}
+                />
+            </View>
+            <View style={styles.numberRowViewUnderlineView}>
+                <View style={styles.numberRowViewUnderline}>
+
+                </View>
+            </View>
+            <View style={styles.numberRowViewAttach}>
+                <Text style={styles.numberRowViewAttachText}>
+                    收取0.1%的服务费
+                </Text>
+            </View>
+        </View>
+        )
+    };
+
     withdrawBtnClicked(){
         this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE)
     }

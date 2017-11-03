@@ -8,6 +8,8 @@ import {
 import {colors} from '../constants/index'
 import BasePage from './BasePage'
 import ScreenUtils from '../utils/ScreenUtils'
+import CommonButton from '../components/CommonButton'
+import TimePicker from '../modal/TimePicker'
 class Test extends BasePage {
 
     constructor(props) {
@@ -20,10 +22,16 @@ class Test extends BasePage {
         return (
             <View style={styles.container}>
                 <View style={styles.content_container}>
-                    <View style={{height:50}}/>
+                    <CommonButton value='时间选择器' style={{marginTop:50}} onPress={()=>{this.showTimePicker()}}/>
                 </View>
             </View>
         );
+    }
+
+    showTimePicker=()=> {
+        TimePicker.showTimePicker((value)=>{
+            console.log('日期选择器输出'+value)
+        })
     }
 }
 

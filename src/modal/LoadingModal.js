@@ -38,7 +38,8 @@ class LoadingModal extends Component {
         return (
             <Modal
                 transparent={true}
-                visible={true}>
+                visible={true}
+                onRequestClose={()=>{}}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
                         <Animated.Image source={loading_icon}

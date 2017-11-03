@@ -20,7 +20,12 @@
 //RN跳转修改登录密码页面
 #define kNotificationRNJumpBackToNativeResetLoginPwd @"RNJumpBackToNativeResetLoginPwd"
 //RN跳转修改支付密码页面
-#define knotificationRNJumpBackToNativeResetPayPwd @"RNJumpBackToNativeResetPayPwd"
+#define kNotificationRNJumpBackToNativeResetPayPwd @"RNJumpBackToNativeResetPayPwd"
+//RN跳转进入二级页面
+#define kNotificationRNJumpIntoSecondLevel @"RNJumpIntoSecondLevel"
+//RN跳回一级页面
+#define kNotificationRNJumpBackToFirstLevel @"RNJumpBackToFirstLevel"
+
 
 //从注册页面跳转至重置密码页面
 
