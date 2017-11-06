@@ -38,7 +38,7 @@ class ButtonComponent extends Component {
         if (isShow) {
             return <Image style={styles.img} source={right_arrow}/>;
         } else {
-            return <View style={{width: 22}}/>;
+            return <View style={{ marginRight: 4}}/>;
         }
     };
 }
