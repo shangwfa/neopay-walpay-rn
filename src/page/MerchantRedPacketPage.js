@@ -12,6 +12,7 @@ import BasePage from "./BasePage";
 import {RouterPaths} from "../constants/RouterPaths";
 import ApiManager from "../utils/ApiManager";
 import {SwRefreshListView} from "react-native-swRefresh";
+import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
 
 class MerchantRedPacketPage extends BasePage {
 
@@ -70,69 +71,12 @@ class MerchantRedPacketPage extends BasePage {
             <TouchableOpacity
                 activeOpacity={0.8} onPress={this._clickItem.bind(this, item)}>
                 <View style={[styles.red_container, {backgroundColor: "yellow", marginTop: 20}]}>
-                    <View >
-                        <Image
-                            style={styles.img}
-                            source={{uri: item.themeUrl}}>
-                            {this._renderTypeView(item)}
-                        </Image>
-                    </View>
+                    <RedPacketTypeComponent
+                        redPacketData={item}/>
                 </View>
             </TouchableOpacity>
         );
     };
-
-    //渲染那种类型的红包
-    _renderTypeView = (item) => {
-        switch (item.receiveStatus) {
-            case 1:
-                return this._renderRobRedPacketView(item);
-                break;
-            case 2:
-                return this._renderOverdueRedPacketView(item);
-                break;
-            case 3:
-                return this._renderGeneralRedPacketView(item);
-                break;
-
-        }
-    };
-
-    /*待抢红包--类型*/
-    _renderRobRedPacketView = (item) => {
-        let isTheme = true;
-        return <View style={{marginLeft: 97}}>
-            <Text style={[isTheme ? styles.message : styles.message_general, {fontSize: 17}]}>{item.message}</Text>
-            <View style={[styles.message_from_container, {marginTop: 23, paddingLeft: 5}]}>
-                <View style={[styles.line]}/>
-                <Text
-                    style={[isTheme ? styles.message : styles.message_general, {fontSize: 14,}]}>来自{item.bossName}的红包</Text>
-            </View>
-
-        </View>;
-    };
-    /*红包过期/已领完--类型*/
-    _renderOverdueRedPacketView = (item) => {
-        return <View style={{marginLeft: 76}}>
-            <Text style={[styles.message, {fontSize: 14}]}>{item.message}</Text>
-            <Text style={[styles.message, {fontSize: 17, paddingLeft: 22, marginTop: 48}]}>啊哦，这个红包过期了~</Text>
-            <View style={[styles.message_from_container, {paddingLeft: 22, marginTop: 17}]}>
-                <View style={[styles.line]}/>
-                <Text style={[styles.message, {fontSize: 14}]}>来自{item.bossName}的红包</Text>
-            </View>
-        </View>;
-    };
-    /*普通红包--类型*/
-    _renderGeneralRedPacketView = (item) => {
-        return <View style={{marginLeft: 97}}>
-            <Text style={[styles.message_general, {fontSize: 27, paddingLeft: 33}]}>$898.78</Text>
-            <Text style={[styles.message, {fontSize: 17, marginTop: 18}]}>{item.message}</Text>
-            <View style={[styles.message_from_container, {marginTop: 16}]}>
-                <View style={[styles.line]}/>
-                <Text style={[styles.message, {fontSize: 14}]}>来自{item.bossName}的红包</Text>
-            </View>
-        </View>;
-    }
 }
 
 const styles = StyleSheet.create({
@@ -157,28 +101,6 @@ const styles = StyleSheet.create({
         display: "none",
         marginBottom: 7,
     },
-    img: {
-        width: 350,
-        height: 155,
-        resizeMode: "cover",
-        justifyContent: 'center',
-    },
-    message: {
-        color: "#FBDEB0",
-    },
-    message_general: {
-        color: "#FFFFFF",
-    },
-    message_from_container: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginTop: 0,
-    },
-    line: {
-        width: 31,
-        height: 1,
-        backgroundColor: "#FBDEB0"
-    }
 });
 
 export default MerchantRedPacketPage

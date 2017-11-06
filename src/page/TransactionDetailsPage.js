@@ -13,7 +13,7 @@ import right_arrow from '../res/img/right_arrow.png';
 import Space from "../components/Space";
 import CommonButton from "../components/CommonButton";
 import ApiManager from "../utils/ApiManager";
-import CommonButtonComponent from "../components/CommonButtonComponent";
+import CommonButtonComponent from "../components/ButtonComponent";
 let mData = [];
 class TransactionDetailsPage extends BasePage {
     constructor(props) {
