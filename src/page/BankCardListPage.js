@@ -57,7 +57,7 @@ class BankCardListPage extends BasePage {
         {
             return (
                 <View style={styles.container}>
-                    <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
+                    <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:20, height:20}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
 
                     <FlatList
                         renderItem={this.renderItem}
@@ -70,7 +70,7 @@ class BankCardListPage extends BasePage {
         {
             return (
                 <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
+                <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:20, height:20}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
                 {this.renderEmptyView()}
                 </View>
             );
