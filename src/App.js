@@ -64,6 +64,19 @@ class App extends Component {
                     index: routes.length - 1,
                 };
             }
+            //一级页面允许右划返回
+            else if(state && action.type === NavigationActions.BACK && state.routes.length ===2) {
+                if (ScreenUtils.isIOS === true) {
+                    //开启系统右划手势
+                    NativeModules.commModule.rnJumpBackToFirstLevel()
+                }
+            }
+            //进入二级页面禁用系统右划
+            else if(state && action.type === NavigationActions.NAVIGATE && state.routes.length ===1) {
+                if (ScreenUtils.isIOS === true) {
+                    NativeModules.commModule.rnJumpIntoSecondLevel()
+                }
+            }
             return defaultStateAction(action, state);
         };
 
