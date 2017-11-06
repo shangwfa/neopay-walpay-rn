@@ -10,8 +10,6 @@
 		4210AF401F95CE6D008132C5 /* XGQBCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */; };
 		4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */; };
 		4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */; };
-		4211E8DC1FAAF1EA00C0E5A5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 4211E8DB1FAAF1EA00C0E5A5 /* assets */; };
-		4211E8DE1FAAF24B00C0E5A5 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 4211E8DD1FAAF24B00C0E5A5 /* main.jsbundle */; };
 		421412EA1FA0808500290A06 /* mess.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421412E91FA0808500290A06 /* mess.plist */; };
 		421412ED1FA08FDD00290A06 /* XGQBActiRedPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */; };
 		422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */; };
@@ -32,6 +30,8 @@
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
+		42D5377A1FB03C7900AFB2F7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42D537791FB03C7900AFB2F7 /* assets */; };
+		42D5377C1FB03C8600AFB2F7 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42D5377B1FB03C8600AFB2F7 /* main.jsbundle */; };
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
 		42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */; };
 		6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */; };
@@ -100,8 +100,6 @@
 		4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiMessTVC.m; sourceTree = "<group>"; };
 		4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCommMessTVC.h; sourceTree = "<group>"; };
 		4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCommMessTVC.m; sourceTree = "<group>"; };
-		4211E8DB1FAAF1EA00C0E5A5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
-		4211E8DD1FAAF24B00C0E5A5 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		421412E91FA0808500290A06 /* mess.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mess.plist; sourceTree = "<group>"; };
 		421412EB1FA08FDD00290A06 /* XGQBActiRedPView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBActiRedPView.h; sourceTree = "<group>"; };
 		421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiRedPView.m; sourceTree = "<group>"; };
@@ -143,6 +141,8 @@
 		42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRNViewController.m; sourceTree = "<group>"; };
 		42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleBtn.h; sourceTree = "<group>"; };
 		42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleBtn.m; sourceTree = "<group>"; };
+		42D537791FB03C7900AFB2F7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
+		42D5377B1FB03C8600AFB2F7 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		42DD31DC1F8C748D00B435EA /* XGQBHomeBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBanner.h; sourceTree = "<group>"; };
 		42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBanner.m; sourceTree = "<group>"; };
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
@@ -577,9 +577,9 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4211E8DB1FAAF1EA00C0E5A5 /* assets */,
-				4211E8DD1FAAF24B00C0E5A5 /* main.jsbundle */,
+				42D537791FB03C7900AFB2F7 /* assets */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
+				42D5377B1FB03C8600AFB2F7 /* main.jsbundle */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
 				6AF9E40B1F78DDB6005E901C /* Info.plist */,
@@ -1014,9 +1014,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4211E8DC1FAAF1EA00C0E5A5 /* assets in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
-				4211E8DE1FAAF24B00C0E5A5 /* main.jsbundle in Resources */,
+				42D5377A1FB03C7900AFB2F7 /* assets in Resources */,
+				42D5377C1FB03C8600AFB2F7 /* main.jsbundle in Resources */,
 				421412EA1FA0808500290A06 /* mess.plist in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);

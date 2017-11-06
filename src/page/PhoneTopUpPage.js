@@ -17,7 +17,7 @@ class PhoneTopUpPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='手机充值' rightTitle="充值记录" rightIconStyle={{height:10}}/>
+                <Header navigation={this.props.navigation} title='手机充值' rightTitle="充值记录"/>
                 <PhoneTopUpTabNavigator/>
             </View>
         );

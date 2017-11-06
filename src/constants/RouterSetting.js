@@ -37,7 +37,7 @@ import PayResultPage from "../page/PayResultPage"
 import MerchantActivityList from "../page/MerchantActivityListPage"
 import CreditCardInput from "../page/CreditCardInputPage"
 import PhoneTopUpPage from "../page/PhoneTopUpPage"
-
+import RedPacketReady from "../page/RedPacketsReadyPage"
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -79,6 +79,7 @@ const RouterSetting = {
     merchantActivityList: {screen: MerchantActivityList},
     creditCardInput: {screen: CreditCardInput},
     phoneTopUp:{screen:PhoneTopUpPage},
+    redPacketReady:{screen:RedPacketReady},
 }
 
 export default RouterSetting
