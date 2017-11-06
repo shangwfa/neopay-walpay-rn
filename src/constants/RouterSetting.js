@@ -29,6 +29,7 @@ import CardPack from "../page/CardPackPage";
 import PayCode from "../page/PayCodePage";
 import MyBalance from "../page/MyBalancePage"
 import AccountWithdrawPage from "../page/AccountWithdrawPage";
+import ChargeFluxResult from "../page/ChargeFluxResultPage"
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
 import AccountTopup from "../page/AccountTopupPage"
 import AccountTopupResult from "../page/AccountTopupResultPage"
@@ -36,6 +37,7 @@ import PayResultPage from "../page/PayResultPage"
 import MerchantActivityList from "../page/MerchantActivityListPage"
 import CreditCardInput from "../page/CreditCardInputPage"
 import PhoneTopUpPage from "../page/PhoneTopUpPage"
+
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -51,6 +53,7 @@ const RouterSetting = {
     myOrder: {screen: MyOrder},
     panResponderDemo: {screen: PanResponderDemo},
     redList: {screen: RedList},
+    chargeFluxResult:{screen:ChargeFluxResult},
     tradeRecordList: {screen: TradeRecordList},
     myLotteryRecord: {screen: MyLotteryRecord},
     filter: {screen: Filter},
