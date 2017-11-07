@@ -109,7 +109,7 @@
         
         //前往实名按钮
         [goRegBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(66*sizeRatio, 20*sizeRatio));
+            make.size.mas_equalTo(CGSizeMake(76*sizeRatio, 20*sizeRatio));
             make.top.equalTo(phoneLebel.mas_bottom).with.offset(7*sizeRatio);
             make.centerX.equalTo(bgView);
         }];

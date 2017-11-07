@@ -24,7 +24,7 @@
 #define kNavBgFontColor  [UIColor colorWithHexString:@"010101"]
 
 //默认页面背景色
-#define kViewBgColor [UIColor colorWithHexString:@"F5F5F5"]
+#define kViewBgColor [UIColor colorWithHexString:@"F2F2F2"]
 
 //分割线颜色
 #define kLineColor [UIColor colorWithHexString:@"DCDCDC"]
@@ -34,6 +34,9 @@
 
 //再次级字色
 #define CFontColor2 [UIColor colorWithHexString:@"5c5c5c"]
+
+//按钮颜色
+#define kButtonColor [UIColor colorWithHexString:@"F34646"]
 
 //颜色
 #define kClearColor [UIColor clearColor]

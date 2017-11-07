@@ -27,6 +27,7 @@ class Header extends Component {
         rightIcon: React.PropTypes.any,
         rightIconNormal: React.PropTypes.any,
         rightIconStyle:React.PropTypes.any
+        // rightIconStyle:React.PropTypes.style 加上这句的时候,外面引用不加style会报警告
     }
 
     constructor(props) {
@@ -40,8 +41,6 @@ class Header extends Component {
            return  <Text style={styles.header_right_title}>{this.props.rightTitle}</Text>
         }else if(this.props.rightIcon){
             return <Image style={[styles.right_icon,this.props.rightIconStyle&&this.props.rightIconStyle]} source={this.props.rightIcon}/>
-        }else if(this.props.rightIconNormal){
-            return <Image style={styles.right_icon_normal} source={this.props.rightIconNormal}/>
         }
     }
     getRightIcon=()=>{
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
         height: 18,
     },
     header_left: {
-        flex: 1,
+        flex: 1.4,
         justifyContent: 'center',
         marginLeft: 13,
     },
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header_right: {
-        flex: 1,
+        flex: 1.4,
         justifyContent: 'center',
         marginRight: 13,
         alignItems:'flex-end',

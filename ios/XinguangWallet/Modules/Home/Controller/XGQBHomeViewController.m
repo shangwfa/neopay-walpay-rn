@@ -174,7 +174,7 @@
         
         alertIDVC.modalPresentationStyle = UIModalPresentationCustom;
         
-        [self presentViewController:alertIDVC animated:YES completion:nil];
+        [self.navigationController presentViewController:alertIDVC animated:YES completion:nil];
     }
 }
 //transition代理方法

@@ -31,7 +31,7 @@
     desLabel.textColor = [UIColor colorWithHexString:@"B5B5B5"];
     [self.view addSubview:desLabel];
     
-    XGQBPureColorBtn *reloadBtn = [XGQBPureColorBtn buttonWithText:@"刷新" andColor:kRedColor];
+    XGQBPureColorBtn *reloadBtn = [XGQBPureColorBtn buttonWithText:@"刷新" andColor:kButtonColor];
     [self.view addSubview:reloadBtn];
     
     [networkFailIV mas_makeConstraints:^(MASConstraintMaker *make) {
