@@ -70,7 +70,7 @@ class BankCardListPage extends BasePage {
         {
             return (
                 <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/right_arrow.png")} onRightPress = {()=>this.addBankCard()}/>
+                <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle={{width:32,height:32}} rightIcon={require("../res/img/right_arrow.png")} onRightPress = {()=>this.addBankCard()}/>
                 {this.renderEmptyView()}
                 </View>
             );

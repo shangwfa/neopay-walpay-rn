@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import {colors} from '../constants/index'
 import Divider from '../components/Divider'
+import selected_icon from '../res/img/selected_icon.png'
+import unselected_icon from '../res/img/unselected_icon.png'
 
 const CommonItemTwo = props => {
     const {
@@ -18,10 +20,17 @@ const CommonItemTwo = props => {
         rightBottomValue,
         rightBottomStyle,
         isLine,
+        isContacts,
+        isSelected,
         ...attributes
     } = props
 
     const styles = StyleSheet.create({
+        right_icon:{
+            width:18,
+            height:18,
+            marginRight:25
+        },
         avatar: {
             width: 48,
             height: 48,
@@ -33,7 +42,7 @@ const CommonItemTwo = props => {
             marginRight: 10
         },
         middle_bottom_value: {
-            marginTop: 15,
+            marginTop: 10,
             color: colors.balck_more_light,
             fontSize: 12
         },
@@ -42,7 +51,7 @@ const CommonItemTwo = props => {
             fontSize: 15
         },
         middle_container: {
-            marginLeft: 20,
+            marginLeft: 15,
         },
         content_container: {
             flexDirection: 'row',
@@ -60,7 +69,7 @@ const CommonItemTwo = props => {
     }
 
     const renderMiddleValue = () => {
-        return <View>
+        return <View style={styles.middle_container}>
             <Text style={styles.middle_up_value}>{middleUpValue}</Text>
             <Text style={styles.middle_bottom_value}>{middleBottomValue}</Text>
         </View>
@@ -68,15 +77,25 @@ const CommonItemTwo = props => {
 
     const renderRightValue = () => {
         return <View style={styles.right_container}>
-            <Text style={styles.middle_up_value}>{rightUpValue}</Text>
+            {renderRightUp()}
             {renderRightBottom()}
 
         </View>
     }
 
-    renderRightBottom=()=>{
+    const renderRightBottom=()=>{
         if(rightBottomValue){
             return <Text style={[styles.middle_bottom_value, rightBottomStyle && rightBottomStyle]}>{rightBottomValue}</Text>
+        }
+    }
+    const renderRightUp=()=>{
+        if(rightUpValue){
+            return <Text style={styles.middle_up_value}>{rightUpValue}</Text>
+        }
+    }
+    const renderRightIcon=()=>{
+        if(isContacts){
+            return <Image style={styles.right_icon} source={isSelected?selected_icon:unselected_icon}/>
         }
     }
     return (
@@ -86,6 +105,7 @@ const CommonItemTwo = props => {
                 {renderMiddleValue()}
                 <View style={{flex: 1}}/>
                 {renderRightValue()}
+                {renderRightIcon()}
             </View>
             {renderLine()}
 

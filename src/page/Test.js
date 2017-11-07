@@ -3,13 +3,15 @@ import {
     StyleSheet,
     View,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    NativeModules
 } from 'react-native'
 import {colors} from '../constants/index'
 import BasePage from './BasePage'
 import ScreenUtils from '../utils/ScreenUtils'
 import CommonButton from '../components/CommonButton'
 import TimePicker from '../modal/TimePicker'
+
 class Test extends BasePage {
 
     constructor(props) {

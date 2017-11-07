@@ -6,7 +6,8 @@ import {
     Image,
     TouchableWithoutFeedback,
     TouchableOpacity
-} from 'react-native';
+} from 'react-native'
+import PropTypes from 'prop-types'
 import Divider from '../components/Divider'
 import colors from '../constants/colors'
 import ScreenUtils from '../utils/ScreenUtils'
@@ -21,12 +22,11 @@ class Header extends Component {
         backgroundColor:colors.white,
         textColor:colors.black,
         isWhiteArrow:false,
-
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
         rightIconNormal: React.PropTypes.any,
-        rightIconStyle:React.PropTypes.style
+        rightIconStyle:React.PropTypes.any
     }
 
     constructor(props) {
