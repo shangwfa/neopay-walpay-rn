@@ -20,17 +20,17 @@
 #pragma mark - viewController 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    //插入临时显示VC名称的标签
-    YYLabel *label = [YYLabel new];
-    label.font= kSYSTEMFONT(8.0);
-    [self.view addSubview:label];
-
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.view).with.offset(-50);
-    }];
-    label.text = NSStringFromClass(self.class);
+//
+//    //插入临时显示VC名称的标签
+//    YYLabel *label = [YYLabel new];
+//    label.font= kSYSTEMFONT(8.0);
+//    [self.view addSubview:label];
+//
+//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.view);
+//        make.bottom.equalTo(self.view).with.offset(-50);
+//    }];
+//    label.text = NSStringFromClass(self.class);
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

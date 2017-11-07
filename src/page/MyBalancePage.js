@@ -10,9 +10,12 @@ import {
 import BasePage from './BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
-import CommonButton from "../components/CommonButton";
+import CommonButton from "../components/CommonButton"
 import {RouterPaths} from "../constants/RouterPaths"
+import ScreenUtils from "../utils/ScreenUtils"
 
+
+let sizeRatio = ScreenUtils.width/375.0;
 
 class MyBalancePage extends BasePage {
 
@@ -31,7 +34,7 @@ class MyBalancePage extends BasePage {
                     this.props.navigation.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {"pageType": 0})
                 }}/>
                 <View style={styles.logoImg}>
-                    <Image source={require("../res/img/HomePage/sy_yue.png")}/>
+                    <Image source={require("../res/img/HomePage/sy_yue.png")} style={{height:145*sizeRatio,width:161*sizeRatio,}}/>
                 </View>
                 <View style={styles.desTextView}>
                     <Text style ={styles.desText}>
@@ -72,8 +75,8 @@ const styles = StyleSheet.create({
     },
     logoImg:{
         alignItems:'center',
-        marginTop:68,
-        marginBottom:40,
+        marginTop:68*sizeRatio,
+        marginBottom:40*sizeRatio,
         // backgroundColor:'purple'
     },
     desTextView:{
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         flexDirection:'row',
-        marginTop:19,
+        marginTop:19*sizeRatio,
         // backgroundColor:'gray'
     },
     RMBText:{
@@ -100,11 +103,11 @@ const styles = StyleSheet.create({
         color:'#E66941',
     },
     topupBtn:{
-        marginTop:65,
+        marginTop:65*sizeRatio,
         // backgroundColor:'green'
     },
     withDrawBtn:{
-        marginTop:20,
+        marginTop:20*sizeRatio,
     }
 });
 

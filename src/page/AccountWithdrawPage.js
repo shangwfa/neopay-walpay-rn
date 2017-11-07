@@ -20,7 +20,7 @@ class AccountWithdrawPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title={'提现'} rightIconNormal={require("../res/img/HomePage/sy_wenhao.png")}/>
+                <Header navigation={this.props.navigation} title={'提现'} rightIcon={require("../res/img/HomePage/sy_wenhao.png")} rightIconStyle={{height:20}}/>
                 {this.renderBankCardRow()}
                 {this.renderDetailRow()}
                 <View style={styles.confirmBtnView}>
@@ -88,6 +88,8 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     bankCardRowIcon:{
+        height:20,
+        width:20,
         marginLeft:14,
         marginRight:8,
     },
