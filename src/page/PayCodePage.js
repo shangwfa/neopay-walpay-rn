@@ -20,12 +20,12 @@ import img_dashed_line from '../res/img/img_dashed_line.png';
 import img_pay_code_bg from '../res/img/img_pay_code_bg.png';
 import ScreenUtils from "../utils/ScreenUtils";
 import TwoBottomItemModal from "../modal/TwoBottomItemModal";
-import CommonButtonComponent from "../components/CommonButtonComponent";
 import SupportTongBaoComponent from "../components/SupportTongBaoComponent";
 import SelectPayStyleModal from "../modal/SelectPayStyleModal";
 import StringUtils from "../utils/StringUtils";
 import FormatUtils from "../utils/FormatUtils";
-import CommonAvatarComponent from "../components/CommonAvatarComponent";
+import AvatarComponent from "../components/AvatarComponent";
+import ButtonComponent from "../components/ButtonComponent";
 class PayCodePage extends BasePage {
     constructor(props) {
         super(props);
@@ -77,7 +77,7 @@ class PayCodePage extends BasePage {
                             <View style={{marginTop: 74, alignItems: "center"}}>
                                 <QRCode
                                     value={this.state.payQRCodeDataContent}
-                                    size={258}
+                                    size={ScreenUtils.width * 0.688}
                                     bgColor='#000'
                                     fgColor='#FFF'/>
                             </View>
@@ -86,7 +86,7 @@ class PayCodePage extends BasePage {
                                 style={{width: ScreenUtils.width, height: 1, marginTop: 20}}
                                 source={img_dashed_line}/>
                             {/*选择银行卡*/}
-                            <CommonButtonComponent
+                            <ButtonComponent
                                 btnClick={this._handleBtnClick.bind(this)}
                                 leftTitle="付款方式"
                                 rightTitle={this.state.payTypeDescTxt}/>
@@ -95,7 +95,7 @@ class PayCodePage extends BasePage {
                         </View>
                         {/*头像*/}
                         <View style={styles.img_container}>
-                            <CommonAvatarComponent
+                            <AvatarComponent
                                 avatar={this.state.userInfoData.avatarUrl}/>
                         </View>
                     </ScrollView>

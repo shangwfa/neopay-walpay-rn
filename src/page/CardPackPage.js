@@ -117,7 +117,15 @@ class CardPackPage extends BasePage {
     _handleFlatListItemClick = (item, index) => {
         console.log("index= " + index);
         //活动跳转详情
-        this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST, {"pageType": 1});
+        switch (index) {
+            case 0://余额交易记录、银行卡交易记录
+                this.props.navigation.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {"pageType": 1});
+                break;
+            case 1://话费、流量充值记录
+                this.props.navigation.navigate(RouterPaths.CHARGE_FLUX_RESULT, {"pageTitle": "手机充值"});
+                break;
+        }
+
     };
     _keyExtractor = (item, index) => {
         return index;

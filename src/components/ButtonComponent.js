@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import right_arrow from '../res/img/right_arrow.png';
 import Space from "./Space";
-class CommonButtonComponent extends Component {
+class ButtonComponent extends Component {
     static defaultProps = {
         isShowRightArrows: true,
     };
@@ -38,7 +38,7 @@ class CommonButtonComponent extends Component {
         if (isShow) {
             return <Image style={styles.img} source={right_arrow}/>;
         } else {
-            return <View style={{width: 22}}/>;
+            return <View style={{ marginRight: 4}}/>;
         }
     };
 }
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CommonButtonComponent
+export default ButtonComponent

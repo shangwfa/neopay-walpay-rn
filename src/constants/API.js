@@ -21,4 +21,5 @@ export const APIS = {
     GET_USER_BANK_CARD_LIST: "bank/get_user_bank_card_list",//获取用户银行卡列表
     QUERY_BANK_CARD_RECORD_PAGE: "pay/query_bank_card_record_page",//查询银行卡交易记录
     QUERY_BALANCE_RECORD_PAGE: "balance/query_balance_record_page",//获取余额交易记录
+    PHONE_RECHARGE_ORDER_QUERY: "pcharge/phone_recharge_order_query",//获取手机充值和流量充值结果
 };

@@ -36,6 +36,10 @@ import PayResultPage from "../page/PayResultPage"
 import MerchantActivityList from "../page/MerchantActivityListPage"
 import CreditCardInput from "../page/CreditCardInputPage"
 import Contacts from '../page/ContactsPage'
+import PhoneTopUpPage from "../page/PhoneTopUpPage"
+import RedPacketReady from "../page/RedPacketsReadyPage"
+import RedPacketRecord from "../page/RedPacketRecordPage"
+import ChargeFluxResult from '../page/ChargeFluxResultPage'
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -51,6 +55,7 @@ const RouterSetting = {
     myOrder: {screen: MyOrder},
     panResponderDemo: {screen: PanResponderDemo},
     redList: {screen: RedList},
+    chargeFluxResult:{screen:ChargeFluxResult},
     tradeRecordList: {screen: TradeRecordList},
     myLotteryRecord: {screen: MyLotteryRecord},
     filter: {screen: Filter},
@@ -58,12 +63,6 @@ const RouterSetting = {
     swRefreshScrollView: {screen: SwRefreshScrollView},
     payMessage: {screen: PayMessage},
     transactionDetails: {screen: TransactionDetailsPage},
-    bankCardList: {screen: BankCardList},
-    bankCardDetail: {screen: BankCardDetail},
-    topupMsgList: {screen: TopupMsgList},
-    qrCodeScan: {screen: QrCodeScan},
-    invalidQrCode: {screen: InvalidQrCode},
-    payment: {screen: Payment},
     bankCardList: {screen: BankCardList},
     bankCardDetail: {screen: BankCardDetail},
     topupMsgList: {screen: TopupMsgList},
@@ -81,6 +80,9 @@ const RouterSetting = {
     payResult: {screen: PayResultPage},
     merchantActivityList: {screen: MerchantActivityList},
     creditCardInput: {screen: CreditCardInput},
+    phoneTopUp:{screen:PhoneTopUpPage},
+    redPacketReady:{screen:RedPacketReady},
+    redPacketRecord:{screen:RedPacketRecord},
     contacts:{screen:Contacts}
 }
 

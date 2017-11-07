@@ -76,6 +76,11 @@ getBalanceRecordList = (request, callback) => {
         callback(data);
     });
 };
+getPhoneRechargeOrderQuery = (request, callback) => {
+    NetUtil.post(APIS.PHONE_RECHARGE_ORDER_QUERY, request, (data) => {
+        callback(data);
+    });
+};
 export default {
     getUserInfo,
     queryBannerList,
@@ -91,4 +96,5 @@ export default {
     geUserBankCardList,
     getBankCardRecordPage,
     getBalanceRecordList,
+    getPhoneRechargeOrderQuery,
 }
