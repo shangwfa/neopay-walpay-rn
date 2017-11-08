@@ -15,6 +15,8 @@ export const RouterPaths = {
     FILTER_PAGE: 'filter',
     BANKCARD_DETAIL: 'bankCardDetail',
     ACCOUNT_WITHDRAW_PAGE: 'accountWithdraw',
+    BIG_RED_PACKET: "bigRedPacket",
+    RECEIVE_RED_PACKET: "receiveRedPacket",
     ACCOUNT_WITHDRAW_RESULT_PAGE: 'accountWithdrawResult',
     BANKCARD_ORDERLIST: 'bankCardOrderList',
     CHARGE_FLUX_RESULT: 'chargeFluxResult',
@@ -23,6 +25,7 @@ export const RouterPaths = {
     TRADE_RECORD_LIST_PAGE: 'tradeRecordList',
     PAYMENT: 'payment',
     CREDITINPUT_PAGE: 'CreditCardInput',
+    RED_PACKET_SQUARE: "redPacketSquare",
 };
 
 

@@ -5,6 +5,7 @@ import {
     Text,
     Image,
 } from 'react-native'
+import ScreenUtils from "../utils/ScreenUtils";
 /**
  * @author: carlos.guo
  * @data:  2017/11/3.
@@ -47,7 +48,8 @@ class RedPacketTypeComponent extends Component {
     _renderRobRedPacketView = (redPacketData) => {
         let isTheme = true;
         return <View style={{marginLeft: 97}}>
-            <Text style={[isTheme ? styles.message : styles.message_general, {fontSize: 17}]}>{redPacketData.message}</Text>
+            <Text
+                style={[isTheme ? styles.message : styles.message_general, {fontSize: 17}]}>{redPacketData.message}</Text>
             <View style={[styles.message_from_container, {marginTop: 23, paddingLeft: 5}]}>
                 <View style={[styles.line]}/>
                 <Text
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     img: {
-        width: 350,
+        width: ScreenUtils.width,
         height: 155,
         resizeMode: "cover",
         justifyContent: 'center',

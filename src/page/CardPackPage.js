@@ -124,6 +124,12 @@ class CardPackPage extends BasePage {
             case 1://话费、流量充值记录
                 this.props.navigation.navigate(RouterPaths.CHARGE_FLUX_RESULT, {"pageTitle": "手机充值"});
                 break;
+            case 2://大红包
+                this.props.navigation.navigate(RouterPaths.BIG_RED_PACKET);
+                break;
+            case 3://收红包
+                this.props.navigation.navigate(RouterPaths.RECEIVE_RED_PACKET);
+                break;
         }
 
     };

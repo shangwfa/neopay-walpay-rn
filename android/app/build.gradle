@@ -111,6 +111,7 @@ dependencies {
     compile rootProject.ext.dependencies["constraint_layout"]
     compile rootProject.ext.dependencies["jpush"]
     compile rootProject.ext.dependencies["jcore"]
+    compile rootProject.ext.dependencies["fresco_animated_gif"]
     annotationProcessor rootProject.ext.dependencies["aroutercompiler"]
     testCompile 'junit:junit:4.12'
 
