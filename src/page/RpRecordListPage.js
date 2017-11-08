@@ -111,7 +111,7 @@ class RpRecordListPage extends BasePage {
     }
     renderSectionHeader = (item) => {
         if (item.isShowTime) {
-            return <SectionHeader title={item.tradeTime} value='查看月账单'/>
+            return <SectionHeader title={item.tradeTime} value='查看月红包'/>
         }
     }
 

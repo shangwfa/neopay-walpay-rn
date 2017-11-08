@@ -43,7 +43,6 @@ import PhoneTopUpPage from "../page/PhoneTopUpPage"
 import RedPacketReady from "../page/RedPacketsReadyPage"
 import RedPacketRecord from "../page/RedPacketRecordPage"
 import ChargeFluxResult from '../page/ChargeFluxResultPage'
-
 import RpDetailPage from '../page/RpDetailPage'
 import RpRecordListPage from '../page/RpRecordListPage'
 import TopupRecordListPage from '../page/TopupRecordListPage'
