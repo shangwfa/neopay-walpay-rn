@@ -44,6 +44,12 @@ import RedPacketReady from "../page/RedPacketsReadyPage"
 import RedPacketRecord from "../page/RedPacketRecordPage"
 import ChargeFluxResult from '../page/ChargeFluxResultPage'
 
+import RpDetailPage from '../page/RpDetailPage'
+import RpRecordListPage from '../page/RpRecordListPage'
+import TopupRecordListPage from '../page/TopupRecordListPage'
+import RpTitleStylePage from '../page/RpTitleStylePage'
+
+
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
@@ -89,7 +95,11 @@ const RouterSetting = {
     phoneTopUp:{screen:PhoneTopUpPage},
     redPacketReady:{screen:RedPacketReady},
     redPacketRecord:{screen:RedPacketRecord},
-    contacts:{screen:Contacts}
+    contacts:{screen:Contacts},
+    rpDetail:{screen:RpDetailPage},
+    rpRecordList:{screen:RpRecordListPage},
+    topupRecordList:{screen:TopupRecordListPage},
+    rpTitleStyle:{screen:RpTitleStylePage}
 }
 
 export default RouterSetting
