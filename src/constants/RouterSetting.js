@@ -27,6 +27,7 @@ import Payment from '../page/PaymentPage'
 import Test from '../page/Test'
 import CardPack from "../page/CardPackPage";
 import PayCode from "../page/PayCodePage";
+import SendRedPacket from "../page/SendRedPacketPage";
 import BigRedPacket from "../page/BigRedPacketPage";
 import RedPacketSquare from  "../page/RedPacketSquarePage";
 import ReceiveRedPacket from  "../page/ReceiveRedPacketPage";
@@ -83,6 +84,7 @@ const RouterSetting = {
     redPacketSquare: {screen: RedPacketSquare},
     receiveRedPacket: {screen: ReceiveRedPacket},
     payCode: {screen: PayCode},
+    sendRedPacket: {screen: SendRedPacket},
     myBalance: {screen: MyBalance},
     accountWithdraw: {screen: AccountWithdrawPage},
     accountWithdrawResult: {screen: AccountWithdrawResultPage},
@@ -92,16 +94,16 @@ const RouterSetting = {
     payResult: {screen: PayResultPage},
     merchantActivityList: {screen: MerchantActivityList},
     creditCardInput: {screen: CreditCardInput},
-    phoneTopUp:{screen:PhoneTopUpPage},
-    redPacketReady:{screen:RedPacketReady},
-    redPacketRecord:{screen:RedPacketRecord},
-    contacts:{screen:Contacts},
-    redPacketReceiver:{screen:RedPacketReceiver},
-    contacts:{screen:Contacts},
-    rpDetail:{screen:RpDetailPage},
-    rpRecordList:{screen:RpRecordListPage},
-    topupRecordList:{screen:TopupRecordListPage},
-    rpTitleStyle:{screen:RpTitleStylePage}
+    phoneTopUp: {screen: PhoneTopUpPage},
+    redPacketReady: {screen: RedPacketReady},
+    redPacketRecord: {screen: RedPacketRecord},
+    contacts: {screen: Contacts},
+    redPacketReceiver: {screen: RedPacketReceiver},
+    rpDetail: {screen: RpDetailPage},
+    rpRecordList: {screen: RpRecordListPage},
+    topupRecordList: {screen: TopupRecordListPage},
+    rpTitleStyle: {screen: RpTitleStylePage}
+
 }
 
 export default RouterSetting

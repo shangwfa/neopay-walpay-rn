@@ -25,7 +25,7 @@ class ReceiveRedPacketPage extends BasePage {
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
             page: 0,
-            isShowProcess: true,
+            isShowProcess: false,
         }
     }
 
@@ -42,7 +42,7 @@ class ReceiveRedPacketPage extends BasePage {
             <View style={styles.container}>
                 {/*标题栏*/}
                 <Header
-                    rightIconStyle={{width: 20, height: 20, resizeMode: "cover", marginRight: 13}}
+                    rightIconStyle={{width: 20, height: 20, resizeMode: "cover"}}
                     rightIcon={img_question}
                     onRightPress={this._handleRightArrowClick.bind(this)}
                     navigation={this.props.navigation}
