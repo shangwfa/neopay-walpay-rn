@@ -20,7 +20,7 @@ class NetUtil extends Component {
 
     static post(urlPath, data, successCallbak, isShowLoading = true) {
         if (isShowLoading) {
-            // NativeModules.commModule.showLoadingDialog('')
+            NativeModules.commModule.showLoadingDialog()
         }
         NativeModules.commModule.netCommParas((originalata) => {
             console.log('公共参数'+originalata)
@@ -45,10 +45,10 @@ class NetUtil extends Component {
                     } else {
                         this.handleException(response.netCode, response.retMsg)
                     }
-                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                 })
                 .catch((err) => {
-                    // if (isShowLoading) NativeModules.commModule.hideLoadingDialog('')
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                     console.log(err)
                     NativeModules.commModule.toast('网络不给力')
                 })
