@@ -13,17 +13,21 @@ import Header from '../components/Header'
 import CommonButton from "../components/CommonButton"
 import {RouterPaths} from "../constants/RouterPaths"
 import ScreenUtils from "../utils/ScreenUtils"
+import NetUtil from "../utils/NetUtil"
 
 
 let sizeRatio = ScreenUtils.width/375.0;
 
 class MyBalancePage extends BasePage {
 
-    topupBtnClicked(){
-
-    }
-    withdrawBtnClicked(){
-        this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_PAGE)
+    constructor(props){
+        super(props);
+        this.state={
+            data:{
+                "balance":0.00,
+                "frozenBalance":20
+            }
+        }
     }
 
     render() {
@@ -46,7 +50,7 @@ class MyBalancePage extends BasePage {
                         ¥
                     </Text>
                     <Text style ={styles.numberText}>
-                        82732.23
+                        {this.state.data.balance}
                     </Text>
                 </View>
 
@@ -61,11 +65,19 @@ class MyBalancePage extends BasePage {
         this.props.navigation.navigate(RouterPaths.ACCOUNT_TOPUP)
     }
 
-    headerRightBtnClicked(){
-        return(
-            this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST,{pageType:0})
-        )
+    withdrawBtnClicked=()=>{
+        this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_PAGE)
     }
+
+    componentDidMount() {
+
+        NetUtil.post('/balance/get_user_balance', {}, (data) => {
+            this.setState({
+                data: data
+            })
+        })
+    }
+
 }
 
 const styles = StyleSheet.create({

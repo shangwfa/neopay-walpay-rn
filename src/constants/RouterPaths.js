@@ -18,7 +18,6 @@ export const RouterPaths = {
     BIG_RED_PACKET: "bigRedPacket",
     RECEIVE_RED_PACKET: "receiveRedPacket",
     ACCOUNT_WITHDRAW_RESULT_PAGE: 'accountWithdrawResult',
-    BANKCARD_ORDERLIST: 'bankCardOrderList',
     CHARGE_FLUX_RESULT: 'chargeFluxResult',
     ACCOUNT_TOPUP: 'accountTopup',
     ACCOUNT_TOPUP_RESULT: 'accountTopupResult',
