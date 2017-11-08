@@ -12,6 +12,7 @@ import colors from '../constants/colors'
 import ScreenUtils from '../utils/ScreenUtils'
 import img_left_arrow from '../res/img/img_left_arrow.png'
 import three_points from '../res/img/three_points.png'
+import PropTypes from 'prop-types'
 import white_back_arrow from '../res/img/white_back_arrow.png'
 
 
@@ -21,11 +22,12 @@ class Header extends Component {
         backgroundColor: colors.white,
         textColor: colors.black,
         isWhiteArrow: false,
+        rightIconStyle:null
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
         rightIconNormal: React.PropTypes.any,
-        rightIconStyle: React.PropTypes.style
+        rightIconStyle: PropTypes.any
     }
 
     constructor(props) {
@@ -45,17 +47,9 @@ class Header extends Component {
             return <Image style={styles.right_icon_normal} source={this.props.rightIconNormal}/>
         }
     }
-    getRightIcon = () => {
-        switch (this.props.rightIconType) {
-            case '1':
-                return three_points
-                break
-        }
-    }
 
     goback = () => {
         console.log("回退")
-        console.log(this.props.navigation)
         this.props.navigation.goBack();
     }
     renderDivider = () => {

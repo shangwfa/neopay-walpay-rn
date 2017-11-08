@@ -43,6 +43,7 @@ import PhoneTopUpPage from "../page/PhoneTopUpPage"
 import RedPacketReady from "../page/RedPacketsReadyPage"
 import RedPacketRecord from "../page/RedPacketRecordPage"
 import ChargeFluxResult from '../page/ChargeFluxResultPage'
+import RedPacketReceiver from '../page/RedPacketReceiverPage'
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -89,7 +90,8 @@ const RouterSetting = {
     phoneTopUp:{screen:PhoneTopUpPage},
     redPacketReady:{screen:RedPacketReady},
     redPacketRecord:{screen:RedPacketRecord},
-    contacts:{screen:Contacts}
+    contacts:{screen:Contacts},
+    redPacketReceiver:{screen:RedPacketReceiver}
 }
 
 export default RouterSetting

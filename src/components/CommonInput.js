@@ -15,8 +15,13 @@ import StringUtils from "../utils/StringUtils";
 
 class CommonInput extends Component {
     static defaultProps = {
-        editable:true,
-        noEditText:''
+        editable: true,
+        noEditText: ''
+    }
+
+    static propTypes = {
+        leftIcon: React.PropTypes.any,
+        leftIconStyle: React.PropTypes.style
     }
 
     constructor(props) {
@@ -27,24 +32,29 @@ class CommonInput extends Component {
         }
     }
 
-    renderVerifyCode=(isVerfyCode)=>{
-        if(isVerfyCode){
+    renderVerifyCode = (isVerfyCode) => {
+        if (isVerfyCode) {
             return <TimerButton phone={this.props.phone}/>
         }
+    }
+
+    renderLeft = () => {
+        return (
+            <Text style={styles.title}>
+                {this.props.data.key}
+            </Text>)
     }
 
     render() {
         let data = this.props.data
         let keybordType = StringUtils.isEmpty(data.keyboard) ? 'default' : data.keyboard
         console.log(keybordType)
-        let isLine=data.isLine&&data.isLine
-        let isVerfyCode=data.isVerfyCode&&data.isVerfyCode
+        let isLine = data.isLine && data.isLine
+        let isVerfyCode = data.isVerfyCode && data.isVerfyCode
         return (
             <View style={styles.container}>
                 <View style={styles.content_container}>
-                    <Text style={styles.title}>
-                        {data.key}
-                    </Text>
+                    {this.renderLeft}
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid={'transparent'}
@@ -52,7 +62,7 @@ class CommonInput extends Component {
                         numberOfLines={1}
                         onChangeText={this.onChangeText}
                         keyboardType={keybordType}
-                        value={this.props.editable?this.state.inputText:this.props.noEditText}
+                        value={this.props.editable ? this.state.inputText : this.props.noEditText}
                         onBlur={this.props.onBlur}
                         editable={this.props.editable}
                     />
@@ -63,8 +73,8 @@ class CommonInput extends Component {
             </View>)
     }
 
-    renderLine=(isLine)=>{
-        if(isLine) return <Divider style={{marginLeft:10}}/>
+    renderLine = (isLine) => {
+        if (isLine) return <Divider style={{marginLeft: 10}}/>
     }
     onChangeText = (text) => {
         let inputText = ""
@@ -107,17 +117,21 @@ class CommonInput extends Component {
 }
 
 const styles = StyleSheet.create({
-    input:{
+    left_img:{
+        width:17,
+        height:17
+    },
+    input: {
         marginLeft: 10,
         flex: 1,
-        fontSize:15,
-        color:colors.black
+        fontSize: 15,
+        color: colors.black
     },
-    title:{
-        width:80,
+    title: {
+        width: 80,
         marginLeft: 10,
-        fontSize:15,
-        color:colors.black
+        fontSize: 15,
+        color: colors.black
     },
     close_input_img: {
         height: 18,
@@ -131,8 +145,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    container:{
-        backgroundColor:colors.white
+    container: {
+        backgroundColor: colors.white
     }
 })
 
