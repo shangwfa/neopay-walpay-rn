@@ -79,7 +79,7 @@
     
     UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
     
-    XGQBPureColorBtn *btn = [XGQBPureColorBtn buttonWithText:btnName andColor:[UIColor colorWithHexString:@"F34646"]];
+    XGQBPureColorBtn *btn = [XGQBPureColorBtn buttonWithText:btnName andColor:kButtonColor];
     [footerView addSubview:btn];
     
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {

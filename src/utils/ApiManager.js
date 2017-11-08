@@ -76,6 +76,21 @@ getBalanceRecordList = (request, callback) => {
         callback(data);
     });
 };
+getPhoneRechargeOrderQuery = (request, callback) => {
+    NetUtil.post(APIS.PHONE_RECHARGE_ORDER_QUERY, request, (data) => {
+        callback(data);
+    });
+};
+getUserReceivableRedPacket = (request, callback) => {
+    NetUtil.post(APIS.QUERY_USER_RECEIVABLE_RED_PACKET_PAGE, request, (data) => {
+        callback(data);
+    });
+};
+getSquareRedPacketList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_SQUARE_RED_PACKET_LIST, request, (data) => {
+        callback(data);
+    });
+};
 export default {
     getUserInfo,
     queryBannerList,
@@ -91,4 +106,7 @@ export default {
     geUserBankCardList,
     getBankCardRecordPage,
     getBalanceRecordList,
+    getPhoneRechargeOrderQuery,
+    getUserReceivableRedPacket,
+    getSquareRedPacketList,
 }

@@ -42,7 +42,7 @@
     additionalLabel.font = kSYSTEMFONT(12.0);
     additionalLabel.textColor = [UIColor colorWithHexString:@"666666"];
     
-    XGQBPureColorBtn *confirmBtn = [XGQBPureColorBtn buttonWithText:@"确认" andColor:kRedColor];
+    XGQBPureColorBtn *confirmBtn = [XGQBPureColorBtn buttonWithText:@"确认" andColor:kButtonColor];
     
     [tableFooterView addSubview:confirmBtn];
     [tableFooterView addSubview:additionalLabel];

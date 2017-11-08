@@ -59,7 +59,7 @@
     [self addSubview:logoImg];
     
     //立即认证
-    XGQBPureColorBtn *confirmBtn =[XGQBPureColorBtn buttonWithText:@"立即认证" andColor:[UIColor colorWithHexString:@"F34646"]];
+    XGQBPureColorBtn *confirmBtn =[XGQBPureColorBtn buttonWithText:@"立即认证" andColor:kButtonColor];
     [confirmBtn addTarget:self action:@selector(registerBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:confirmBtn];
     

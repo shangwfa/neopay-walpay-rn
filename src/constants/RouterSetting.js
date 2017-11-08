@@ -27,6 +27,9 @@ import Payment from '../page/PaymentPage'
 import Test from '../page/Test'
 import CardPack from "../page/CardPackPage";
 import PayCode from "../page/PayCodePage";
+import BigRedPacket from "../page/BigRedPacketPage";
+import RedPacketSquare from  "../page/RedPacketSquarePage";
+import ReceiveRedPacket from  "../page/ReceiveRedPacketPage";
 import MyBalance from "../page/MyBalancePage"
 import AccountWithdrawPage from "../page/AccountWithdrawPage";
 import AccountWithdrawResultPage from "../page/AccountWithdrawResultPage"
@@ -35,6 +38,11 @@ import AccountTopupResult from "../page/AccountTopupResultPage"
 import PayResultPage from "../page/PayResultPage"
 import MerchantActivityList from "../page/MerchantActivityListPage"
 import CreditCardInput from "../page/CreditCardInputPage"
+import Contacts from '../page/ContactsPage'
+import PhoneTopUpPage from "../page/PhoneTopUpPage"
+import RedPacketReady from "../page/RedPacketsReadyPage"
+import RedPacketRecord from "../page/RedPacketRecordPage"
+import ChargeFluxResult from '../page/ChargeFluxResultPage'
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -50,6 +58,7 @@ const RouterSetting = {
     myOrder: {screen: MyOrder},
     panResponderDemo: {screen: PanResponderDemo},
     redList: {screen: RedList},
+    chargeFluxResult: {screen: ChargeFluxResult},
     tradeRecordList: {screen: TradeRecordList},
     myLotteryRecord: {screen: MyLotteryRecord},
     filter: {screen: Filter},
@@ -64,16 +73,23 @@ const RouterSetting = {
     invalidQrCode: {screen: InvalidQrCode},
     payment: {screen: Payment},
     cardPack: {screen: CardPack},
+    bigRedPacket: {screen: BigRedPacket},
+    redPacketSquare: {screen: RedPacketSquare},
+    receiveRedPacket: {screen: ReceiveRedPacket},
     payCode: {screen: PayCode},
     myBalance: {screen: MyBalance},
     accountWithdraw: {screen: AccountWithdrawPage},
     accountWithdrawResult: {screen: AccountWithdrawResultPage},
-    test:{screen:Test},
-    accountTopup:{screen:AccountTopup},
-    accountTopupResult:{screen:AccountTopupResult},
+    test: {screen: Test},
+    accountTopup: {screen: AccountTopup},
+    accountTopupResult: {screen: AccountTopupResult},
     payResult: {screen: PayResultPage},
     merchantActivityList: {screen: MerchantActivityList},
     creditCardInput: {screen: CreditCardInput},
+    phoneTopUp:{screen:PhoneTopUpPage},
+    redPacketReady:{screen:RedPacketReady},
+    redPacketRecord:{screen:RedPacketRecord},
+    contacts:{screen:Contacts}
 }
 
 export default RouterSetting

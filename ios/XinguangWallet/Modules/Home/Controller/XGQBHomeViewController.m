@@ -154,6 +154,10 @@
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType =@"cardPack";
         [self.navigationController pushViewController:RNVC animated:YES];
+    }else if([btn.titleLabel.text isEqualToString:@"手机充值"]){
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"phoneTopUp";
+        [self.navigationController pushViewController:RNVC animated:YES];
     }
 }
 
@@ -170,7 +174,7 @@
         
         alertIDVC.modalPresentationStyle = UIModalPresentationCustom;
         
-        [self presentViewController:alertIDVC animated:YES completion:nil];
+        [self.navigationController presentViewController:alertIDVC animated:YES completion:nil];
     }
 }
 //transition代理方法

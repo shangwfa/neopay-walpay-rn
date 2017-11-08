@@ -76,7 +76,7 @@
     [self.view addSubview:logoImage];
 
     [logoImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(162/2, 217/2));
+        make.size.mas_equalTo(CGSizeMake(162/2.0*kScreenWidth/375.0, 217/2.0*kScreenWidth/375.0));
         make.centerX.equalTo(weakself.view);
         make.top.equalTo(weakself.view).with.offset(kScreenHeight*0.13);
     }];
@@ -123,7 +123,7 @@
     }];
     
     //登录按钮
-    XGQBPureColorBtn *btn = [XGQBPureColorBtn buttonWithText:@"登录" andColor:[UIColor redColor]];
+    XGQBPureColorBtn *btn = [XGQBPureColorBtn buttonWithText:@"登录" andColor:kButtonColor];
     self.loginBtn = btn;
     
     [self.view addSubview:btn];
@@ -150,7 +150,7 @@
     restPwdBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
     [restPwdBtn addTarget:self action:@selector(resetPwdButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:restPwdBtn];
-    [restPwdBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [restPwdBtn setTitleColor:[UIColor colorWithHexString:@"888888"] forState:UIControlStateNormal];
     [restPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60, 20));
         make.right.equalTo(sepLine.mas_left).with.offset(-2);
@@ -162,7 +162,7 @@
     [registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
     registerBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
     [self.view addSubview:registerBtn];
-    [registerBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [registerBtn setTitleColor:[UIColor colorWithHexString:@"E83042"] forState:UIControlStateNormal];
 
     [registerBtn addTarget:self action:@selector(registerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -173,7 +173,7 @@
 
     
     //跳过按钮
-    XGQBPureColorBtn *skipBtn = [XGQBPureColorBtn buttonWithText:@"skip" andColor:[UIColor redColor]];
+    XGQBPureColorBtn *skipBtn = [XGQBPureColorBtn buttonWithText:@"skip" andColor:kButtonColor];
     [self.view addSubview:skipBtn];
     [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.4, 20));

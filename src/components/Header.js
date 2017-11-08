@@ -17,15 +17,15 @@ import white_back_arrow from '../res/img/white_back_arrow.png'
 
 class Header extends Component {
     static defaultProps = {
-        isShowLine:true,
-        backgroundColor:colors.white,
-        textColor:colors.black,
-        isWhiteArrow:false,
+        isShowLine: true,
+        backgroundColor: colors.white,
+        textColor: colors.black,
+        isWhiteArrow: false,
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
         rightIconNormal: React.PropTypes.any,
-        rightIconStyle:React.PropTypes.style
+        rightIconStyle: React.PropTypes.style
     }
 
     constructor(props) {
@@ -34,17 +34,19 @@ class Header extends Component {
     }
 
 
-    renderHeaderRight=()=>{
-        if(this.props.rightTitle){
-           return  <Text style={styles.header_right_title}>{this.props.rightTitle}</Text>
-        }else if(this.props.rightIcon){
-            return <Image style={[styles.right_icon,this.props.rightIconStyle&&this.props.rightIconStyle]} source={this.props.rightIcon}/>
-        }else if(this.props.rightIconNormal){
+    renderHeaderRight = () => {
+        if (this.props.rightTitle) {
+            return <Text
+                style={[styles.header_right_title, {color: this.props.rightTextColor}]}>{this.props.rightTitle}</Text>
+        } else if (this.props.rightIcon) {
+            return <Image style={[styles.right_icon, this.props.rightIconStyle && this.props.rightIconStyle]}
+                          source={this.props.rightIcon}/>
+        } else if (this.props.rightIconNormal) {
             return <Image style={styles.right_icon_normal} source={this.props.rightIconNormal}/>
         }
     }
-    getRightIcon=()=>{
-        switch (this.props.rightIconType){
+    getRightIcon = () => {
+        switch (this.props.rightIconType) {
             case '1':
                 return three_points
                 break
@@ -56,10 +58,10 @@ class Header extends Component {
         console.log(this.props.navigation)
         this.props.navigation.goBack();
     }
-    renderDivider=()=>{
-        if(this.props.isShowLine){
+    renderDivider = () => {
+        if (this.props.isShowLine) {
             return <Divider/>
-        }else {
+        } else {
             return null
         }
     }
@@ -67,38 +69,42 @@ class Header extends Component {
     render() {
         return (
             <View>
-                <View style={[styles.container,{backgroundColor: this.props.backgroundColor},{height:ScreenUtils.headerHeight,paddingTop:ScreenUtils.statusBarHeight}]}>
+                <View style={[styles.container, {backgroundColor: this.props.backgroundColor}, {
+                    height: ScreenUtils.headerHeight,
+                    paddingTop: ScreenUtils.statusBarHeight
+                }]}>
                     {/*header左侧*/}
-                    <TouchableOpacity style={styles.header_left} onPress={()=>this.goback()}>
-                        <Image style={styles.header_back_img} source={this.props.isWhiteArrow?white_back_arrow:img_left_arrow}/>
+                    <TouchableOpacity style={styles.header_left} onPress={() => this.goback()}>
+                        <Image style={styles.header_back_img}
+                               source={this.props.isWhiteArrow ? white_back_arrow : img_left_arrow}/>
                     </TouchableOpacity>
 
                     {/*header中间*/}
                     <View style={styles.header_middle}>
-                        <Text style={[styles.title,{color:this.props.textColor}]}> {this.props.title}</Text>
+                        <Text style={[styles.title, {color: this.props.textColor}]}> {this.props.title}</Text>
                     </View>
                     {/*header右侧*/}
-                    <TouchableOpacity style={styles.header_right} onPress={()=>this.props.onRightPress()}>
+                    <TouchableOpacity style={styles.header_right} onPress={() => this.props.onRightPress()}>
                         {this.renderHeaderRight()}
                     </TouchableOpacity>
 
                 </View>
                 {this.renderDivider()}
             </View>
-            )
+        )
     }
 }
 
 const styles = StyleSheet.create({
-    right_icon:{
+    right_icon: {
         width: 20,
         height: 4,
     },
-    right_icon_normal:{
-        width:20,
-        height:20,
+    right_icon_normal: {
+        width: 20,
+        height: 20,
     },
-    header_right_title:{
+    header_right_title: {
         fontSize: 14,
         color: colors.black,
     },
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         marginRight: 13,
-        alignItems:'flex-end',
+        alignItems: 'flex-end',
     },
     title: {
         fontSize: 18,
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'row',
-        backgroundColor:'blue',
+        backgroundColor: 'blue',
     },
 });
 

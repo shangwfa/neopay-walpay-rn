@@ -5,6 +5,7 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
+import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 
 import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.WalpayApp;
@@ -54,6 +55,7 @@ public class RNCacheViewManager {
                 .addPackage(WalpayApp.rnPackage)
                 .addPackage(new RCTCameraPackage())
                 .addPackage(new PickerViewPackage())
+                .addPackage(new ReactNativeContacts())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();

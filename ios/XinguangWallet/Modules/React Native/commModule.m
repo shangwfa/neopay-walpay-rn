@@ -56,7 +56,7 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
 
     [netPaStrAfter replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, netPaStrAfter.length)];
     
-        callback(@[[NSNull null],netPaStrAfter]);
+        callback(@[netPaStrAfter]);
 }
 
 //跳转至原生特定页面
@@ -88,19 +88,15 @@ RCT_EXPORT_METHOD(rnCallNative:(NSString*)phoneNo){
 
 //RN进入二级页面,禁用系统右划手势
 RCT_EXPORT_METHOD(rnJumpIntoSecondLevel){
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
+    
         [kNotificationCenter postNotificationName:kNotificationRNJumpIntoSecondLevel object:nil];
-    });
 }
 
 
 //RN进入一级页面,开启系统优化手势
 RCT_EXPORT_METHOD(rnJumpBackToFirstLevel){
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
+
         [kNotificationCenter postNotificationName:kNotificationRNJumpBackToFirstLevel object:nil];
-    });
 }
 
 
