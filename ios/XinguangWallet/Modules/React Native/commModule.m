@@ -56,7 +56,7 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
 
     [netPaStrAfter replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, netPaStrAfter.length)];
     
-        callback(@[[NSNull null],netPaStrAfter]);
+        callback(@[netPaStrAfter]);
 }
 
 //跳转至原生特定页面

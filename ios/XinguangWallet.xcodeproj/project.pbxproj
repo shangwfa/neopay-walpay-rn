@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DA62DDF03A34E24A5B3C3B2 /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4F49D009044D08A1DB82DA /* libRCTContacts.a */; };
 		4210AF401F95CE6D008132C5 /* XGQBCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */; };
 		4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */; };
 		4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */; };
@@ -77,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4281B52F1FB1D57200EFE342 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7A2E382AB7A45F3A23A18FE /* RCTContacts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1441618E1BD0A79300FA4F59;
+			remoteInfo = RCTContacts;
+		};
 		6AF9E4131F78DDB6005E901C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6AF9E3F21F78DDB6005E901C /* Project object */;
@@ -231,7 +239,9 @@
 		6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineViewController.m; sourceTree = "<group>"; };
 		6AF9E4891F78EDA9005E901C /* XGQBRootNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRootNavigationController.h; sourceTree = "<group>"; };
 		6AF9E48A1F78EDA9005E901C /* XGQBRootNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRootNavigationController.m; sourceTree = "<group>"; };
+		6B4F49D009044D08A1DB82DA /* libRCTContacts.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTContacts.a; sourceTree = "<group>"; };
 		A1D6E6C49142EAB9057AFA1A /* Pods-XinguangWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinguangWallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XinguangWallet/Pods-XinguangWallet.debug.xcconfig"; sourceTree = "<group>"; };
+		A7A2E382AB7A45F3A23A18FE /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTContacts.xcodeproj; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; };
 		BC42FA44C79E3FAE16512E1B /* Pods-XinguangWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XinguangWallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-XinguangWallet/Pods-XinguangWallet.release.xcconfig"; sourceTree = "<group>"; };
 		DFE03A9FABCE2475826A5708 /* libPods-XinguangWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XinguangWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -242,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7A419D64D389536228DE027 /* libPods-XinguangWallet.a in Frameworks */,
+				2DA62DDF03A34E24A5B3C3B2 /* libRCTContacts.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +322,14 @@
 			path = "React Native";
 			sourceTree = "<group>";
 		};
+		4281B52C1FB1D57200EFE342 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4281B5301FB1D57200EFE342 /* libRCTContacts.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		42990E721F998F2C00B20EBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +368,7 @@
 		6A0FF9D71F7F4691001A66BA /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
+				6B4F49D009044D08A1DB82DA /* libRCTContacts.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -892,6 +912,7 @@
 		F6535A29D649472AA58B4289 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A7A2E382AB7A45F3A23A18FE /* RCTContacts.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1000,6 +1021,12 @@
 			mainGroup = 6AF9E3F11F78DDB6005E901C;
 			productRefGroup = 6AF9E3FB1F78DDB6005E901C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4281B52C1FB1D57200EFE342 /* Products */;
+					ProjectRef = A7A2E382AB7A45F3A23A18FE /* RCTContacts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6AF9E3F91F78DDB6005E901C /* XinguangWallet */,
@@ -1008,6 +1035,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4281B5301FB1D57200EFE342 /* libRCTContacts.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTContacts.a;
+			remoteRef = 4281B52F1FB1D57200EFE342 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6AF9E3F81F78DDB6005E901C /* Resources */ = {
@@ -1321,7 +1358,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/XinguangWallet/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Neopay-Wallet.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1344,7 +1384,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/XinguangWallet/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Neopay-Wallet.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1361,7 +1404,10 @@
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				INFOPLIST_FILE = XinguangWalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinguang.XinguangWalletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1377,7 +1423,10 @@
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				INFOPLIST_FILE = XinguangWalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinguang.XinguangWalletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1392,7 +1441,10 @@
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				INFOPLIST_FILE = XinguangWalletUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinguang.XinguangWalletUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1407,7 +1459,10 @@
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				INFOPLIST_FILE = XinguangWalletUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xinguang.XinguangWalletUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
