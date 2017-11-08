@@ -34,6 +34,20 @@ RCT_EXPORT_METHOD(toast:(NSString*)msg){
     });
 }
 
+//RN显示网络加载
+RCT_EXPORT_METHOD(showLoadingDialog){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD show];
+    });
+}
+
+//RN取消显示网络加载
+RCT_EXPORT_METHOD(hideLoadingDialog){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+    });
+}
+
 //传递网络参数
 RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
     
