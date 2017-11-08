@@ -22,7 +22,6 @@ class Header extends Component {
         backgroundColor: colors.white,
         textColor: colors.black,
         isWhiteArrow: false,
-        rightIconStyle:null
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
@@ -43,8 +42,6 @@ class Header extends Component {
         } else if (this.props.rightIcon) {
             return <Image style={[styles.right_icon, this.props.rightIconStyle && this.props.rightIconStyle]}
                           source={this.props.rightIcon}/>
-        } else if (this.props.rightIconNormal) {
-            return <Image style={styles.right_icon_normal} source={this.props.rightIconNormal}/>
         }
     }
 

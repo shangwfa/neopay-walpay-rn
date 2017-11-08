@@ -26,13 +26,13 @@
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
 		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
 		42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */; };
+		42AA0D901FB2904F0013289E /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42AA0D8E1FB2904F0013289E /* assets */; };
+		42AA0D911FB2904F0013289E /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42AA0D8F1FB2904F0013289E /* main.jsbundle */; };
 		42B98A371FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */; };
 		42B98A3A1FA2FC5B00850FDB /* XGQBAccountExistAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A391FA2FC5B00850FDB /* XGQBAccountExistAlertView.m */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
-		42D5377A1FB03C7900AFB2F7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42D537791FB03C7900AFB2F7 /* assets */; };
-		42D5377C1FB03C8600AFB2F7 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42D5377B1FB03C8600AFB2F7 /* main.jsbundle */; };
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
 		42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */; };
 		6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */; };
@@ -139,6 +139,8 @@
 		42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNetworkFailureViewController.m; sourceTree = "<group>"; };
 		42990E7A1F99D06D00B20EBA /* XGQBRegResetPwdTVController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegResetPwdTVController.h; sourceTree = "<group>"; };
 		42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRegResetPwdTVController.m; sourceTree = "<group>"; };
+		42AA0D8E1FB2904F0013289E /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
+		42AA0D8F1FB2904F0013289E /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		42B98A351FA2FC2700850FDB /* XGQBAccountExistAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAccountExistAlertViewController.h; sourceTree = "<group>"; };
 		42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAccountExistAlertViewController.m; sourceTree = "<group>"; };
 		42B98A381FA2FC5B00850FDB /* XGQBAccountExistAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAccountExistAlertView.h; sourceTree = "<group>"; };
@@ -149,8 +151,6 @@
 		42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRNViewController.m; sourceTree = "<group>"; };
 		42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleBtn.h; sourceTree = "<group>"; };
 		42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleBtn.m; sourceTree = "<group>"; };
-		42D537791FB03C7900AFB2F7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
-		42D5377B1FB03C8600AFB2F7 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		42DD31DC1F8C748D00B435EA /* XGQBHomeBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBanner.h; sourceTree = "<group>"; };
 		42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBanner.m; sourceTree = "<group>"; };
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
@@ -597,9 +597,9 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				42D537791FB03C7900AFB2F7 /* assets */,
+				42AA0D8E1FB2904F0013289E /* assets */,
+				42AA0D8F1FB2904F0013289E /* main.jsbundle */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
-				42D5377B1FB03C8600AFB2F7 /* main.jsbundle */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
 				6AF9E40B1F78DDB6005E901C /* Info.plist */,
@@ -1052,8 +1052,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
-				42D5377A1FB03C7900AFB2F7 /* assets in Resources */,
-				42D5377C1FB03C8600AFB2F7 /* main.jsbundle in Resources */,
+				42AA0D901FB2904F0013289E /* assets in Resources */,
+				42AA0D911FB2904F0013289E /* main.jsbundle in Resources */,
 				421412EA1FA0808500290A06 /* mess.plist in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);
