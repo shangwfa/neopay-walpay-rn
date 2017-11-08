@@ -96,7 +96,7 @@ const RouterSetting = {
     redPacketReady:{screen:RedPacketReady},
     redPacketRecord:{screen:RedPacketRecord},
     contacts:{screen:Contacts},
-    redPacketReceiver:{screen:RedPacketReceiver}
+    redPacketReceiver:{screen:RedPacketReceiver},
     contacts:{screen:Contacts},
     rpDetail:{screen:RpDetailPage},
     rpRecordList:{screen:RpRecordListPage},
