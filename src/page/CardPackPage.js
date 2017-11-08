@@ -83,6 +83,9 @@ class CardPackPage extends BasePage {
     }
 
     _renderPage = (data, pageID) => {
+        if (!data) {
+            return null;
+        }
         return (
             <TouchableWithoutFeedback
                 style={styles.page}
@@ -129,6 +132,9 @@ class CardPackPage extends BasePage {
                 break;
             case 3://收红包
                 this.props.navigation.navigate(RouterPaths.RECEIVE_RED_PACKET);
+                break;
+            case 4://发红包
+                this.props.navigation.navigate(RouterPaths.SEND_RED_PACKET);
                 break;
         }
 
