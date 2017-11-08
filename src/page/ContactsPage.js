@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View,
     Text,
-    FlatList
+    FlatList,
+    DeviceEventEmitter
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
@@ -14,6 +15,7 @@ import Contacts from 'react-native-contacts'
 import StringUtils from "../utils/StringUtils";
 import Pinyin from '../utils/Pinyin'
 import ScreenUtils from "../utils/ScreenUtils";
+import {events} from '../constants/index'
 
 const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
 
@@ -136,6 +138,8 @@ class ContactsPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='红包领取人' rightTitle='确定' onRightPress={() => {
+                    this.props.navigation.goBack();
+                    DeviceEventEmitter.emit(events.CONTACTS_EVENT,this.state.selectedData); //显示弹窗
                     console.log(this.state.selectedData)
                 }}/>
                 {this.renderSearchBar()}
