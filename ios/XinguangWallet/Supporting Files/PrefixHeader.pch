@@ -23,7 +23,6 @@
 #import "XGQBRootWebViewController.h"
 #import "XGQBAppManager.h"
 
-//#import "MBProgressHUD+XY.h"
 //#import "PPNetworkHelper.h"
 //#import "ShareManager.h"
 //#import "UserManager.h"
@@ -41,9 +40,8 @@
 #import <YYKit.h>
 //#import <JSONKit.h>
 #import "SVProgressHUD.h"
-//#import <MBProgressHUD.h>
 #import <Masonry.h>
-//#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "IQKeyboardManager.h"
 
 //通用视图组件
