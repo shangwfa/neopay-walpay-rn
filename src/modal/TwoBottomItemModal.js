@@ -26,9 +26,9 @@ class TwoBottomItemModal extends Component {
                 onRequestClose={()=>{}}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
-                        <CommonItemThree title={this.props.oneItemTitle} onPress={this.props.ensure}/>
+                        <CommonItemThree title={this.props.oneItemTitle} onPress={this.props.ensure} isShowArrow={false}/>
                         <View style={{height:10}}/>
-                        <CommonItemThree title={this.props.twoItemTitle} onPress={this.props.close}/>
+                        <CommonItemThree title={this.props.twoItemTitle} onPress={this.props.close} isShowArrow={false}/>
                     </View>
 
                 </View>

@@ -12,6 +12,7 @@ import colors from '../constants/colors'
 import ScreenUtils from '../utils/ScreenUtils'
 import img_left_arrow from '../res/img/img_left_arrow.png'
 import three_points from '../res/img/three_points.png'
+import PropTypes from 'prop-types'
 import white_back_arrow from '../res/img/white_back_arrow.png'
 
 
@@ -24,7 +25,9 @@ class Header extends Component {
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
-        rightIconStyle: React.PropTypes.any
+        rightIconStyle: React.PropTypes.any,
+        header_middleStyle: React.PropTypes.any
+
     }
 
     constructor(props) {
@@ -42,17 +45,9 @@ class Header extends Component {
                           source={this.props.rightIcon}/>
         }
     }
-    getRightIcon = () => {
-        switch (this.props.rightIconType) {
-            case '1':
-                return three_points
-                break
-        }
-    }
 
     goback = () => {
         console.log("回退")
-        console.log(this.props.navigation)
         this.props.navigation.goBack();
     }
     renderDivider = () => {
@@ -77,7 +72,7 @@ class Header extends Component {
                     </TouchableOpacity>
 
                     {/*header中间*/}
-                    <View style={styles.header_middle}>
+                    <View style={[styles.header_middle,this.props.header_middleStyle&&this.props.header_middleStyle]}>
                         <Text style={[styles.title, {color: this.props.textColor}]}> {this.props.title}</Text>
                     </View>
                     {/*header右侧*/}

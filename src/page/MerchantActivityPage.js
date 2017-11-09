@@ -11,8 +11,8 @@ import BasePage from './BasePage'
 import ApiManager from '../utils/ApiManager'
 class ActivityListPage extends BasePage {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             data:[
                 {

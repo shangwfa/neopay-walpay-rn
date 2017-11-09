@@ -4,7 +4,9 @@ import {
     View,
     Text,
     Image,
+    NativeModules
 } from 'react-native'
+import ScreenUtils from '../utils/ScreenUtils'
 import {colors} from '../constants/index'
 import QRScannerView from '../components/QRScannerView'
 import Header from '../components/Header'
@@ -63,6 +65,9 @@ class QrCodeScanPage extends BasePage {
     }
 
     render() {
+        if (ScreenUtils.isIOS){
+            NativeModules.commModule.statusBarLight();
+        }
         return (
             <View style={styles.container}>
                 <QRScannerView

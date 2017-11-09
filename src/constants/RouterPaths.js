@@ -17,8 +17,8 @@ export const RouterPaths = {
     ACCOUNT_WITHDRAW_PAGE: 'accountWithdraw',
     BIG_RED_PACKET: "bigRedPacket",
     RECEIVE_RED_PACKET: "receiveRedPacket",
+    SEND_RED_PACKET: "sendRedPacket",
     ACCOUNT_WITHDRAW_RESULT_PAGE: 'accountWithdrawResult',
-    BANKCARD_ORDERLIST: 'bankCardOrderList',
     CHARGE_FLUX_RESULT: 'chargeFluxResult',
     ACCOUNT_TOPUP: 'accountTopup',
     ACCOUNT_TOPUP_RESULT: 'accountTopupResult',
@@ -26,6 +26,7 @@ export const RouterPaths = {
     PAYMENT: 'payment',
     CREDITINPUT_PAGE: 'CreditCardInput',
     RED_PACKET_SQUARE: "redPacketSquare",
+    CONTACTS_PAGE:'contacts',
 };
 
 
