@@ -36,7 +36,7 @@ class LottieDemoPage extends BasePage {
                     }}
                     source={LottieLogo}
                 />
-                <CommonButton value='点击动画2' onPress={()=>{
+                <CommonButton value='点击动画1' onPress={()=>{
                     this.animation1.play()
                 }}/>
                 <Animation
