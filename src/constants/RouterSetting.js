@@ -50,6 +50,7 @@ import TopupRecordListPage from '../page/TopupRecordListPage'
 import RpTitleStylePage from '../page/RpTitleStylePage'
 import LottieDemo from '../page/LottieDemoPage'
 import SendRedPacket from '../page/SendRedPacketPage'
+import ViewpageDemo from '../page/ViewpageDemoPage'
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -103,7 +104,8 @@ const RouterSetting = {
     rpRecordList:{screen:RpRecordListPage},
     topupRecordList:{screen:TopupRecordListPage},
     rpTitleStyle:{screen:RpTitleStylePage},
-    lottieDemo:{screen:LottieDemo}
+    lottieDemo:{screen:LottieDemo},
+    viewpageDemo:{screen:ViewpageDemo}
 }
 
 export default RouterSetting
