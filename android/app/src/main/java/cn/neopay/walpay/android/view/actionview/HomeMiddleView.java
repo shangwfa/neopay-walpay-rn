@@ -58,9 +58,10 @@ public class HomeMiddleView extends FrameLayout {
         });
 
         mBinding.homeRechargeLl.setOnClickListener(v -> {
-            BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
-                //TODO 跳转 手机充值
-            });
+//            BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
+//                //TODO 跳转 手机充值
+//            });
+            RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_CHARGE_PAGE);
         });
 
         mBinding.homeSeasonsLl.setOnClickListener(v -> {

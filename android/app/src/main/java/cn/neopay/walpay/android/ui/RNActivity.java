@@ -90,6 +90,9 @@ public class RNActivity extends BaseRNActivity {
             case PageType.BALANCE:
                 initLaunchOptions(bundle, PageType.BALANCE);
                 break;
+            case PageType.PHONE_CHARGE_PAGE:
+                initLaunchOptions(bundle, PageType.PHONE_CHARGE_PAGE);
+                break;
         }
         return bundle;
     }
@@ -175,6 +178,7 @@ public class RNActivity extends BaseRNActivity {
         String CARD_PACK_PAGE = "cardPack";
         String PAY_CODE_PAGE = "payCode";
         String BALANCE="myBalance";
+        String PHONE_CHARGE_PAGE="phoneTopUp";
     }
 
     public static void jumpToRNPage(Context context, String pageType) {
