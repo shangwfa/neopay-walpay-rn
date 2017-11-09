@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "ac-qrcode": "^1.0.1",
+    "lottie-react-native": "2.2.7",
     "picker": "^0.1.4",
     "prop-types": "^15.5.8",
     "react": "16.0.0-alpha.12",

@@ -48,7 +48,7 @@ import RpDetailPage from '../page/RpDetailPage'
 import RpRecordListPage from '../page/RpRecordListPage'
 import TopupRecordListPage from '../page/TopupRecordListPage'
 import RpTitleStylePage from '../page/RpTitleStylePage'
-
+import LottieDemo from '../page/LottieDemoPage'
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -96,12 +96,12 @@ const RouterSetting = {
     redPacketReady:{screen:RedPacketReady},
     redPacketRecord:{screen:RedPacketRecord},
     contacts:{screen:Contacts},
-    redPacketReceiver:{screen:RedPacketReceiver}
-    contacts:{screen:Contacts},
+    redPacketReceiver:{screen:RedPacketReceiver},
     rpDetail:{screen:RpDetailPage},
     rpRecordList:{screen:RpRecordListPage},
     topupRecordList:{screen:TopupRecordListPage},
-    rpTitleStyle:{screen:RpTitleStylePage}
+    rpTitleStyle:{screen:RpTitleStylePage},
+    lottieDemo:{screen:LottieDemo}
 }
 
 export default RouterSetting

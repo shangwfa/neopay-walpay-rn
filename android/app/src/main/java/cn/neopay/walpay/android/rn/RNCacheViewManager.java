@@ -1,5 +1,6 @@
 package cn.neopay.walpay.android.rn;
 
+import com.airbnb.android.react.lottie.LottiePackage;
 import com.beefe.picker.PickerViewPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.common.LifecycleState;
@@ -56,6 +57,7 @@ public class RNCacheViewManager {
                 .addPackage(new RCTCameraPackage())
                 .addPackage(new PickerViewPackage())
                 .addPackage(new ReactNativeContacts())
+                .addPackage(new LottiePackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();

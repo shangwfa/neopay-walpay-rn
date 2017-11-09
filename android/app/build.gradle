@@ -99,7 +99,6 @@ walle {
 }
 
 dependencies {
-    compile project(':react-native-contacts')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -107,6 +106,9 @@ dependencies {
     compile project(':commonlib')
     compile project(':react-native-camera')
     compile project(':react-native-picker')
+    compile project(':react-native-contacts')
+    compile project(':lottie-react-native')
+
     compile rootProject.ext.dependencies["appcompatv7"]
     compile rootProject.ext.dependencies["constraint_layout"]
     compile rootProject.ext.dependencies["jpush"]
