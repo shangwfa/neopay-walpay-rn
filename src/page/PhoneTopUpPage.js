@@ -10,6 +10,7 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import {TabNavigator,TabBarTop} from 'react-navigation'
 import MoneyTopUpView from '../components/PhoneTopUpCellView'
+import {RouterPaths} from "../constants/RouterPaths"
 
 
 
@@ -17,11 +18,15 @@ class PhoneTopUpPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='手机充值' rightTitle="充值记录"/>
+                <Header navigation={this.props.navigation} title='手机充值' rightTitle="充值记录" onRightPress={()=>{
+                    this.props.navigation.navigate(RouterPaths.CHARGE_FLUX_RESULT, {"pageType": 0})
+                }}/>
                 <PhoneTopUpTabNavigator/>
             </View>
         );
     }
+
+
 }
 
 const PhoneTopUpTabNavigator = TabNavigator({
