@@ -52,7 +52,6 @@ class RedPacketItemComponent extends Component {
 
 const styles = StyleSheet.create({
     content_container: {
-        flex: 1,
         backgroundColor: colors.white,
         marginTop: 10,
         marginBottom:0,
