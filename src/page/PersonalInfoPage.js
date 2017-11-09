@@ -17,8 +17,8 @@ import ApiManager from '../utils/ApiManager'
 
 class PersonalInfoPage extends BasePage {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             data:{
                 avatarUrl:'http://pic2.ooopic.com/12/22/94/37bOOOPICc7_1024.jpg',
@@ -78,7 +78,7 @@ class PersonalInfoPage extends BasePage {
                     })
                 }}/>
                 <CommonKeyValueItem  title='昵称'   value={this.state.data.nickName}  isLine={true} isArrow={true} onPress={()=>{
-                    this.props.navigation.navigate(RouterPaths.CHANGE_NAME_PAGE)
+                    nav.navigate(RouterPaths.CHANGE_NAME_PAGE)
                 }}/>
                 {this.renderRealNameItem()}
                 <CommonKeyValueItem  title='新光钱包账号'   value={FormatUtils.tuoMinPhone(this.state.data.phone)}   />
