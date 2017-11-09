@@ -47,7 +47,7 @@ class LottieDemoPage extends BasePage {
                     }}
                     source={demo}
                     loop={false}
-                    imageAssetsFolder={'lottie/'}
+                    // imageAssetsFolder={'lottie/'}
                 />
                 <CommonButton value='点击动画2' onPress={()=>{
                     this.animation2.play()

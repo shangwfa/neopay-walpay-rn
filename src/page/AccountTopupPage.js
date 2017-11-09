@@ -26,8 +26,8 @@ class AccountTopupPage extends BasePage {
     //         })
     //     })
     // }
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             inputText: ''
         }

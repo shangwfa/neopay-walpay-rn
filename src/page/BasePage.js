@@ -10,6 +10,10 @@ class BasePage extends Component {
     static navigationOptions = {
         header: null
     };
+    constructor(props) {
+        super(props)
+        global.nav=this.props.navigation
+    }
 }
 
 

@@ -16,8 +16,8 @@ import events from "../constants/events";
 import ApiManager from "../utils/ApiManager";
 
  class ChangeNamePage extends BasePage {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             inputText: ''
         }
