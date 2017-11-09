@@ -134,15 +134,13 @@ class BigRedPacketPage extends BasePage {
                                source={img_red_packet_right_arrow}/>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.container_view_pager_}>
-                    {/*轮播*/}
-                    <View style={[styles.page, {marginTop: 11, marginBottom: 13,}]}>
-                        <ViewPager
-                            dataSource={this.state.dataSourceViewPage}
-                            renderPage={this._renderPage}
-                            isLoop={true}
-                            autoPlay={true}/>
-                    </View>
+                {/*轮播*/}
+                <View style={[styles.page, styles.container_view_pager]}>
+                    <ViewPager
+                        dataSource={this.state.dataSourceViewPage}
+                        renderPage={this._renderPage}
+                        isLoop={true}
+                        autoPlay={true}/>
                 </View>
             </View>
         );
@@ -210,8 +208,9 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         marginRight: 14
     },
-    container_view_pager_: {
-        backgroundColor: "#FFEAD0",
+    container_view_pager: {
+        marginTop: 11,
+        marginBottom: 13,
         marginLeft: 13,
         marginRight: 13
     }

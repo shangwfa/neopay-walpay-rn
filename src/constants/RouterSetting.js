@@ -49,6 +49,7 @@ import RpRecordListPage from '../page/RpRecordListPage'
 import TopupRecordListPage from '../page/TopupRecordListPage'
 import RpTitleStylePage from '../page/RpTitleStylePage'
 import LottieDemo from '../page/LottieDemoPage'
+import SendRedPacket from '../page/SendRedPacketPage'
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -83,6 +84,7 @@ const RouterSetting = {
     redPacketSquare: {screen: RedPacketSquare},
     receiveRedPacket: {screen: ReceiveRedPacket},
     payCode: {screen: PayCode},
+    sendRedPacket: {screen: SendRedPacket},
     myBalance: {screen: MyBalance},
     accountWithdraw: {screen: AccountWithdrawPage},
     accountWithdrawResult: {screen: AccountWithdrawResultPage},

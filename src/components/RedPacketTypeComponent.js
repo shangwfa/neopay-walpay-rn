@@ -87,16 +87,18 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     img: {
-        width: ScreenUtils.width,
+        width: ScreenUtils.width - 26,
         height: 155,
         resizeMode: "cover",
         justifyContent: 'center',
     },
     message: {
         color: "#FBDEB0",
+        backgroundColor: "transparent"
     },
     message_general: {
         color: "#FFFFFF",
+        backgroundColor: "transparent"
     },
     message_from_container: {
         flexDirection: "row",

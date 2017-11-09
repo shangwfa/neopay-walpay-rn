@@ -25,8 +25,9 @@ class Header extends Component {
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
-        rightIconNormal: React.PropTypes.any,
-        rightIconStyle: PropTypes.any
+        rightIconStyle: React.PropTypes.any,
+        header_middleStyle: React.PropTypes.any
+
     }
 
     constructor(props) {
@@ -71,7 +72,7 @@ class Header extends Component {
                     </TouchableOpacity>
 
                     {/*header中间*/}
-                    <View style={styles.header_middle}>
+                    <View style={[styles.header_middle,this.props.header_middleStyle&&this.props.header_middleStyle]}>
                         <Text style={[styles.title, {color: this.props.textColor}]}> {this.props.title}</Text>
                     </View>
                     {/*header右侧*/}
