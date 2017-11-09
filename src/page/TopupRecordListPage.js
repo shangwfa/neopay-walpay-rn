@@ -30,44 +30,50 @@ class TopupRecordListPage extends BasePage {
             dataSource: this.dataSource.cloneWithRows([
                 {
                     iconUrl: url,
-                    title: '大红包',
-                    tradeTime: '本月',
-                    amount: '+88.00',
+                    title: '话费10元-18877776666',
+                    tradeTime: '09-28 12:22',
+                    amount: '-10.00',
+                    month:'本月',
                     isShowTime: true
                 },
                 {
                     iconUrl: url,
-                    title: '来自毛主席的大红包',
-                    tradeTime: '本月',
-                    amount: '+88.00',
+                    title: '话费10元-18877776666',
+                    tradeTime: '09-28 12:22',
+                    amount: '-10.00',
+                    month:'本月',
                     isShowTime: false
                 },
                 {
                     iconUrl: url,
-                    title: '大红包',
-                    tradeTime: '本月',
-                    amount: '+88.00',
+                    title: '话费10元-18877776666',
+                    tradeTime: '09-28 12:22',
+                    amount: '-10.00',
+                    month:'本月',
                     isShowTime: false
                 },
                 {
                     iconUrl: url,
-                    title: '大红包',
-                    tradeTime: '本月',
-                    amount: '+88.00',
+                    title: '话费10元-18877776666',
+                    tradeTime: '09-28 12:22',
+                    amount: '-10.00',
+                    month:'本月',
+                    isShowTime: true
+                },
+                {
+                    iconUrl: url,
+                    title: '话费10元-18877776666',
+                    tradeTime: '09-28 12:22',
+                    amount: '-10.00',
+                    month:'本月',
                     isShowTime: false
                 },
                 {
                     iconUrl: url,
-                    title: '大红包',
-                    tradeTime: '本月',
-                    amount: '+88.00',
-                    isShowTime: false
-                },
-                {
-                    iconUrl: url,
-                    title: '大红包',
-                    tradeTime: '本月',
-                    amount: '+88.00',
+                    title: '话费10元-18877776666',
+                    tradeTime: '09-28 12:22',
+                    amount: '-10.00',
+                    month:'本月',
                     isShowTime: false
                 },
             ])
@@ -111,7 +117,7 @@ class TopupRecordListPage extends BasePage {
     }
     renderSectionHeader = (item) => {
         if (item.isShowTime) {
-            return <SectionHeader title={item.tradeTime} value='查看月账单'/>
+            return <SectionHeader title={item.month} value='支出:-8888'/>
         }
     }
 
@@ -119,7 +125,7 @@ class TopupRecordListPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='红包交易明细' onRightPress={() => {
+                <Header navigation={this.props.navigation} title='充值记录' onRightPress={() => {
                     this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
                 <SwRefreshListView
