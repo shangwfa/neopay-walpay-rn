@@ -158,6 +158,10 @@
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType = @"phoneTopUp";
         [self.navigationController pushViewController:RNVC animated:YES];
+    }else if([btn.titleLabel.text isEqualToString:@"大红包"]){
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"bigRedPacket";
+        [self.navigationController pushViewController:RNVC animated:YES];
     }
 }
 

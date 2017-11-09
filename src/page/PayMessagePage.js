@@ -27,89 +27,22 @@ class PayMessagePage extends BasePage {
         this.state = {
             dataSource: this.dataSource.cloneWithRows([
                 {
-                    "billId":15,
-                    "createTime":"2017-10-08 20:49:42",
-                    "amount":-38.00,
-                    "payNoticeType":1,
-                    "payBy":'中信银行储蓄卡(9919)',
-                    "payTo":'兔波波178果舍近江时代大厦店',
-                    "withAttach":0,
-                    "attach":'欠你的钱,还给你啦',
-                    "isShowTime":1,
-                },
-                {
-                    "billId":15,
-                    "createTime":"2017-10-08 20:49:42",
-                    "amount":-45.00,
-                    "payNoticeType":1,
-                    "payBy":'中信银行储蓄卡(9919)',
-                    "payTo":'兔波波178果舍近江时代大厦店',
-                    "withAttach":1,
-                    "attach":'欠你的钱,还给你啦',
-                    "isShowTime":1,
-                },
-                {
-                    "billId":15,
-                    "createTime":"2017-10-08 20:49:42",
-                    "amount":-2.00,
-                    "payNoticeType":1,
-                    "payBy":'中信银行储蓄卡(9919)',
-                    "payTo":'兔波波178果舍近江时代大厦店',
-                    "withAttach":1,
-                    "attach":'欠你的钱,还给你啦',
-                    "isShowTime":1,
-                },
-                {
-                    "billId":15,
-                    "createTime":"2017-10-08 20:49:42",
-                    "amount":-38.00,
-                    "payNoticeType":1,
-                    "payBy":'中信银行储蓄卡(9919)',
-                    "payTo":'兔波波178果舍近江时代大厦店',
-                    "withAttach":0,
-                    "attach":'欠你的钱,还给你啦',
-                    "isShowTime":0,
-                },
-                {
-                    "billId":15,
-                    "createTime":"2017-10-08 20:49:42",
-                    "amount":-38,
-                    "payNoticeType":1,
-                    "payBy":'中信银行储蓄卡(9919)',
-                    "payTo":'兔波波178果舍近江时代大厦店',
-                    "withAttach":1,
-                    "attach":'欠你的钱,还给你啦',
-                    "isShowTime":0,
-                },
-                {
-                    "billId":15,
-                    "createTime":"2017-10-08 20:49:42",
-                    "amount":-38,
-                    "payNoticeType":1,
-                    "payBy":'中信银行储蓄卡(9919)',
-                    "payTo":'兔波波178果舍近江时代大厦店',
-                    "withAttach":0,
-                    "attach":'欠你的钱,还给你啦',
-                    "isShowTime":0,
-                },
-                {
-                    "billId":15,
-                    "createTime":"2017-10-08 20:49:42",
-                    "amount":-38,
-                    "payNoticeType":1,
-                    "payBy":'中信银行储蓄卡(9919)',
-                    "payTo":'兔波波178果舍近江时代大厦店',
-                    "withAttach":0,
-                    "attach":'欠你的钱,还给你啦',
-                    "isShowTime":0,
+                    "createTime": "2000-01-01 00:00:00",
+                    "msgTypeText": "付款未知",
+                    "payDirectionText": "未知",
+                    "payNoticeTypeText": "未知",
+                    "isShowTime": true,
+                    "withAttach": true,
+                    "amount": 0.0,
+                    "attachText": "备注"
                 }
             ])
         }
     }
-    componentWillMount() {
-        NetUtil.post('pay/query_user_order_page', {}, (data) => {
+    componentDidMount() {
+        NetUtil.post('message/query_pay_msg_page', {}, (data) => {
             this.setState({
-                data: data
+                dataSource: this.dataSource.cloneWithRows(data)
             })
         })
     }
@@ -134,9 +67,9 @@ class PayMessagePage extends BasePage {
             <View>
                 {this.renderSectionHeader(item)}
                 <PayMessageCell createTime={item.createTime}
-                               payNoticeType={item.payNoticeType} payBy={item.payBy}
-                               payTo={item.payTo} withAttach={item.withAttach}
-                               attach={item.attach} amount = {item.amount}/>
+                               payNoticeType={item.msgTypeText} payBy={item.payNoticeTypeText}
+                               payTo={item.payDirectionText} withAttach={item.withAttach}
+                               attach={item.attachText} amount = {item.amount}/>
             </View>
         )
 

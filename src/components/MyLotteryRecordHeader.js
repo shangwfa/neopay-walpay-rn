@@ -6,7 +6,25 @@ import {
     Image,
 } from 'react-native'
 
+import NetUtil from "../utils/NetUtil"
+
 class MyLotteryRecordHeader extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            data:{
+                "amount":0.00,
+                "joinActivityCount":0,
+                "neocoin":0,
+                "platformActivityCount":0,
+                "poolAmount":0.00,
+                "poolNeocoin":0,
+                "winCount":0
+            }
+        }
+    }
+
     render() {
         return (
 
@@ -15,7 +33,7 @@ class MyLotteryRecordHeader extends Component {
                         <Image source = {require('../res/img/LotteryRecord/wd_hongbao3.png')}>
 
                             <Text style = {styles.redHeightTitle}>
-                                4756元
+                                {this.state.data.amount+'元'}
                             </Text>
                         </Image>
 
@@ -26,29 +44,38 @@ class MyLotteryRecordHeader extends Component {
                             共参与
                         </Text>
                         <Text style = {styles.redHeightText}>
-                            78
+                            {this.state.data.joinActivityCount}
                         </Text>
                         <Text style = {styles.desLabelText}>
                             次活动，中奖
                         </Text>
                         <Text style = {styles.redHeightText}>
-                            67
+                            {this.state.data.winCount}
                         </Text>
                         <Text style = {styles.desLabelText}>
                             次。获得
                         </Text>
                         <Text style = {styles.redHeightText}>
-                            4756元
+                            {this.state.data.amount+'元'}
                         </Text>
                     </View>
                     <Text style = {styles.detailLabel}>
-                        平台共发布134次活动，中奖池金额4567.89元
+                        {'平台共发布'+this.state.data.platformActivityCount+'次活动，中奖池金额'+this.state.data.poolAmount+'元'}
                     </Text>
 
                 </View>
 
         );
     }
+
+    componentDidMount() {
+        NetUtil.post('merchant/get_user_activity_stats', {}, (data) => {
+            this.setState({
+                data: data
+            })
+        })
+    }
+
 }
 
 const styles = StyleSheet.create({

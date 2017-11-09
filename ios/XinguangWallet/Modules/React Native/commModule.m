@@ -113,6 +113,21 @@ RCT_EXPORT_METHOD(rnJumpBackToFirstLevel){
         [kNotificationCenter postNotificationName:kNotificationRNJumpBackToFirstLevel object:nil];
 }
 
+//RN页面设置标题栏默认黑色
+RCT_EXPORT_METHOD(statusBarDefault){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    });
+}
+
+//RN页面设置标题栏白色
+RCT_EXPORT_METHOD(statusBarLight){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    });
+}
+
+
 
 
     
