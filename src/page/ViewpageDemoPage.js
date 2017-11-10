@@ -9,7 +9,6 @@ import {
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
 import {colors} from '../constants/index'
-import Swiper from 'react-native-swiper'
 import ViewPager from '../components/ViewPager'
 class ViewpageDemoPage extends BasePage {
 

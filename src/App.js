@@ -80,10 +80,27 @@ class App extends Component {
             return defaultStateAction(action, state);
         };
 
+        const  getCurrentRouteName=(navigationState) =>{
+            if (!navigationState) {
+                return null;
+            }
+            const route = navigationState.routes[navigationState.index];
+            // dive into nested navigators
+            if (route.routes) {
+                return getCurrentRouteName(route);
+            }
+            return route.routeName;
+        }
 
         return (
             <View style={{flex: 1}}>
-                <Navigator screenProps={this.props.params}/>
+                <Navigator screenProps={this.props.params} onNavigationStateChange={(prevState, currentState) => {
+                    const currentScreen = getCurrentRouteName(currentState);
+                    const prevScreen = getCurrentRouteName(prevState);
+                    if (prevScreen !== currentScreen) {
+                        console.log("从页面"+prevScreen+"跳转页面"+currentScreen)
+                    }
+                }}/>
             </View>
 
         );

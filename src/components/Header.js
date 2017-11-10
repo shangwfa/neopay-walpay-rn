@@ -22,6 +22,7 @@ class Header extends Component {
         backgroundColor: colors.white,
         textColor: colors.black,
         isWhiteArrow: false,
+        onRightPress:()=>{}
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
@@ -47,7 +48,6 @@ class Header extends Component {
     }
 
     goback = () => {
-        console.log("回退")
         this.props.navigation.goBack();
     }
     renderDivider = () => {
