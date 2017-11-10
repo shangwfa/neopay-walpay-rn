@@ -10,31 +10,38 @@ import BasePage from '../page/BasePage'
 import Header from '../components/Header'
 import {colors} from '../constants/index'
 import Swiper from 'react-native-swiper'
+import ViewPager from '../components/ViewPager'
 class ViewpageDemoPage extends BasePage {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            data:[
+                {text:'Hello Swiper'},
+                {text:'Beautiful'},
+                {text:'And simple'}
+            ]
+        };
     }
 
+
+    renderViewPageItem=(item)=>{
+        return (
+            <View style={styles.slide1}>
+                <Text style={styles.text}>{item.text}</Text>
+            </View>
+        )
+    }
     render() {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='ViewpageDemo'/>
                 <ScrollView  style={styles.scrollview} showsVerticalScrollIndicator={false}>
-                    <View style={{height:200}}>
-                        <Swiper style={styles.wrapper}   autoplay>
-                            <View style={styles.slide1}>
-                                <Text style={styles.text}>Hello Swiper</Text>
-                            </View>
-                            <View style={styles.slide2}>
-                                <Text style={styles.text}>Beautiful</Text>
-                            </View>
-                            <View style={styles.slide3}>
-                                <Text style={styles.text}>And simple</Text>
-                            </View>
-                        </Swiper>
-                    </View>
+                    <ViewPager style={{height:200,marginTop:10}} arrayData={this.state.data} autoplay={true} renderItem={(item)=>this.renderViewPageItem(item)}/>
+                    <ViewPager style={{height:200,marginTop:10}} arrayData={this.state.data} dotColor='red' activeDotColor ='yellow'
+                               renderItem={(item)=>this.renderViewPageItem(item)}/>
+                    <ViewPager style={{height:200,marginTop:10}} arrayData={this.state.data} dotStyle={{height:10,width:10,borderRadius:5}}
+                               activeDotStyle={{height:10,width:20,borderRadius:3}} renderItem={(item)=>this.renderViewPageItem(item)}/>
                 </ScrollView>
 
 

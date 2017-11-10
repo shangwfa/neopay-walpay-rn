@@ -1,23 +1,27 @@
 /**
  * @author: carlos.guo
  * @data:  2017/11/7.
- * @description:
+ * @description:  拆红包--页面
  */
 import React, {Component} from 'react'
 import {
     StyleSheet,
     View,
     Text,
-    Image, Modal,
+    Image, Modal, Animated
 } from 'react-native'
-import img_get_red_packet_process from "../res/img/img_get_red_packet_process.gif"
-import img_money from "../res/img/img_money.png"
+import Animation from 'lottie-react-native'
+import demo from '../data/data.json'
+import CommonButton from "../components/CommonButton";
+let refAnimation;
 class ReceiveRedPacketModal extends Component {
+
     constructor(props) {
         super(props);
     }
 
     render() {
+        this._handleIsPlay();
         return (
             <Modal
                 transparent={true}
@@ -25,14 +29,29 @@ class ReceiveRedPacketModal extends Component {
                 onRequestClose={() => {
                 }}>
                 <View style={styles.modalStyle}>
-                    <Image
-                        style={{width: 100, height: 100}}
-                        source={img_get_red_packet_process}
+                    <Animation
+                        ref={this._handleRef.bind(this)}
+                        style={{
+                            width: 200,
+                            height: 200,
+                        }}
+                        source={demo}
+                        loop={true}
                     />
                 </View>
             </Modal>
         );
     }
+
+    _handleRef = (refAnimation) => {
+        this.refAnimation = refAnimation;
+    };
+    _handleIsPlay = () => {
+        if (this.props.isShow) {
+            this.refAnimation.play();
+        }
+    };
+
 }
 
 const styles = StyleSheet.create({

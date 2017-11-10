@@ -52,16 +52,11 @@ public class HomeMiddleView extends FrameLayout {
         mBinding.homeCardBagLl.setOnClickListener(v -> RNActivity.jumpToRNPage(context, RNActivity.PageType.CARD_PACK_PAGE));
 
         mBinding.homeBigRedBagLl.setOnClickListener(v -> {
-            BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
-                //TODO 跳转 大红包
-            });
+            BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIG_RED_PAGE));
         });
 
         mBinding.homeRechargeLl.setOnClickListener(v -> {
-//            BusniessUtils.handleCertification(context, mUserInfoBean, () -> {
-//                //TODO 跳转 手机充值
-//            });
-            RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_CHARGE_PAGE);
+            BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_TOPUP_PAGE));
         });
 
         mBinding.homeSeasonsLl.setOnClickListener(v -> {

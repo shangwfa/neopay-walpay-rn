@@ -32,9 +32,7 @@ const dataSource = [
 class RpTitleStylePage extends BasePage {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        this.state = {}
     }
 
     // componentWillMount() {
@@ -56,10 +54,10 @@ class RpTitleStylePage extends BasePage {
 
     render() {
         return (
-            <View style = {styles.container}>
+            <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='红包主题'/>
                 <RedPacketItemComponent/>
-                <Text style ={styles.middle_text}>选择主题</Text>
+                <Text style={styles.middle_text}>选择主题</Text>
                 <FlatList
                     style={{marginTop: 5,}}
                     ref='flatList'
@@ -71,12 +69,12 @@ class RpTitleStylePage extends BasePage {
                     data={dataSource}
                     refreshing={false}
                 />
-                <CommonButton value='确定' style={{marginBottom:15 }} onPress={()=>this.pushRecordPage()}/>
+                <CommonButton value='确定' style={{marginBottom: 15}} onPress={() => this.pushRecordPage()}/>
             </View>
         );
     }
 
-    pushRecordPage = () =>{
+    pushRecordPage = () => {
 
     }
 }
@@ -86,11 +84,11 @@ const styles = StyleSheet.create({
         height: 40,
         backgroundColor: colors.one_color
     },
-    middle_text:{
-        fontSize:16,
-        color:colors.black,
-        marginTop:50,
-        marginLeft:15,
+    middle_text: {
+        fontSize: 16,
+        color: colors.black,
+        marginTop: 50,
+        marginLeft: 15,
     },
     container: {
         flex: 1,

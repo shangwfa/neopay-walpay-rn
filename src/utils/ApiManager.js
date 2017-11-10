@@ -91,6 +91,21 @@ getSquareRedPacketList = (request, callback) => {
         callback(data);
     });
 };
+getRecentPayType = (request, callback) => {
+    NetUtil.post(APIS.GET_RECENT_PAY_TYPE, request, (data) => {
+        callback(data);
+    });
+};
+createRedPacket = (request, callback) => {
+    NetUtil.post(APIS.CREATE_RED_PACKET, request, (data) => {
+        callback(data);
+    });
+};
+payRedPacket = (request, callback) => {
+    NetUtil.post(APIS.PAY_RED_PACKET, request, (data) => {
+        callback(data);
+    });
+};
 export default {
     getUserInfo,
     queryBannerList,
@@ -109,4 +124,7 @@ export default {
     getPhoneRechargeOrderQuery,
     getUserReceivableRedPacket,
     getSquareRedPacketList,
+    getRecentPayType,
+    createRedPacket,
+    payRedPacket,
 }
