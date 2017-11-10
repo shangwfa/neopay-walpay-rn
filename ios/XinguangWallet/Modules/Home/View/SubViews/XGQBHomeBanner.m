@@ -99,7 +99,8 @@
         make.bottom.equalTo(self);
     }];
     
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
+    //开始自动滚屏
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
     
 }
 
@@ -123,30 +124,28 @@
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-//    [self.timer invalidate];
-//    self.timer = nil;
+    [self.timer invalidate];
+    self.timer = nil;
 }
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
 }
 
 
 -(void)repeatAction
 {
+    _currentPage=(int)_pageControl.currentPage+1;
     if (_currentPage<_bannerListArr.count) {
         self.currentPage ++;
     }else if(_currentPage ==_bannerListArr.count)
     {
         self.currentPage=1;
     }
+   
+    [_scrV setContentOffset:CGPointMake((_currentPage-1)*_pageWidth,0) animated:YES];
+
 }
 
--(void)setCurrentPage:(int)currentPage
-{
-    _currentPage = currentPage;
-    _pageControl.currentPage = currentPage;
-    [_scrV setContentOffset:CGPointMake((currentPage-1)*_pageWidth,0) animated:YES];
-}
 
 @end
