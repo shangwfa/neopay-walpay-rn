@@ -47,7 +47,6 @@
         
         //广告页
         XGQBHomeBanner *adView = [[XGQBHomeBanner alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth*0.95, kScreenWidth*0.9*0.44)];
-        adView.backgroundColor = [UIColor yellowColor];
         [self addSubview:adView];
         
         

@@ -69,7 +69,7 @@
     [self.view addSubview:bgImg];
     
     //tableview
-    XGQBMineTableView *mineTableView = [[XGQBMineTableView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 0, 353/375.0*kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+    XGQBMineTableView *mineTableView = [[XGQBMineTableView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 0, 353/375.0*kScreenWidth, kScreenHeight-44) style:UITableViewStyleGrouped];
     
     mineTableView.backgroundColor = kClearColor;
     mineTableView.delegate = self;
