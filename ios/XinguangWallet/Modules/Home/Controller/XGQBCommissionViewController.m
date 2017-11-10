@@ -14,24 +14,25 @@
 
 @interface XGQBCommissionViewController ()
 @property (nonatomic,strong)RCTRootView *rctRootV;
-
+@property (nonatomic,strong) UILabel *routerLabel;
 @end
 
 @implementation XGQBCommissionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = kViewBgColor;
     self.navigationController.navigationBarHidden = NO;
     
     
     //临时退出登录按钮
     YYLabel *logoutLabel = [YYLabel new];
-    logoutLabel.text = @"Logout";
+    logoutLabel.text = @"退出登录";
     logoutLabel.textAlignment = NSTextAlignmentCenter;
     logoutLabel.backgroundColor = [UIColor redColor];
     
-    logoutLabel.frame = CGRectMake(100, 100, 100, 50);
+    logoutLabel.frame = CGRectMake(20, 100, 200, 50);
     [self.view addSubview:logoutLabel];
     
     [logoutLabel setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
@@ -41,11 +42,11 @@
     
     //临时充值app运行次数按钮
     YYLabel *restRunCount = [YYLabel new];
-    restRunCount.text = @"ResetRunCount";
+    restRunCount.text = @"重置运行次数";
     restRunCount.textAlignment = NSTextAlignmentCenter;
     restRunCount.backgroundColor = [UIColor redColor];
     
-    restRunCount.frame = CGRectMake(100, 200, 100, 50);
+    restRunCount.frame = CGRectMake(20, 170, 200, 50);
     [self.view addSubview:restRunCount];
     
     [restRunCount setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
@@ -53,71 +54,40 @@
     }];
     
     //临时跳转登录页面按钮
-    UIButton *button = [[UIButton alloc]initWithFrame:(CGRectMake(100, 300, 100, 50))];
-    [button setTitle:@"Login" forState:UIControlStateNormal];
+    UIButton *button = [[UIButton alloc]initWithFrame:(CGRectMake(20, 240, 200, 50))];
+    [button setTitle:@"跳转登录页面" forState:UIControlStateNormal];
     [self.view addSubview:button];
     button.backgroundColor = [UIColor redColor];
     [button addTarget:self action:@selector(pushToLoginVC) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    //临时跳转RN页面按钮
-    UIButton *jumpToRN = [[UIButton alloc]initWithFrame:(CGRectMake(100, 400, 100, 50))];
-    [jumpToRN setTitle:@"jumpToRN" forState:UIControlStateNormal];
-    [self.view addSubview:jumpToRN];
-    jumpToRN.backgroundColor = [UIColor redColor];
-    [jumpToRN addTarget:self action:@selector(jumpToRN) forControlEvents:UIControlEventTouchUpInside];
-    
-    //监听RN跳转通知
-    [kNotificationCenter addObserver:self selector:@selector(jumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
-    
     //    NSLog(@"%s",__func__);
     
+    //临时修改RN路径按钮
+    UIButton *changeRNRouter = [[UIButton alloc]initWithFrame:(CGRectMake(20, 310, 200, 50))];
+    [changeRNRouter setTitle:@"更换RNRouter" forState:UIControlStateNormal];
+    [self.view addSubview:changeRNRouter];
+    changeRNRouter.backgroundColor = [UIColor redColor];
+    [changeRNRouter addTarget:self action:@selector(changeRNRouter) forControlEvents:UIControlEventTouchUpInside];
     
+    //路径label
+    UILabel *jsRouterLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 380, kScreenWidth-40, 50)];
+    jsRouterLabel.font = kSYSTEMFONT(14.0);
+    [self.view addSubview:jsRouterLabel];
+    
+    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    int i = [GVUserDefaults standardUserDefaults].RNRouter;
+    
+
+    
+    jsRouterLabel.text = [self convertURLtoSimpleStr:appDelegate.jsCodeLocationArr[i]];
+    _routerLabel = jsRouterLabel;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
-}
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 
-//跳转进入RN界面
--(void)jumpToRN
-{
-    
-    //    NSURL *jsCodeLocation = [NSURL URLWithString:[[NSBundle mainBundle]pathForResource:@"index.ios" ofType:@"jsbundle"]];
-    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
-    
-    
-    //隐藏顶部loading from 提示
-    [RCTDevLoadingView setEnabled:NO];
-    
-    //RCT初始化方法必须在主线程执行,开子线程报错
-    
-    [SVProgressHUD show];
-    
-    RCTRootView *rootView =
-    [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
-                         moduleName        : @"neopay_walpay"
-                         initialProperties :@{@"params": @{@"page":@"home"}}
-                          launchOptions    : nil];
-
-    
-    
-    [SVProgressHUD dismiss];
-    
-    //创建XGQBRNTestVC
-    XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-    RNVC.view = rootView;
-    
-    [self.navigationController pushViewController:RNVC animated:YES];
-    
-}
-
-//从RN跳回原生界面
--(void)jumpBackToNative
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)pushToLoginVC
@@ -125,6 +95,37 @@
     [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
 }
 
+-(void)changeRNRouter
+{
+    int i =[GVUserDefaults standardUserDefaults].RNRouter;
+    
+    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    if (i==appDelegate.jsCodeLocationArr.count-1) {
+        i=0;
+    }else{
+        i++;
+    }
+    
+    [GVUserDefaults standardUserDefaults].RNRouter =i;
+    
+    _routerLabel.text =[self convertURLtoSimpleStr:appDelegate.jsCodeLocationArr[i]];
+}
 
+
+-(NSString*)convertURLtoSimpleStr:(NSString*)str
+{
+    NSString *oriText = str;
+    NSString *textAfter = @"";
+    if ([oriText containsString:@"http://"]) {
+        NSRange portRange = [oriText rangeOfString:@":8081"];
+        textAfter = [[oriText substringToIndex:portRange.location]copy];
+        NSRange httpRange = [textAfter rangeOfString:@"http://"];
+        textAfter = [textAfter substringFromIndex:httpRange.length+httpRange.location];
+    }else{
+        textAfter = @"本地包";
+    }
+    return [NSString stringWithFormat:@"RN包地址:%@",textAfter];
+}
 
 @end

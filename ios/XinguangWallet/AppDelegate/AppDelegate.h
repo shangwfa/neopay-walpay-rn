@@ -21,5 +21,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,strong) XGQBMainTabBarViewController *mainTabBarVC;
 
+@property (nonatomic,strong) NSArray *jsCodeLocationArr;
+
 @end
 
