@@ -17,7 +17,7 @@ class PayPwdModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show:false
+            show: false
         }
     }
 
@@ -25,15 +25,15 @@ class PayPwdModal extends Component {
     renderTop = () => {
         return (
             <View style={styles.top_container}>
-                <TouchableOpacity style={{flex: 1}} onPress={()=>this.props.onClose()}>
+                <TouchableOpacity style={{flex: 1}} onPress={() => this.props.onClose()}>
                     <Image style={styles.close_icon} source={close_icon}/>
                 </TouchableOpacity>
 
-                <View style={{flex: 2,alignItems:'center'}}>
-                    <Text style={{color:colors.black,fontSize:14}}>请输入支付密码</Text>
+                <View style={{flex: 2, alignItems: 'center'}}>
+                    <Text style={{color: colors.black, fontSize: 14}}>请输入支付密码</Text>
                 </View>
-                <TouchableOpacity style={{flex:1,alignItems:'flex-end'}} onPress={()=>this.props.onForgetPwd()}>
-                    <Text style={{color:colors.balck_more_light,fontSize:12,marginRight:10}}>忘记密码</Text>
+                <TouchableOpacity style={{flex: 1, alignItems: 'flex-end'}} onPress={() => this.props.onForgetPwd()}>
+                    <Text style={{color: colors.balck_more_light, fontSize: 12, marginRight: 10}}>忘记密码</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -44,20 +44,29 @@ class PayPwdModal extends Component {
             <Modal
                 transparent={true}
                 visible={this.props.isShow}
-                onShow={() => {}}
-                onRequestClose={() => {}} >
+                onShow={() => {
+                }}
+                onRequestClose={() => {
+                }}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
                         <View style={styles.content_container}>
                             {this.renderTop()}
-                            <Divider/>
-                            <Text style={{color:colors.black,fontSize:14}}>{this.props.contentFront}<Text style={{color:colors.black,fontSize:20}}> {this.props.contentBack}</Text></Text>
-                            <PasswordInput style={{width: 290,marginTop:10}} maxLength={6} onEnd={(text)=>this.props.onEnd(text)}/>
-                            <View style={{marginTop:20,flexDirection:'row',alignItems:'center',marginBottom:13}}>
-                                <Text style={{color:colors.balck_more_light,fontSize:14,marginLeft:10}}>付款方式</Text>
-                                <View style={{flex:1}}/>
-                                <Text style={{color:colors.black_light,fontSize:14,marginLeft:10}}>{this.props.payTypeContent}</Text>
-                                <Image style={{width:7,height:12,marginRight:10}} source={right_arrow}/>
+                            <View style={styles.line}/>
+                            <Text style={{color: colors.black, fontSize: 14}}>{this.props.contentFront}<Text
+                                style={{color: colors.black, fontSize: 20}}> {this.props.contentBack}</Text></Text>
+                            <PasswordInput style={{width: 290, marginTop: 10}} maxLength={6}
+                                           onEnd={(text) => this.props.onEnd(text)}/>
+                            <View style={{marginTop: 20, flexDirection: 'row', alignItems: 'center', marginBottom: 13}}>
+                                <Text style={{color: colors.balck_more_light, fontSize: 14, marginLeft: 10}}>付款方式</Text>
+                                <View style={{flex: 1}}/>
+                                <Text style={{
+                                    color: colors.black_light,
+                                    fontSize: 14,
+                                    marginLeft: 10
+                                }}>{this.props.payTypeContent}</Text>
+                                <Image style={{marginLeft: 8, width: 7, height: 12, marginRight: 10}}
+                                       source={right_arrow}/>
                             </View>
                         </View>
                     </View>
@@ -82,7 +91,7 @@ const styles = StyleSheet.create({
         width: 316,
         backgroundColor: colors.white,
         alignItems: 'center',
-        borderRadius:5,
+        borderRadius: 5,
     },
     container: {
         backgroundColor: colors.page_background,
@@ -90,10 +99,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     modalStyle: {
-        backgroundColor:'#cccccc80',
+        backgroundColor: '#cccccc80',
         alignItems: 'center',
-        justifyContent:'center',
-        flex:1,
+        justifyContent: 'center',
+        flex: 1,
+    },
+    line: {
+        backgroundColor: colors.divider,
+        height: 0.5,
+        width: 316,
     },
 });
 

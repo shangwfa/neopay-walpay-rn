@@ -55,9 +55,9 @@ class ReceiveRedPacketPage extends BasePage {
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
                 />
-                <ReceiveRedPacketModal
-                    isShow={this.state.isShowProcess}
-                />
+                {/*<ReceiveRedPacketModal*/}
+                {/*isShow={this.state.isShowProcess}*/}
+                {/*/>*/}
             </View>
         );
     }
@@ -79,7 +79,8 @@ class ReceiveRedPacketPage extends BasePage {
         //     this.setState({
         //         isShowProcess: false
         //     })
-        // }, 5000)
+        // }, 3000);
+        this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE);
     };
     _handleRightArrowClick = () => {
         alert("红包规则");

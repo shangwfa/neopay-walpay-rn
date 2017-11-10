@@ -9,7 +9,7 @@ import {
     View,
     Text,
     TextInput,
-    NativeModules,
+    NativeModules, DeviceEventEmitter,
     Image, TouchableOpacity,
 } from 'react-native'
 import BasePage from "./BasePage";
@@ -19,6 +19,10 @@ import CommonButton from "../components/CommonButton";
 import Space from "../components/Space";
 import RedPacketInputComponent from "../components/RedPacketInputComponent";
 import StringUtils from "../utils/StringUtils";
+import OneButtonModal from "../modal/OneButtonModal";
+import PayPwdModal from "../modal/PayPwdModal";
+import ApiManager from "../utils/ApiManager";
+import {RouterPaths} from "../constants/RouterPaths";
 class SendRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
@@ -26,14 +30,29 @@ class SendRedPacketPage extends BasePage {
             redTheme: "普通",
             redPacketNum: "",
             redPacketAmount: "",
-            redPacketMessage: "",
-            isRandomRedPacket: false,
-            redPacketAmountText: "金额"
+            redPacketMessage: "恭喜发财!",
+            isRandomRedPacket: true,
+            redPacketAmountText: "金额",
+            isShow: false,
+            isShowPay: false,
+            contentModal: "",
+            contentFront: "",
+            payTypeContent: "",
+            contentBack: "",
+            payTypeSourceData: {},
+            redPacketSourceData: {},
+            payResultSourceData: {},
+
         };
     }
 
     componentWillMount() {
         this._handleRedPacketAmountText();
+        ApiManager.getRecentPayType({}, (data) => {
+            this.setState({
+                payTypeSourceData: data
+            });
+        });
     }
 
     render() {
@@ -77,6 +96,19 @@ class SendRedPacketPage extends BasePage {
                     onTextInputClick={this._handleTextInputClick.bind(this)}
                     textInputChangeListener={this._handleRedPacketMessageListener.bind(this)}/>
                 <CommonButton value='发红包啦！' style={{marginTop: 68}} onPress={this._handleButtonClick.bind(this)}/>
+                <OneButtonModal
+                    onPress={this._handleBtnModalClick}
+                    btnTitle="确定"
+                    content={this.state.contentModal}
+                    isShow={this.state.isShow}/>
+                <PayPwdModal
+                    isShow={this.state.isShowPay}
+                    onForgetPwd={this._handlePayOnForgetPwdClick}
+                    contentFront={this.state.contentFront}
+                    contentBack={this.state.contentBack}
+                    payTypeContent={this.state.payTypeContent}
+                    onClose={this._handlePayOnCloseClick}
+                    onEnd={this._handlePayEndClick}/>
             </View>
         );
     }
@@ -119,6 +151,38 @@ class SendRedPacketPage extends BasePage {
             );
         }
     };
+    _handlePayEndClick = (text) => {
+        let request = {
+            packetCode: this.state.redPacketSourceData.packetCode,
+            payPassword: text.toString().trim(),
+            payType: this.state.payTypeSourceData.payType,
+            bankCardId: this.state.payTypeSourceData.bankCardId
+        };
+        ApiManager.payRedPacket(request, (data) => {
+            this.setState({
+                payResultSourceData: data
+            });
+        });
+        if (this.state.payResultSourceData) {
+            this.setState({
+                isShowPay: false,
+            });
+        }
+    };
+    _handlePayOnForgetPwdClick = () => {
+        const params = {page: 'resetPayPwd'};
+        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
+    };
+    _handlePayOnCloseClick = () => {
+        this.setState({
+            isShowPay: false
+        });
+    };
+    _handleBtnModalClick = () => {
+        this.setState({
+            isShow: false
+        });
+    };
     _handleIsRandomRedPacketTypeClick = () => {
         this.setState({
             isRandomRedPacket: true,
@@ -141,11 +205,17 @@ class SendRedPacketPage extends BasePage {
         this.setState({
             redPacketAmountText: textContent
         });
+
+        DeviceEventEmitter.addListener("event", (data) => {
+            this.setState({
+                redTheme: data.themeUrl
+            });
+        })
     };
     _handleTextInputClick = () => {
     };
     _handleRedThemeClick = (item) => {
-        alert("红包主题" + item);
+        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE, {"themeUrl": this.state.redTheme});
     };
     _handleRedPacketListener = (text) => {
     };
@@ -165,10 +235,20 @@ class SendRedPacketPage extends BasePage {
     };
     _handleRedPacketMessageListener = (text) => {
         this.setState({
-            redPacketMessage: text
+            redPacketMessage: text,
         });
     };
     _handleButtonClick = () => {
+        this._handleCheckText();
+        this._handleCreateRedPacket();
+        if (this.state.redPacketSourceData) {
+            this._handleShowPayModal();
+        }
+    };
+    _handleRightArrowClick = () => {
+        alert("红包规则");
+    };
+    _handleCheckText = () => {
         if (StringUtils.isEmpty(this.state.redPacketNum.toString())
             || parseInt(this.state.redPacketNum.toString().trim()) <= 0) {
             NativeModules.commModule.toast('红包个数必须大于0');
@@ -186,15 +266,40 @@ class SendRedPacketPage extends BasePage {
         }
         if (!this.state.isRandomRedPacket
             && this.state.redPacketNum * this.state.redPacketAmount > 2000) {
-            //TODO 弹窗
-            NativeModules.commModule.toast('红包金额不能超过2000元');
+            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为
+            ${this.state.redPacketNum * this.state.redPacketAmount} 元`;
+            this.setState({
+                contentModal: contentModal,
+                isShow: true,
+            });
             return;
         }
-        //TODO 支付密码框
     };
-    _handleRightArrowClick = () => {
-        alert("红包规则");
+    _handleCreateRedPacket = () => {
+        let request = {
+            bossType: 1,
+            packetType: this.state.isRandomRedPacket ? 1 : 2,
+            amount: this.state.redPacketAmount,
+            totalCount: this.state.redPacketNum,
+            themeUrl: this.state.redTheme,
+            message: this.state.redPacketMessage,
+        };
+        ApiManager.createRedPacket(request, (data) => {
+            this.setState({
+                redPacketSourceData: data
+            });
+        });
     };
+    _handleShowPayModal = () => {
+        let contentFront = `实付金额`;
+        let contentBack = `${this.state.redPacketNum * this.state.redPacketAmount}元`;
+        this.setState({
+            contentFront: contentFront,
+            contentBack: contentBack,
+            payTypeContent: this.state.payTypeSourceData.payTypeDesc,
+            isShowPay: true,
+        });
+    }
 }
 
 const styles = StyleSheet.create({

@@ -90,8 +90,11 @@ public class RNActivity extends BaseRNActivity {
             case PageType.BALANCE:
                 initLaunchOptions(bundle, PageType.BALANCE);
                 break;
-            case PageType.PHONE_CHARGE_PAGE:
-                initLaunchOptions(bundle, PageType.PHONE_CHARGE_PAGE);
+            case PageType.PHONE_TOPUP_PAGE:
+                initLaunchOptions(bundle, PageType.PHONE_TOPUP_PAGE);
+                break;
+            case PageType.BIG_RED_PAGE:
+                initLaunchOptions(bundle, PageType.BIG_RED_PAGE);
                 break;
         }
         return bundle;
@@ -171,11 +174,13 @@ public class RNActivity extends BaseRNActivity {
         String PERSONAL_INFO_PAGE = "personalInfo";
         String ACTIVITY_LIST_PAGE = "activityList";
         String ACTIVITY_RED_LIST_PAGE = "redList";
-        String PAY_SCAN_QR_CODE="qrCodeScan";
+        String PAY_SCAN_QR_CODE = "qrCodeScan";
         String MY_LOTTER_RECORD = "myLotteryRecord";
         String MY_ASSET = "myAsset";
         String MY_BANK = "bankCardList";
         String CARD_PACK_PAGE = "cardPack";
+        String BIG_RED_PAGE = "bigRedPacket";
+        String PHONE_TOPUP_PAGE = "phoneTopUp";
         String PAY_CODE_PAGE = "payCode";
         String BALANCE="myBalance";
         String PHONE_CHARGE_PAGE="phoneTopUp";

@@ -21,12 +21,15 @@ export const RouterPaths = {
     ACCOUNT_WITHDRAW_RESULT_PAGE: 'accountWithdrawResult',
     CHARGE_FLUX_RESULT: 'chargeFluxResult',
     ACCOUNT_TOPUP: 'accountTopup',
+    RED_PACKET_RECORD: "redPacketRecord",
+    RP_TITLE_STYLE: "rpTitleStyle",
+    RED_PACKETS_READY_PAGE: "redPacketsReadyPage",
     ACCOUNT_TOPUP_RESULT: 'accountTopupResult',
     TRADE_RECORD_LIST_PAGE: 'tradeRecordList',
     PAYMENT: 'payment',
     CREDITINPUT_PAGE: 'CreditCardInput',
     RED_PACKET_SQUARE: "redPacketSquare",
-    CONTACTS_PAGE:'contacts',
+    CONTACTS_PAGE: 'contacts',
 };
 
 

@@ -152,13 +152,13 @@ class BigRedPacketPage extends BasePage {
         this.props.navigation.navigate(RouterPaths.RED_PACKET_SQUARE);
     };
     _handleSendRedPacketClick = () => {
-        alert("发红包");
+        this.props.navigation.navigate(RouterPaths.SEND_RED_PACKET);
     };
     _handleGetRedPacketClick = () => {
-        alert("领红包");
+        this.props.navigation.navigate(RouterPaths.RECEIVE_RED_PACKET);
     };
     _handleHeaderRightClick = () => {
-        alert("红包记录");
+        this.props.navigation.navigate(RouterPaths.RED_PACKET_RECORD);
     };
 }
 const styles = StyleSheet.create({

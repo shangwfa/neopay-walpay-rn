@@ -22,12 +22,13 @@ class OneButtonModal extends Component {
             <Modal
                 transparent={true}
                 visible={this.props.isShow}
-                onRequestClose={()=>{}}>
+                onRequestClose={() => {
+                }}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
                         <Text style={styles.text_content}>{this.props.content}</Text>
                         <View style={styles.line}/>
-                        <TouchableOpacity onPress={this.props.onPress}>
+                        <TouchableOpacity style={{width: 316,}} onPress={this.props.onPress}>
                             <Text style={styles.btn}>{this.props.btnTitle}</Text>
                         </TouchableOpacity>
                     </View>
@@ -40,16 +41,18 @@ class OneButtonModal extends Component {
 }
 
 const styles = StyleSheet.create({
-    line:{
-        backgroundColor:colors.divider,
-        height:0.5,
-        width:316,
-        marginTop:30
+    line: {
+        backgroundColor: colors.divider,
+        height: 0.5,
+        width: 316,
+        marginTop: 30
     },
     btn: {
+        fontSize: 13,
+        color: colors.black,
         height: 50,
         textAlign: 'center',
-        textAlignVertical:'center'
+        textAlignVertical: 'center'
     },
     text_content: {
         fontSize: 13,
@@ -57,10 +60,10 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginLeft: 16,
         marginRight: 16,
+        textAlign: 'center',
     },
     container: {
         width: 316,
-        height: 136,
         borderRadius: 5,
         alignItems: 'center',
         backgroundColor: 'white',
