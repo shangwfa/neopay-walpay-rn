@@ -41,7 +41,7 @@ class MyAsset extends BasePage {
     }
     renderTop = () => {
         return (
-            <View style={{marginLeft: 60, marginTop: 60}}>
+            <View style={{marginTop: 60,alignItems:'center'}}>
                 <Image style={styles.img} source={my_asset}>
                     <View style={{marginLeft: 65, marginTop: 90}}>
                         <Text style={styles.amount_title}>总资产(元)</Text>

@@ -13,6 +13,8 @@ class BasePage extends Component {
     constructor(props) {
         super(props)
         global.nav=this.props.navigation
+        console.log("当前页面======"+nav.state.routeName)
+
     }
 }
 
