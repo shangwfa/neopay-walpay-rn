@@ -41,11 +41,7 @@
 
     
     NSString *jsCodeLocationStr = appDelegate.jsCodeLocationArr[[GVUserDefaults standardUserDefaults].RNRouter]?appDelegate.jsCodeLocationArr[[GVUserDefaults standardUserDefaults].RNRouter]:@"http://localhost:8081/index.ios.bundle?platform=ios";
-//    [[NSBundle mainBundle]pathForResource:@"main" ofType:@"jsbundle"]];
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.11:8081/index.ios.bundle?platform=ios"];
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://172.16.33.182:8081/index.ios.bundle?platform=ios"];
-//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios"];
-    
+
     NSURL *jsCodeLocation = [NSURL URLWithString:jsCodeLocationStr];
     
     //隐藏顶部loading from 提示
