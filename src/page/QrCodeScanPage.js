@@ -16,6 +16,34 @@ import scan_bottom_icon from '../res/img/scan_bottom_icon.png'
 import scan_line from '../res/img/scan_line.png'
 import three_points from '../res/img/three_points.png'
 import {RouterPaths} from '../constants/RouterPaths'
+
+const headerTop=()=>{
+    if(ScreenUtils.isIOSSmall){
+        return ScreenUtils.height/10
+    }if(ScreenUtils.isIOSNomarl){
+        return ScreenUtils.height/7
+    }if(ScreenUtils.isIOSP){
+        return ScreenUtils.height/6
+    }if(ScreenUtils.isIOSX){
+        return ScreenUtils.height/6+10
+    }else {
+        return 80
+    }
+}
+
+const bottomTop=()=>{
+    if(ScreenUtils.isIOSSmall){
+        return 10
+    }if(ScreenUtils.isIOSNomarl){
+        return -30
+    }if(ScreenUtils.isIOSP){
+        return -50
+    }if(ScreenUtils.isIOSX){
+        return -100
+    }else {
+        return 0
+    }
+}
 class QrCodeScanPage extends BasePage {
 
     constructor(props) {
@@ -25,6 +53,7 @@ class QrCodeScanPage extends BasePage {
             isGetScanResult:false,
         };
     }
+
 
 
     scanResult = (e) => {
@@ -50,7 +79,7 @@ class QrCodeScanPage extends BasePage {
             <Header navigation={this.props.navigation} backgroundColor={colors.transparent} title='扫一扫' isShowLine={false}
                     isWhiteArrow={true} textColor={colors.white} rightIcon={three_points} onRightPress={this.onRightPress.bind(this)}/>
             <View style={styles.header_container}>
-                <Text style={{color: 'white'}}>请将下框对准二维码</Text>
+                <Text style={{color: colors.white}}>请将下框对准二维码</Text>
             </View>
 
         </View>)
@@ -100,12 +129,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:colors.transparent
+        backgroundColor:colors.transparent,
+        marginTop:bottomTop()
     },
     header_container: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 85,
+        marginTop: headerTop(),
         backgroundColor:colors.transparent
     },
     hint_text_style: {

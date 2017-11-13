@@ -58,7 +58,7 @@ dependencies {
     compile rootProject.ext.dependencies["pickerview"]
     compile rootProject.ext.dependencies["mock_api"]
     compile rootProject.ext.dependencies["multidex"]
-//    compile rootProject.ext.dependencies["bugly_crashreport"]
+    //    compile rootProject.ext.dependencies["bugly_crashreport"]
     compile rootProject.ext.dependencies["bugly_update"]
     compile rootProject.ext.dependencies["bugly_nativecrashreport"]
     compile rootProject.ext.dependencies["ucrop"]
@@ -79,10 +79,10 @@ dependencies {
     compile rootProject.ext.dependencies["one_push_huawei"]
     compile rootProject.ext.dependencies["one_push_xiaomi"]
     compile rootProject.ext.dependencies["agentweb"]
-
     compile 'com.facebook.react:react-native:+'
-    compile files('libs/zxing.jar')
+    //    compile files('libs/zxing.jar')
     compile files('libs/aliyun-oss-sdk-android-2.3.0.jar')
+    compile project(':react-native-camera')
 }
 repositories {
     mavenCentral()
