@@ -34,7 +34,7 @@ const CommonButton = props => {
     });
 
     return (
-        <TouchableOpacity activeOpacity={0.8}  {...attributes}>
+        <TouchableOpacity  {...attributes}>
             <View style={styles.container}>
                 <Text style={styles.value}>
                     {value}

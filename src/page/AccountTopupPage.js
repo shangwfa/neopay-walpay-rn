@@ -10,7 +10,6 @@ import {
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
-import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
 import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
@@ -34,7 +33,7 @@ class AccountTopupPage extends BasePage {
     }
 
     render() {
-        const nameData = {'key': '金额', 'placeholder': '请输入充值金额', isLine: true}
+        const nameData = {'key': '金额', 'placeholder': '请输入充值金额'}
         const dataV  = {
                 imgUrl: '',
                 bankName: '中国工商银行',
@@ -44,18 +43,10 @@ class AccountTopupPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='充值' rightTitle='=='/>
-
-                <ChoseBankCardItem style = {styles.top} imgIconUrl = {dataV.imgUrl} bankNameValue = {dataV.bankName} cardNoValue = {dataV.bankCardNo}
-                    click = {()=>this.onPress()}
-                />
-
+                <ChoseBankCardItem style = {styles.top} imgIconUrl = {dataV.imgUrl} bankNameValue = {dataV.bankName} cardNoValue = {dataV.bankCardNo} click = {()=>this.onPress()}/>
                 <View style = {styles.middleView}/>
-
-                <CommonInput data = {nameData} onChangeText={(text) => this.onChangeText(text)}
-                />
-
+                <CommonInput data = {nameData} onChangeText={(text) => this.onChangeText(text)}/>
                 <Text style = {styles.remind}>*单日充值限额50000.00元</Text>
-
                 <CommonButton value='充值' style={{marginTop:50 }} onPress={()=>this.goTopup()}/>
 
             </View>
