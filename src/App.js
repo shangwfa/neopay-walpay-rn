@@ -100,7 +100,6 @@ class App extends Component {
                         console.log("从页面"+prevScreen+"跳转页面"+currentScreen)
                     }
                 }}/>
-                <View style={{height:200,width:ScreenUtils.width,position:'absolute',backgroundColor:'red'}}></View>
             </View>
 
         );
