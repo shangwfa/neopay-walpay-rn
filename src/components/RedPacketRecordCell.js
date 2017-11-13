@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
         height:ScreenUtils.width*197.0/375.0,
     },
     backgroundImg:{
-
+        width:ScreenUtils.width,
+        height:ScreenUtils.width*197.0/375.0,
     },
     titleView:{
         backgroundColor:'transparent'

@@ -30,6 +30,7 @@ export const RouterPaths = {
     CREDITINPUT_PAGE: 'CreditCardInput',
     RED_PACKET_SQUARE: "redPacketSquare",
     CONTACTS_PAGE: 'contacts',
+    RED_PACKET_RECORD_LIST: 'rpRecordList',
 };
 
 

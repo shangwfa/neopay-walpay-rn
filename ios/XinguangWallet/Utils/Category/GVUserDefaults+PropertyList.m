@@ -20,4 +20,5 @@
 @dynamic authStatus;
 
 @dynamic runCount;
+@dynamic RNRouter;
 @end
