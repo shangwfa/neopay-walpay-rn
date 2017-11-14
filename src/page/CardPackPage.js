@@ -11,29 +11,27 @@ import {
     Image, FlatList, TouchableOpacity, ScrollView, TouchableWithoutFeedback,
 } from 'react-native'
 import Header from "../components/Header";
-import ViewPager from "react-native-viewpager";
 import ScreenUtils from "../utils/ScreenUtils";
 import BasePage from "./BasePage";
 import img_activity from "../res/img/img_activity.png"
 import ApiManager from "../utils/ApiManager";
 import {RouterPaths} from "../constants/RouterPaths";
+import ViewPager from "../components/ViewPager";
 
 class CardPackPage extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
-            dataSourceViewPage: new ViewPager.DataSource({
-                pageHasChanged: (p1, p2) => p1 !== p2,
-            }),
-            sourceDataFlatList: []
+            dataSourceViewPage: [],
+            sourceDataFlatList: [],
         };
     }
 
     componentWillMount() {
         ApiManager.getMerchantBannerList({}, (data) => {
             this.setState({
-                dataSourceViewPage: this.state.dataSourceViewPage.cloneWithPages(data)
+                dataSourceViewPage: data
             });
         });
         ApiManager.getUserMerchantList({}, (data) => {
@@ -50,13 +48,16 @@ class CardPackPage extends BasePage {
                 <ScrollView
                     showsVerticalScrollIndicator={false}>
                     {/*轮播*/}
-                    <View style={[styles.page]}>
-                        <ViewPager
-                            dataSource={this.state.dataSourceViewPage}
-                            renderPage={this._renderPage}
-                            isLoop={true}
-                            autoPlay={true}/>
-                    </View>
+                    <ViewPager
+                        style={[styles.page]}
+                        dotStyle={{height: 6, width: 6}}
+                        activeDotStyle={{height: 6, width: 12, borderRadius: 6}}
+                        dotColor='#FFF'
+                        activeDotColor='#F00'
+                        arrayData={this.state.dataSourceViewPage}
+                        renderItem={this._renderPage}
+                        autoplay={true}
+                    />
                     {/*热门活动*/}
                     <View style={styles.title_activity}>
                         <Image
@@ -82,23 +83,23 @@ class CardPackPage extends BasePage {
         );
     }
 
-    _renderPage = (data, pageID) => {
-        if (!data) {
+    _renderPage = (item) => {
+        if (!item) {
             return null;
         }
         return (
             <TouchableWithoutFeedback
                 style={styles.page}
                 activeOpacity={0.9}
-                onPress={this._handleImageClick.bind(this, pageID)}>
+                onPress={this._handleImageClick.bind(this, item)}>
                 <Image
                     style={[styles.page, {resizeMode: "cover"}]}
-                    source={{uri: data.imageUrl}}/>
+                    source={{uri: item.imageUrl}}/>
             </TouchableWithoutFeedback>
         );
     };
-    _handleImageClick = (pageID) => {
-        alert("pageID= " + pageID);
+    _handleImageClick = (item) => {
+        alert("活动H5:" + item.linkUrl);
     };
     _renderViewPageIndicator = () => {
 
@@ -118,14 +119,11 @@ class CardPackPage extends BasePage {
         );
     };
     _handleFlatListItemClick = (item, index) => {
-        console.log("index= " + index);
-        //活动跳转详情
-        switch (index) {
-            case 1://话费、流量充值记录
-                this.props.navigation.navigate(RouterPaths.CHARGE_FLUX_RESULT, {"pageTitle": "手机充值"});
-                break;
-        }
-
+        let params = {
+            merchantNo: item.merchantNo,
+            merchantName: item.merchantName,
+        };
+        this.props.navigation.navigate(RouterPaths.MERCHANT_ACTIVITY_LIST, params);
     };
     _keyExtractor = (item, index) => {
         return index;

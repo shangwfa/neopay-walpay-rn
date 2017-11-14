@@ -19,7 +19,7 @@ class PhoneTopUpPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='手机充值' rightTitle="充值记录" onRightPress={()=>{
-                    this.props.navigation.navigate(RouterPaths.CHARGE_FLUX_RESULT, {"pageType": 0})
+                    this.props.navigation.navigate(RouterPaths.CHARGE_FLUX_RESULT, {pageType: 0})
                 }}/>
                 <PhoneTopUpTabNavigator/>
             </View>

@@ -21,28 +21,22 @@ import colors from "../constants/colors";
 import BasePage from "./BasePage";
 import ScreenUtils from "../utils/ScreenUtils";
 import Space from "../components/Space";
-import ViewPager from "react-native-viewpager";
 import ApiManager from "../utils/ApiManager";
 import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
 import {RouterPaths} from "../constants/RouterPaths";
+import ViewPager from "../components/ViewPager";
 class BigRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            dataSourceViewPage: new ViewPager.DataSource({
-                pageHasChanged: (p1, p2) => p1 !== p2,
-            })
+            dataSourceViewPage: []
         };
     }
 
     componentWillMount() {
         ApiManager.getSquareRedPacketList({}, (data) => {
-            let mData = [];
-            for (let i = 0; i < 5; i++) {
-                mData.push(data[i]);
-            }
             this.setState({
-                dataSourceViewPage: this.state.dataSourceViewPage.cloneWithPages(mData)
+                dataSourceViewPage: data.slice(0, 5)
             });
         });
     }
@@ -74,14 +68,14 @@ class BigRedPacketPage extends BasePage {
         );
     }
 
-    _renderPage = (data, pageID) => {
+    _renderPage = (item) => {
         return (
             <TouchableOpacity
                 style={[styles.page]}
                 activeOpacity={0.7}
-                onPress={this._handleViewPageItemClick.bind(this, pageID)}>
+                onPress={this._handleViewPageItemClick.bind(this, item)}>
                 <RedPacketTypeComponent
-                    redPacketData={data}/>
+                    redPacketData={item}/>
             </TouchableOpacity>
         );
     };
@@ -137,16 +131,21 @@ class BigRedPacketPage extends BasePage {
                 {/*轮播*/}
                 <View style={[styles.page, styles.container_view_pager]}>
                     <ViewPager
-                        dataSource={this.state.dataSourceViewPage}
-                        renderPage={this._renderPage}
-                        isLoop={true}
-                        autoPlay={true}/>
+                        style={[styles.page]}
+                        dotStyle={{height: 6, width: 6}}
+                        activeDotStyle={{height: 6, width: 12, borderRadius: 6}}
+                        dotColor='#FFF'
+                        activeDotColor='#F00'
+                        arrayData={this.state.dataSourceViewPage}
+                        renderItem={this._renderPage}
+                        autoplay={true}
+                    />
                 </View>
             </View>
         );
     };
-    _handleViewPageItemClick = (pageID) => {
-        alert("pageID= " + pageID);
+    _handleViewPageItemClick = (item) => {
+        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {info: item});
     };
     _handleAllRedPacketClick = () => {
         this.props.navigation.navigate(RouterPaths.RED_PACKET_SQUARE);

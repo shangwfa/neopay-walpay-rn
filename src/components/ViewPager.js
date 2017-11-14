@@ -12,8 +12,8 @@ import Swiper from 'react-native-swiper'
 
 const ViewPager = props => {
     const {
-        horizontal=true,
-        autoplay=false,
+        horizontal = true,
+        autoplay = false,
         dotStyle,
         activeDotStyle,
         dotColor,
@@ -24,14 +24,13 @@ const ViewPager = props => {
     } = props
 
     const styles = StyleSheet.create({
-        wrapper:{
-        },
+        wrapper: {},
     });
 
-    const renderItems=()=>{
-        if(arrayData){
-            let itemViews=[]
-            for (let item of arrayData){
+    const renderItems = () => {
+        if (arrayData) {
+            let itemViews = []
+            for (let item of arrayData) {
                 itemViews.push(renderItem(item))
             }
             return itemViews
@@ -41,8 +40,13 @@ const ViewPager = props => {
 
     return (
         <View  {...attributes}>
-            <Swiper style={styles.wrapper}   horizontal={horizontal} autoplay={autoplay}
-                    dotStyle={dotStyle} activeDotStyle={activeDotStyle} dotColor={dotColor}
+            <Swiper style={styles.wrapper}
+                    paginationStyle={{marginBottom: -20}}
+                    horizontal={horizontal}
+                    autoplay={autoplay}
+                    dotStyle={dotStyle}
+                    activeDotStyle={activeDotStyle}
+                    dotColor={dotColor}
                     activeDotColor={activeDotColor}>
                 {renderItems()}
             </Swiper>
@@ -52,9 +56,9 @@ const ViewPager = props => {
 
 ViewPager.propTypes = {
     arrayData: PropTypes.array,
-    renderItem:PropTypes.func,
-    dotStyle:PropTypes.any,
-    activeDotStyle:PropTypes.any,
+    renderItem: PropTypes.func,
+    dotStyle: PropTypes.any,
+    activeDotStyle: PropTypes.any,
 
 }
 

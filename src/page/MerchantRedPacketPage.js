@@ -63,7 +63,7 @@ class MerchantRedPacketPage extends BasePage {
     };
     _clickItem = (item) => {
         // 红包详情跳转
-        this.props.navigation.navigate(RouterPaths.TRANSACTION_DETAILS, {info: item.packetCode});
+        this.props.navigation.navigate(RouterPaths.TRANSACTION_DETAILS, {packetCode: item.packetCode});
     };
     _renderItem = (item) => {
 

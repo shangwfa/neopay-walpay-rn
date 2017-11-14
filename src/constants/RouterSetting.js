@@ -50,6 +50,7 @@ import RpTitleStylePage from '../page/RpTitleStylePage'
 import LottieDemo from '../page/LottieDemoPage'
 import SendRedPacket from '../page/SendRedPacketPage'
 import ViewpageDemo from '../page/ViewpageDemoPage'
+import InstructionsPage from "../page/InstructionsPage";
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -62,6 +63,7 @@ const RouterSetting = {
     feedback: {screen: Feedback},
     setting: {screen: Setting},
     myOrder: {screen: MyOrder},
+    instructions: {screen: InstructionsPage},
     panResponderDemo: {screen: PanResponderDemo},
     redList: {screen: RedList},
     chargeFluxResult: {screen: ChargeFluxResult},
@@ -93,17 +95,17 @@ const RouterSetting = {
     payResult: {screen: PayResultPage},
     merchantActivityList: {screen: MerchantActivityList},
     creditCardInput: {screen: CreditCardInput},
-    phoneTopUp:{screen:PhoneTopUpPage},
-    redPacketReady:{screen:RedPacketReady},
-    redPacketRecord:{screen:RedPacketRecord},
-    contacts:{screen:Contacts},
-    redPacketReceiver:{screen:RedPacketReceiver},
-    rpDetail:{screen:RpDetailPage},
-    rpRecordList:{screen:RpRecordListPage},
-    topupRecordList:{screen:TopupRecordListPage},
-    rpTitleStyle:{screen:RpTitleStylePage},
-    lottieDemo:{screen:LottieDemo},
-    viewpageDemo:{screen:ViewpageDemo}
+    phoneTopUp: {screen: PhoneTopUpPage},
+    redPacketReady: {screen: RedPacketReady},
+    redPacketRecord: {screen: RedPacketRecord},
+    contacts: {screen: Contacts},
+    redPacketReceiver: {screen: RedPacketReceiver},
+    rpDetail: {screen: RpDetailPage},
+    rpRecordList: {screen: RpRecordListPage},
+    topupRecordList: {screen: TopupRecordListPage},
+    rpTitleStyle: {screen: RpTitleStylePage},
+    lottieDemo: {screen: LottieDemo},
+    viewpageDemo: {screen: ViewpageDemo}
 }
 
 export default RouterSetting

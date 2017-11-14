@@ -107,12 +107,28 @@ class SendRedPacketPage extends BasePage {
                     contentFront={this.state.contentFront}
                     contentBack={this.state.contentBack}
                     payTypeContent={this.state.payTypeContent}
+                    selectPayStyleClick={this._handleSelectPayStyleClick}
                     onClose={this._handlePayOnCloseClick}
                     onEnd={this._handlePayEndClick}/>
             </View>
         );
     }
 
+    emitEvent = (event) => {
+        switch (event.type) {
+            case 0://选择红包主题
+                this.setState({
+                    redTheme: event.redTheme
+                });
+                break;
+            case 1://payTypeDesc 选择银行卡
+                this.setState({
+                    payTypeContent: event.payTypeContent
+                });
+                break;
+        }
+
+    };
     _renderLineView = () => {
         return <View style={{backgroundColor: "#FFF"}}>
             <View style={{height: 1, marginLeft: 13, backgroundColor: "#F5F5F5",}}/>
@@ -151,6 +167,15 @@ class SendRedPacketPage extends BasePage {
             );
         }
     };
+    _handleSelectPayStyleClick = () => {
+        this.setState({
+            isShowPay: false
+        });
+        let params = {
+            pageType: 1
+        };
+        this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE, params);
+    };
     _handlePayEndClick = (text) => {
         let request = {
             packetCode: this.state.redPacketSourceData.packetCode,
@@ -167,6 +192,7 @@ class SendRedPacketPage extends BasePage {
             this.setState({
                 isShowPay: false,
             });
+            this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, {info: this.state.payResultSourceData});
         }
     };
     _handlePayOnForgetPwdClick = () => {
@@ -215,7 +241,7 @@ class SendRedPacketPage extends BasePage {
     _handleTextInputClick = () => {
     };
     _handleRedThemeClick = (item) => {
-        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE, {"themeUrl": this.state.redTheme});
+        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE, {themeUrl: this.state.redTheme});
     };
     _handleRedPacketListener = (text) => {
     };
@@ -240,13 +266,9 @@ class SendRedPacketPage extends BasePage {
     };
     _handleButtonClick = () => {
         this._handleCheckText();
-        this._handleCreateRedPacket();
-        if (this.state.redPacketSourceData) {
-            this._handleShowPayModal();
-        }
     };
     _handleRightArrowClick = () => {
-        alert("红包规则");
+        this.props.navigation.navigate(RouterPaths.INSTRUCTIONS_PAGE);
     };
     _handleCheckText = () => {
         if (StringUtils.isEmpty(this.state.redPacketNum.toString())
@@ -274,8 +296,6 @@ class SendRedPacketPage extends BasePage {
             });
             return;
         }
-    };
-    _handleCreateRedPacket = () => {
         let request = {
             bossType: 1,
             packetType: this.state.isRandomRedPacket ? 1 : 2,
@@ -289,6 +309,9 @@ class SendRedPacketPage extends BasePage {
                 redPacketSourceData: data
             });
         });
+        if (this.state.redPacketSourceData) {
+            this._handleShowPayModal();
+        }
     };
     _handleShowPayModal = () => {
         let contentFront = `实付金额`;

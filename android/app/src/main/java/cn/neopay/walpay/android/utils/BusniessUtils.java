@@ -4,11 +4,11 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.xgjk.common.lib.manager.storage.StoreManager;
-import com.xgjk.common.lib.utils.ToastUtils;
 
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
+import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
  * Created by shangwf on 2017/5/18.
@@ -32,11 +32,8 @@ public class BusniessUtils {
             return;
         }
 
-        if (null == userInfoBean.getAuthStatus() || 1 != userInfoBean.getAuthStatus()) { //未认证
-            DialogManager.getSingleton().showCertificationDialog(context, () -> {
-                //TODO 认证界面 销毁当前页  去掉默认值
-                ToastUtils.show("实名认证");
-            });
+        if (null == userInfoBean.getAuthStatus() || 2 != userInfoBean.getAuthStatus()) { //未认证
+            DialogManager.getSingleton().showCertificationDialog(context, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIND_BANK_CARD));
         } else {//认证
             iCertificationCallBack.authenticated();
         }

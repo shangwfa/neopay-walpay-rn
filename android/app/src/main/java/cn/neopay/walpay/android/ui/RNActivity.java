@@ -53,50 +53,7 @@ public class RNActivity extends BaseRNActivity {
     @Nullable
     public Bundle getLaunchOptions() {
         Bundle bundle = new Bundle();
-        switch (activityParams.getRnPage()) {
-            case PageType.PERSONAL_INFO_PAGE:
-                initLaunchOptions(bundle, PageType.PERSONAL_INFO_PAGE);
-                break;
-            case PageType.SETTING_PAGE:
-                initLaunchOptions(bundle, PageType.SETTING_PAGE);
-                break;
-            case PageType.MY_ORDER_PAGE:
-                initLaunchOptions(bundle, PageType.MY_ORDER_PAGE);
-                break;
-            case PageType.ACTIVITY_LIST_PAGE:
-                initLaunchOptions(bundle, PageType.ACTIVITY_LIST_PAGE);
-                break;
-            case PageType.ACTIVITY_RED_LIST_PAGE:
-                initLaunchOptions(bundle, PageType.ACTIVITY_RED_LIST_PAGE);
-                break;
-            case PageType.MY_LOTTER_RECORD:
-                initLaunchOptions(bundle, PageType.MY_LOTTER_RECORD);
-                break;
-            case PageType.MY_ASSET:
-                initLaunchOptions(bundle, PageType.MY_ASSET);
-                break;
-            case PageType.MY_BANK:
-                initLaunchOptions(bundle, PageType.MY_BANK);
-                break;
-            case PageType.CARD_PACK_PAGE:
-                initLaunchOptions(bundle, PageType.CARD_PACK_PAGE);
-                break;
-            case PageType.PAY_CODE_PAGE:
-                initLaunchOptions(bundle, PageType.PAY_CODE_PAGE);
-                break;
-            case PageType.PAY_SCAN_QR_CODE:
-                initLaunchOptions(bundle, PageType.PAY_SCAN_QR_CODE);
-                break;
-            case PageType.BALANCE:
-                initLaunchOptions(bundle, PageType.BALANCE);
-                break;
-            case PageType.PHONE_TOPUP_PAGE:
-                initLaunchOptions(bundle, PageType.PHONE_TOPUP_PAGE);
-                break;
-            case PageType.BIG_RED_PAGE:
-                initLaunchOptions(bundle, PageType.BIG_RED_PAGE);
-                break;
-        }
+        initLaunchOptions(bundle, activityParams.getRnPage());
         return bundle;
     }
 
@@ -182,8 +139,8 @@ public class RNActivity extends BaseRNActivity {
         String BIG_RED_PAGE = "bigRedPacket";
         String PHONE_TOPUP_PAGE = "phoneTopUp";
         String PAY_CODE_PAGE = "payCode";
-        String BALANCE="myBalance";
-        String PHONE_CHARGE_PAGE="phoneTopUp";
+        String BALANCE = "myBalance";
+        String BIND_BANK_CARD = "bindBankCard";
     }
 
     public static void jumpToRNPage(Context context, String pageType) {
