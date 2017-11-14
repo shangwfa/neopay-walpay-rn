@@ -13,7 +13,7 @@ class BasePage extends Component {
 
     /*event={type:'xxxxx',data:{}*/
     componentDidMount() {
-        DeviceEventEmitter.addListener(nav.state.routeName, (event) => {
+        this.emitterListener=DeviceEventEmitter.addListener(nav.state.routeName, (event) => {
             this.emitEvent(event)
         })
     }
@@ -21,6 +21,11 @@ class BasePage extends Component {
      * 1.emitEvent=(event)=>{console.log(event)}
      * 2.DeviceEventEmitter.emit('activityList',{type:'xxx',{a:'xxxxx',b:'yyyyyy'}})
      * */
+
+    componentWillUnmount() {
+        // 移除
+        this.emitterListener.remove();
+    }
 }
 
 
