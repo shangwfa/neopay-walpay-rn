@@ -86,6 +86,7 @@ class PhoneTopUpMoneyView extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={{backgroundColor:'#DADADA',height:1}}></View>
                 <View style={styles.phoneNumberTextInputView}>
                     <TextInput style={styles.phoneNumberTextInput}
                                placeholder={'请输入手机号'}
@@ -188,6 +189,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor:'white',
+        marginTop:0,
     },
     phoneNumberTextInputView:{
         flexDirection:'row',
