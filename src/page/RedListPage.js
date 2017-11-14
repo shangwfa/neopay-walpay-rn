@@ -61,7 +61,7 @@ class RedListPage extends BasePage {
     };
     _clickItem = (item) => {
         // 红包详情跳转
-        this.props.navigation.navigate(RouterPaths.TRANSACTION_DETAILS, {info: item.packetCode});
+        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
     };
     _renderItem = (item) => {
         let isShow = item.disPlayDate;

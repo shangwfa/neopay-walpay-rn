@@ -55,9 +55,9 @@ class ReceiveRedPacketPage extends BasePage {
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
                 />
-                {/*<ReceiveRedPacketModal*/}
-                {/*isShow={this.state.isShowProcess}*/}
-                {/*/>*/}
+                <ReceiveRedPacketModal
+                    isShow={this.state.isShowProcess}
+                />
             </View>
         );
     }
@@ -72,18 +72,19 @@ class ReceiveRedPacketPage extends BasePage {
         end();//刷新成功后需要调用end结束刷新
     };
     _clickItem = (item) => {
-        // this.setState({
-        //     isShowProcess: true
-        // });
-        // setInterval(() => {
-        //     this.setState({
-        //         isShowProcess: false
-        //     })
-        // }, 3000);
-        this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE);
+        this.setState({
+            isShowProcess: true
+        });
+        setTimeout(() => {
+            this.setState({
+                isShowProcess: false
+            });
+            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
+        }, 3000);
+
     };
     _handleRightArrowClick = () => {
-        alert("红包规则");
+        this.props.navigation.navigate(RouterPaths.INSTRUCTIONS_PAGE);
     };
     _renderItem = (item) => {
         return (
