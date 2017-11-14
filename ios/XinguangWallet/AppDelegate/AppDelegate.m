@@ -92,6 +92,8 @@
 
 #pragma clang diagnostic pop
 
+
+//临时增加RN服务器切换地址
 -(NSArray *)jsCodeLocationArr
 {
     if (!_jsCodeLocationArr) {
@@ -107,8 +109,6 @@
     }
     return _jsCodeLocationArr;
 }
-
-
 
 
 @end
