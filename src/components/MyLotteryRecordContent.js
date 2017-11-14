@@ -51,6 +51,7 @@ const MyLotteryRecordTab = TabNavigator({
         activeTintColor: colors.one_color,
         inactiveTintColor: colors.black,
         swipeEnabled:true,
+        allowFontScaling:false,
         style: {
             backgroundColor: 'transparent',
         },

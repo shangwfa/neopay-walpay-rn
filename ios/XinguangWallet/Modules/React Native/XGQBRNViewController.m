@@ -25,6 +25,9 @@
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
+    //RN页面禁用IQKeyboardManager
+    [IQKeyboardManager sharedManager].enable = NO;
+    
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNative) name:kNotificationRNJumpBackToNative object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetLoginPwd) name:kNotificationRNJumpBackToNativeResetLoginPwd object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetPayPwd) name:kNotificationRNJumpBackToNativeResetPayPwd object:nil];
