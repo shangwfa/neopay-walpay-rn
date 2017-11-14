@@ -55,6 +55,9 @@ class PaymentPage extends BasePage {
                 }
             })
         }
+        if(ScreenUtils.isIOSSmall){
+            this.setState({isHaveNav:true})
+        }
     }
     renderTop = () => {
         return <View style={this.state.isHaveNav?styles.top_container_nav:styles.top_container}>
@@ -176,7 +179,8 @@ class PaymentPage extends BasePage {
 const styles = StyleSheet.create({
     keyboard_container:{
         height:216,
-        backgroundColor:'blue'
+        backgroundColor:'blue',
+        marginBottom:ScreenUtils.isIOSX?18:0
     },
     input: {
         marginLeft: 10,

@@ -3,7 +3,6 @@ import Home from "../page/HomePage"
 import ChangeName from '../page/ChangeNamePage'
 import ActivityList from '../page/ActivityListPage'
 import ModalDemo from '../page/ModalDemoPage'
-import QRCode from '../page/QRCodePage'
 import PersonalInfo from "../page/PersonalInfoPage"
 import BindBankCard from '../page/BindBankCardPage'
 import Feedback from '../page/FeedbackPage'
@@ -58,7 +57,6 @@ const RouterSetting = {
     changeName: {screen: ChangeName},
     activityList: {screen: ActivityList},
     modal: {screen: ModalDemo},
-    qrCode: {screen: QRCode},
     personalInfo: {screen: PersonalInfo},
     bindBankCard: {screen: BindBankCard},
     feedback: {screen: Feedback},
