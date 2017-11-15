@@ -26,6 +26,12 @@
 //RN跳回一级页面
 #define kNotificationRNJumpBackToFirstLevel @"RNJumpBackToFirstLevel"
 
+//Test UINavigationController push之后通知tabbar禁用自定义右划手势
+#define kNotificationNavPushToSecondLevel @"NavPushToSecondLevel"
+
+//Test UINavigationController push回来之后通知tabbar启用自定义右划手势
+#define kNotificationNavPopToFirstLevel @"NavPopToFirstLevel"
+
 
 //从注册页面跳转至重置密码页面
 

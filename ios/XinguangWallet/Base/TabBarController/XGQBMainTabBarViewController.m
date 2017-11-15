@@ -28,6 +28,8 @@
 
 @property (nonatomic,strong) NSMutableArray *VCs;
 
+@property (nonatomic,strong) UIPanGestureRecognizer *panToRightGes;
+
 @end
 
 @implementation XGQBMainTabBarViewController
@@ -46,7 +48,23 @@
 //    panToRight.edges = UIRectEdgeLeft;
 
     UIPanGestureRecognizer *panToRight = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panToRight:)];
+    _panToRightGes = panToRight;
     [self.view addGestureRecognizer:panToRight];
+    
+    [kNotificationCenter addObserver:self selector:@selector(removePanToRightGes) name:kNotificationNavPushToSecondLevel object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(addPanToRightGes) name:kNotificationNavPopToFirstLevel object:nil];
+}
+
+-(void)removePanToRightGes
+{
+    if (_panToRightGes) {
+        [self.view removeGestureRecognizer:_panToRightGes];
+    }
+}
+-(void)addPanToRightGes{
+    if (_panToRightGes) {
+        [self.view addGestureRecognizer:_panToRightGes];
+    }
 }
 
 -(void)panToRight:(UIPanGestureRecognizer*)sender

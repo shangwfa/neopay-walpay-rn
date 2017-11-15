@@ -57,12 +57,24 @@
         [leftBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         // 右上角的更多
         //        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回首页" style:UIBarButtonItemStyleDone target:self action:@selector(more)];
+    
+        //给tabbar发送通知,禁用自定义优化手势
+        [kNotificationCenter postNotificationName:kNotificationNavPushToSecondLevel object:nil];
+    
     }
     [super pushViewController:viewController animated:animated];
 }
 - (void)back
 {
     [self popViewControllerAnimated:YES];
+}
+
+-(UIViewController *)popViewControllerAnimated:(BOOL)animated
+{
+    if (self.viewControllers.count==2) {
+        [kNotificationCenter postNotificationName:kNotificationNavPopToFirstLevel object:nil];
+    }
+    return [super popViewControllerAnimated:animated];
 }
 
 
