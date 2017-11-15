@@ -25,6 +25,7 @@
 		42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C621FBA917A00E5AB73 /* UIView+Transform.m */; };
 		42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C671FBAC84F00E5AB73 /* XGQBSideView.m */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
+		4293F4801FBBE1F4008C1531 /* XGQBHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4293F47F1FBBE1F4008C1531 /* XGQBHomeTableViewController.m */; };
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
 		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
 		42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */; };
@@ -140,6 +141,8 @@
 		42655C671FBAC84F00E5AB73 /* XGQBSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideView.m; sourceTree = "<group>"; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
 		428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
+		4293F47E1FBBE1F4008C1531 /* XGQBHomeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTableViewController.h; sourceTree = "<group>"; };
+		4293F47F1FBBE1F4008C1531 /* XGQBHomeTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTableViewController.m; sourceTree = "<group>"; };
 		42990E741F998F7C00B20EBA /* XGQBNoContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNoContentViewController.h; sourceTree = "<group>"; };
 		42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNoContentViewController.m; sourceTree = "<group>"; };
 		42990E771F99942000B20EBA /* XGQBNetworkFailureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNetworkFailureViewController.h; sourceTree = "<group>"; };
@@ -734,6 +737,8 @@
 				4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */,
 				4210AF3E1F95CE6D008132C5 /* XGQBCommissionViewController.h */,
 				4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */,
+				4293F47E1FBBE1F4008C1531 /* XGQBHomeTableViewController.h */,
+				4293F47F1FBBE1F4008C1531 /* XGQBHomeTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1207,6 +1212,7 @@
 				6AF9E44D1F78E39E005E901C /* XGQBMainTabBarViewController.m in Sources */,
 				42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */,
 				6A3843CC1F79E46600BFE9B4 /* XGQBLoginViewController.m in Sources */,
+				4293F4801FBBE1F4008C1531 /* XGQBHomeTableViewController.m in Sources */,
 				6AE813A41F7B4D550044B072 /* XGQBAdViewController.m in Sources */,
 				6AF9E4831F78EA3B005E901C /* XGQBMineViewController.m in Sources */,
 				4255866E1F94A879002E039B /* XGQBMineItemCell.m in Sources */,

@@ -8,11 +8,11 @@
 
 #import "XGQBHomeViewController.h"
 #import "XGQBLoginViewController.h"
+#import "XGQBHomeTableViewController.h"
 
 #import "XGQBHomeTitleView.h"
-#import "XGQBHomeCellView.h"
-#import "XGQBHomeBannerView.h"
-#import "XGQBHomeCellBtn.h"
+
+
 
 #import "XGQBIDAlertViewController.h"
 #import "XGQBIDAlertTransiton.h"
@@ -24,8 +24,9 @@
 #import "XGQBRNViewController.h"
 
 
-@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate, XGQBHomeCellViewDelegate>
+@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate>
 
+@property (nonatomic,strong) XGQBHomeTableViewController *homeTableVC;
 
 @end
 
@@ -36,6 +37,9 @@
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = kViewBgColor;
+    
+    XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]init];
+    _homeTableVC = homeTableVC;
 
     [self setUpViewComponents];
     [self checkIDStatus];
@@ -55,16 +59,6 @@
     self.view.transform = CGAffineTransformIdentity;
 }
 
-//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    self.view.transform = CGAffineTransformMakeTranslation(100, 200);
-//
-//}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - 设置视图组件
 -(void)setUpViewComponents
 {
@@ -76,29 +70,9 @@
     [homeTitleView.accountBtn addTarget:self action:@selector(accountBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [homeTitleView.calenderBtn addTarget:self action:@selector(calenderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
-    //添加滚动视图
-    UIScrollView *homeScrollView = [[UIScrollView alloc]init];
-//    homeScrollView.contentSize= CGSizeMake(kScreenWidth, 400);
-    [self.view addSubview:homeScrollView];
+    [self.view addSubview:_homeTableVC.tableView];
     
-    //添加滚动视图容器视图
-    UIView *homeScrollViewContainer = [[UIView alloc]init];
-    [homeScrollView addSubview:homeScrollViewContainer];
-    
-    //主业务图标视图
-    XGQBHomeCellView *homeCellView = [XGQBHomeCellView new];
-    homeCellView.delegate = self;
-    [homeScrollViewContainer addSubview:homeCellView];
-
-    
-    //广告视图
-    XGQBHomeBannerView *homeADView = [XGQBHomeBannerView new];
-    [homeADView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [homeScrollViewContainer addSubview:homeADView];
-    
-    //添加约束
     kWeakSelf(self);
-    
     [homeTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth/2.0));
@@ -106,30 +80,12 @@
         make.left.equalTo(weakself.view);
     }];
     
-    [homeScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_homeTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(weakself.view);
         make.top.equalTo(homeTitleView.mas_bottom);
-        make.left.equalTo(weakself.view);
-        make.bottom.equalTo(weakself.view).with.offset(-44);
-        make.right.equalTo(weakself.view);
     }];
     
-    [homeScrollViewContainer mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.equalTo(homeScrollView);
-        make.width.equalTo(homeScrollView);
-    }];
-
-    [homeCellView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.584));
-        make.top.equalTo(homeScrollViewContainer);
-        make.left.equalTo(homeScrollViewContainer);
-    }];
     
-    [homeADView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.557));
-        make.top.equalTo(homeCellView.mas_bottom).with.offset(10);
-        make.left.equalTo(homeScrollViewContainer);
-        make.bottom.equalTo(homeScrollViewContainer).with.offset(0);
-    }];
 }
 
 #pragma mark - 处理按钮点击
@@ -159,14 +115,6 @@
     XGQBCommissionViewController *sVC = [XGQBCommissionViewController new];
     [self.navigationController pushViewController:sVC animated:YES];
     
-//    NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",@"18668180337"]];
-//    [[UIApplication sharedApplication]openURL: phoneURL];
-//
-//    UIWebView * callWebview = [[UIWebView alloc]init];
-//    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:10010"]]];
-//    [[UIApplication sharedApplication].keyWindow addSubview:callWebview];
-
-    
 }
 -(void)moreBtnClicked
 {
@@ -174,25 +122,6 @@
     RNVC.pageType = @"activityList";
     [self.navigationController pushViewController:RNVC animated:YES];
     
-}
-
-#pragma mark - 按钮点击代理
--(void)btnClicked:(XGQBHomeCellBtn *)btn
-{
-    if ([btn.titleLabel.text isEqualToString:@"卡包"]) {
-        
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType =@"cardPack";
-        [self.navigationController pushViewController:RNVC animated:YES];
-    }else if([btn.titleLabel.text isEqualToString:@"手机充值"]){
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"phoneTopUp";
-        [self.navigationController pushViewController:RNVC animated:YES];
-    }else if([btn.titleLabel.text isEqualToString:@"大红包"]){
-        XGQBRNViewController *RNVC =[XGQBRNViewController new];
-        RNVC.pageType = @"bigRedPacket";
-        [self.navigationController pushViewController:RNVC animated:YES];
-    }
 }
 
 #pragma mark - 实名认证弹框
