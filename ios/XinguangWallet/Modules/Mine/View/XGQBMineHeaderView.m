@@ -19,7 +19,7 @@
         UIImageView *bgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_beijing2"]];
         
         //头像
-        UIImageView *headerView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test_touxiang"]];
+        UIImageView *headerView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_touxiang"]];
         headerView.size = CGSizeMake(CGRectGetWidth(frame)*0.198, CGRectGetWidth(frame)*0.198);
         kViewRadius(headerView, headerView.size.width/2);
         
