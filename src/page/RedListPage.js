@@ -13,23 +13,20 @@ import {RouterPaths} from "../constants/RouterPaths";
 import ApiManager from "../utils/ApiManager";
 import {SwRefreshListView} from "react-native-swRefresh";
 import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
+import RefreshList, {RefreshStatus} from "../components/RefreshList";
 
 class RedListPage extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
-            dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
-            page: 0,
+            dataSource: [],
+            footerStatus: RefreshStatus.IDLE,
         };
     }
 
     componentWillMount() {
-        ApiManager.getRedPacketList({}, (data) => {
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(data),
-            });
-        });
+        this._handleRefresh();
     }
 
     render() {
@@ -38,32 +35,51 @@ class RedListPage extends BasePage {
                 {/*标题栏*/}
                 <Header navigation={this.props.navigation} title='红包来了！'/>
                 {/*消息列表*/}
-                <SwRefreshListView
-                    ref='listView'
-                    dataSource={this.state.dataSource}
-                    renderRow={this._renderItem}
+                <RefreshList
+                    data={this.state.dataSource}
+                    renderItem={this._renderItem}
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
+                    footerStatus={this.state.footerStatus}
                 />
             </View>
         );
 
     }
 
-    _onRefresh = (end) => {
-        console.log("_onRefresh");
-        end();//刷新成功后需要调用end结束刷新
+    _handleRefresh = () => {
+        ApiManager.getRedPacketList({}, (data) => {
+            this.setState({
+                dataSource: data,
+            });
+        });
     };
-    _onLoadMore = (end) => {
-        console.log("_onLoadMore");
-        this.refs.listView.resetStatus(); //重置上拉加载的状态
-        end();//刷新成功后需要调用end结束刷新
+    _onRefresh = () => {
+        this._handleRefresh();
+    };
+    _onLoadMore = (pageSize) => {
+        let params = {
+            pageSize: pageSize
+        };
+        ApiManager.getRedPacketList(params, (data) => {
+            if (data) {
+                let allData = this.state.dataSource;
+                allData = allData.concat(data);
+                this.setState({
+                    dataSource: allData,
+                });
+            } else {
+                this.setState({
+                    footerStatus: RefreshStatus.END
+                });
+            }
+        });
     };
     _clickItem = (item) => {
         // 红包详情跳转
         this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
     };
-    _renderItem = (item) => {
+    _renderItem = ({item}) => {
         let isShow = item.disPlayDate;
         return (
             <TouchableOpacity
