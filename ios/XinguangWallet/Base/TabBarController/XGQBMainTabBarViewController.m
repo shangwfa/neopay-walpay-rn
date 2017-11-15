@@ -146,9 +146,9 @@
 //    XGQBCoinViewController *iconVC = [[XGQBCoinViewController alloc]init];
 //    [self setupChildViewController:iconVC title:@"新光币" imageName:@"sy_xinguangbi2" seleceImageName:@"sy_xinguangbi1"];
     
-    XGQBMessageViewController *msgVC = [XGQBMessageViewController new];
-    [self setupChildViewController:msgVC title:@"消息" imageName:@"sy_xiaoxi2" seleceImageName:@"sy_xiaoxi1"];
-    
+//    XGQBMessageViewController *msgVC = [XGQBMessageViewController new];
+//    [self setupChildViewController:msgVC title:@"消息" imageName:@"sy_xiaoxi2" seleceImageName:@"sy_xiaoxi1"];
+//    
     
     XGQBMineViewController *mineVC = [[XGQBMineViewController alloc]init];
     [self setupChildViewController:mineVC title:@"我的" imageName:@"sy_wode2" seleceImageName:@"sy_wode1"];
