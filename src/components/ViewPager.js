@@ -42,7 +42,7 @@ const ViewPager = props => {
     }
 
     const renderSwiper = () => {
-        if (arrayData.length > 0) {
+        if (arrayData&&arrayData.length > 0) {
             return (
                 <Swiper style={styles.wrapper}
                         paginationStyle={{marginBottom: -20}}
