@@ -12,6 +12,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.gson.Gson;
 import com.xgjk.common.lib.utils.HandlerUtils;
+import com.xgjk.common.lib.utils.ScreenUtils;
 import com.xgjk.common.lib.utils.StringUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 
@@ -230,6 +231,10 @@ public class CommModule extends ReactContextBaseJavaModule {
         LoadingDialogEvent event=new LoadingDialogEvent();
         event.setShow(false);
         EventBus.getDefault().post(event);
+    }
 
+    @ReactMethod
+    public void isHaveBottomNav( Callback callback) {
+        callback.invoke(ScreenUtils.hasSoftKeys(mContext.getCurrentActivity()));
     }
 }

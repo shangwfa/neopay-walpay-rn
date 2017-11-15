@@ -8,6 +8,7 @@ import {
     FlatList
 } from 'react-native';
 import {colors} from '../constants/index'
+import ScreenUtils from "../utils/ScreenUtils";
 
 class FilterItem extends Component {
 
@@ -36,7 +37,7 @@ class FilterItem extends Component {
         }
     }
     renderItem = ({item}) => (
-        <TouchableOpacity activeOpacity={0.8} onPress={() => this.onPress(item)}>
+        <TouchableOpacity  style={item.selected?styles.button_container_selected:styles.button_container}onPress={() => this.onPress(item)}>
             <Text style={item.selected ? styles.button_selected : styles.button}>{item.name}</Text>
         </TouchableOpacity>
 
@@ -51,6 +52,7 @@ class FilterItem extends Component {
                 </View>
                 <View style={{height: 4}}/>
                 <FlatList
+                    style={{marginLeft:ScreenUtils.width/25}}
                     data={this.state.data}
                     renderItem={this.renderItem}
                     numColumns={4}
@@ -64,28 +66,31 @@ class FilterItem extends Component {
 }
 
 const styles = StyleSheet.create({
-    button_selected: {
-        width: 80,
+    button_container_selected:{
+        width: (ScreenUtils.width/25*5),
         height: 34,
-        color: colors.one_color,
         borderColor: colors.one_color,
-        borderWidth: 0.5,
-        textAlignVertical: 'center',
-        textAlign: 'center',
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 10
+        borderWidth: ScreenUtils.isIOS?1.0:0.5,
+        marginRight: (ScreenUtils.width/25),
+        marginTop: 10,
+        justifyContent:'center',
+        alignItems:'center'
     },
-    button: {
-        width: 80,
+    button_container:{
+        width: (ScreenUtils.width/25*5),
         height: 34,
         borderColor: colors.balck_more_light,
-        borderWidth: 0.5,
-        textAlignVertical: 'center',
-        textAlign: 'center',
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 10
+        borderWidth: ScreenUtils.isIOS?1.0:0.5,
+        marginRight: (ScreenUtils.width/25),
+        marginTop: 10,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    button_selected: {
+        color: colors.one_color,
+    },
+    button: {
+        color: colors.black_light,
     },
     title: {
         fontSize: 15,

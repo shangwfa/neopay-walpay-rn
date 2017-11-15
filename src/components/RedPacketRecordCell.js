@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import ScreenUtils from '../utils/ScreenUtils'
 
+const sizeRatio = ScreenUtils.width/375.0;
 
 class RedPacketRecordCell extends Component {
 
@@ -39,6 +40,7 @@ class RedPacketRecordCell extends Component {
                             {this.props.num}
                         </Text>
                     </View>
+                    <View style={{flex:1}}/>
                     <View style={styles.bottomBtnView}>
                         <TouchableWithoutFeedback onPress={()=>this.detailBtnClicked()}>
                         <View style={styles.bottomBtn}>
@@ -71,14 +73,15 @@ const styles = StyleSheet.create({
         height:ScreenUtils.width*197.0/375.0,
     },
     backgroundImg:{
-
+        width:ScreenUtils.width,
+        height:ScreenUtils.width*197.0/375.0,
     },
     titleView:{
         backgroundColor:'transparent'
     },
     titleViewText:{
-        marginLeft:13,
-        marginTop:20,
+        marginLeft:13*sizeRatio,
+        marginTop:20*sizeRatio,
         fontSize:15,
         color:'#FFFFFF',
     },
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'flex-end',
         justifyContent:'center',
-        marginTop:50,
+        marginTop:45*sizeRatio,
         backgroundColor:'transparent'
     },
     numberViewRMB:{
@@ -99,12 +102,12 @@ const styles = StyleSheet.create({
     },
     bottomBtnView:{
         alignItems:'center',
-        marginTop:35,
+        marginBottom:28*sizeRatio,
     },
     bottomBtn:{
-        height:28,
-        width:158,
-        borderRadius:14,
+        height:28*sizeRatio,
+        width:158*sizeRatio,
+        borderRadius:14*sizeRatio,
         backgroundColor:'#FFFFFF',
         alignItems:'center',
         justifyContent:'center',

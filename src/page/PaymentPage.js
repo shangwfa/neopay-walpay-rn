@@ -20,6 +20,7 @@ import StringUtils from '../utils/StringUtils'
 import TwoButtonModal from '../modal/TwoButtonModal'
 import PayPwdModal from '../modal/PayPwdModal'
 import {RouterPaths} from '../constants/RouterPaths'
+import ScreenUtils from '../utils/ScreenUtils'
 class PaymentPage extends BasePage {
 
     constructor(props) {
@@ -39,11 +40,27 @@ class PaymentPage extends BasePage {
             inputText:'',
             isShow:false,
             isPayShow:false,
+            isHaveNav:false,
         }
     }
 
+    componentDidMount(){
+        if(!ScreenUtils.isIOS){
+            NativeModules.commModule.isHaveBottomNav((isHaveNav)=>{
+                this.setState({isHaveNav:isHaveNav})
+                if(isHaveNav){
+                    console.log('有底部导航栏')
+                }else {
+                    console.log('没有底部导航栏')
+                }
+            })
+        }
+        if(ScreenUtils.isIOSSmall){
+            this.setState({isHaveNav:true})
+        }
+    }
     renderTop = () => {
-        return <View style={styles.top_container}>
+        return <View style={this.state.isHaveNav?styles.top_container_nav:styles.top_container}>
             <Image style={styles.avatar_img} source={{uri: this.state.avatarUrl}}/>
             <Text style={styles.top_text}>{this.state.name}</Text>
         </View>
@@ -147,7 +164,7 @@ class PaymentPage extends BasePage {
                 <Text style={styles.pay_text}>付款金额</Text>
                 {this.renderInput()}
                 <Divider style={{marginLeft: 10, marginRight: 10}}/>
-                <CommonButton value='确认付款' style={{marginTop: 50}} onPress={() => this.commite()}/>
+                <CommonButton value='确认付款' style={{marginTop: this.state.isHaveNav?30:50}} onPress={() => this.commite()}/>
                 <View style={{flex:1,height:1}}/>
                 {this.renderKeyboard()}
                 <TwoButtonModal isShow={this.state.isShow}  title='余额不足，绑定银行卡支付' content={'账户余额 675.87元'+'\n'+'实付金额 898.87元'} oneBtnText='关闭弹窗' twoBtnText='去绑卡'
@@ -162,7 +179,8 @@ class PaymentPage extends BasePage {
 const styles = StyleSheet.create({
     keyboard_container:{
         height:216,
-        backgroundColor:'blue'
+        backgroundColor:'blue',
+        marginBottom:ScreenUtils.isIOSX?18:0
     },
     input: {
         marginLeft: 10,
@@ -200,6 +218,12 @@ const styles = StyleSheet.create({
     top_container: {
         flexDirection: 'row',
         height: 140,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+    },
+    top_container_nav: {
+        flexDirection: 'row',
+        height: 120,
         backgroundColor: colors.white,
         justifyContent: 'center',
     },

@@ -26,6 +26,7 @@ import StringUtils from "../utils/StringUtils";
 import FormatUtils from "../utils/FormatUtils";
 import AvatarComponent from "../components/AvatarComponent";
 import ButtonComponent from "../components/ButtonComponent";
+import {RouterPaths} from "../constants/RouterPaths";
 class PayCodePage extends BasePage {
     constructor(props) {
         super(props);
@@ -83,7 +84,7 @@ class PayCodePage extends BasePage {
                             </View>
                             {/*虚线*/}
                             <Image
-                                style={{width: ScreenUtils.width, height: 1, marginTop: 20}}
+                                style={{width: ScreenUtils.width - 36, height: 1, marginTop: 20}}
                                 source={img_dashed_line}/>
                             {/*选择银行卡*/}
                             <ButtonComponent
@@ -136,7 +137,7 @@ class PayCodePage extends BasePage {
         this.setState({
             isShowSelectPayStyle: false,
         });
-        alert("添加绑定银行卡");
+        this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
     };
 
     _handleBtnClick = () => {
@@ -155,10 +156,10 @@ class PayCodePage extends BasePage {
         });
     };
     _handleEventCLick = () => {
-        alert("使用说明");
         this.setState({
             isShowBottom: false
         });
+        this.props.navigation.navigate(RouterPaths.INSTRUCTIONS_PAGE);
     };
     _handleRightPressClick = () => {
         this.setState({

@@ -93,8 +93,22 @@
 #pragma clang diagnostic pop
 
 
+//临时增加RN服务器切换地址
+-(NSArray *)jsCodeLocationArr
+{
+    if (!_jsCodeLocationArr) {
+        NSString *str1 = @"http://localhost:8081/index.ios.bundle?platform=ios";
+        
+        NSString *str2 = @"http://172.16.33.182:8081/index.ios.bundle?platform=ios";
+        
+        NSString *str3 = @"http://172.16.33.11:8081/index.ios.bundle?platform=ios";
+        
+        NSString *str4 = [[NSBundle mainBundle]pathForResource:@"main" ofType:@"jsbundle"];
 
-
+        _jsCodeLocationArr = [NSArray arrayWithObjects:str1,str2,str3,str4, nil];
+    }
+    return _jsCodeLocationArr;
+}
 
 
 @end

@@ -32,7 +32,6 @@ public class LoginPresenter extends LoginContract.Presenter {
     }
 
     private void handleLogin(UserInfoResponseBean userInfoResponseBean) {
-        StoreManager.getSingleton().put(true, IWalpayConstants.USER_INFO, userInfoResponseBean);
         StoreManager.getSingleton().putString(false, IWalpayConstants.ACCESS_TOKEN, userInfoResponseBean.getAccessToken());
         ActivityManager.getInstance().killAllActivity();
         MainRouter.getSingleton().jumpToHomePage("");

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "XGQBMainTabBarViewController.h"
 
+//引入侧边栏视图
+#import "XGQBSideView.h"
+
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -16,10 +19,17 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, JPUSHRegisterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,strong) XGQBMainTabBarViewController *mainTabBarVC;
+
+
+//侧边栏视图
+@property (nonatomic,weak) XGQBSideView *sideView;
+
+@property (nonatomic,strong) NSArray *jsCodeLocationArr;
 
 @end
 

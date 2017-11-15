@@ -24,8 +24,8 @@
 #import "XGQBRNViewController.h"
 
 
-
 @interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate, XGQBHomeCellViewDelegate>
+
 
 @end
 
@@ -35,23 +35,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"F5F5F5"];
-    
+    self.view.backgroundColor = kViewBgColor;
+
     [self setUpViewComponents];
     [self checkIDStatus];
-    
+
     //接受实名认证通知,跳转至实名认证页面
     [kNotificationCenter addObserver:self selector:@selector(registerID) name:kNotificationRegisterIDAction object:nil];
 
 }
+
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-
+    self.view.transform = CGAffineTransformIdentity;
 }
+
+//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    self.view.transform = CGAffineTransformMakeTranslation(100, 200);
+//
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

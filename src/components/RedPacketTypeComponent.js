@@ -31,10 +31,10 @@ class RedPacketTypeComponent extends Component {
     //渲染那种类型的红包
     _renderTypeView = (redPacketData) => {
         switch (redPacketData.receiveStatus) {
-            case 1://领取中
+            case 1://未领取
                 return this._renderRobRedPacketView(redPacketData);
                 break;
-            case 2://已过期
+            case 2://已过期、已经领取
                 return this._renderOverdueRedPacketView(redPacketData);
                 break;
             case 3://普通

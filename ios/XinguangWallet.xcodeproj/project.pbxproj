@@ -22,6 +22,8 @@
 		4255866B1F94A85B002E039B /* XGQBMineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866A1F94A85B002E039B /* XGQBMineHeaderView.m */; };
 		4255866E1F94A879002E039B /* XGQBMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255866D1F94A879002E039B /* XGQBMineItemCell.m */; };
 		425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425586701F94C84D002E039B /* XGQBMineTableView.m */; };
+		42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C621FBA917A00E5AB73 /* UIView+Transform.m */; };
+		42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C671FBAC84F00E5AB73 /* XGQBSideView.m */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
 		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
@@ -33,9 +35,9 @@
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
 		42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */; };
+		42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42DE35F91FB56F2200A73DB3 /* main.jsbundle */; };
+		42DE35FC1FB59CE400A73DB3 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42DE35FB1FB59CE400A73DB3 /* assets */; };
 		42F975E61FB40E22009D7085 /* XGQBHomeBannerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F975E51FB40E22009D7085 /* XGQBHomeBannerItem.m */; };
-		42F975E91FB44A56009D7085 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42F975E81FB44A56009D7085 /* assets */; };
-		42F975EB1FB44A60009D7085 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42F975EA1FB44A60009D7085 /* main.jsbundle */; };
 		6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */; };
 		6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0FF9D51F7F3A0E001A66BA /* commModule.m */; };
 		6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C68AC1F7A3CF400170E47 /* XGQBAPPBootViewController.m */; };
@@ -132,6 +134,10 @@
 		4255866F1F94C84D002E039B /* XGQBMineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineTableView.h; sourceTree = "<group>"; };
 		425586701F94C84D002E039B /* XGQBMineTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineTableView.m; sourceTree = "<group>"; };
 		425881101F909EFB005566A6 /* XinguangWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XinguangWallet.entitlements; sourceTree = "<group>"; };
+		42655C621FBA917A00E5AB73 /* UIView+Transform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Transform.m"; sourceTree = "<group>"; };
+		42655C641FBA917B00E5AB73 /* UIView+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Transform.h"; sourceTree = "<group>"; };
+		42655C661FBAC84F00E5AB73 /* XGQBSideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSideView.h; sourceTree = "<group>"; };
+		42655C671FBAC84F00E5AB73 /* XGQBSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideView.m; sourceTree = "<group>"; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
 		428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
 		42990E741F998F7C00B20EBA /* XGQBNoContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBNoContentViewController.h; sourceTree = "<group>"; };
@@ -152,10 +158,10 @@
 		42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleBtn.m; sourceTree = "<group>"; };
 		42DD31DC1F8C748D00B435EA /* XGQBHomeBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBanner.h; sourceTree = "<group>"; };
 		42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBanner.m; sourceTree = "<group>"; };
+		42DE35F91FB56F2200A73DB3 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
+		42DE35FB1FB59CE400A73DB3 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		42F975E41FB40E22009D7085 /* XGQBHomeBannerItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBannerItem.h; sourceTree = "<group>"; };
 		42F975E51FB40E22009D7085 /* XGQBHomeBannerItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBannerItem.m; sourceTree = "<group>"; };
-		42F975E81FB44A56009D7085 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
-		42F975EA1FB44A60009D7085 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
 		6A01A0191F7A2AC20059D6D3 /* ABNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkManager.h; sourceTree = "<group>"; };
 		6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABNetworkManager.m; sourceTree = "<group>"; };
@@ -295,6 +301,8 @@
 				6AF78B8F1F8B617E002EAAB2 /* XGQBHomeCellView.m */,
 				6AF78B911F8B76CD002EAAB2 /* XGQBHomeBannerView.h */,
 				6AF78B921F8B76CD002EAAB2 /* XGQBHomeBannerView.m */,
+				42655C661FBAC84F00E5AB73 /* XGQBSideView.h */,
+				42655C671FBAC84F00E5AB73 /* XGQBSideView.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -464,6 +472,8 @@
 		6A8758DF1F7A2CDE00F480EF /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				42655C641FBA917B00E5AB73 /* UIView+Transform.h */,
+				42655C621FBA917A00E5AB73 /* UIView+Transform.m */,
 				6A8758E01F7A2CF300F480EF /* GVUserDefaults+PropertyList.h */,
 				6A8758E11F7A2CF300F480EF /* GVUserDefaults+PropertyList.m */,
 				6AD95AEB1F7CB47900BFF4DA /* NSString+checkContent.h */,
@@ -600,10 +610,10 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				42F975E81FB44A56009D7085 /* assets */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
-				42F975EA1FB44A60009D7085 /* main.jsbundle */,
+				42DE35FB1FB59CE400A73DB3 /* assets */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
+				42DE35F91FB56F2200A73DB3 /* main.jsbundle */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
 				6AF9E40B1F78DDB6005E901C /* Info.plist */,
 				6AF9E40C1F78DDB6005E901C /* main.m */,
@@ -1056,9 +1066,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42DE35FC1FB59CE400A73DB3 /* assets in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
-				42F975E91FB44A56009D7085 /* assets in Resources */,
-				42F975EB1FB44A60009D7085 /* main.jsbundle in Resources */,
+				42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */,
 				421412EA1FA0808500290A06 /* mess.plist in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);
@@ -1169,6 +1179,7 @@
 				6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */,
 				6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */,
 				6AF9E4541F78E675005E901C /* XGQBTabBarItem.m in Sources */,
+				42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */,
 				42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */,
 				6AF78B8D1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m in Sources */,
 				422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */,
@@ -1194,6 +1205,7 @@
 				42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */,
 				6AF9E4571F78E68E005E901C /* XGQBTabBarBadge.m in Sources */,
 				6AF9E44D1F78E39E005E901C /* XGQBMainTabBarViewController.m in Sources */,
+				42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */,
 				6A3843CC1F79E46600BFE9B4 /* XGQBLoginViewController.m in Sources */,
 				6AE813A41F7B4D550044B072 /* XGQBAdViewController.m in Sources */,
 				6AF9E4831F78EA3B005E901C /* XGQBMineViewController.m in Sources */,

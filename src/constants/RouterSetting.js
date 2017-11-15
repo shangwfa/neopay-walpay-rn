@@ -3,7 +3,6 @@ import Home from "../page/HomePage"
 import ChangeName from '../page/ChangeNamePage'
 import ActivityList from '../page/ActivityListPage'
 import ModalDemo from '../page/ModalDemoPage'
-import QRCode from '../page/QRCodePage'
 import PersonalInfo from "../page/PersonalInfoPage"
 import BindBankCard from '../page/BindBankCardPage'
 import Feedback from '../page/FeedbackPage'
@@ -51,6 +50,7 @@ import RpTitleStylePage from '../page/RpTitleStylePage'
 import LottieDemo from '../page/LottieDemoPage'
 import SendRedPacket from '../page/SendRedPacketPage'
 import ViewpageDemo from '../page/ViewpageDemoPage'
+import InstructionsPage from "../page/InstructionsPage";
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -58,12 +58,12 @@ const RouterSetting = {
     changeName: {screen: ChangeName},
     activityList: {screen: ActivityList},
     modal: {screen: ModalDemo},
-    qrCode: {screen: QRCode},
     personalInfo: {screen: PersonalInfo},
     bindBankCard: {screen: BindBankCard},
     feedback: {screen: Feedback},
     setting: {screen: Setting},
     myOrder: {screen: MyOrder},
+    instructions: {screen: InstructionsPage},
     panResponderDemo: {screen: PanResponderDemo},
     redList: {screen: RedList},
     chargeFluxResult: {screen: ChargeFluxResult},
@@ -95,17 +95,17 @@ const RouterSetting = {
     payResult: {screen: PayResultPage},
     merchantActivityList: {screen: MerchantActivityList},
     creditCardInput: {screen: CreditCardInput},
-    phoneTopUp:{screen:PhoneTopUpPage},
-    redPacketReady:{screen:RedPacketReady},
-    redPacketRecord:{screen:RedPacketRecord},
-    contacts:{screen:Contacts},
-    redPacketReceiver:{screen:RedPacketReceiver},
-    rpDetail:{screen:RpDetailPage},
-    rpRecordList:{screen:RpRecordListPage},
-    topupRecordList:{screen:TopupRecordListPage},
-    rpTitleStyle:{screen:RpTitleStylePage},
-    lottieDemo:{screen:LottieDemo},
-    viewpageDemo:{screen:ViewpageDemo}
+    phoneTopUp: {screen: PhoneTopUpPage},
+    redPacketReady: {screen: RedPacketReady},
+    redPacketRecord: {screen: RedPacketRecord},
+    contacts: {screen: Contacts},
+    redPacketReceiver: {screen: RedPacketReceiver},
+    rpDetail: {screen: RpDetailPage},
+    rpRecordList: {screen: RpRecordListPage},
+    topupRecordList: {screen: TopupRecordListPage},
+    rpTitleStyle: {screen: RpTitleStylePage},
+    lottieDemo: {screen: LottieDemo},
+    viewpageDemo: {screen: ViewpageDemo}
 }
 
 export default RouterSetting

@@ -11,4 +11,5 @@
 @interface XGQBRNViewController : XGQBRootViewController
 
 @property (nonatomic,strong) NSString *pageType;
+
 @end

@@ -63,6 +63,14 @@
             XGQBHomeBannerItem *item = [XGQBHomeBannerItem modelWithJSON:dict];
             [bannerListArr addObject:item];
         }
+        //添加第一页视图至最后一页
+        XGQBHomeBannerItem *firstItem = bannerListArr[0];
+        [bannerListArr addObject:firstItem];
+        
+        //添加最后一页视图至第一页
+        XGQBHomeBannerItem *lastItem = bannerListArr[[bannerListArr count]-2];
+        [bannerListArr insertObject:lastItem atIndex:0];
+        
         _bannerListArr = bannerListArr;
         [self addScrSubViews:frame];
     } andFailerFn:^(NSError *error) {
@@ -89,7 +97,7 @@
     pageControl.pageIndicatorTintColor = kWhiteColor;
     pageControl.currentPageIndicatorTintColor = kBlackColor;
     pageControl.currentPage = 1;
-    pageControl.numberOfPages = _bannerListArr.count;
+    pageControl.numberOfPages = _bannerListArr.count-2;
     pageControl.userInteractionEnabled = NO;
     _pageControl = pageControl;
     [self addSubview:pageControl];
@@ -98,6 +106,9 @@
         make.centerX.equalTo(self);
         make.bottom.equalTo(self);
     }];
+    
+    [_scrV setContentOffset:CGPointMake(frame.size.width, 0)];
+
     
     //开始自动滚屏
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
@@ -119,7 +130,31 @@
 #pragma mark - ScrollView代理方法
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    self.pageControl.currentPage = scrollView.contentOffset.x/(scrollView.frame.size.width-1);
+    self.pageControl.currentPage = scrollView.contentOffset.x/(scrollView.frame.size.width)-0.55;
+    
+    //处理滑到尾部页码
+    if (scrollView.contentOffset.x/(scrollView.frame.size.width)>_bannerListArr.count-1.5) {
+        _pageControl.currentPage=0;
+    }
+    //处理滑到尾部之后重回头部
+    if (scrollView.contentOffset.x/(scrollView.frame.size.width)>_bannerListArr.count-1.005) {
+        
+    //[_scrV setContentOffset:CGPointMake((scrollView.contentOffset.x-scrollView.frame.size.width*(_bannerListArr.count-2)),0) animated:NO];
+     [_scrV setContentOffset:CGPointMake(scrollView.frame.size.width,0) animated:NO];
+        
+    }
+    
+    //处理滑到头部页码
+    if (scrollView.contentOffset.x/(scrollView.frame.size.width)<0.5) {
+        _pageControl.currentPage=_bannerListArr.count-1;
+    }
+    
+    //处理滑到头部之后重回尾部
+    if (scrollView.contentOffset.x/(scrollView.frame.size.width)<0.005) {
+        
+        [_scrV setContentOffset:CGPointMake(scrollView.frame.size.width*(_bannerListArr.count-2),0) animated:NO];
+    }
+    
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -132,18 +167,19 @@
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
 }
 
-
 -(void)repeatAction
 {
     _currentPage=(int)_pageControl.currentPage+1;
-    if (_currentPage<_bannerListArr.count) {
+    if (_currentPage<_bannerListArr.count-1) {
         self.currentPage ++;
-    }else if(_currentPage ==_bannerListArr.count)
+        [_scrV setContentOffset:CGPointMake((_currentPage)*_pageWidth,0) animated:YES];
+
+    }else if(_currentPage ==_bannerListArr.count-1)
     {
         self.currentPage=1;
+        [_scrV setContentOffset:CGPointMake((_currentPage)*_pageWidth,0) animated:YES];
     }
    
-    [_scrV setContentOffset:CGPointMake((_currentPage-1)*_pageWidth,0) animated:YES];
 
 }
 

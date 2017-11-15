@@ -10,6 +10,8 @@ import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
 import RedPacketRecordCell from '../components/RedPacketRecordCell'
+import {RouterPaths} from '../constants/RouterPaths'
+
 
 class RedPacketRecord extends BasePage {
 
@@ -23,7 +25,9 @@ class RedPacketRecord extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='红包记录' rightTitle='红包交易明细'/>
+                <Header navigation={this.props.navigation} title='红包记录' rightTitle='红包交易明细'onRightPress={() => {
+                    this.props.navigation.navigate(RouterPaths.RED_PACKET_RECORD_LIST)
+                }} header_middleStyle={{flex:1.4}}/>
                 <RedPacketRecordCell cellType={true}/>
                 <RedPacketRecordCell cellType={false}/>
             </View>

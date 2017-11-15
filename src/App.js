@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {NativeModules, View, DeviceEventEmitter, Animated, Easing,Text,TextInput} from 'react-native'
+import {NativeModules, View, DeviceEventEmitter, Animated, Easing,Text,TextInput,TouchableOpacity} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator'
 import JsonUtil from './utils/JsonUtil'
@@ -16,8 +16,8 @@ class App extends Component {
         console.log(this.props)
         Text.defaultProps.allowFontScaling=false;
         Text.defaultProps.fontFamily = 'system font';
+        TouchableOpacity.defaultProps.activeOpacity=0.8
     }
-
 
     render() {
         let params = ScreenUtils.isIOS ? this.props.params : JsonUtil.strToJson(this.props.params)
@@ -85,7 +85,6 @@ class App extends Component {
                 return null;
             }
             const route = navigationState.routes[navigationState.index];
-            // dive into nested navigators
             if (route.routes) {
                 return getCurrentRouteName(route);
             }

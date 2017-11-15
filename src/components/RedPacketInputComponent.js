@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import Space from "./Space";
 import img_arrow_right from "../res/img/img_select_add_bank_card.png";
+import ScreenUtils from "../utils/ScreenUtils";
 class RedPacketInputComponent extends Component {
     constructor(props) {
         super(props);
@@ -34,7 +35,7 @@ class RedPacketInputComponent extends Component {
                     editable={this.props.isEditable}
                     onChangeText={this._handleTextInputChangeText.bind(this)}
                 />
-                <Text style={{fontSize: 14, marginLeft: -2, color: "#333"}}>{this.props.contentEndUnit}</Text>
+                <Text style={{fontSize: 14, marginLeft:ScreenUtils.isIOS?0: -2, color: "#333"}}>{this.props.contentEndUnit}</Text>
                 {this._renderRightArrow()}
             </TouchableOpacity>
         );

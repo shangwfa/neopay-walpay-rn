@@ -13,7 +13,6 @@ import {
 import Animation from 'lottie-react-native'
 import demo from '../data/data.json'
 import CommonButton from "../components/CommonButton";
-let refAnimation;
 class ReceiveRedPacketModal extends Component {
 
     constructor(props) {
@@ -21,7 +20,6 @@ class ReceiveRedPacketModal extends Component {
     }
 
     render() {
-        this._handleIsPlay();
         return (
             <Modal
                 transparent={true}
@@ -30,7 +28,11 @@ class ReceiveRedPacketModal extends Component {
                 }}>
                 <View style={styles.modalStyle}>
                     <Animation
-                        ref={this._handleRef.bind(this)}
+                        ref={animation => {
+                            if (this.props.isShow) {
+                                animation.play();
+                            }
+                        }}
                         style={{
                             width: 200,
                             height: 200,
@@ -43,14 +45,6 @@ class ReceiveRedPacketModal extends Component {
         );
     }
 
-    _handleRef = (refAnimation) => {
-        this.refAnimation = refAnimation;
-    };
-    _handleIsPlay = () => {
-        if (this.props.isShow) {
-            this.refAnimation.play();
-        }
-    };
 
 }
 

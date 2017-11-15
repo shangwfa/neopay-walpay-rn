@@ -57,17 +57,17 @@ class PayPwdModal extends Component {
                                 style={{color: colors.black, fontSize: 20}}> {this.props.contentBack}</Text></Text>
                             <PasswordInput style={{width: 290, marginTop: 10}} maxLength={6}
                                            onEnd={(text) => this.props.onEnd(text)}/>
-                            <View style={{marginTop: 20, flexDirection: 'row', alignItems: 'center', marginBottom: 13}}>
-                                <Text style={{color: colors.balck_more_light, fontSize: 14, marginLeft: 10}}>付款方式</Text>
-                                <View style={{flex: 1}}/>
-                                <Text style={{
-                                    color: colors.black_light,
-                                    fontSize: 14,
-                                    marginLeft: 10
-                                }}>{this.props.payTypeContent}</Text>
-                                <Image style={{marginLeft: 8, width: 7, height: 12, marginRight: 10}}
-                                       source={right_arrow}/>
-                            </View>
+                            <TouchableOpacity
+                                style={{flexDirection: 'row', alignItems: 'center',}}
+                                onPress={() => this.props.selectPayStyleClick()}>
+                                <View style={styles.select_pay_style_container}>
+                                    <Text style={styles.select_pay_style_txt}>付款方式</Text>
+                                    <View style={{flex: 1}}/>
+                                    <Text style={styles.select_pay_content_txt}>{this.props.payTypeContent}</Text>
+                                    <Image style={{marginLeft: 8, width: 7, height: 12, marginRight: 10}}
+                                           source={right_arrow}/>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -108,6 +108,22 @@ const styles = StyleSheet.create({
         backgroundColor: colors.divider,
         height: 0.5,
         width: 316,
+    },
+    select_pay_style_container: {
+        marginTop: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 13
+    },
+    select_pay_style_txt: {
+        color: colors.balck_more_light,
+        fontSize: 14,
+        marginLeft: 10
+    },
+    select_pay_content_txt: {
+        color: colors.black_light,
+        fontSize: 14,
+        marginLeft: 10
     },
 });
 

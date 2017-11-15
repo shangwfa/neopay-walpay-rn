@@ -20,8 +20,8 @@ import {events} from '../constants/index'
 
 class Home extends BasePage {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             data: {}
         }

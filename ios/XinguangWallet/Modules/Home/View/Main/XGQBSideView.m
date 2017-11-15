@@ -1,31 +1,42 @@
 //
-//  XGQBCommissionViewController.m
+//  XGQBSideView.m
 //  XinguangWallet
 //
-//  Created by BossKing on 17/10/2017.
+//  Created by BossKing on 14/11/2017.
 //  Copyright © 2017 Hangzhou Neopay Co.,Ltd. All rights reserved.
 //
 
-#import "XGQBCommissionViewController.h"
-#import "XGQBRNViewController.h"
-#import "RCTRootView.h"
-#import "RCTDevLoadingView.h"
+#import "XGQBSideView.h"
 
+@interface XGQBSideView ()
 
-@interface XGQBCommissionViewController ()
-@property (nonatomic,strong)RCTRootView *rctRootV;
 @property (nonatomic,strong) UILabel *routerLabel;
+
 @end
 
-@implementation XGQBCommissionViewController
+@implementation XGQBSideView
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
     
-    self.view.backgroundColor = kViewBgColor;
-    self.navigationController.navigationBarHidden = NO;
+    if (self) {
+        self.backgroundColor = kViewBgColor;
+        [self addsubviews];
+    }
     
-    
+    return self;
+}
+
+-(void)addsubviews{
     //临时退出登录按钮
     YYLabel *logoutLabel = [YYLabel new];
     logoutLabel.text = @"退出登录";
@@ -33,7 +44,7 @@
     logoutLabel.backgroundColor = [UIColor redColor];
     
     logoutLabel.frame = CGRectMake(20, 100, 200, 50);
-    [self.view addSubview:logoutLabel];
+    [self addSubview:logoutLabel];
     
     [logoutLabel setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         [GVUserDefaults standardUserDefaults].accessToken = nil;
@@ -47,7 +58,7 @@
     restRunCount.backgroundColor = [UIColor redColor];
     
     restRunCount.frame = CGRectMake(20, 170, 200, 50);
-    [self.view addSubview:restRunCount];
+    [self addSubview:restRunCount];
     
     [restRunCount setTextTapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         [GVUserDefaults standardUserDefaults].runCount = 0;
@@ -56,7 +67,7 @@
     //临时跳转登录页面按钮
     UIButton *button = [[UIButton alloc]initWithFrame:(CGRectMake(20, 240, 200, 50))];
     [button setTitle:@"跳转登录页面" forState:UIControlStateNormal];
-    [self.view addSubview:button];
+    [self addSubview:button];
     button.backgroundColor = [UIColor redColor];
     [button addTarget:self action:@selector(pushToLoginVC) forControlEvents:UIControlEventTouchUpInside];
     //    NSLog(@"%s",__func__);
@@ -64,30 +75,22 @@
     //临时修改RN路径按钮
     UIButton *changeRNRouter = [[UIButton alloc]initWithFrame:(CGRectMake(20, 310, 200, 50))];
     [changeRNRouter setTitle:@"更换RNRouter" forState:UIControlStateNormal];
-    [self.view addSubview:changeRNRouter];
+    [self addSubview:changeRNRouter];
     changeRNRouter.backgroundColor = [UIColor redColor];
     [changeRNRouter addTarget:self action:@selector(changeRNRouter) forControlEvents:UIControlEventTouchUpInside];
     
     //路径label
     UILabel *jsRouterLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 380, kScreenWidth-40, 50)];
     jsRouterLabel.font = kSYSTEMFONT(14.0);
-    [self.view addSubview:jsRouterLabel];
+    [self addSubview:jsRouterLabel];
     
     AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication]delegate];
     int i = [GVUserDefaults standardUserDefaults].RNRouter;
     
-
+    
     
     jsRouterLabel.text = [self convertURLtoSimpleStr:appDelegate.jsCodeLocationArr[i]];
     _routerLabel = jsRouterLabel;
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-
 }
 
 -(void)pushToLoginVC

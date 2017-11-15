@@ -61,7 +61,7 @@ class RedPacketSquarePage extends BasePage {
         end();//刷新成功后需要调用end结束刷新
     };
     _clickItem = (item) => {
-        alert("领取红包");
+        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {info: item});
     };
     _renderItem = (item) => {
         return (
