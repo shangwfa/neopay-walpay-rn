@@ -78,19 +78,32 @@
         [GVUserDefaults standardUserDefaults].runCount ++ ;
         //判断是否含有登录信息
         if (![GVUserDefaults standardUserDefaults].accessToken) {
-            //没有Token,自动进入主界面
+            //没有Token,自动进入登录界面
             kPostNotification(kNotificationLoginStateChange, @NO);
         }else{
+            //有token,自动进入主页
+            //创建左划视图
+            XGQBSideView *sideView = [[XGQBSideView alloc]initWithFrame:CGRectMake(-kScreenWidth*0.33, 0, kScreenWidth*0.66, kScreenHeight)];
+            [self.window addSubview:sideView];
+            self.sideView = sideView;
+            
+            //创建tabbarVC
             self.mainTabBarVC = [XGQBMainTabBarViewController new];
             self.window.rootViewController = self.mainTabBarVC;
         }
     }
 }
+
 -(void)loginStateChange:(NSNotification*)notification
 {
     BOOL loginSuccess = [notification.object boolValue];
+    
     if (loginSuccess) {
         self.mainTabBarVC = [XGQBMainTabBarViewController new];
+        
+        XGQBSideView *sideView = [[XGQBSideView alloc]initWithFrame:CGRectMake(-kScreenWidth*0.33, 0, kScreenWidth*0.66, kScreenHeight)];
+        [self.window addSubview:sideView];
+        self.sideView = sideView;
         
         //自定义转场动画
         CATransition *anima = [CATransition animation];
@@ -104,10 +117,11 @@
     }else{
         //加载登录页面
         self.mainTabBarVC = nil;
-        
+        if (self.sideView) {
+            [self.sideView removeFromSuperview];
+        }
         XGQBRootNavigationController *loginNavi = [[XGQBRootNavigationController alloc]initWithRootViewController:[XGQBLoginViewController new] ];
-//        UINavigationController *loginNavi = [[UINavigationController alloc]initWithRootViewController:[XGQBLoginViewController new]];
-        
+   
         CATransition *anima = [CATransition animation];
         anima.type = @"fade";//设置动画的类型
         anima.subtype = kCATransitionFromRight; //设置动画的方向
