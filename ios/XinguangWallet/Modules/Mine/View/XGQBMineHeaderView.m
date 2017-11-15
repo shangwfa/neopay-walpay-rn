@@ -8,7 +8,33 @@
 
 #import "XGQBMineHeaderView.h"
 
+@interface XGQBMineHeaderView ()
+
+@property (nonatomic,weak) UIView *headerView;
+@property (nonatomic,weak) UIImageView *regStatusIV;
+@property (nonatomic,assign) int regStatus;
+@property (nonatomic,weak) UILabel *nameLabel;
+@property (nonatomic,weak) UILabel *phoneLabel;
+
+
+
+@end
+
 @implementation XGQBMineHeaderView
+
+-(void)updateUI
+{
+    _nameLabel.text = [GVUserDefaults standardUserDefaults].name?[GVUserDefaults standardUserDefaults].name:@"未命名";
+    _regStatus = [GVUserDefaults standardUserDefaults].authStatus;
+    _phoneLabel.text = [[GVUserDefaults standardUserDefaults].phone secPhoneStr];
+    if ([GVUserDefaults standardUserDefaults].authStatus==2) {
+        _regStatusIV.hidden = YES;
+        _goRegBtn.hidden = YES;
+    }else{
+        _regStatusIV.hidden = NO;
+        _goRegBtn.hidden = NO;
+    }
+}
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -19,16 +45,25 @@
         UIImageView *bgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_beijing2"]];
         
         //头像
-        UIImageView *headerView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_touxiang"]];
+        NSString *avatarUrl = [GVUserDefaults standardUserDefaults].avatarUrl;
+        UIImageView *headerView = [[UIImageView alloc]init];
+        _headerView = headerView;
+        [headerView sd_setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:@"wd_touxiang"]];
         headerView.size = CGSizeMake(CGRectGetWidth(frame)*0.198, CGRectGetWidth(frame)*0.198);
         kViewRadius(headerView, headerView.size.width/2);
         
         //实名状态标签
-        UIImageView *regStatus = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_weishiming"]];
+        UIImageView *regStatusIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_weishiming"]];
+        _regStatusIV = regStatusIV;
+        //判断未实名
+        if ([GVUserDefaults standardUserDefaults].authStatus==2) {
+            regStatusIV.hidden = YES;
+        }
         
         //用户名
         UILabel *namaLebel = [[UILabel alloc]init];
-        namaLebel.text = @"胡萝卜";
+        _nameLabel = namaLebel;
+        namaLebel.text = [GVUserDefaults standardUserDefaults].name;
         namaLebel.textAlignment = NSTextAlignmentCenter;
         namaLebel.font = kSYSTEMFONT(17.0);
         
@@ -37,8 +72,10 @@
         
         //手机号
         UILabel *phoneLebel = [[UILabel alloc]init];
+        _phoneLabel=phoneLebel;
         phoneLebel.textAlignment = NSTextAlignmentCenter;
-        phoneLebel.text = @"138****2345";
+//        phoneLebel.text = @"138****2345";
+        phoneLebel.text= [[GVUserDefaults standardUserDefaults].phone secPhoneStr];
         phoneLebel.textColor=[UIColor colorWithHexString:@"666666"];
         phoneLebel.font = kSYSTEMFONT(14.0);
         
@@ -50,11 +87,15 @@
         [goRegBtn setTitle:@"前往实名" forState:UIControlStateNormal];
         goRegBtn.titleLabel.font = kSYSTEMFONT(11.0);
         goRegBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 10);
+        //判断未实名
+        if ([GVUserDefaults standardUserDefaults].authStatus==2) {
+            goRegBtn.hidden = YES;
+        }
         
         //添加视图
         [self addSubview:bgView];
         [self addSubview:headerView];
-        [self addSubview:regStatus];
+        [self addSubview:regStatusIV];
         [self addSubview:namaLebel];
         [self addSubview:cellphone];
         [self addSubview:phoneLebel];
@@ -80,7 +121,7 @@
         }];
         
         //实名状态
-        [regStatus mas_makeConstraints:^(MASConstraintMaker *make) {
+        [regStatusIV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(36*sizeRatio,12*sizeRatio));
             make.left.equalTo(headerView.mas_centerX);
             make.bottom.equalTo(headerView);

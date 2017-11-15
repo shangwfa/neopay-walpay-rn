@@ -87,6 +87,7 @@
     if (_bannerListArr.count==0) {
         UIImage *img = [UIImage imageNamed:@"beijing"];
         UIImageView *imgV = [[UIImageView alloc]initWithImage:img];
+        imgV.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
         [_scrV addSubview:imgV];
         }
     //如果有值,开始从数组取出数据

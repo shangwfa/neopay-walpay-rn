@@ -12,4 +12,6 @@
 
 @property (nonatomic,strong) UIButton *goRegBtn;
 
+-(void)updateUI;
+
 @end
