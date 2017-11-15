@@ -105,7 +105,12 @@ payRedPacket = (request, callback) => {
     NetUtil.post(APIS.PAY_RED_PACKET, request, (data) => {
         callback(data);
     });
-};
+}
+queryUserBill=(request,callback)=>{
+    NetUtil.post(APIS.USER_BILL_RECORD,request, (data) => {
+        callback(data);
+    })
+}
 export default {
     getUserInfo,
     queryBannerList,
@@ -127,4 +132,5 @@ export default {
     getRecentPayType,
     createRedPacket,
     payRedPacket,
+    queryUserBill
 }

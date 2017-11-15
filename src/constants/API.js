@@ -27,4 +27,5 @@ export const APIS = {
     GET_RECENT_PAY_TYPE: "pay/get_recent_pay_type",//获取上一次付款方式
     CREATE_RED_PACKET: "packet/create_red_packet",//创建红包
     PAY_RED_PACKET: "packet/pay_red_packet",//支付红包
+    USER_BILL_RECORD:'pay/query_user_bill_page',//账单记录
 };

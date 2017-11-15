@@ -30,26 +30,36 @@ const ViewPager = props => {
     const renderItems = () => {
         if (arrayData) {
             let itemViews = []
-            for (let item of arrayData) {
-                itemViews.push(renderItem(item))
-            }
+            arrayData.map((item, key) => {
+                itemViews.push(<View key={key}>
+                    {renderItem(item)}
+                </View>)
+            })
+
             return itemViews
         }
 
     }
 
+    const renderSwiper = () => {
+        if (arrayData.length > 0) {
+            return (
+                <Swiper style={styles.wrapper}
+                        paginationStyle={{marginBottom: -20}}
+                        horizontal={horizontal}
+                        autoplay={autoplay}
+                        dotStyle={dotStyle}
+                        activeDotStyle={activeDotStyle}
+                        dotColor={dotColor}
+                        activeDotColor={activeDotColor}>
+                    {renderItems()}
+                </Swiper>)
+        }
+    }
+
     return (
         <View  {...attributes}>
-            <Swiper style={styles.wrapper}
-                    paginationStyle={{marginBottom: -20}}
-                    horizontal={horizontal}
-                    autoplay={autoplay}
-                    dotStyle={dotStyle}
-                    activeDotStyle={activeDotStyle}
-                    dotColor={dotColor}
-                    activeDotColor={activeDotColor}>
-                {renderItems()}
-            </Swiper>
+            {renderSwiper()}
         </View>
     );
 };
