@@ -11,7 +11,7 @@ class NetUtil extends Component {
     static handleException(code, msg) {
         let isShowMsg=true
         switch (code) {
-            case "1":
+            case 104://用户未登录
                 break
         }
         NativeModules.commModule.toast(msg)
