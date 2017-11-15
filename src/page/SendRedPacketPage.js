@@ -192,7 +192,7 @@ class SendRedPacketPage extends BasePage {
             this.setState({
                 isShowPay: false,
             });
-            this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, {info: this.state.payResultSourceData});
+            this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, this.state.payResultSourceData);
         }
     };
     _handlePayOnForgetPwdClick = () => {

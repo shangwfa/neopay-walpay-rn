@@ -15,7 +15,7 @@ export const RefreshStatus = {
     END: 'end',
     ERROR: 'error'
 }
-const defaulePageSize=10
+const defaulePageSize = 10
 class RefreshList extends Component {
 
     constructor(props) {
@@ -25,10 +25,11 @@ class RefreshList extends Component {
     componentDidMount() {
 
     }
-    errorReLoadPress=()=>{
+
+    errorReLoadPress = () => {
         this.onEndReached()
     }
-     renderFooter = () => {
+    renderFooter = () => {
         switch (this.props.footerStatus) {
             case RefreshStatus.END:
                 return (
@@ -38,8 +39,8 @@ class RefreshList extends Component {
                 )
                 break
             case RefreshStatus.ERROR:
-                return(
-                    <TouchableOpacity onPress={()=>this.errorReLoadPress()}>
+                return (
+                    <TouchableOpacity onPress={() => this.errorReLoadPress()}>
                         <View style={styles.footer_container}>
                             <Text style={styles.footer_text}>加载失败，点击重新加载</Text>
                         </View>
@@ -58,18 +59,20 @@ class RefreshList extends Component {
 
     }
 
-    onEndReached=()=>{
-        if(StringUtils.equals(this.props.footerStatus,RefreshStatus.IDLE)){
-            let dataLength=this.props.data.length
-            let curPage=dataLength%defaulePageSize?(dataLength/defaulePageSize+1):(dataLength/defaulePageSize+2)
+    onEndReached = () => {
+        if (StringUtils.equals(this.props.footerStatus, RefreshStatus.IDLE)) {
+            let dataLength = this.props.data.length
+            let curPage = dataLength % defaulePageSize ? (dataLength / defaulePageSize + 1) : (dataLength / defaulePageSize + 2)
             this.props.onLoadMore(curPage)
         }
     }
+
     render() {
-        const {data, renderItem,onRefresh, extraData, ...attributes} = this.props
+        const {data, renderItem, onRefresh, extraData, ...attributes} = this.props
         return (
             <FlatList
                 data={data}
+                showsVerticalScrollIndicator={false}
                 renderItem={renderItem}
                 onRefresh={onRefresh}
                 onEndReached={this.onEndReached}
