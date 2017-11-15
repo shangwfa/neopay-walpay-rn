@@ -19,22 +19,19 @@ import {RouterPaths} from "../constants/RouterPaths";
 import img_question from "../res/img/img_question.png"
 import BasePage from "./BasePage";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
+import RefreshList, {RefreshStatus} from "../components/RefreshList";
 class ReceiveRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
-            page: 0,
+            dataSource: [],
             isShowProcess: false,
+            footerStatus: RefreshStatus.IDLE,
         }
     }
 
     componentWillMount() {
-        ApiManager.getUserReceivableRedPacket({}, (data) => {
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(data),
-            });
-        });
+        this._handleRefresh();
     }
 
     render() {
@@ -48,28 +45,45 @@ class ReceiveRedPacketPage extends BasePage {
                     navigation={this.props.navigation}
                     title='领红包'/>
                 {/*消息列表*/}
-                <SwRefreshListView
-                    ref='listView'
-                    dataSource={this.state.dataSource}
-                    renderRow={this._renderItem}
+                <RefreshList
+                    data={this.state.dataSource}
+                    renderItem={this._renderItem}
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
-                />
+                    footerStatus={this.state.footerStatus}/>
                 <ReceiveRedPacketModal
-                    isShow={this.state.isShowProcess}
-                />
+                    isShow={this.state.isShowProcess}/>
             </View>
         );
     }
 
-    _onRefresh = (end) => {
-        console.log("_onRefresh");
-        end();//刷新成功后需要调用end结束刷新
+    _handleRefresh = () => {
+        ApiManager.getUserReceivableRedPacket({}, (data) => {
+            this.setState({
+                dataSource: data,
+            });
+        });
     };
-    _onLoadMore = (end) => {
-        console.log("_onLoadMore");
-        this.refs.listView.resetStatus(); //重置上拉加载的状态
-        end();//刷新成功后需要调用end结束刷新
+    _onRefresh = () => {
+        this._handleRefresh();
+    };
+    _onLoadMore = (pageSize) => {
+        let params = {
+            pageSize: pageSize
+        };
+        ApiManager.getUserReceivableRedPacket(params, (data) => {
+            if (data) {
+                let allData = this.state.dataSource;
+                allData = allData.concat(data);
+                this.setState({
+                    dataSource: allData,
+                });
+            } else {
+                this.setState({
+                    footerStatus: RefreshStatus.END
+                });
+            }
+        });
     };
     _clickItem = (item) => {
         this.setState({
@@ -86,7 +100,7 @@ class ReceiveRedPacketPage extends BasePage {
     _handleRightArrowClick = () => {
         this.props.navigation.navigate(RouterPaths.INSTRUCTIONS_PAGE);
     };
-    _renderItem = (item) => {
+    _renderItem = ({item}) => {
         return (
             <TouchableOpacity
                 activeOpacity={0.8} onPress={this._clickItem.bind(this, item)}>

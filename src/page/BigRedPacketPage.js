@@ -145,7 +145,7 @@ class BigRedPacketPage extends BasePage {
         );
     };
     _handleViewPageItemClick = (item) => {
-        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {info: item});
+        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, item);
     };
     _handleAllRedPacketClick = () => {
         this.props.navigation.navigate(RouterPaths.RED_PACKET_SQUARE);
