@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {NativeModules, View, DeviceEventEmitter, Animated, Easing,Text,TextInput,TouchableOpacity} from 'react-native'
+import {NativeModules, View, DeviceEventEmitter, Animated, Easing,Text,TouchableOpacity} from 'react-native'
 import {StackNavigator, NavigationActions} from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator'
 import JsonUtil from './utils/JsonUtil'

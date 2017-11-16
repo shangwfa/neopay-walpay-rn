@@ -63,6 +63,8 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
         [netParas setObject:@"123" forKey:@"macUrl"];
         [netParas setObject:@"CDMA" forKey:@"operator"];
     
+        [netParas setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
+    
     
     //将字典转换成JSON字符串
     NSData *netPaData = [NSJSONSerialization dataWithJSONObject:netParas options:NSJSONWritingPrettyPrinted error:nil];

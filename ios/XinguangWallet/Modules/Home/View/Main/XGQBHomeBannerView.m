@@ -22,8 +22,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, kScreenWidth, kScreenWidth/0.557)];
-    
+    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, kScreenWidth, kScreenWidth*0.557)];
     if (self) {
         //广告页头部图片标签
         UIImageView *titleView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_juhui"]];
@@ -68,6 +67,7 @@
             make.centerX.equalTo(weakself);
             make.top.equalTo(titleView.mas_bottom).with.offset(5);
         }];
+        [self layoutIfNeeded];
     }
     self.backgroundColor = kWhiteColor;
     return self;

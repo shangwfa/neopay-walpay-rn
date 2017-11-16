@@ -63,14 +63,15 @@
             XGQBHomeBannerItem *item = [XGQBHomeBannerItem modelWithJSON:dict];
             [bannerListArr addObject:item];
         }
-        //添加第一页视图至最后一页
-        XGQBHomeBannerItem *firstItem = bannerListArr[0];
-        [bannerListArr addObject:firstItem];
-        
-        //添加最后一页视图至第一页
-        XGQBHomeBannerItem *lastItem = bannerListArr[[bannerListArr count]-2];
-        [bannerListArr insertObject:lastItem atIndex:0];
-        
+        if (bannerListArr.count>=3) {
+            //添加第一页视图至最后一页
+            XGQBHomeBannerItem *firstItem = bannerListArr[0];
+            [bannerListArr addObject:firstItem];
+            
+            //添加最后一页视图至第一页
+            XGQBHomeBannerItem *lastItem = bannerListArr[[bannerListArr count]-2];
+            [bannerListArr insertObject:lastItem atIndex:0];
+        }
         _bannerListArr = bannerListArr;
         [self addScrSubViews:frame];
     } andFailerFn:^(NSError *error) {
@@ -82,10 +83,18 @@
     //设置SV的contentsize
     _scrV.contentSize = CGSizeMake((frame.size.width)*(_bannerListArr.count), frame.size.height);
     
-    
+    //如果没有值,显示一张默认图
+    if (_bannerListArr.count==0) {
+        UIImage *img = [UIImage imageNamed:@"beijing"];
+        UIImageView *imgV = [[UIImageView alloc]initWithImage:img];
+        imgV.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        [_scrV addSubview:imgV];
+        }
+    //如果有值,开始从数组取出数据
+    else{
     for (int i=0; i<_bannerListArr.count; i++) {
-        //创建临时图片
-        UIImage *img = [self createImageWithColor:kRandomColor andFrame:frame];
+        //创建默认背景图片
+        UIImage *img = [UIImage imageNamed:@"beijing"];
         UIImageView *page = [UIImageView new];
         [page sd_setImageWithURL:[NSURL URLWithString:_bannerListArr[i].imageUrl] placeholderImage:img];
         page.frame = CGRectMake(i*frame.size.width, 0, frame.size.width, frame.size.height);
@@ -112,19 +121,7 @@
     
     //开始自动滚屏
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
-    
-}
-
-//创建单色图片 temp
-- (UIImage*)createImageWithColor: (UIColor*)color andFrame:(CGRect)frame
-{
-    UIGraphicsBeginImageContext(frame.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, frame);
-    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return theImage;
+    }
 }
 
 #pragma mark - ScrollView代理方法
