@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ActivityListPage
+export default ActivityListPage //该页面已废弃

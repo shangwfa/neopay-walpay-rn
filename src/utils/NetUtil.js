@@ -14,7 +14,8 @@ class NetUtil extends Component {
             case 104://用户未登录
                 break
         }
-        NativeModules.commModule.toast(msg)
+
+        if(isShowMsg) NativeModules.commModule.toast(msg)
     }
 
 
