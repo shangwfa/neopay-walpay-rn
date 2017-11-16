@@ -69,4 +69,11 @@
     }
 }
 
+-(NSString *)secPhoneStr
+{
+    NSString *secPhone = [self stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    
+    return secPhone;
+}
+
 @end

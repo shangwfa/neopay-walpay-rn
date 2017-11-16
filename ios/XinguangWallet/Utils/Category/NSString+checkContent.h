@@ -15,5 +15,6 @@
 - (BOOL)checkPassword;
 - (BOOL)checkPayPassword;
 - (BOOL)isValidateEmail;
+-(NSString*)secPhoneStr;
 
 @end

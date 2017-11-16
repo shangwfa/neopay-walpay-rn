@@ -22,6 +22,8 @@
 
 @property (nonatomic,strong) NSArray *cellImgArray;
 
+@property (nonatomic,weak) XGQBMineHeaderView *headerView;
+
 @end
 
 @implementation XGQBMineViewController
@@ -36,6 +38,9 @@
     self.navigationController.navigationBarHidden = YES;
     
     [self setUpViewComponents];
+    
+    //开始发送网络请求获取用户信息
+    [self fetchUserInfomation];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -44,6 +49,24 @@
     
     self.navigationController.navigationBarHidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+#pragma mark - 网络请求用户数据
+-(void)fetchUserInfomation{
+    
+    NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+    [body setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
+    
+    [MemberCoreService getUserInfo:body andSuccessFn:^(id responseAfter, id responseBefore) {
+        [GVUserDefaults standardUserDefaults].name = responseAfter[@"name"];
+        [GVUserDefaults standardUserDefaults].phone = responseAfter[@"phone"];
+        [GVUserDefaults standardUserDefaults].authStatus = [responseAfter[@"authStatus"] intValue];
+        [_headerView updateUI];
+    } andFailerFn:^(NSError *error) {
+        nil;
+    }];
+    
+    
 }
 
 #pragma mark - 懒加载相关
@@ -84,6 +107,8 @@
     
     //tableview头部试图
     XGQBMineHeaderView *headerView = [[XGQBMineHeaderView alloc]initWithFrame:CGRectMake(11.0/375.0*kScreenWidth, 59/375.0*kScreenWidth, 353/375.0*kScreenWidth, 161/375.0*kScreenWidth+70)];
+    
+    _headerView = headerView;
     
     [headerView.goRegBtn addTarget:self action:@selector(goRegBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     

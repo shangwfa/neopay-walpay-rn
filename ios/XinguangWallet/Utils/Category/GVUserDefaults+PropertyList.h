@@ -13,12 +13,12 @@
 @interface GVUserDefaults (PropertyList)
 @property (nonatomic,strong)NSString* accessToken;
 @property (nonatomic,strong)NSString* uuid;
-@property (nonatomic,strong)NSString* userStatus;
+@property (nonatomic,assign)int userStatus;
 @property (nonatomic,strong)NSString* name;
 @property (nonatomic,strong)NSString* phone;
 @property (nonatomic,strong)NSString* nickName;
 @property (nonatomic,strong)NSString* avatarUrl;
-@property (nonatomic,strong)NSString* authStatus;
+@property (nonatomic,assign)int authStatus;
 
 
 @property (nonatomic,assign)int runCount;

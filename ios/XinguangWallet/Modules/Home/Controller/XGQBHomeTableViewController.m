@@ -26,57 +26,6 @@
 
 @implementation XGQBHomeTableViewController
 
-/*
- //添加滚动视图
- UIScrollView *homeScrollView = [[UIScrollView alloc]init];
- //    homeScrollView.contentSize= CGSizeMake(kScreenWidth, 400);
- [self.view addSubview:homeScrollView];
- 
- //添加滚动视图容器视图
- UIView *homeScrollViewContainer = [[UIView alloc]init];
- [homeScrollView addSubview:homeScrollViewContainer];
- 
- //主业务图标视图
- XGQBHomeCellView *homeCellView = [XGQBHomeCellView new];
- homeCellView.delegate = self;
- [homeScrollViewContainer addSubview:homeCellView];
- 
- 
- //广告视图
- XGQBHomeBannerView *homeADView = [XGQBHomeBannerView new];
- [homeADView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
- [homeScrollViewContainer addSubview:homeADView];
- 
- //添加约束
- 
- 
- 
- [homeScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
- make.top.equalTo(homeTitleView.mas_bottom);
- make.left.equalTo(weakself.view);
- make.bottom.equalTo(weakself.view).with.offset(-44);
- make.right.equalTo(weakself.view);
- }];
- 
- [homeScrollViewContainer mas_makeConstraints:^(MASConstraintMaker *make) {
- make.top.left.right.bottom.equalTo(homeScrollView);
- make.width.equalTo(homeScrollView);
- }];
- 
- [homeCellView mas_makeConstraints:^(MASConstraintMaker *make) {
- make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.584));
- make.top.equalTo(homeScrollViewContainer);
- make.left.equalTo(homeScrollViewContainer);
- }];
- 
- [homeADView mas_makeConstraints:^(MASConstraintMaker *make) {
- make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*0.557));
- make.top.equalTo(homeCellView.mas_bottom).with.offset(10);
- make.left.equalTo(homeScrollViewContainer);
- make.bottom.equalTo(homeScrollViewContainer).with.offset(0);
- }];
- */
-
 #pragma mark - Table view data source
 
 -(NSMutableArray*)messArr

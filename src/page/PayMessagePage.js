@@ -16,8 +16,6 @@ import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
 
-const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
-
 class PayMessagePage extends BasePage {
     page = 0
     dataSource = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
@@ -27,14 +25,24 @@ class PayMessagePage extends BasePage {
         this.state = {
             dataSource: this.dataSource.cloneWithRows([
                 {
-                    "createTime": "2000-01-01 00:00:00",
-                    "msgTypeText": "付款未知",
-                    "payDirectionText": "未知",
-                    "payNoticeTypeText": "未知",
-                    "isShowTime": true,
-                    "withAttach": true,
-                    "amount": 0.0,
-                    "attachText": "备注"
+                    "msgType": 2,
+                    "msgTypeText": "支付消息",
+                    "dayCode": "20171026",
+                    "disPlayDate": true,
+                    "id": 100,
+                    "uuid": "AnJ8xUoCkpVccr0Z",
+                    "billId": 99,
+                    "payNoticeType": 1,
+                    "payNoticeTypeText": "扫一扫付款",
+                    "payDirection": 2,
+                    "payDirectionText": "付款",
+                    "readStatus": 2,
+                    "readStatusText": "未读",
+                    "createTime": "2017-10-26 14:24:31",
+                    "createTimeMs": 1508999071000,
+                    "updateTime": "2017-10-26 14:24:31",
+                    "updateTimeMs": 1508999071000
+
                 }
             ])
         }

@@ -70,6 +70,7 @@
     [homeTitleView.accountBtn addTarget:self action:@selector(accountBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [homeTitleView.calenderBtn addTarget:self action:@selector(calenderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
+    //tableView视图
     [self.view addSubview:_homeTableVC.tableView];
     
     kWeakSelf(self);
@@ -81,7 +82,8 @@
     }];
     
     [_homeTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(weakself.view);
+        make.left.right.equalTo(weakself.view);
+        make.bottom.equalTo(weakself.view).with.offset(-44);
         make.top.equalTo(homeTitleView.mas_bottom);
     }];
     
