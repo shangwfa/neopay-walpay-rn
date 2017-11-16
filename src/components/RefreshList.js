@@ -62,7 +62,7 @@ class RefreshList extends Component {
     onEndReached = () => {
         if (StringUtils.equals(this.props.footerStatus, RefreshStatus.IDLE)) {
             let dataLength = this.props.data.length
-            let curPage = dataLength % defaulePageSize ? (dataLength / defaulePageSize + 1) : (dataLength / defaulePageSize + 2)
+            let curPage = dataLength % defaulePageSize ? (parseInt(dataLength / defaulePageSize + 1)) : parseInt((dataLength / defaulePageSize + 2))
             this.props.onLoadMore(curPage)
         }
     }

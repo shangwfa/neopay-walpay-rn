@@ -25,8 +25,10 @@ class BankCardDetailPage extends BasePage {
 
     constructor(props) {
         super(props);
+        console.log("---->"+this.props.navigation.state.params)
         this.state = {
-            isShowBottom:false
+            isShowBottom:false,
+            param:this.props.navigation.state.params
         };
         console.log(props)
     }
@@ -49,10 +51,10 @@ class BankCardDetailPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='银行卡列表' rightTitle='筛选' onRightPress={()=>this.rightClick()}/>
-                <BankCardCell imgIconUrl={dataSource.imgUrl}
-                              bankNameValue={dataSource.name}
-                              bankTypeValue={dataSource.type}
-                              cardNoValue={dataSource.cardNo}/>
+                <BankCardCell imgIconUrl={this.state.param.iconUrl}
+                              bankNameValue={this.state.param.bankName}
+                              bankTypeValue={this.state.param.cardType}
+                              cardNoValue={this.state.param.cardNo}/>
                 <CommonButton value='查看该张银行卡交易记录' style={{marginTop:50 }} onPress={()=>this.pushRecordPage()}/>
 
                 <TwoBottomItemModal oneItemTitle='解绑该张银行卡' twoItemTitle='关闭弹窗' isShow={this.state.isShow} close={() => this.close()} ensure={()=>this.unBind()}/>

@@ -1,6 +1,13 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+
+getRedPacketRecord = (req, callback) => {
+    NetUtil.post(APIS.QUERY_RED_PACKET_RECORD, req, (data) => {
+        callback(data)
+    })
+}
+
 modifyUserNickName = (req, callback) => {
     NetUtil.post(APIS.MODIFY_USER_NICKNAME, req, (data) => {
         callback(data)
@@ -107,6 +114,7 @@ payRedPacket = (request, callback) => {
     });
 };
 export default {
+    getRedPacketRecord,
     getUserInfo,
     queryBannerList,
     bindBankCard,
