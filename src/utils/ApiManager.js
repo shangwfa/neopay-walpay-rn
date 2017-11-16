@@ -88,6 +88,11 @@ getPhoneRechargeOrderQuery = (request, callback) => {
         callback(data);
     });
 };
+getPhoneRechargeProductList = (request, callback) => {
+    NetUtil.post(APIS.PHONE_RECHARGE_PRODUCT_LIST, request, (data) => {
+        callback(data);
+    });
+};
 getUserReceivableRedPacket = (request, callback) => {
     NetUtil.post(APIS.QUERY_USER_RECEIVABLE_RED_PACKET_PAGE, request, (data) => {
         callback(data);
@@ -117,6 +122,9 @@ queryUserBill=(request,callback)=>{
     NetUtil.post(APIS.USER_BILL_RECORD,request, (data) => {
         callback(data);
     })
+};
+queryPayMessage=(request,callback)=>{
+    NetUtil.post(APIS)
 }
 export default {
     getRedPacketRecord,
@@ -135,10 +143,12 @@ export default {
     getBankCardRecordPage,
     getBalanceRecordList,
     getPhoneRechargeOrderQuery,
+    getPhoneRechargeProductList,
     getUserReceivableRedPacket,
     getSquareRedPacketList,
     getRecentPayType,
     createRedPacket,
     payRedPacket,
-    queryUserBill
+    queryUserBill,
+    queryPayMessage,
 }
