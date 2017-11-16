@@ -35,11 +35,9 @@ const showTimePicker = (onPicker) => {
         pickerBg:[232, 232, 232, 1],
         wheelFlex: [1,1,1],
         onPickerConfirm: pickedValue => {
-            console.log('area', pickedValue);
+            onPicker(pickedValue)
         },
         onPickerCancel: pickedValue => {
-            console.log('area', pickedValue);
-            onPicker(pickedValue)
         },
         onPickerSelect: pickedValue => {
             let targetValue = [...pickedValue];

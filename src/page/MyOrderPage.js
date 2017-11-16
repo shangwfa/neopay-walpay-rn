@@ -17,6 +17,10 @@ import {RefreshStatus} from "../components/RefreshList"
 const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
 
 class MyOrderPage extends BasePage {
+    queryType=''//订单类型
+    payDirection=''//交易方向
+    startTime=''//开始时间
+    endTime=''//结束时间
 
     constructor(props) {
         super(props);
@@ -112,7 +116,7 @@ class MyOrderPage extends BasePage {
                     displayDate: false
                 },
             ],
-            footerStatus: RefreshStatus.IDLE
+            footerStatus: RefreshStatus.IDLE,
         }
     }
 
@@ -120,8 +124,23 @@ class MyOrderPage extends BasePage {
         this.loadData(1,false)
     }
 
+    emitEvent=(event)=>{
+        this.queryType=event.data.tradeType
+        this.payDirection=event.data.incomeType
+        this.startTime=event.data.startTime
+        this.endTime=event.data.endTime
+        this.loadData(1,false)
+    }
+
     loadData = (pageNo,isLoadMore) => {
-        ApiManager.queryUserBill({pageNo: pageNo}, data => {
+        const req={
+            pageNo: pageNo,
+            queryType:this.queryType,
+            payDirection:this.payDirection,
+            startTime:this.startTime,
+            endTime:this.endTime
+        }
+        ApiManager.queryUserBill(req, data => {
             if(data.length<10){
                 this.setState({footerStatus:RefreshStatus.END})
             }else {
@@ -149,7 +168,7 @@ class MyOrderPage extends BasePage {
                                rightUpValue={item.amount}
                                rightBottomValue={item.status}
                                isLine={true}
-                                onPress={()=>{
+                               onPress={()=>{
                                     nav.navigate(RouterPaths.TRANSACTION_DETAILS,{orderNo:item.orderNo})
                                 }}/>
             </View>

@@ -7,6 +7,7 @@ export const APIS = {
     /**
      * 网络请求-api
      */
+    QUERY_RED_PACKET_RECORD:"packet/query_red_packet_record_page",//红包交易明细
     QUERY_RECENT_RED_PACKET_LIST: "packet/query_recent_red_packet_list",  //获取红包列表
     GET_USER_INFO: 'user/get_user_info',//获取用户信息
     QUERY_USER_BILL_DETAIL: "pay/query_user_bill_detail",//查询用户账单详情
