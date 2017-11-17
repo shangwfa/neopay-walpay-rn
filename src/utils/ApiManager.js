@@ -124,7 +124,9 @@ queryUserBill=(request,callback)=>{
     })
 };
 queryPayMessage=(request,callback)=>{
-    NetUtil.post(APIS)
+    NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE,request,(data)=>{
+        callback(data);
+    })
 }
 export default {
     getRedPacketRecord,

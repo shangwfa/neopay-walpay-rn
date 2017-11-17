@@ -30,5 +30,5 @@ export const APIS = {
     CREATE_RED_PACKET: "packet/create_red_packet",//创建红包
     PAY_RED_PACKET: "packet/pay_red_packet",//支付红包
     USER_BILL_RECORD:'pay/query_user_bill_page',//账单记录
-    QUERY_PAY_MESSAGE_PAGE:'query_pay_msg_page',//获取支付消息
+    QUERY_PAY_MESSAGE_PAGE:'message/query_pay_msg_page',//获取支付消息
 };
