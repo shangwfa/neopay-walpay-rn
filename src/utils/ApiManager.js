@@ -172,7 +172,12 @@ createPhoneRechargeOrder=(request, callback)=>{
     NetUtil.post(APIS.CREATE_PHONE_RECHARGE_ORDER,request,(data)=>{
         callback(data);
     })
-}
+};
+getUserRedPacketStats=(request, callback)=>{
+    NetUtil.post(APIS.GET_USER_RED_PACKET_STATS,request,(data)=>{
+        callback(data);
+    })
+};
 export default {
     getRpDetail,
     getRpReceiverList,
@@ -205,5 +210,6 @@ export default {
     payRedPacket,
     queryUserBill,
     queryPayMessage,
-    createPhoneRechargeOrder
+    createPhoneRechargeOrder,
+    getUserRedPacketStats
 }

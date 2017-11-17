@@ -39,4 +39,5 @@ export const APIS = {
     USER_BILL_RECORD:'pay/query_user_bill_page',//账单记录
     QUERY_PAY_MESSAGE_PAGE:'message/query_pay_msg_page',//获取支付消息
     CREATE_PHONE_RECHARGE_ORDER:'pcharge/create_phone_recharge_order',//创建手机充值订单
+    GET_USER_RED_PACKET_STATS:'packet/get_user_red_packet_stats',//获取用户红包统计
 };
