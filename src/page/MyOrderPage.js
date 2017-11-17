@@ -26,97 +26,8 @@ class MyOrderPage extends BasePage {
         super(props);
         this.state = {
             data: [
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-20 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: true
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-20 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-20 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-20 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-20 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
 
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-10 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: true
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-10 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-10 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-10 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: true
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-10 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
-                {
-                    iconUrl: url,
-                    title: '胡萝卜的兔子店',
-                    tradeTime: '2017-10-10 15:31:16',
-                    amount: '-38.00',
-                    status: '付款处理中',
-                    displayDate: false
-                },
             ],
-            footerStatus: RefreshStatus.IDLE,
         }
     }
 
@@ -141,12 +52,6 @@ class MyOrderPage extends BasePage {
             endTime:this.endTime
         }
         ApiManager.queryUserBill(req, data => {
-            if(data.length<10){
-                this.setState({footerStatus:RefreshStatus.END})
-            }else {
-                this.setState({footerStatus:RefreshStatus.IDLE})
-            }
-
             if(isLoadMore){
                 const arrData=this.state.data
                 arrData.push(...data)
@@ -201,7 +106,6 @@ class MyOrderPage extends BasePage {
                     onRefresh={this.onRefresh}
                     onLoadMore={this.onLoadMore}
                     extraData={this.state}
-                    footerStatus={this.state.footerStatus}
                 />
             </View>
         );

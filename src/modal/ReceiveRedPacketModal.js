@@ -27,19 +27,22 @@ class ReceiveRedPacketModal extends Component {
                 onRequestClose={() => {
                 }}>
                 <View style={styles.modalStyle}>
-                    <Animation
-                        ref={animation => {
-                            if (this.props.isShow) {
-                                animation.play();
-                            }
-                        }}
-                        style={{
-                            width: 200,
-                            height: 200,
-                        }}
-                        source={demo}
-                        loop={true}
-                    />
+                    <View>
+                        <Animation
+                            ref={animation => {
+                                if(animation)
+                                    setTimeout(()=>{
+                                        animation.play();
+                                    },200)
+                            }}
+                            style={{
+                                width: 200,
+                                height: 200,
+                            }}
+                            source={demo}
+                        />
+                    </View>
+
                 </View>
             </Modal>
         );
