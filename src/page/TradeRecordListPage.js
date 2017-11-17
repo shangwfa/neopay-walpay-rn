@@ -17,16 +17,16 @@ import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
 import ApiManager from "../utils/ApiManager";
+import RefreshList, {RefreshStatus} from "../components/RefreshList";
 
 class TradeRecordListPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
-            page: 0,
-
+            dataSource: [],
+            footerStatus: RefreshStatus.IDLE,
             pageType: this.props.navigation.state.params.pageType,
-            title:''
+            title: ''
         }
     }
 
@@ -39,18 +39,18 @@ class TradeRecordListPage extends BasePage {
             <View style={styles.container}>
 
                 <Header navigation={this.props.navigation} title={this.state.title}/>
-                <SwRefreshListView
-                    dataSource={this.state.dataSource}
-                    ref="swRefreshListView"
-                    renderRow={this.renderRow}
+                <RefreshList
+                    data={this.state.dataSource}
+                    renderItem={this.renderRow}
                     onRefresh={this.onRefresh}
                     onLoadMore={this.onLoadMore}
+                    footerStatus={this.state.footerStatus}
                 />
             </View>
         );
     }
 
-    renderRow = (item) => {
+    renderRow = ({item}) => {
         return (
             <View>
                 {this.renderSectionHeader(item)}
@@ -73,39 +73,72 @@ class TradeRecordListPage extends BasePage {
                 value={"收入:" + item.incomeMoney + "元  " + "支出:" + item.outMoney + "元"}/>
         }
     };
-    onLoadMore = (end) => {
-        console.log("_onLoadMore");
-        this.refs.swRefreshListView.resetStatus(); //重置上拉加载的状态
-        end(this._page > 2);//刷新成功后需要调用end结束刷新
+    onLoadMore = (pageSize) => {
+        let params = {
+            pageSize: pageSize
+        };
+        switch (this.state.pageType) {
+            case 0://余额
+                ApiManager.getBalanceRecordList(params, (data) => {
+                    if (data) {
+                        let allData = this.state.dataSource;
+                        allData.push(...data);
+                        this.setState({
+                            dataSource: allData,
+                        });
+                    } else {
+                        this.setState({
+                            footerStatus: RefreshStatus.END
+                        });
+                    }
+                });
+                break;
+            case 1://银行卡
+                ApiManager.getBankCardRecordPage(params, (data) => {
+                    if (data) {
+                        let allData = this.state.dataSource;
+                        allData.push(...data);
+                        this.setState({
+                            dataSource: allData,
+                        });
+                    } else {
+                        this.setState({
+                            footerStatus: RefreshStatus.END
+                        });
+                    }
+                });
+                break
+        }
+
     };
-    onRefresh = (end) => {
-        console.log("_onRefresh");
-        end()//刷新成功后需要调用end结束刷新
+    onRefresh = () => {
+        this._handleCurrentPageType();
     };
     _handleItemClick = (item) => {
         alert(item.title);
     };
 
     _handleCurrentPageType = () => {
+        let txtContent;
         switch (this.state.pageType) {
             case 0://余额
                 ApiManager.getBalanceRecordList({}, (data) => {
                     this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(data),
+                        dataSource: data,
                     });
                 });
-                this.setState({title:'余额交易记录'})
+                txtContent = '余额交易记录';
                 break;
             case 1://银行卡
                 ApiManager.getBankCardRecordPage({}, (data) => {
                     this.setState({
-                        dataSource: this.state.dataSource.cloneWithRows(data),
+                        dataSource: data,
                     });
                 });
-                this.setState({title:'银行卡交易记录'})
+                txtContent = '银行卡交易记录';
                 break;
-
         }
+        this.setState({title: txtContent})
     }
 
 }

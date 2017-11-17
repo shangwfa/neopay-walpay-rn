@@ -13,6 +13,7 @@ import colors from "../constants/colors";
 const PhoneTopupMsgCell = props => {
     const {
         isShow,
+        showDate,
         relustTilte,
         dateValue,
         topupTypeValue,
@@ -128,7 +129,7 @@ const PhoneTopupMsgCell = props => {
     renderSectionHeader = () => {
         if (isShow) {
             return <View style = {styles.headr}>
-                <Text>xxxx</Text>
+                <Text>{showDate}</Text>
             </View>
         }else {
             return <View style={styles.headr_bottom}/>

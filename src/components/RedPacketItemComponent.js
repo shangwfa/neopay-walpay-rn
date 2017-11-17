@@ -16,6 +16,10 @@ class RedPacketItemComponent extends Component {
         itemData: {},
     }
 
+    constructor(props) {
+        super(props)
+    }
+
     onPress=()=>{
         //TODO 处理点击事件
         console.log("点击Item")
@@ -35,7 +39,7 @@ class RedPacketItemComponent extends Component {
             <TouchableWithoutFeedback onPress={()=>this.onPress()}>
                     <View style={styles.content_container}>
                         <Image style={styles.backgroundImg}
-                               source={sourceImgs[this.props.itemData.packetType==='newYear'?0:1]}>
+                               source={{url:this.props.imgUrl}}>
                         <Text style={styles.desText}>{this.props.itemData.descText}</Text>
                         <Text style={styles.shopText}>
                             <Text style = {styles.shopdesText}>——来自</Text>

@@ -7,6 +7,7 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     Modal,
+    NativeModules
 } from 'react-native'
 import {colors} from '../constants/index'
 import ScreenUtils from '../utils/ScreenUtils'
@@ -164,7 +165,6 @@ class PhoneTopUpMoneyView extends Component {
             ],
             selectedItemIndex:0,
             showContactIcon:true,
-            modalVisible:false
         }
     }
 
@@ -174,7 +174,7 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={{backgroundColor:'#DADADA',height:1}}></View>
                 <View style={styles.phoneNumberTextInputView}>
                     <TextInput style={styles.phoneNumberTextInput}
-                               placeholder={'请输入手机号'}
+                               placeholder={this.state.phoneNo?this.state.phoneNo:'请输入手机号'}
                                keyboardType='numeric'
                                clearButtonMode='while-editing'
                                placeholderTextColor='#999999'
@@ -193,20 +193,17 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={styles.cellItemsContainer}>
                     {this.renderCells()}
                 </View>
-                <Modal
-                    animationType={"slide"}
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {alert("Modal has been closed.")}}
-                >
-                    <Text>modal page</Text>
-                </Modal>
             </View>
         );
     }
 
     componentDidMount() {
-        ApiManager.getPhoneRechargeProductList({"phone":"18668180337","productType":this.props.viewType?2:1},(data)=>{
+        NativeModules.commModule.contactCommNumber((data)=>{
+            this.setState({
+                phoneNo:data["phoneNo"]
+            })
+        });
+        ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
             if(this.props.viewType){
                 this.setState({
                     CelluarItemList:data,
@@ -287,9 +284,7 @@ class PhoneTopUpMoneyView extends Component {
         }
     };
     contactBtnClicked = ()=>{
-        this.setState({
-            modalVisible:true
-        })
+        NativeModules.commModule.rnModalContactList();
     }
 
 }

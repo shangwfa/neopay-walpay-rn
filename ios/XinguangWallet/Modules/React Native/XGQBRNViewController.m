@@ -13,8 +13,13 @@
 
 #import "XGQBRegResetPwdTVController.h"
 
+#import <Contacts/Contacts.h>
+#import <ContactsUI/ContactsUI.h>
 
-@interface XGQBRNViewController ()
+
+@interface XGQBRNViewController () <CNContactPickerDelegate>
+
+@property (nonatomic,weak) RCTRootView *rootView;
 
 @end
 
@@ -33,11 +38,7 @@
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetPayPwd) name:kNotificationRNJumpBackToNativeResetPayPwd object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpIntoSecondLevel) name:kNotificationRNJumpIntoSecondLevel object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToFirstLevel) name:kNotificationRNJumpBackToFirstLevel object:nil];
-
-    
-    //RN打包ios命令
-//    react-native bundle --entry-file index.ios.js --bundle-output ./ios/bundle/index.ios.jsbundle --platform ios --assets-dest ./ios/bundle --dev false
-    
+    [kNotificationCenter addObserver:self selector:@selector(RNModalContactList) name:kNotificationRNModalContactList object:nil];
     //预先加载RN页面
     
     AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -70,6 +71,7 @@
                           launchOptions    : nil];
     
     self.view = rootView;
+    _rootView = rootView;
     
     
     [SVProgressHUD dismiss];
@@ -121,25 +123,60 @@
     if (arc4random()%2) {
         XGQBRegResetPwdTVController *resetPayPwdVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetPayPwdNoID];
         [self.navigationController pushViewController:resetPayPwdVC animated:YES];
-
     }else
     {
         XGQBRegResetPwdTVController *resetPayPwdVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetPayPwdWithID];
         [self.navigationController pushViewController:resetPayPwdVC animated:YES];
+    }
+}
 
+#pragma mark - Contacts Picker
+-(void)RNModalContactList
+{
+    if (@available(iOS 9.0, *)) {
+        CNContactPickerViewController *contactPickerVC = [[CNContactPickerViewController alloc]init];
+        contactPickerVC.displayedPropertyKeys=@[@"phoneNumbers"];
+        NSPredicate *phoneNumberPredicate = [NSPredicate predicateWithFormat:@"phoneNumbers.@count>0"];
+
+        contactPickerVC.predicateForSelectionOfContact = phoneNumberPredicate;
+        
+        NSPredicate *propertyPredicate = [NSPredicate predicateWithFormat:@"key=='phoneNumbers'"];
+        
+        contactPickerVC.predicateForSelectionOfProperty = propertyPredicate;
+        
+        contactPickerVC.delegate = self;
+        [self.navigationController presentViewController:contactPickerVC animated:YES completion:nil];
+    } else {
+        // Fallback on earlier versions
+    }
+
+}
+
+- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
+{
+    CNPhoneNumber *phoneNumber = (CNPhoneNumber*)contactProperty.value;
+    
+    //countryCode非公开属性,可能会有被拒风险
+    NSString *countryCode =[phoneNumber valueForKey:@"countryCode"];
+    
+    //处理手机号
+    if (![countryCode isEqualToString:@"cn"]) {
+        [SVProgressHUD showInfoWithStatus:@"不支持境外手机号"];
+        return;
+    }
+    NSString *phoneNumberStr = [phoneNumber stringValue];
+    phoneNumberStr = [phoneNumberStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+    phoneNumberStr = [phoneNumberStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    phoneNumberStr = [phoneNumberStr stringByReplacingOccurrencesOfString:@"+86" withString:@""];
+    if ([[phoneNumberStr substringWithRange:NSMakeRange(0, 2)]isEqualToString:@"86"]) {
+        phoneNumberStr=[phoneNumberStr stringByReplacingCharactersInRange:NSMakeRange(0, 2) withString:@""];
     }
     
-
+    if([phoneNumberStr length]!=11){
+        [SVProgressHUD showInfoWithStatus:@"请选择正确手机号"];
+        return;
+    }
+    [GVUserDefaults standardUserDefaults].phone=phoneNumberStr;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

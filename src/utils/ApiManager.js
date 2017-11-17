@@ -1,9 +1,32 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+getPhoneTopupRecordList = (req, callback) => {
+    NetUtil.post(APIS.PHONE_TOPUP_RECORD_LIST, req, (data) => {
+        callback(data)
+    })
+}
+
+getPhoneTopupMsg = (req, callback) => {
+    NetUtil.post(APIS.MESSAGE_TOPUP_PHONE, req, (data) => {
+        callback(data)
+    })
+}
 
 getRedPacketRecord = (req, callback) => {
     NetUtil.post(APIS.QUERY_RED_PACKET_RECORD, req, (data) => {
+        callback(data)
+    })
+}
+
+postUnBindBankCard = (req, callback) => {
+    NetUtil.post(APIS.BANK_UNBIND_BANKCARD, req, (data) => {
+        callback(data)
+    })
+}
+
+getRedPacketThemeList = (callback) => {
+    NetUtil.post(APIS.RED_PACKET_THEME, {}, (data) => {
         callback(data)
     })
 }
@@ -40,6 +63,11 @@ getUserInfo = (callback) => {
 
 getUserBillDetail = (request, callback) => {
     NetUtil.post(APIS.QUERY_USER_BILL_DETAIL, request, (data) => {
+        callback(data);
+    });
+};
+getRedPacketMessageList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_RED_PACKET_MSG_PAGE, request, (data) => {
         callback(data);
     });
 };
@@ -118,16 +146,22 @@ payRedPacket = (request, callback) => {
         callback(data);
     });
 }
-queryUserBill=(request,callback)=>{
-    NetUtil.post(APIS.USER_BILL_RECORD,request, (data) => {
+queryUserBill = (request, callback) => {
+    NetUtil.post(APIS.USER_BILL_RECORD, request, (data) => {
         callback(data);
     })
 };
 queryPayMessage=(request,callback)=>{
-    NetUtil.post(APIS)
+    NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE,request,(data)=>{
+        callback(data);
+    })
 }
 export default {
+    getPhoneTopupRecordList,
+    getPhoneTopupMsg,
     getRedPacketRecord,
+    postUnBindBankCard,
+    getRedPacketThemeList,
     getUserInfo,
     queryBannerList,
     bindBankCard,
@@ -135,6 +169,7 @@ export default {
     modifyUserNickName,
     getUserBillDetail,
     getRedPacketList,
+    getRedPacketMessageList,
     getMerchantBannerList,
     getMerchantActivityList,
     getUserMerchantList,

@@ -1,7 +1,7 @@
 /**
  * @author: carlos.guo
  * @data:  2017/10/23.
- * @description: 红包列表--页面
+ * @description: 消息红包列表--页面
  */
 import React, {Component} from 'react'
 import {
@@ -24,7 +24,6 @@ class RedListPage extends BasePage {
             footerStatus: RefreshStatus.IDLE,
         };
     }
-
     componentWillMount() {
         this._handleRefresh();
     }
@@ -48,7 +47,7 @@ class RedListPage extends BasePage {
     }
 
     _handleRefresh = () => {
-        ApiManager.getRedPacketList({}, (data) => {
+        ApiManager.getRedPacketMessageList({}, (data) => {
             this.setState({
                 dataSource: data,
             });
@@ -61,10 +60,10 @@ class RedListPage extends BasePage {
         let params = {
             pageSize: pageSize
         };
-        ApiManager.getRedPacketList(params, (data) => {
+        ApiManager.getRedPacketMessageList(params, (data) => {
             if (data) {
                 let allData = this.state.dataSource;
-                allData = allData.concat(data);
+                allData.push(...data);
                 this.setState({
                     dataSource: allData,
                 });

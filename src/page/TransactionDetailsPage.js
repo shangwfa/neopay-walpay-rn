@@ -22,7 +22,7 @@ class TransactionDetailsPage extends BasePage {
         super(props);
         this.state = {
             sourceData: {},
-            orderNo: this.props.navigation.state.params.info,
+            orderNo: this.props.navigation.state.params.orderNo,
         }
     }
 

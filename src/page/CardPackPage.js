@@ -63,7 +63,7 @@ class CardPackPage extends BasePage {
                         <Image
                             source={img_activity}
                             style={styles.img_activity}/>
-                        <Text style={styles.title_txt}>热门活动</Text>
+                        <Text style={styles.title_txt}>热门商户</Text>
                     </View>
                     <View style={{marginLeft: 13, marginRight: 4}}>
                         <FlatList
@@ -84,9 +84,6 @@ class CardPackPage extends BasePage {
     }
 
     _renderPage = (item) => {
-        if (!item) {
-            return null;
-        }
         return (
             <TouchableWithoutFeedback
                 style={styles.page}
