@@ -27,7 +27,7 @@ class SendRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            redTheme: "普通",
+            redThemeName: "普通",
             redPacketNum: "",
             redPacketAmount: "",
             redPacketMessage: "恭喜发财!",
@@ -83,7 +83,7 @@ class SendRedPacketPage extends BasePage {
                 {this._renderLineView()}
                 <RedPacketInputComponent
                     contentType="红包主题"
-                    conentValue={this.state.redTheme}
+                    conentValue={this.state.redThemeName}
                     isEditable={false}
                     isShowArrow={true}
                     onTextInputClick={this._handleRedThemeClick.bind(this)}
@@ -91,7 +91,7 @@ class SendRedPacketPage extends BasePage {
                 <RedPacketInputComponent
                     containerTypeStyle={{marginTop: 10}}
                     contentType="留言"
-                    placeholderType="恭喜发财!"
+                    conentValue={this.state.redPacketMessage}
                     keybordType="default"
                     onTextInputClick={this._handleTextInputClick.bind(this)}
                     textInputChangeListener={this._handleRedPacketMessageListener.bind(this)}/>
@@ -116,9 +116,11 @@ class SendRedPacketPage extends BasePage {
 
     emitEvent = (event) => {
         switch (event.type) {
-            case 0://选择红包主题
+            case "redTheme"://选择红包主题
                 this.setState({
-                    redTheme: event.redTheme
+                    redThemeName: event.data.name,
+                    redPacketMessage: event.data.blessingWords,
+                    redPacketThemeCode: event.data.themeCode
                 });
                 break;
             case 1://payTypeDesc 选择银行卡
@@ -232,16 +234,11 @@ class SendRedPacketPage extends BasePage {
             redPacketAmountText: textContent
         });
 
-        DeviceEventEmitter.addListener("event", (data) => {
-            this.setState({
-                redTheme: data.themeUrl
-            });
-        })
     };
     _handleTextInputClick = () => {
     };
     _handleRedThemeClick = (item) => {
-        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE, {themeUrl: this.state.redTheme});
+        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE);
     };
     _handleRedPacketListener = (text) => {
     };
@@ -297,11 +294,10 @@ class SendRedPacketPage extends BasePage {
             return;
         }
         let request = {
-            bossType: 1,
             packetType: this.state.isRandomRedPacket ? 1 : 2,
             amount: this.state.redPacketAmount,
             totalCount: this.state.redPacketNum,
-            themeUrl: this.state.redTheme,
+            themeCode: this.state.redPacketThemeCode,
             message: this.state.redPacketMessage,
         };
         ApiManager.createRedPacket(request, (data) => {
