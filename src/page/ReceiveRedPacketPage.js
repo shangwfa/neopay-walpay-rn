@@ -74,7 +74,7 @@ class ReceiveRedPacketPage extends BasePage {
         ApiManager.getUserReceivableRedPacket(params, (data) => {
             if (data) {
                 let allData = this.state.dataSource;
-                allData = allData.concat(data);
+                allData.push(...data);
                 this.setState({
                     dataSource: allData,
                 });

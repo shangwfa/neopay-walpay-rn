@@ -6,9 +6,14 @@ import {
     Image,
     TextInput,
     TouchableWithoutFeedback,
+    Modal,
+    NativeModules
 } from 'react-native'
 import {colors} from '../constants/index'
 import ScreenUtils from '../utils/ScreenUtils'
+import ApiManager from '../utils/ApiManager'
+import Contacts from '../page/ContactsPage'
+
 
 const marginBetween=13;
 const marginCellTop= 15;
@@ -22,63 +27,143 @@ class PhoneTopUpMoneyView extends Component {
     constructor(props){
         super(props)
         this.state={
-            MoneyItemList:[{
-                    item:10,
-                    price:9.98
-                },{
-                    item:20,
-                    price:19.98
-                },{
-                    item:30,
-                    price:29.98
-                },{
-                    item:50,
-                    price:49.98
-                },{
-                    item:80,
-                    price:79.98
-                },{
-                    item:100,
-                    price:99.98
-                },{
-                    item:200,
-                    price:199.98
-                },{
-                    item:300,
-                    price:299.98
-                },{
-                    item:400,
-                    price:399.98
-                },{
-                    item:500,
-                    price:499.98
+            MoneyItemList:[
+                {
+                    "nameCode": 21,
+                    "rechargeAmout": "10",
+                    "tradeAmount": 9.90000,
+                    "rechargeType": 1,
+                    "rechargeTypeText": "话费"
+                },
+                {
+                    "nameCode": 22,
+                    "rechargeAmout": "20",
+                    "tradeAmount": 19.80000,
+                    "rechargeType": 1,
+                    "rechargeTypeText": "话费"
+                },
+                {
+                    "nameCode": 23,
+                    "rechargeAmout": "30",
+                    "tradeAmount": 29.70000,
+                    "rechargeType": 1,
+                    "rechargeTypeText": "话费"
+                },
+                {
+                    "nameCode": 24,
+                    "rechargeAmout": "50",
+                    "tradeAmount": 49.50000,
+                    "rechargeType": 1,
+                    "rechargeTypeText": "话费"
+                },
+                {
+                    "nameCode": 25,
+                    "rechargeAmout": "100",
+                    "tradeAmount": 99.00000,
+                    "rechargeType": 1,
+                    "rechargeTypeText": "话费"
+                },
+                {
+                    "nameCode": 26,
+                    "rechargeAmout": "200",
+                    "tradeAmount": 198.00000,
+                    "rechargeType": 1,
+                    "rechargeTypeText": "话费"
+                },
+                {
+                    "nameCode": 27,
+                    "rechargeAmout": "500",
+                    "tradeAmount": 494.00000,
+                    "rechargeType": 1,
+                    "rechargeTypeText": "话费"
                 }],
-            CelluarItemList:[{
-                item:'20M',
-                price:9.98
-            },{
-                item:'50M',
-                price:19.98
-            },{
-                item:'100M',
-                price:29.98
-            },{
-                item:'200M',
-                price:49.98
-            },{
-                item:'300M',
-                price:79.98
-            },{
-                item:'500M',
-                price:99.98
-            },{
-                item:'1G',
-                price:199.98
-            },{
-                item:'2G',
-                price:299.98
-            }],
-            selectedItemIndex:2,
+            CelluarItemList:[
+                {
+                    "nameCode": 1,
+                    "rechargeAmout": "10",
+                    "tradeAmount": 9.90000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 2,
+                    "rechargeAmout": "30",
+                    "tradeAmount": 29.70000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 3,
+                    "rechargeAmout": "50",
+                    "tradeAmount": 49.50000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 4,
+                    "rechargeAmout": "70",
+                    "tradeAmount": 69.30000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 5,
+                    "rechargeAmout": "100",
+                    "tradeAmount": 99.00000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 6,
+                    "rechargeAmout": "200",
+                    "tradeAmount": 198.00000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 7,
+                    "rechargeAmout": "1024",
+                    "tradeAmount": 1013.76000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 8,
+                    "rechargeAmout": "2048",
+                    "tradeAmount": 2027.52000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 9,
+                    "rechargeAmout": "3072",
+                    "tradeAmount": 3041.28000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 10,
+                    "rechargeAmout": "4096",
+                    "tradeAmount": 4055.04000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 11,
+                    "rechargeAmout": "5120",
+                    "tradeAmount": 5068.80000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                },
+                {
+                    "nameCode": 12,
+                    "rechargeAmout": "6144",
+                    "tradeAmount": 6080.56000,
+                    "rechargeType": 3,
+                    "rechargeTypeText": "国内流量"
+                }
+            ],
+            selectedItemIndex:0,
             showContactIcon:true,
         }
     }
@@ -89,7 +174,7 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={{backgroundColor:'#DADADA',height:1}}></View>
                 <View style={styles.phoneNumberTextInputView}>
                     <TextInput style={styles.phoneNumberTextInput}
-                               placeholder={'请输入手机号'}
+                               placeholder={this.state.phoneNo?this.state.phoneNo:'请输入手机号'}
                                keyboardType='numeric'
                                clearButtonMode='while-editing'
                                placeholderTextColor='#999999'
@@ -112,6 +197,25 @@ class PhoneTopUpMoneyView extends Component {
         );
     }
 
+    componentDidMount() {
+        NativeModules.commModule.contactCommNumber((data)=>{
+            this.setState({
+                phoneNo:data["phoneNo"]
+            })
+        });
+        ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
+            if(this.props.viewType){
+                this.setState({
+                    CelluarItemList:data,
+                })
+            }else {
+                this.setState({
+                    MoneyItemList: data,
+                })
+            }
+        });
+    }
+
     renderCells= ()=>{
         let itemCells = [];
         if(this.props.viewType===false) {
@@ -120,9 +224,9 @@ class PhoneTopUpMoneyView extends Component {
                     <TouchableWithoutFeedback key={i} onPress={() => this.cellSelected(i)}>
                         <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.MoneyItemList[i].item}元</Text>
+                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.MoneyItemList[i].rechargeAmout}元</Text>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText}>售价:{this.state.MoneyItemList[i].price}</Text>
+                                style={i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText}>售价:{this.state.MoneyItemList[i].tradeAmount.toFixed(2)}</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 )
@@ -133,9 +237,9 @@ class PhoneTopUpMoneyView extends Component {
                     <TouchableWithoutFeedback key={i} onPress={() => this.cellSelected(i)}>
                         <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.CelluarItemList[i].item}</Text>
+                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.CelluarItemList[i].rechargeAmout}</Text>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText}>售价:{this.state.CelluarItemList[i].price}</Text>
+                                style={i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText}>售价:{this.state.CelluarItemList[i].tradeAmount.toFixed(2)}</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 )
@@ -180,7 +284,7 @@ class PhoneTopUpMoneyView extends Component {
         }
     };
     contactBtnClicked = ()=>{
-        console.log('通讯录图标点击')
+        NativeModules.commModule.rnModalContactList();
     }
 
 }

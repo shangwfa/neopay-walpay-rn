@@ -1,3 +1,8 @@
+/**
+ * @author: carlos.guo
+ * @data:  2017/11/6.
+ * @description: 交易类型说明item--utils
+ */
 import React, {Component} from 'react'
 import {
     StyleSheet,
@@ -5,11 +10,8 @@ import {
     Text,
     Image,
 } from 'react-native'
-/**
- * @author: carlos.guo
- * @data:  2017/11/6.
- * @description: 交易类型说明item--utils
- */
+import StringUtils from "./StringUtils";
+import {RouterPaths} from "../constants/RouterPaths";
 _payTypeItem = (mData, item) => {
     let payType = {
         transformType: "付款方式",
@@ -17,7 +19,8 @@ _payTypeItem = (mData, item) => {
         isShowArrows: true,
     };
     payType.onclick = () => {
-        alert(payType.transformType);
+        let pageType = StringUtils.isContainChildrenStr(item.payTypeDesc, "余额") ? 0 : 1;
+        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType});
     };
     mData.push(payType);
 };
@@ -39,7 +42,8 @@ _incomeTypeItem = (mData, item) => {
         isShowArrows: true,
     };
     incomeType.onclick = () => {
-        alert(incomeType.transformType);
+        let pageType = StringUtils.isContainChildrenStr(item.incomeTypeDesc, "余额") ? 0 : 1;
+        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType});
     };
     mData.push(incomeType);
 };
@@ -51,7 +55,7 @@ _tradeTypeItem = (mData, item) => {
         isShowArrows: true,
     };
     tradeType.onclick = () => {
-        alert(tradeType.transformType);
+        nav.navigate(RouterPaths.MY_ORDER_PAGE, {tradeType: item.tradeType});
     };
     mData.push(tradeType);
 };

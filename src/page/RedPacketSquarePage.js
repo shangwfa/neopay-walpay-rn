@@ -58,7 +58,7 @@ class RedPacketSquarePage extends BasePage {
         ApiManager.getSquareRedPacketList(params, (data) => {
             if (data) {
                 let allData = this.state.dataSource;
-                allData = allData.concat(data);
+                allData.push(...data);
                 this.setState({
                     dataSource: allData,
                 });

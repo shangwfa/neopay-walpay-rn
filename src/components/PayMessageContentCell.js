@@ -16,18 +16,17 @@ const PayMessageContentCell = props => {
         payNoticeType,
         payBy,
         payTo,
-        withAttach,
-        attach,
+        remark,
         amount,
         ...attributes
     } = props
 
     renderAttach = () => {
 
-        if (withAttach) {
+        if (remark) {
             return(<View style = {styles.detailLabel}>
                 <Text style = {styles.detailItem}>备注 :</Text>
-                <Text style = {styles.detailDes}>{attach}</Text>
+                <Text style = {styles.detailDes}>{remark}</Text>
             </View>)
         }
     }
@@ -35,11 +34,11 @@ const PayMessageContentCell = props => {
         <View style = {styles.container}>
             <View style={styles.content_container}>
                 <View style ={styles.titleView}>
-                    <Text style = {styles.titleText}>付款成功</Text>
+                    <Text style = {styles.titleText}>{payNoticeType}</Text>
                     <Text style = {styles.titleDate}>{createTime}</Text>
                 </View>
                 <View style = {styles.countView}>
-                    <Text style = {styles.countText}>{amount}.00</Text>
+                    <Text style = {styles.countText}>{amount}</Text>
                 </View>
                 <View style = {styles.separatorLineView}>
                 <View style = {styles.separatorLine}>

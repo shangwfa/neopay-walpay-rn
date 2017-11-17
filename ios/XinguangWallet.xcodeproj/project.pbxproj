@@ -24,6 +24,8 @@
 		425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425586701F94C84D002E039B /* XGQBMineTableView.m */; };
 		42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C621FBA917A00E5AB73 /* UIView+Transform.m */; };
 		42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C671FBAC84F00E5AB73 /* XGQBSideView.m */; };
+		427A666E1FBD6D1900E0D92B /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666C1FBD6D1000E0D92B /* Contacts.framework */; };
+		427A66701FBD6D2E00E0D92B /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666F1FBD6D2100E0D92B /* ContactsUI.framework */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
 		4293F4801FBBE1F4008C1531 /* XGQBHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4293F47F1FBBE1F4008C1531 /* XGQBHomeTableViewController.m */; };
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
@@ -139,6 +141,8 @@
 		42655C641FBA917B00E5AB73 /* UIView+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Transform.h"; sourceTree = "<group>"; };
 		42655C661FBAC84F00E5AB73 /* XGQBSideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSideView.h; sourceTree = "<group>"; };
 		42655C671FBAC84F00E5AB73 /* XGQBSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideView.m; sourceTree = "<group>"; };
+		427A666C1FBD6D1000E0D92B /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		427A666F1FBD6D2100E0D92B /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
 		428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
 		4293F47E1FBBE1F4008C1531 /* XGQBHomeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTableViewController.h; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				427A66701FBD6D2E00E0D92B /* ContactsUI.framework in Frameworks */,
+				427A666E1FBD6D1900E0D92B /* Contacts.framework in Frameworks */,
 				E7A419D64D389536228DE027 /* libPods-XinguangWallet.a in Frameworks */,
 				2DA62DDF03A34E24A5B3C3B2 /* libRCTContacts.a in Frameworks */,
 			);
@@ -288,6 +294,8 @@
 		2FD558E3F31DF09C78F29DD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				427A666F1FBD6D2100E0D92B /* ContactsUI.framework */,
+				427A666C1FBD6D1000E0D92B /* Contacts.framework */,
 				DFE03A9FABCE2475826A5708 /* libPods-XinguangWallet.a */,
 			);
 			name = Frameworks;
@@ -1380,7 +1388,7 @@
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XinguangWallet/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/XinguangWallet/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1406,7 +1414,7 @@
 				DEVELOPMENT_TEAM = LBJWZAMBH7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XinguangWallet/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/XinguangWallet/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
