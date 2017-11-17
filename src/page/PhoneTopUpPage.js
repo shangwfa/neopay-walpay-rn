@@ -30,6 +30,7 @@ class PhoneTopUpPage extends BasePage {
 }
 
 const PhoneTopUpTabNavigator = TabNavigator({
+
     MoneyTopUp:{
         screen:props=> <MoneyTopUpView{...props} viewType={false}/>,
         navigationOptions: ({navigation}) => ({

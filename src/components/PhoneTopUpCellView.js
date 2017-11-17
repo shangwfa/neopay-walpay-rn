@@ -12,8 +12,8 @@ import {
 import {colors} from '../constants/index'
 import ScreenUtils from '../utils/ScreenUtils'
 import ApiManager from '../utils/ApiManager'
-import Contacts from '../page/ContactsPage'
-
+import PayPwdModal from '../modal/PayPwdModal'
+import {RouterPaths} from "../constants/RouterPaths"
 
 const marginBetween=13;
 const marginCellTop= 15;
@@ -163,8 +163,9 @@ class PhoneTopUpMoneyView extends Component {
                     "rechargeTypeText": "国内流量"
                 }
             ],
-            selectedItemIndex:0,
             showContactIcon:true,
+            phoneNo:'',
+            isPayShow:false,
         }
     }
 
@@ -193,6 +194,8 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={styles.cellItemsContainer}>
                     {this.renderCells()}
                 </View>
+                <PayPwdModal isShow={this.state.isPayShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
+                             onForgetPwd={()=>{}} onEnd={(text)=>this.pwdInputFinished(text)}/>
             </View>
         );
     }
@@ -200,20 +203,22 @@ class PhoneTopUpMoneyView extends Component {
     componentDidMount() {
         NativeModules.commModule.contactCommNumber((data)=>{
             this.setState({
-                phoneNo:data["phoneNo"]
-            })
+                phoneNo:data
+
+            });
+            ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
+                if(this.props.viewType){
+                    this.setState({
+                        CelluarItemList:data,
+                    })
+                }else {
+                    this.setState({
+                        MoneyItemList: data,
+                    })
+                }
+            });
         });
-        ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
-            if(this.props.viewType){
-                this.setState({
-                    CelluarItemList:data,
-                })
-            }else {
-                this.setState({
-                    MoneyItemList: data,
-                })
-            }
-        });
+
     }
 
     renderCells= ()=>{
@@ -250,8 +255,10 @@ class PhoneTopUpMoneyView extends Component {
 
     cellSelected = (i)=>{
         this.setState({
-            selectedItemIndex:i
-        })
+            selectedItemIndex:i,
+            isPayShow:true,
+        });
+
     };
 
     textInputFocus = (event)=>{
@@ -284,7 +291,22 @@ class PhoneTopUpMoneyView extends Component {
         }
     };
     contactBtnClicked = ()=>{
-        NativeModules.commModule.rnModalContactList();
+        NativeModules.commModule.rnModalContactList((data)=>{
+            this.setState({
+                phoneNo:data
+            })
+        });
+    };
+
+    //输入密码完成
+    pwdInputFinished =(text) =>{
+        this.setState({
+            isPayShow:false
+        });
+        ApiManager.createPhoneRechargeOrder({"phone":this.state.phoneNo,"payType":1,"nameCode":1,"payPassword":text},(data)=>{
+            //创建订单成功,跳转结果页
+            nav.navigate(RouterPaths.CHARGE_FLUX_RESULT,{pageTitle:this.props.viewType?'流量充值':'手机充值',orderNo:data['orderNo']});
+        });
     }
 
 }

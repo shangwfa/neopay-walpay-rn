@@ -39,6 +39,7 @@ class NetUtil extends Component {
             fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
                 .then((response) => response.text())
                 .then((responseText) => {
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                     console.log(responseText)
                     let response = JSON.parse(responseText);
                     if (netCode.netOk === response.retCode) {
@@ -46,7 +47,6 @@ class NetUtil extends Component {
                     } else {
                         this.handleException(response.netCode, response.retMsg)
                     }
-                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                 })
                 .catch((err) => {
                     if (isShowLoading) NativeModules.commModule.hideLoadingDialog()

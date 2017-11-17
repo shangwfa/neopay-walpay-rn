@@ -16,10 +16,13 @@
 #import <Contacts/Contacts.h>
 #import <ContactsUI/ContactsUI.h>
 
+#import "RCTBridgeModule.h"
+
 
 @interface XGQBRNViewController () <CNContactPickerDelegate>
 
 @property (nonatomic,weak) RCTRootView *rootView;
+@property (nonatomic,copy) RCTResponseSenderBlock contactCommBlock;
 
 @end
 
@@ -38,7 +41,7 @@
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToNativeResetPayPwd) name:kNotificationRNJumpBackToNativeResetPayPwd object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpIntoSecondLevel) name:kNotificationRNJumpIntoSecondLevel object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToFirstLevel) name:kNotificationRNJumpBackToFirstLevel object:nil];
-    [kNotificationCenter addObserver:self selector:@selector(RNModalContactList) name:kNotificationRNModalContactList object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(RNModalContactList:) name:kNotificationRNModalContactList object:nil];
     //预先加载RN页面
     
     AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -131,9 +134,9 @@
 }
 
 #pragma mark - Contacts Picker
--(void)RNModalContactList
+-(void)RNModalContactList:(NSNotification*)notification
 {
-    if (@available(iOS 9.0, *)) {
+        _contactCommBlock = [notification object];
         CNContactPickerViewController *contactPickerVC = [[CNContactPickerViewController alloc]init];
         contactPickerVC.displayedPropertyKeys=@[@"phoneNumbers"];
         NSPredicate *phoneNumberPredicate = [NSPredicate predicateWithFormat:@"phoneNumbers.@count>0"];
@@ -145,10 +148,8 @@
         contactPickerVC.predicateForSelectionOfProperty = propertyPredicate;
         
         contactPickerVC.delegate = self;
+    
         [self.navigationController presentViewController:contactPickerVC animated:YES completion:nil];
-    } else {
-        // Fallback on earlier versions
-    }
 
 }
 
@@ -176,7 +177,7 @@
         [SVProgressHUD showInfoWithStatus:@"请选择正确手机号"];
         return;
     }
-    [GVUserDefaults standardUserDefaults].phone=phoneNumberStr;
+    _contactCommBlock(@[phoneNumberStr]);
 }
 
 @end

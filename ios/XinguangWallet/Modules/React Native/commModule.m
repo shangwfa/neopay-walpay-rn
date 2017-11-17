@@ -39,10 +39,10 @@ RCT_EXPORT_METHOD(showLoadingDialog){
     dispatch_async(dispatch_get_main_queue(), ^{
         [SVProgressHUD show];
     });
-    //临时:2s后取消网络加载框
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [SVProgressHUD dismiss];
-    });
+//    //临时:2s后取消网络加载框
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [SVProgressHUD dismiss];
+//    });
 }
 
 //RN取消显示网络加载
@@ -134,14 +134,14 @@ RCT_EXPORT_METHOD(statusBarLight){
 }
 
 //RN页面跳转系统通讯录
-RCT_EXPORT_METHOD(rnModalContactList){
-    [kNotificationCenter postNotificationName:kNotificationRNModalContactList object:nil];
+RCT_EXPORT_METHOD(rnModalContactList:(RCTResponseSenderBlock)callback){
+    [kNotificationCenter postNotificationName:kNotificationRNModalContactList object:callback];
 }
 
 //传递手机充值页面手机号
 RCT_EXPORT_METHOD(contactCommNumber:(RCTResponseSenderBlock)callback){
     NSString *phoneNo = [GVUserDefaults standardUserDefaults].phone;
-    callback(@[@{@"phoneNo":phoneNo}]);
+    callback(@[phoneNo]);
 }
 
     

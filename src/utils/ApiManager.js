@@ -167,6 +167,11 @@ queryPayMessage=(request,callback)=>{
     NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE,request,(data)=>{
         callback(data);
     })
+};
+createPhoneRechargeOrder=(request, callback)=>{
+    NetUtil.post(APIS.CREATE_PHONE_RECHARGE_ORDER,request,(data)=>{
+        callback(data);
+    })
 }
 export default {
     getRpDetail,
@@ -200,4 +205,5 @@ export default {
     payRedPacket,
     queryUserBill,
     queryPayMessage,
+    createPhoneRechargeOrder
 }
