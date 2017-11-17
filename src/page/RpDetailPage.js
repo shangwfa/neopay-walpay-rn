@@ -15,104 +15,13 @@ import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
 import RpDetailHeader from '../components/RpDetailHeader'
 import CommonButton from '../components/CommonButton'
+import ApiManager from '../utils/ApiManager'
+import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
-
-const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
-const dataDetail= {remark: '欠你的钱还上了蛤', imgUrl:url, backGroundImg:url, amount: '88.88', fromTo: '来自毛主席的大红包',state:'来晚了，红包被林彪领完了'}
-const dataSource = [
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-20 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: true
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-20 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-20 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-20 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-20 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-10 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: true
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-10 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-10 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-10 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: true
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-10 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-    {
-        iconUrl: url,
-        title: '胡萝卜的兔子店',
-        tradeTime: '2017-10-10 15:31:16',
-        amount: '-38.00',
-        status: '付款处理中',
-        isShowTime: false
-    },
-]
 
 class RpDetailPage extends BasePage {
 
@@ -120,19 +29,40 @@ class RpDetailPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-
+            dataDetail:{},
+            dataSource:[],
+            param:this.props.navigation.state.params
         }
     }
 
-    // componentWillMount() {
-    //     NetUtil.post('pay/query_user_order_page', {}, (data) => {
-    //         this.setState({
-    //             data: data
-    //         })
-    //     })
-    // }
+    componentWillMount() {
+        this._postRpDetail();
+        this._postRpReceiverList();
+    }
 
-    renderRow = (item) => {
+    _postRpDetail = () =>{
+        let body = {
+            packetCode: this.state.param.packetCode
+        };
+        ApiManager.getRpDetail(body, (data) => {
+            this.setState({
+                dataDetail: data,
+            });
+        });
+    }
+
+    _postRpReceiverList = () => {
+        let body = {
+            packetCode: this.state.param.packetCode
+        };
+        ApiManager.getRpReceiverList(body, (data) => {
+            this.setState({
+                dataSource: data,
+            });
+        });
+    };
+
+    renderRow = ({item}) => {
         console.log('----xxx' + item)
         return (
             <View>
@@ -148,17 +78,23 @@ class RpDetailPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='红包详情'/>
-                <RpDetailHeader imgBackGroundUrl={dataDetail.backGroundImg}
-                                imgIconUrl={dataDetail.imgUrl}
-                                amountValue={dataDetail.amount}
-                                fromValue={dataDetail.fromTo}
-                                remarkValue={dataDetail.remark}
-                                stateValue={dataDetail.state}/>
+                <Header
+                    navigation={this.props.navigation}
+                    backgroundColor="#D83E3E"
+                    isShowLine={false}
+                    isWhiteArrow={true}
+                    textColor={colors.white}
+                    rightTextColor={colors.white}
+                    title='红包详情'/>
+                <RpDetailHeader imgIconUrl={this.state.dataDetail.imgUrl}
+                                amountValue={this.state.dataDetail.amount}
+                                fromValue={this.state.dataDetail.bossName}
+                                remarkValue={this.state.dataDetail.message}
+                                stateValue={this.state.dataDetail.state}/>
                 <FlatList
                     style={{marginTop: 5,}}
                     ref='flatList'
-                    data={dataSource}
+                    data={this.state.dataSource}
                     renderItem={this.renderRow}
                     refreshing={false}
                 />

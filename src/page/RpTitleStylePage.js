@@ -84,7 +84,7 @@ class RpTitleStylePage extends BasePage {
     }
 
     pushRecordPage = () => {
-        DeviceEventEmitter.emit('sendRedPacket',{type:'redTheme',themeUrl:this.state.choseItem.imageUrl,themeCode:this.state.choseItem.themeCode})
+        DeviceEventEmitter.emit('sendRedPacket',{type:'redTheme',data:this.state.choseItem})
         this.props.navigation.goBack();
     }
 }

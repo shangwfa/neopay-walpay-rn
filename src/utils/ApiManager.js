@@ -1,6 +1,18 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+getRpDetail = (req, callback) => {
+    NetUtil.post(APIS.RP_GET_RP_DETAIL, req, (data) => {
+        callback(data)
+    })
+}
+
+getRpReceiverList = (req, callback) => {
+    NetUtil.post(APIS.RP_GET_RECEIVER_LIST, req, (data) => {
+        callback(data)
+    })
+}
+
 getPhoneTopupRecordList = (req, callback) => {
     NetUtil.post(APIS.PHONE_TOPUP_RECORD_LIST, req, (data) => {
         callback(data)
@@ -157,6 +169,8 @@ queryPayMessage=(request,callback)=>{
     })
 }
 export default {
+    getRpDetail,
+    getRpReceiverList,
     getPhoneTopupRecordList,
     getPhoneTopupMsg,
     getRedPacketRecord,

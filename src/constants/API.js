@@ -7,6 +7,8 @@ export const APIS = {
     /**
      * 网络请求-api
      */
+    RP_GET_RP_DETAIL:"packet/get_red_packet_info",
+    RP_GET_RECEIVER_LIST:"packet/query_red_packet_receive_list",
     PHONE_TOPUP_RECORD_LIST:'pcharge/query_phone_recharge_page',
     MESSAGE_TOPUP_PHONE:'message/query_phone_recharge_msg_page',
     BANK_UNBIND_BANKCARD:'bank/unbind_bank_card',//解绑银行卡
