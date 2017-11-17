@@ -16,6 +16,8 @@ import CommonButton from '../components/CommonButton'
 import TwoBottomItemModal from '../modal/TwoBottomItemModal'
 import BankCardOrderList from './TradeRecordListPage'
 import {RouterPaths} from '../constants/RouterPaths'
+import PayPwdModal from '../modal/PayPwdModal'
+import ApiManager from '../utils/ApiManager'
 
 const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
 const dataSource = {name: 'chris', imgUrl: url, type: '储蓄卡', cardNo: '****   ****   ****   ****   8889'}
@@ -25,9 +27,10 @@ class BankCardDetailPage extends BasePage {
 
     constructor(props) {
         super(props);
-        console.log("---->"+this.props.navigation.state.params)
         this.state = {
+            payPassword:'',
             isShowBottom:false,
+            isPayShow:false,
             param:this.props.navigation.state.params
         };
         console.log(props)
@@ -41,10 +44,27 @@ class BankCardDetailPage extends BasePage {
 
     unBind=()=>{
         this.setState({
-            isShowBottom:false
+            isShowBottom:false,
+            isPayShow:true
         })
-        //解绑操作
     }
+
+    onEnd=(text) =>{
+        console.log('223322');
+        let params = {
+            cardId: this.state.param.cardId,
+            payPassword:text
+        };
+        ApiManager.postUnBindBankCard(params, (data) => {
+            if (data) {
+                this.setState({
+                    isShowBottom:false
+                })
+            } else {
+
+            }
+        });
+}
 
 
     render() {
@@ -57,7 +77,9 @@ class BankCardDetailPage extends BasePage {
                               cardNoValue={this.state.param.cardNo}/>
                 <CommonButton value='查看该张银行卡交易记录' style={{marginTop:50 }} onPress={()=>this.pushRecordPage()}/>
 
-                <TwoBottomItemModal oneItemTitle='解绑该张银行卡' twoItemTitle='关闭弹窗' isShow={this.state.isShow} close={() => this.close()} ensure={()=>this.unBind()}/>
+                <TwoBottomItemModal oneItemTitle='解绑该张银行卡' twoItemTitle='关闭弹窗' isShow={this.state.isShowBottom} close={() => this.close()} ensure={()=>this.unBind()}/>
+                <PayPwdModal isShow={this.state.isPayShow} onClose={()=>this.setState({isPayShow:false})}
+                             onForgetPwd={()=>{}} onEnd={(text)=>this.onEnd(text)}/>
             </View>
         );
     }

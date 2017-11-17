@@ -7,7 +7,13 @@ export const APIS = {
     /**
      * 网络请求-api
      */
+    RP_GET_RP_DETAIL:"packet/get_red_packet_info",
+    RP_GET_RECEIVER_LIST:"packet/query_red_packet_receive_list",
+    PHONE_TOPUP_RECORD_LIST:'pcharge/query_phone_recharge_page',
+    MESSAGE_TOPUP_PHONE:'message/query_phone_recharge_msg_page',
+    BANK_UNBIND_BANKCARD:'bank/unbind_bank_card',//解绑银行卡
     QUERY_RED_PACKET_RECORD:"packet/query_red_packet_record_page",//红包交易明细
+    RED_PACKET_THEME:"packet/query_red_packet_theme_list",
     QUERY_RECENT_RED_PACKET_LIST: "packet/query_recent_red_packet_list",  //获取红包列表
     QUERY_RED_PACKET_MSG_PAGE: "message/query_red_packet_msg_page",  //获取红包消息分页
     GET_USER_INFO: 'user/get_user_info',//获取用户信息

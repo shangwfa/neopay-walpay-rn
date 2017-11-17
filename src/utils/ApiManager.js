@@ -1,9 +1,44 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+getRpDetail = (req, callback) => {
+    NetUtil.post(APIS.RP_GET_RP_DETAIL, req, (data) => {
+        callback(data)
+    })
+}
+
+getRpReceiverList = (req, callback) => {
+    NetUtil.post(APIS.RP_GET_RECEIVER_LIST, req, (data) => {
+        callback(data)
+    })
+}
+
+getPhoneTopupRecordList = (req, callback) => {
+    NetUtil.post(APIS.PHONE_TOPUP_RECORD_LIST, req, (data) => {
+        callback(data)
+    })
+}
+
+getPhoneTopupMsg = (req, callback) => {
+    NetUtil.post(APIS.MESSAGE_TOPUP_PHONE, req, (data) => {
+        callback(data)
+    })
+}
 
 getRedPacketRecord = (req, callback) => {
     NetUtil.post(APIS.QUERY_RED_PACKET_RECORD, req, (data) => {
+        callback(data)
+    })
+}
+
+postUnBindBankCard = (req, callback) => {
+    NetUtil.post(APIS.BANK_UNBIND_BANKCARD, req, (data) => {
+        callback(data)
+    })
+}
+
+getRedPacketThemeList = (callback) => {
+    NetUtil.post(APIS.RED_PACKET_THEME, {}, (data) => {
         callback(data)
     })
 }
@@ -139,7 +174,13 @@ createPhoneRechargeOrder=(request, callback)=>{
     })
 }
 export default {
+    getRpDetail,
+    getRpReceiverList,
+    getPhoneTopupRecordList,
+    getPhoneTopupMsg,
     getRedPacketRecord,
+    postUnBindBankCard,
+    getRedPacketThemeList,
     getUserInfo,
     queryBannerList,
     bindBankCard,
