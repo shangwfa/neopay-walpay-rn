@@ -133,8 +133,16 @@ RCT_EXPORT_METHOD(statusBarLight){
     });
 }
 
+//RN页面跳转系统通讯录
+RCT_EXPORT_METHOD(rnModalContactList){
+    [kNotificationCenter postNotificationName:kNotificationRNModalContactList object:nil];
+}
 
-
+//传递手机充值页面手机号
+RCT_EXPORT_METHOD(contactCommNumber:(RCTResponseSenderBlock)callback){
+    NSString *phoneNo = [GVUserDefaults standardUserDefaults].phone;
+    callback(@[@{@"phoneNo":phoneNo}]);
+}
 
     
 @end

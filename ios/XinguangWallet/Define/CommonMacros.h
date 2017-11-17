@@ -25,6 +25,8 @@
 #define kNotificationRNJumpIntoSecondLevel @"RNJumpIntoSecondLevel"
 //RN跳回一级页面
 #define kNotificationRNJumpBackToFirstLevel @"RNJumpBackToFirstLevel"
+//RN通知打开系统通讯录
+#define kNotificationRNModalContactList @"RNModalContactList"
 
 //Test UINavigationController push之后通知tabbar禁用自定义右划手势
 #define kNotificationNavPushToSecondLevel @"NavPushToSecondLevel"
