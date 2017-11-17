@@ -14,6 +14,14 @@ import ScreenUtils from "../utils/ScreenUtils";
 class RedPacketTypeComponent extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            redThemeTxtColor: "#000",
+            lineBgColor: "#000"
+        };
+    }
+
+    componentWillMount() {
+        this._handleRedThemeTypeStyle(this.props.redPacketData);
     }
 
     render() {
@@ -34,51 +42,91 @@ class RedPacketTypeComponent extends Component {
             case 1://未领取
                 return this._renderRobRedPacketView(redPacketData);
                 break;
-            case 2://已过期、已经领取
-                return this._renderOverdueRedPacketView(redPacketData);
-                break;
-            case 3://普通
+            case 2://已领取
                 return this._renderGeneralRedPacketView(redPacketData);
+                break;
+            case 3://已过期，已领完
+            case 4://已过期，已领完
+                return this._renderOverdueRedPacketView(redPacketData);
                 break;
 
         }
     };
 
-    /*待抢红包--类型*/
+    /*未领取--类型*/
     _renderRobRedPacketView = (redPacketData) => {
-        let isTheme = true;
         return <View style={{marginLeft: 97}}>
             <Text
-                style={[isTheme ? styles.message : styles.message_general, {fontSize: 17}]}>{redPacketData.message}</Text>
+                style={[{color: this.state.redThemeTxtColor, fontSize: 17}]}>{redPacketData.message}</Text>
             <View style={[styles.message_from_container, {marginTop: 23, paddingLeft: 5}]}>
-                <View style={[styles.line]}/>
+                <View style={[styles.line, {backgroundColor: this.state.lineBgColor}]}/>
                 <Text
-                    style={[isTheme ? styles.message : styles.message_general, {fontSize: 14,}]}>来自{redPacketData.bossName}的红包</Text>
+                    style={[{
+                        color: this.state.redThemeTxtColor,
+                        fontSize: 14,
+                        opacity: 0.65
+                    }]}>来自{redPacketData.bossName}的红包</Text>
             </View>
-
         </View>;
     };
+
     /*红包过期/已领完--类型*/
     _renderOverdueRedPacketView = (redPacketData) => {
+        let txtContent = redPacketData.receiveStatus === 3 ? "过期" : "抢完";
         return <View style={{marginLeft: 76}}>
-            <Text style={[styles.message, {fontSize: 14}]}>{redPacketData.message}</Text>
-            <Text style={[styles.message, {fontSize: 17, paddingLeft: 22, marginTop: 48}]}>啊哦，这个红包过期了~</Text>
+            <Text style={[{color: this.state.redThemeTxtColor, fontSize: 14}]}>{redPacketData.message}</Text>
+            <Text style={[{
+                color: this.state.redThemeTxtColor,
+                fontSize: 17,
+                paddingLeft: 22,
+                marginTop: 48
+            }]}>啊哦，这个红包{txtContent}了~</Text>
             <View style={[styles.message_from_container, {paddingLeft: 22, marginTop: 17}]}>
-                <View style={[styles.line]}/>
-                <Text style={[styles.message, {fontSize: 14}]}>来自{redPacketData.bossName}的红包</Text>
+                <View style={[styles.line, {backgroundColor: this.state.lineBgColor}]}/>
+                <Text style={[{
+                    color: this.state.redThemeTxtColor,
+                    fontSize: 14,
+                    opacity: 0.65
+                }]}>来自{redPacketData.bossName}的红包</Text>
             </View>
         </View>;
     };
     /*普通红包--类型*/
     _renderGeneralRedPacketView = (redPacketData) => {
         return <View style={{marginLeft: 97}}>
-            <Text style={[styles.message_general, {fontSize: 27, paddingLeft: 33}]}>$898.78</Text>
-            <Text style={[styles.message, {fontSize: 17, marginTop: 18}]}>{redPacketData.message}</Text>
+            <Text style={[{
+                color: this.state.redThemeTxtColor,
+                fontSize: 27,
+                paddingLeft: 33
+            }]}>￥{redPacketData.luckyAmount}</Text>
+            <Text style={[{
+                color: this.state.redThemeTxtColor,
+                fontSize: 17,
+                marginTop: 18
+            }]}>{redPacketData.message}</Text>
             <View style={[styles.message_from_container, {marginTop: 16}]}>
-                <View style={[styles.line]}/>
-                <Text style={[styles.message, {fontSize: 14}]}>来自{redPacketData.bossName}的红包</Text>
+                <View style={[styles.line, {backgroundColor: this.state.lineBgColor}]}/>
+                <Text style={[{
+                    color: this.state.redThemeTxtColor, fontSize: 14,
+                    opacity: 0.65
+                }]}>来自{redPacketData.bossName}的红包</Text>
             </View>
         </View>;
+    }
+    _handleRedThemeTypeStyle = (redPacketData) => {
+        let colorTxt;
+        switch (parseInt(redPacketData.themeCode)) {
+            case 1://生日主题
+                colorTxt = "#FFFFFF";
+                break;
+            case 2://春节主题
+                colorTxt = "#FBDEB0";
+                break;
+        }
+        this.setState({
+            redThemeTxtColor: colorTxt,
+            lineBgColor: colorTxt
+        });
     }
 }
 
@@ -108,7 +156,8 @@ const styles = StyleSheet.create({
     line: {
         width: 31,
         height: 1,
-        backgroundColor: "#FBDEB0"
+        opacity: 0.65,
+
     }
 });
 

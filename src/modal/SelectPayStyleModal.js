@@ -42,7 +42,8 @@ class SelectPayStyleModal extends Component {
             <Modal
                 transparent={true}
                 visible={this.props.isShow}
-                onRequestClose={()=>{}}>
+                onRequestClose={() => {
+                }}>
                 <View style={styles.modalStyle}>
                     {/*title*/}
                     {this._renderTitle()}
@@ -90,7 +91,7 @@ class SelectPayStyleModal extends Component {
             <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={this._handleBankCardFooterItemClick.bind(this)}>
-                {this._renderItemLine()}
+                {this._handleNoDataView()}
                 <View
                     style={styles.item_container}>
                     <Image
@@ -104,6 +105,11 @@ class SelectPayStyleModal extends Component {
                 </View>
             </TouchableOpacity>
         )
+    };
+    _handleNoDataView = () => {
+        if (this.state.selectPayStyleData.length !== 0) {
+            return this._renderItemLine();
+        }
     };
     _renderItemLine = () => {
         return (

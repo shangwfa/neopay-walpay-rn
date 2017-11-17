@@ -43,6 +43,11 @@ getUserBillDetail = (request, callback) => {
         callback(data);
     });
 };
+getRedPacketMessageList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_RED_PACKET_MSG_PAGE, request, (data) => {
+        callback(data);
+    });
+};
 getRedPacketList = (request, callback) => {
     NetUtil.post(APIS.QUERY_RECENT_RED_PACKET_LIST, request, (data) => {
         callback(data);
@@ -118,8 +123,8 @@ payRedPacket = (request, callback) => {
         callback(data);
     });
 }
-queryUserBill=(request,callback)=>{
-    NetUtil.post(APIS.USER_BILL_RECORD,request, (data) => {
+queryUserBill = (request, callback) => {
+    NetUtil.post(APIS.USER_BILL_RECORD, request, (data) => {
         callback(data);
     })
 };
@@ -137,6 +142,7 @@ export default {
     modifyUserNickName,
     getUserBillDetail,
     getRedPacketList,
+    getRedPacketMessageList,
     getMerchantBannerList,
     getMerchantActivityList,
     getUserMerchantList,

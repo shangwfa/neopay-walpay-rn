@@ -66,7 +66,7 @@ class PayCodePage extends BasePage {
                         navigation={this.props.navigation}
                         backgroundColor={colors.transparent}
                         isShowLine={false}
-                        title='交易详情'
+                        title='向商家付钱'
                         isWhiteArrow={true}
                         textColor={colors.white}
                         rightIcon={three_points}
