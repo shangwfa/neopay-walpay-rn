@@ -169,4 +169,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default CardPackPage
+export default CardPackPage //已废弃
