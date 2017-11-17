@@ -46,16 +46,14 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
                     if (null == data.getAuthStatus()) {
                         return;
                     }
-                    if (1 == data.getAuthStatus()) {//实名认证
+                    if (2 == data.getAuthStatus()) {//实名认证
                         view.setVisibility(View.INVISIBLE);
                         injector.background(R.id.mine_auth_state_iv, R.mipmap.img_auth_tag);
                     }
-                    if (2 == data.getAuthStatus()) {//未实名认证
+                    if (1 == data.getAuthStatus()) {//未实名认证
                         view.setVisibility(View.VISIBLE);
                         injector.background(R.id.mine_auth_state_iv, R.mipmap.img_not_auth_tag);
-                        view.setOnClickListener(v -> {
-                            //TODO 进行 实名认证
-                        });
+                        view.setOnClickListener(v -> RNActivity.jumpToRNPage(v.getContext(), RNActivity.PageType.BIND_BANK_CARD));
                     }
 
                 })
@@ -70,16 +68,16 @@ public class MineUserInforSlimInjector implements SlimInjector<UserInfoResponseB
         String phone = StringUtils.authString(data.getPhone());
         String name = StringUtils.authString(data.getName());
 
-        if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//未设置昵称未实名认证
+        if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//未设置昵称未实名认证
             injector.visibility(R.id.mine_user_name_tv, View.GONE);
         }
-        if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//未设置昵称且实名认证
+        if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//未设置昵称且实名认证
             view.setText(FormatUtils.nameTuomin(data.getName()));
         }
-        if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {// 设置昵称且实名认证
+        if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {// 设置昵称且实名认证
             view.setText(String.format("%s(%s)", nickName, FormatUtils.nameTuomin(name)));
         }
-        if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//设置昵称未实名认证
+        if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//设置昵称未实名认证
             view.setText(nickName);
         }
         if (StringUtils.isNotEmpty(phone)) {

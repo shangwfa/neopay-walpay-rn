@@ -39,7 +39,7 @@ class RedPacketItemComponent extends Component {
             <TouchableWithoutFeedback onPress={()=>this.onPress()}>
                     <View style={styles.content_container}>
                         <Image style={styles.backgroundImg}
-                               source={{url:this.props.imgUrl}}>
+                               source={{uri:this.props.imgUrl}}>
                         <Text style={styles.desText}>{this.props.itemData.descText}</Text>
                         <Text style={styles.shopText}>
                             <Text style = {styles.shopdesText}>——来自</Text>

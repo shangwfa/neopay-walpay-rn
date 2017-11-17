@@ -79,6 +79,9 @@
             android:name=".ui.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".ui.homedraw.HomeDrawActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ui.forgotpwd.ForgotPwdActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -221,7 +224,7 @@
             android:value="13dcf601d46a529f33bd1d5f" />
         <!--JPush end-->
 
-        <service android:name=".rn.RNService"/>
+        <service android:name=".rn.RNService" />
     </application>
 
 </manifest>

@@ -79,6 +79,7 @@ dependencies {
     compile rootProject.ext.dependencies["one_push_huawei"]
     compile rootProject.ext.dependencies["one_push_xiaomi"]
     compile rootProject.ext.dependencies["agentweb"]
+    compile rootProject.ext.dependencies["nineoldandroids"]
     compile 'com.facebook.react:react-native:+'
     //    compile files('libs/zxing.jar')
     compile files('libs/aliyun-oss-sdk-android-2.3.0.jar')

@@ -45,6 +45,7 @@ public interface IWalpayConstants {
     String TO_SPLASH_PAGE = "/appModule/SplashActivity";
     String TO_LOGIN_PAGE = "/appModule/LoginActivity";
     String TO_HOME_PAGE = "/appModule/HomeActivity";
+    String TO_HOME_DRAW_PAGE = "/appModule/HomeDrawActivity";
     String TO_REGISTER_PAGE = "/appModule/RegisterActivity";
     String TO_FORGOTPWD_PAGE = "/appModule/ForgotPwdActivity";
     String TO_RN_PAGE = "/appModule/RNActivity";

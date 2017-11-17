@@ -37,7 +37,6 @@ class MerchantRedPacketPage extends BasePage {
                 <RefreshList
                     data={this.state.dataSource}
                     renderItem={this._renderItem}
-                    onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
                     footerStatus={this.state.footerStatus}
                 />
