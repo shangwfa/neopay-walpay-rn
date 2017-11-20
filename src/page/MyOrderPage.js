@@ -29,6 +29,8 @@ class MyOrderPage extends BasePage {
 
             ],
         }
+
+        if(this.props.navigation.state.params) this.queryType=this.props.navigation.state.params.tradeType
     }
 
     componentWillMount() {
