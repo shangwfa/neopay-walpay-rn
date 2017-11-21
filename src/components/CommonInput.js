@@ -21,7 +21,6 @@ class CommonInput extends Component {
 
     static propTypes = {
         leftIcon: React.PropTypes.any,
-        leftIconStyle: React.PropTypes.style
     }
 
     constructor(props) {
