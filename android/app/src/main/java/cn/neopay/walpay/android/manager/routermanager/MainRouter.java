@@ -53,6 +53,11 @@ public class MainRouter {
                 .navigation();
     }
 
+    public void jumpToHomeDrawPage() {
+        ARouter.getInstance().build(IWalpayConstants.TO_HOME_DRAW_PAGE)
+                .navigation();
+    }
+
     public void jumpToRegisterPage(String userName) {
         ARouter.getInstance().build(IWalpayConstants.TO_REGISTER_PAGE)
                 .withString("userName", userName)

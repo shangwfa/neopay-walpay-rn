@@ -37,11 +37,8 @@ class RpRecordListPage extends BasePage {
     }
 
     _handleRefresh = () => {
-        let body = {
-            pageSize: 0,
-            redpTradeQueryType:3,
-        };
-        ApiManager.getRedPacketRecord({body}, (data) => {
+        //采用变量传递网络参数的时候,无法获取到相应参数,很奇怪
+        ApiManager.getRedPacketRecord({pageSize:10,redpTradeQueryType:this.props.navigation.state.params.QueryType}, (data) => {
             this.setState({
                 dataSource: data,
             });
@@ -53,11 +50,8 @@ class RpRecordListPage extends BasePage {
     };
 
     _onLoadMore = (pageSize) => {
-        let body = {
-            pageSize: pageSize,
-            redpTradeQueryType:3,
-        };
-        ApiManager.getRedPacketRecord(body, (data) => {
+
+        ApiManager.getRedPacketRecord({pageSize: pageSize,redpTradeQueryType:this.props.navigation.state.params.QueryType}, (data) => {
             if (data) {
                 let allData = this.state.dataSource;
                 allData.push(...data);
@@ -95,7 +89,7 @@ class RpRecordListPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='红包交易明细' onRightPress={() => {
+                <Header navigation={this.props.navigation} title={this.getTitle()} onRightPress={() => {
                     this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
                 <RefreshList
@@ -108,6 +102,17 @@ class RpRecordListPage extends BasePage {
             </View>
         );
     }
+
+    getTitle=()=>{
+        if(this.props.navigation.state.params.QueryType===1){
+            return '发出大红包明细';
+        }else if(this.props.navigation.state.params.QueryType ==2){
+            return '收到大红包明细';
+        }else {
+            return '红包交易明细';
+        }
+    }
+
 }
 
 const styles = StyleSheet.create({

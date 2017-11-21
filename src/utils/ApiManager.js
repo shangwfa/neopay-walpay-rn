@@ -1,6 +1,18 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+getRpDetail = (req, callback) => {
+    NetUtil.post(APIS.RP_GET_RP_DETAIL, req, (data) => {
+        callback(data)
+    })
+}
+
+getRpReceiverList = (req, callback) => {
+    NetUtil.post(APIS.RP_GET_RECEIVER_LIST, req, (data) => {
+        callback(data)
+    })
+}
+
 getPhoneTopupRecordList = (req, callback) => {
     NetUtil.post(APIS.PHONE_TOPUP_RECORD_LIST, req, (data) => {
         callback(data)
@@ -155,8 +167,20 @@ queryPayMessage=(request,callback)=>{
     NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE,request,(data)=>{
         callback(data);
     })
-}
+};
+createPhoneRechargeOrder=(request, callback)=>{
+    NetUtil.post(APIS.CREATE_PHONE_RECHARGE_ORDER,request,(data)=>{
+        callback(data);
+    })
+};
+getUserRedPacketStats=(request, callback)=>{
+    NetUtil.post(APIS.GET_USER_RED_PACKET_STATS,request,(data)=>{
+        callback(data);
+    })
+};
 export default {
+    getRpDetail,
+    getRpReceiverList,
     getPhoneTopupRecordList,
     getPhoneTopupMsg,
     getRedPacketRecord,
@@ -186,4 +210,6 @@ export default {
     payRedPacket,
     queryUserBill,
     queryPayMessage,
+    createPhoneRechargeOrder,
+    getUserRedPacketStats
 }

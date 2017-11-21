@@ -76,8 +76,8 @@ const RpDetailHeader = props => {
         <Image style = {styles.background_container} source = {require("../res/img/rp_backGround.png")}>
             <Text style={styles.remark_value}>{remarkValue}</Text>
             <Text style={styles.amount_value}>{amountValue}</Text>
-            <Image style = {styles.iconImg} source = {{imgIconUrl}} ></Image>
-            <Text style={styles.from_value}>{fromValue}</Text>
+            <Image style = {styles.iconImg} source = {{url:imgIconUrl}} ></Image>
+            <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
             <Text style={styles.state_value}>{stateValue}</Text>
         </Image>
     );

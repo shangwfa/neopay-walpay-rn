@@ -27,37 +27,31 @@ class RpTitleStylePage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource:[],
-            choseItem:{}
+            dataSource: [],
+            choseItem: {}
         }
     }
 
     componentWillMount() {
         ApiManager.getRedPacketThemeList((data) => {
-            if (data) {
-                let allData = data;
-                this.setState({
-                    dataSource: allData,
-                    choseItem:allData[0]
-                });
-            } else {
-
-            }
+            this.setState({
+                dataSource: data,
+                choseItem: data[0]
+            });
         });
     }
 
-    _choseRpTheme=(item)=> {
+    _choseRpTheme = (item) => {
         this.setState({
-            choseItem:item
+            choseItem: item
         })
-
-
     }
 
     _renderFlatListItem = ({item, index}) => {
         return (
             <View>
-                <RpTitleStyleItem style={{flexDirection: "column"} } imgBackGroundUrl={item.imageUrl} click = {()=> this._choseRpTheme(item)}>
+                <RpTitleStyleItem style={{flexDirection: "column"} } imgBackGroundUrl={item.imageUrl}
+                                  click={() => this._choseRpTheme(item)}>
                 </RpTitleStyleItem>
             </View>
         );
@@ -67,7 +61,7 @@ class RpTitleStylePage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='红包主题'/>
-                <RedPacketItemComponent imgUrl = {this.state.choseItem.imageUrl}/>
+                <RedPacketItemComponent imgUrl={this.state.choseItem.imageUrl}/>
                 <Text style={styles.middle_text}>选择主题</Text>
                 <FlatList
                     style={{marginTop: 5,}}
@@ -84,7 +78,7 @@ class RpTitleStylePage extends BasePage {
     }
 
     pushRecordPage = () => {
-        DeviceEventEmitter.emit('sendRedPacket',{type:'redTheme',themeUrl:this.state.choseItem.imageUrl,themeCode:this.state.choseItem.themeCode})
+        DeviceEventEmitter.emit('sendRedPacket', {type: 'redTheme', data: this.state.choseItem})
         this.props.navigation.goBack();
     }
 }

@@ -1,6 +1,7 @@
 package cn.neopay.walpay.android.ui.fragment.newsfragment;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
@@ -98,6 +99,9 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
     }
 
     private void setHeaderView() {
+        if (null != getArguments() && "homeDrawer".equals(getArguments().getString("pageOrigin"))) {
+            mPageBinding.commonHeader.setVisibility(View.GONE);
+        }
         mPageBinding.commonHeader.setHeaderOnlyTitle("消息");
     }
 

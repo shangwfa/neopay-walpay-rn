@@ -58,7 +58,7 @@ const RpTitleStyleItem = props => {
 
     return (
         <TouchableOpacity activeOpacity={0.8} style={[styles.background_container]} onPress ={click} {...attributes}>
-            <Image style={[styles.container]} source={{url:imgBackGroundUrl}}>
+            <Image style={[styles.container]} source={{uri:imgBackGroundUrl}}>
 
             </Image>
 

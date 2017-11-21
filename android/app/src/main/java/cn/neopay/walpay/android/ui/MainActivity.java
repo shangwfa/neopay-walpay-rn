@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         hideStatusBar();
         setContentView(R.layout.activity_main);
         jumpToAppStatePage();
-        startService(new Intent(this,RNActivity.class));
+        startService(new Intent(this, RNActivity.class));
     }
 
     private void jumpToAppStatePage() {

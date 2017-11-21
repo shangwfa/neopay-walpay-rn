@@ -7,6 +7,8 @@ export const APIS = {
     /**
      * 网络请求-api
      */
+    RP_GET_RP_DETAIL:"packet/get_red_packet_info",
+    RP_GET_RECEIVER_LIST:"packet/query_red_packet_receive_list",
     PHONE_TOPUP_RECORD_LIST:'pcharge/query_phone_recharge_page',
     MESSAGE_TOPUP_PHONE:'message/query_phone_recharge_msg_page',
     BANK_UNBIND_BANKCARD:'bank/unbind_bank_card',//解绑银行卡
@@ -36,4 +38,6 @@ export const APIS = {
     PAY_RED_PACKET: "packet/pay_red_packet",//支付红包
     USER_BILL_RECORD:'pay/query_user_bill_page',//账单记录
     QUERY_PAY_MESSAGE_PAGE:'message/query_pay_msg_page',//获取支付消息
+    CREATE_PHONE_RECHARGE_ORDER:'pcharge/create_phone_recharge_order',//创建手机充值订单
+    GET_USER_RED_PACKET_STATS:'packet/get_user_red_packet_stats',//获取用户红包统计
 };

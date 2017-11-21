@@ -7,6 +7,8 @@ import {
     TouchableWithoutFeedback
 } from 'react-native'
 import ScreenUtils from '../utils/ScreenUtils'
+import {RouterPaths} from '../constants/RouterPaths'
+
 
 const sizeRatio = ScreenUtils.width/375.0;
 
@@ -14,8 +16,7 @@ class RedPacketRecordCell extends Component {
 
     static defaultProps = {
         cellType:true,
-        item:'10',
-        num:'100.00',
+
     };
 
     constructor(props){
@@ -29,7 +30,7 @@ class RedPacketRecordCell extends Component {
                 <Image style={styles.backgroundImg} source={this.props.cellType?require('../res/img/HomePage/sy_shoudao.png'):require('../res/img/HomePage/sy_fachu.png')}>
                     <View style={styles.titleView}>
                         <Text style={styles.titleViewText}>
-                            {this.props.cellType?'共收到'+this.props.item+'个红包':'共发出'+this.props.item+'个红包'}
+                            {this.props.cellType?'共收到'+this.props.count+'个红包':'共发出'+this.props.count+'个红包'}
                         </Text>
                     </View>
                     <View style={styles.numberView}>
@@ -37,7 +38,7 @@ class RedPacketRecordCell extends Component {
                             ¥
                         </Text>
                         <Text style={styles.numberViewText}>
-                            {this.props.num}
+                            {this.props.amount}
                         </Text>
                     </View>
                     <View style={{flex:1}}/>
@@ -57,9 +58,9 @@ class RedPacketRecordCell extends Component {
 
     detailBtnClicked=()=>{
         if(this.props.cellType){
-            console.log('点击了收到大红包明细按钮')
+            nav.navigate(RouterPaths.RED_PACKET_RECORD_LIST,{QueryType:2})
         }else{
-            console.log('点击了发出大红包明细按钮')
+            nav.navigate(RouterPaths.RED_PACKET_RECORD_LIST,{QueryType:1})
         }
 
     }
