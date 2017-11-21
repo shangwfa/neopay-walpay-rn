@@ -51,6 +51,7 @@ import LottieDemo from '../page/LottieDemoPage'
 import SendRedPacket from '../page/SendRedPacketPage'
 import ViewpageDemo from '../page/ViewpageDemoPage'
 import InstructionsPage from "../page/InstructionsPage"
+import OccupationSelectionPage from "../page/OccupationSelectionPage"
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -106,6 +107,7 @@ const RouterSetting = {
     rpTitleStyle: {screen: RpTitleStylePage},
     lottieDemo: {screen: LottieDemo},
     viewpageDemo: {screen: ViewpageDemo},
+    occupationSelection: {screen:OccupationSelectionPage}
 }
 
 export default RouterSetting
