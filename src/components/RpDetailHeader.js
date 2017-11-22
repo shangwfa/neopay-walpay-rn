@@ -20,6 +20,7 @@ const RpDetailHeader = props => {
         fromValue,
         remarkValue,
         stateValue,
+        isMax,
         ...attributes
     } = props
 
@@ -31,11 +32,19 @@ const RpDetailHeader = props => {
             alignItems:'center'
         },
 
+        middle_container: {
+            flexDirection:'row',
+            width:ScreenUtils.width,
+            justifyContent:'space-between'
+        },
+
         remark_value: {
             marginTop:30,
             fontSize:15,
             color:colors.orange,
-            backgroundColor:'transparent'
+            backgroundColor:'transparent',
+            flex:1,
+            textAlign:'center'
 
         },
         amount_value: {
@@ -49,7 +58,13 @@ const RpDetailHeader = props => {
             height:imgWidth,
             borderRadius: imgWidth/2,
             marginTop: 20,
-            backgroundColor:colors.black
+            backgroundColor:colors.black,
+        },
+        maxImg: {
+            width: 100,
+            height:60,
+            marginRight:10,
+            flex:1
         },
         from_value: {
             marginTop:30,
@@ -74,9 +89,13 @@ const RpDetailHeader = props => {
 
     return (
         <Image style = {styles.background_container} source = {require("../res/img/rp_backGround.png")}>
-            <Text style={styles.remark_value}>{remarkValue}</Text>
-            <Text style={styles.amount_value}>{amountValue}</Text>
-            <Image style = {styles.iconImg} source = {{url:imgIconUrl}} ></Image>
+            <View style = {styles.middle_container}>
+                <View style={{flex:1}} />
+                <Text style={styles.remark_value}>{remarkValue}</Text>
+                <Image style = {styles.maxImg} source = {{uri:imgIconUrl}} ></Image>
+            </View>
+            <Text style={styles.amount_value}>{amountValue==0?'  ':amountValue}</Text>
+            <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
             <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
             <Text style={styles.state_value}>{stateValue}</Text>
         </Image>

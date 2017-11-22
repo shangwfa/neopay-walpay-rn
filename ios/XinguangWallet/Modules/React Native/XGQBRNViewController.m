@@ -18,11 +18,10 @@
 
 #import "RCTBridgeModule.h"
 
-
 @interface XGQBRNViewController () <CNContactPickerDelegate>
 
 @property (nonatomic,weak) RCTRootView *rootView;
-@property (nonatomic,copy) RCTResponseSenderBlock contactCommBlock;
+//@property (nonatomic,copy) RCTResponseSenderBlock contactCommBlock;
 
 @end
 
@@ -136,7 +135,7 @@
 #pragma mark - Contacts Picker
 -(void)RNModalContactList:(NSNotification*)notification
 {
-        _contactCommBlock = [notification object];
+//        _contactCommBlock = [notification object];
         CNContactPickerViewController *contactPickerVC = [[CNContactPickerViewController alloc]init];
         contactPickerVC.displayedPropertyKeys=@[@"phoneNumbers"];
         NSPredicate *phoneNumberPredicate = [NSPredicate predicateWithFormat:@"phoneNumbers.@count>0"];
@@ -177,7 +176,14 @@
         [SVProgressHUD showInfoWithStatus:@"请选择正确手机号"];
         return;
     }
-    _contactCommBlock(@[phoneNumberStr]);
+//    _contactCommBlock(@[phoneNumberStr]);
+    
+//    XGQBRNEventEmitter *eventEmitter = [[XGQBRNEventEmitter alloc]init];
+////    [eventEmitter sendEventWithName:@"ContactSelected" body:phoneNumberStr];
+//    [eventEmitter tellJS];
+    
+    [kNotificationCenter postNotificationName:kNotificationGetContactPhoneNoToRN object:nil userInfo:@{@"PhoneNo":phoneNumberStr}];
+    
 }
 
 @end

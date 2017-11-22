@@ -15,7 +15,9 @@ import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
 import RpDetailHeader from '../components/RpDetailHeader'
 import CommonButton from '../components/CommonButton'
+import ImageButton from '../components/ImageTitleButton'
 import ApiManager from '../utils/ApiManager'
+import ScreenUtils from '../utils/ScreenUtils'
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
@@ -62,22 +64,26 @@ class RpDetailPage extends BasePage {
         });
     };
 
-    renderRow = ({item}) => {
+    _pushSendRpPage=()=>{
+        this.props.navigation.navigate(RouterPaths.SEND_RED_PACKET);
+    }
+
+    _renderRow = ({item}) => {
         console.log('----xxx' + item)
         return (
             <View>
                 <CommonItemTwo imgUrl={item.iconUrl}
-                               middleUpValue={item.title} middleBottomValue={item.tradeTime}
-                               rightUpValue={item.amount} rightBottomValue={item.status}
+                               middleUpValue={item.robberName} middleBottomValue={item.createTime}
+                               rightUpValue={item.luckyMoney}
                                isLine={true}/>
             </View>
         )
 
     }
 
-    render() {
-        return (
-            <View style={styles.container}>
+    _renderMainView = () =>{
+        return(
+            <View style = {{height:ScreenUtils.height - 50}}>
                 <Header
                     navigation={this.props.navigation}
                     backgroundColor="#D83E3E"
@@ -87,18 +93,50 @@ class RpDetailPage extends BasePage {
                     rightTextColor={colors.white}
                     title='红包详情'/>
                 <RpDetailHeader imgIconUrl={this.state.dataDetail.imgUrl}
-                                amountValue={this.state.dataDetail.amount}
+                                amountValue={this.state.dataDetail.luckyMoney}
                                 fromValue={this.state.dataDetail.bossName}
                                 remarkValue={this.state.dataDetail.message}
                                 stateValue={this.state.dataDetail.state}/>
+                <View style = {styles.mid_view}>
+                    <Text style = {styles.num_text}>{this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>
+                    <Text style = {styles.amount_text}>{'总额¥' + this.state.dataDetail.amount}</Text>
+                </View>
                 <FlatList
                     style={{marginTop: 5,}}
                     ref='flatList'
                     data={this.state.dataSource}
-                    renderItem={this.renderRow}
+                    renderItem={this._renderRow}
                     refreshing={false}
                 />
-                <CommonButton value='确定' style={{marginBottom:15 }} onPress={()=>this.pushRecordPage()}/>
+            </View>
+        )
+    }
+
+    _renderBottom=()=>{
+        if(!this.state.dataSource.ownerBool){
+            return (
+                <View style = {styles.bg_bottom}>
+                    <ImageButton value='我也要发红包' style={{marginBottom:0,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
+                </View>
+            )
+        }else{
+            return (
+                <View style = {styles.bg_bottom}>
+                    <ImageButton value='分享该红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
+                    <View style={{width:1,backgroundColor:colors.divider }}/>
+                    <ImageButton value='我也要发红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
+                </View>
+            )
+        }
+
+    }
+
+
+    render() {
+        return (
+            <View style={styles.container}>
+                {this._renderMainView()}
+                {this._renderBottom()}
             </View>
         );
     }
@@ -112,6 +150,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.page_background,
+    },
+    mid_view: {
+        backgroundColor: colors.page_background,
+        height:40,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    num_text: {
+        fontSize:15,
+        marginLeft:15
+    },
+    amount_text: {
+        fontSize:15,
+        marginRight:15
+    },
+    bg_bottom:{
+        marginTop:0,
+        flexDirection:'row'
+
     }
 });
 
