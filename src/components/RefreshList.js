@@ -6,11 +6,13 @@ import {
     Text,
     ActivityIndicator,
     DeviceEventEmitter,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from 'react-native'
 import PropTypes from 'prop-types'
 import {events} from '../constants/index'
-import ScreenUtils from "../utils/ScreenUtils";
+import ScreenUtils from "../utils/ScreenUtils"
+import list_empty_icon from '../res/img/list_empty_icon.png'
 
 export const RefreshStatus = {
     IDLE: 'idle',
@@ -27,7 +29,8 @@ class RefreshList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isError: false
+            isError: false,
+            isEmpty:false
         }
     }
 
@@ -87,12 +90,12 @@ class RefreshList extends Component {
     renderEmpty = () => {
         return (
             <View >
-                <Text style={{fontSize:15,color:'#B5B5B5'}}>暂时没有内容哦！去其他页面看看～</Text>
+                <Image style={{height:200,width:200}} source={list_empty_icon}/>
             </View>)
     }
 
     render() {
-        const {data, renderItem, onRefresh, extraData, ...attributes} = this.props
+        const {data, renderItem, onRefresh, isEmpty,extraData, ...attributes} = this.props
         if (data.length > 0) {
             return (
                 <FlatList
@@ -105,7 +108,6 @@ class RefreshList extends Component {
                     refreshing={false}
                     onEndReachedThreshold={0.1}
                     ListFooterComponent={this.renderFooter}
-                    ListEmptyComponent={this.renderEmpty}
                     keyExtractor={(item, index) => {
                         return index
                     }}
@@ -113,10 +115,13 @@ class RefreshList extends Component {
                 />
             )
         } else {
-            return (
-                <View style={{flex: 1, width:ScreenUtils.width,alignItems: 'center', justifyContent: 'center'}}>
-                    {this.renderEmpty()}
-                </View>)
+            if(isEmpty){
+                return (
+                    <View style={{flex: 1, width:ScreenUtils.width,alignItems: 'center', justifyContent: 'center'}}>
+                        {this.renderEmpty()}
+                    </View>)
+            }
+            return null
         }
 
     }

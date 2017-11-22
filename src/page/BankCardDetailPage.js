@@ -33,7 +33,7 @@ class BankCardDetailPage extends BasePage {
             isPayShow:false,
             param:this.props.navigation.state.params
         };
-        console.log(props)
+        console.log('xxx'+props)
     }
 
     close=()=>{
@@ -52,7 +52,7 @@ class BankCardDetailPage extends BasePage {
     onEnd=(text) =>{
         console.log('223322');
         let params = {
-            cardId: this.state.param.cardId,
+            cardId: this.state.param.id,
             payPassword:text
         };
         ApiManager.postUnBindBankCard(params, (data) => {
@@ -91,7 +91,8 @@ class BankCardDetailPage extends BasePage {
     }
 
     pushRecordPage = () => {
-        this.props.navigation.navigate(RouterPaths.BANKCARD_ORDERLIST)
+        console.log('xxxxxx'+this.state.param.id)
+        this.props.navigation.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE,{pageType:1,cardId:this.state.param.id})
     }
 }
 

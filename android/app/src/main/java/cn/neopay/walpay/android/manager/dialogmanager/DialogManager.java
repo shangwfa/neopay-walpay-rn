@@ -89,4 +89,11 @@ public class DialogManager {
         dialog.setEnsureText("");
         dialog.show();
     }
+
+    public void showReadContactsDialog(Context context) {
+        final CommonDialog dialog = new CommonDialog(context, "读取联系人权限未开启，如需使用请进入设置中开启联系人权限");
+        dialog.setCancelText("取消");
+        dialog.setEnsureText("");
+        dialog.show();
+    }
 }

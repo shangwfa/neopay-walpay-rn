@@ -22,6 +22,7 @@ const CommonItemTwo = props => {
         isLine,
         isContacts,
         isSelected,
+        imgIconUrl,
         ...attributes
     } = props
 
@@ -36,6 +37,10 @@ const CommonItemTwo = props => {
             height: 48,
             borderRadius: 24,
             marginRight: 10
+        },
+        mid_view: {
+            flexDirection:'row',
+            alignItems:'center'
         },
 
         right_container: {
@@ -70,7 +75,10 @@ const CommonItemTwo = props => {
 
     const renderMiddleValue = () => {
         return <View style={styles.middle_container}>
-            <Text style={styles.middle_up_value}>{middleUpValue}</Text>
+            <View style = {styles.mid_view}>
+                <Text style={styles.middle_up_value}>{middleUpValue}</Text>
+                <Image style= {{marginLeft:10,width:20,height:20, backgroundColor:colors.orange}} source = {imgIconUrl}></Image>
+            </View>
             <Text style={styles.middle_bottom_value}>{middleBottomValue}</Text>
         </View>
     }

@@ -1,5 +1,7 @@
 package cn.neopay.walpay.android.rn.module;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,23 +13,22 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.gson.Gson;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.xgjk.common.lib.utils.HandlerUtils;
 import com.xgjk.common.lib.utils.ScreenUtils;
-import com.xgjk.common.lib.utils.StringUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
-import cn.neopay.walpay.android.view.dialog.LoadingDialog;
+import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
  * Created by shangwf on 2017/9/14.
@@ -41,6 +42,7 @@ public class CommModule extends ReactContextBaseJavaModule {
     public static final String EVENT_NAME1 = "getPatchImgs";
 
     public static final String EVENT_UPDATE_HEAD_IMG = "updateHeadImg";
+    public static final String EVENT_SELECT_CONTACTS = "ContactSelected";
 
     /**
      * 构造方法必须实现
@@ -76,6 +78,29 @@ public class CommModule extends ReactContextBaseJavaModule {
         intent.setData(Uri.parse("tel:" + phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 跳转需要添加flag, 否则报错
         mContext.startActivity(intent);
+    }
+
+    /**
+     * RN调用Native的方法
+     */
+    @ReactMethod
+    public void rnModalContactList() {
+        // 跳转到系统联系人界面
+        HandlerUtils.runOnUiThread(() -> {
+            Activity activity = getCurrentActivity();
+            if (null != activity) {
+                new RxPermissions(activity)
+                        .request(Manifest.permission.READ_CONTACTS)
+                        .subscribe(granted -> {
+                            if (!granted) {
+                                DialogManager.getSingleton().showReadContactsDialog(activity);
+                            }
+                        });
+                BusniessUtils.startContactsNoRepeatList(getCurrentActivity());
+            }
+        });
+
+
     }
 
     /**
@@ -214,13 +239,23 @@ public class CommModule extends ReactContextBaseJavaModule {
         mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(EVENT_UPDATE_HEAD_IMG, imgUrl);
     }
-    
+
+    /**
+     * Native调用RN
+     *
+     * @param //msg
+     */
+    public void nativeCallRnSelectContacts(String phone) {
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(EVENT_SELECT_CONTACTS, phone);
+    }
+
     /**
      * 功能显示加载弹窗
      */
     @ReactMethod
     public void showLoadingDialog() {
-        LoadingDialogEvent event=new LoadingDialogEvent();
+        LoadingDialogEvent event = new LoadingDialogEvent();
         event.setShow(true);
         EventBus.getDefault().post(event);
 
@@ -228,13 +263,13 @@ public class CommModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void hideLoadingDialog() {
-        LoadingDialogEvent event=new LoadingDialogEvent();
+        LoadingDialogEvent event = new LoadingDialogEvent();
         event.setShow(false);
         EventBus.getDefault().post(event);
     }
 
     @ReactMethod
-    public void isHaveBottomNav( Callback callback) {
+    public void isHaveBottomNav(Callback callback) {
         callback.invoke(ScreenUtils.hasSoftKeys(mContext.getCurrentActivity()));
     }
 }

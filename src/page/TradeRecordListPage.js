@@ -26,7 +26,8 @@ class TradeRecordListPage extends BasePage {
             dataSource: [],
             footerStatus: RefreshStatus.IDLE,
             pageType: this.props.navigation.state.params.pageType,
-            title: ''
+            title: '',
+            cardId:this.props.navigation.state.params.cardId
         }
     }
 
@@ -75,7 +76,8 @@ class TradeRecordListPage extends BasePage {
     };
     onLoadMore = (pageSize) => {
         let params = {
-            pageSize: pageSize
+            pageNo: pageSize,
+            cardId:this.state.cardId?this.state.cardId:''
         };
         switch (this.state.pageType) {
             case 0://余额
@@ -120,9 +122,13 @@ class TradeRecordListPage extends BasePage {
 
     _handleCurrentPageType = () => {
         let txtContent;
+        let params = {
+            pageNo: 1,
+            cardId:this.state.cardId?this.state.cardId:''
+        }
         switch (this.state.pageType) {
             case 0://余额
-                ApiManager.getBalanceRecordList({}, (data) => {
+                ApiManager.getBalanceRecordList(params, (data) => {
                     this.setState({
                         dataSource: data,
                     });
@@ -130,7 +136,7 @@ class TradeRecordListPage extends BasePage {
                 txtContent = '余额交易记录';
                 break;
             case 1://银行卡
-                ApiManager.getBankCardRecordPage({}, (data) => {
+                ApiManager.getBankCardRecordPage(params, (data) => {
                     this.setState({
                         dataSource: data,
                     });
