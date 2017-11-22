@@ -42,10 +42,9 @@ const RpDetailHeader = props => {
             marginTop:30,
             fontSize:15,
             color:colors.orange,
-            backgroundColor:'transparent',
             flex:1,
-            textAlign:'center'
-
+            textAlign:'center',
+            backgroundColor:'transparent'
         },
         amount_value: {
             marginTop:20,
@@ -64,7 +63,6 @@ const RpDetailHeader = props => {
             width: 100,
             height:60,
             marginRight:10,
-            flex:1
         },
         from_value: {
             marginTop:30,
@@ -92,7 +90,10 @@ const RpDetailHeader = props => {
             <View style = {styles.middle_container}>
                 <View style={{flex:1}} />
                 <Text style={styles.remark_value}>{remarkValue}</Text>
-                <Image style = {styles.maxImg} source = {{uri:imgIconUrl}} ></Image>
+                <View style={{flex:1,backgroundColor:'transparent'}}>
+                    <Image style = {styles.maxImg} source = {{uri:imgIconUrl}} ></Image>
+                </View>
+
             </View>
             <Text style={styles.amount_value}>{amountValue==0?'  ':amountValue}</Text>
             <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
