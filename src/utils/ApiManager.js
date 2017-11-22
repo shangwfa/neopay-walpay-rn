@@ -178,6 +178,21 @@ getUserRedPacketStats=(request, callback)=>{
         callback(data);
     })
 };
+getwithdrawbalance=(request,callback)=>{
+    NetUtil.post(APIS.GET_WITHDRAW_BALANCE,request,(data)=>{
+        callback(data);
+    })
+};
+createWithdrawOrder=(request,callback)=>{
+    NetUtil.post(APIS.CREATE_WITHDRAW_BALANCE,request,(data)=>{
+        callback(data);
+    })
+};
+withdraworder=(request,callback)=>{
+    NetUtil.post(APIS.WITHDRAW_ORDER,request,(data)=>{
+        callback(data);
+    })
+}
 export default {
     getRpDetail,
     getRpReceiverList,
@@ -211,5 +226,8 @@ export default {
     queryUserBill,
     queryPayMessage,
     createPhoneRechargeOrder,
-    getUserRedPacketStats
+    getUserRedPacketStats,
+    getwithdrawbalance,
+    createWithdrawOrder,
+    withdraworder
 }

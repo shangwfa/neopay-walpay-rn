@@ -301,6 +301,9 @@ class PhoneTopUpMoneyView extends Component {
                 showContactIcon:true
             })
         }
+        this.setState({
+            phoneNo:event.nativeEvent.text
+        })
     };
     contactBtnClicked = ()=>{
         NativeModules.commModule.rnModalContactList()
