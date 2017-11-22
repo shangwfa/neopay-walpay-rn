@@ -7,7 +7,8 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     Modal,
-    NativeModules
+    NativeModules,
+    NativeAppEventEmitter,
 } from 'react-native'
 import {colors} from '../constants/index'
 import ScreenUtils from '../utils/ScreenUtils'
@@ -175,7 +176,8 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={{backgroundColor:'#DADADA',height:1}}></View>
                 <View style={styles.phoneNumberTextInputView}>
                     <TextInput style={styles.phoneNumberTextInput}
-                               placeholder={this.state.phoneNo?this.state.phoneNo:'请输入手机号'}
+                               placeholder={'请输入手机号'}
+                               value={this.state.phoneNo}
                                keyboardType='numeric'
                                clearButtonMode='while-editing'
                                placeholderTextColor='#999999'
@@ -201,6 +203,9 @@ class PhoneTopUpMoneyView extends Component {
     }
 
     componentDidMount() {
+
+        NativeAppEventEmitter.addListener('ContactSelected',(data)=>this.receivedContactPhoneNo(data));
+
         NativeModules.commModule.contactCommNumber((data)=>{
             this.setState({
                 phoneNo:data
@@ -219,6 +224,13 @@ class PhoneTopUpMoneyView extends Component {
             });
         });
 
+    }
+
+    receivedContactPhoneNo=(data)=>{
+        // console.log('收到手机号'+data);
+        this.setState({
+            phoneNo:data,
+        })
     }
 
     renderCells= ()=>{
@@ -291,11 +303,7 @@ class PhoneTopUpMoneyView extends Component {
         }
     };
     contactBtnClicked = ()=>{
-        NativeModules.commModule.rnModalContactList((data)=>{
-            this.setState({
-                phoneNo:data
-            })
-        });
+        NativeModules.commModule.rnModalContactList()
     };
 
     //输入密码完成

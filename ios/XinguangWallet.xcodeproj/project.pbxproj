@@ -13,6 +13,7 @@
 		4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */; };
 		421412EA1FA0808500290A06 /* mess.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421412E91FA0808500290A06 /* mess.plist */; };
 		421412ED1FA08FDD00290A06 /* XGQBActiRedPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */; };
+		422231751FC50F8900C415BE /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 422231741FC50F8900C415BE /* assets */; };
 		422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */; };
 		422895731F8F5152005E16E1 /* XGQBRegisterTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 422895721F8F5152005E16E1 /* XGQBRegisterTVCell.m */; };
 		422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */; };
@@ -24,6 +25,7 @@
 		425586711F94C84D002E039B /* XGQBMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425586701F94C84D002E039B /* XGQBMineTableView.m */; };
 		42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C621FBA917A00E5AB73 /* UIView+Transform.m */; };
 		42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C671FBAC84F00E5AB73 /* XGQBSideView.m */; };
+		426BD05C1FC5124000F49282 /* XGQBRNEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 426BD05B1FC5124000F49282 /* XGQBRNEventEmitter.m */; };
 		427A666E1FBD6D1900E0D92B /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666C1FBD6D1000E0D92B /* Contacts.framework */; };
 		427A66701FBD6D2E00E0D92B /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666F1FBD6D2100E0D92B /* ContactsUI.framework */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
@@ -39,7 +41,6 @@
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
 		42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */; };
 		42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42DE35F91FB56F2200A73DB3 /* main.jsbundle */; };
-		42DE35FC1FB59CE400A73DB3 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42DE35FB1FB59CE400A73DB3 /* assets */; };
 		42F975E61FB40E22009D7085 /* XGQBHomeBannerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F975E51FB40E22009D7085 /* XGQBHomeBannerItem.m */; };
 		6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */; };
 		6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0FF9D51F7F3A0E001A66BA /* commModule.m */; };
@@ -117,6 +118,7 @@
 		421412E91FA0808500290A06 /* mess.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mess.plist; sourceTree = "<group>"; };
 		421412EB1FA08FDD00290A06 /* XGQBActiRedPView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBActiRedPView.h; sourceTree = "<group>"; };
 		421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiRedPView.m; sourceTree = "<group>"; };
+		422231741FC50F8900C415BE /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		4228956E1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDRegisterTableViewController.h; sourceTree = "<group>"; };
 		4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDRegisterTableViewController.m; sourceTree = "<group>"; };
 		422895711F8F5152005E16E1 /* XGQBRegisterTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegisterTVCell.h; sourceTree = "<group>"; };
@@ -141,6 +143,8 @@
 		42655C641FBA917B00E5AB73 /* UIView+Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Transform.h"; sourceTree = "<group>"; };
 		42655C661FBAC84F00E5AB73 /* XGQBSideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSideView.h; sourceTree = "<group>"; };
 		42655C671FBAC84F00E5AB73 /* XGQBSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideView.m; sourceTree = "<group>"; };
+		426BD05A1FC5124000F49282 /* XGQBRNEventEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNEventEmitter.h; sourceTree = "<group>"; };
+		426BD05B1FC5124000F49282 /* XGQBRNEventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRNEventEmitter.m; sourceTree = "<group>"; };
 		427A666C1FBD6D1000E0D92B /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		427A666F1FBD6D2100E0D92B /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
@@ -166,7 +170,6 @@
 		42DD31DC1F8C748D00B435EA /* XGQBHomeBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBanner.h; sourceTree = "<group>"; };
 		42DD31DD1F8C748D00B435EA /* XGQBHomeBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBanner.m; sourceTree = "<group>"; };
 		42DE35F91FB56F2200A73DB3 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
-		42DE35FB1FB59CE400A73DB3 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		42F975E41FB40E22009D7085 /* XGQBHomeBannerItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeBannerItem.h; sourceTree = "<group>"; };
 		42F975E51FB40E22009D7085 /* XGQBHomeBannerItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeBannerItem.m; sourceTree = "<group>"; };
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
@@ -340,6 +343,8 @@
 				6A0FF9D51F7F3A0E001A66BA /* commModule.m */,
 				42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */,
 				42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */,
+				426BD05A1FC5124000F49282 /* XGQBRNEventEmitter.h */,
+				426BD05B1FC5124000F49282 /* XGQBRNEventEmitter.m */,
 			);
 			path = "React Native";
 			sourceTree = "<group>";
@@ -621,8 +626,8 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				422231741FC50F8900C415BE /* assets */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
-				42DE35FB1FB59CE400A73DB3 /* assets */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
 				42DE35F91FB56F2200A73DB3 /* main.jsbundle */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
@@ -1079,7 +1084,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42DE35FC1FB59CE400A73DB3 /* assets in Resources */,
+				422231751FC50F8900C415BE /* assets in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
 				42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */,
 				421412EA1FA0808500290A06 /* mess.plist in Resources */,
@@ -1192,6 +1197,7 @@
 				6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */,
 				6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */,
 				6AF9E4541F78E675005E901C /* XGQBTabBarItem.m in Sources */,
+				426BD05C1FC5124000F49282 /* XGQBRNEventEmitter.m in Sources */,
 				42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */,
 				42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */,
 				6AF78B8D1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m in Sources */,
