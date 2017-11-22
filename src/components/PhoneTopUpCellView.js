@@ -206,23 +206,23 @@ class PhoneTopUpMoneyView extends Component {
 
         NativeAppEventEmitter.addListener('ContactSelected',(data)=>this.receivedContactPhoneNo(data));
 
-        NativeModules.commModule.contactCommNumber((data)=>{
-            this.setState({
-                phoneNo:data
-
-            });
-            ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
-                if(this.props.viewType){
-                    this.setState({
-                        CelluarItemList:data,
-                    })
-                }else {
-                    this.setState({
-                        MoneyItemList: data,
-                    })
-                }
-            });
-        });
+        // NativeModules.commModule.contactCommNumber((data)=>{
+        //     this.setState({
+        //         phoneNo:data
+        //
+        //     });
+        //     ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
+        //         if(this.props.viewType){
+        //             this.setState({
+        //                 CelluarItemList:data,
+        //             })
+        //         }else {
+        //             this.setState({
+        //                 MoneyItemList: data,
+        //             })
+        //         }
+        //     });
+        // });
 
     }
 
