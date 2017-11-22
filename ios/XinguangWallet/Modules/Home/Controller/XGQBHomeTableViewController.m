@@ -48,7 +48,7 @@
     homeCellView.delegate = self;
     
     XGQBHomeBannerView *homeBannerView = [[XGQBHomeBannerView alloc]initWithFrame:CGRectMake(0, 229, kScreenWidth, 209)];
-    
+    [homeBannerView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableHeaderView = homeCellView;
     self.tableView.tableFooterView = homeBannerView;
 }
@@ -58,6 +58,14 @@
     [super viewWillAppear:animated];
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 //    self.navigationController.navigationBarHidden = NO;
+    
+}
+
+-(void)moreBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"activityList";
+    [self.tableView.superview.viewController.navigationController pushViewController:RNVC animated:YES];
     
 }
 

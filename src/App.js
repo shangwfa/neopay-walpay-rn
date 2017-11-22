@@ -28,32 +28,35 @@ class App extends Component {
         const Navigator = StackNavigator(RouterSetting,
             {
                 initialRouteName: params.page,
-                headerMode: 'screen',
-                transitionConfig: () => ({
-                    transitionSpec: {
-                        duration: 300,
-                        easing: Easing.ease,
-                        timing: Animated.timing,
-                    },
-                    screenInterpolator: sceneProps => {
-                        const { layout, position, scene } = sceneProps
-                        const { index } = scene
-                        const width = layout.initWidth
-
-                        const translateX = position.interpolate({
-                            inputRange: [index - 1, index, index + 1],
-                            outputRange: [width, 0, 0],
-                        })
-
-                        return {transform: [{ translateX }] }
-                    },
-                })
+                mode: 'card',
+                headerMode: 'float',
+                screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+                // transitionConfig: () => ({
+                //     transitionSpec: {
+                //         duration: 300,
+                //         easing: Easing.ease,
+                //         timing: Animated.timing,
+                //     },
+                //     screenInterpolator: sceneProps => {
+                //         const { layout, position, scene } = sceneProps
+                //         const { index } = scene
+                //         const width = layout.initWidth
+                //
+                //         const translateX = position.interpolate({
+                //             inputRange: [index - 1, index, index + 1],
+                //             outputRange: [width, 0, 0],
+                //         })
+                //
+                //         return {transform: [{ translateX }] }
+                //     },
+                // })
 
             }
         );
 
         const defaultStateAction = Navigator.router.getStateForAction
         Navigator.router.getStateForAction = (action, state) => {
+            console.log('xxxxxxxxxxxx')
             if (state && action.type === NavigationActions.BACK && state.routes.length === 1) {
                 console.log("退出RN页面")
                 NativeModules.commModule.closeRNPage()
@@ -79,6 +82,12 @@ class App extends Component {
             }
             return defaultStateAction(action, state);
         };
+
+        const componentForRouteName = Navigator.router.getComponentForRouteName
+        Navigator.router.getComponentForRouteName=(routeName)=>{
+            console.log('getComponentForRouteName=>'+routeName)
+            return componentForRouteName(routeName)
+        }
 
         const  getCurrentRouteName=(navigationState) =>{
             if (!navigationState) {

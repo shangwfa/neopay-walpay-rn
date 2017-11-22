@@ -42,6 +42,7 @@ class SendRedPacketPage extends BasePage {
             payTypeSourceData: {},
             redPacketSourceData: {},
             payResultSourceData: {},
+            redPacketThemeCode:''
 
         };
     }

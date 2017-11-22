@@ -12,7 +12,7 @@ import OneButtonModal from '../modal/OneButtonModal'
 import TwoButtonModal from '../modal/TwoButtonModal'
 import bind_card_failed_icon from '../res/img/bind_card_failed_icon.png'
 import bind_card_success_icon from '../res/img/bind_card_success_icon.png'
-
+import PayPwdModal from '../modal/PayPwdModal'
 
 class ModalDemoPage extends BasePage {
 
@@ -63,11 +63,14 @@ class ModalDemoPage extends BasePage {
                 {/*}}/>*/}
                 {/*<OperationStatusMoadl  icon={bind_card_success_icon}  tip='解绑成功' isShow={this.state.isShow}/>*/}
 
-                <UnbindBankCardModal topTitle="解绑银行卡" isShow={this.state.isShow} close={() => this.close()}
-                                     unBind={() => this.unBind()}/>
+                {/*<UnbindBankCardModal topTitle="解绑银行卡" isShow={this.state.isShow} close={() => this.close()}*/}
+                                     {/*unBind={() => this.unBind()}/>*/}
                 {/*<OneButtonModal isShow={this.state.isShow} content='xxxxxxxxx' btnTitle="确定" onPress={()=>this.close()}/>*/}
                 {/*<TwoButtonModal isShow={this.state.isShow} content='xxxxxxx' oneBtnText='忘记密码' twoBtnText='去登陆'*/}
                 {/*onePress={() => this.close()} twoPress={() => this.close()}/>*/}
+
+                <PayPwdModal isShow={this.state.isShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
+                             onForgetPwd={()=>{}} onEnd={(text)=>{console.log('输出密码'+text)}}/>
             </View>
         )
     }

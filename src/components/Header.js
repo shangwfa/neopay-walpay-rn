@@ -48,7 +48,11 @@ class Header extends Component {
     }
 
     goback = () => {
-        this.props.navigation.goBack();
+        if(this.props.onLeftPress){
+            this.props.onLeftPress()
+        }else {
+            this.props.navigation.goBack();
+        }
     }
     renderDivider = () => {
         if (this.props.isShowLine) {

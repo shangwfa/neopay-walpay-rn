@@ -118,13 +118,7 @@
     [self.navigationController pushViewController:sVC animated:YES];
     
 }
--(void)moreBtnClicked
-{
-    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType = @"activityList";
-    [self.navigationController pushViewController:RNVC animated:YES];
-    
-}
+
 
 #pragma mark - 实名认证弹框
 //检查是否需要实名认证弹框

@@ -10,7 +10,7 @@ import BasePage from './BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
 import ScrnUtil from '../utils/ScreenUtils'
-
+import {StackNavigator, NavigationActions} from 'react-navigation'
 class AccountWithdrawResultPage extends BasePage {
 
     constructor(props) {
@@ -22,7 +22,9 @@ class AccountWithdrawResultPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title={'提现结果'}/>
+                <Header navigation={this.props.navigation} title={'提现结果'} onLeftPress={()=>{
+                    nav.goBack(backKey)
+                }}/>
                 <FlatList
                     data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:'中信银行信用卡(9889)'},{key: '提现服务费',data:'1.23元'}]}
                     renderItem={this._renderItemComponent}

@@ -27,6 +27,8 @@
 #define kNotificationRNJumpBackToFirstLevel @"RNJumpBackToFirstLevel"
 //RN通知打开系统通讯录
 #define kNotificationRNModalContactList @"RNModalContactList"
+//原生获得通讯录手机号
+#define kNotificationGetContactPhoneNoToRN @"GetContactPhoneNoToRN"
 
 //Test UINavigationController push之后通知tabbar禁用自定义右划手势
 #define kNotificationNavPushToSecondLevel @"NavPushToSecondLevel"
