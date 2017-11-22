@@ -32,6 +32,10 @@ class ContactsPage extends BasePage {
         this.pinyin = new Pinyin({charCase: 0});
     }
 
+    emitEvent=()=>{
+
+    }
+
     componentWillMount() {
         Contacts.checkPermission((err, permission) => {
             if (permission === 'undefined') {

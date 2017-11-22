@@ -15,6 +15,10 @@ import Divider from "../components/Divider"
 import CommonItemThree from '../components/CommonItemThree'
 
 class AccountWithdrawPage extends BasePage {
+    constructor(props){
+        super(props)
+        global.backKey=nav.state.key
+    }
 
     render() {
         return (

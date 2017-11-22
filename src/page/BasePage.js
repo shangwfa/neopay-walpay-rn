@@ -19,12 +19,12 @@ class BasePage extends Component {
     }
     /**
      * 1.emitEvent=(event)=>{console.log(event)}
-     * 2.DeviceEventEmitter.emit('activityList',{type:'xxx',{a:'xxxxx',b:'yyyyyy'}})
+     * 2.DeviceEventEmitter.emit('activityList',{type:'xxx',data:{a:'xxxxx',b:'yyyyyy'}})
      * */
 
     componentWillUnmount() {
         // 移除
-        this.emitterListener.remove();
+        if(this.emitterListener) this.emitterListener.remove();
     }
 }
 

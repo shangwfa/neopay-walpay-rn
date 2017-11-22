@@ -13,6 +13,7 @@ import {
     TouchableHighlight,
     InteractionManager,
 } from 'react-native';
+import ScreenUtils from '../utils/ScreenUtils'
 
 export default class PasswordInput extends Component {
     static propTypes = {
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flexDirection: 'row',
-        borderWidth: 0.5,
+        borderWidth: ScreenUtils.isIOS?1.0:0.5,
         borderColor: '#ccc',
         borderRadius: 5,
         backgroundColor: '#fff'
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputItemBorderLeftWidth: {
-        borderLeftWidth: 0.5,
+        borderLeftWidth: ScreenUtils.isIOS?1.0:0.5,
         borderColor: '#ccc',
     },
     iconStyle: {

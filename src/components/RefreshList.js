@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import {events} from '../constants/index'
+import ScreenUtils from "../utils/ScreenUtils";
+
 export const RefreshStatus = {
     IDLE: 'idle',
     END: 'end',
@@ -24,31 +26,31 @@ class RefreshList extends Component {
 
     constructor(props) {
         super(props)
-        this.state={
-            isError:false
+        this.state = {
+            isError: false
         }
     }
 
     componentDidMount() {
         DeviceEventEmitter.addListener(events.REFRESH_LIST_EVENY, (value) => {
-            this.setState({isError:true})
+            this.setState({isError: true})
         })
     }
 
     errorReLoadPress = () => {
-        this.setState({isError:false})
+        this.setState({isError: false})
         this.onEndReached()
     }
-    isEnd=()=>{
-        return this.props.data.length% defaulePageSize != 0
+    isEnd = () => {
+        return this.props.data.length % defaulePageSize != 0
     }
 
-    isNoraml=()=>{
+    isNoraml = () => {
         return !this.isEnd()
     }
 
     renderFooter = () => {
-        if(this.state.isError){
+        if (this.state.isError) {
             return (
                 <TouchableOpacity onPress={() => this.errorReLoadPress()}>
                     <View style={styles.footer_container}>
@@ -57,31 +59,37 @@ class RefreshList extends Component {
                 </TouchableOpacity>
 
             )
-        }else {
+        } else {
             if (this.isEnd()) {
                 return (
                     <View style={styles.footer_container}>
-                        <Text style={styles.footer_text}>我是有底线的</Text>
+                        <Text style={styles.footer_text}>———— 没有更多内容啦！————</Text>
                     </View>
                 )
             } else {
                 return (
                     <View style={styles.footer_container}>
                         <ActivityIndicator size="small" color="#888888"/>
-                        <Text style={styles.footer_text}>加载更多</Text>
+                        <Text style={styles.footer_text}>拼命加载中…</Text>
                     </View>)
             }
         }
     }
 
     onEndReached = () => {
-        if ((!this.state.isError)&&this.isNoraml()) {
+        if ((!this.state.isError) && this.isNoraml()) {
             let dataLength = this.props.data.length
             let curPage = dataLength % defaulePageSize ? (parseInt(dataLength / defaulePageSize + 1)) : parseInt((dataLength / defaulePageSize + 2))
             this.props.onLoadMore(curPage)
         }
     }
 
+    renderEmpty = () => {
+        return (
+            <View >
+                <Text style={{fontSize:15,color:'#B5B5B5'}}>暂时没有内容哦！去其他页面看看～</Text>
+            </View>)
+    }
 
     render() {
         const {data, renderItem, onRefresh, extraData, ...attributes} = this.props
@@ -97,6 +105,7 @@ class RefreshList extends Component {
                     refreshing={false}
                     onEndReachedThreshold={0.1}
                     ListFooterComponent={this.renderFooter}
+                    ListEmptyComponent={this.renderEmpty}
                     keyExtractor={(item, index) => {
                         return index
                     }}
@@ -104,7 +113,10 @@ class RefreshList extends Component {
                 />
             )
         } else {
-            return null
+            return (
+                <View style={{flex: 1, width:ScreenUtils.width,alignItems: 'center', justifyContent: 'center'}}>
+                    {this.renderEmpty()}
+                </View>)
         }
 
     }
