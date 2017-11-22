@@ -13,9 +13,6 @@ import CommonItemTwo from '../components/CommonItemTwo'
 import {RouterPaths} from '../constants/RouterPaths'
 import ApiManager from '../utils/ApiManager'
 import RefreshList from '../components/RefreshList'
-import {RefreshStatus} from "../components/RefreshList"
-const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
-
 class MyOrderPage extends BasePage {
     queryType=''//订单类型
     payDirection=''//交易方向
@@ -25,9 +22,8 @@ class MyOrderPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-
-            ],
+            data: [],
+            isEmpty:false
         }
 
         if(this.props.navigation.state.params) this.queryType=this.props.navigation.state.params.tradeType
@@ -59,7 +55,8 @@ class MyOrderPage extends BasePage {
                 arrData.push(...data)
                 this.setState({data: arrData})
             }else {
-                this.setState({data: data})
+                const empty=!data||data.length<=0
+                this.setState({data: data,isEmpty:empty})
             }
 
 
@@ -108,6 +105,7 @@ class MyOrderPage extends BasePage {
                     onRefresh={this.onRefresh}
                     onLoadMore={this.onLoadMore}
                     extraData={this.state}
+                    isEmpty={this.state.isEmpty}
                 />
             </View>
         );
