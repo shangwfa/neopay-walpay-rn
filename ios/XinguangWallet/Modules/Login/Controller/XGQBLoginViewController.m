@@ -8,7 +8,6 @@
 
 #import "XGQBLoginViewController.h"
 #import "XGQBRootNavigationController.h"
-#import "XGQBMainTabBarViewController.h"
 
 #import "XGQBPureColorBtn.h"
 #import "XGQBLoginInputView.h"

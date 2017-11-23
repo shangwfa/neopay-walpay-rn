@@ -83,7 +83,7 @@
     
     [_homeTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(weakself.view);
-        make.bottom.equalTo(weakself.view).with.offset(-44);
+        make.bottom.equalTo(weakself.view).with.offset(0);
         make.top.equalTo(homeTitleView.mas_bottom);
     }];
     

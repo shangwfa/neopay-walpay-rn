@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		2DA62DDF03A34E24A5B3C3B2 /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4F49D009044D08A1DB82DA /* libRCTContacts.a */; };
 		4210AF401F95CE6D008132C5 /* XGQBCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */; };
-		4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */; };
-		4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */; };
-		421412EA1FA0808500290A06 /* mess.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421412E91FA0808500290A06 /* mess.plist */; };
-		421412ED1FA08FDD00290A06 /* XGQBActiRedPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */; };
 		422231751FC50F8900C415BE /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 422231741FC50F8900C415BE /* assets */; };
 		422895701F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */; };
 		422895731F8F5152005E16E1 /* XGQBRegisterTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 422895721F8F5152005E16E1 /* XGQBRegisterTVCell.m */; };
@@ -28,6 +24,10 @@
 		426BD05C1FC5124000F49282 /* XGQBRNEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 426BD05B1FC5124000F49282 /* XGQBRNEventEmitter.m */; };
 		427A666E1FBD6D1900E0D92B /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666C1FBD6D1000E0D92B /* Contacts.framework */; };
 		427A66701FBD6D2E00E0D92B /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666F1FBD6D2100E0D92B /* ContactsUI.framework */; };
+		4284C6A51FC59AAF002AA0E3 /* XGQBActiMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284C69B1FC59AAF002AA0E3 /* XGQBActiMessTVC.m */; };
+		4284C6A61FC59AAF002AA0E3 /* XGQBActiRedPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284C69C1FC59AAF002AA0E3 /* XGQBActiRedPView.m */; };
+		4284C6A71FC59AAF002AA0E3 /* XGQBCommMessTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4284C69F1FC59AAF002AA0E3 /* XGQBCommMessTVC.m */; };
+		4284C6A91FC59BA5002AA0E3 /* mess.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4284C6A81FC59BA5002AA0E3 /* mess.plist */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
 		4293F4801FBBE1F4008C1531 /* XGQBHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4293F47F1FBBE1F4008C1531 /* XGQBHomeTableViewController.m */; };
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
@@ -35,6 +35,8 @@
 		42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */; };
 		42B98A371FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */; };
 		42B98A3A1FA2FC5B00850FDB /* XGQBAccountExistAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A391FA2FC5B00850FDB /* XGQBAccountExistAlertView.m */; };
+		42BCB5C61FC66439002B4FBF /* XGQBSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */; };
+		42BCB5CA1FC66955002B4FBF /* XGQBAPPRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BCB5C91FC66955002B4FBF /* XGQBAPPRootViewController.m */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
@@ -73,12 +75,7 @@
 		6AF9E4371F78E039005E901C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4341F78DF4E005E901C /* AppDelegate.m */; };
 		6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4381F78E0E9005E901C /* AppDelegate+PushService.m */; };
 		6AF9E43D1F78E0E9005E901C /* AppDelegate+AppService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E43B1F78E0E9005E901C /* AppDelegate+AppService.m */; };
-		6AF9E44D1F78E39E005E901C /* XGQBMainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E44C1F78E39E005E901C /* XGQBMainTabBarViewController.m */; };
-		6AF9E4511F78E659005E901C /* XGQBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4501F78E659005E901C /* XGQBTabBar.m */; };
-		6AF9E4541F78E675005E901C /* XGQBTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4531F78E675005E901C /* XGQBTabBarItem.m */; };
-		6AF9E4571F78E68E005E901C /* XGQBTabBarBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4561F78E68E005E901C /* XGQBTabBarBadge.m */; };
 		6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E45D1F78E858005E901C /* XGQBRootViewController.m */; };
-		6AF9E4801F78EA2F005E901C /* XGQBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E47F1F78EA2F005E901C /* XGQBMessageViewController.m */; };
 		6AF9E4831F78EA3B005E901C /* XGQBMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */; };
 		6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9E48A1F78EDA9005E901C /* XGQBRootNavigationController.m */; };
 		E7A419D64D389536228DE027 /* libPods-XinguangWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFE03A9FABCE2475826A5708 /* libPods-XinguangWallet.a */; };
@@ -111,13 +108,6 @@
 /* Begin PBXFileReference section */
 		4210AF3E1F95CE6D008132C5 /* XGQBCommissionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCommissionViewController.h; sourceTree = "<group>"; };
 		4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCommissionViewController.m; sourceTree = "<group>"; };
-		4210AF411F95D1ED008132C5 /* XGQBActiMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBActiMessTVC.h; sourceTree = "<group>"; };
-		4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiMessTVC.m; sourceTree = "<group>"; };
-		4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCommMessTVC.h; sourceTree = "<group>"; };
-		4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCommMessTVC.m; sourceTree = "<group>"; };
-		421412E91FA0808500290A06 /* mess.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mess.plist; sourceTree = "<group>"; };
-		421412EB1FA08FDD00290A06 /* XGQBActiRedPView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBActiRedPView.h; sourceTree = "<group>"; };
-		421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBActiRedPView.m; sourceTree = "<group>"; };
 		422231741FC50F8900C415BE /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		4228956E1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBIDRegisterTableViewController.h; sourceTree = "<group>"; };
 		4228956F1F8F4B88005E16E1 /* XGQBIDRegisterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDRegisterTableViewController.m; sourceTree = "<group>"; };
@@ -147,6 +137,13 @@
 		426BD05B1FC5124000F49282 /* XGQBRNEventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRNEventEmitter.m; sourceTree = "<group>"; };
 		427A666C1FBD6D1000E0D92B /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		427A666F1FBD6D2100E0D92B /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+		4284C69B1FC59AAF002AA0E3 /* XGQBActiMessTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XGQBActiMessTVC.m; sourceTree = "<group>"; };
+		4284C69C1FC59AAF002AA0E3 /* XGQBActiRedPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XGQBActiRedPView.m; sourceTree = "<group>"; };
+		4284C69D1FC59AAF002AA0E3 /* XGQBCommMessTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGQBCommMessTVC.h; sourceTree = "<group>"; };
+		4284C69E1FC59AAF002AA0E3 /* XGQBActiMessTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGQBActiMessTVC.h; sourceTree = "<group>"; };
+		4284C69F1FC59AAF002AA0E3 /* XGQBCommMessTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XGQBCommMessTVC.m; sourceTree = "<group>"; };
+		4284C6A01FC59AAF002AA0E3 /* XGQBActiRedPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGQBActiRedPView.h; sourceTree = "<group>"; };
+		4284C6A81FC59BA5002AA0E3 /* mess.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mess.plist; sourceTree = "<group>"; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
 		428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
 		4293F47E1FBBE1F4008C1531 /* XGQBHomeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTableViewController.h; sourceTree = "<group>"; };
@@ -161,6 +158,10 @@
 		42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAccountExistAlertViewController.m; sourceTree = "<group>"; };
 		42B98A381FA2FC5B00850FDB /* XGQBAccountExistAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAccountExistAlertView.h; sourceTree = "<group>"; };
 		42B98A391FA2FC5B00850FDB /* XGQBAccountExistAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAccountExistAlertView.m; sourceTree = "<group>"; };
+		42BCB5C41FC66439002B4FBF /* XGQBSideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSideViewController.h; sourceTree = "<group>"; };
+		42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideViewController.m; sourceTree = "<group>"; };
+		42BCB5C81FC66955002B4FBF /* XGQBAPPRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAPPRootViewController.h; sourceTree = "<group>"; };
+		42BCB5C91FC66955002B4FBF /* XGQBAPPRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAPPRootViewController.m; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
 		42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNViewController.h; sourceTree = "<group>"; };
@@ -240,20 +241,10 @@
 		6AF9E4401F78E1B6005E901C /* FontAndColorMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FontAndColorMacros.h; sourceTree = "<group>"; };
 		6AF9E4411F78E1B6005E901C /* ThirdMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdMacros.h; sourceTree = "<group>"; };
 		6AF9E4431F78E1B6005E901C /* UtilsMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacros.h; sourceTree = "<group>"; };
-		6AF9E44B1F78E39E005E901C /* XGQBMainTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMainTabBarViewController.h; sourceTree = "<group>"; };
-		6AF9E44C1F78E39E005E901C /* XGQBMainTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMainTabBarViewController.m; sourceTree = "<group>"; };
-		6AF9E44F1F78E659005E901C /* XGQBTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBTabBar.h; sourceTree = "<group>"; };
-		6AF9E4501F78E659005E901C /* XGQBTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBTabBar.m; sourceTree = "<group>"; };
-		6AF9E4521F78E675005E901C /* XGQBTabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBTabBarItem.h; sourceTree = "<group>"; };
-		6AF9E4531F78E675005E901C /* XGQBTabBarItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBTabBarItem.m; sourceTree = "<group>"; };
-		6AF9E4551F78E68E005E901C /* XGQBTabBarBadge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBTabBarBadge.h; sourceTree = "<group>"; };
-		6AF9E4561F78E68E005E901C /* XGQBTabBarBadge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBTabBarBadge.m; sourceTree = "<group>"; };
 		6AF9E45C1F78E858005E901C /* XGQBRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRootViewController.h; sourceTree = "<group>"; };
 		6AF9E45D1F78E858005E901C /* XGQBRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRootViewController.m; sourceTree = "<group>"; };
 		6AF9E47B1F78EA0B005E901C /* XGQBHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeViewController.h; sourceTree = "<group>"; };
 		6AF9E47C1F78EA0B005E901C /* XGQBHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeViewController.m; sourceTree = "<group>"; };
-		6AF9E47E1F78EA2F005E901C /* XGQBMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMessageViewController.h; sourceTree = "<group>"; };
-		6AF9E47F1F78EA2F005E901C /* XGQBMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMessageViewController.m; sourceTree = "<group>"; };
 		6AF9E4811F78EA3B005E901C /* XGQBMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMineViewController.h; sourceTree = "<group>"; };
 		6AF9E4821F78EA3B005E901C /* XGQBMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMineViewController.m; sourceTree = "<group>"; };
 		6AF9E4891F78EDA9005E901C /* XGQBRootNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRootNavigationController.h; sourceTree = "<group>"; };
@@ -357,6 +348,69 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		4284C6931FC59AAF002AA0E3 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				4284C6941FC59AAF002AA0E3 /* Logic */,
+				4284C6951FC59AAF002AA0E3 /* Controller */,
+				4284C6991FC59AAF002AA0E3 /* Model */,
+				4284C69A1FC59AAF002AA0E3 /* View */,
+				4284C6A11FC59AAF002AA0E3 /* Service */,
+				4284C6A21FC59AAF002AA0E3 /* Resource */,
+			);
+			name = Message;
+			path = XinguangWallet/Modules/Message;
+			sourceTree = SOURCE_ROOT;
+		};
+		4284C6941FC59AAF002AA0E3 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		4284C6951FC59AAF002AA0E3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4284C6A81FC59BA5002AA0E3 /* mess.plist */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4284C6991FC59AAF002AA0E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4284C69A1FC59AAF002AA0E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4284C69B1FC59AAF002AA0E3 /* XGQBActiMessTVC.m */,
+				4284C69C1FC59AAF002AA0E3 /* XGQBActiRedPView.m */,
+				4284C69D1FC59AAF002AA0E3 /* XGQBCommMessTVC.h */,
+				4284C69E1FC59AAF002AA0E3 /* XGQBActiMessTVC.h */,
+				4284C69F1FC59AAF002AA0E3 /* XGQBCommMessTVC.m */,
+				4284C6A01FC59AAF002AA0E3 /* XGQBActiRedPView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4284C6A11FC59AAF002AA0E3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		4284C6A21FC59AAF002AA0E3 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		42990E721F998F2C00B20EBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +433,24 @@
 				42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		42BCB5C21FC66425002B4FBF /* Side */ = {
+			isa = PBXGroup;
+			children = (
+				42BCB5C41FC66439002B4FBF /* XGQBSideViewController.h */,
+				42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */,
+			);
+			path = Side;
+			sourceTree = "<group>";
+		};
+		42BCB5C71FC66932002B4FBF /* APPRootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42BCB5C81FC66955002B4FBF /* XGQBAPPRootViewController.h */,
+				42BCB5C91FC66955002B4FBF /* XGQBAPPRootViewController.m */,
+			);
+			path = APPRootViewController;
 			sourceTree = "<group>";
 		};
 		6A01A0171F7A2AC20059D6D3 /* NetworkingConfig */ = {
@@ -671,13 +743,14 @@
 		6AF9E4481F78E281005E901C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				42BCB5C21FC66425002B4FBF /* Side */,
 				423FAB0F1FA6B7300079CB99 /* React Native */,
 				6AD95AE71F7C87BE00BFF4DA /* Common */,
 				6AE813A11F7B4D300044B072 /* AdVC */,
+				4284C6931FC59AAF002AA0E3 /* Message */,
 				6A1C68AA1F7A3CD300170E47 /* AppBootVC */,
 				6A3843C31F79E43C00BFE9B4 /* Login */,
 				6AF9E4651F78E962005E901C /* Home */,
-				6AF9E46C1F78E962005E901C /* Message */,
 				6AF9E4731F78E963005E901C /* Mine */,
 			);
 			path = Modules;
@@ -686,35 +759,12 @@
 		6AF9E4491F78E281005E901C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				42BCB5C71FC66932002B4FBF /* APPRootViewController */,
 				6AE8138D1F7B47AD0044B072 /* RootWebViewController */,
 				6AF9E4881F78ED8E005E901C /* RootNavigationController */,
 				6AF9E45B1F78E858005E901C /* RootViewController */,
-				6AF9E44A1F78E35B005E901C /* TabBarController */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		6AF9E44A1F78E35B005E901C /* TabBarController */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E44E1F78E5FC005E901C /* TabBarViews */,
-				6AF9E44B1F78E39E005E901C /* XGQBMainTabBarViewController.h */,
-				6AF9E44C1F78E39E005E901C /* XGQBMainTabBarViewController.m */,
-			);
-			path = TabBarController;
-			sourceTree = "<group>";
-		};
-		6AF9E44E1F78E5FC005E901C /* TabBarViews */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E44F1F78E659005E901C /* XGQBTabBar.h */,
-				6AF9E4501F78E659005E901C /* XGQBTabBar.m */,
-				6AF9E4521F78E675005E901C /* XGQBTabBarItem.h */,
-				6AF9E4531F78E675005E901C /* XGQBTabBarItem.m */,
-				6AF9E4551F78E68E005E901C /* XGQBTabBarBadge.h */,
-				6AF9E4561F78E68E005E901C /* XGQBTabBarBadge.m */,
-			);
-			path = TabBarViews;
 			sourceTree = "<group>";
 		};
 		6AF9E45B1F78E858005E901C /* RootViewController */ = {
@@ -793,70 +843,6 @@
 			children = (
 				422A2D831F8F033800485DB5 /* Main */,
 				422A2D841F8F033F00485DB5 /* SubViews */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		6AF9E46C1F78E962005E901C /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E46D1F78E962005E901C /* Controller */,
-				6AF9E46E1F78E962005E901C /* Logic */,
-				6AF9E46F1F78E962005E901C /* Model */,
-				6AF9E4701F78E962005E901C /* Resource */,
-				6AF9E4711F78E962005E901C /* Service */,
-				6AF9E4721F78E962005E901C /* View */,
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
-		6AF9E46D1F78E962005E901C /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				6AF9E47E1F78EA2F005E901C /* XGQBMessageViewController.h */,
-				6AF9E47F1F78EA2F005E901C /* XGQBMessageViewController.m */,
-				421412E91FA0808500290A06 /* mess.plist */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		6AF9E46E1F78E962005E901C /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		6AF9E46F1F78E962005E901C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		6AF9E4701F78E962005E901C /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resource;
-			sourceTree = "<group>";
-		};
-		6AF9E4711F78E962005E901C /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		6AF9E4721F78E962005E901C /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4210AF411F95D1ED008132C5 /* XGQBActiMessTVC.h */,
-				4210AF421F95D1ED008132C5 /* XGQBActiMessTVC.m */,
-				4210AF441F95D20D008132C5 /* XGQBCommMessTVC.h */,
-				4210AF451F95D20D008132C5 /* XGQBCommMessTVC.m */,
-				421412EB1FA08FDD00290A06 /* XGQBActiRedPView.h */,
-				421412EC1FA08FDD00290A06 /* XGQBActiRedPView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1084,10 +1070,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4284C6A91FC59BA5002AA0E3 /* mess.plist in Resources */,
 				422231751FC50F8900C415BE /* assets in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
 				42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */,
-				421412EA1FA0808500290A06 /* mess.plist in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1172,9 +1158,9 @@
 				6AD95B321F7D064100BFF4DA /* AssistCoreService.m in Sources */,
 				42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */,
 				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
-				4210AF431F95D1ED008132C5 /* XGQBActiMessTVC.m in Sources */,
 				6AD95B331F7D064100BFF4DA /* BalanceCoreService.m in Sources */,
 				42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */,
+				4284C6A61FC59AAF002AA0E3 /* XGQBActiRedPView.m in Sources */,
 				42B98A371FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m in Sources */,
 				428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
@@ -1189,25 +1175,24 @@
 				6AE813A71F7B52960044B072 /* XGQBAppManager.m in Sources */,
 				42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */,
 				6AF78B901F8B617E002EAAB2 /* XGQBHomeCellView.m in Sources */,
+				42BCB5C61FC66439002B4FBF /* XGQBSideViewController.m in Sources */,
 				6AF4A75A1F7A31EF006AE5E8 /* IphoneDevice.m in Sources */,
-				421412ED1FA08FDD00290A06 /* XGQBActiRedPView.m in Sources */,
 				6AF4A75B1F7A31EF006AE5E8 /* SystemMethods.m in Sources */,
-				4210AF461F95D20D008132C5 /* XGQBCommMessTVC.m in Sources */,
 				6A8758E21F7A2D0300F480EF /* GVUserDefaults+PropertyList.m in Sources */,
 				6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */,
 				6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */,
-				6AF9E4541F78E675005E901C /* XGQBTabBarItem.m in Sources */,
+				4284C6A51FC59AAF002AA0E3 /* XGQBActiMessTVC.m in Sources */,
 				426BD05C1FC5124000F49282 /* XGQBRNEventEmitter.m in Sources */,
 				42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */,
 				42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */,
+				4284C6A71FC59AAF002AA0E3 /* XGQBCommMessTVC.m in Sources */,
+				42BCB5CA1FC66955002B4FBF /* XGQBAPPRootViewController.m in Sources */,
 				6AF78B8D1F8B60ED002EAAB2 /* XGQBHomeCellBtn.m in Sources */,
 				422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */,
 				6A792B991F7F6E53009039AF /* XGQBRegRestPwdTVCell.m in Sources */,
 				6A792B9C1F7F98A2009039AF /* XGQBTextField.m in Sources */,
 				6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */,
 				42B98A3A1FA2FC5B00850FDB /* XGQBAccountExistAlertView.m in Sources */,
-				6AF9E4511F78E659005E901C /* XGQBTabBar.m in Sources */,
-				6AF9E4801F78EA2F005E901C /* XGQBMessageViewController.m in Sources */,
 				42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */,
 				6AF78B931F8B76CD002EAAB2 /* XGQBHomeBannerView.m in Sources */,
 				6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */,
@@ -1222,8 +1207,6 @@
 				42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */,
 				6AF9E40D1F78DDB6005E901C /* main.m in Sources */,
 				42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */,
-				6AF9E4571F78E68E005E901C /* XGQBTabBarBadge.m in Sources */,
-				6AF9E44D1F78E39E005E901C /* XGQBMainTabBarViewController.m in Sources */,
 				42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */,
 				6A3843CC1F79E46600BFE9B4 /* XGQBLoginViewController.m in Sources */,
 				4293F4801FBBE1F4008C1531 /* XGQBHomeTableViewController.m in Sources */,

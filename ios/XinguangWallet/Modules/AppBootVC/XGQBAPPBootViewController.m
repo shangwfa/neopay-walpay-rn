@@ -7,7 +7,6 @@
 //
 
 #import "XGQBAPPBootViewController.h"
-#import "XGQBMainTabBarViewController.h"
 #import "XGQBLoginViewController.h"
 
 @interface XGQBAPPBootViewController ()
