@@ -75,7 +75,8 @@ class RpDetailPage extends BasePage {
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.robberName} middleBottomValue={item.createTime}
                                rightUpValue={item.luckyMoney}
-                               isLine={true}/>
+                               isLine={true}
+                               imgIconUrl={item.luckyFlag==1?require("../res/img/rp_max_num.png"):' '} />
             </View>
         )
 
@@ -96,13 +97,14 @@ class RpDetailPage extends BasePage {
                                 amountValue={this.state.dataDetail.luckyMoney}
                                 fromValue={this.state.dataDetail.bossName}
                                 remarkValue={this.state.dataDetail.message}
-                                stateValue={this.state.dataDetail.state}/>
+                                stateValue={this.state.dataDetail.state}
+                                isMax = {this.state.dataDetail.bestLuckyBool}/>
                 <View style = {styles.mid_view}>
                     <Text style = {styles.num_text}>{this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>
                     <Text style = {styles.amount_text}>{'总额¥' + this.state.dataDetail.amount}</Text>
                 </View>
                 <FlatList
-                    style={{marginTop: 5,}}
+                    style={{marginTop: 0,}}
                     ref='flatList'
                     data={this.state.dataSource}
                     renderItem={this._renderRow}
@@ -160,11 +162,13 @@ const styles = StyleSheet.create({
     },
     num_text: {
         fontSize:15,
-        marginLeft:15
+        marginLeft:15,
+        color:colors.balck_more_light,
     },
     amount_text: {
         fontSize:15,
-        marginRight:15
+        marginRight:15,
+        color:colors.balck_more_light
     },
     bg_bottom:{
         marginTop:0,

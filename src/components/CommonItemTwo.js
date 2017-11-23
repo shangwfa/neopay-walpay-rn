@@ -77,7 +77,7 @@ const CommonItemTwo = props => {
         return <View style={styles.middle_container}>
             <View style = {styles.mid_view}>
                 <Text style={styles.middle_up_value}>{middleUpValue}</Text>
-                <Image style= {{marginLeft:10,width:20,height:20, backgroundColor:colors.orange}} source = {imgIconUrl}></Image>
+                <Image style= {{marginLeft:10,width:20,height:20,resizeMode:'contain'}} source = {imgIconUrl}></Image>
             </View>
             <Text style={styles.middle_bottom_value}>{middleBottomValue}</Text>
         </View>
