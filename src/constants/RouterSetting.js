@@ -52,6 +52,7 @@ import SendRedPacket from '../page/SendRedPacketPage'
 import ViewpageDemo from '../page/ViewpageDemoPage'
 import InstructionsPage from "../page/InstructionsPage"
 import OccupationSelectionPage from "../page/OccupationSelectionPage"
+import BigRedPacketSimplePage from "../page/BigRedPacketSimplePage";
 import RpMonthDetailRecord from "../page/RpMonthDetailRecord"
 import NewBindBankCard from "../page/NewBindBankCardPage"
 import NewUserInfoCertify from "../page/NewUserInfoCertifyPage"
@@ -86,6 +87,7 @@ const RouterSetting = {
     payment: {screen: Payment},
     cardPack: {screen: CardPack},
     bigRedPacket: {screen: BigRedPacket},
+    bigRedPacketSimple: {screen: BigRedPacketSimplePage},
     redPacketSquare: {screen: RedPacketSquare},
     receiveRedPacket: {screen: ReceiveRedPacket},
     payCode: {screen: PayCode},
@@ -110,10 +112,10 @@ const RouterSetting = {
     rpTitleStyle: {screen: RpTitleStylePage},
     lottieDemo: {screen: LottieDemo},
     viewpageDemo: {screen: ViewpageDemo},
-    occupationSelection: {screen:OccupationSelectionPage},
-    rpMonthDetailRecord: {screen:RpMonthDetailRecord},
-    newBindBankCard: {screen:NewBindBankCard},
-    userInfoCerfity: {screen:NewUserInfoCertify}
+    rpMonthDetailRecord: {screen: RpMonthDetailRecord},
+    newBindBankCard: {screen: NewBindBankCard},
+    userInfoCerfity: {screen: NewUserInfoCertify},
+    occupationSelection: {screen: OccupationSelectionPage}
 }
 
 export default RouterSetting

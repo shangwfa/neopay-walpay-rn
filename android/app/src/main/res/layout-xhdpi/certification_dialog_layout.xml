@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_21dp"
             android:gravity="center"
-            android:text="为了您的账户安全，\n 实名认证用户才可以使用支付转账等功能。\n请添加银行卡完成实名认证"
+            android:text="为了您的账户安全，\n 实名认证用户才可以使用支付等功能。\n请添加银行卡完成实名认证"
             android:textColor="@color/common_black"
             android:textSize="@dimen/size_13sp" />
 

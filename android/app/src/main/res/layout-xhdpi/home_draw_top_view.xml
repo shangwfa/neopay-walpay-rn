@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_340dp"
+        android:background="@color/background_gray"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_158dp"
+            android:background="@mipmap/img_home_draw_bg">
+
+            <LinearLayout
+                android:id="@+id/home_avatar_container_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15dp"
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                tools:ignore="RtlHardcoded">
+
+                <ImageView
+                    android:id="@+id/home_avatar_iv"
+                    android:layout_width="@dimen/size_38dp"
+                    android:src="@mipmap/img_default_avater"
+                    android:layout_height="@dimen/size_38dp"
+                    android:layout_marginLeft="@dimen/size_12dp"
+                    android:layout_marginStart="@dimen/size_12dp"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/home_avatar_des_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_17sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_103dp"
+            android:layout_marginLeft="@dimen/size_12dp"
+            android:layout_marginRight="@dimen/size_12dp"
+            android:layout_marginTop="-82dp"
+            android:background="@mipmap/img_home_draw_white_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/home_draw_big_red_packet_ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_50dp"
+                    android:layout_height="@dimen/size_50dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_draw_red_packet" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="大红包"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_draw_recharge_ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_50dp"
+                    android:layout_height="@dimen/size_50dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_recharge" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="手机充值"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_152dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/home_draw_loans_ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="员工贷款"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_8dp"
+                        android:text="快速低息"
+                        android:textColor="#999"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="@dimen/size_20dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/img_home_draw_loans" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/size_1dp"
+                android:layout_height="match_parent"
+                android:background="#EEEEEE" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/home_draw_seasons_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    tools:ignore="NestedWeights">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="四季严选"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_8dp"
+                            android:text="新鲜到家"
+                            android:textColor="#999"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="44dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginStart="40dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/img_home_draw_seasons" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE" />
+
+                <LinearLayout
+                    android:id="@+id/home_draw_balance_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="余额"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_8dp"
+                            android:text="我的资产"
+                            android:textColor="#999"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginStart="40dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/img_home_draw_balance" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

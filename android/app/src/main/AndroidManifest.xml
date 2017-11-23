@@ -62,7 +62,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- scheme://host:port/path?-->s
+                <!-- scheme://host:port/path?-->
                 <data
                     android:host="www.baidu.com"
                     android:scheme="http" />
