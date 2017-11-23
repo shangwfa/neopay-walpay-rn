@@ -63,6 +63,7 @@ const RpDetailHeader = props => {
             width: 100,
             height:60,
             marginRight:10,
+            resizeMode:'contain'
         },
         from_value: {
             marginTop:30,
@@ -91,7 +92,7 @@ const RpDetailHeader = props => {
                 <View style={{flex:1}} />
                 <Text style={styles.remark_value}>{remarkValue}</Text>
                 <View style={{flex:1,backgroundColor:'transparent'}}>
-                    <Image style = {styles.maxImg} source = {{uri:imgIconUrl}} ></Image>
+                    <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
                 </View>
 
             </View>
