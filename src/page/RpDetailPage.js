@@ -93,11 +93,11 @@ class RpDetailPage extends BasePage {
                     textColor={colors.white}
                     rightTextColor={colors.white}
                     title='红包详情'/>
-                <RpDetailHeader imgIconUrl={this.state.dataDetail.imgUrl}
+                <RpDetailHeader imgIconUrl={this.state.dataDetail.bossAvatarUrl}
                                 amountValue={this.state.dataDetail.luckyMoney}
                                 fromValue={this.state.dataDetail.bossName}
                                 remarkValue={this.state.dataDetail.message}
-                                stateValue={this.state.dataDetail.state}
+                                stateValue={this.state.dataDetail.redPacketReceiveStatusText}
                                 isMax = {this.state.dataDetail.bestLuckyBool}/>
                 <View style = {styles.mid_view}>
                     <Text style = {styles.num_text}>{this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>

@@ -16,7 +16,7 @@ class RedPacketRecordCell extends Component {
 
     static defaultProps = {
         cellType:true,
-
+        isShowBtn:true
     };
 
     constructor(props){
@@ -42,20 +42,27 @@ class RedPacketRecordCell extends Component {
                         </Text>
                     </View>
                     <View style={{flex:1}}/>
-                    <View style={styles.bottomBtnView}>
-                        <TouchableWithoutFeedback onPress={()=>this.detailBtnClicked()}>
-                        <View style={styles.bottomBtn}>
-                            <Text style={styles.bottomBtnText}>
-                                {this.props.cellType?'收到大红包明细':'发出大红包明细'}
-                            </Text>
-                        </View>
-                        </TouchableWithoutFeedback>
-                    </View>
+                    {this.renderView()}
                 </Image>
             </View>
         );
     }
 
+    renderView=()=>{
+        if(this.props.isShowBtn){
+            return  <View style={styles.bottomBtnView}>
+                <TouchableWithoutFeedback onPress={()=>this.detailBtnClicked()}>
+                    <View style={styles.bottomBtn}>
+                        <Text style={styles.bottomBtnText}>
+                            {this.props.cellType?'收到大红包明细':'发出大红包明细'}
+                        </Text>
+                    </View>
+                </TouchableWithoutFeedback>
+            </View>
+        }else {
+            return null;
+        }
+    }
     detailBtnClicked=()=>{
         if(this.props.cellType){
             nav.navigate(RouterPaths.RED_PACKET_RECORD_LIST,{QueryType:2})
@@ -104,6 +111,7 @@ const styles = StyleSheet.create({
     bottomBtnView:{
         alignItems:'center',
         marginBottom:28*sizeRatio,
+
     },
     bottomBtn:{
         height:28*sizeRatio,

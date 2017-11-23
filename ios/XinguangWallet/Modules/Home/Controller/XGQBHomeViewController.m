@@ -151,8 +151,11 @@
 -(void)registerID
 
 {
-    XGQBIDRegisterTableViewController *registerVC = [[XGQBIDRegisterTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
-    [self.navigationController pushViewController:registerVC animated:YES];
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"userInfoCerfity";
+    [self.navigationController pushViewController:RNVC animated:YES];
+//    XGQBIDRegisterTableViewController *registerVC = [[XGQBIDRegisterTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
+//    [self.navigationController pushViewController:registerVC animated:YES];
 }
 
 @end

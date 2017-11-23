@@ -41,29 +41,6 @@ class BankCardListPage extends BasePage {
         });
     };
 
-    _onRefresh = () => {
-        this._handleRefresh();
-    };
-
-    _onLoadMore = (pageSize) => {
-        let params = {
-            pageSize: pageSize
-        };
-        ApiManager.geUserBankCardList(params, (data) => {
-            if (data) {
-                let allData = this.state.dataSource;
-                allData.push(...data);
-                this.setState({
-                    dataSource: allData,
-                });
-            } else {
-                this.setState({
-                    footerStatus: RefreshStatus.END
-                });
-            }
-        });
-    };
-
     _renderItem = ({item}) => {
         return <BankCardCell imgIconUrl={item.iconUrl}
                              bankNameValue={item.bankName}
@@ -85,17 +62,14 @@ class BankCardListPage extends BasePage {
     }
 
     render() {
-        if(this.state.dataSource)
+        if(this.state.dataSource.length > 0)
         {
             return (
                 <View style={styles.container}>
                     <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:20, height:20}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
-                    <RefreshList
+                    <FlatList
                         data={this.state.dataSource}
                         renderItem={this._renderItem}
-                        onRefresh={this._onRefresh}
-                        onLoadMore={this._onLoadMore}
-                        footerStatus={this.state.footerStatus}
                     />
 
                 </View>
