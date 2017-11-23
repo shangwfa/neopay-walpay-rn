@@ -9,12 +9,10 @@
 #import "XGQBAPPRootViewController.h"
 #import "UIView+Transform.h"
 
-
 @interface XGQBAPPRootViewController ()
 
 @property (nonatomic,strong) UIPanGestureRecognizer *panToRightGes;
 @property (nonatomic,weak) UIView *blockView;
-
 @end
 
 @implementation XGQBAPPRootViewController
@@ -44,25 +42,53 @@
     rootVC.sideView = (XGQBSideView*)sideVC.view;
     
     //增加右划手势
-    UIPanGestureRecognizer *panToRight = [[UIPanGestureRecognizer alloc]initWithTarget:rootVC action:@selector(panToRight:)];
-    
-    rootVC.panToRightGes = panToRight;
-    
-    [rootVC.rootNAV.view addGestureRecognizer:panToRight];
-    
-    [kNotificationCenter addObserver:rootVC selector:@selector(removePanToRightGes) name:kNotificationNavPushToSecondLevel object:nil];
-    [kNotificationCenter addObserver:rootVC selector:@selector(addPanToRightGes) name:kNotificationNavPopToFirstLevel object:nil];
-
+    [rootVC addGesture];
     //增加蒙版
-    UIView *blockView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    blockView.backgroundColor = [UIColor colorWithHexString:@"474747"];
-    blockView.alpha=0;
-    rootVC.blockView=blockView;
-    [rootVC.rootNAV.view addSubview:blockView];
+    [rootVC addBlockView];
     
     return rootVC;
 }
 
+-(void)addGesture{
+    UIPanGestureRecognizer *panToRight = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panToRight:)];
+    self.panToRightGes = panToRight;
+    
+    [self.rootNAV.view addGestureRecognizer:panToRight];
+    
+    [kNotificationCenter addObserver:self selector:@selector(removePanToRightGes) name:kNotificationNavPushToSecondLevel object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(addPanToRightGes) name:kNotificationNavPopToFirstLevel object:nil];
+}
+
+-(void)addBlockView{
+    UIView *blockView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    blockView.backgroundColor = [UIColor colorWithHexString:@"000000"];
+    blockView.alpha=0;
+    self.blockView=blockView;
+    [self.rootNAV.view addSubview:blockView];
+    
+    UITapGestureRecognizer *tapOnBlockView = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapOnBlockView)];
+    [blockView addGestureRecognizer:tapOnBlockView];
+    
+}
+
+-(void)closeSideView
+{
+    [UIView animateWithDuration:0.2f animations:^{
+        _rootNAV.view.transform=CGAffineTransformMakeTranslation(0, 0);;
+        _sideView.tx = _rootNAV.view.tx/2.0;
+        _blockView.alpha=0.0;
+    }];
+}
+
+
+-(void)tapOnBlockView
+{
+    [UIView animateWithDuration:0.2f animations:^{
+        _rootNAV.view.transform=CGAffineTransformMakeTranslation(0, 0);;
+        _sideView.tx = _rootNAV.view.tx/2.0;
+        _blockView.alpha=0.0;
+    }];
+}
 
 -(void)removePanToRightGes
 {
@@ -99,7 +125,7 @@
     // 3. 让平移的值不要累加
     [sender setTranslation:CGPointZero inView:sender.view];
     // 4. 获取最右边的范围
-    CGFloat rightScopeTransformMaxX = (CGFloat)kScreenWidth*0.66;
+    CGFloat rightScopeTransformMaxX = (CGFloat)kScreenWidth*kSideViewRatio;
     
     if (sender.view.tx > rightScopeTransformMaxX) {
         // 当移动到右边极限时
@@ -115,7 +141,7 @@
     // 拖拽结束时
     if (sender.state == UIGestureRecognizerStateEnded) {
         [UIView animateWithDuration:0.2f animations:^{
-            if (sender.view.left > kScreenWidth * 0.33) {
+            if (sender.view.left > kScreenWidth * kSideViewRatio*0.5) {
                 sender.view.tx = rightScopeTransformMaxX;
                 _sideView.tx = sender.view.tx/2.0;
                 _blockView.alpha=0.7;

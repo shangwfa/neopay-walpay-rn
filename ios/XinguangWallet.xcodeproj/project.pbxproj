@@ -37,6 +37,9 @@
 		42B98A3A1FA2FC5B00850FDB /* XGQBAccountExistAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A391FA2FC5B00850FDB /* XGQBAccountExistAlertView.m */; };
 		42BCB5C61FC66439002B4FBF /* XGQBSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */; };
 		42BCB5CA1FC66955002B4FBF /* XGQBAPPRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BCB5C91FC66955002B4FBF /* XGQBAPPRootViewController.m */; };
+		42BCB5CF1FC69890002B4FBF /* XGQBSideHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BCB5CE1FC69890002B4FBF /* XGQBSideHeaderView.m */; };
+		42BCB5D21FC698A1002B4FBF /* XGQBSideTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BCB5D11FC698A1002B4FBF /* XGQBSideTableView.m */; };
+		42BCB5D51FC6ABD2002B4FBF /* XGQBSideTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BCB5D41FC6ABD2002B4FBF /* XGQBSideTableViewCell.m */; };
 		42C0583D1F87771800DE73B6 /* XGQBCountTimeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
@@ -162,6 +165,12 @@
 		42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideViewController.m; sourceTree = "<group>"; };
 		42BCB5C81FC66955002B4FBF /* XGQBAPPRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBAPPRootViewController.h; sourceTree = "<group>"; };
 		42BCB5C91FC66955002B4FBF /* XGQBAPPRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBAPPRootViewController.m; sourceTree = "<group>"; };
+		42BCB5CD1FC69890002B4FBF /* XGQBSideHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSideHeaderView.h; sourceTree = "<group>"; };
+		42BCB5CE1FC69890002B4FBF /* XGQBSideHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideHeaderView.m; sourceTree = "<group>"; };
+		42BCB5D01FC698A1002B4FBF /* XGQBSideTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSideTableView.h; sourceTree = "<group>"; };
+		42BCB5D11FC698A1002B4FBF /* XGQBSideTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideTableView.m; sourceTree = "<group>"; };
+		42BCB5D31FC6ABD2002B4FBF /* XGQBSideTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBSideTableViewCell.h; sourceTree = "<group>"; };
+		42BCB5D41FC6ABD2002B4FBF /* XGQBSideTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideTableViewCell.m; sourceTree = "<group>"; };
 		42C0583B1F87771700DE73B6 /* XGQBCountTimeBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCountTimeBtn.m; sourceTree = "<group>"; };
 		42C0583C1F87771700DE73B6 /* XGQBCountTimeBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCountTimeBtn.h; sourceTree = "<group>"; };
 		42D44A9F1F8CCF060064A32D /* XGQBRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNViewController.h; sourceTree = "<group>"; };
@@ -306,8 +315,6 @@
 				6AF78B8F1F8B617E002EAAB2 /* XGQBHomeCellView.m */,
 				6AF78B911F8B76CD002EAAB2 /* XGQBHomeBannerView.h */,
 				6AF78B921F8B76CD002EAAB2 /* XGQBHomeBannerView.m */,
-				42655C661FBAC84F00E5AB73 /* XGQBSideView.h */,
-				42655C671FBAC84F00E5AB73 /* XGQBSideView.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -438,8 +445,8 @@
 		42BCB5C21FC66425002B4FBF /* Side */ = {
 			isa = PBXGroup;
 			children = (
-				42BCB5C41FC66439002B4FBF /* XGQBSideViewController.h */,
-				42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */,
+				42BCB5CC1FC696E0002B4FBF /* Controller */,
+				42BCB5CB1FC696C6002B4FBF /* View */,
 			);
 			path = Side;
 			sourceTree = "<group>";
@@ -451,6 +458,30 @@
 				42BCB5C91FC66955002B4FBF /* XGQBAPPRootViewController.m */,
 			);
 			path = APPRootViewController;
+			sourceTree = "<group>";
+		};
+		42BCB5CB1FC696C6002B4FBF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				42655C661FBAC84F00E5AB73 /* XGQBSideView.h */,
+				42655C671FBAC84F00E5AB73 /* XGQBSideView.m */,
+				42BCB5CD1FC69890002B4FBF /* XGQBSideHeaderView.h */,
+				42BCB5CE1FC69890002B4FBF /* XGQBSideHeaderView.m */,
+				42BCB5D01FC698A1002B4FBF /* XGQBSideTableView.h */,
+				42BCB5D11FC698A1002B4FBF /* XGQBSideTableView.m */,
+				42BCB5D31FC6ABD2002B4FBF /* XGQBSideTableViewCell.h */,
+				42BCB5D41FC6ABD2002B4FBF /* XGQBSideTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		42BCB5CC1FC696E0002B4FBF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				42BCB5C41FC66439002B4FBF /* XGQBSideViewController.h */,
+				42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		6A01A0171F7A2AC20059D6D3 /* NetworkingConfig */ = {
@@ -1162,6 +1193,7 @@
 				42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */,
 				4284C6A61FC59AAF002AA0E3 /* XGQBActiRedPView.m in Sources */,
 				42B98A371FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m in Sources */,
+				42BCB5CF1FC69890002B4FBF /* XGQBSideHeaderView.m in Sources */,
 				428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */,
 				6AD95B341F7D064100BFF4DA /* BankCardCoreService.m in Sources */,
 				42DD31DE1F8C748D00B435EA /* XGQBHomeBanner.m in Sources */,
@@ -1181,6 +1213,7 @@
 				6A8758E21F7A2D0300F480EF /* GVUserDefaults+PropertyList.m in Sources */,
 				6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */,
 				6AF9E47A1F78E9D4005E901C /* XGQBRootViewController.m in Sources */,
+				42BCB5D21FC698A1002B4FBF /* XGQBSideTableView.m in Sources */,
 				4284C6A51FC59AAF002AA0E3 /* XGQBActiMessTVC.m in Sources */,
 				426BD05C1FC5124000F49282 /* XGQBRNEventEmitter.m in Sources */,
 				42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */,
@@ -1196,6 +1229,7 @@
 				42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */,
 				6AF78B931F8B76CD002EAAB2 /* XGQBHomeBannerView.m in Sources */,
 				6A4352011F7E22E7009971FD /* YYFPSLabel.m in Sources */,
+				42BCB5D51FC6ABD2002B4FBF /* XGQBSideTableViewCell.m in Sources */,
 				42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */,
 				4210AF401F95CE6D008132C5 /* XGQBCommissionViewController.m in Sources */,
 				6AF9E4371F78E039005E901C /* AppDelegate.m in Sources */,

@@ -23,12 +23,6 @@
 #import "XGQBRootWebViewController.h"
 #import "XGQBAppManager.h"
 
-//#import "PPNetworkHelper.h"
-//#import "ShareManager.h"
-//#import "UserManager.h"
-//#import "IMManager.h"
-//#import "UIButton+XYButton.h"
-
 //工具类
 #import "IphoneDevice.h"
 #import "SystemMethods.h"
@@ -38,7 +32,6 @@
 
 //第三方
 #import <YYKit.h>
-//#import <JSONKit.h>
 #import "SVProgressHUD.h"
 #import <Masonry.h>
 #import <SDWebImage/UIImageView+WebCache.h>

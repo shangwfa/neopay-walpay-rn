@@ -24,4 +24,6 @@
 
 +(instancetype)setupSideVCAndNavVC;
 
+-(void)closeSideView;
+
 @end

@@ -15,6 +15,8 @@
 
 //默认间距
 #define kNormalSpace 12.0f
+//左侧菜单视图比例
+#define kSideViewRatio 305/375.0
 
 #pragma mark -  颜色区
 //主题色 导航栏颜色
