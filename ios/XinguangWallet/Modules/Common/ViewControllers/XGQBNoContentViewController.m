@@ -23,6 +23,7 @@
     UIImageView *noContentImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"kong"]];
     [self.view addSubview:noContentImage];
     
+    
     UILabel *desLabel = [[UILabel alloc]init];
     desLabel.text = @"暂时没有内容哦！去其他页面看看~";
     desLabel.font = kSYSTEMFONT(15.0);
@@ -44,6 +45,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden=NO;
 }
 
 /*

@@ -10,6 +10,7 @@
 #import "XGQBAPPBootViewController.h"
 #import "XGQBLoginViewController.h"
 #import "XGQBRootNavigationController.h"
+#import "XGQBAPPRootViewController.h"
 
 
 @implementation AppDelegate (AppService)
@@ -58,7 +59,7 @@
     [SVProgressHUD setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
     [SVProgressHUD setForegroundColor:kWhiteColor];
     [SVProgressHUD setMinimumDismissTimeInterval:2];
-//    [SVProgressHUD setInfoImage:nil];
+    //    [SVProgressHUD setInfoImage:nil];
     //    [SVProgressHUD setImageViewSize:CGSizeMake(10, 10)];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
 }
@@ -82,14 +83,8 @@
             kPostNotification(kNotificationLoginStateChange, @NO);
         }else{
             //有token,自动进入主页
-            //创建左划视图
-            XGQBSideView *sideView = [[XGQBSideView alloc]initWithFrame:CGRectMake(-kScreenWidth*0.33, 0, kScreenWidth*0.66, kScreenHeight)];
-            [self.window addSubview:sideView];
-            self.sideView = sideView;
+            [self setupAndJumpIntoMainInterface];
             
-            //创建tabbarVC
-            self.mainTabBarVC = [XGQBMainTabBarViewController new];
-            self.window.rootViewController = self.mainTabBarVC;
         }
     }
 }
@@ -99,27 +94,10 @@
     BOOL loginSuccess = [notification.object boolValue];
     
     if (loginSuccess) {
-        self.mainTabBarVC = [XGQBMainTabBarViewController new];
         
-        XGQBSideView *sideView = [[XGQBSideView alloc]initWithFrame:CGRectMake(-kScreenWidth*0.33, 0, kScreenWidth*0.66, kScreenHeight)];
-        [self.window addSubview:sideView];
-        self.sideView = sideView;
-        
-        //自定义转场动画
-        CATransition *anima = [CATransition animation];
-        anima.type = @"fade";//设置动画的类型
-        anima.subtype = kCATransitionFromRight; //设置动画的方向
-        anima.duration = 0.3f;
-        
-        self.window.rootViewController = self.mainTabBarVC;
-        [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
-        
+        [self setupAndJumpIntoMainInterface];
     }else{
-        //加载登录页面
-        self.mainTabBarVC = nil;
-        if (self.sideView) {
-            [self.sideView removeFromSuperview];
-        }
+
         XGQBRootNavigationController *loginNavi = [[XGQBRootNavigationController alloc]initWithRootViewController:[XGQBLoginViewController new] ];
    
         CATransition *anima = [CATransition animation];
@@ -132,6 +110,20 @@
         [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
     }
    
+}
+
+-(void)setupAndJumpIntoMainInterface{
+    
+    XGQBAPPRootViewController *appRootVC = [XGQBAPPRootViewController setupSideVCAndNavVC];
+    self.window.rootViewController = appRootVC;
+    
+    //自定义转场动画
+    CATransition *anima = [CATransition animation];
+    anima.type = @"fade";//设置动画的类型
+    anima.subtype = kCATransitionFromRight; //设置动画的方向
+    anima.duration = 0.3f;
+    
+    [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
 }
 
 
