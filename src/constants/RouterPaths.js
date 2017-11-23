@@ -36,7 +36,9 @@ export const RouterPaths = {
     CONTACTS_PAGE: 'contacts',
     RED_PACKET_RECORD_LIST: 'rpRecordList',
     TOUUP_RECORD_LIST:'topupRecordList',
-    RED_PACKET_RECEIVER:'redPacketReceiver'
+    RED_PACKET_RECEIVER:'redPacketReceiver',
+    RP_MONTH_DETAILRECORD:'rpMonthDetailRecord',
+    NEW_BIND_BANKCARD:'newBindBankCard',
 };
 
 

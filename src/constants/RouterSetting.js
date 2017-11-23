@@ -52,6 +52,9 @@ import SendRedPacket from '../page/SendRedPacketPage'
 import ViewpageDemo from '../page/ViewpageDemoPage'
 import InstructionsPage from "../page/InstructionsPage"
 import OccupationSelectionPage from "../page/OccupationSelectionPage"
+import RpMonthDetailRecord from "../page/RpMonthDetailRecord"
+import NewBindBankCard from "../page/NewBindBankCardPage"
+import NewUserInfoCertify from "../page/NewUserInfoCertifyPage"
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -107,7 +110,10 @@ const RouterSetting = {
     rpTitleStyle: {screen: RpTitleStylePage},
     lottieDemo: {screen: LottieDemo},
     viewpageDemo: {screen: ViewpageDemo},
-    occupationSelection: {screen:OccupationSelectionPage}
+    occupationSelection: {screen:OccupationSelectionPage},
+    rpMonthDetailRecord: {screen:RpMonthDetailRecord},
+    newBindBankCard: {screen:NewBindBankCard},
+    userInfoCerfity: {screen:NewUserInfoCertify}
 }
 
 export default RouterSetting

@@ -20,8 +20,6 @@ import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
 
-const url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507787767410&di=eac401274fbb9b107a0bd65a9b71e37a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dc495bd1722381f308a1485eac168267d%2Fe824b899a9014c0834bca78a007b02087bf4f41e.jpg'
-
 class RpRecordListPage extends BasePage {
 
     constructor(props) {
@@ -74,14 +72,15 @@ class RpRecordListPage extends BasePage {
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.title} middleBottomValue={item.tradeTime}
                                rightUpValue={item.amount} rightBottomValue={item.status}
-                               isLine={true}/>
+                               isLine={true}
+                               imgIconUrl={item.bestFlag==1?require("../res/img/rp_max_num.png"):' '}/>
             </View>
         )
 
     }
     renderSectionHeader = (item) => {
-        if (item.isShowTime) {
-            return <SectionHeader title={item.tradeTime} value='查看月红包'/>
+        if (item.displayDate) {
+            return <SectionHeader title={item.monthCode} value='查看月红包' onPress ={()=>this.pushMontnDetailPage(item)}/>
         }
     }
 
@@ -101,6 +100,10 @@ class RpRecordListPage extends BasePage {
                 />
             </View>
         );
+    }
+
+    pushMontnDetailPage =(item)=> {
+        this.props.navigation.navigate(RouterPaths.RP_MONTH_DETAILRECORD,item)
     }
 
     getTitle=()=>{
