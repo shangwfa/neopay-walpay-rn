@@ -20,7 +20,6 @@
 #import "AppDelegate+PushService.h"
 #import "XGQBRootViewController.h"
 #import "XGQBRootNavigationController.h"
-#import "XGQBRootWebViewController.h"
 #import "XGQBAppManager.h"
 
 //工具类

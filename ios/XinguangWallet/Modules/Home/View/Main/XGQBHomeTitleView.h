@@ -7,17 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XGQBHomeTitleBtn.h"
+
+@class XGQBHomeTitleBtn;
 
 @interface XGQBHomeTitleView : UIView
 
-@property (nonatomic,strong) UIButton *calenderBtn;
-
-@property (nonatomic,strong) XGQBHomeTitleBtn *scanBtn;
-
-@property (nonatomic,strong) XGQBHomeTitleBtn *codeBtn;
-
-@property (nonatomic,strong) XGQBHomeTitleBtn *accountBtn;
-
+@property(nonatomic,weak) XGQBHomeTitleBtn *redPacketBtn;
+@property (nonatomic,weak) XGQBHomeTitleBtn *phoneTopUpBtn;
 
 @end

@@ -7,75 +7,144 @@
 //
 
 #import "XGQBHomeCellView.h"
-#import "XGQBHomeCellBtn.h"
 
-@interface XGQBHomeCellView()
+#import "XGQBHomeCellCVFlowLayout.h"
 
-@property (nonatomic, strong)NSArray *homeCellNameArray;
-@property (nonatomic, strong)NSArray *homeCellImgArray;
+@interface XGQBHomeCellView()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
 @end
 
+static NSString *const cellId = @"cellId";
 
 @implementation XGQBHomeCellView
 
-
--(NSArray *)homeCellNameArray
-{
-    if (!_homeCellNameArray) {
-        _homeCellNameArray =@[@"卡包",@"大红包",@"手机充值",@"四季严选",@"天下食集",@"快递跑腿",@"员工贷款",@"信用卡申请"];
-    }
-    return _homeCellNameArray;
-}
-
--(NSArray *)homeCellImgArray
-{
-    if (!_homeCellImgArray) {
-        _homeCellImgArray = @[@"sy_kabao",@"sy_dahongbao",@"sy_chongzhi",@"sy_siji",@"sy_shiji",@"sy_paotui",@"sy_daikuan",@"sy_xinyongka"];
-    }
-    return _homeCellImgArray;
-}
-
 -(instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, kScreenWidth, kScreenWidth*0.584)];
+    self = [super initWithFrame:frame];
     
-    if (self) {
-        self.backgroundColor = kWhiteColor;
-        
-        for (int i=0; i<self.homeCellNameArray.count; i++) {
-            
-            XGQBHomeCellBtn *homeCellBtn = [XGQBHomeCellBtn buttonWithType:UIButtonTypeCustom];
-            [homeCellBtn setImage:[UIImage imageNamed:self.homeCellImgArray[i]] forState:UIControlStateNormal];
-            [homeCellBtn setTitle:self.homeCellNameArray[i] forState:UIControlStateNormal];
-            [self addSubview:homeCellBtn];
-            
-            [homeCellBtn addTarget:self action:@selector(homeCellBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-            
-            kWeakSelf(self);
-            [homeCellBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(weakself.width/4.0, weakself.height/2.0));
-                
-                if (i<4) {
-                    make.top.equalTo(weakself);
-                    make.left.mas_equalTo(weakself).with.offset(kScreenWidth/4.0*i);
-                }else{
-                    make.top.equalTo(weakself).with.offset(weakself.height/2.0);
-                    make.left.mas_equalTo(weakself).with.offset(kScreenWidth/4.0*(i-4));
-                }
-                
-            }];
-//            NSLog(@"homecellbtnframe:%@",NSStringFromCGRect(homeCellBtn.frame));
-        }
+    XGQBHomeCellCVFlowLayout *layout = [[XGQBHomeCellCVFlowLayout alloc]init];
 
-    }
-
+    UICollectionView *cellCollectionV = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)collectionViewLayout:layout];
+    
+    cellCollectionV.dataSource = self;
+    cellCollectionV.delegate = self;
+    cellCollectionV.backgroundColor = kViewBgColor;
+    
+    [self addSubview:cellCollectionV];
+    
+    [cellCollectionV registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellId];
+    
     return self;
+    
 }
 
--(void)homeCellBtnClicked:(XGQBHomeCellBtn*)btn
+#pragma mark - UICollectionViewDataSource
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    cell.contentView.backgroundColor = kWhiteColor;
+
+    if (indexPath.section==0&&indexPath.row==0) {
+        [cell.contentView addSubview:[self firstCell]];
+    }else if (indexPath.section==0&&indexPath.row==1){
+        [cell.contentView addSubview:[self secondAndThirdCellWithTitle:@"四季严选" des:@"新鲜到家" andImageNamed:@"sy_siji"]];
+    }else if (indexPath.section==0&&indexPath.row==2){
+        [cell.contentView addSubview:[self secondAndThirdCellWithTitle:@"余额" des:@"我的资产" andImageNamed:@"sy_yue6"]];
+    }
+    return cell;
+    
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 3;
+}
+
+
+#pragma mark - 生成cell视图
+-(UIView*)firstCell
 {
-    [self.delegate btnClicked:btn];
+    UIView *firstCell =[[UIView alloc]initWithFrame: CGRectMake(0,0, (kScreenWidth-1)/2.0, 152/375.0*kScreenWidth)];
+    
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.text = @"员工贷款";
+    titleLabel.font = kSYSTEMFONT(14.0);
+    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    [firstCell addSubview:titleLabel];
+    
+    UILabel *desLabel = [[UILabel alloc]init];
+    desLabel.text = @"快速低息";
+    desLabel.font = kSYSTEMFONT(13.0);
+    desLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    [firstCell addSubview:desLabel];
+    
+    UIImageView *icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_daikuan5"]];
+    [firstCell addSubview:icon];
+    
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(firstCell).with.offset(28);
+        make.centerX.equalTo(firstCell);
+    }];
+    
+    [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLabel.mas_bottom).with.offset(8);
+        make.centerX.equalTo(firstCell);
+    }];
+    
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(38.5, 49));
+        make.top.equalTo(desLabel.mas_bottom).with.offset(20);
+        make.centerX.equalTo(firstCell);
+    }];
+    
+    return firstCell;
+}
+
+-(UIView*)secondAndThirdCellWithTitle:(NSString*)title des:(NSString*)des andImageNamed:(NSString*)imageName
+{
+    UIView *cell = [[UIView alloc]initWithFrame: CGRectMake(0,0, (kScreenWidth-1)/2.0, (152/375.0*kScreenWidth-1)/2.0)];
+    
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.text = title;
+    titleLabel.font = kSYSTEMFONT(14.0);
+    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    [cell addSubview:titleLabel];
+    
+    UILabel *desLabel = [[UILabel alloc]init];
+    desLabel.text = des;
+    desLabel.font = kSYSTEMFONT(13.0);
+    desLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    [cell addSubview:desLabel];
+    
+    UIImageView *icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
+    [cell addSubview:icon];
+    
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cell).with.offset(21);
+        make.left.equalTo(cell).with.offset(30);
+    }];
+    
+    [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLabel.mas_bottom).with.offset(8);
+        make.left.equalTo(titleLabel);
+    }];
+    
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(27, 38.5));
+        make.right.equalTo(cell).with.offset(-34);
+        make.centerY.equalTo(cell);
+    }];
+    
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"高亮了第%ld个Cell",(long)indexPath.row);
+    return YES;
 }
 
 @end

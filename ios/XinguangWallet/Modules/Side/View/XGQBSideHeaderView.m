@@ -45,6 +45,7 @@
     UIButton *regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [regBtn setImage:[UIImage imageNamed:@"wd_renzhneg"] forState:UIControlStateNormal];
     [self addSubview:regBtn];
+    _regBtn=regBtn;
     
     kWeakSelf(self);
     //添加约束

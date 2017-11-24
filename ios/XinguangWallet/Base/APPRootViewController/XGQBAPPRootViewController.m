@@ -122,6 +122,7 @@
     // 2. 让当前视图进行平移
     sender.view.transform = CGAffineTransformTranslate(sender.view.transform, translation.x, 0);
     _sideView.tx = sender.view.tx/2.0;
+    _blockView.alpha=sender.view.tx*1.0/kScreenWidth;
     // 3. 让平移的值不要累加
     [sender setTranslation:CGPointZero inView:sender.view];
     // 4. 获取最右边的范围
@@ -132,10 +133,12 @@
         // 限制最右边的范围
         sender.view.transform = CGAffineTransformMakeTranslation(rightScopeTransformMaxX, 0);
         _sideView.tx = sender.view.tx/2.0;
+        _blockView.alpha=sender.view.tx*1.0/kScreenWidth;
     } else if (sender.view.tx < 0.0) {
         // 限制最左边的范围
         sender.view.transform = CGAffineTransformMakeTranslation(0, 0);
         _sideView.tx = sender.view.tx/2.0;
+        _blockView.alpha=sender.view.tx*1.0/kScreenWidth;
     }
     
     // 拖拽结束时
@@ -144,8 +147,7 @@
             if (sender.view.left > kScreenWidth * kSideViewRatio*0.5) {
                 sender.view.tx = rightScopeTransformMaxX;
                 _sideView.tx = sender.view.tx/2.0;
-                _blockView.alpha=0.7;
-                
+                _blockView.alpha=sender.view.tx*1.0/kScreenWidth;
             } else {
                 sender.view.transform = CGAffineTransformIdentity;
                 _sideView.tx = sender.view.tx/2.0;

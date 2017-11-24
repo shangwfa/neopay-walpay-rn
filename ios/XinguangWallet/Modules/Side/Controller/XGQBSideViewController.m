@@ -28,6 +28,8 @@
     XGQBSideView *sideView =[[XGQBSideView alloc]initWithFrame:CGRectMake(-kScreenWidth*kSideViewRatio*0.5, 0, kScreenWidth*kSideViewRatio, kScreenHeight)];
     self.view = sideView;
     
+    [sideView.headerView.regBtn addTarget:self action:@selector(goRegBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
     sideView.tableView.delegate = self;
     sideView.tableView.dataSource = self;
     
@@ -90,12 +92,15 @@
 }
 
 #pragma mark - 处理按钮点击
-//-(void)goRegBtnClicked
-//{
-//    XGQBIDRegisterTableViewController *idRegVC = [[XGQBIDRegisterTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
-//    [self.navigationController pushViewController:idRegVC animated:YES];
-//}
-//
+-(void)goRegBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType=@"userInfoCerfity";
+    XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)self.parentViewController;
+    [rootVC.rootNAV pushViewController:RNVC animated:YES];
+    [rootVC closeSideView];
+}
+
 //-(void)tableHeaderClicked
 //{
 //    XGQBRNViewController *RNVC = [XGQBRNViewController new];

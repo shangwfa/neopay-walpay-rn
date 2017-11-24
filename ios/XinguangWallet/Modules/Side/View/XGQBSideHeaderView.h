@@ -10,4 +10,6 @@
 
 @interface XGQBSideHeaderView : UIView
 
+@property (nonatomic,weak) UIButton *regBtn;
+
 @end
