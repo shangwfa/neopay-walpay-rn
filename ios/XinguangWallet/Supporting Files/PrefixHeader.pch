@@ -35,6 +35,7 @@
 #import <Masonry.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "IQKeyboardManager.h"
+#import "MJRefresh.h"
 
 //通用视图组件
 #import "XGQBTextField.h"

@@ -12,6 +12,9 @@
 #import "XGQBAPPRootViewController.h"
 #import "XGQBSideTableViewCell.h"
 
+//temp
+#import "XGQBCommissionViewController.h"
+
 @interface XGQBSideViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray *cellItemArray;
@@ -38,14 +41,14 @@
 #pragma mark - 懒加载相关
 -(NSArray *)cellItemArray{
     if (!_cellItemArray) {
-        _cellItemArray = @[@"我的账单",@"我的资产",@"我的银行卡",@"关于我们",@"设置"];
+        _cellItemArray = @[@"我的账单",@"我的资产",@"我的银行卡",@"关于我们",@"设置",@"Commissioning"];
     }
     return _cellItemArray;
 }
 
 -(NSArray *)cellImgArray{
     if (!_cellImgArray) {
-        _cellImgArray = @[@"wd_zhangdan4",@"wd_zichan4",@"wd_yinhangka4",@"wd_guanyu4",@"wd_shezhi4"];
+        _cellImgArray = @[@"wd_zhangdan4",@"wd_zichan4",@"wd_yinhangka4",@"wd_guanyu4",@"wd_shezhi4",@"wd_shezhi4"];
     }
     return _cellImgArray;
 }
@@ -60,7 +63,7 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,6 +88,14 @@
     //设置
     else if (indexPath.section==0&&indexPath.row==4) {
         RNVC.pageType = @"setting";
+    }
+    //跳转调试页面
+    else if (indexPath.section==0 && indexPath.row==5){
+        XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)self.parentViewController;
+        XGQBCommissionViewController *commVC = [XGQBCommissionViewController new];
+        [rootVC.rootNAV pushViewController:commVC animated:YES];
+        [rootVC closeSideView];
+        return;
     }
     XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)self.parentViewController;
     [rootVC.rootNAV pushViewController:RNVC animated:YES];

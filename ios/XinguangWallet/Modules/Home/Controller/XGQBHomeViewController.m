@@ -8,27 +8,30 @@
 
 #import "XGQBHomeViewController.h"
 #import "XGQBLoginViewController.h"
-#import "XGQBHomeTableViewController.h"
 
+#import "XGQBHomeScrollView.h"
 #import "XGQBHomeTitleView.h"
 #import "XGQBHomeCellView.h"
-#import "XGQBHomeTitleBtn.h"
+#import "XGQBHomeTableView.h"
+#import "XGQBHeaderIconView.h"
 
 
 #import "XGQBIDAlertViewController.h"
 #import "XGQBIDAlertTransiton.h"
 
-#import "XGQBIDRegisterTableViewController.h"
 
 #import "XGQBCommissionViewController.h"
 
 #import "XGQBRNViewController.h"
 
+#define titleViewHeight (kScreenWidth*134/375.0)
+#define cellViewHeight (kScreenWidth*152/375.0)
+#define homeNAVHeight 75
 
-@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate>
-
-@property (nonatomic,strong) XGQBHomeTableViewController *homeTableVC;
-
+@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UIScrollViewDelegate>
+@property (nonatomic,weak) XGQBHomeScrollView *homeScrollV;
+@property (nonatomic,weak) UIButton *headerBtn;
+@property (nonatomic,weak) UIView *headerIconView;
 @end
 
 @implementation XGQBHomeViewController
@@ -39,9 +42,6 @@
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
     
-    XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
-    _homeTableVC = homeTableVC;
-
     [self setUpViewComponents];
     [self checkIDStatus];
 
@@ -63,38 +63,42 @@
 #pragma mark - 设置视图组件
 -(void)setUpViewComponents
 {
-    //顶部视图
-    XGQBHomeTitleView *homeTitleView = [[XGQBHomeTitleView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*209/375.0)];
-    [homeTitleView.redPacketBtn addTarget:self action:@selector(redPacketBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [homeTitleView.phoneTopUpBtn addTarget:self action:@selector(phoneTopUpBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:homeTitleView];
+    //顶部背景图
+    UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_beijing8"]];
+    [self.view addSubview:backgroundImg];
     
-    //cell视图
-    XGQBHomeCellView *homeCellView =[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*209/375.0, kScreenWidth, kScreenWidth*152/375.0)];
-    [self.view addSubview:homeCellView];
+    //头像按钮
+    UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    NSString *headerBtnTitle = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
+    [headerBtn setTitle:headerBtnTitle forState:UIControlStateNormal];
+    [headerBtn setImage:[UIImage imageNamed:@"sy_touxiang"] forState:UIControlStateNormal];
+    _headerBtn = headerBtn;
+    [self.view addSubview:headerBtn];
     
-    //tableView视图
-    [self.view addSubview:_homeTableVC.tableView];
+    //顶部缩略图
+    XGQBHeaderIconView *headerIconView = [[XGQBHeaderIconView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 75)];
+    headerIconView.alpha=0;
+    _headerIconView = headerIconView;
+    [self.view addSubview:headerIconView];
+    
+    //滚动视图
+    XGQBHomeScrollView *homeScrollV = [[XGQBHomeScrollView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenHeight-75)];
+    [self.view addSubview:homeScrollV];
+    homeScrollV.delegate = self;
+    _homeScrollV=homeScrollV;
+                                       
     
     kWeakSelf(self);
-    [homeTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*209/375.0));
-        make.top.equalTo(weakself.view);
-        make.left.equalTo(weakself.view);
+    
+    [backgroundImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(weakself.view);
+        make.height.mas_equalTo(178/375.0*kScreenWidth);
     }];
     
-    [homeCellView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*152/375.0));
-        make.top.equalTo(homeTitleView.mas_bottom);
-        make.left.equalTo(weakself.view);
-    }];
-    
-    
-    [_homeTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(weakself.view);
-        make.bottom.equalTo(weakself.view).with.offset(0);
-        make.top.equalTo(homeCellView.mas_bottom);
+    [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 50));
+        make.left.equalTo(weakself.view).with.offset(12);
+        make.top.equalTo(weakself.view).with.offset(30);
     }];
     
     
@@ -151,4 +155,54 @@
     RNVC.pageType = @"phoneTopUp";
     [self.navigationController pushViewController:RNVC animated:YES];
 }
+
+#pragma mark - scrollView Delegate
+
+-(void)scrollViewWillEndDragging:(XGQBHomeScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y < - 65) {
+        [scrollView.homeTableView.mj_header beginRefreshing];
+    }else if(y > 0 && y <= titleViewHeight) {
+        [scrollView titleViewAnimationWithOffsetY:y];
+    }
+}
+
+-(void)scrollViewDidScroll:(XGQBHomeScrollView *)scrollView
+{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y <= 0) {
+        //下滑时保持头部试图位置不变
+        scrollView.homeTitleView.alpha = 1;
+        CGRect newFrame = scrollView.homeTitleView.frame;
+        newFrame.origin.y = y;
+        scrollView.homeTitleView.frame = newFrame;
+        
+        newFrame = scrollView.homeCellView.frame;
+        newFrame.origin.y = y + titleViewHeight;
+        scrollView.homeCellView.frame = newFrame;
+
+        newFrame = scrollView.homeTableView.frame;
+        newFrame.origin.y = y + titleViewHeight+cellViewHeight;
+        scrollView.homeTableView.frame = newFrame;
+
+        //偏移量给到tableview，tableview自己来滑动
+        [scrollView.homeTableView setScrollViewContentOffSetWithPoint:CGPointMake(0, y)];
+    }
+        else if(y < titleViewHeight && y > 0) {
+        CGRect newFrame = scrollView.homeTitleView.frame;
+        newFrame.origin.y = y/2;
+        scrollView.homeTitleView.frame = newFrame;
+
+        //处理透明度
+        CGFloat alpha = (1 - y*2/titleViewHeight) > 0 ? (1 - y*2/titleViewHeight) : 0;
+        scrollView.homeTitleView.alpha = alpha;
+        self.headerBtn.alpha = alpha;
+
+            CGFloat alpha2 = ((y-titleViewHeight/2.0)*2/titleViewHeight)>0?((y-titleViewHeight/2.0)*2/titleViewHeight):0;
+        self.headerIconView.alpha=alpha2;
+    
+    }
+}
+
 @end

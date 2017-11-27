@@ -15,10 +15,10 @@
 #import "XGQBNoContentViewController.h"
 #import "XGQBNetworkFailureViewController.h"
 
-#import "XGQBHomeCellView.h"
-#import "XGQBHomeBannerView.h"
+#import "XGQBHomeTableView.h"
 
-@interface XGQBHomeTableViewController () <XGQBHomeCellViewDelegate>
+@interface XGQBHomeTableViewController ()
+
 @property (nonatomic,strong) NSMutableArray *messArr;
 
 @end
@@ -26,6 +26,28 @@
 @implementation XGQBHomeTableViewController
 
 #pragma mark - Table view data source
+
+-(void)loadView
+{
+    XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, kScreenWidth*286/375.0, kScreenWidth, kScreenHeight-75+350) style:UITableViewStyleGrouped];
+    self.tableView = tableView;
+    self.view = tableView;
+    
+
+    tableView.mj_header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [tableView.mj_header endRefreshing];
+        });
+    }];
+    
+    tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [tableView.mj_footer endRefreshing];
+        });
+    }];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+}
 
 -(NSMutableArray*)messArr
 {
@@ -43,15 +65,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.sectionHeaderHeight=0;
     self.tableView.sectionFooterHeight=0;
+    self.tableView.scrollEnabled = NO;
     
-//
-//    XGQBHomeCellView *homeCellView = [[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*152/375.0)];
-//
-//    XGQBHomeBannerView *homeBannerView = [[XGQBHomeBannerView alloc]initWithFrame:CGRectMake(0, 229, kScreenWidth, 209)];
-//    [homeBannerView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-//
-//    self.tableView.tableHeaderView = homeCellView;
-//    self.tableView.tableFooterView = homeBannerView;
 }
 
 -(void)moreBtnClicked
@@ -63,7 +78,6 @@
 
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
