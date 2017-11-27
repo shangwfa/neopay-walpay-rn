@@ -44,7 +44,7 @@
     
     kWeakSelf(self);
     [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 30));
+        make.size.mas_equalTo(CGSizeMake(150, 30));
         make.left.equalTo(weakself).with.offset(13);
         make.top.equalTo(weakself).with.offset(33);
     }];

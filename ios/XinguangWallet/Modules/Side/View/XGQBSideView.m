@@ -36,7 +36,10 @@
 -(void)addsubviewsWithFrame:(CGRect)frame{
 
     //添加背景图
-    UIImageView *sideBgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_beijing9"]];
+    UIImage *bgImg = [YYImage imageNamed:@"sy_beijing.gif"];
+//    UIImageView *sideBgView = [[UIImageView alloc]initWithImage:bgImg];
+    YYAnimatedImageView *sideBgView =[[YYAnimatedImageView alloc]initWithImage:bgImg];
+    
     [self addSubview:sideBgView];
     
     //添加头部试图
@@ -52,7 +55,7 @@
     //添加约束
     kWeakSelf(self);
     [sideBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.bottom.equalTo(weakself);
+        make.left.top.right.equalTo(weakself);
     }];
 
 }

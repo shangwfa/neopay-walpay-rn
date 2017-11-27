@@ -36,6 +36,8 @@
     [rootVC.view addSubview:sideVC.view];
     [rootVC.view addSubview:homeNAV.view];
     
+    [homeVC.headerBtn addTarget:self action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
+    
     rootVC.rootNAV = homeNAV;
     rootVC.sideVC = sideVC;
     rootVC.homeVC = homeVC;
@@ -77,6 +79,15 @@
         _rootNAV.view.transform=CGAffineTransformMakeTranslation(0, 0);;
         _sideView.tx = _rootNAV.view.tx/2.0;
         _blockView.alpha=0.0;
+    }];
+}
+
+-(void)openSideView
+{
+    [UIView animateWithDuration:0.2f animations:^{
+        _rootNAV.view.tx = (CGFloat)kScreenWidth*kSideViewRatio;
+        _sideView.tx = _rootNAV.view.tx/2.0;
+        _blockView.alpha=_rootNAV.view.tx*1.0/kScreenWidth;
     }];
 }
 

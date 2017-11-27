@@ -11,6 +11,7 @@
 
 #import "XGQBHomeScrollView.h"
 #import "XGQBHomeTitleView.h"
+#import "XGQBHomeTitleBtn.h"
 #import "XGQBHomeCellView.h"
 #import "XGQBHomeTableView.h"
 #import "XGQBHeaderIconView.h"
@@ -28,9 +29,8 @@
 #define cellViewHeight (kScreenWidth*152/375.0)
 #define homeNAVHeight 75
 
-@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UIScrollViewDelegate>
+@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UIScrollViewDelegate,XGQBHomeTitleViewBtnDelegate>
 @property (nonatomic,weak) XGQBHomeScrollView *homeScrollV;
-@property (nonatomic,weak) UIButton *headerBtn;
 @property (nonatomic,weak) UIView *headerIconView;
 @end
 
@@ -85,6 +85,7 @@
     XGQBHomeScrollView *homeScrollV = [[XGQBHomeScrollView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenHeight-75)];
     [self.view addSubview:homeScrollV];
     homeScrollV.delegate = self;
+    homeScrollV.homeTitleView.delegate=self;
     _homeScrollV=homeScrollV;
                                        
     
@@ -202,6 +203,18 @@
             CGFloat alpha2 = ((y-titleViewHeight/2.0)*2/titleViewHeight)>0?((y-titleViewHeight/2.0)*2/titleViewHeight):0;
         self.headerIconView.alpha=alpha2;
     
+    }
+}
+
+- (void)homeTitleBtnClicked:(XGQBHomeTitleBtn *)btn {
+    if ([btn.titleLabel.text isEqualToString:@"大红包"]) {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"bigRedPacket";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }else if ([btn.titleLabel.text isEqualToString:@"手机充值"]){
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"phoneTopUp";
+        [self.navigationController pushViewController:RNVC animated:YES];
     }
 }
 

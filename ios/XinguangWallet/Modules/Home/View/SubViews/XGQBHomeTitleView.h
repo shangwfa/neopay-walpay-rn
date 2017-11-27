@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
 @class XGQBHomeTitleBtn;
+
+@protocol XGQBHomeTitleViewBtnDelegate <NSObject>
+@required
+-(void)homeTitleBtnClicked:(XGQBHomeTitleBtn*)btn;
+@end
+
 
 @interface XGQBHomeTitleView : UIView
 
 @property(nonatomic,weak) XGQBHomeTitleBtn *redPacketBtn;
 @property (nonatomic,weak) XGQBHomeTitleBtn *phoneTopUpBtn;
+@property (nonatomic,weak) id <XGQBHomeTitleViewBtnDelegate> delegate;
 
 @end

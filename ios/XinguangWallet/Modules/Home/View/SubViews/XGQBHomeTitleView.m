@@ -29,6 +29,7 @@
     [redPBtn setTitle:@"大红包" forState:UIControlStateNormal];
     [redPBtn setImage:[UIImage imageNamed:@"sy_hongbao9"] forState:UIControlStateNormal];
     [self addSubview:redPBtn];
+    [redPBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _redPacketBtn = redPBtn;
     
     //手机充值按钮
@@ -36,6 +37,7 @@
     [phoneTopUpBtn setTitle:@"手机充值" forState:UIControlStateNormal];
     [phoneTopUpBtn setImage:[UIImage imageNamed:@"sy_chonzghi9"] forState:UIControlStateNormal];
     [self addSubview:phoneTopUpBtn];
+    [phoneTopUpBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _phoneTopUpBtn = phoneTopUpBtn;
     
     
@@ -62,6 +64,11 @@
     
     return self;
     
+}
+
+-(void)btnClicked:(XGQBHomeTitleBtn*)btn
+{
+    [self.delegate homeTitleBtnClicked:btn];
 }
 
 @end

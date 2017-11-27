@@ -43,7 +43,7 @@
     
     //认证按钮
     UIButton *regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [regBtn setImage:[UIImage imageNamed:@"wd_renzhneg"] forState:UIControlStateNormal];
+    [regBtn setImage:[UIImage imageNamed:@"wd_qianwang"] forState:UIControlStateNormal];
     [self addSubview:regBtn];
     _regBtn=regBtn;
     

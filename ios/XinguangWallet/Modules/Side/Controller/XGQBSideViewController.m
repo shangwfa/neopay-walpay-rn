@@ -48,7 +48,7 @@
 
 -(NSArray *)cellImgArray{
     if (!_cellImgArray) {
-        _cellImgArray = @[@"wd_zhangdan4",@"wd_zichan4",@"wd_yinhangka4",@"wd_guanyu4",@"wd_shezhi4",@"wd_shezhi4"];
+        _cellImgArray = @[@"wd_zhangdan",@"wd_zichan",@"wd_yinghangka",@"wd_guanyu",@"wd_shezhi",@"wd_shezhi"];
     }
     return _cellImgArray;
 }
