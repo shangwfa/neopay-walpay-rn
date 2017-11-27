@@ -18,6 +18,7 @@ class MyOrderPage extends BasePage {
     payDirection=''//交易方向
     startTime=''//开始时间
     endTime=''//结束时间
+    isResult=false
 
     constructor(props) {
         super(props);
@@ -26,7 +27,14 @@ class MyOrderPage extends BasePage {
             isEmpty:false
         }
 
-        if(this.props.navigation.state.params) this.queryType=this.props.navigation.state.params.tradeType
+        if(this.props.navigation.state.params) {
+            const {tradeType,incomeType,startTime,endTime,isResult}=this.props.navigation.state.params
+            this.queryType=tradeType
+            this.payDirection=incomeType
+            this.startTime=startTime
+            this.endTime=endTime
+            this.isResult=isResult
+        }
     }
 
     componentWillMount() {
@@ -92,13 +100,21 @@ class MyOrderPage extends BasePage {
         this.loadData(page,true)
     }
 
-    render() {
-        return (
-            <View style={styles.container}>
+    renderHeader=()=>{
+        if(this.isResult){
+            return(<Header navigation={this.props.navigation} title='我的账单'/>)
+        }else {
+            return(
                 <Header navigation={this.props.navigation} title='我的账单' rightTitle='筛选' onRightPress={() => {
                     this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
-
+            )
+        }
+    }
+    render() {
+        return (
+            <View style={styles.container}>
+                {this.renderHeader()}
                 <RefreshList
                     data={this.state.data}
                     renderItem={this.renderItem}
