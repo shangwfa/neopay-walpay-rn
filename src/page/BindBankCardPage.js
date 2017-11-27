@@ -10,10 +10,10 @@ import Header from '../components/Header'
 import CommonInput from '../components/CommonInput'
 import CommonButton from '../components/CommonButton'
 import {colors} from '../constants/index'
-import NetUtil from '../utils/NetUtil'
 import StringUtils from '../utils/StringUtils'
 import {APIS} from "../constants/API"
 import ApiManager from '../utils/ApiManager'
+
 
 class BindBankCardPage extends BasePage {
 

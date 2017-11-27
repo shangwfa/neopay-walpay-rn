@@ -53,7 +53,7 @@ class CommonInput extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.content_container}>
-                    {this.renderLeft}
+                    {this.renderLeft()}
                     <TextInput
                         style={styles.input}
                         underlineColorAndroid={'transparent'}
