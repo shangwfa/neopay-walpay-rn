@@ -77,5 +77,7 @@ public interface IWalpayConstants {
     String HOME_TABTYPE_MINE = "mineFragment";
     String SELECTBANKPAY_BALANCE_TYPE = "balance_type";
     String SELECTBANKPAY_BANK_TYPE = "bank_type";
+    //---------------------------other---------------------//
+    int SELECT_SYSTEM_CONTACTS = 0;
 
 }

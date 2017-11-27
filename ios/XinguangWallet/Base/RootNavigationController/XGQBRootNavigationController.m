@@ -35,6 +35,7 @@
     //默认开启系统右划返回
     self.interactivePopGestureRecognizer.enabled = YES;
     self.interactivePopGestureRecognizer.delegate = self;
+    
 }
 
 //根视图禁用右划返回

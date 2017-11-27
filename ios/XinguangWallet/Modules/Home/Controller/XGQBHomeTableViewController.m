@@ -17,7 +17,6 @@
 
 #import "XGQBHomeCellView.h"
 #import "XGQBHomeBannerView.h"
-#import "XGQBHomeCellBtn.h"
 
 @interface XGQBHomeTableViewController () <XGQBHomeCellViewDelegate>
 @property (nonatomic,strong) NSMutableArray *messArr;
@@ -40,25 +39,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.clearsSelectionOnViewWillAppear = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.sectionHeaderHeight=0;
+    self.tableView.sectionFooterHeight=0;
     
-    XGQBHomeCellView *homeCellView = [[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 219)];
-    homeCellView.delegate = self;
-    
-    XGQBHomeBannerView *homeBannerView = [[XGQBHomeBannerView alloc]initWithFrame:CGRectMake(0, 229, kScreenWidth, 209)];
-    [homeBannerView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    self.tableView.tableHeaderView = homeCellView;
-    self.tableView.tableFooterView = homeBannerView;
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-//    self.navigationController.navigationBarHidden = NO;
-    
+//
+//    XGQBHomeCellView *homeCellView = [[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*152/375.0)];
+//
+//    XGQBHomeBannerView *homeBannerView = [[XGQBHomeBannerView alloc]initWithFrame:CGRectMake(0, 229, kScreenWidth, 209)];
+//    [homeBannerView.moreBtn addTarget:self action:@selector(moreBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+//
+//    self.tableView.tableHeaderView = homeCellView;
+//    self.tableView.tableFooterView = homeBannerView;
 }
 
 -(void)moreBtnClicked
@@ -66,21 +59,23 @@
     XGQBRNViewController *RNVC = [XGQBRNViewController new];
     RNVC.pageType = @"activityList";
     [self.tableView.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section==0) {
-        return 10;
-    }
-    return 10;
-}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 8;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -108,7 +103,7 @@
         UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeShopAd timeLabel:@"06/06 00:00"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         return cell;
         
     }
@@ -117,7 +112,7 @@
         UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeCellPhone timeLabel:@"06/06 00:00"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         return cell;
     }
     else if([messDict[@"type"]isEqualToString:@"shopAct"]){
@@ -125,7 +120,7 @@
         UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeShop timeLabel:@"06/06 00:00"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         return cell;
     }
     else if([messDict[@"type"]isEqualToString:@"redPacketAct"]){
@@ -133,7 +128,7 @@
         UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeRedPocket timeLabel:@"06/06 00:00"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         return cell;
     }
     else if([messDict[@"type"]isEqualToString:@"systemMess"]){
@@ -141,7 +136,7 @@
         UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeSystem timeLabel:@"06/06 00:00"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         return cell;
     }
     else if([messDict[@"type"]isEqualToString:@"systemAct"]){
@@ -149,7 +144,7 @@
         UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeSystem timeLabel:@"06/06 00:00"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         return cell;
     }
     else if([messDict[@"type"]isEqualToString:@"payMess"]){
@@ -157,7 +152,7 @@
         UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypePayment timeLabel:@"06/06 00:00"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         return cell;
     }
     return nil;
@@ -195,23 +190,5 @@
 }
 
 
-#pragma mark - 按钮点击代理
--(void)btnClicked:(XGQBHomeCellBtn *)btn
-{
-    if ([btn.titleLabel.text isEqualToString:@"卡包"]) {
-        
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType =@"cardPack";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }else if([btn.titleLabel.text isEqualToString:@"手机充值"]){
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"phoneTopUp";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }else if([btn.titleLabel.text isEqualToString:@"大红包"]){
-        XGQBRNViewController *RNVC =[XGQBRNViewController new];
-        RNVC.pageType = @"bigRedPacket";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }
-}
 
 @end

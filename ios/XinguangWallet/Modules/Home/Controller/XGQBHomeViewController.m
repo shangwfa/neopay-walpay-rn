@@ -11,7 +11,8 @@
 #import "XGQBHomeTableViewController.h"
 
 #import "XGQBHomeTitleView.h"
-
+#import "XGQBHomeCellView.h"
+#import "XGQBHomeTitleBtn.h"
 
 
 #import "XGQBIDAlertViewController.h"
@@ -36,9 +37,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
-    self.view.backgroundColor = kViewBgColor;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
     
-    XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]init];
+    XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     _homeTableVC = homeTableVC;
 
     [self setUpViewComponents];
@@ -63,12 +64,14 @@
 -(void)setUpViewComponents
 {
     //顶部视图
-    XGQBHomeTitleView *homeTitleView = [XGQBHomeTitleView new];
+    XGQBHomeTitleView *homeTitleView = [[XGQBHomeTitleView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*209/375.0)];
+    [homeTitleView.redPacketBtn addTarget:self action:@selector(redPacketBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [homeTitleView.phoneTopUpBtn addTarget:self action:@selector(phoneTopUpBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:homeTitleView];
-    [homeTitleView.scanBtn addTarget:self action:@selector(scanBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [homeTitleView.codeBtn addTarget:self action:@selector(payCodeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [homeTitleView.accountBtn addTarget:self action:@selector(accountBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [homeTitleView.calenderBtn addTarget:self action:@selector(calenderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    //cell视图
+    XGQBHomeCellView *homeCellView =[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*209/375.0, kScreenWidth, kScreenWidth*152/375.0)];
+    [self.view addSubview:homeCellView];
     
     //tableView视图
     [self.view addSubview:_homeTableVC.tableView];
@@ -76,46 +79,24 @@
     kWeakSelf(self);
     [homeTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth/2.0));
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*209/375.0));
         make.top.equalTo(weakself.view);
         make.left.equalTo(weakself.view);
     }];
     
-    [_homeTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(weakself.view);
-        make.bottom.equalTo(weakself.view).with.offset(-44);
+    [homeCellView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*152/375.0));
         make.top.equalTo(homeTitleView.mas_bottom);
+        make.left.equalTo(weakself.view);
     }];
     
     
-}
-
-#pragma mark - 处理按钮点击
--(void)scanBtnClicked
-{
-    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType =@"qrCodeScan";
-    [self.navigationController pushViewController:RNVC animated:YES];
-}
-
--(void)payCodeBtnClicked
-{
-    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType =@"payCode";
-    [self.navigationController pushViewController:RNVC animated:YES];
-}
-
--(void)accountBtnClicked
-{
-    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType =@"myBalance";
-    [self.navigationController pushViewController:RNVC animated:YES];
-}
-
--(void)calenderBtnClicked
-{
-    XGQBCommissionViewController *sVC = [XGQBCommissionViewController new];
-    [self.navigationController pushViewController:sVC animated:YES];
+    [_homeTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(weakself.view);
+        make.bottom.equalTo(weakself.view).with.offset(0);
+        make.top.equalTo(homeCellView.mas_bottom);
+    }];
+    
     
 }
 
@@ -151,8 +132,23 @@
 -(void)registerID
 
 {
-    XGQBIDRegisterTableViewController *registerVC = [[XGQBIDRegisterTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
-    [self.navigationController pushViewController:registerVC animated:YES];
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"userInfoCerfity";
+    [self.navigationController pushViewController:RNVC animated:YES];
 }
 
+#pragma mark - 按钮点击
+-(void)redPacketBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"bigRedPacket";
+    [self.navigationController pushViewController:RNVC animated:YES];
+}
+
+-(void)phoneTopUpBtnClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"phoneTopUp";
+    [self.navigationController pushViewController:RNVC animated:YES];
+}
 @end

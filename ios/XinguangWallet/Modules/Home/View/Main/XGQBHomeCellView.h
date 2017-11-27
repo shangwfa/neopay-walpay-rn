@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XGQBHomeCellBtn.h"
 
 @protocol XGQBHomeCellViewDelegate
-
--(void)btnClicked:(XGQBHomeCellBtn*)btn;
 
 @end
 

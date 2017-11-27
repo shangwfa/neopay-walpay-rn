@@ -18,6 +18,8 @@ import com.xgjk.common.lib.utils.ToastUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.WalpayApp;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
@@ -28,6 +30,7 @@ import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
 import cn.neopay.walpay.android.module.rnParams.TestParams;
 import cn.neopay.walpay.android.rn.RNCacheViewManager;
+import cn.neopay.walpay.android.utils.BusniessUtils;
 import cn.neopay.walpay.android.view.dialog.LoadingDialog;
 
 /**
@@ -108,6 +111,29 @@ public class RNActivity extends BaseRNActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case IWalpayConstants.SELECT_SYSTEM_CONTACTS:
+                contactActivityResult(resultCode, data);
+                break;
+            default:
+                photoActivityResult(requestCode, resultCode, data);
+                break;
+        }
+
+    }
+
+    private void contactActivityResult(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            ArrayList<String> contactsData = BusniessUtils.contactsNoRepeatListResult(RNActivity.this, data);
+            if (null != contactsData && contactsData.size() >= 2) {
+                WalpayApp.getRnPackage().mModule.nativeCallRnSelectContacts(contactsData.get(1));
+            }
+        }
+    }
+
+
+    private void photoActivityResult(int requestCode, int resultCode, Intent data) {
         PhotoUtils.onActivityResult(this, requestCode, resultCode, data, R.color.colorPrimary, R.color.colorPrimaryDark, (Uri resultUri) -> {
             ApiManager.getSingleton().uploadSigleImge(this, resultUri, new ApiManager.UploadSingleImgCallback() {
                 @Override
@@ -121,7 +147,6 @@ public class RNActivity extends BaseRNActivity {
                 }
             });
         });
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
 

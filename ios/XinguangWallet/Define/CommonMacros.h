@@ -11,7 +11,7 @@
 #ifndef CommonMacros_h
 #define CommonMacros_h
 
-#pragma mark - ——————— 用户相关 ————————
+#pragma mark - ——————— 通知相关 ————————
 //登录状态改变通知
 #define kNotificationLoginStateChange @"loginStateChange"
 
@@ -36,22 +36,8 @@
 //Test UINavigationController push回来之后通知tabbar启用自定义右划手势
 #define kNotificationNavPopToFirstLevel @"NavPopToFirstLevel"
 
-
-//从注册页面跳转至重置密码页面
-
-
 //进行实名认证通知
 #define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"
-
-//被踢下线
-//#define KNotificationOnKick @"KNotificationOnKick"
-
-//用户信息缓存 名称
-//#define KUserCacheName @"KUserCacheName"
-
-//用户model缓存
-//#define KUserModelCache @"KUserModelCache"
-
 
 
 #pragma mark - ——————— 网络状态相关 ————————
