@@ -14,7 +14,7 @@
 
 @interface XGQBHomeScrollView : UIScrollView
 @property (nonatomic,weak) XGQBHomeTableView* homeTableView;
-@property (nonatomic,weak) XGQBHomeCellView *homeCellView;
+//@property (nonatomic,weak) XGQBHomeCellView *homeCellView;
 @property (nonatomic,weak) XGQBHomeTitleView *homeTitleView;
 
 -(void)titleViewAnimationWithOffsetY:(CGFloat)offsetY;

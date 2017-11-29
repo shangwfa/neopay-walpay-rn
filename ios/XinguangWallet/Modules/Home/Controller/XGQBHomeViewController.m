@@ -70,9 +70,8 @@
     
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    NSString *headerBtnTitle = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
-//    [headerBtn setTitle:headerBtnTitle forState:UIControlStateNormal];
-    [headerBtn setImage:[UIImage imageNamed:@"sy_touxiang"] forState:UIControlStateNormal];
+    [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"sy_touxiang"]];
+    kViewRadius(headerBtn.imageView, 19);
     _headerBtn = headerBtn;
     [self.view addSubview:headerBtn];
     [headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
@@ -178,18 +177,16 @@
         CGRect newFrame = scrollView.homeTitleView.frame;
         newFrame.origin.y = y;
         scrollView.homeTitleView.frame = newFrame;
-        
-        newFrame = scrollView.homeCellView.frame;
-        newFrame.origin.y = y + titleViewHeight;
-        scrollView.homeCellView.frame = newFrame;
 
+        //保持tableview位置不变
         newFrame = scrollView.homeTableView.frame;
-        newFrame.origin.y = y + titleViewHeight+cellViewHeight;
+        newFrame.origin.y = y + titleViewHeight;
         scrollView.homeTableView.frame = newFrame;
 
         //偏移量给到tableview，tableview自己来滑动
         [scrollView.homeTableView setScrollViewContentOffSetWithPoint:CGPointMake(0, y)];
     }
+    
         else if(y < titleViewHeight && y > 0) {
         CGRect newFrame = scrollView.homeTitleView.frame;
         newFrame.origin.y = y/2;

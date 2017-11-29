@@ -33,6 +33,8 @@
     [self addSubviews];
     self.contentSize = CGSizeMake(kScreenWidth, kScreenHeight-75+kScreenWidth*134/375.0+kScreenWidth*152/375.0+350);
     
+    self.showsVerticalScrollIndicator = NO;
+    
     return self;
     
 }
@@ -44,11 +46,6 @@
     _homeTitleView=homeTitleView;
     [self addSubview:homeTitleView];
 
-    //cell视图
-    XGQBHomeCellView *homeCellView =[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenWidth*152/375.0)];
-    _homeCellView = homeCellView;
-    [self addSubview:homeCellView];
-
     //tableView视图
     XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
 
@@ -56,26 +53,6 @@
     [kAppWindow.rootViewController addChildViewController:homeTableVC];
     _homeTableView = (XGQBHomeTableView*)homeTableVC.tableView;
     [self addSubview:homeTableVC.tableView];
-    
-//    kWeakSelf(self);
-//    [homeTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*134/375.0));
-//        make.top.equalTo(weakself);
-//        make.left.equalTo(weakself);
-//    }];
-
-//    [homeCellView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenWidth*152/375.0));
-//        make.top.equalTo(homeTitleView.mas_bottom);
-//        make.left.equalTo(weakself);
-//    }];
-
-
-//    [homeTableVC.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(kScreenWidth, kScreenHeight-75));
-//        make.left.equalTo(weakself);
-//        make.top.equalTo(homeCellView.mas_bottom);
-//    }];
 }
 
 -(void)titleViewAnimationWithOffsetY:(CGFloat)offsetY
@@ -86,4 +63,6 @@
         [self setContentOffset:CGPointMake(0, 0) animated:YES];
     }
 }
+
+
 @end

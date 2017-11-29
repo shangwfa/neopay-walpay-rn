@@ -25,8 +25,9 @@
 {
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [headerBtn setImage:[UIImage imageNamed:@"sy_touxiang"] forState:UIControlStateNormal];
-    headerBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"sy_touxiang"]];
+//    headerBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    kViewRadius(headerBtn.imageView, 15);
     _headerBtn=headerBtn;
     [self addSubview:headerBtn];
     

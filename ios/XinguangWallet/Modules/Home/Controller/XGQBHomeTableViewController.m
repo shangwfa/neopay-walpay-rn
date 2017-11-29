@@ -15,6 +15,8 @@
 #import "XGQBNoContentViewController.h"
 #import "XGQBNetworkFailureViewController.h"
 
+#import "XGQBHomeCellView.h"
+
 #import "XGQBHomeTableView.h"
 
 @interface XGQBHomeTableViewController ()
@@ -26,13 +28,13 @@
 @implementation XGQBHomeTableViewController
 
 #pragma mark - Table view data source
-
 -(void)loadView
 {
-    XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, kScreenWidth*286/375.0, kScreenWidth, kScreenHeight-75+350) style:UITableViewStyleGrouped];
+    XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenHeight-75+350) style:UITableViewStyleGrouped];
     self.tableView = tableView;
     self.view = tableView;
     
+    tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenWidth*152/375.0)];
 
     tableView.mj_header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -202,7 +204,6 @@
         
     }
 }
-
 
 
 @end

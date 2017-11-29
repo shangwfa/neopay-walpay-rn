@@ -22,7 +22,9 @@
 -(void)setupViewComponentsWithFrame:(CGRect)frame
 {
     //头像
-    UIImageView *headerIcon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_touxiang"]];
+    UIImageView *headerIcon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width*0.285, frame.size.width*0.285)];
+    [headerIcon sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] placeholderImage:[UIImage imageNamed:@"wd_touxiang"]];
+    kViewRadius(headerIcon,MAX(headerIcon.width/2.0, headerIcon.height/2.0));
     [self addSubview:headerIcon];
     
     //认证标签

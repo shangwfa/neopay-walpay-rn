@@ -126,5 +126,18 @@
     [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
 }
 
+-(void)logoutUserInfo
+{
+    //清空公共参数
+    [GVUserDefaults standardUserDefaults].name=nil;
+    [GVUserDefaults standardUserDefaults].uuid=nil;
+    [GVUserDefaults standardUserDefaults].phone=nil;
+    [GVUserDefaults standardUserDefaults].userStatus=0;
+    [GVUserDefaults standardUserDefaults].nickName=nil;
+    [GVUserDefaults standardUserDefaults].authStatus=0;
+    [GVUserDefaults standardUserDefaults].avatarUrl=nil;
+    [GVUserDefaults standardUserDefaults].accessToken=nil;
+}
+
 
 @end
