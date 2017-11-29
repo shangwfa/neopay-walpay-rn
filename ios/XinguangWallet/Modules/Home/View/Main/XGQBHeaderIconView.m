@@ -25,28 +25,41 @@
 {
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    NSString *headerBtnTitle = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
-    [headerBtn setTitle:headerBtnTitle forState:UIControlStateNormal];
     [headerBtn setImage:[UIImage imageNamed:@"sy_touxiang"] forState:UIControlStateNormal];
-    headerBtn.titleLabel.font = kSYSTEMFONT(14.0);
     headerBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    headerBtn.imageEdgeInsets= UIEdgeInsetsMake(0, 0, 0, 10);
+    _headerBtn=headerBtn;
     [self addSubview:headerBtn];
+    
+    //用户名标签
+    UILabel *userNameLabel = [[UILabel alloc]init];
+    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
+    userNameLabel.font = kSYSTEMFONT(14.0);
+    userNameLabel.textColor = kWhiteColor;
+    [self addSubview:userNameLabel];
     
     //右侧图标
     UIButton *redPBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [redPBtn setImage:[UIImage imageNamed:@"sy_hongbao7"] forState:UIControlStateNormal];
+    redPBtn.tag=10001;
     [self addSubview:redPBtn];
+    [redPBtn addTarget:self action:@selector(homeIconBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [phoneBtn setImage:[UIImage imageNamed:@"sy_chongzhi7"] forState:UIControlStateNormal];
+    phoneBtn.tag=10002;
     [self addSubview:phoneBtn];
+    [phoneBtn addTarget:self action:@selector(homeIconBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     kWeakSelf(self);
     [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 30));
+        make.size.mas_equalTo(CGSizeMake(30, 30));
         make.left.equalTo(weakself).with.offset(13);
         make.top.equalTo(weakself).with.offset(33);
+    }];
+    
+    [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(headerBtn.mas_right).with.offset(10);
+        make.centerY.equalTo(headerBtn);
     }];
 
     [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,6 +73,11 @@
         make.top.equalTo(weakself).with.offset(33);
     }];
     
+}
+
+-(void)homeIconBtnClicked:(UIButton*)btn
+{
+    [self.delegate homeHeaderIconBtnClicked:btn];
 }
 
 @end

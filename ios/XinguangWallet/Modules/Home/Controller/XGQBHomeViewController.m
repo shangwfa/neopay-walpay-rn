@@ -16,6 +16,8 @@
 #import "XGQBHomeTableView.h"
 #import "XGQBHeaderIconView.h"
 
+#import "XGQBAPPRootViewController.h"
+
 
 #import "XGQBIDAlertViewController.h"
 #import "XGQBIDAlertTransiton.h"
@@ -29,9 +31,10 @@
 #define cellViewHeight (kScreenWidth*152/375.0)
 #define homeNAVHeight 75
 
-@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UIScrollViewDelegate,XGQBHomeTitleViewBtnDelegate>
+@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UIScrollViewDelegate,XGQBHomeTitleViewBtnDelegate,XGQBHomeHeaderIconBtnDelegata>
 @property (nonatomic,weak) XGQBHomeScrollView *homeScrollV;
 @property (nonatomic,weak) UIView *headerIconView;
+@property (nonatomic,weak) UILabel *userNameLabel;
 @end
 
 @implementation XGQBHomeViewController
@@ -50,8 +53,6 @@
 
 }
 
-
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -69,16 +70,28 @@
     
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    NSString *headerBtnTitle = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
-    [headerBtn setTitle:headerBtnTitle forState:UIControlStateNormal];
+//    NSString *headerBtnTitle = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
+//    [headerBtn setTitle:headerBtnTitle forState:UIControlStateNormal];
     [headerBtn setImage:[UIImage imageNamed:@"sy_touxiang"] forState:UIControlStateNormal];
     _headerBtn = headerBtn;
     [self.view addSubview:headerBtn];
+    [headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
+    
+    //用户名标签
+    UILabel *userNameLabel = [[UILabel alloc]init];
+    userNameLabel.textColor = kWhiteColor;
+    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
+    userNameLabel.font = kSYSTEMFONT(17.0);
+    [self.view addSubview:userNameLabel];
+    _userNameLabel = userNameLabel;
+    
     
     //顶部缩略图
     XGQBHeaderIconView *headerIconView = [[XGQBHeaderIconView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 75)];
     headerIconView.alpha=0;
     _headerIconView = headerIconView;
+    headerIconView.delegate=self;
+    [headerIconView.headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:headerIconView];
     
     //滚动视图
@@ -97,11 +110,14 @@
     }];
     
     [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 50));
+        make.size.mas_equalTo(CGSizeMake(38, 38));
         make.left.equalTo(weakself.view).with.offset(12);
         make.top.equalTo(weakself.view).with.offset(30);
     }];
-    
+    [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(headerBtn.mas_right).with.offset(10);
+        make.centerY.equalTo(headerBtn);
+    }];
     
 }
 
@@ -142,23 +158,7 @@
     [self.navigationController pushViewController:RNVC animated:YES];
 }
 
-#pragma mark - 按钮点击
--(void)redPacketBtnClicked
-{
-    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType = @"bigRedPacket";
-    [self.navigationController pushViewController:RNVC animated:YES];
-}
-
--(void)phoneTopUpBtnClicked
-{
-    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType = @"phoneTopUp";
-    [self.navigationController pushViewController:RNVC animated:YES];
-}
-
 #pragma mark - scrollView Delegate
-
 -(void)scrollViewWillEndDragging:(XGQBHomeScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     CGFloat y = scrollView.contentOffset.y;
@@ -196,22 +196,39 @@
         scrollView.homeTitleView.frame = newFrame;
 
         //处理透明度
-        CGFloat alpha = (1 - y*2/titleViewHeight) > 0 ? (1 - y*2/titleViewHeight) : 0;
+        CGFloat alpha = (1-y*2/titleViewHeight)>0?(1 - y*2/titleViewHeight):0;
         scrollView.homeTitleView.alpha = alpha;
         self.headerBtn.alpha = alpha;
+        self.userNameLabel.alpha = alpha;
+        
 
-            CGFloat alpha2 = ((y-titleViewHeight/2.0)*2/titleViewHeight)>0?((y-titleViewHeight/2.0)*2/titleViewHeight):0;
+        CGFloat alpha2 = ((y-titleViewHeight/2.0)*2/titleViewHeight)>0?((y-titleViewHeight/2.0)*2/titleViewHeight):0;
         self.headerIconView.alpha=alpha2;
     
     }
 }
 
+#pragma mark - XGQBHomeTitleViewBtnDelegate
 - (void)homeTitleBtnClicked:(XGQBHomeTitleBtn *)btn {
     if ([btn.titleLabel.text isEqualToString:@"大红包"]) {
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType = @"bigRedPacket";
         [self.navigationController pushViewController:RNVC animated:YES];
     }else if ([btn.titleLabel.text isEqualToString:@"手机充值"]){
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"phoneTopUp";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }
+}
+
+#pragma mark - XGQBHomeHeaderIconBtnDelegata
+-(void)homeHeaderIconBtnClicked:(UIButton *)btn
+{
+    if (btn.tag==10001) {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"bigRedPacket";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }else if (btn.tag==10002){
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType = @"phoneTopUp";
         [self.navigationController pushViewController:RNVC animated:YES];

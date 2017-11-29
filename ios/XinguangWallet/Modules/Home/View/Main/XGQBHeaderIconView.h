@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol XGQBHomeHeaderIconBtnDelegata
+@required
+-(void)homeHeaderIconBtnClicked:(UIButton*)btn;
+@end
 
 @interface XGQBHeaderIconView : UIView
 
+@property(nonatomic,weak)id<XGQBHomeHeaderIconBtnDelegata> delegate;
+@property (nonatomic,weak) UIButton *headerBtn;
 @end

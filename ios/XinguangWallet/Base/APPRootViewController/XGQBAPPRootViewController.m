@@ -36,8 +36,6 @@
     [rootVC.view addSubview:sideVC.view];
     [rootVC.view addSubview:homeNAV.view];
     
-    [homeVC.headerBtn addTarget:self action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
-    
     rootVC.rootNAV = homeNAV;
     rootVC.sideVC = sideVC;
     rootVC.homeVC = homeVC;
@@ -48,6 +46,7 @@
     //增加蒙版
     [rootVC addBlockView];
     
+
     return rootVC;
 }
 
