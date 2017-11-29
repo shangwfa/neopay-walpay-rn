@@ -19,7 +19,7 @@
     self.sectionFooterHeight = 0;
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
-    self.rowHeight = 58;
+    self.rowHeight = 50;
     
     return self;
 }

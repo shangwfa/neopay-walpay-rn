@@ -43,12 +43,12 @@
     [self addSubview:sideBgView];
     
     //添加头部试图
-    XGQBSideHeaderView *sideHeaderView = [[XGQBSideHeaderView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height*0.37)];
+    XGQBSideHeaderView *sideHeaderView = [[XGQBSideHeaderView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height*0.45)];
     [self addSubview:sideHeaderView];
     _headerView = sideHeaderView;
     
     //添加列表
-    XGQBSideTableView *sideTableView = [[XGQBSideTableView alloc]initWithFrame:CGRectMake(0, frame.size.height*0.37, frame.size.width, frame.size.height*0.63)];
+    XGQBSideTableView *sideTableView = [[XGQBSideTableView alloc]initWithFrame:CGRectMake(0, frame.size.height*0.45, frame.size.width, frame.size.height*0.55)];
     [self addSubview:sideTableView];
     _tableView=sideTableView;
     
