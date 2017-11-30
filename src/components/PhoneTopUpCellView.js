@@ -266,10 +266,16 @@ class PhoneTopUpMoneyView extends Component {
     };
 
     cellSelected = (i)=>{
-        this.setState({
-            selectedItemIndex:i,
-            isPayShow:true,
-        });
+
+        if(this.state.phoneNo.length==11){
+            this.setState({
+                selectedItemIndex:i,
+                isPayShow:true,
+            });
+        }else {
+            NativeModules.commModule.toast("请输入正确手机号");
+        }
+
 
     };
 
