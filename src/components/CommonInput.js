@@ -16,7 +16,8 @@ import StringUtils from "../utils/StringUtils";
 class CommonInput extends Component {
     static defaultProps = {
         editable: true,
-        noEditText: ''
+        noEditText: '',
+        tapClick:null
     }
 
     static propTypes = {
@@ -44,6 +45,42 @@ class CommonInput extends Component {
             </Text>)
     }
 
+    renderInput =()=>{
+        let data = this.props.data
+        let keybordType = StringUtils.isEmpty(data.keyboard) ? 'default' : data.keyboard
+        let isLine = data.isLine && data.isLine
+        let isVerfyCode = data.isVerfyCode && data.isVerfyCode
+
+        if(this.props.editable){
+            return(
+                <TextInput
+                    style={styles.input}
+                    underlineColorAndroid={'transparent'}
+                    placeholder={data.placeholder}
+                    numberOfLines={1}
+                    onChangeText={this.onChangeText}
+                    keyboardType={keybordType}
+                    value={this.props.editable ? this.state.inputText : this.props.noEditText}
+                    onBlur={this.props.onBlur}
+                    editable={this.props.editable}
+                />
+            )
+        }else{
+            return(
+                <TouchableWithoutFeedback onPress={() => this.props.tapClick()}>
+                    <Text
+                        style={styles.content}
+                        underlineColorAndroid={'transparent'}
+                    >{this.props.noEditText == ''? data.placeholder : this.props.noEditText}</Text>
+                </TouchableWithoutFeedback>
+            )
+        }
+    }
+
+    click=()=> {
+        console.log('22334422')
+    }
+
     render() {
         let data = this.props.data
         let keybordType = StringUtils.isEmpty(data.keyboard) ? 'default' : data.keyboard
@@ -54,17 +91,7 @@ class CommonInput extends Component {
             <View style={styles.container}>
                 <View style={styles.content_container}>
                     {this.renderLeft()}
-                    <TextInput
-                        style={styles.input}
-                        underlineColorAndroid={'transparent'}
-                        placeholder={data.placeholder}
-                        numberOfLines={1}
-                        onChangeText={this.onChangeText}
-                        keyboardType={keybordType}
-                        value={this.props.editable ? this.state.inputText : this.props.noEditText}
-                        onBlur={this.props.onBlur}
-                        editable={this.props.editable}
-                    />
+                    {this.renderInput()}
                     {this.input_close_img()}
                     {this.renderVerifyCode(isVerfyCode)}
                 </View>
@@ -121,6 +148,12 @@ const styles = StyleSheet.create({
         height:17
     },
     input: {
+        marginLeft: 10,
+        flex: 1,
+        fontSize: 15,
+        color: colors.black
+    },
+    content: {
         marginLeft: 10,
         flex: 1,
         fontSize: 15,
