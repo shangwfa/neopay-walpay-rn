@@ -24,13 +24,18 @@ static NSString *const cellId = @"cellId";
     
     XGQBHomeCellCVFlowLayout *layout = [[XGQBHomeCellCVFlowLayout alloc]init];
 
-    UICollectionView *cellCollectionV = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)collectionViewLayout:layout];
+    UICollectionView *cellCollectionV = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height-8)collectionViewLayout:layout];
     
     cellCollectionV.dataSource = self;
     cellCollectionV.delegate = self;
     cellCollectionV.backgroundColor = kViewBgColor;
     
     [self addSubview:cellCollectionV];
+    
+    //增加下划线
+    UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-8, frame.size.width, 8)];
+    sepLine.backgroundColor=[UIColor colorWithHexString:@"F5F5F5"];
+    [self addSubview:sepLine];
     
     [cellCollectionV registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellId];
     

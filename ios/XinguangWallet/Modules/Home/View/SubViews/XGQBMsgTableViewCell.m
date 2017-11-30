@@ -107,7 +107,8 @@
     //支付消息
     else
 //    else if (message.msgType.intValue==2)
-    {        //标题
+    {
+        //标题
         UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 66, 16)];
         title.text=message.msgTypeText;
         title.font=kSYSTEMFONT(16.0);
@@ -122,7 +123,7 @@
         //图标
         UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth*58/375.0, kScreenWidth*58/375.0)];
         [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:[UIImage imageNamed:@"wd_touxiang"]];
-        kViewRadius(icon,kScreenWidth*58/375.0/2.0);
+        kViewRadius(icon,icon.width/2.0);
         
         //描述文字
         UILabel *desLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 53, 13)];

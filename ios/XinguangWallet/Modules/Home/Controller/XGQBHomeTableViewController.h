@@ -10,4 +10,6 @@
 
 @interface XGQBHomeTableViewController : UITableViewController
 
+@property (nonatomic,strong) NSMutableArray *messArr;
+
 @end

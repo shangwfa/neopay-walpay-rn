@@ -42,9 +42,7 @@
 @property (nonatomic,weak) UILabel *userNameLabel;
 @property (nonatomic,weak) XGQBHomeTitleView *homeTitleView;
 @property (nonatomic,weak) XGQBHomeTableView* homeTableView;
-
-@property (nonatomic,strong) NSMutableArray <XGQBMessage*>*messArr;
-
+@property (nonatomic,weak) XGQBHomeTableViewController *homeTVC;
 
 @end
 
@@ -84,6 +82,7 @@
 
     //tableView视图
     XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
+    _homeTVC=homeTableVC;
     homeTableVC.tableView.delegate=self;
     //一定要将tableviewcontroller加入到子控制器中,tableview才能点击...
     [kAppWindow.rootViewController addChildViewController:homeTableVC];
@@ -205,52 +204,38 @@
 }
 
 #pragma mark - tableViewDelegate
-
-//-(NSMutableArray*)messArr
-//{
-//    if (!_messArr) {
-//
-//        _messArr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"mess" ofType:@"plist"]];
-//    }
-//    return _messArr;
-//}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSDictionary *messDict = self.messArr[indexPath.row];
-//
-//    if ([messDict[@"type"]isEqualToString:@"payMess"]) {
-//        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-//        RNVC.pageType = @"payMessage";
-//        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-//    }
-//    else if([messDict[@"type"]isEqualToString:@"mobileMess"])
-//    {
-//        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-//        RNVC.pageType = @"topupMsgList";
-//        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-//    }else if([messDict[@"type"]isEqualToString:@"redPacketAct"])
-//    {
-//        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-//        RNVC.pageType = @"redList";
-//        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-//    }
-//
-//    else if (arc4random()%2) {
-//        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
-//        [self.view.superview.viewController.navigationController pushViewController:noContentVC animated:YES];
-//    }else{
-//        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
-//        [self.view.superview.viewController.navigationController pushViewController:netWorkFailVC animated:YES];
-//
-//    }
-    
-    NSLog(@"点击了第%ld行",(long)indexPath.row);
+    XGQBMessage *message = _homeTVC.messArr[indexPath.row];
+
+    if (message.msgType.intValue==1) {
+        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+        RNVC.pageType = @"redList";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }
+    else if(message.msgType.intValue==2)
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"payMessage";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }else if(message.msgType.intValue==3)
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"topupMsgList";
+        [self.navigationController pushViewController:RNVC animated:YES];
+    }
+    else if (arc4random()%2) {
+        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
+        [self.navigationController pushViewController:noContentVC animated:YES];
+    }else{
+        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
+        [self.navigationController pushViewController:netWorkFailVC animated:YES];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 8;
+    return 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

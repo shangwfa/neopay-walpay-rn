@@ -23,7 +23,6 @@
 
 @interface XGQBHomeTableViewController ()
 
-@property (nonatomic,strong) NSMutableArray *messArr;
 @property (nonatomic,assign) int currentPage;
 
 @end
@@ -40,7 +39,7 @@
     self.view = tableView;
     tableView.dataSource = self;
     
-    tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenWidth*152/375.0)];
+    tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenWidth*152/375.0+8)];
     
     [self refreshData];
 
@@ -51,8 +50,7 @@
     }];
     tableView.mj_header = header;
     header.automaticallyChangeAlpha=YES;
-//    header.lastUpdatedTimeLabel.hidden=YES;
-//    header.stateLabel.hidden=YES;
+    header.lastUpdatedTimeLabel.hidden=YES;
     
     //上拉加载
     tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
@@ -136,13 +134,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XGQBMessage *mess = self.messArr[indexPath.row];
-    
     XGQBMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mess.msgTypeText];
-    
     if (!cell) {
         cell = [XGQBMsgTableViewCell cellWithMessage:mess];
     }
-//    cell.textLabel.text=mess.ID;
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
 
