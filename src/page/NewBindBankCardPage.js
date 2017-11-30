@@ -15,11 +15,13 @@ import StringUtils from '../utils/StringUtils'
 import {APIS} from "../constants/API"
 import ApiManager from '../utils/ApiManager'
 
+
 class NewBindBankCardPage extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
+            isCreditCard:false,
             name: '',
             idCardNo: '',
             bankCardNo: '',
@@ -66,34 +68,59 @@ class NewBindBankCardPage extends BasePage {
     onBlur = () => {
         ApiManager.getBankInfoByCardNo({'cardNo': this.state.cardNo},data=>{
             this.setState({
-                    openBankName: data.bankName
+                    openBankName: data.bankName,
+                    isCreditCard: data.cardType == 2?true:false
                 }
             )
         })
     }
 
-    render() {
-        const nameData = {'key': '姓名', 'placeholder': '请填写真实姓名', isLine: true}
-        const idCardNameData = {'key': '身份证号', 'placeholder': '请填写身份证号', isLine: true}
+    choseDate=()=>{
+        console.log('123321')
+    }
+
+    renderTopView =()=>{
+        const nameData = {'key': '姓名', 'placeholder': '姓名', isLine: true}
         const cardNumData = {'key': '卡号', 'placeholder': '请填写银行卡号', isLine: true}
-        const openAccountBankData = {'key': '开户银行', 'placeholder': '开户银行'}
+        const idCardNameData = {'key': '开户银行', 'placeholder': '开户银行', isLine: true}
+        return(
+            <View>
+                <CommonInput data={nameData} editable={false} onChangeText={(text) => this.setState({name: text})}/>
+                <CommonInput data={cardNumData} keyboardType = {'number-pad'} onChangeText={(text) => this.setState({idCardNo: text})} onBlur ={()=>this.onBlur()}/>
+                <CommonInput data={idCardNameData} editable={false} noEditText={this.state.openBankName}/>
+            </View>
+        )
+
+    }
+
+    renderMidView =()=>{
+        const CVV2Data = {'key': 'CVV2', 'placeholder': '信用卡背面签名栏末三位数字', isLine: true}
+        const dateInfo = {'key': '有效期', 'placeholder': '请选择信用卡有效期', isLine: true}
+        if(!this.state.isCreditCard){
+            return(
+                <View>
+                    <CommonInput data={CVV2Data} onChangeText={(text) => this.setState({idCardNo: text})}/>
+                    <CommonInput data={dateInfo} editable={false} noEditText={this.state.openBankName} tapClick={()=>this.choseDate()}/>
+                </View>
+            )
+        }else{
+            return null
+        }
+
+    }
+
+    render() {
         const phoneData = {'key': '手机号', 'placeholder': '请填写银行预留手机号', 'keyboard': 'numeric', isLine: true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
-        const tips = '注:认证通过后，该账号关联的信息不可更改'
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='添加绑定银行卡'/>
+                <Header navigation={this.props.navigation} title='绑定银行卡'/>
+                {this.renderTopView()}
+                {this.renderMidView()}
                 <View style={{height: 10}}/>
-                <CommonInput data={nameData} onChangeText={(text) => this.setState({name: text})}/>
-                <CommonInput data={idCardNameData} onChangeText={(text) => this.setState({idCardNo: text})}/>
-                <CommonInput data={cardNumData} onChangeText={(text) => this.setState({bankCardNo: text})}
-                             onBlur={() => this.onBlur()}/>
-                <CommonInput data={openAccountBankData} editable={false} noEditText={this.state.openBankName}/>
-                <View style={{height: 10}}/>
-                <CommonInput data={phoneData} onChangeText={(text) => this.setState({bindPhone: text})}/>
+                <CommonInput data={phoneData} editable={false} onChangeText={(text) => this.setState({bindPhone: text})}/>
                 <CommonInput data={verifyCodeData} phone={this.state.bindPhone}
                              onChangeText={(text) => this.setState({smsCode: text})}/>
-                <Text style={styles.tips}>{tips}</Text>
                 <CommonButton value='确定' style={{marginTop: 75}} onPress={() => this.commit()}/>
             </View>
         );
