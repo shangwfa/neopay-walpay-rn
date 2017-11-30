@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return;
             }
-            MainRouter.getSingleton().jumpToHomePage("");
+            MainRouter.getSingleton().jumpToHomeDrawPage();
             finish();
         }, IWalpayConstants.DELAY_TIME);
 

@@ -20,14 +20,7 @@
 #import "AppDelegate+PushService.h"
 #import "XGQBRootViewController.h"
 #import "XGQBRootNavigationController.h"
-#import "XGQBRootWebViewController.h"
 #import "XGQBAppManager.h"
-
-//#import "PPNetworkHelper.h"
-//#import "ShareManager.h"
-//#import "UserManager.h"
-//#import "IMManager.h"
-//#import "UIButton+XYButton.h"
 
 //工具类
 #import "IphoneDevice.h"
@@ -38,11 +31,12 @@
 
 //第三方
 #import <YYKit.h>
-//#import <JSONKit.h>
 #import "SVProgressHUD.h"
 #import <Masonry.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
 #import "IQKeyboardManager.h"
+#import "MJRefresh.h"
 
 //通用视图组件
 #import "XGQBTextField.h"

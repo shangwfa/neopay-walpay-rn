@@ -52,7 +52,7 @@ public class RegisterPresenter extends RegisterContract.Presenter {
         userRequestBean.setSmsCode(SmsCode);
         ApiManager.getSingleton().registerUser(userRequestBean, new BaseSubscriber(mActivity, o -> {
             ActivityManager.getInstance().killAllActivity();
-            MainRouter.getSingleton().jumpToHomePage("");
+            MainRouter.getSingleton().jumpToHomeDrawPage();
             ToastUtils.show("注册成功");
         }));
 

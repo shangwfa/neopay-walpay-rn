@@ -170,16 +170,16 @@
         make.left.equalTo(sepLine.mas_right).with.offset(2);
     }];
 
-    
-    //跳过按钮
-    XGQBPureColorBtn *skipBtn = [XGQBPureColorBtn buttonWithText:@"skip" andColor:kButtonColor];
-    [self.view addSubview:skipBtn];
-    [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.4, 20));
-        make.centerX.equalTo(weakself.view);
-        make.top.equalTo(btn.mas_bottom).with.offset(kScreenHeight*0.1);
-    }];
-    [skipBtn addTarget:self action:@selector(skipButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//
+//    //跳过按钮
+//    XGQBPureColorBtn *skipBtn = [XGQBPureColorBtn buttonWithText:@"skip" andColor:kButtonColor];
+//    [self.view addSubview:skipBtn];
+//    [skipBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(kScreenWidth*0.4, 20));
+//        make.centerX.equalTo(weakself.view);
+//        make.top.equalTo(btn.mas_bottom).with.offset(kScreenHeight*0.1);
+//    }];
+//    [skipBtn addTarget:self action:@selector(skipButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
@@ -250,15 +250,30 @@
 //            NSLog(@"responseBefore:%@",responseBefore);
         {
             [GVUserDefaults standardUserDefaults].accessToken = [responseAfter objectForKey:@"accessToken"];
-  
-            //发送登录成功通知
-            kPostNotification(kNotificationLoginStateChange, @YES);
             
+            //获取用户信息
+            [MemberCoreService getUserInfo:@{@"accessToken":[GVUserDefaults standardUserDefaults].accessToken}.mutableCopy andSuccessFn:^(id responseAfter, id responseBefore) {
+
+                //设置公共参数
+                [GVUserDefaults standardUserDefaults].name=[responseAfter objectForKey:@"name"];
+                [GVUserDefaults standardUserDefaults].uuid=[responseAfter objectForKey:@"uuid"];
+                [GVUserDefaults standardUserDefaults].phone=[responseAfter objectForKey:@"phone"];
+                [GVUserDefaults standardUserDefaults].userStatus=[[responseAfter objectForKey:@"userStatus"]intValue];
+                [GVUserDefaults standardUserDefaults].nickName=[responseAfter objectForKey:@"nickName"];
+                [GVUserDefaults standardUserDefaults].authStatus=[[responseAfter objectForKey:@"authStatus"]intValue];
+                [GVUserDefaults standardUserDefaults].avatarUrl=[responseAfter objectForKey:@"avatarUrl"];
+                
+                NSLog(@"%@",[GVUserDefaults standardUserDefaults]);
+                
+                //发送登录成功通知,跳转首页
+                kPostNotification(kNotificationLoginStateChange, @YES);
+            } andFailerFn:^(NSError *error) {
+                nil;
+            }];
         }
         
     } andFailerFn:^(NSError *error) {
 
-    
     }];
 }
 

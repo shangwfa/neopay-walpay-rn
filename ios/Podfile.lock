@@ -24,6 +24,7 @@ PODS:
     - lottie-ios
     - React
   - Masonry (1.1.0)
+  - MJRefresh (3.1.14)
   - Picker (4.2.0):
     - Picker/Core (= 4.2.0)
     - React
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
   - Masonry (~> 1.1.0)
+  - MJRefresh (~> 3.1.14)
   - Picker (from `../node_modules/react-native-picker`)
   - react-native-camera (from `../node_modules/react-native-camera`)
   - React/ART (from `../node_modules/react-native`)
@@ -137,6 +139,7 @@ SPEC CHECKSUMS:
   lottie-ios: 8c150606598931621e927377f1426d2d3e99282d
   lottie-react-native: 7473cccb5efa322498c850bffc60acc9dc0c5846
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: 6642e35b3227a5447b9fd5e17c552c90196c9859
   Picker: ca5259d1c3a6d84e680c26fa003653b40a9fe4af
   React: 6d68659481a8a56e0f6b3dbecd984d5b9bb2d6c5
   react-native-camera: 16adf5f4a105010e25841711ab6ed8f98499cc09
@@ -145,6 +148,6 @@ SPEC CHECKSUMS:
   Yoga: ccefa1454b2e9825dce3b2df98088b7f0e3c2675
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 6460bf85399d230e95cde8a06b9da697128e1285
+PODFILE CHECKSUM: 91a52d6a9b8fd139d5ae08da18ae80f4c619fc9a
 
 COCOAPODS: 1.3.1

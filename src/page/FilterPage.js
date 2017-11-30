@@ -16,6 +16,8 @@ import trade_icon from '../res/img/filter_trade.png'
 import income_icon from '../res/img/filter_income.png'
 import TimePicker from '../modal/TimePicker'
 import {RouterPaths} from '../constants/RouterPaths'
+import DateUtils from '../utils/DateUtils'
+import StringUtils from "../utils/StringUtils";
 class FilterPage extends BasePage {
 
     constructor(props) {
@@ -69,8 +71,8 @@ class FilterPage extends BasePage {
             ],
             tradeType: '',
             incomeType: '',
-            startTime: '',
-            endTime: '',
+            startTime: '设置时间',
+            endTime: DateUtils.dateFmt(),
             startTimeValue:0,
             endTimeValue:0,
         }
@@ -82,12 +84,14 @@ class FilterPage extends BasePage {
             data:{
                 tradeType:this.state.tradeType,
                 incomeType:this.state.incomeType,
-                startTime:this.state.startTime+" 00:00:00",
-                endTime:this.state.endTime+ " 23:59:59"
+                startTime:StringUtils.equals(this.state.startTime,'设置时间')?'':this.state.startTime+" 00:00:00",
+                endTime:this.state.endTime+ " 23:59:59",
+                isResult:true
             }
         }
-        DeviceEventEmitter.emit(RouterPaths.MY_ORDER_PAGE,params)
-        nav.goBack()
+        // DeviceEventEmitter.emit(RouterPaths.MY_ORDER_PAGE,params)
+        // nav.goBack()
+        nav.navigate(RouterPaths.MY_ORDER_PAGE,params.data)
     }
     pickStartTime = () => {
         TimePicker.showTimePicker((value) => {

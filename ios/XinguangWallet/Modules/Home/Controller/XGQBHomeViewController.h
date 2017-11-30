@@ -10,5 +10,6 @@
 
 @interface XGQBHomeViewController : XGQBRootViewController
 
+@property (nonatomic,weak) UIButton *headerBtn;
 
 @end

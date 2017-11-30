@@ -76,4 +76,10 @@
     return secPhone;
 }
 
+-(NSString*)secureName
+{
+    NSString *newStr =[self stringByReplacingCharactersInRange:NSMakeRange(0, 2) withString:@"*"];
+    
+    return newStr;
+}
 @end
