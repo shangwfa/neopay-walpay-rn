@@ -12,8 +12,6 @@
 #import "XGQBCommMessTVC.h"
 #import "XGQBActiMessTVC.h"
 
-#import "XGQBNoContentViewController.h"
-#import "XGQBNetworkFailureViewController.h"
 
 #import "XGQBHomeCellView.h"
 
@@ -30,24 +28,29 @@
 #pragma mark - Table view data source
 -(void)loadView
 {
-    XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenHeight-75+350) style:UITableViewStyleGrouped];
+    XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenHeight-75) style:UITableViewStyleGrouped];
+    tableView.contentInset=UIEdgeInsetsMake(kScreenWidth*134/375.0, 0, 0, 0);
+    tableView.backgroundColor=kClearColor;
     self.tableView = tableView;
     self.view = tableView;
     
     tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenWidth*152/375.0)];
 
-    tableView.mj_header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    MJRefreshNormalHeader *header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [tableView.mj_header endRefreshing];
         });
     }];
+    tableView.mj_header = header;
+    header.automaticallyChangeAlpha=YES;
+    header.lastUpdatedTimeLabel.hidden=YES;
+    header.stateLabel.hidden=YES;
     
     tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [tableView.mj_footer endRefreshing];
         });
     }];
-    tableView.delegate = self;
     tableView.dataSource = self;
 }
 
@@ -67,8 +70,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.sectionHeaderHeight=0;
     self.tableView.sectionFooterHeight=0;
-    self.tableView.scrollEnabled = NO;
-    
 }
 
 -(void)moreBtnClicked
@@ -84,31 +85,10 @@
     return 1;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 8;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return CGFLOAT_MIN;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.messArr.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *messDict = self.messArr[indexPath.row];
-    
-    if ([messDict[@"type"]containsString:@"Mess"]) {
-        return (79+8);
-    }
-    else{
-        return (218*kScreenWidth/375.0+8);
-    }
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -174,36 +154,6 @@
     return nil;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *messDict = self.messArr[indexPath.row];
-    
-    if ([messDict[@"type"]isEqualToString:@"payMess"]) {
-        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-        RNVC.pageType = @"payMessage";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }
-    else if([messDict[@"type"]isEqualToString:@"mobileMess"])
-    {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"topupMsgList";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }else if([messDict[@"type"]isEqualToString:@"redPacketAct"])
-    {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"redList";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }
-    
-    else if (arc4random()%2) {
-        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
-        [self.view.superview.viewController.navigationController pushViewController:noContentVC animated:YES];
-    }else{
-        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
-        [self.view.superview.viewController.navigationController pushViewController:netWorkFailVC animated:YES];
-        
-    }
-}
 
 
 @end

@@ -9,7 +9,8 @@
 #import "XGQBHomeViewController.h"
 #import "XGQBLoginViewController.h"
 
-#import "XGQBHomeScrollView.h"
+#import "XGQBHomeTableViewController.h"
+
 #import "XGQBHomeTitleView.h"
 #import "XGQBHomeTitleBtn.h"
 #import "XGQBHomeCellView.h"
@@ -17,6 +18,10 @@
 #import "XGQBHeaderIconView.h"
 
 #import "XGQBAPPRootViewController.h"
+
+#import "XGQBNoContentViewController.h"
+#import "XGQBNetworkFailureViewController.h"
+
 
 
 #import "XGQBIDAlertViewController.h"
@@ -31,10 +36,15 @@
 #define cellViewHeight (kScreenWidth*152/375.0)
 #define homeNAVHeight 75
 
-@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UIScrollViewDelegate,XGQBHomeTitleViewBtnDelegate,XGQBHomeHeaderIconBtnDelegata>
-@property (nonatomic,weak) XGQBHomeScrollView *homeScrollV;
+@interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UITableViewDelegate,XGQBHomeTitleViewBtnDelegate,XGQBHomeHeaderIconBtnDelegata>
 @property (nonatomic,weak) UIView *headerIconView;
 @property (nonatomic,weak) UILabel *userNameLabel;
+@property (nonatomic,weak) XGQBHomeTitleView *homeTitleView;
+@property (nonatomic,weak) XGQBHomeTableView* homeTableView;
+
+@property (nonatomic,strong) NSMutableArray *messArr;
+
+
 @end
 
 @implementation XGQBHomeViewController
@@ -68,6 +78,22 @@
     UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_beijing8"]];
     [self.view addSubview:backgroundImg];
     
+
+
+    //tableView视图
+    XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
+    homeTableVC.tableView.delegate=self;
+    //一定要将tableviewcontroller加入到子控制器中,tableview才能点击...
+    [kAppWindow.rootViewController addChildViewController:homeTableVC];
+    _homeTableView = (XGQBHomeTableView*)homeTableVC.tableView;
+    [self.view addSubview:homeTableVC.tableView];
+
+    //顶部视图
+    XGQBHomeTitleView *homeTitleView = [[XGQBHomeTitleView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenWidth*134/375.0)];
+    homeTitleView.delegate=self;
+    _homeTitleView=homeTitleView;
+    [self.view addSubview:homeTitleView];
+    
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"sy_touxiang"]];
@@ -84,7 +110,6 @@
     [self.view addSubview:userNameLabel];
     _userNameLabel = userNameLabel;
     
-    
     //顶部缩略图
     XGQBHeaderIconView *headerIconView = [[XGQBHeaderIconView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 75)];
     headerIconView.alpha=0;
@@ -92,15 +117,8 @@
     headerIconView.delegate=self;
     [headerIconView.headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:headerIconView];
-    
-    //滚动视图
-    XGQBHomeScrollView *homeScrollV = [[XGQBHomeScrollView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenHeight-75)];
-    [self.view addSubview:homeScrollV];
-    homeScrollV.delegate = self;
-    homeScrollV.homeTitleView.delegate=self;
-    _homeScrollV=homeScrollV;
-                                       
-    
+
+
     kWeakSelf(self);
     
     [backgroundImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,54 +175,6 @@
     [self.navigationController pushViewController:RNVC animated:YES];
 }
 
-#pragma mark - scrollView Delegate
--(void)scrollViewWillEndDragging:(XGQBHomeScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y < - 65) {
-        [scrollView.homeTableView.mj_header beginRefreshing];
-    }else if(y > 0 && y <= titleViewHeight) {
-        [scrollView titleViewAnimationWithOffsetY:y];
-    }
-}
-
--(void)scrollViewDidScroll:(XGQBHomeScrollView *)scrollView
-{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y <= 0) {
-        //下滑时保持头部试图位置不变
-        scrollView.homeTitleView.alpha = 1;
-        CGRect newFrame = scrollView.homeTitleView.frame;
-        newFrame.origin.y = y;
-        scrollView.homeTitleView.frame = newFrame;
-
-        //保持tableview位置不变
-        newFrame = scrollView.homeTableView.frame;
-        newFrame.origin.y = y + titleViewHeight;
-        scrollView.homeTableView.frame = newFrame;
-
-        //偏移量给到tableview，tableview自己来滑动
-        [scrollView.homeTableView setScrollViewContentOffSetWithPoint:CGPointMake(0, y)];
-    }
-    
-        else if(y < titleViewHeight && y > 0) {
-        CGRect newFrame = scrollView.homeTitleView.frame;
-        newFrame.origin.y = y/2;
-        scrollView.homeTitleView.frame = newFrame;
-
-        //处理透明度
-        CGFloat alpha = (1-y*2/titleViewHeight)>0?(1 - y*2/titleViewHeight):0;
-        scrollView.homeTitleView.alpha = alpha;
-        self.headerBtn.alpha = alpha;
-        self.userNameLabel.alpha = alpha;
-        
-
-        CGFloat alpha2 = ((y-titleViewHeight/2.0)*2/titleViewHeight)>0?((y-titleViewHeight/2.0)*2/titleViewHeight):0;
-        self.headerIconView.alpha=alpha2;
-    
-    }
-}
-
 #pragma mark - XGQBHomeTitleViewBtnDelegate
 - (void)homeTitleBtnClicked:(XGQBHomeTitleBtn *)btn {
     if ([btn.titleLabel.text isEqualToString:@"大红包"]) {
@@ -231,5 +201,120 @@
         [self.navigationController pushViewController:RNVC animated:YES];
     }
 }
+
+#pragma mark - tableViewDelegate
+
+-(NSMutableArray*)messArr
+{
+    if (!_messArr) {
+        
+        _messArr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"mess" ofType:@"plist"]];
+    }
+    return _messArr;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *messDict = self.messArr[indexPath.row];
+
+    if ([messDict[@"type"]isEqualToString:@"payMess"]) {
+        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+        RNVC.pageType = @"payMessage";
+        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
+    }
+    else if([messDict[@"type"]isEqualToString:@"mobileMess"])
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"topupMsgList";
+        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
+    }else if([messDict[@"type"]isEqualToString:@"redPacketAct"])
+    {
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType = @"redList";
+        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
+    }
+
+    else if (arc4random()%2) {
+        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
+        [self.view.superview.viewController.navigationController pushViewController:noContentVC animated:YES];
+    }else{
+        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
+        [self.view.superview.viewController.navigationController pushViewController:netWorkFailVC animated:YES];
+
+    }
+    
+    NSLog(@"点击了第%ld行",(long)indexPath.row);
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 8;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *messDict = self.messArr[indexPath.row];
+    
+    if ([messDict[@"type"]containsString:@"Mess"]) {
+        return (79+8);
+    }
+    else{
+        return (218*kScreenWidth/375.0+8);
+    }
+}
+
+#pragma mark - scrollView Delegate
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    CGFloat y = scrollView.contentOffset.y;
+    NSLog(@"%f",y);
+    
+    if(y > -titleViewHeight && y <= 0) {
+        if (y > -titleViewHeight/ 2.0) {
+            [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        }else {
+            [scrollView setContentOffset:CGPointMake(0, -titleViewHeight) animated:YES];
+        }
+    }
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat originInsetY=-(kScreenWidth*134.0/375.0);//-148
+    CGFloat y = scrollView.contentOffset.y;
+    NSLog(@"scrollviewDidScroll:%f",y);
+    //处理开始上划
+    if(y > originInsetY) {
+        
+        CGRect newFrame = _homeTitleView.frame;
+        newFrame.origin.y = 75-(y-originInsetY)/2.0;
+        _homeTitleView.frame = newFrame;
+
+        //处理透明度
+        CGFloat alpha = 1-((y-originInsetY)/(titleViewHeight)*2)>0?1-((y-originInsetY)/(titleViewHeight)*2):0;
+        _homeTitleView.alpha = alpha;
+        self.headerBtn.alpha = alpha;
+        self.userNameLabel.alpha = alpha;
+
+        CGFloat alpha2 = ((y-originInsetY-titleViewHeight/2.0)/titleViewHeight)*2.0>0?((y-originInsetY-titleViewHeight/2.0)/titleViewHeight)*2.0:0;
+        self.headerIconView.alpha=alpha2;
+    }
+    //处理开始下滑时,上方titleView的位置固定,防止出现下滑过快,titleView无法回到初始位置,并且透明度无法回位的情况
+    else{
+        _homeTitleView.frame = CGRectMake(0, 75, kScreenWidth, kScreenWidth*134/375.0);
+        _homeTitleView.alpha=1.0;
+        _headerBtn.alpha=1.0;
+        _userNameLabel.alpha=1.0;
+        _headerIconView.alpha=0.0;
+        
+    }
+}
+
+
 
 @end
