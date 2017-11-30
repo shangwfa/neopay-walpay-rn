@@ -22,6 +22,7 @@
 #import "XGQBNoContentViewController.h"
 #import "XGQBNetworkFailureViewController.h"
 
+#import "XGQBMessage.h"
 
 
 #import "XGQBIDAlertViewController.h"
@@ -42,7 +43,7 @@
 @property (nonatomic,weak) XGQBHomeTitleView *homeTitleView;
 @property (nonatomic,weak) XGQBHomeTableView* homeTableView;
 
-@property (nonatomic,strong) NSMutableArray *messArr;
+@property (nonatomic,strong) NSMutableArray <XGQBMessage*>*messArr;
 
 
 @end
@@ -57,6 +58,7 @@
     
     [self setUpViewComponents];
     [self checkIDStatus];
+    
 
     //接受实名认证通知,跳转至实名认证页面
     [kNotificationCenter addObserver:self selector:@selector(registerID) name:kNotificationRegisterIDAction object:nil];
@@ -204,44 +206,44 @@
 
 #pragma mark - tableViewDelegate
 
--(NSMutableArray*)messArr
-{
-    if (!_messArr) {
-        
-        _messArr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"mess" ofType:@"plist"]];
-    }
-    return _messArr;
-}
+//-(NSMutableArray*)messArr
+//{
+//    if (!_messArr) {
+//
+//        _messArr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"mess" ofType:@"plist"]];
+//    }
+//    return _messArr;
+//}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *messDict = self.messArr[indexPath.row];
-
-    if ([messDict[@"type"]isEqualToString:@"payMess"]) {
-        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-        RNVC.pageType = @"payMessage";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }
-    else if([messDict[@"type"]isEqualToString:@"mobileMess"])
-    {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"topupMsgList";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }else if([messDict[@"type"]isEqualToString:@"redPacketAct"])
-    {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"redList";
-        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
-    }
-
-    else if (arc4random()%2) {
-        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
-        [self.view.superview.viewController.navigationController pushViewController:noContentVC animated:YES];
-    }else{
-        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
-        [self.view.superview.viewController.navigationController pushViewController:netWorkFailVC animated:YES];
-
-    }
+//    NSDictionary *messDict = self.messArr[indexPath.row];
+//
+//    if ([messDict[@"type"]isEqualToString:@"payMess"]) {
+//        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+//        RNVC.pageType = @"payMessage";
+//        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
+//    }
+//    else if([messDict[@"type"]isEqualToString:@"mobileMess"])
+//    {
+//        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+//        RNVC.pageType = @"topupMsgList";
+//        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
+//    }else if([messDict[@"type"]isEqualToString:@"redPacketAct"])
+//    {
+//        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+//        RNVC.pageType = @"redList";
+//        [self.view.superview.viewController.navigationController pushViewController:RNVC animated:YES];
+//    }
+//
+//    else if (arc4random()%2) {
+//        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
+//        [self.view.superview.viewController.navigationController pushViewController:noContentVC animated:YES];
+//    }else{
+//        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
+//        [self.view.superview.viewController.navigationController pushViewController:netWorkFailVC animated:YES];
+//
+//    }
     
     NSLog(@"点击了第%ld行",(long)indexPath.row);
 }
@@ -256,23 +258,10 @@
     return CGFLOAT_MIN;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *messDict = self.messArr[indexPath.row];
-    
-    if ([messDict[@"type"]containsString:@"Mess"]) {
-        return (79+8);
-    }
-    else{
-        return (218*kScreenWidth/375.0+8);
-    }
-}
-
 #pragma mark - scrollView Delegate
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     CGFloat y = scrollView.contentOffset.y;
-    NSLog(@"%f",y);
     
     if(y > -titleViewHeight && y <= 0) {
         if (y > -titleViewHeight/ 2.0) {
@@ -287,7 +276,6 @@
 {
     CGFloat originInsetY=-(kScreenWidth*134.0/375.0);//-148
     CGFloat y = scrollView.contentOffset.y;
-    NSLog(@"scrollviewDidScroll:%f",y);
     //处理开始上划
     if(y > originInsetY) {
         

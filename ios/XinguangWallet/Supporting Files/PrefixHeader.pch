@@ -44,10 +44,6 @@
 //网络类
 #import "ABNetworkCofing.h"
 #import "ABNetworkManager.h"
-#import "AssistCoreService.h"
-#import "BalanceCoreService.h"
-#import "BankCardCoreService.h"
 #import "MemberCoreService.h"
-#import "MerchantCoreService.h"
 
 #endif /* PrefixHeader_pch */

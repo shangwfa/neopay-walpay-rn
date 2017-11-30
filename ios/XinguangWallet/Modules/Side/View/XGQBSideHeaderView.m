@@ -25,7 +25,11 @@
     UIImageView *headerIcon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width*0.285, frame.size.width*0.285)];
     [headerIcon sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] placeholderImage:[UIImage imageNamed:@"wd_touxiang"]];
     kViewRadius(headerIcon,MAX(headerIcon.width/2.0, headerIcon.height/2.0));
+    _headerIcon=headerIcon;
     [self addSubview:headerIcon];
+    
+    headerIcon.userInteractionEnabled=YES;
+
     
     //认证标签
     NSString *imageName = [GVUserDefaults standardUserDefaults].authStatus==2?@"wd_yishiming":@"wd_weishiming";
