@@ -1,6 +1,18 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+getProvinceList = (callback) => {
+    NetUtil.post(APIS.GET_PROVINCE_LIST, {}, (data) => {
+        callback(data)
+    })
+}
+
+getCityList = (req, callback) => {
+    NetUtil.post(APIS.GET_CITY_LIST, req, (data) => {
+        callback(data)
+    })
+}
+
 getRpDetail = (req, callback) => {
     NetUtil.post(APIS.RP_GET_RP_DETAIL, req, (data) => {
         callback(data)
@@ -194,6 +206,8 @@ withdraworder=(request,callback)=>{
     })
 }
 export default {
+    getProvinceList,
+    getCityList,
     getRpDetail,
     getRpReceiverList,
     getPhoneTopupRecordList,

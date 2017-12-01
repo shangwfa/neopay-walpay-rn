@@ -12,6 +12,8 @@ import ScreenUtils from '../utils/ScreenUtils'
 
 const imgWidth = (ScreenUtils.width - 30)/4;
 
+const itemHeight = ScreenUtils.height/6;
+
 const RpDetailHeader = props => {
     const {
         imgBackGroundUrl,
@@ -32,10 +34,25 @@ const RpDetailHeader = props => {
             alignItems:'center'
         },
 
+        top_View:{
+            width:ScreenUtils.width,
+            height:itemHeight,
+            backgroundColor:colors.rp_bg_def
+        },
+
+        mid_Image:{
+            width:ScreenUtils.width,
+            height:itemHeight-4,
+            resizeMode:'cover',
+            backgroundColor:colors.white,
+            alignItems:'center',
+            justifyContent:'flex-end'
+        },
+
         middle_container: {
             flexDirection:'row',
             width:ScreenUtils.width,
-            justifyContent:'space-between'
+            justifyContent:'space-between',
         },
 
         remark_value: {
@@ -56,7 +73,6 @@ const RpDetailHeader = props => {
             width: imgWidth,
             height:imgWidth,
             borderRadius: imgWidth/2,
-            marginTop: 20,
             backgroundColor:colors.black,
         },
         maxImg: {
@@ -87,20 +103,26 @@ const RpDetailHeader = props => {
     }
 
     return (
-        <Image style = {styles.background_container} source = {require("../res/img/rp_backGround.png")}>
-            <View style = {styles.middle_container}>
-                <View style={{flex:1}} />
-                <Text style={styles.remark_value}>{remarkValue}</Text>
-                <View style={{flex:1,backgroundColor:'transparent'}}>
-                    <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
-                </View>
+        <View style = {styles.background_container} >
+            <View style = {styles.top_View}>
+                <View style = {styles.middle_container}>
+                    <View style={{flex:1}} />
+                    <Text style={styles.remark_value}>{remarkValue}</Text>
+                    <View style={{flex:1,backgroundColor:'transparent'}}>
+                        <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
+                    </View>
 
+                </View>
+                <Text style={styles.amount_value}>{amountValue==0?'  ':amountValue}</Text>
             </View>
-            <Text style={styles.amount_value}>{amountValue==0?'  ':amountValue}</Text>
-            <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
+
+            <Image style = {styles.mid_Image} source = {require("../res/img/rp_mid_bg.png")}>
+                <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
+            </Image>
+
             <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
             <Text style={styles.state_value}>{stateValue}</Text>
-        </Image>
+        </View>
     );
 };
 

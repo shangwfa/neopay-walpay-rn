@@ -7,5 +7,6 @@ export default {
     black_light: '#666666',
     balck_more_light:'#999999',
     divider:'#cccccc',
+    rp_bg_def:'#d83e3e',
     transparent:'#0000'
 }

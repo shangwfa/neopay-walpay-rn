@@ -1,5 +1,6 @@
 import Splash from '../page/SplashPage'
 import Home from "../page/HomePage"
+import ChoseCity from '../page/ChoseCityPage'
 import ChangeName from '../page/ChangeNamePage'
 import ActivityList from '../page/ActivityListPage'
 import ModalDemo from '../page/ModalDemoPage'
@@ -60,6 +61,7 @@ import NewUserInfoCertify from "../page/NewUserInfoCertifyPage"
 const RouterSetting = {
     splash: {screen: Splash},
     home: {screen: Home},
+    choseCity: {screen: ChoseCity},
     changeName: {screen: ChangeName},
     activityList: {screen: ActivityList},
     modal: {screen: ModalDemo},

@@ -6,6 +6,7 @@ export const RouterPaths = {
     TRANSACTION_DETAILS: "transactionDetails",
     SPLASH_PAGE: 'splash',
     HOME_PAGE: 'home',
+    CHOSE_CITY: 'choseCity',
     CHANGE_NAME_PAGE: 'changeName',
     FEEDBACK_PAGE: 'feedback',
     SETTING_PAGE: 'setting',
