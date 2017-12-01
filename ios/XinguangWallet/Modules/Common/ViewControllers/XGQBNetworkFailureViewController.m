@@ -61,6 +61,9 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden=NO;
+    kApplication.statusBarStyle=UIStatusBarStyleDefault;
+    [kNotificationCenter postNotificationName:kNotificationNavPushToSecondLevel object:nil];
+
 }
 
 /*
