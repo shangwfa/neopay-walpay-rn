@@ -45,19 +45,19 @@
     kWeakSelf(self);
 
     [floatBgImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth*350/375.0, kScreenWidth*103/375.0));
+        make.size.mas_equalTo(CGSizeMake(kScaledSizeW(350), kScaledSizeW(103)));
         make.centerX.equalTo(weakself);
         make.bottom.equalTo(weakself).with.offset(-10);
     }];
     
     [redPBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth*50/375.0, kScreenWidth*75/375.0));
+        make.size.mas_equalTo(CGSizeMake(kScaledSizeW(50), kScaledSizeW(75)));
         make.centerY.equalTo(floatBgImg);
         make.left.equalTo(floatBgImg).with.offset(63);
     }];
     
     [phoneTopUpBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kScreenWidth*50/375.0, kScreenWidth*75/375.0));
+        make.size.mas_equalTo(CGSizeMake(kScaledSizeW(50), kScaledSizeW(75)));
         make.centerY.equalTo(floatBgImg);
         make.right.equalTo(floatBgImg).with.offset(-63);
     }];

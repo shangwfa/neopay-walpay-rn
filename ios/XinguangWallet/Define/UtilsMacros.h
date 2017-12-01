@@ -32,8 +32,8 @@
 #define kScreen_Bounds [UIScreen mainScreen].bounds
 
 //根据iPhone6的尺寸来缩放
-#define kSizeRatioW kScreenWidth/375.0
-#define kSizeRationH kScreenHeight/667.0
+#define kSizeRatioW (kScreenWidth/375.0)
+#define kSizeRationH (kScreenHeight/667.0)
 #define kScaledSizeW(width) ((width)*(kScreenWidth/375.0f))
 #define kScaledSizeH(width) ((height)*(kScreenHeight/667.0f))
 

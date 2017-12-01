@@ -33,8 +33,8 @@
 
 #import "XGQBRNViewController.h"
 
-#define titleViewHeight (kScreenWidth*134/375.0)
-#define cellViewHeight (kScreenWidth*152/375.0)
+#define titleViewHeight (kScaledSizeW(134))
+#define cellViewHeight (kScaledSizeW(152))
 #define homeNAVHeight 75
 
 @interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UITableViewDelegate,XGQBHomeTitleViewBtnDelegate,XGQBHomeHeaderIconBtnDelegata>
@@ -90,7 +90,7 @@
     [self.view addSubview:homeTableVC.tableView];
 
     //顶部视图
-    XGQBHomeTitleView *homeTitleView = [[XGQBHomeTitleView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenWidth*134/375.0)];
+    XGQBHomeTitleView *homeTitleView = [[XGQBHomeTitleView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScaledSizeW(134))];
     homeTitleView.delegate=self;
     _homeTitleView=homeTitleView;
     [self.view addSubview:homeTitleView];
@@ -180,7 +180,7 @@
 - (void)homeTitleBtnClicked:(XGQBHomeTitleBtn *)btn {
     if ([btn.titleLabel.text isEqualToString:@"大红包"]) {
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"bigRedPacket";
+        RNVC.pageType = @"bigRedPacketSimple";
         [self.navigationController pushViewController:RNVC animated:YES];
     }else if ([btn.titleLabel.text isEqualToString:@"手机充值"]){
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
@@ -194,7 +194,7 @@
 {
     if (btn.tag==10001) {
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"bigRedPacket";
+        RNVC.pageType = @"bigRedPacketSimple";
         [self.navigationController pushViewController:RNVC animated:YES];
     }else if (btn.tag==10002){
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
@@ -259,7 +259,7 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat originInsetY=-(kScreenWidth*134.0/375.0);//-148
+    CGFloat originInsetY=-(kScaledSizeW(134.0));//-148
     CGFloat y = scrollView.contentOffset.y;
     //处理开始上划
     if(y > originInsetY) {
@@ -279,7 +279,7 @@
     }
     //处理开始下滑时,上方titleView的位置固定,防止出现下滑过快,titleView无法回到初始位置,并且透明度无法回位的情况
     else{
-        _homeTitleView.frame = CGRectMake(0, 75, kScreenWidth, kScreenWidth*134/375.0);
+        _homeTitleView.frame = CGRectMake(0, 75, kScreenWidth, kScaledSizeW(134));
         _homeTitleView.alpha=1.0;
         _headerBtn.alpha=1.0;
         _userNameLabel.alpha=1.0;

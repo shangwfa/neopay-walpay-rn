@@ -29,13 +29,13 @@
 -(void)loadView
 {
     XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenHeight-75) style:UITableViewStyleGrouped];
-    tableView.contentInset=UIEdgeInsetsMake(kScreenWidth*134/375.0, 0, 0, 0);
+    tableView.contentInset=UIEdgeInsetsMake(kScaledSizeW(134), 0, 0, 0);
     tableView.backgroundColor=kClearColor;
     self.tableView = tableView;
     self.view = tableView;
     tableView.dataSource = self;
     
-    tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenWidth*152/375.0+8)];
+    tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScaledSizeW(134), kScreenWidth, kScaledSizeW(152)+8)];
     
     [self refreshData];
 
