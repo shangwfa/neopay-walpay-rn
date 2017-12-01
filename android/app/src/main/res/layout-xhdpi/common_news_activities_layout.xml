@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <FrameLayout
+        android:id="@+id/common_activity_container_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/common_white">
@@ -10,11 +11,8 @@
             android:id="@+id/common_news_red_packet_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_13dp"
-            android:layout_marginRight="@dimen/size_13dp"
             android:layout_marginTop="@dimen/size_10dp"
             android:orientation="vertical">
-
 
             <include
                 android:id="@+id/common_news_title_ll"
@@ -25,6 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_155dp"
                 android:layout_marginBottom="@dimen/size_15dp"
+                android:layout_marginLeft="@dimen/size_13dp"
+                android:layout_marginRight="@dimen/size_13dp"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:scaleType="fitXY" />
         </LinearLayout>

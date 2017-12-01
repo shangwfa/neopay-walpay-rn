@@ -30,7 +30,7 @@ public class RNCacheViewManager {
 
     public static ReactInstanceManager getReactInstanceManager() {
         if (mReactInstanceManager == null) {
-           init();
+            init();
         }
         return mReactInstanceManager;
     }

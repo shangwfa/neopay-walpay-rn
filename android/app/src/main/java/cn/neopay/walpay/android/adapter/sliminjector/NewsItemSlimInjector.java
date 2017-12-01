@@ -23,11 +23,12 @@ public class NewsItemSlimInjector implements SlimInjector<NewsItemBean> {
         if (null == data) {
             return;
         }
-        injector.with(R.id.news_item_avatar_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getAvatar()))
+        injector.with(R.id.news_item_avatar_iv, view -> GlideManager.loadNetCircleImage((ImageView) view, data.getAvatar()))
                 .text(R.id.news_item_type_tv, data.getName())
                 .text(R.id.news_item_time_tv, data.getTime())
                 .text(R.id.news_item_result_tv, data.getContent())
-                .visibility(R.id.news_item_red_dot_iv, data.isSelect() ? View.INVISIBLE : View.GONE);
+                .visibility(R.id.news_item_red_dot_iv, data.getIsSelectState() != 1 ? View.VISIBLE : View.GONE)
+                .clicked(R.id.news_item_container_ll, data.getOnClickListener());
 
 
     }

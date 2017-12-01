@@ -11,10 +11,17 @@ import android.widget.FrameLayout;
 
 import com.xgjk.common.lib.manager.glide.GlideManager;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.text.MessageFormat;
+
 import cn.neopay.walpay.android.BuildConfig;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.databinding.HomeDrawTopViewBinding;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.event.HomeTopViewEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.BusniessUtils;
@@ -53,19 +60,16 @@ public class HomeDrawTopView extends FrameLayout {
     }
 
     private void handleView(Context context) {
-
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         if (BuildConfig.DEBUG) {
             mBinding.homeAvatarDesTv.setOnClickListener(v -> MainRouter.getSingleton().jumpToEnvironmentSettingActivityPage());
         }
-        mBinding.homeDrawLoansLl.setOnClickListener(v -> {
-            //todo 员工贷款
-        });
-        mBinding.homeDrawSeasonsLl.setOnClickListener(v -> {
-            //todo 四季严选
-        });
-        mBinding.homeDrawBigRedPacketLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIG_RED_PAGE)));
+        mBinding.homeDrawBigRedPacketLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIG_RED_PACKET_SIMPLE_PAGE)));
         mBinding.homeDrawRechargeLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_TOPUP_PAGE)));
-        mBinding.homeDrawBalanceLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BALANCE)));
+        mBinding.homeSimpleBigRedPacketIv.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIG_RED_PACKET_SIMPLE_PAGE)));
+        mBinding.homeSimplePhoneChargeIv.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_TOPUP_PAGE)));
     }
 
     public UserInfoResponseBean getmUserInfoBean() {
@@ -80,8 +84,18 @@ public class HomeDrawTopView extends FrameLayout {
         this.mUserInfoBean = mUserInfoBean;
         if (mUserInfoBean != null) {
             GlideManager.loadNetCircleImage(mBinding.homeAvatarIv, mUserInfoBean.getAvatarUrl());
-            mBinding.homeAvatarDesTv.setText(mUserInfoBean.getNickName());
+            mBinding.homeAvatarDesTv.setText(MessageFormat.format("hi，{0}", mUserInfoBean.getNickName()));
+            GlideManager.loadNetCircleImage(mBinding.homeSimpleAvatarIv, mUserInfoBean.getAvatarUrl());
+            mBinding.homeSimpleAvatarDesTv.setText(MessageFormat.format("hi，{0}", mUserInfoBean.getNickName()));
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeHomeTopViewEvent(HomeTopViewEventBean homeTopViewEventBean) {
+        if (null == homeTopViewEventBean) {
+            return;
+        }
+//        mBinding.getRoot().scrollBy(0, homeTopViewEventBean.getScrollY());
     }
 
 }

@@ -21,7 +21,6 @@ import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
-import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
  * @author carlos.guo
@@ -62,7 +61,7 @@ public class HomeTopView extends FrameLayout {
             mBinding.walpayIconIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToEnvironmentSettingActivityPage());
         }
 
-        mBinding.homeSignIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToSignInWebPage());
+        mBinding.homeSignIv.setOnClickListener(v -> MainRouter.getSingleton().jumpToCommonWebPage(""));
 
         mBinding.homeScanLl.setOnClickListener(v -> new RxPermissions((Activity) getContext())
                 .request(Manifest.permission.CAMERA)

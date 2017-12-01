@@ -19,6 +19,7 @@ import cn.neopay.walpay.android.manager.ossmanager.OssManager;
 import cn.neopay.walpay.android.module.request.AddFeedbackRequestBean;
 import cn.neopay.walpay.android.module.request.AddRedPacketReceiverRequestBean;
 import cn.neopay.walpay.android.module.request.AddShareRequestBean;
+import cn.neopay.walpay.android.module.request.BaseRequest;
 import cn.neopay.walpay.android.module.request.BindBankCardRequestBean;
 import cn.neopay.walpay.android.module.request.CheckAppVersionRequestBean;
 import cn.neopay.walpay.android.module.request.CheckInRequestBean;
@@ -757,6 +758,27 @@ public class ApiManager {
                 .compose(RxUtils.rxNet())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 获取首页消息
+     */
+    public void getHomeNewsInfo(BaseRequest requestBean, BaseSubscriber subscriber) {
+        Api.getInstance().getApiService()
+                .getHomeNewsInfo(ReflectUtils.convertObjToMap(requestBean))
+                .compose(RxUtils.rxNet())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 更新首页消息的状态
+     */
+    public void updateNewsReadStatus(BaseRequest requestBean, BaseSubscriber subscriber) {
+        Api.getInstance().getApiService()
+                .updateNewsReadStatus(ReflectUtils.convertObjToMap(requestBean))
+                .compose(RxUtils.rxNet())
+                .subscribe(subscriber);
+    }
+
 
     /**
      * 上传单张图片

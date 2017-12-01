@@ -85,7 +85,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
     private void setNextItemData(ArrayList<Object> data) {
 
         MineTextImgItemBean mAbout = new MineTextImgItemBean();
-        mAbout.setItemImgId(R.mipmap.img_about_us);
+        mAbout.setItemImgId(R.mipmap.img_mine_draw_about);
         mAbout.setItemName("关于我们");
         mAbout.setOnClickListener(v -> {
 
@@ -93,7 +93,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         data.add(mAbout);
         mData.add(new CommonLineItemBean());
         MineTextImgItemBean mSetting = new MineTextImgItemBean();
-        mSetting.setItemImgId(R.mipmap.img_setting);
+        mSetting.setItemImgId(R.mipmap.img_mine_draw_settings);
         mSetting.setItemName("设置");
         mSetting.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
@@ -105,7 +105,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
 
     private void setTopMineItemData(ArrayList<Object> data) {
         MineTextImgItemBean mMyBill = new MineTextImgItemBean();
-        mMyBill.setItemImgId(R.mipmap.img_my_bill);
+        mMyBill.setItemImgId(R.mipmap.img_mine_draw_bill);
         mMyBill.setItemName("我的账单");
         mMyBill.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
@@ -115,7 +115,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         data.add(mMyBill);
         mData.add(new CommonLineItemBean());
         MineTextImgItemBean mAsset = new MineTextImgItemBean();
-        mAsset.setItemImgId(R.mipmap.img_asset);
+        mAsset.setItemImgId(R.mipmap.img_mine_draw_money);
         mAsset.setItemName("我的资产");
         mAsset.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
@@ -125,7 +125,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         data.add(mAsset);
         mData.add(new CommonLineItemBean());
         MineTextImgItemBean mMyBank = new MineTextImgItemBean();
-        mMyBank.setItemImgId(R.mipmap.img_bank);
+        mMyBank.setItemImgId(R.mipmap.img_mine_draw_bank_card);
         mMyBank.setItemName("我的银行卡");
         mMyBank.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();

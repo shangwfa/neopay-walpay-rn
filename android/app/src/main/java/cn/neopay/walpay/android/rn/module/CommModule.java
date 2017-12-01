@@ -43,6 +43,7 @@ public class CommModule extends ReactContextBaseJavaModule {
 
     public static final String EVENT_UPDATE_HEAD_IMG = "updateHeadImg";
     public static final String EVENT_SELECT_CONTACTS = "ContactSelected";
+    public static final String EVENT_RED_PACKET_DETAIL = "RedPacketDetail";
 
     /**
      * 构造方法必须实现
@@ -248,6 +249,16 @@ public class CommModule extends ReactContextBaseJavaModule {
     public void nativeCallRnSelectContacts(String phone) {
         mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(EVENT_SELECT_CONTACTS, phone);
+    }
+
+    /**
+     * Native调用RN
+     *
+     * @param //msg
+     */
+    public void nativeCallRnRedPacketDetail(String packetCode) {
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(EVENT_RED_PACKET_DETAIL, packetCode);
     }
 
     /**

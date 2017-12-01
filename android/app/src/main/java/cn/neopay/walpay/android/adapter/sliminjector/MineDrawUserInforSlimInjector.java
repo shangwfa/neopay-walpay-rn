@@ -1,5 +1,6 @@
 package cn.neopay.walpay.android.adapter.sliminjector;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,11 +25,13 @@ import cn.neopay.walpay.android.ui.RNActivity;
  */
 
 public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoResponseBean> {
+    @SuppressLint("ResourceType")
     @Override
     public void onInject(UserInfoResponseBean data, IViewInjector injector) {
         if (null == data) {
             return;
         }
+        injector.with(R.id.img_mine_draw_bg_iv, view -> GlideManager.loadResImage((ImageView) view, R.mipmap.img_mine_draw_gif_bg));
         injector.with(R.id.mine_draw_user_avatar_iv, view -> {
             if (null == data.getAvatarUrl() || TextUtils.isEmpty(data.getAvatarUrl())) {
                 injector.background(R.id.mine_draw_user_avatar_iv, R.mipmap.img_default_avater);
@@ -57,6 +60,7 @@ public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoRespo
                     }
 
                 })
+                .with(R.id.mine_draw_go_auth_two_iv, view -> view.setOnClickListener(v -> RNActivity.jumpToRNPage(v.getContext(), RNActivity.PageType.BIND_BANK_CARD)))
         ;
     }
 
@@ -69,15 +73,22 @@ public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoRespo
         String name = StringUtils.authString(data.getName());
 
         if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//未设置昵称未实名认证
-            injector.visibility(R.id.mine_draw_user_name_tv, View.GONE);
+            injector.visibility(R.id.mine_draw_auth_state_ll, View.GONE);
+            injector.visibility(R.id.mine_draw_go_auth_two_iv, View.VISIBLE);
         }
         if (StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {//未设置昵称且实名认证
+            injector.visibility(R.id.mine_draw_auth_state_ll, View.VISIBLE);
+            injector.visibility(R.id.mine_draw_go_auth_two_iv, View.GONE);
             view.setText(FormatUtils.nameTuomin(data.getName()));
         }
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {// 设置昵称且实名认证
+            injector.visibility(R.id.mine_draw_auth_state_ll, View.VISIBLE);
+            injector.visibility(R.id.mine_draw_go_auth_two_iv, View.GONE);
             view.setText(String.format("%s(%s)", nickName, FormatUtils.nameTuomin(name)));
         }
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//设置昵称未实名认证
+            injector.visibility(R.id.mine_draw_auth_state_ll, View.VISIBLE);
+            injector.visibility(R.id.mine_draw_go_auth_two_iv, View.GONE);
             view.setText(nickName);
         }
         if (StringUtils.isNotEmpty(phone)) {
