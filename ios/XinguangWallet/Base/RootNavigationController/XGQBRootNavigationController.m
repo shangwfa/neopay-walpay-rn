@@ -50,7 +50,7 @@
         // 左上角的返回
         UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 10.5, 18)];
 //        leftBtn.backgroundColor = kRedColor;
-        [leftBtn setImage:[UIImage imageNamed:@"jiantou"] forState:0];
+        [leftBtn setImage:kIMAGENAMED(@"jiantou") forState:0];
         [leftBtn setTitle:@"        " forState:UIControlStateNormal];
 //        [leftBtn imageRectForContentRect:CGRectMake(0, 0, 30, 30)];
         

@@ -62,7 +62,7 @@
 
 -(void)addBlockView{
     UIView *blockView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    blockView.backgroundColor = [UIColor colorWithHexString:@"000000"];
+    blockView.backgroundColor = UIColorHex(000000);
     blockView.alpha=0;
     self.blockView=blockView;
     [self.rootNAV.view addSubview:blockView];

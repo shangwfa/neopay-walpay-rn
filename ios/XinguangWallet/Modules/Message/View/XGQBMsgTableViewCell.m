@@ -19,40 +19,40 @@
     if (message.msgType.intValue==1) {
         
         //红包来啦标题栏
-        UIImageView *titleImgV =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_hongbaolaila5"]];
+        UIImageView *titleImgV =[[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_hongbaolaila5")];
         
         //时间标签
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
         timeLabel.font = kSYSTEMFONT(11.0);
-        timeLabel.textColor=[UIColor colorWithHexString:@"999999"];
+        timeLabel.textColor=UIColorHex(999999);
         timeLabel.text=message.createTime;
         
         //背景图片
-        UIImage *bgImg = [UIImage imageNamed:@"beijing"];
+        UIImage *bgImg = kIMAGENAMED(@"beijing");
         UIImageView *bgImgV =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth-2*12, kScreenWidth*155/375.0)];
         [bgImgV sd_setImageWithURL:[NSURL URLWithString:message.themeUrl] placeholderImage:bgImg];
         kViewRadius(bgImgV, 5);
         
         //图标
         UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth*58/375.0, kScreenWidth*58/375.0)];
-        [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:[UIImage imageNamed:@"wd_touxiang"]];
+        [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
         kViewRadius(icon,kScreenWidth*58/375.0/2.0);
         
         //描述文字
         UILabel *desText = [[UILabel alloc]initWithFrame:CGRectMake(98, 51, 163, 17)];
         desText.text = message.themeTypeText;
         desText.font = kSYSTEMFONT(17);
-        desText.textColor = [UIColor colorWithHexString:@"FBDEB0"];
+        desText.textColor = UIColorHex(FBDEB0);
         
         //店铺文字描述
         UILabel *shopText = [[UILabel alloc]initWithFrame:CGRectMake(98, 91, 200, 14)];
         shopText.font = kSYSTEMFONT(13);
-        shopText.textColor = [UIColor colorWithHexString:@"FBDEB0"];
+        shopText.textColor = UIColorHex(FBDEB0);
         shopText.text = [NSString stringWithFormat:@"——来自%@的红包",message.bossName];
         
         //分割线
         UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 8)];
-        sepLine.backgroundColor=[UIColor colorWithHexString:@"F5F5F5"];
+        sepLine.backgroundColor=UIColorHex(F5F5F5);
         
         [cell.contentView addSubview:titleImgV];
         [cell.contentView addSubview:timeLabel];
@@ -112,28 +112,28 @@
         UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 66, 16)];
         title.text=message.msgTypeText;
         title.font=kSYSTEMFONT(16.0);
-        title.textColor= [UIColor colorWithHexString:@"333333"];
+        title.textColor= UIColorHex(333333);
         
         //时间标签
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
         timeLabel.font = kSYSTEMFONT(11.0);
-        timeLabel.textColor=[UIColor colorWithHexString:@"999999"];
+        timeLabel.textColor=UIColorHex(999999);
         timeLabel.text=message.createTime;
         
         //图标
         UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth*58/375.0, kScreenWidth*58/375.0)];
-        [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:[UIImage imageNamed:@"wd_touxiang"]];
+        [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
         kViewRadius(icon,icon.width/2.0);
         
         //描述文字
         UILabel *desLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 53, 13)];
         desLabel.text = message.payNoticeTypeText;
         desLabel.font = kSYSTEMFONT(13.0);
-        timeLabel.textColor=[UIColor colorWithHexString:@"999999"];
+        timeLabel.textColor=UIColorHex(999999);
         
         //分割线
         UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 8)];
-        sepLine.backgroundColor=[UIColor colorWithHexString:@"F5F5F5"];
+        sepLine.backgroundColor=UIColorHex(F5F5F5);
 
         [cell.contentView addSubview:title];
         [cell.contentView addSubview:timeLabel];
@@ -169,7 +169,6 @@
         }];
         
     }
-    
     
     return cell;
 }

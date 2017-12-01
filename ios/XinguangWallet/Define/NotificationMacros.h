@@ -1,5 +1,5 @@
 //
-//  CommonMacros.h
+//  NotificationMacros.h
 //  MiAiApp
 //
 //  Created by JK on 2017/5/31.
@@ -8,13 +8,12 @@
 
 //全局标记字符串，用于 通知 存储
 
-#ifndef CommonMacros_h
-#define CommonMacros_h
+#ifndef NotificationMacros_h
+#define NotificationMacros_h
 
 #pragma mark - ——————— 通知相关 ————————
 //登录状态改变通知
 #define kNotificationLoginStateChange @"loginStateChange"
-
 //RN跳回原生界面通知
 #define kNotificationRNJumpBackToNative @"RNJumpBackToNative"
 //RN跳转修改登录密码页面
@@ -29,13 +28,10 @@
 #define kNotificationRNModalContactList @"RNModalContactList"
 //原生获得通讯录手机号
 #define kNotificationGetContactPhoneNoToRN @"GetContactPhoneNoToRN"
-
 //Test UINavigationController push之后通知tabbar禁用自定义右划手势
 #define kNotificationNavPushToSecondLevel @"NavPushToSecondLevel"
-
 //Test UINavigationController push回来之后通知tabbar启用自定义右划手势
 #define kNotificationNavPopToFirstLevel @"NavPopToFirstLevel"
-
 //进行实名认证通知
 #define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"
 
@@ -45,4 +41,4 @@
 //网络状态变化
 //#define KNotificationNetWorkStateChange @"KNotificationNetWorkStateChange"
 
-#endif /* CommonMacros_h */
+#endif /* NotificationMacros_h */

@@ -57,8 +57,8 @@
     }else
     {
         self.userInteractionEnabled = NO;
-        self.layer.borderColor = [UIColor colorWithHexString:@"CCCCCC"].CGColor;
-        self.backgroundColor = [UIColor colorWithHexString:@"CCCCCC"];
+        self.layer.borderColor = UIColorHex(CCCCCC).CGColor;
+        self.backgroundColor = UIColorHex(CCCCCC);
         [self setTitle:[NSString stringWithFormat:@"%dS后重新获取",_second] forState:UIControlStateNormal];
         [self setTitleColor:kWhiteColor forState:UIControlStateNormal];
         

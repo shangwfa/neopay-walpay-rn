@@ -15,7 +15,7 @@
     XGQBLoginInputView *loginInputV = [[XGQBLoginInputView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth*0.9, 40)];
     
     //左边图标
-    UIImageView *leftImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:leftImageName]];
+    UIImageView *leftImageView = [[UIImageView alloc]initWithImage:kIMAGENAMED(leftImageName)];
     //下划线
     UIView *underlineView = [UIView new];
     underlineView.backgroundColor = kLineColor;

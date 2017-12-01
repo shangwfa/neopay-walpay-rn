@@ -84,7 +84,7 @@
     
     self.attributedPlaceholder = [[NSAttributedString alloc]initWithString:placeholder
                                                                 attributes:@{
-                                                                             NSForegroundColorAttributeName :[UIColor colorWithHexString:@"CACACF"],
+                                                                             NSForegroundColorAttributeName :UIColorHex(CACACF),
                                                                                          NSFontAttributeName:kSYSTEMFONT(14.0)
                                                                                                          }];
 }

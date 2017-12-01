@@ -58,7 +58,7 @@
     kWeakSelf(self);
     
     //背景
-    UIImageView *backgroundImageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dl_beijing"]];
+    UIImageView *backgroundImageV = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"dl_beijing")];
     [self.view addSubview:backgroundImageV];
 //    backgroundImageV.backgroundColor = [UIColor blueColor];
     [backgroundImageV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -70,7 +70,7 @@
     
 
     //logo
-    UIImageView *logoImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dl_logo"]];
+    UIImageView *logoImage = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"dl_logo")];
     logoImage.alpha = 0;
     [self.view addSubview:logoImage];
 
@@ -101,8 +101,8 @@
     
     //pwdIV
     UIButton *readPwdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [readPwdBtn setImage:[UIImage imageNamed:@"dl_yanjing"] forState:UIControlStateNormal];
-    [readPwdBtn setImage:[UIImage imageNamed:@"dl_zhengyan"] forState:UIControlStateSelected];
+    [readPwdBtn setImage:kIMAGENAMED(@"dl_yanjing") forState:UIControlStateNormal];
+    [readPwdBtn setImage:kIMAGENAMED(@"dl_zhengyan") forState:UIControlStateSelected];
 
     [readPwdBtn addTarget:self action:@selector(readPwdBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     readPwdBtn.selected = NO;
@@ -149,7 +149,7 @@
     restPwdBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
     [restPwdBtn addTarget:self action:@selector(resetPwdButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:restPwdBtn];
-    [restPwdBtn setTitleColor:[UIColor colorWithHexString:@"888888"] forState:UIControlStateNormal];
+    [restPwdBtn setTitleColor:UIColorHex(888888) forState:UIControlStateNormal];
     [restPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60, 20));
         make.right.equalTo(sepLine.mas_left).with.offset(-2);
@@ -161,7 +161,7 @@
     [registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
     registerBtn.titleLabel.font = [UIFont systemFontOfSize:13.0];
     [self.view addSubview:registerBtn];
-    [registerBtn setTitleColor:[UIColor colorWithHexString:@"E83042"] forState:UIControlStateNormal];
+    [registerBtn setTitleColor:UIColorHex(E83042) forState:UIControlStateNormal];
 
     [registerBtn addTarget:self action:@selector(registerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -244,7 +244,7 @@
     
     //发送登录请求
     [MemberCoreService loginUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
-        NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+//        NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
         [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
         if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
 //            NSLog(@"responseBefore:%@",responseBefore);
@@ -262,9 +262,7 @@
                 [GVUserDefaults standardUserDefaults].nickName=[responseAfter objectForKey:@"nickName"];
                 [GVUserDefaults standardUserDefaults].authStatus=[[responseAfter objectForKey:@"authStatus"]intValue];
                 [GVUserDefaults standardUserDefaults].avatarUrl=[responseAfter objectForKey:@"avatarUrl"];
-                
-                NSLog(@"%@",[GVUserDefaults standardUserDefaults]);
-                
+                                
                 //发送登录成功通知,跳转首页
                 kPostNotification(kNotificationLoginStateChange, @YES);
             } andFailerFn:^(NSError *error) {

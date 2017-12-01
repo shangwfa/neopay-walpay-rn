@@ -28,13 +28,14 @@
 
 //获取屏幕宽高
 #define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
-#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define kScreenHeight ([[UIScreen mainScreen] bounds].size.height)
 #define kScreen_Bounds [UIScreen mainScreen].bounds
 
-//#define Iphone6ScaleWidth kScreenWidth/375.0
-//#define Iphone6ScaleHeight kScreenHeight/667.0
-////根据ip6的屏幕来拉伸
-//#define kRealValue(with) ((with)*(kScreenWidth/375.0f))
+//根据iPhone6的尺寸来缩放
+#define kSizeRatioW kScreenWidth/375.0
+#define kSizeRationH kScreenHeight/667.0
+#define kScaledSizeW(width) ((width)*(kScreenWidth/375.0f))
+#define kScaledSizeH(width) ((height)*(kScreenHeight/667.0f))
 
 //强弱引用
 #define kWeakSelf(type)  __weak typeof(type) weak##type = type;
@@ -55,30 +56,28 @@
 [View.layer setMasksToBounds:YES]
 
 ///IOS 版本判断
-#define IOSAVAILABLEVERSION(version) ([[UIDevice currentDevice] availableVersion:version] < 0)
+#define kIOSAVAILABLEVERSION(version) ([[UIDevice currentDevice] availableVersion:version] < 0)
 // 当前系统版本
-#define CurrentSystemVersion [[UIDevice currentDevice].systemVersion doubleValue]
+#define kCurrentSystemVersion [[UIDevice currentDevice].systemVersion doubleValue]
 //当前语言
-#define CurrentLanguage (［NSLocale preferredLanguages] objectAtIndex:0])
+#define kCurrentLanguage (［NSLocale preferredLanguages] objectAtIndex:0])
 
 //-------------------打印日志-------------------------
 //DEBUG  模式下打印日志,当前行
 #ifdef DEBUG
-#define JKLog(fmt, ...)
-//NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define JKLog(fmt, ...) NSLog((@"JKLog:%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define JKLog(...)
 #endif
 
+
+
 //拼接字符串
-#define NSStringFormat(format,...) [NSString stringWithFormat:format,##__VA_ARGS__]
-
-
-
+#define kNSStringFormat(format,...) [NSString stringWithFormat:format,##__VA_ARGS__]
 
 //定义UIImage对象
 #define ImageWithFile(_pointer) [UIImage imageWithContentsOfFile:([[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@@%dx", _pointer, (int)[UIScreen mainScreen].nativeScale] ofType:@"png"])]
-#define IMAGE_NAMED(name) [UIImage imageNamed:name]
+#define kIMAGENAMED(name) [UIImage imageNamed:name]
 
 //数据验证
 #define StrValid(f) (f!=nil && [f isKindOfClass:[NSString class]] && ![f isEqualToString:@""])
@@ -95,8 +94,6 @@
 //获取一段时间间隔
 #define kStartTime CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
 #define kEndTime  NSLog(@"Time: %f", CFAbsoluteTimeGetCurrent() - start)
-//打印当前方法名
-#define ITTDPRINTMETHODNAME() ITTDPRINT(@"%s", __PRETTY_FUNCTION__)
 
 
 //发送通知

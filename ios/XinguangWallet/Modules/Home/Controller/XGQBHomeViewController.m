@@ -52,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"EFEFEF"];
+    self.view.backgroundColor = UIColorHex(EFEFEF);
     
     [self setUpViewComponents];
     [self checkIDStatus];
@@ -75,7 +75,7 @@
 -(void)setUpViewComponents
 {
     //顶部背景图
-    UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_beijing8"]];
+    UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_beijing8")];
     [self.view addSubview:backgroundImg];
     
 
@@ -97,7 +97,7 @@
     
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"sy_touxiang"]];
+    [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
     kViewRadius(headerBtn.imageView, 19);
     _headerBtn = headerBtn;
     [self.view addSubview:headerBtn];

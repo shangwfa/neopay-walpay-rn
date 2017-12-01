@@ -29,8 +29,8 @@
     cell.countTimeBtn = countTimeBtn;
     
     UIButton *readPwdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [readPwdBtn setImage:[UIImage imageNamed:@"dl_yanjing"] forState:UIControlStateNormal];
-    [readPwdBtn setImage:[UIImage imageNamed:@"dl_zhengyan"] forState:UIControlStateSelected];
+    [readPwdBtn setImage:kIMAGENAMED(@"dl_yanjing") forState:UIControlStateNormal];
+    [readPwdBtn setImage:kIMAGENAMED(@"dl_zhengyan") forState:UIControlStateSelected];
     
     [readPwdBtn addTarget:cell action:@selector(readPwdBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     readPwdBtn.selected = NO;
@@ -71,7 +71,7 @@
 {
     
     //左边图标
-    UIImageView *leftImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:leftImageName]];
+    UIImageView *leftImageView = [[UIImageView alloc]initWithImage:kIMAGENAMED(leftImageName)];
     //下划线
     UIView *underlineView = [UIView new];
     underlineView.backgroundColor = kLineColor;
@@ -94,18 +94,17 @@
     
     //添加约束
     kWeakSelf(self);
-    CGFloat sizeRatio = kScreenWidth/375.0;
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(19, 19));
         make.bottom.equalTo(weakself.contentView).with.offset(-2);
-        make.left.equalTo(weakself.contentView).with.offset(30*sizeRatio);
+        make.left.equalTo(weakself.contentView).with.offset(30*kSizeRatioW);
     }];
     if(rightBtn){
             [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 
 //            make.size.mas_equalTo(CGSizeMake(19, 19));
             make.bottom.equalTo(weakself.contentView).with.offset(-2);
-            make.right.equalTo(weakself.contentView).with.offset(-30*sizeRatio);
+            make.right.equalTo(weakself.contentView).with.offset(-30*kSizeRatioW);
         }];
     }
     if(rightBtn){
@@ -126,7 +125,7 @@
         make.left.equalTo(leftImageView.mas_right).with.offset(6);
         make.height.mas_equalTo(1);
         make.bottom.equalTo(weakself.contentView).with.offset(0);
-        make.right.equalTo(weakself.contentView).with.offset(-31*sizeRatio);
+        make.right.equalTo(weakself.contentView).with.offset(-31*kSizeRatioW);
     }];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;

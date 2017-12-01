@@ -37,7 +37,7 @@
     UITapGestureRecognizer *tapOnIcon = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tableHeaderClicked)];
     
     [sideView.headerView.headerIcon addGestureRecognizer:tapOnIcon];
-    
+        
 }
 
 #pragma mark - 懒加载相关
@@ -120,6 +120,7 @@
     RNVC.pageType = @"personalInfo";
     XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)self.parentViewController;
     [rootVC.rootNAV pushViewController:RNVC animated:YES];
+
     [rootVC closeSideView];
 }
 

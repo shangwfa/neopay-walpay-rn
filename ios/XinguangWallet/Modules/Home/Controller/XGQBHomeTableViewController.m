@@ -9,10 +9,6 @@
 #import "XGQBHomeTableViewController.h"
 #import "XGQBRNViewController.h"
 
-#import "XGQBCommMessTVC.h"
-#import "XGQBActiMessTVC.h"
-
-
 #import "XGQBHomeCellView.h"
 
 #import "XGQBMessage.h"

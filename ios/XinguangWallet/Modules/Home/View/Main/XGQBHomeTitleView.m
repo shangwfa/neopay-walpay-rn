@@ -21,13 +21,13 @@
     self = [super initWithFrame:frame];
     
     //悬空背景
-    UIImageView *floatBgImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_beijing9"]];
+    UIImageView *floatBgImg = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_beijing9")];
     [self addSubview:floatBgImg];
     
     //大红包按钮
     XGQBHomeTitleBtn *redPBtn = [[XGQBHomeTitleBtn alloc]init];
     [redPBtn setTitle:@"大红包" forState:UIControlStateNormal];
-    [redPBtn setImage:[UIImage imageNamed:@"sy_hongbao9"] forState:UIControlStateNormal];
+    [redPBtn setImage:kIMAGENAMED(@"sy_hongbao9") forState:UIControlStateNormal];
     [self addSubview:redPBtn];
     [redPBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _redPacketBtn = redPBtn;
@@ -35,7 +35,7 @@
     //手机充值按钮
     XGQBHomeTitleBtn *phoneTopUpBtn = [[XGQBHomeTitleBtn alloc]init];
     [phoneTopUpBtn setTitle:@"手机充值" forState:UIControlStateNormal];
-    [phoneTopUpBtn setImage:[UIImage imageNamed:@"sy_chonzghi9"] forState:UIControlStateNormal];
+    [phoneTopUpBtn setImage:kIMAGENAMED(@"sy_chonzghi9") forState:UIControlStateNormal];
     [self addSubview:phoneTopUpBtn];
     [phoneTopUpBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _phoneTopUpBtn = phoneTopUpBtn;

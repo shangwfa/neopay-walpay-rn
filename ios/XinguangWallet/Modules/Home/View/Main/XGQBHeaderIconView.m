@@ -25,7 +25,7 @@
 {
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"sy_touxiang"]];
+    [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
 //    headerBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     kViewRadius(headerBtn.imageView, 15);
     _headerBtn=headerBtn;
@@ -40,13 +40,13 @@
     
     //右侧图标
     UIButton *redPBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [redPBtn setImage:[UIImage imageNamed:@"sy_hongbao7"] forState:UIControlStateNormal];
+    [redPBtn setImage:kIMAGENAMED(@"sy_hongbao7") forState:UIControlStateNormal];
     redPBtn.tag=10001;
     [self addSubview:redPBtn];
     [redPBtn addTarget:self action:@selector(homeIconBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [phoneBtn setImage:[UIImage imageNamed:@"sy_chongzhi7"] forState:UIControlStateNormal];
+    [phoneBtn setImage:kIMAGENAMED(@"sy_chongzhi7") forState:UIControlStateNormal];
     phoneBtn.tag=10002;
     [self addSubview:phoneBtn];
     [phoneBtn addTarget:self action:@selector(homeIconBtnClicked:) forControlEvents:UIControlEventTouchUpInside];

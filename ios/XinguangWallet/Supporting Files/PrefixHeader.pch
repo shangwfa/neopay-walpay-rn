@@ -12,7 +12,7 @@
 #import "UtilsMacros.h"
 #import "FontAndColorMacros.h"
 #import "ThirdMacros.h"
-#import "CommonMacros.h"
+#import "NotificationMacros.h"
 
 //基础类
 #import "AppDelegate.h"

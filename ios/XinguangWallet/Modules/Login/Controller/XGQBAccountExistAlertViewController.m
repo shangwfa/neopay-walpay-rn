@@ -32,7 +32,7 @@
     [self.view addSubview:backView];
     [self.view addSubview:alertView];
     
-    backView.backgroundColor = [UIColor colorWithHexString:@"A1A1A1"];
+    backView.backgroundColor = UIColorHex(A1A1A1);
     self.view.backgroundColor = [UIColor clearColor];
     
     kWeakSelf(self);

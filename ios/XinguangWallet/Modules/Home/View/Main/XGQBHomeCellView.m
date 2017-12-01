@@ -34,7 +34,7 @@ static NSString *const cellId = @"cellId";
     
     //增加下划线
     UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height-8, frame.size.width, 8)];
-    sepLine.backgroundColor=[UIColor colorWithHexString:@"F5F5F5"];
+    sepLine.backgroundColor=UIColorHex(F5F5F5);
     [self addSubview:sepLine];
     
     [cellCollectionV registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellId];
@@ -72,38 +72,36 @@ static NSString *const cellId = @"cellId";
 #pragma mark - 生成cell视图
 -(UIView*)firstCell
 {
-    CGFloat sizeRatio = kScreenWidth/375.0;
-
     UIView *firstCell =[[UIView alloc]initWithFrame: CGRectMake(0,0, (kScreenWidth-1)/2.0, 152/375.0*kScreenWidth)];
     
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.text = @"员工贷款";
-    titleLabel.font = kSYSTEMFONT(14.0*sizeRatio);
-    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.font = kSYSTEMFONT(14.0*kSizeRatioW);
+    titleLabel.textColor = UIColorHex(333333);
     [firstCell addSubview:titleLabel];
     
     UILabel *desLabel = [[UILabel alloc]init];
     desLabel.text = @"快速低息";
-    desLabel.font = kSYSTEMFONT(13.0*sizeRatio);
-    desLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    desLabel.font = kSYSTEMFONT(13.0*kSizeRatioW);
+    desLabel.textColor = UIColorHex(999999);
     [firstCell addSubview:desLabel];
     
-    UIImageView *icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_daikuan5"]];
+    UIImageView *icon = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_daikuan5")];
     [firstCell addSubview:icon];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(firstCell).with.offset(28*sizeRatio);
+        make.top.equalTo(firstCell).with.offset(28*kSizeRatioW);
         make.centerX.equalTo(firstCell);
     }];
     
     [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLabel.mas_bottom).with.offset(8*sizeRatio);
+        make.top.equalTo(titleLabel.mas_bottom).with.offset(8*kSizeRatioW);
         make.centerX.equalTo(firstCell);
     }];
     
     [icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(38.5*sizeRatio, 49*sizeRatio));
-        make.top.equalTo(desLabel.mas_bottom).with.offset(20*sizeRatio);
+        make.size.mas_equalTo(CGSizeMake(38.5*kSizeRatioW, 49*kSizeRatioW));
+        make.top.equalTo(desLabel.mas_bottom).with.offset(20*kSizeRatioW);
         make.centerX.equalTo(firstCell);
     }];
     
@@ -112,38 +110,37 @@ static NSString *const cellId = @"cellId";
 
 -(UIView*)secondAndThirdCellWithTitle:(NSString*)title des:(NSString*)des andImageNamed:(NSString*)imageName
 {
-    CGFloat sizeRatio = kScreenWidth/375.0;
 
     UIView *cell = [[UIView alloc]initWithFrame: CGRectMake(0,0, (kScreenWidth-1)/2.0, (152/375.0*kScreenWidth-1)/2.0)];
     
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.text = title;
-    titleLabel.font = kSYSTEMFONT(14.0*sizeRatio);
-    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.font = kSYSTEMFONT(14.0*kSizeRatioW);
+    titleLabel.textColor = UIColorHex(333333);
     [cell addSubview:titleLabel];
     
     UILabel *desLabel = [[UILabel alloc]init];
     desLabel.text = des;
-    desLabel.font = kSYSTEMFONT(13.0*sizeRatio);
-    desLabel.textColor = [UIColor colorWithHexString:@"999999"];
+    desLabel.font = kSYSTEMFONT(13.0*kSizeRatioW);
+    desLabel.textColor = UIColorHex(999999);
     [cell addSubview:desLabel];
     
-    UIImageView *icon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
+    UIImageView *icon = [[UIImageView alloc]initWithImage:kIMAGENAMED(imageName)];
     [cell addSubview:icon];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cell).with.offset(21*sizeRatio);
-        make.left.equalTo(cell).with.offset(30*sizeRatio);
+        make.top.equalTo(cell).with.offset(21*kSizeRatioW);
+        make.left.equalTo(cell).with.offset(30*kSizeRatioW);
     }];
     
     [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLabel.mas_bottom).with.offset(8*sizeRatio);
+        make.top.equalTo(titleLabel.mas_bottom).with.offset(8*kSizeRatioW);
         make.left.equalTo(titleLabel);
     }];
     
     [icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(27*sizeRatio, 38.5*sizeRatio));
-        make.right.equalTo(cell).with.offset(-34*sizeRatio);
+        make.size.mas_equalTo(CGSizeMake(27*kSizeRatioW, 38.5*kSizeRatioW));
+        make.right.equalTo(cell).with.offset(-34*kSizeRatioW);
         make.centerY.equalTo(cell);
     }];
     
