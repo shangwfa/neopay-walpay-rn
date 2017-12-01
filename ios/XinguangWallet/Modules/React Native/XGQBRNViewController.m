@@ -88,6 +88,8 @@
     self.navigationController.navigationBarHidden = YES;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
+    [kNotificationCenter postNotificationName:kNotificationNavPushToSecondLevel object:nil];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
