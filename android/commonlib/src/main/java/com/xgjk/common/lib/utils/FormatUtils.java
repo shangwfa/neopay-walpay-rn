@@ -33,7 +33,7 @@ public class FormatUtils {
         }
 
         if (11 == phone.length()) {
-            return phone.substring(0, 4) + "****" + phone.substring(8, 11);
+            return phone.substring(0, 3) + "****" + phone.substring(7, 11);
         } else {
             return "";
         }

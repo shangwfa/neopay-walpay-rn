@@ -29,21 +29,21 @@
     titleLabel.numberOfLines = 0;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = kSYSTEMFONT(13.0);
-    titleLabel.textColor = [UIColor colorWithHexString:@"333333"];
+    titleLabel.textColor = UIColorHex(333333);
 //    titleLabel.backgroundColor = kBlueColor;
     titleLabel.text = @"该手机账号已存在，请直接登录\n若您忘记密码，请通过忘记密码按钮重置登录";
     [self addSubview:titleLabel];
     
     //分割线
     UIView *separator = [[UIView alloc]init];
-    separator.backgroundColor = [UIColor colorWithHexString:@"999999"];
+    separator.backgroundColor = UIColorHex(999999);
     [self addSubview:separator];
     
     //忘记密码按钮
     UIButton *forgetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    forgetBtn.backgroundColor = kYellowColor;
     [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [forgetBtn setTitleColor:[UIColor colorWithHexString:@"999999"] forState:UIControlStateNormal];
+    [forgetBtn setTitleColor:UIColorHex(999999) forState:UIControlStateNormal];
     forgetBtn.titleLabel.font = kSYSTEMFONT(14.0);
     [forgetBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview: forgetBtn];
@@ -52,7 +52,7 @@
     UIButton *goLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    goLoginBtn.backgroundColor = kGreenColor;
     [goLoginBtn setTitle:@"去登陆" forState:UIControlStateNormal];
-    [goLoginBtn setTitleColor:[UIColor colorWithHexString:@"F34646"] forState:UIControlStateNormal];
+    [goLoginBtn setTitleColor:UIColorHex(F34646) forState:UIControlStateNormal];
     goLoginBtn.titleLabel.font = kSYSTEMFONT(14.0);
     [goLoginBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview: goLoginBtn];
@@ -87,7 +87,6 @@
 
 -(void)btnClicked:(UIButton*)btn
 {
-    NSLog(@"%@",self.delegate);
     [self.delegate accountExistAlertView:self btnClicked:btn];
 }
 

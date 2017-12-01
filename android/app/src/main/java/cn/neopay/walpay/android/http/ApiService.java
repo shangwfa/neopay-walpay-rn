@@ -13,6 +13,7 @@ import cn.neopay.walpay.android.module.response.BannerResponseBean;
 import cn.neopay.walpay.android.module.response.BaseResponse;
 import cn.neopay.walpay.android.module.response.CheckInInfoResponseBean;
 import cn.neopay.walpay.android.module.response.CheckInResponseBean;
+import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 import cn.neopay.walpay.android.module.response.LoginResponseBean;
 import cn.neopay.walpay.android.module.response.MerchantActivityResponseBean;
 import cn.neopay.walpay.android.module.response.MerchantBannerResponseBean;
@@ -447,6 +448,15 @@ public interface ApiService {
     @POST("user/modify_user_info")
     Observable<Result<BaseResponse>> modifyUserInfo(@QueryMap Map<String, String> modifyUserInfoRequestBean);
 
+    /**
+     * 修改用户信息
+     */
+    @POST("message/message_overview")
+    Observable<Result<List<GetNewsResponseBean>>> getHomeNewsInfo(@QueryMap Map<String, String> homeNewsInfoRequestBean);
+
     @POST("file/get_security_token")
     Observable<Result<SecurityTokenResponseBean>> getSecurityToken(@Query("type") int type);
+
+    @POST("message/update_read_status_msg")
+    Observable<Result<BaseResponse>> updateNewsReadStatus(@QueryMap Map<String, String> updateNewsReadStatusRequestBean);
 }

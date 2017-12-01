@@ -11,5 +11,6 @@
 @interface XGQBSideHeaderView : UIView
 
 @property (nonatomic,weak) UIButton *regBtn;
+@property (nonatomic,weak) UIImageView *headerIcon;
 
 @end

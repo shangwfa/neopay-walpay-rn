@@ -28,7 +28,7 @@
     cell.backgroundColor = kClearColor;
     
     //icon图标
-    UIImageView *iconView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:name]];
+    UIImageView *iconView = [[UIImageView alloc]initWithImage:kIMAGENAMED(name)];
     [cell.contentView addSubview:iconView];
     
     //文字描述
@@ -38,12 +38,12 @@
     [cell.contentView addSubview:desLabel];
     
     //右箭头
-    UIImageView *arrow =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wd_jiantou4"]];
+    UIImageView *arrow =[[UIImageView alloc]initWithImage:kIMAGENAMED(@"wd_jiantou4")];
     [cell.contentView addSubview:arrow];
     
     //下划线
     UIView *underLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0.68*kScreenWidth, 1)];
-    underLine.backgroundColor = [UIColor colorWithHexString:@"EEEEEE"];
+    underLine.backgroundColor = UIColorHex(EEEEEE);
     [cell.contentView addSubview:underLine];
     
     //添加约束

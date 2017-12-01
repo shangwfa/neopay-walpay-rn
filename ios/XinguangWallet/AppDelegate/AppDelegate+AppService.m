@@ -56,7 +56,7 @@
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 20;
     
     //SVProgressHUD设置
-    [SVProgressHUD setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
+    [SVProgressHUD setBackgroundColor:UIColorHex(333333)];
     [SVProgressHUD setForegroundColor:kWhiteColor];
     [SVProgressHUD setMinimumDismissTimeInterval:2];
     //    [SVProgressHUD setInfoImage:nil];

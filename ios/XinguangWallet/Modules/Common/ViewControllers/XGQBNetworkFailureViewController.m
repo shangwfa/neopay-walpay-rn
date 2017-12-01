@@ -22,13 +22,13 @@
     
     self.view.backgroundColor = kViewBgColor;
     
-    UIImageView *networkFailIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wuwang"]];
+    UIImageView *networkFailIV = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"wuwang")];
     [self.view addSubview:networkFailIV];
     
     UILabel *desLabel = [[UILabel alloc]init];
     desLabel.text = @"网络开了个小差，请检查您的网络~";
     desLabel.font = kSYSTEMFONT(15.0);
-    desLabel.textColor = [UIColor colorWithHexString:@"B5B5B5"];
+    desLabel.textColor = UIColorHex(B5B5B5);
     [self.view addSubview:desLabel];
     
     XGQBPureColorBtn *reloadBtn = [XGQBPureColorBtn buttonWithText:@"刷新" andColor:kButtonColor];

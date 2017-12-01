@@ -1,5 +1,6 @@
 package com.xgjk.common.lib.base;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.tencent.tinker.loader.app.TinkerApplication;
@@ -10,6 +11,7 @@ import com.tencent.tinker.loader.shareutil.ShareConstants;
  */
 
 public abstract class BaseApp extends TinkerApplication {
+    @SuppressLint("StaticFieldLeak")
     public static Application application;
     public static BaseActivityLifeCallback mActivityLifeCallback;
 

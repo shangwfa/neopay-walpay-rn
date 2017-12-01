@@ -1,6 +1,5 @@
 package cn.neopay.walpay.android.ui.homedraw;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -31,6 +30,7 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
 
     private MineDrawFragment mMineFragment;
     private NewsFragment mNewsFragment;
+    private UserInfoResponseBean mUserInfoBean;
 
     @Override
     public int getLayoutId() {
@@ -51,9 +51,6 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
         }
         if (null == mNewsFragment) {
             mNewsFragment = new NewsFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("pageOrigin", "homeDrawer");
-            mNewsFragment.setArguments(bundle);
         }
         fragmentTransaction.add(R.id.mine_fl, mMineFragment);
         fragmentTransaction.add(R.id.home_fl, mNewsFragment);
@@ -87,7 +84,7 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
 
         @Override
         public void onDrawerClosed(View drawerView) {
-
+            mPresenter.getUserInfo();
         }
 
         @Override
@@ -98,9 +95,11 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
 
     @Override
     public void setViewData(UserInfoResponseBean userInfoBean) {
+        mUserInfoBean = userInfoBean;
         StoreManager.getSingleton().put(true, IWalpayConstants.USER_INFO, userInfoBean);
         if (null != userInfoBean) {
             mViewBinding.commonHomeDrawTopView.setmUserInfoBean(userInfoBean);
+            EventBus.getDefault().post(userInfoBean);
         }
     }
 }

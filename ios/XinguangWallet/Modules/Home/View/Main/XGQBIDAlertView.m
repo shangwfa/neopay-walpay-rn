@@ -55,7 +55,7 @@
     desLabel.numberOfLines = 0;
     [self addSubview:desLabel];
     //图标
-    UIImageView *logoImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_renzheng"]];
+    UIImageView *logoImg = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_renzheng")];
     [self addSubview:logoImg];
     
     //立即认证
@@ -66,7 +66,7 @@
     //暂不认证
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelBtn setTitle:@"暂不认证" forState:UIControlStateNormal];
-    [cancelBtn setTitleColor:[UIColor colorWithHexString:@"F34646"] forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:UIColorHex(F34646) forState:UIControlStateNormal];
     cancelBtn.titleLabel.font = kSYSTEMFONT(14.0);
     [cancelBtn addTarget:self action:@selector(dismissVC) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview: cancelBtn];

@@ -1,6 +1,5 @@
 package cn.neopay.walpay.android.adapter.sliminjector;
 
-import android.view.View;
 import android.widget.ImageView;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimInjector;
@@ -23,11 +22,10 @@ public class NewsActivitiesSlimInjector implements SlimInjector<NewsActivitiesIt
         if (null == data) {
             return;
         }
-        injector.background(R.id.common_news_type_icon_iv, R.mipmap.img_red_packet)
-                .text(R.id.common_news_type_name_tv, "商家活动")
-                .visibility(R.id.common_red_dot_iv, data.isSelect() ? View.INVISIBLE : View.GONE)
+        injector.with(R.id.common_news_type_icon_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getAvatar()))
                 .text(R.id.common_news_type_time_tv, data.getTime())
-                .with(R.id.activities_icon_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getContent()));
+                .with(R.id.activities_icon_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getContent()))
+                .clicked(R.id.common_activity_container_fl, data.getOnClickListener());
 
     }
 }

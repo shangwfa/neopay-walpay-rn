@@ -2,6 +2,8 @@ package cn.neopay.walpay.android.module.sliminjector;
 
 import android.view.View;
 
+import java.math.BigDecimal;
+
 /**
  * @author carlos.guo
  * @date 2017/10/18
@@ -10,70 +12,46 @@ import android.view.View;
  */
 
 public class NewsRedPacketItemBean {
-    private String avatar;
-    private boolean isSelect;
-    private String name;
-    private String time;
-    private String content;
-    private String contentTitle;
-    private String contentFrom;
+    /**
+     * msgType : 1
+     * msgTypeText : 红包消息
+     * dayCode : 20171029
+     * disPlayDate : true
+     * id : 100
+     * packetCode : 21f9b9bdd5fe4221808dd0b631fc44e4
+     * uuid : AnJ8xUoCkpVccr0Z
+     * readStatus : 2
+     * receiveStatus : 4
+     * bossName : 红包老板名称
+     * message : test
+     * themeType : 1
+     * themeTypeText : 普通
+     * themeName : 生日
+     * themeUrl : https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2516037300,2879226066&fm=27&gp=0.jpg
+     * createTime : 2017-10-29 10:59:15
+     * createTimeMs : 1509245955000
+     * luckyAmount: 0
+     */
+
+    private int msgType;
+    private String msgTypeText;
+    private String dayCode;
+    private boolean disPlayDate;
+    private int id;
+    private String packetCode;
+    private String uuid;
+    private int readStatus;
+    private int receiveStatus;
+    private String bossName;
+    private String message;
+    private int themeType;
+    private String themeTypeText;
+    private String themeName;
+    private String themeUrl;
+    private String createTime;
+    private long createTimeMs;
+    private BigDecimal luckyAmount;
     private View.OnClickListener onClickListener;
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContentTitle() {
-        return contentTitle;
-    }
-
-    public void setContentTitle(String contentTitle) {
-        this.contentTitle = contentTitle;
-    }
-
-    public String getContentFrom() {
-        return contentFrom;
-    }
-
-    public void setContentFrom(String contentFrom) {
-        this.contentFrom = contentFrom;
-    }
-
-    public boolean isSelect() {
-        return isSelect;
-    }
-
-    public void setSelect(boolean select) {
-        isSelect = select;
-    }
 
     public View.OnClickListener getOnClickListener() {
         return onClickListener;
@@ -81,5 +59,149 @@ public class NewsRedPacketItemBean {
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public BigDecimal getLuckyAmount() {
+        return luckyAmount;
+    }
+
+    public void setLuckyAmount(BigDecimal luckyAmount) {
+        this.luckyAmount = luckyAmount;
+    }
+
+    public int getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(int msgType) {
+        this.msgType = msgType;
+    }
+
+    public String getMsgTypeText() {
+        return msgTypeText;
+    }
+
+    public void setMsgTypeText(String msgTypeText) {
+        this.msgTypeText = msgTypeText;
+    }
+
+    public String getDayCode() {
+        return dayCode;
+    }
+
+    public void setDayCode(String dayCode) {
+        this.dayCode = dayCode;
+    }
+
+    public boolean isDisPlayDate() {
+        return disPlayDate;
+    }
+
+    public void setDisPlayDate(boolean disPlayDate) {
+        this.disPlayDate = disPlayDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPacketCode() {
+        return packetCode;
+    }
+
+    public void setPacketCode(String packetCode) {
+        this.packetCode = packetCode;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public int getReadStatus() {
+        return readStatus;
+    }
+
+    public void setReadStatus(int readStatus) {
+        this.readStatus = readStatus;
+    }
+
+    public int getReceiveStatus() {
+        return receiveStatus;
+    }
+
+    public void setReceiveStatus(int receiveStatus) {
+        this.receiveStatus = receiveStatus;
+    }
+
+    public String getBossName() {
+        return bossName;
+    }
+
+    public void setBossName(String bossName) {
+        this.bossName = bossName;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getThemeType() {
+        return themeType;
+    }
+
+    public void setThemeType(int themeType) {
+        this.themeType = themeType;
+    }
+
+    public String getThemeTypeText() {
+        return themeTypeText;
+    }
+
+    public void setThemeTypeText(String themeTypeText) {
+        this.themeTypeText = themeTypeText;
+    }
+
+    public String getThemeName() {
+        return themeName;
+    }
+
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
+    }
+
+    public String getThemeUrl() {
+        return themeUrl;
+    }
+
+    public void setThemeUrl(String themeUrl) {
+        this.themeUrl = themeUrl;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public long getCreateTimeMs() {
+        return createTimeMs;
+    }
+
+    public void setCreateTimeMs(long createTimeMs) {
+        this.createTimeMs = createTimeMs;
     }
 }

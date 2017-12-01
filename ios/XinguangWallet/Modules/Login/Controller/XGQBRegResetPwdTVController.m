@@ -159,7 +159,7 @@
     if (self.type == XGQBRegResetPwdTVConTypeRegister) {
         //发送注册请求
         [MemberCoreService registerUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
-            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+//            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
             [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
                 //            NSLog(@"responseBefore:%@",responseBefore);
@@ -221,7 +221,7 @@
     //注册页面获取验证码
     if (self.type == XGQBRegResetPwdTVConTypeRegister) {
         [MemberCoreService sendRegisterCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
-            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+//            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
             [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {
@@ -238,7 +238,7 @@
     //重置登录密码页面获取验证码
     else if(self.type == XGQBRegResetPwdTVConTypeResetLoginPwd){
         [MemberCoreService sendResetLoginPasswordCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
-            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+//            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
             [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {
@@ -251,7 +251,7 @@
     }
     else if(self.type == XGQBRegResetPwdTVConTypeResetPayPwdNoID||self.type == XGQBRegResetPwdTVConTypeResetPayPwdWithID){
         [MemberCoreService sendResetPayPasswordCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
-            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
+//            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
             [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {

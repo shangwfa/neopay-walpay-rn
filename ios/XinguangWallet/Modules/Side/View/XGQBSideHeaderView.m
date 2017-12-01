@@ -23,13 +23,17 @@
 {
     //头像
     UIImageView *headerIcon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width*0.285, frame.size.width*0.285)];
-    [headerIcon sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] placeholderImage:[UIImage imageNamed:@"wd_touxiang"]];
+    [headerIcon sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
     kViewRadius(headerIcon,MAX(headerIcon.width/2.0, headerIcon.height/2.0));
+    _headerIcon=headerIcon;
     [self addSubview:headerIcon];
+    
+    headerIcon.userInteractionEnabled=YES;
+
     
     //认证标签
     NSString *imageName = [GVUserDefaults standardUserDefaults].authStatus==2?@"wd_yishiming":@"wd_weishiming";
-    UIImageView *regIcon = [[UIImageView alloc]initWithImage:[UIImage imageNamed: imageName]];
+    UIImageView *regIcon = [[UIImageView alloc]initWithImage:kIMAGENAMED(imageName)];
     [self addSubview:regIcon];
     
     //用户名视图
@@ -75,7 +79,7 @@
         
         //认证按钮
         UIButton *regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [regBtn setImage:[UIImage imageNamed:@"wd_qianwang"] forState:UIControlStateNormal];
+        [regBtn setImage:kIMAGENAMED(@"wd_qianwang") forState:UIControlStateNormal];
         [userNameView addSubview:regBtn];
         _regBtn=regBtn;
         
@@ -107,7 +111,7 @@
         
         //认证按钮
         UIButton *regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [regBtn setImage:[UIImage imageNamed:@"wd_qianwang"] forState:UIControlStateNormal];
+        [regBtn setImage:kIMAGENAMED(@"wd_qianwang") forState:UIControlStateNormal];
         [userNameView addSubview:regBtn];
         _regBtn=regBtn;
         

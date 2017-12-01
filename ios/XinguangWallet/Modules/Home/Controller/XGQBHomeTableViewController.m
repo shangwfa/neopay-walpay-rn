@@ -9,17 +9,17 @@
 #import "XGQBHomeTableViewController.h"
 #import "XGQBRNViewController.h"
 
-#import "XGQBCommMessTVC.h"
-#import "XGQBActiMessTVC.h"
-
-
 #import "XGQBHomeCellView.h"
+
+#import "XGQBMessage.h"
 
 #import "XGQBHomeTableView.h"
 
+#import "XGQBMsgTableViewCell.h"
+
 @interface XGQBHomeTableViewController ()
 
-@property (nonatomic,strong) NSMutableArray *messArr;
+@property (nonatomic,assign) int currentPage;
 
 @end
 
@@ -29,38 +29,70 @@
 -(void)loadView
 {
     XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenHeight-75) style:UITableViewStyleGrouped];
-    tableView.contentInset=UIEdgeInsetsMake(kScreenWidth*134/375.0, 0, 0, 0);
+    tableView.contentInset=UIEdgeInsetsMake(kScaledSizeW(134), 0, 0, 0);
     tableView.backgroundColor=kClearColor;
     self.tableView = tableView;
     self.view = tableView;
+    tableView.dataSource = self;
     
-    tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScreenWidth*134/375.0, kScreenWidth, kScreenWidth*152/375.0)];
+    tableView.tableHeaderView=[[XGQBHomeCellView alloc]initWithFrame:CGRectMake(0, kScaledSizeW(134), kScreenWidth, kScaledSizeW(152)+8)];
+    
+    [self refreshData];
 
+    //下拉刷新
+    kWeakSelf(self);
     MJRefreshNormalHeader *header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [tableView.mj_header endRefreshing];
-        });
+        [weakself refreshData];
     }];
     tableView.mj_header = header;
     header.automaticallyChangeAlpha=YES;
     header.lastUpdatedTimeLabel.hidden=YES;
-    header.stateLabel.hidden=YES;
     
-    tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [tableView.mj_footer endRefreshing];
-        });
+    //上拉加载
+    tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [weakself loadMoreData];
     }];
-    tableView.dataSource = self;
 }
 
--(NSMutableArray*)messArr
+-(void)loadMoreData
 {
-    if (!_messArr) {
+    NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+    [body setObject:[NSNumber numberWithInt:_currentPage] forKey:@"pageNo"];
+    [body setObject:@10 forKey:@"pageSize"];
+    [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
+        for (NSDictionary*dict in responseAfter) {
+            XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
+            [self.messArr addObject:mess];
+            [self.tableView.mj_footer endRefreshing];
+            [self.tableView reloadData];
+        }
+        _currentPage++;
+    } andFailerFn:^(NSError *error) {
+        [self.tableView.mj_footer endRefreshing];
+    }];
+}
+
+-(void)refreshData
+{
+    //发送请求获取消息数据
+    NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+    [body setObject:@10 forKey:@"pageSize"];
+    [body setObject:@1 forKey:@"pageNo"];
+    [self.tableView.mj_header beginRefreshing];
+    [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
         
-        _messArr = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"mess" ofType:@"plist"]];
-    }
-    return _messArr;
+        self.messArr=nil;
+
+        for (NSDictionary*dict in responseAfter) {
+            XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
+            [self.messArr addObject:mess];
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView reloadData];
+        }
+        _currentPage=2;
+    } andFailerFn:^(NSError *error) {
+            [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 - (void)viewDidLoad {
@@ -70,13 +102,18 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.sectionHeaderHeight=0;
     self.tableView.sectionFooterHeight=0;
+    
+    self.tableView.estimatedRowHeight=84;
+    self.tableView.rowHeight=UITableViewAutomaticDimension;
+
 }
 
--(void)moreBtnClicked
+-(NSMutableArray *)messArr
 {
-    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-    RNVC.pageType = @"activityList";
-    [self.tableView.superview.viewController.navigationController pushViewController:RNVC animated:YES];
+    if (!_messArr) {
+        _messArr=[NSMutableArray arrayWithCapacity:10];
+    }
+    return _messArr;
 }
 
 
@@ -92,66 +129,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *messDict = self.messArr[indexPath.row];
-    
-    if ([messDict[@"type"]isEqualToString:@"shopMess"]) {
-        
-        UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeShopAd timeLabel:@"06/06 00:00"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        return cell;
-        
+    XGQBMessage *mess = self.messArr[indexPath.row];
+    XGQBMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mess.msgTypeText];
+    if (!cell) {
+        cell = [XGQBMsgTableViewCell cellWithMessage:mess];
     }
-    else if([messDict[@"type"]isEqualToString:@"mobileMess"]){
-        
-        UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeCellPhone timeLabel:@"06/06 00:00"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        return cell;
-    }
-    else if([messDict[@"type"]isEqualToString:@"shopAct"]){
-        
-        UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeShop timeLabel:@"06/06 00:00"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        return cell;
-    }
-    else if([messDict[@"type"]isEqualToString:@"redPacketAct"]){
-        
-        UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeRedPocket timeLabel:@"06/06 00:00"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        return cell;
-    }
-    else if([messDict[@"type"]isEqualToString:@"systemMess"]){
-        
-        UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypeSystem timeLabel:@"06/06 00:00"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        return cell;
-    }
-    else if([messDict[@"type"]isEqualToString:@"systemAct"]){
-        
-        UITableViewCell *cell=[XGQBActiMessTVC actiTableViewCellWithType:XGQBActiMessTypeSystem timeLabel:@"06/06 00:00"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        return cell;
-    }
-    else if([messDict[@"type"]isEqualToString:@"payMess"]){
-        
-        UITableViewCell *cell=[XGQBCommMessTVC messTableViewCellWithType:XGQBCommMessTypePayment timeLabel:@"06/06 00:00"];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        return cell;
-    }
-    return nil;
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    return cell;
 }
 
 

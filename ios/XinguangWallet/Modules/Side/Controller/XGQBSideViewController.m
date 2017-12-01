@@ -30,12 +30,14 @@
     // Do any additional setup after loading the view.
     XGQBSideView *sideView =[[XGQBSideView alloc]initWithFrame:CGRectMake(-kScreenWidth*kSideViewRatio*0.5, 0, kScreenWidth*kSideViewRatio, kScreenHeight)];
     self.view = sideView;
-    
-    [sideView.headerView.regBtn addTarget:self action:@selector(goRegBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    
+        
     sideView.tableView.delegate = self;
     sideView.tableView.dataSource = self;
     
+    UITapGestureRecognizer *tapOnIcon = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tableHeaderClicked)];
+    
+    [sideView.headerView.headerIcon addGestureRecognizer:tapOnIcon];
+        
 }
 
 #pragma mark - 懒加载相关
@@ -112,12 +114,15 @@
     [rootVC closeSideView];
 }
 
-//-(void)tableHeaderClicked
-//{
-//    XGQBRNViewController *RNVC = [XGQBRNViewController new];
-//    RNVC.pageType = @"personalInfo";
-//    [self.navigationController pushViewController:RNVC animated:YES];
-//}
+-(void)tableHeaderClicked
+{
+    XGQBRNViewController *RNVC = [XGQBRNViewController new];
+    RNVC.pageType = @"personalInfo";
+    XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)self.parentViewController;
+    [rootVC.rootNAV pushViewController:RNVC animated:YES];
+
+    [rootVC closeSideView];
+}
 
 
 
