@@ -1,18 +1,28 @@
 package cn.neopay.walpay.android.module.sliminjector;
 
+import android.view.View;
+
 /**
  * @author carlos.guo
  * @date 2017/10/18
  * @describe NewsItemBean 消息页面
- * //TODO 模式news bean
  */
 
 public class NewsItemBean {
     private String avatar;
     private String name;
     private String time;
-    private boolean isSelect;
+    private int isSelectState;
     private String content;
+    private View.OnClickListener onClickListener;
+
+    public View.OnClickListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 
     public String getAvatar() {
         return avatar;
@@ -46,11 +56,11 @@ public class NewsItemBean {
         this.content = content;
     }
 
-    public boolean isSelect() {
-        return isSelect;
+    public int getIsSelectState() {
+        return isSelectState;
     }
 
-    public void setSelect(boolean select) {
-        isSelect = select;
+    public void setIsSelectState(int isSelectState) {
+        this.isSelectState = isSelectState;
     }
 }

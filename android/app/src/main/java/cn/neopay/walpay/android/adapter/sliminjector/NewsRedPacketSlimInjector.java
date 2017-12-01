@@ -1,11 +1,15 @@
 package cn.neopay.walpay.android.adapter.sliminjector;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xgjk.common.lib.adapter.slimadapter.SlimInjector;
 import com.xgjk.common.lib.adapter.slimadapter.viewinjector.IViewInjector;
 import com.xgjk.common.lib.manager.glide.GlideManager;
+
+import java.text.MessageFormat;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
@@ -17,20 +21,87 @@ import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
  */
 
 public class NewsRedPacketSlimInjector implements SlimInjector<NewsRedPacketItemBean> {
+
+    private int txtColor;
+
     @Override
     public void onInject(NewsRedPacketItemBean data, IViewInjector injector) {
         if (null == data) {
             return;
         }
-        injector.background(R.id.common_news_type_icon_iv, R.mipmap.img_red_packet)
-                .text(R.id.common_news_type_name_tv, "红包来了!")
-                .visibility(R.id.common_red_dot_iv, data.isSelect() ? View.INVISIBLE : View.GONE)
-                .text(R.id.common_news_type_time_tv, data.getTime())
-                .with(R.id.red_packet_bg_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getContent()))
-                .text(R.id.red_packet_title_tv, data.getContentTitle())
-                .text(R.id.red_packet_from_tv, data.getContentFrom())
+        handleTxtColor(data);
+        handleRedPacketView(data, injector);
+        injector.background(R.id.common_news_type_icon_iv, R.mipmap.img_red_packet_banner)
+                .with(R.id.red_packet_bg_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getThemeUrl()))
+                .text(R.id.common_news_type_time_tv, MessageFormat.format("{0}", data.getCreateTimeMs()))
                 .clicked(R.id.common_news_red_packet_ll, data.getOnClickListener());
+    }
 
+    private void handleRedPacketView(NewsRedPacketItemBean data, IViewInjector injector) {
+        handleTxtColor(injector);
+        switch (data.getReceiveStatus()) {
+            case 1://未领取
+                handleNotReceive(data, injector);
+                break;
+            case 2://已领取
+                handleReceived(data, injector);
+                break;
+            case 3://已过期，已领完
+            case 4://已过期，已领完
+                handleReceiveOut(data, injector);
+                break;
 
+        }
+    }
+
+    private void handleReceiveOut(NewsRedPacketItemBean data, IViewInjector injector) {
+        injector.text(R.id.red_packet_title_tv, MessageFormat.format("啊哦，这个红包已经{0}了...", data.getReceiveStatus() == 3 ? "过期" : "抢完"))
+                .text(R.id.red_packet_from_tv, MessageFormat.format("来自{0}的红包", data.getBossName()))
+                .visibility(R.id.red_packet_from_empty_view, View.GONE)
+                .visibility(R.id.red_packet_amount_tv, View.GONE)
+                .with(R.id.red_packet_msg_tv, view -> {
+                    view.setVisibility(View.VISIBLE);
+                    ((TextView) view).setText(data.getMessage());
+                });
+    }
+
+    private void handleReceived(NewsRedPacketItemBean data, IViewInjector injector) {
+        injector.text(R.id.red_packet_title_tv, data.getMessage())
+                .text(R.id.red_packet_from_tv, MessageFormat.format("来自{0}的红包", data.getBossName()))
+                .visibility(R.id.red_packet_from_empty_view, View.GONE)
+                .visibility(R.id.red_packet_msg_tv, View.GONE)
+                .with(R.id.red_packet_amount_tv, view -> {
+                    view.setVisibility(View.VISIBLE);
+                    ((TextView) view).setText(MessageFormat.format("{0}", data.getLuckyAmount()));
+                });
+    }
+
+    private void handleNotReceive(NewsRedPacketItemBean data, IViewInjector injector) {
+        injector.text(R.id.red_packet_title_tv, data.getMessage())
+                .text(R.id.red_packet_from_tv, MessageFormat.format("来自{0}的红包", data.getBossName()))
+                .visibility(R.id.red_packet_from_empty_view, View.VISIBLE)
+                .visibility(R.id.red_packet_amount_tv, View.GONE)
+                .visibility(R.id.red_packet_msg_tv, View.GONE);
+    }
+
+    private void handleTxtColor(IViewInjector injector) {
+        injector
+                .with(R.id.red_packet_line_view, view -> view.setBackgroundColor(txtColor))
+                .with(R.id.red_packet_title_tv, view -> ((TextView) view).setTextColor(txtColor))
+                .with(R.id.red_packet_from_tv, view -> ((TextView) view).setTextColor(txtColor))
+                .with(R.id.red_packet_amount_tv, view -> ((TextView) view).setTextColor(txtColor))
+                .with(R.id.red_packet_msg_tv, view -> ((TextView) view).setTextColor(txtColor));
+    }
+
+    private void handleTxtColor(NewsRedPacketItemBean data) {
+        txtColor = Color.parseColor("#FFFFFF");
+        switch (data.getThemeType()) {
+            case 2://生日
+                txtColor = Color.parseColor("#FFFFFF");
+                break;
+            case 3://春节
+                txtColor = Color.parseColor("#FBDEB0");
+                break;
+        }
     }
 }

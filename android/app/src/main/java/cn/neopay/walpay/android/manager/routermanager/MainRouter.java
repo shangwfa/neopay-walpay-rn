@@ -86,8 +86,9 @@ public class MainRouter {
                 .navigation();
     }
 
-    public void jumpToSignInWebPage() {
+    public void jumpToCommonWebPage(String loadUrl) {
         ARouter.getInstance().build(IWalpayConstants.TO_SIGNINWEB_PAGE)
+                .withString("loadUrl", loadUrl)
                 .navigation();
     }
 

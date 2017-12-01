@@ -1,51 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:id="@+id/common_news_title_ll"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/white">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/common_news_type_icon_iv"
+            android:layout_width="180dp"
+            android:layout_height="@dimen/size_30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_14dp"
+            android:scaleType="fitXY" />
 
-            <ImageView
-                android:id="@+id/common_news_type_icon_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_29dp"
-                android:scaleType="fitXY" />
-
-            <TextView
-                android:id="@+id/common_news_type_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/size_10dp"
-                android:layout_toEndOf="@+id/common_news_type_icon_iv"
-                android:layout_toRightOf="@+id/common_news_type_icon_iv"
-                android:text=""
-                android:textColor="@color/common_black"
-                android:textSize="@dimen/size_17sp" />
-
-            <ImageView
-                android:id="@+id/common_red_dot_iv"
-                android:layout_width="@dimen/size_9dp"
-                android:layout_height="@dimen/size_9dp"
-                android:layout_toRightOf="@+id/common_news_type_name_tv"
-                android:scaleType="fitXY"
-                android:src="@mipmap/img_red_dot" />
-
-            <TextView
-                android:id="@+id/common_news_type_time_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text=""
-                android:textColor="@color/common_gray_light"
-                android:textSize="@dimen/size_11dp" />
-        </RelativeLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/common_news_type_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/size_12dp"
+            android:layout_marginRight="@dimen/size_12dp"
+            android:text=""
+            android:textColor="@color/common_gray_light"
+            android:textSize="@dimen/size_11sp" />
+    </RelativeLayout>
 </layout>

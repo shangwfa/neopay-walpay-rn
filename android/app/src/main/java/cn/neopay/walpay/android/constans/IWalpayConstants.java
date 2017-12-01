@@ -49,7 +49,7 @@ public interface IWalpayConstants {
     String TO_REGISTER_PAGE = "/appModule/RegisterActivity";
     String TO_FORGOTPWD_PAGE = "/appModule/ForgotPwdActivity";
     String TO_RN_PAGE = "/appModule/RNActivity";
-    String TO_SIGNINWEB_PAGE = "/appModule/SignInWebActivity";
+    String TO_SIGNINWEB_PAGE = "/appModule/CommonWebActivity";
     String TO_SCAN_PAGE = "/appModule/ScanActivity";
     String TO_EXPLAIN_PAGE = "/appModule/ExplainActivity";
     String TO_PAYCODE_PAGE = "/appModule/PayCodeActivity";

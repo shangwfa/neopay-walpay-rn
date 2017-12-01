@@ -95,7 +95,7 @@
             android:name=".ui.scan.ScanActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.web.SignInWebActivity"
+            android:name=".ui.web.CommonWebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.explain.ExplainActivity"

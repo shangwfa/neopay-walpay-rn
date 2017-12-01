@@ -3,11 +3,9 @@ package cn.neopay.walpay.android;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.xgjk.common.lib.base.BaseApp;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

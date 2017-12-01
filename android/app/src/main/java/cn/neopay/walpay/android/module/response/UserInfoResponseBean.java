@@ -1,9 +1,11 @@
 package cn.neopay.walpay.android.module.response;
 
+import java.io.Serializable;
+
 /**
  * 用户信息
  */
-public class UserInfoResponseBean extends BaseResponse {
+public class UserInfoResponseBean extends BaseResponse implements Serializable {
     /**
      * 用户uuid
      */

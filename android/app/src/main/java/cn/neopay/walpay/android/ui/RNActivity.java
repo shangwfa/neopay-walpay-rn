@@ -161,8 +161,12 @@ public class RNActivity extends BaseRNActivity {
         String MY_ASSET = "myAsset";
         String MY_BANK = "bankCardList";
         String CARD_PACK_PAGE = "cardPack";
+        String RP_DETAIL_PAGE = "rpDetail";
         String BIG_RED_PAGE = "bigRedPacket";
+        String BIG_RED_PACKET_SIMPLE_PAGE = "bigRedPacketSimple";
         String PHONE_TOPUP_PAGE = "phoneTopUp";
+        String TOPUP_MSG_LIST_PAGE = "topupMsgList";
+        String PAY_MESSAGE_PAGE = "payMessage";
         String PAY_CODE_PAGE = "payCode";
         String BALANCE = "myBalance";
         String BIND_BANK_CARD = "bindBankCard";
