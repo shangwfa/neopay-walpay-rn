@@ -25,6 +25,7 @@ class BankCardListPage extends BasePage {
         this.state = {
             dataSource: [],
             footerStatus: RefreshStatus.IDLE,
+            isReq:false
         };
         console.log(props)
     }
@@ -37,6 +38,7 @@ class BankCardListPage extends BasePage {
         ApiManager.geUserBankCardList({}, (data) => {
             this.setState({
                 dataSource: data,
+                isReq:true
             });
         });
     };
@@ -61,12 +63,35 @@ class BankCardListPage extends BasePage {
 
     }
 
-    render() {
-        if(this.state.dataSource.length > 0)
+    renderHead=()=>{
+        if(this.state.dataSource.length>0)
+        {
+            return <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:20, height:20}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
+        }else {
+            return <Header navigation={this.props.navigation} title='银行卡列表' />
+        }
+    }
+
+    renderMainView=()=>{
+        if(!this.state.isReq && this.state.dataSource.length==0)
         {
             return (
                 <View style={styles.container}>
-                    <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:20, height:20}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
+                    {this.renderHead()}
+                </View>
+            );
+        }else if(this.state.isReq && this.state.dataSource.length==0)
+        {
+            return (
+                <View style={styles.container}>
+                    {this.renderHead()}
+                    {this.renderEmptyView()}
+                </View>
+            );
+        }else {
+            return (
+                <View style={styles.container}>
+                    {this.renderHead()}
                     <FlatList
                         data={this.state.dataSource}
                         renderItem={this._renderItem}
@@ -74,15 +99,13 @@ class BankCardListPage extends BasePage {
 
                 </View>
             );
-        }else
-        {
-            return (
-                <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:20, height:20}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
-                {this.renderEmptyView()}
-                </View>
-            );
         }
+    }
+
+    render() {
+        return (
+            this.renderMainView()
+        );
     }
 
     pushAddBankCard = () =>{

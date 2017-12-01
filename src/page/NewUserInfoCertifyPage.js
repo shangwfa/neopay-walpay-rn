@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View,
     Text,
-    NativeModules
+    NativeModules,
+    DeviceEventEmitter,
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
@@ -27,7 +28,8 @@ class NewUserInfoCertifyPage extends BasePage {
             bankCode: '',
             bindPhone: '',
             smsCode: '',
-            openBankName: ''
+            openBankName: '',
+            dataDetail:{provinceName:'选择省、',provinceCode:'',cityName:'市、',cityCode:'',areaName:'区',areaCode:''},
         };
     }
 
@@ -65,6 +67,10 @@ class NewUserInfoCertifyPage extends BasePage {
 
     }
 
+    choseCityClick =()=>{
+        this.props.navigation.navigate(RouterPaths.CHOSE_CITY,{type:1})
+    }
+
     onBlur = () => {
         ApiManager.getBankInfoByCardNo({'cardNo': this.state.cardNo},data=>{
             this.setState({
@@ -74,10 +80,23 @@ class NewUserInfoCertifyPage extends BasePage {
         })
     }
 
+    emitEvent = (event) => {
+        switch (event.type) {
+            case "choseCity"://选择红包主题
+                this.setState({
+                    dataDetail:event.data
+                });
+                console.log('^^^^'+ this.state.dataDetail.areaName)
+                // console.log('^^^^'+ event.data.areaName)
+                break;
+        }
+
+    };
+
     render() {
         const nameData = {'key': '姓名', 'placeholder': '请填写真实姓名', isLine: true}
         const idCardNameData = {'key': '身份证号', 'placeholder': '请填写身份证号', isLine: true}
-        const cardNumData = {'key': '居住所在地', 'placeholder': '选择省、市、区', isLine: true}
+        const cardNumData = {'key': '居住所在地', 'placeholder': this.state.dataDetail.provinceName+this.state.dataDetail.cityName+this.state.dataDetail.areaName, isLine: true}
         const openAccountBankData = {'key': '职业类别', 'placeholder': '请选择'}
         const phoneData = {'key': '手机号', 'placeholder': '请填写银行预留手机号', 'keyboard': 'numeric', isLine: true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
@@ -88,7 +107,7 @@ class NewUserInfoCertifyPage extends BasePage {
                 <View style={{height: 10}}/>
                 <CommonInput data={nameData} onChangeText={(text) => this.setState({name: text})}/>
                 <CommonInput data={idCardNameData} onChangeText={(text) => this.setState({idCardNo: text})}/>
-                <CommonInput data={cardNumData} editable={false} noEditText={this.state.openBankName}/>
+                <CommonInput data={cardNumData} editable={false} noEditText={this.state.openBankName} tapClick={()=>this.choseCityClick()}/>
                 <CommonInput data={openAccountBankData} editable={false} noEditText={this.state.openBankName}/>
                 <View style={{height: 10}}/>
                 <CommonInput data={phoneData} onChangeText={(text) => this.setState({bindPhone: text})}/>

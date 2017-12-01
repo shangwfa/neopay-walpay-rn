@@ -7,6 +7,8 @@ export const APIS = {
     /**
      * 网络请求-api
      */
+    GET_PROVINCE_LIST:"assist/query_province_list",
+    GET_CITY_LIST:"assist/query_area_list",
     RP_GET_RP_DETAIL:"packet/get_red_packet_info",
     RP_GET_RECEIVER_LIST:"packet/query_red_packet_receive_list",
     PHONE_TOPUP_RECORD_LIST:'pcharge/query_phone_recharge_page',
