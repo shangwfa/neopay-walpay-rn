@@ -103,7 +103,7 @@
     //用户名标签
     UILabel *userNameLabel = [[UILabel alloc]init];
     userNameLabel.textColor = kWhiteColor;
-    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
+    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
     userNameLabel.font = kSYSTEMFONT(17.0);
     [self.view addSubview:userNameLabel];
     _userNameLabel = userNameLabel;

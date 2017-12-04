@@ -25,7 +25,7 @@
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
         timeLabel.font = kSYSTEMFONT(11.0);
         timeLabel.textColor=UIColorHex(999999);
-        timeLabel.text=message.createTime;
+        timeLabel.text=[message.createTime formatDate];
         
         //背景图片
         UIImage *bgImg = kIMAGENAMED(@"beijing");
@@ -119,7 +119,7 @@
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
         timeLabel.font = kSYSTEMFONT(11.0);
         timeLabel.textColor=UIColorHex(999999);
-        timeLabel.text=message.createTime;
+        timeLabel.text=[message.createTime formatDate];
         
         //图标
         UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScaledSizeW(52), kScaledSizeW(52))];
