@@ -82,4 +82,15 @@
     
     return newStr;
 }
+
+-(NSString*)formatDate
+{
+    NSMutableString *newStr = [[self stringByReplacingOccurrencesOfString:@"-" withString:@"/"]mutableCopy];
+    
+    [newStr deleteCharactersInRange:NSMakeRange(0, 5)];
+    [newStr deleteCharactersInRange:NSMakeRange(newStr.length-3, 3)];
+    
+    return newStr;
+}
+
 @end

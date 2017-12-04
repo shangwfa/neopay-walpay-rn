@@ -9,6 +9,9 @@
 #import "XGQBHomeCellView.h"
 
 #import "XGQBHomeCellCVFlowLayout.h"
+#import "XGQBRNViewController.h"
+
+#import "XGQBAPPRootViewController.h"
 
 @interface XGQBHomeCellView()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
@@ -148,9 +151,22 @@ static NSString *const cellId = @"cellId";
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"高亮了第%ld个Cell",(long)indexPath.row);
-    return YES;
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section==0&&indexPath.row==2) {
+       
+        XGQBAPPRootViewController *rootVC =(XGQBAPPRootViewController*)kAppWindow.rootViewController;
+        
+        XGQBRNViewController *RNVC =[XGQBRNViewController new];
+        RNVC.pageType=@"myBalance";
+        [rootVC.rootNAV pushViewController:RNVC animated:YES];
+    }else{
+        JKLog();
+    }
+    
+
 }
+
 
 @end

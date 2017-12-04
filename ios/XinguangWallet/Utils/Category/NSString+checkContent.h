@@ -17,5 +17,6 @@
 - (BOOL)isValidateEmail;
 -(NSString*)secPhoneStr;
 -(NSString*)secureName;
+-(NSString*)formatDate;
 
 @end
