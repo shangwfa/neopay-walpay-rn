@@ -37,6 +37,7 @@
         UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScaledSizeW(58), kScaledSizeW(58))];
         [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
         kViewRadius(icon,kScaledSizeW(58)/2.0);
+        icon.contentMode = UIViewContentModeScaleAspectFill;
         
         //描述文字
         UILabel *desText = [[UILabel alloc]initWithFrame:CGRectMake(98, 51, 163, 17)];
@@ -123,7 +124,8 @@
         //图标
         UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScaledSizeW(52), kScaledSizeW(52))];
         [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
-        kViewRadius(icon,kScaledSizeW(52)/2.0);
+        icon.contentMode = UIViewContentModeScaleAspectFill;
+        kViewRadius(icon, kScaledSizeW(52)/2.0);
         
         //描述文字
         UILabel *desLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 53, 13)];
@@ -167,7 +169,6 @@
             make.right.equalTo(cell.contentView).with.offset(-18);
             make.centerY.equalTo(title);
         }];
-        
     }
     
     return cell;

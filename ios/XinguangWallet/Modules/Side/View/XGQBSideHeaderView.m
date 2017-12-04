@@ -19,17 +19,22 @@
     return self;
 }
 
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+}
+
 -(void)setupViewComponentsWithFrame:(CGRect)frame
 {
     //头像
     UIImageView *headerIcon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width*0.285, frame.size.width*0.285)];
     [headerIcon sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
-    kViewRadius(headerIcon,MAX(headerIcon.width/2.0, headerIcon.height/2.0));
     _headerIcon=headerIcon;
     [self addSubview:headerIcon];
-    
+    headerIcon.contentMode = UIViewContentModeScaleAspectFill;
+    kViewRadius(_headerIcon,frame.size.width*0.285/2.0);
     headerIcon.userInteractionEnabled=YES;
-
     
     //认证标签
     NSString *imageName = [GVUserDefaults standardUserDefaults].authStatus==2?@"wd_yishiming":@"wd_weishiming";
@@ -43,11 +48,11 @@
     kWeakSelf(self);
     //添加约束
     [headerIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(frame.size.width*0.285, frame.size.width*0.285));
         make.centerX.equalTo(weakself);
         make.top.equalTo(weakself).with.offset(0.195*kScreenHeight);
+        make.size.mas_equalTo(CGSizeMake(frame.size.width*0.285, frame.size.width*0.285));
     }];
-    
+
     [regIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(frame.size.width*0.118, frame.size.width*0.039));
         make.bottom.equalTo(headerIcon);

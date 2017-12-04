@@ -78,8 +78,6 @@
     UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_beijing8")];
     [self.view addSubview:backgroundImg];
     
-
-
     //tableView视图
     XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     _homeTVC=homeTableVC;
@@ -98,7 +96,6 @@
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
-    kViewRadius(headerBtn.imageView, 19);
     _headerBtn = headerBtn;
     [self.view addSubview:headerBtn];
     [headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
@@ -119,7 +116,6 @@
     [headerIconView.headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:headerIconView];
 
-
     kWeakSelf(self);
     
     [backgroundImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -137,6 +133,7 @@
         make.centerY.equalTo(headerBtn);
     }];
     
+    kViewRadius(headerBtn, 19);
 }
 
 
