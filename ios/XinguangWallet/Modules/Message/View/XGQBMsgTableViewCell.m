@@ -15,11 +15,17 @@
 {
     XGQBMsgTableViewCell *cell =[[XGQBMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:message.msgTypeText];
     
-    //红包消息
-    if (message.msgType.intValue==1) {
+    //红包消息//商家活动//系统活动
+    if (message.msgType.intValue==1||(message.msgType.intValue==4&&message.payNoticeType.intValue==3)||(message.msgType.intValue==4&&message.payNoticeType.intValue==1)) {
         
-        //红包来啦标题栏
-        UIImageView *titleImgV =[[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_hongbaolaila5")];
+        //标题栏
+        NSString *titleImgName = @"sy_hongbaolaila5";
+        if (message.msgType.intValue==4&&message.payNoticeType.intValue==3) {
+            titleImgName = @"sy_juhui";
+        }else if (message.msgType.intValue==4&&message.payNoticeType.intValue==1){
+            titleImgName = @"sy_xitong4";
+        }
+        UIImageView *titleImgV =[[UIImageView alloc]initWithImage:kIMAGENAMED(titleImgName)];
         
         //时间标签
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
@@ -112,6 +118,10 @@
         //标题
         UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 66, 16)];
         title.text=message.msgTypeText;
+        if ((message.msgType.intValue==4&&message.payNoticeType.intValue==4)||(message.msgType.intValue==4&&message.payNoticeType.intValue==2))//商家广播||系统消息
+        {
+            title.text = message.payNoticeTypeText;
+        }
         title.font=kSYSTEMFONT(16.0);
         title.textColor= UIColorHex(333333);
         

@@ -28,7 +28,7 @@
 #pragma mark - Table view data source
 -(void)loadView
 {
-    XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScreenHeight-75) style:UITableViewStyleGrouped];
+    XGQBHomeTableView *tableView =[[XGQBHomeTableView alloc]initWithFrame:CGRectMake(0, 75+(kiPhoneX?24:0), kScreenWidth, kScreenHeight-75-(kiPhoneX?24:0)) style:UITableViewStyleGrouped];
     tableView.contentInset=UIEdgeInsetsMake(kScaledSizeW(134), 0, 0, 0);
     tableView.backgroundColor=kClearColor;
     self.tableView = tableView;

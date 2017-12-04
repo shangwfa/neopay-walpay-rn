@@ -28,7 +28,7 @@
 -(void)addSubviews
 {
     //背景图
-    UIImageView *bgImg =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sy_beijing7"]];
+    UIImageView *bgImg =[[UIImageView alloc]initWithImage:[UIImage imageNamed: (kiPhoneX?@"sy_beijing7_x":@"sy_beijing7")]];
     [self addSubview:bgImg];
     
     //头像按钮
@@ -66,7 +66,7 @@
     [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(30, 30));
         make.left.equalTo(weakself).with.offset(13);
-        make.top.equalTo(weakself).with.offset(33);
+        make.top.equalTo(weakself).with.offset(33+(kiPhoneX?24:0));
     }];
     
     [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,12 +77,12 @@
     [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.right.equalTo(weakself).with.offset(-13);
-        make.top.equalTo(weakself).with.offset(33);
+        make.top.equalTo(weakself).with.offset(33+(kiPhoneX?24:0));
     }];
     [redPBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.right.equalTo(phoneBtn.mas_left).with.offset(-35);
-        make.top.equalTo(weakself).with.offset(33);
+        make.top.equalTo(weakself).with.offset(33+(kiPhoneX?24:0));
     }];
 }
 
