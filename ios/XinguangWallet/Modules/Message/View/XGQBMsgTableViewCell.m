@@ -64,42 +64,42 @@
         
         
         //添加约束
-        [titleImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.contentView).with.offset(13);
+        [titleImgV mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(cell.contentView).with.offset(13).with.priority(999);
             make.size.mas_equalTo(CGSizeMake(164, 30));
             make.centerX.equalTo(cell.contentView);
         }];
         
-        [bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+        [bgImgV mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(titleImgV.mas_bottom);
             make.size.mas_equalTo(CGSizeMake(kScreenWidth-2*12, kScaledSizeW(155)));
             make.centerX.equalTo(cell.contentView);
         }];
         
-        [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        [sepLine mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(kScreenWidth, 8));
             make.left.equalTo(cell.contentView);
             make.top.equalTo(bgImgV.mas_bottom).with.offset(12);
             make.bottom.equalTo(cell.contentView);
         }];
         
-        [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(cell.contentView).with.offset(-12);
             make.top.equalTo(cell.contentView).with.offset(18);
         }];
         
-        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        [icon mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(kScaledSizeW(58), kScaledSizeW(58)));
             make.centerY.equalTo(bgImgV);
             make.left.equalTo(bgImgV).with.offset(25);
         }];
         
-        [desText mas_makeConstraints:^(MASConstraintMaker *make) {
+        [desText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(bgImgV.mas_centerY).with.offset(-10);
             make.left.equalTo(icon.mas_right).with.offset(18);
         }];
         
-        [shopText mas_makeConstraints:^(MASConstraintMaker *make) {
+        [shopText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(bgImgV.mas_centerY).with.offset(10);
             make.left.equalTo(icon.mas_right).with.offset(18);
         }];
@@ -121,15 +121,15 @@
         timeLabel.text=message.createTime;
         
         //图标
-        UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScaledSizeW(58), kScaledSizeW(58))];
+        UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScaledSizeW(52), kScaledSizeW(52))];
         [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
-        kViewRadius(icon,icon.width/2.0);
+        kViewRadius(icon,kScaledSizeW(52)/2.0);
         
         //描述文字
         UILabel *desLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 53, 13)];
         desLabel.text = message.payNoticeTypeText;
         desLabel.font = kSYSTEMFONT(13.0);
-        timeLabel.textColor=UIColorHex(999999);
+        desLabel.textColor=UIColorHex(999999);
         
         //分割线
         UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 8)];
@@ -141,29 +141,29 @@
         [cell.contentView addSubview:icon];
         [cell.contentView addSubview:sepLine];
         
-        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        [icon mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(kScaledSizeW(52), kScaledSizeW(52)));
-            make.top.equalTo(cell.contentView).with.offset(12);
+            make.top.equalTo(cell.contentView).with.offset(12).with.priority(999);
             make.left.equalTo(cell.contentView).with.offset(13);
         }];
         
-        [sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        [sepLine mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(kScreenWidth, 8));
             make.left.equalTo(cell.contentView);
             make.bottom.equalTo(cell.contentView);
             make.top.equalTo(icon.mas_bottom).with.offset(12);
         }];
         
-        [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        [title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(cell.contentView.mas_centerY).with.offset(-5);
             make.left.equalTo(icon.mas_right).with.offset(18);
         }];
-        [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [desLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cell.contentView.mas_centerY).with.offset(5);
             make.left.equalTo(icon.mas_right).with.offset(18);
         }];
         
-        [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(cell.contentView).with.offset(-18);
             make.centerY.equalTo(title);
         }];

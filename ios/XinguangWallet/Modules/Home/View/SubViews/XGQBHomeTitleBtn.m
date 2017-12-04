@@ -18,13 +18,13 @@
 
     self.titleLabel.font = kSYSTEMFONT(13.0);
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
+    self.titleLabel.clipsToBounds=NO;
     return self;
 }
 
 -(CGRect)titleRectForContentRect:(CGRect)contentRect
 {
-    CGFloat titleX = contentRect.size.height *-0.2;
+    CGFloat titleX = -contentRect.size.width*0.2;
     CGFloat titleY = contentRect.size.height *0.7;
     CGFloat titleW = contentRect.size.width;
     CGFloat titleH = contentRect.size.height*0.3;
