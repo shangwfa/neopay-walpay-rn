@@ -38,16 +38,10 @@
         UIImageView *bgImgV =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth-2*12, kScaledSizeW(155))];
         [bgImgV sd_setImageWithURL:[NSURL URLWithString:message.themeUrl] placeholderImage:bgImg];
         kViewRadius(bgImgV, 5);
-        
-        //图标
-        UIImageView *icon =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScaledSizeW(58), kScaledSizeW(58))];
-        [icon sd_setImageWithURL:[NSURL URLWithString:message.iconUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
-        kViewRadius(icon,kScaledSizeW(58)/2.0);
-        icon.contentMode = UIViewContentModeScaleAspectFill;
-        
+
         //描述文字
         UILabel *desText = [[UILabel alloc]initWithFrame:CGRectMake(98, 51, 163, 17)];
-        desText.text = message.themeTypeText;
+        desText.text = message.msgType.intValue==1?message.themeTypeText:@"";
         desText.font = kSYSTEMFONT(17);
         desText.textColor = UIColorHex(FBDEB0);
         
@@ -55,7 +49,7 @@
         UILabel *shopText = [[UILabel alloc]initWithFrame:CGRectMake(98, 91, 200, 14)];
         shopText.font = kSYSTEMFONT(13);
         shopText.textColor = UIColorHex(FBDEB0);
-        shopText.text = [NSString stringWithFormat:@"——来自%@的红包",message.bossName];
+        shopText.text =message.msgType.intValue==1?[NSString stringWithFormat:@"——来自%@的红包",message.bossName]:@"";
         
         //分割线
         UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 8)];
@@ -64,7 +58,7 @@
         [cell.contentView addSubview:titleImgV];
         [cell.contentView addSubview:timeLabel];
         [cell.contentView addSubview:bgImgV];
-        [cell.contentView addSubview:icon];
+//        [cell.contentView addSubview:icon];
         [cell.contentView addSubview:desText];
         [cell.contentView addSubview:shopText];
         [cell.contentView addSubview:sepLine];
@@ -94,21 +88,15 @@
             make.right.equalTo(cell.contentView).with.offset(-12);
             make.top.equalTo(cell.contentView).with.offset(18);
         }];
-        
-        [icon mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(kScaledSizeW(58), kScaledSizeW(58)));
-            make.centerY.equalTo(bgImgV);
-            make.left.equalTo(bgImgV).with.offset(25);
-        }];
-        
+
         [desText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(bgImgV.mas_centerY).with.offset(-10);
-            make.left.equalTo(icon.mas_right).with.offset(18);
+            make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(98));
         }];
         
         [shopText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(bgImgV.mas_centerY).with.offset(10);
-            make.left.equalTo(icon.mas_right).with.offset(18);
+            make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(98));
         }];
     }
     //支付消息
@@ -124,6 +112,12 @@
         }
         title.font=kSYSTEMFONT(16.0);
         title.textColor= UIColorHex(333333);
+        
+        //未读红点
+        UIImageView *readIcon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 5, 5)];
+        kViewRadius(readIcon, 2.5);
+        readIcon.backgroundColor=UIColorHex(F34646);
+        readIcon.alpha=message.readStatus?1.0:0.0;
         
         //时间标签
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
@@ -148,6 +142,7 @@
         sepLine.backgroundColor=UIColorHex(F5F5F5);
 
         [cell.contentView addSubview:title];
+        [cell.contentView addSubview:readIcon];
         [cell.contentView addSubview:timeLabel];
         [cell.contentView addSubview:desLabel];
         [cell.contentView addSubview:icon];
@@ -158,7 +153,7 @@
             make.top.equalTo(cell.contentView).with.offset(12).with.priority(999);
             make.left.equalTo(cell.contentView).with.offset(13);
         }];
-        
+
         [sepLine mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(kScreenWidth, 8));
             make.left.equalTo(cell.contentView);
@@ -170,6 +165,15 @@
             make.bottom.equalTo(cell.contentView.mas_centerY).with.offset(-5);
             make.left.equalTo(icon.mas_right).with.offset(18);
         }];
+        
+        
+        [readIcon mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(5.0, 5.0));
+            make.centerX.equalTo(title.mas_right);
+            make.centerY.equalTo(title.mas_top);
+        }];
+        
+        
         [desLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cell.contentView.mas_centerY).with.offset(5);
             make.left.equalTo(icon.mas_right).with.offset(18);
