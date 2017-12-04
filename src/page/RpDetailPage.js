@@ -6,7 +6,8 @@ import {
     Image,
     SectionList,
     ListView,
-    FlatList
+    FlatList,
+    DeviceEventEmitter,
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
@@ -41,6 +42,19 @@ class RpDetailPage extends BasePage {
         this._postRpDetail();
         this._postRpReceiverList();
     }
+
+    emitEvent = (event) => {
+        switch (event.type) {
+            case "choseCity"://选择红包主题
+                this.setState({
+                    dataDetail:event.data
+                });
+                console.log('^^^^'+ this.state.dataDetail.areaName)
+                // console.log('^^^^'+ event.data.areaName)
+                break;
+        }
+
+    };
 
     _postRpDetail = () =>{
         let body = {
