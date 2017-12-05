@@ -70,7 +70,7 @@ public class HomeTopView extends FrameLayout {
                         DialogManager.getSingleton().showCarmerTipDialog(getContext());
                     }else {
                         RNActivityParams activityParams = new RNActivityParams();
-                        activityParams.setRnPage(RNActivity.PageType.PAY_SCAN_QR_CODE);
+                        activityParams.setPage(RNActivity.PageType.PAY_SCAN_QR_CODE);
                         MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
                     }
                 }));

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:id="@+id/home_draw_pay_top_container_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_158dp"
+            android:background="@mipmap/img_home_draw_bg" />
+
+        <LinearLayout
+            android:id="@+id/home_draw_pay_top_container_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_103dp"
+            android:layout_marginLeft="@dimen/size_12dp"
+            android:layout_marginRight="@dimen/size_12dp"
+            android:layout_marginTop="85dp"
+            android:background="@mipmap/img_home_draw_white_bg"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/home_draw_big_red_packet_top_ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_50dp"
+                    android:layout_height="@dimen/size_50dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_draw_red_packet" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="大红包"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_draw_recharge_top_ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_50dp"
+                    android:layout_height="@dimen/size_50dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_home_recharge" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_12dp"
+                    android:text="手机充值"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+
+</layout>

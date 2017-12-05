@@ -10,8 +10,6 @@
             android:id="@+id/common_news_red_packet_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_13dp"
-            android:layout_marginRight="@dimen/size_13dp"
             android:layout_marginTop="@dimen/size_10dp"
             android:orientation="vertical">
 
@@ -24,6 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/size_15dp"
+                android:layout_marginLeft="@dimen/size_13dp"
+                android:layout_marginRight="@dimen/size_13dp"
                 android:layout_marginTop="@dimen/size_10dp">
 
                 <ImageView

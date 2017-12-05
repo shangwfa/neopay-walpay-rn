@@ -39,7 +39,7 @@ public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoRespo
             GlideManager.loadNetCircleImage((ImageView) view, data.getAvatarUrl());
             view.setOnClickListener(v -> {
                 RNActivityParams activityParams = new RNActivityParams();
-                activityParams.setRnPage(RNActivity.PageType.PERSONAL_INFO_PAGE);
+                activityParams.setPage(RNActivity.PageType.PERSONAL_INFO_PAGE);
                 MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
             });
         });
