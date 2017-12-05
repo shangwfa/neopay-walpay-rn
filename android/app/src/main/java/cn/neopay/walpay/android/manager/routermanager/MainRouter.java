@@ -82,7 +82,7 @@ public class MainRouter {
         }
 
         ARouter.getInstance().build(IWalpayConstants.TO_RN_PAGE)
-                .withParcelable("activityParams", activityParams)
+                .withParcelable("activityParams",activityParams)
                 .navigation();
     }
 

@@ -94,7 +94,7 @@ class RedPacketTypeComponent extends Component {
     };
     _handleRedThemeTypeStyle = (redPacketData) => {
         let colorTxt;
-        switch (parseInt(redPacketData.themeCode)) {
+        switch (redPacketData.themeType) {
             case 1://生日主题
                 colorTxt = "#FFFFFF";
                 break;

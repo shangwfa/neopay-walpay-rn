@@ -2,10 +2,13 @@ import React from 'react';
 import Picker from 'react-native-picker'
 
 
-const showTimePicker = (onPicker) => {
+const showTimePicker = (onPicker,type) => {
     let years = [],
         months = [],
-        days = []
+        days = [],
+        hours = [],
+        mins = [],
+        seds = []
 
     for(let i=1;i<51;i++){
         years.push(i+1980);
@@ -16,7 +19,29 @@ const showTimePicker = (onPicker) => {
     for(let i=1;i<32;i++){
         days.push(i);
     }
-    let pickerData = [years, months, days];
+
+    let dateType = {
+        "Y": years,
+        "M": months,
+        "D": days,
+        "h": hours,
+        "m": mins,
+        "s": seds,
+    };
+    let pickerData = [];
+
+   type = type?type:'Y-M-D'
+
+    let types = type.toString().split('-')
+
+    let key = types[0].toString()
+
+    for(let i=0;i<types.length;i++){
+        let key = types[i].toString()
+        pickerData.push(dateType[key])
+    }
+
+
     let date = new Date();
     let selectedValue = [
         date.getFullYear(),
@@ -65,6 +90,8 @@ const showTimePicker = (onPicker) => {
     });
     Picker.show();
 };
+
+
 
 export default {
     showTimePicker

@@ -13,6 +13,7 @@ import java.text.MessageFormat;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
+import cn.neopay.walpay.android.utils.DateHandle;
 
 /**
  * @author carlos.guo
@@ -33,7 +34,7 @@ public class NewsRedPacketSlimInjector implements SlimInjector<NewsRedPacketItem
         handleRedPacketView(data, injector);
         injector.background(R.id.common_news_type_icon_iv, R.mipmap.img_red_packet_banner)
                 .with(R.id.red_packet_bg_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getThemeUrl()))
-                .text(R.id.common_news_type_time_tv, MessageFormat.format("{0}", data.getCreateTimeMs()))
+                .text(R.id.common_news_type_time_tv, DateHandle.getMDHSTime(data.getCreateTimeMs()))
                 .clicked(R.id.common_news_red_packet_ll, data.getOnClickListener());
     }
 

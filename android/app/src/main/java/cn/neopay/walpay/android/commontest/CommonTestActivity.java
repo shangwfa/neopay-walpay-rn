@@ -42,7 +42,7 @@ public class CommonTestActivity extends BaseActivity<CommonTestPresenter, Activi
     private void jumpToRNTest() {
         mViewBinding.toRnBtn.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage("home");
+            activityParams.setPage("home");
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
     }

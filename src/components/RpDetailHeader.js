@@ -14,6 +14,8 @@ const imgWidth = (ScreenUtils.width - 30)/4;
 
 const itemHeight = ScreenUtils.height/6;
 
+const imgHeight = ScreenUtils.width/4;
+
 const RpDetailHeader = props => {
     const {
         imgBackGroundUrl,
@@ -37,7 +39,8 @@ const RpDetailHeader = props => {
         top_View:{
             width:ScreenUtils.width,
             height:itemHeight,
-            backgroundColor:colors.rp_bg_def
+            backgroundColor:colors.rp_bg_def,
+            alignItems:'center'
         },
 
         mid_Image:{
@@ -64,7 +67,7 @@ const RpDetailHeader = props => {
             backgroundColor:'transparent'
         },
         amount_value: {
-            marginTop:20,
+            marginTop:5,
             fontSize:40,
             color:colors.orange,
             backgroundColor:'transparent'
@@ -76,8 +79,8 @@ const RpDetailHeader = props => {
             backgroundColor:colors.black,
         },
         maxImg: {
-            width: 100,
-            height:60,
+            width: imgHeight,
+            height:imgHeight*0.6,
             marginRight:10,
             resizeMode:'contain'
         },
@@ -109,11 +112,11 @@ const RpDetailHeader = props => {
                     <View style={{flex:1}} />
                     <Text style={styles.remark_value}>{remarkValue}</Text>
                     <View style={{flex:1,backgroundColor:'transparent'}}>
-                        <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
+                        <Image style = {styles.maxImg} source = {true?require("../res/img/rp_max_text.png"):' '} ></Image>
                     </View>
 
                 </View>
-                <Text style={styles.amount_value}>{amountValue==0?'  ':amountValue}</Text>
+                <Text style={styles.amount_value}>{amountValue==0?' 199876 ':amountValue}</Text>
             </View>
 
             <Image style = {styles.mid_Image} source = {require("../res/img/rp_mid_bg.png")}>

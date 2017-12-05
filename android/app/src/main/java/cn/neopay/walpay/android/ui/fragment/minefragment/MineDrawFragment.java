@@ -97,7 +97,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         mSetting.setItemName("设置");
         mSetting.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.SETTING_PAGE);
+            activityParams.setPage(RNActivity.PageType.SETTING_PAGE);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mSetting);
@@ -109,7 +109,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         mMyBill.setItemName("我的账单");
         mMyBill.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.MY_ORDER_PAGE);
+            activityParams.setPage(RNActivity.PageType.MY_ORDER_PAGE);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyBill);
@@ -119,7 +119,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         mAsset.setItemName("我的资产");
         mAsset.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.MY_ASSET);
+            activityParams.setPage(RNActivity.PageType.MY_ASSET);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mAsset);
@@ -129,7 +129,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         mMyBank.setItemName("我的银行卡");
         mMyBank.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.MY_BANK);
+            activityParams.setPage(RNActivity.PageType.MY_BANK);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyBank);
