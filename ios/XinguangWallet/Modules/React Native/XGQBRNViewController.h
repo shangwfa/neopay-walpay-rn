@@ -11,5 +11,6 @@
 @interface XGQBRNViewController : XGQBRootViewController
 
 @property (nonatomic,strong) NSString *pageType;
+@property (nonatomic,strong) NSMutableDictionary* data;
 
 @end

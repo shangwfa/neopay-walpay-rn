@@ -30,6 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if(!_data)
+    {
+        _data = [NSMutableDictionary dictionaryWithCapacity:0];
+        [_data setObject:@(true) forKey:@"origin"];
+    }else
+    {
+        [_data setObject:@(true) forKey:@"origin"];
+    }
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
     //RN页面禁用IQKeyboardManager
@@ -68,7 +77,7 @@
     [[RCTRootView alloc] initWithBundleURL : jsCodeLocation
                          moduleName        : @"neopay_walpay"
                          initialProperties :@{@"params": @{@"page":_pageType,
-                                                           @"statusBarHeight":statusBarHeiStr,
+                                                           @"data":_data, @"statusBarHeight":statusBarHeiStr,
                                                            @"iphoneDevice":iphoneDevice}}
                           launchOptions    : nil];
     
