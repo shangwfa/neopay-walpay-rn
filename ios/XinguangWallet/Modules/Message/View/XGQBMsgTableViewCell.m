@@ -36,7 +36,11 @@
         //背景图片
         UIImage *bgImg = kIMAGENAMED(@"beijing");
         UIImageView *bgImgV =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth-2*12, kScaledSizeW(155))];
-        [bgImgV sd_setImageWithURL:[NSURL URLWithString:message.themeUrl] placeholderImage:bgImg];
+        NSString *bgImgUrl = message.themeUrl;
+        if ((message.msgType.intValue==4&&message.payNoticeType.intValue==3)||(message.msgType.intValue==4&&message.payNoticeType.intValue==1)) {
+            bgImgUrl=message.noticeImageUrl;
+        }
+        [bgImgV sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:bgImg];
         kViewRadius(bgImgV, 5);
 
         //描述文字

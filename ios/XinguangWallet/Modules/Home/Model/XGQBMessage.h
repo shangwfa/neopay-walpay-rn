@@ -31,5 +31,6 @@
 @property (nonatomic,strong) NSString *payNoticeType;
 @property (nonatomic,strong) NSString *payNoticeTypeText;
 @property (nonatomic,strong) NSString *contentString;
+@property (nonatomic,strong) NSString *noticeImageUrl;
 
 @end
