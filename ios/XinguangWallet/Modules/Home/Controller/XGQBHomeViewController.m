@@ -213,6 +213,7 @@
     if (message.msgType.intValue==1) {
         XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
         RNVC.pageType = @"redList";
+        RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
         [self.navigationController pushViewController:RNVC animated:YES];
     }
     else if(message.msgType.intValue==2)

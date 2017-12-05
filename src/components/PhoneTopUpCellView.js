@@ -28,51 +28,8 @@ class PhoneTopUpMoneyView extends Component {
     constructor(props){
         super(props)
         this.state={
-            MoneyItemList:[
-                {
-                    "nameCode": 21,
-                    "rechargeAmout": "10",
-                    "tradeAmount": 9.90000,
-                    "rechargeType": 1,
-                    "rechargeTypeText": "话费"
-                },
-                {
-                    "nameCode": 22,
-                    "rechargeAmout": "20",
-                    "tradeAmount": 19.80000,
-                    "rechargeType": 1,
-                    "rechargeTypeText": "话费"
-                },
-                {
-                    "nameCode": 23,
-                    "rechargeAmout": "30",
-                    "tradeAmount": 29.70000,
-                    "rechargeType": 1,
-                    "rechargeTypeText": "话费"
-                }],
-            CelluarItemList:[
-                {
-                    "nameCode": 1,
-                    "rechargeAmout": "10",
-                    "tradeAmount": 9.90000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 2,
-                    "rechargeAmout": "30",
-                    "tradeAmount": 29.70000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 3,
-                    "rechargeAmout": "50",
-                    "tradeAmount": 49.50000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                }
-            ],
+            MoneyItemList:[],
+            CelluarItemList:[],
             CelluarPriceList:[],
             showContactIcon:true,
             phoneNo:'',
