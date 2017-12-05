@@ -67,7 +67,7 @@ class CommonInput extends Component {
             )
         }else{
             return(
-                <TouchableWithoutFeedback onPress={() => this.props.tapClick()}>
+                <TouchableWithoutFeedback onPress={this.props.tapClick?() => this.props.tapClick():()=>this.click()}>
                     <Text
                         style={styles.content}
                         underlineColorAndroid={'transparent'}

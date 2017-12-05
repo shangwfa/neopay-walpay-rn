@@ -34,7 +34,7 @@ class RpDetailPage extends BasePage {
         this.state = {
             dataDetail:{},
             dataSource:[],
-            param:this.props.navigation.state.params
+            param:this.props.navigation.state.params.data?this.props.navigation.state.params.data:this.props.navigation.state.params
         }
     }
 

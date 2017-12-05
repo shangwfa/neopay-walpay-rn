@@ -23,7 +23,7 @@ class NewBindBankCardPage extends BasePage {
         super(props);
         this.state = {
             isCreditCard:false,
-            name: '高骏',
+            name: '',
             cardNo: '',
             bankCode: '',
             bindPhone: '',
@@ -34,37 +34,66 @@ class NewBindBankCardPage extends BasePage {
         };
     }
 
+    componentWillMount() {
+        this.getUserInfo();
+    }
+
     commit = () => {
-        const {name, idCardNo, bankCardNo, bankCode, bindPhone, smsCode} = this.state
-        if (StringUtils.isEmpty(name)) {
-            NativeModules.commModule.toast('姓名不能为空')
+        if (StringUtils.isEmpty(this.state.cardNo)) {
+            NativeModules.commModule.toast('银行卡号不能为空')
             return
         }
-        if (StringUtils.isEmpty(idCardNo)) {
-            NativeModules.commModule.toast('身份证号不能为空')
-            return
+        if (StringUtils.isEmpty(this.state.bindPhone)) {
+            NativeModules.commModule.toast('手机号不能为空')
         }
-        // if(StringUtils.isEmpty(bankCode)){
-        //     NativeModules.commModule.toast('银行卡号不能为空')
-        //     return
-        // }
-        if (StringUtils.isEmpty(smsCode)) {
+        if (StringUtils.isEmpty(this.state.smsCode)) {
             NativeModules.commModule.toast('验证码不能为空')
         }
-        //提交添加银行卡
-        const req = {
-            'name': name,
-            'certNo': idCardNo,
-            'cardNo': bankCardNo,
-            'bankCode': 'ABC',
-            'phone': bindPhone,
-            'smsCode': smsCode,
-            'bindCardType': 2
+
+        if(this.state.isCreditCard)
+        {
+            if (StringUtils.isEmpty(this.state.cvv2)) {
+                NativeModules.commModule.toast('cvv2不能为空')
+            }
+
+            if (this.state.date == '请选择信用卡有效期') {
+                NativeModules.commModule.toast('请选择信用卡有效期')
+            }
         }
-        ApiManager.bindBankCard(req,data=>{
+
+        let body;
+
+        if(this.state.isCreditCard)
+        {
+            body = {
+                cardNo:this.state.cardNo,
+                phone:this.state.bindPhone,
+                cvv2:this.state.cvv2,
+                validDate:this.state.date,
+                smsCode:this.state.smsCode,
+            }
+        }else {
+            body = {
+                cardNo:this.state.cardNo,
+                phone:this.state.bindPhone,
+                smsCode:this.state.smsCode,
+            }
+        }
+
+        ApiManager.bindBankCard(body,data=>{
 
         })
 
+    }
+
+    getUserInfo=()=>{
+
+        ApiManager.getUserInfo((data)=>{
+            this.setState({
+                name:data.name,
+                bindPhone:data.phone
+            })
+        })
     }
 
     onBlur = () => {
@@ -81,20 +110,30 @@ class NewBindBankCardPage extends BasePage {
         TimePicker.showTimePicker((value) => {
             console.log('--->' + value)
             let dates = value.toString().split(',')
+
+            let date = ''
+            if(dates[1]>9)
+            {
+                date = dates[0] + '-' + dates[1]
+            }else
+            {
+                date = dates[0] + '-0' + dates[1]
+            }
+
             this.setState({
-                    date:dates[0] + '-' + dates[1]
+                    date:date,
                 }
             )
         },'Y-M')
     }
 
     renderTopView =()=>{
-        const nameData = {'key': '姓名', 'placeholder': '姓名', isLine: true}
+        const nameData = {'key': '姓名', 'placeholder': this.state.name, isLine: true}
         const cardNumData = {'key': '卡号', 'placeholder': '请填写银行卡号', isLine: true}
         const idCardNameData = {'key': '开户银行', 'placeholder': '开户银行', isLine: true}
         return(
             <View>
-                <CommonInput data={nameData} editable={false} onChangeText={(text) => this.setState({name: text})}/>
+                <CommonInput data={nameData} editable={false}/>
                 <CommonInput data={cardNumData} keyboardType = {'number-pad'} onChangeText={(text) => this.setState({cardNo: text})} onBlur ={()=>this.onBlur()}/>
                 <CommonInput data={idCardNameData} editable={false} noEditText={this.state.openBankName}/>
             </View>
@@ -129,7 +168,7 @@ class NewBindBankCardPage extends BasePage {
                 <View style={{height: 10}}/>
                 <CommonInput data={phoneData}  onChangeText={(text) => this.setState({bindPhone: text})}/>
                 <CommonInput data={verifyCodeData} phone={this.state.bindPhone}
-                             onChangeText={(text) => this.setState({smsCode: text})} type = {2} info={{cardNo:this.state.cardNo,bindCardType:this.state.param.type,cvv2:this.state.cvv2,validDate:this.state.date,phone:this.state.bindPhone}}/>
+                             onChangeText={(text) => this.setState({smsCode: text})} type = {2} info={{cardNo:this.state.cardNo,bindCardType:this.state.param.type,cvv2:this.state.cvv2,validDate:this.state.date,phone:this.state.bindPhone,isCreditCard:this.state.isCreditCard}}/>
                 <CommonButton value='确定' style={{marginTop: 75}} onPress={() => this.commit()}/>
             </View>
         );

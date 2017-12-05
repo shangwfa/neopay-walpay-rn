@@ -67,13 +67,24 @@ class TimerButton extends Component {
     }
 
     postGetBindBankCardSMSCode=()=>{
-        let body = {
-            cardNo:this.props.info.cardNo,
-            bindCardType:this.props.info.bindCardType,
-            cvv2:this.props.info.cvv2,
-            validDate:this.props.info.validDate,
-            phone:this.props.info.phone,
-        };
+        let body
+        if(this.props.info.isCreditCard)
+        {
+            body = {
+                cardNo:this.props.info.cardNo,
+                bindCardType:this.props.info.bindCardType,
+                cvv2:this.props.info.cvv2,
+                validDate:this.props.info.validDate + '-01 00:00:01',
+                phone:this.props.info.phone,
+            }
+        }else
+        {
+            body = {
+                cardNo:this.props.info.cardNo,
+                bindCardType:this.props.info.bindCardType,
+                phone:this.props.info.phone,
+            }
+        }
         ApiManager.getBindBankCardSMSCode(body, (data) => {
             this.setState({
                 timerTitle: `重新获取(60s)`,
