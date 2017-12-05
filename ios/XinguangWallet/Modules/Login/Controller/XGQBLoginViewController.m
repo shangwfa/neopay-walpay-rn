@@ -30,7 +30,7 @@
     [self setUpViewComponents];
     
     ///设置键盘不挡住登录按钮
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 180;
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = kScaledSizeH(150);
     
 }
 

@@ -30,5 +30,6 @@
 @property (nonatomic,strong) NSString *createTimeMs;
 @property (nonatomic,strong) NSString *payNoticeType;
 @property (nonatomic,strong) NSString *payNoticeTypeText;
+@property (nonatomic,strong) NSString *contentString;
 
 @end

@@ -67,7 +67,7 @@
         //添加约束
         [titleImgV mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cell.contentView).with.offset(13).with.priority(999);
-            make.size.mas_equalTo(CGSizeMake(164, 30));
+            make.size.mas_equalTo(CGSizeMake(196.5, 31));
             make.centerX.equalTo(cell.contentView);
         }];
         
@@ -133,7 +133,7 @@
         
         //描述文字
         UILabel *desLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 53, 13)];
-        desLabel.text = message.payNoticeTypeText;
+        desLabel.text = message.contentString;
         desLabel.font = kSYSTEMFONT(13.0);
         desLabel.textColor=UIColorHex(999999);
         
