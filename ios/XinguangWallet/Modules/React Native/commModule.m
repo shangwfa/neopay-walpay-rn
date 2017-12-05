@@ -113,6 +113,13 @@ RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
 
 }
 
+//RN端点击退出登录按钮
+RCT_EXPORT_METHOD(logoutFromRN){
+    dispatch_async(dispatch_get_main_queue(), ^{
+    [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
+    });
+}
+
 
 //打电话
 RCT_EXPORT_METHOD(rnCallNative:(NSString*)phoneNo){

@@ -32,6 +32,9 @@ class SettingPage extends BasePage {
     toFeedback=()=>{
         this.props.navigation.navigate(RouterPaths.FEEDBACK_PAGE)
     }
+    toLogout=()=>{
+        NativeModules.commModule.logoutFromRN()
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -39,7 +42,7 @@ class SettingPage extends BasePage {
                 <CommonKeyValueItem title='重置登录密码'  isLine={true} isArrow={true} style={{marginTop:10}}  onPress={()=>this.toLoginPwd()}/>
                 <CommonKeyValueItem title='重置支付密码'  isLine={false} isArrow={true} onPress={()=>this.toPayPwd()}/>
                 <CommonKeyValueItem title='意见反馈'  isLine={false} isArrow={true} style={{marginTop:10}} onPress={()=>this.toFeedback()}/>
-                <CommonButton value='退出登录' style={{marginTop:50}} />
+                <CommonButton value='退出登录' style={{marginTop:50}} onPress={()=>this.toLogout()} />
             </View>
         );
     }

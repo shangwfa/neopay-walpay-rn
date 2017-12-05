@@ -36,7 +36,9 @@
 -(void)addsubviewsWithFrame:(CGRect)frame{
 
     //添加背景图
-    UIImage *bgImg = [YYImage imageNamed:@"sy_beijing.gif"];
+    NSString *bgImgName = kiPhoneX?@"sy_beijing_x.gif":@"sy_beijing.gif";
+    
+    UIImage *bgImg = [YYImage imageNamed:bgImgName];
 //    UIImageView *sideBgView = [[UIImageView alloc]initWithImage:bgImg];
     YYAnimatedImageView *sideBgView =[[YYAnimatedImageView alloc]initWithImage:bgImg];
     
@@ -56,6 +58,7 @@
     kWeakSelf(self);
     [sideBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(weakself);
+        make.height.mas_equalTo(kScaledSizeH(191.0));
     }];
 
 }

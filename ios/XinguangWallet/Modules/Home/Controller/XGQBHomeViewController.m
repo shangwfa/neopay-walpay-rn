@@ -75,11 +75,14 @@
 -(void)setUpViewComponents
 {
     //顶部背景图
-    UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:kIMAGENAMED(@"sy_beijing8")];
+    NSString *bgImgName = @"sy_beijing8";
+    //判断是否是iPhone X
+    if (kiPhoneX) {
+        bgImgName = @"sy_beijing8_x";
+    }
+    UIImageView *backgroundImg = [[UIImageView alloc]initWithImage:kIMAGENAMED(bgImgName)];
     [self.view addSubview:backgroundImg];
     
-
-
     //tableView视图
     XGQBHomeTableViewController *homeTableVC = [[XGQBHomeTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
     _homeTVC=homeTableVC;
@@ -90,7 +93,7 @@
     [self.view addSubview:homeTableVC.tableView];
 
     //顶部视图
-    XGQBHomeTitleView *homeTitleView = [[XGQBHomeTitleView alloc]initWithFrame:CGRectMake(0, 75, kScreenWidth, kScaledSizeW(134))];
+    XGQBHomeTitleView *homeTitleView = [[XGQBHomeTitleView alloc]initWithFrame:CGRectMake(0, 75+(kiPhoneX?24:0), kScreenWidth, kScaledSizeW(134))];
     homeTitleView.delegate=self;
     _homeTitleView=homeTitleView;
     [self.view addSubview:homeTitleView];
@@ -98,7 +101,6 @@
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
-    kViewRadius(headerBtn.imageView, 19);
     _headerBtn = headerBtn;
     [self.view addSubview:headerBtn];
     [headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
@@ -106,37 +108,37 @@
     //用户名标签
     UILabel *userNameLabel = [[UILabel alloc]init];
     userNameLabel.textColor = kWhiteColor;
-    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
+    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
     userNameLabel.font = kSYSTEMFONT(17.0);
     [self.view addSubview:userNameLabel];
     _userNameLabel = userNameLabel;
     
     //顶部缩略图
-    XGQBHeaderIconView *headerIconView = [[XGQBHeaderIconView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 75)];
+    XGQBHeaderIconView *headerIconView = [[XGQBHeaderIconView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 75+(kiPhoneX?24:0))];
     headerIconView.alpha=0;
     _headerIconView = headerIconView;
     headerIconView.delegate=self;
     [headerIconView.headerBtn addTarget:(XGQBAPPRootViewController*)self.parentViewController.parentViewController action:@selector(openSideView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:headerIconView];
 
-
     kWeakSelf(self);
     
     [backgroundImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(weakself.view);
-        make.height.mas_equalTo(178/375.0*kScreenWidth);
+        make.height.mas_equalTo(kScaledSizeW(178)+(kiPhoneX?24:0));
     }];
     
     [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(38, 38));
         make.left.equalTo(weakself.view).with.offset(12);
-        make.top.equalTo(weakself.view).with.offset(30);
+        make.top.equalTo(weakself.view).with.offset(30+(kiPhoneX?24:0));
     }];
     [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(headerBtn.mas_right).with.offset(10);
         make.centerY.equalTo(headerBtn);
     }];
     
+    kViewRadius(headerBtn, 19);
 }
 
 
@@ -263,9 +265,9 @@
     CGFloat y = scrollView.contentOffset.y;
     //处理开始上划
     if(y > originInsetY) {
-        
+
         CGRect newFrame = _homeTitleView.frame;
-        newFrame.origin.y = 75-(y-originInsetY)/2.0;
+        newFrame.origin.y = 75+(kiPhoneX?24:0)-(y-originInsetY)/2.0;
         _homeTitleView.frame = newFrame;
 
         //处理透明度
@@ -279,12 +281,12 @@
     }
     //处理开始下滑时,上方titleView的位置固定,防止出现下滑过快,titleView无法回到初始位置,并且透明度无法回位的情况
     else{
-        _homeTitleView.frame = CGRectMake(0, 75, kScreenWidth, kScaledSizeW(134));
+        _homeTitleView.frame = CGRectMake(0, 75+(kiPhoneX?24:0), kScreenWidth, kScaledSizeW(134));
         _homeTitleView.alpha=1.0;
         _headerBtn.alpha=1.0;
         _userNameLabel.alpha=1.0;
         _headerIconView.alpha=0.0;
-        
+
     }
 }
 

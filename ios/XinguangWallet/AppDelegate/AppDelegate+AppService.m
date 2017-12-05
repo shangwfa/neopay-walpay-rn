@@ -106,6 +106,8 @@
         anima.duration = 0.3f;
         
         self.window.rootViewController = loginNavi;
+        // 清空用户数据
+        [self logoutUserInfo];
         
         [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
     }

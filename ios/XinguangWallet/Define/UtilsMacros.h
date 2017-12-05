@@ -19,11 +19,9 @@
 #define kUserDefaults       [NSUserDefaults standardUserDefaults]
 #define kNotificationCenter [NSNotificationCenter defaultCenter]
 
-//系统版本
-//判断是在iOS11之前
-#ifndef kiOS11Before
-#define kiOS11Before (kSystemVersion < 11)
-#endif
+//判断是否是iPhone X
+#define kiPhoneX ([[IphoneDevice deviceVersion]isEqualToString:@"iPhone X"]||kApplication.statusBarFrame.size.height==44)
+
 
 
 //获取屏幕宽高
@@ -35,7 +33,7 @@
 #define kSizeRatioW (kScreenWidth/375.0)
 #define kSizeRationH (kScreenHeight/667.0)
 #define kScaledSizeW(width) ((width)*(kScreenWidth/375.0f))
-#define kScaledSizeH(width) ((height)*(kScreenHeight/667.0f))
+#define kScaledSizeH(height) ((height)*(kScreenHeight/667.0f))
 
 //强弱引用
 #define kWeakSelf(type)  __weak typeof(type) weak##type = type;
