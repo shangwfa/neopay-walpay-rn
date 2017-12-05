@@ -163,6 +163,11 @@ getPhoneRechargeProductList = (request, callback) => {
         callback(data);
     });
 };
+queryPhoneRechargeDataList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_PHONE_RECHARGE_DATA_LIST,request,(data)=>{
+        callback(data);
+    });
+};
 getUserReceivableRedPacket = (request, callback) => {
     NetUtil.post(APIS.QUERY_USER_RECEIVABLE_RED_PACKET_PAGE, request, (data) => {
         callback(data);
@@ -253,6 +258,7 @@ export default {
     getBalanceRecordList,
     getPhoneRechargeOrderQuery,
     getPhoneRechargeProductList,
+    queryPhoneRechargeDataList,
     getUserReceivableRedPacket,
     getSquareRedPacketList,
     getRecentPayType,

@@ -49,34 +49,6 @@ class PhoneTopUpMoneyView extends Component {
                     "tradeAmount": 29.70000,
                     "rechargeType": 1,
                     "rechargeTypeText": "话费"
-                },
-                {
-                    "nameCode": 24,
-                    "rechargeAmout": "50",
-                    "tradeAmount": 49.50000,
-                    "rechargeType": 1,
-                    "rechargeTypeText": "话费"
-                },
-                {
-                    "nameCode": 25,
-                    "rechargeAmout": "100",
-                    "tradeAmount": 99.00000,
-                    "rechargeType": 1,
-                    "rechargeTypeText": "话费"
-                },
-                {
-                    "nameCode": 26,
-                    "rechargeAmout": "200",
-                    "tradeAmount": 198.00000,
-                    "rechargeType": 1,
-                    "rechargeTypeText": "话费"
-                },
-                {
-                    "nameCode": 27,
-                    "rechargeAmout": "500",
-                    "tradeAmount": 494.00000,
-                    "rechargeType": 1,
-                    "rechargeTypeText": "话费"
                 }],
             CelluarItemList:[
                 {
@@ -99,71 +71,9 @@ class PhoneTopUpMoneyView extends Component {
                     "tradeAmount": 49.50000,
                     "rechargeType": 3,
                     "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 4,
-                    "rechargeAmout": "70",
-                    "tradeAmount": 69.30000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 5,
-                    "rechargeAmout": "100",
-                    "tradeAmount": 99.00000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 6,
-                    "rechargeAmout": "200",
-                    "tradeAmount": 198.00000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 7,
-                    "rechargeAmout": "1024",
-                    "tradeAmount": 1013.76000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 8,
-                    "rechargeAmout": "2048",
-                    "tradeAmount": 2027.52000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 9,
-                    "rechargeAmout": "3072",
-                    "tradeAmount": 3041.28000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 10,
-                    "rechargeAmout": "4096",
-                    "tradeAmount": 4055.04000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 11,
-                    "rechargeAmout": "5120",
-                    "tradeAmount": 5068.80000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
-                },
-                {
-                    "nameCode": 12,
-                    "rechargeAmout": "6144",
-                    "tradeAmount": 6080.56000,
-                    "rechargeType": 3,
-                    "rechargeTypeText": "国内流量"
                 }
             ],
+            CelluarPriceList:[],
             showContactIcon:true,
             phoneNo:'',
             isPayShow:false,
@@ -173,7 +83,7 @@ class PhoneTopUpMoneyView extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{backgroundColor:'#DADADA',height:1}}></View>
+                <View style={{backgroundColor:'#F1F1F0',height:1}}></View>
                 <View style={styles.phoneNumberTextInputView}>
                     <TextInput style={styles.phoneNumberTextInput}
                                placeholder={'请输入手机号'}
@@ -195,6 +105,9 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={{backgroundColor:'#DADADA',height:1}}></View>
                 <View style={styles.cellItemsContainer}>
                     {this.renderCells()}
+                </View>
+                <View style={{marginTop:50}}>
+                    {this.renderCelluarCell()}
                 </View>
                 <PayPwdModal isShow={this.state.isPayShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
                              onForgetPwd={()=>{}} onEnd={(text)=>this.pwdInputFinished(text)}/>
@@ -227,7 +140,7 @@ class PhoneTopUpMoneyView extends Component {
         }
         
     }
-
+    //接收到手机号
     receivedContactPhoneNo=(data)=>{
         // console.log('收到手机号'+data);
         this.setState({
@@ -240,7 +153,7 @@ class PhoneTopUpMoneyView extends Component {
         if(this.props.viewType===false) {
             for (let i = 0; i < this.state.MoneyItemList.length; i++) {
                 itemCells.push(
-                    <TouchableWithoutFeedback key={i} onPress={() => this.cellSelected(i)}>
+                    <TouchableWithoutFeedback key={i} onPress={() => this.moneyCellSelected(i)}>
                         <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
                             <Text
                                 style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.MoneyItemList[i].rechargeAmout}元</Text>
@@ -253,7 +166,7 @@ class PhoneTopUpMoneyView extends Component {
         }else if (this.props.viewType ===true){
             for (let i = 0; i < this.state.CelluarItemList.length; i++) {
                 itemCells.push(
-                    <TouchableWithoutFeedback key={i} onPress={() => this.cellSelected(i)}>
+                    <TouchableWithoutFeedback key={i} onPress={()=>this.celluarCellSelected(i)}>
                         <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
                             <Text
                                 style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.CelluarItemList[i].rechargeAmout}</Text>
@@ -267,7 +180,54 @@ class PhoneTopUpMoneyView extends Component {
         return itemCells;
     };
 
-    cellSelected = (i)=>{
+    renderCelluarCell=()=>{
+        let celluarPriceItem =[];
+        if(this.props.viewType==true){
+            for(let i=0; i<this.state.CelluarPriceList.length;i++){
+                celluarPriceItem.push(
+                    <View>
+                        <View style={{flexDirection:'row',alignItems:'center',marginTop:12}}>
+                            <View style={{marginLeft:14}}>
+                                <Text style={{fontSize:13, color:'#333333'}}>
+                                    {this.state.CelluarItemList[this.state.selectedItemIndex].rechargeAmout+' '+this.state.CelluarPriceList[i].rechargeTypeText}
+                                </Text>
+                                <Text style={{fontSize:12, color:'#999999',marginTop:13}} >
+                                    {this.state.CelluarPriceList[i].productDesc}
+                                </Text>
+                            </View>
+                            <View style={{flex:1}}>
+
+                            </View>
+                            <View style={{marginRight:14,alignItems:'flex-end'}}>
+                                <Text style={{fontSize:16, color:'#333333'}}>
+                                    {'¥'+this.state.CelluarPriceList[i].tradeAmount}
+                                </Text>
+                                <TouchableWithoutFeedback onPress={()=>this.celluarOrderBtnClicked(i)}>
+                                <View style={{height:26,width:61,borderColor:'red',borderRadius:3,borderWidth:1,alignItems:'center',justifyContent:'center',marginTop:11}}>
+                                    <Text style={{color:'#F34646',fontSize:13}}>
+                                        立即购买
+                                    </Text>
+                                </View>
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                        <View style={{height:i==(this.state.CelluarPriceList.length-1)?0:1, width:ScreenUtils.width,backgroundColor:'#DADADA',marginTop:12}}>
+
+                        </View>
+                    </View>
+                )
+            }
+            return celluarPriceItem;
+        }
+    };
+
+    celluarOrderBtnClicked=(i)=>{
+        this.setState({
+            isPayShow:true
+        });
+    };
+
+    moneyCellSelected = (i)=>{
 
         if(this.state.phoneNo.length==11){
             this.setState({
@@ -277,10 +237,26 @@ class PhoneTopUpMoneyView extends Component {
         }else {
             NativeModules.commModule.toast("请输入正确手机号");
         }
-
-
     };
 
+    celluarCellSelected = (i)=>{
+
+        if(this.state.phoneNo.length==11){
+            this.setState({
+                selectedItemIndex:i,
+            });
+
+            ApiManager.queryPhoneRechargeDataList({"nameCode":i,"phone":this.state.phoneNo},(data)=>{
+
+                    this.setState({
+                        CelluarPriceList:data,
+                    })
+            });
+        }else {
+            NativeModules.commModule.toast("请输入正确手机号");
+        }
+    };
+    //处理输入框逻辑
     textInputFocus = (event)=>{
         if(event.nativeEvent.text!=='')
         {
@@ -313,6 +289,7 @@ class PhoneTopUpMoneyView extends Component {
             phoneNo:event.nativeEvent.text
         })
     };
+    //通讯录图标点击
     contactBtnClicked = ()=>{
         NativeModules.commModule.rnModalContactList()
     };
@@ -345,6 +322,7 @@ const styles = StyleSheet.create({
         marginLeft:14,
         marginRight:13,
         fontSize:18,
+        color:'#333333',
     },
     contactIcon:{
         position:'absolute',
