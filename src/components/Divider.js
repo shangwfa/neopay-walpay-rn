@@ -1,6 +1,7 @@
-import React from 'react';
-import {View, StyleSheet,ViewPropTypes as RNViewPropTypes} from 'react-native';
-import colors from '../constants/colors';
+import React from 'react'
+import {View, StyleSheet,ViewPropTypes as RNViewPropTypes} from 'react-native'
+import colors from '../constants/colors'
+import ScreenUtils from "../utils/ScreenUtils"
 
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
 let styles = {};
@@ -14,7 +15,7 @@ Divider.propTypes = {
 
 styles = StyleSheet.create({
     container: {
-        height: 0.5,
+        height: ScreenUtils.onePixel,
         backgroundColor: colors.divider,
     },
 });

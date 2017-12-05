@@ -13,6 +13,7 @@ import Header from '../components/Header'
 import CommonBtn from '../components/CommonButton'
 import ScreenUtils from '../utils/ScreenUtils'
 import Divider from '../components/Divider'
+import {RouterPaths} from "../constants/RouterPaths";
 
 class RedPacketsReadyPage extends BasePage {
 
@@ -78,7 +79,11 @@ class RedPacketsReadyPage extends BasePage {
         return(
             <View>
                 <CommonBtn style={{width:ScreenUtils.width, marginTop:51,}} value={'分享红包至微信领取'}/>
-                <CommonBtn style={{width:ScreenUtils.width, marginTop:20}} backgroundColor={'#FFFFFF'} textColor={'#CCCCCC'} value={'添加指定领取人领取'}/>
+                <CommonBtn style={{width:ScreenUtils.width, marginTop:20}}
+                           backgroundColor={'#FFFFFF'}
+                           textColor={'#CCCCCC'}
+                           value={'添加指定领取人领取'}
+                           onPress={()=>nav.navigate(RouterPaths.RED_PACKET_RECEIVER)}/>
             </View>
         )
     }

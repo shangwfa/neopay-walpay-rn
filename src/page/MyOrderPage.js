@@ -96,7 +96,6 @@ class MyOrderPage extends BasePage {
         this.loadData(1,false)
     }
     onLoadMore = (page) => {
-        console.log("上拉加载更多")
         this.loadData(page,true)
     }
 
