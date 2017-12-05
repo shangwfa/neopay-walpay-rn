@@ -4,6 +4,7 @@ import netCode from '../constants/netCode'
 import {events} from '../constants/index'
 const TEST_URL = "http://139.224.11.160:8202/walpay-web/";
 const MOCK_URL = "http://172.16.33.151:8888/walpay-web/";
+const PROXY_URL="http://172.22.1.47:8202/walpay-web/";
 
 class NetUtil extends Component {
 
@@ -18,6 +19,15 @@ class NetUtil extends Component {
         if(isShowMsg) NativeModules.commModule.toast(msg)
     }
 
+    /**设置超时时间*/
+    static timeout(ms, promise) {
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                reject(new Error("timeout"))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
 
     static post(urlPath, data, successCallbak, isShowLoading = true) {
         if (isShowLoading) {
@@ -34,10 +44,12 @@ class NetUtil extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
-            };
-
-            fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption)
-                .then((response) => response.text())
+            }
+            NetUtil.timeout(10000,fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption))
+                .then((response) => {
+                    console.log(response)
+                    return response.text()
+                })
                 .then((responseText) => {
                     if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                     console.log(responseText)
@@ -54,6 +66,7 @@ class NetUtil extends Component {
                     NativeModules.commModule.toast('网络不给力')
                 })
                 .done()
+
         })
 
     }

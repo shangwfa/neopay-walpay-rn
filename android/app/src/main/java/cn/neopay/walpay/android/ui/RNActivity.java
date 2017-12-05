@@ -100,6 +100,7 @@ public class RNActivity extends BaseRNActivity {
         } else {
             if (null != mLoadingDialog && isShowLoadingDialog) {
                 mLoadingDialog.dismiss();
+                isShowLoadingDialog = false;
             }
         }
 
