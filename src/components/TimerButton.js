@@ -9,6 +9,7 @@ import {
 import {colors} from '../constants/index'
 import StringUtils from '../utils/StringUtils'
 import NetUtil from '../utils/NetUtil'
+import ApiManager from '../utils/ApiManager'
 
 class TimerButton extends Component {
 
@@ -51,8 +52,8 @@ class TimerButton extends Component {
         clearInterval(this.interval)
     }
 
-    sendindBankCardCode=()=>{
-        NetUtil.post('bank/send_bind_bank_card_code', {'phone':this.props.phone}, (data) => {
+    postGetCerfitySMSCode=()=>{
+        ApiManager.getCerfitySMSCode((data) => {
             this.setState({
                 timerTitle: `重新获取(60s)`,
             })
@@ -62,7 +63,39 @@ class TimerButton extends Component {
                 this.setState({selfEnable:false})
                 this.cutDownTime()
             }
-        })
+        });
+    }
+
+    postGetBindBankCardSMSCode=()=>{
+        let body = {
+            cardNo:this.props.info.cardNo,
+            bindCardType:this.props.info.bindCardType,
+            cvv2:this.props.info.cvv2,
+            validDate:this.props.info.validDate,
+            phone:this.props.info.phone,
+        };
+        ApiManager.getBindBankCardSMSCode(body, (data) => {
+            this.setState({
+                timerTitle: `重新获取(60s)`,
+            })
+
+            const {counting,selfEnable} = this.state
+            if (!counting && selfEnable) {
+                this.setState({selfEnable:false})
+                this.cutDownTime()
+            }
+        });
+    }
+
+    sendindBankCardCode=()=>{
+        console.log('321123')
+        if(this.props.type == 1)
+        {
+            this.postGetCerfitySMSCode()
+        }else if(this.props.type == 2)
+        {
+            this.postGetBindBankCardSMSCode()
+        }
     }
 
     onPress=()=>{

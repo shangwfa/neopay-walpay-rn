@@ -45,11 +45,11 @@ class RpDetailPage extends BasePage {
 
     emitEvent = (event) => {
         switch (event.type) {
-            case "choseCity"://选择红包主题
+            case "RedPacketDetail"://选择红包主题
                 this.setState({
                     dataDetail:event.data
                 });
-                console.log('^^^^'+ this.state.dataDetail.areaName)
+                console.log('^^^^'+ this.state.dataDetail.packetCode)
                 // console.log('^^^^'+ event.data.areaName)
                 break;
         }
@@ -58,7 +58,7 @@ class RpDetailPage extends BasePage {
 
     _postRpDetail = () =>{
         let body = {
-            packetCode: this.state.param.packetCode
+            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
         };
         ApiManager.getRpDetail(body, (data) => {
             this.setState({
@@ -69,7 +69,7 @@ class RpDetailPage extends BasePage {
 
     _postRpReceiverList = () => {
         let body = {
-            packetCode: this.state.param.packetCode
+            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
         };
         ApiManager.getRpReceiverList(body, (data) => {
             this.setState({

@@ -14,6 +14,7 @@ import NetUtil from '../utils/NetUtil'
 import StringUtils from '../utils/StringUtils'
 import {APIS} from "../constants/API"
 import ApiManager from '../utils/ApiManager'
+import TimePicker from '../modal/TimePicker'
 
 
 class NewBindBankCardPage extends BasePage {
@@ -22,13 +23,14 @@ class NewBindBankCardPage extends BasePage {
         super(props);
         this.state = {
             isCreditCard:false,
-            name: '',
-            idCardNo: '',
-            bankCardNo: '',
+            name: '高骏',
+            cardNo: '',
             bankCode: '',
             bindPhone: '',
             smsCode: '',
-            openBankName: ''
+            openBankName: '',
+            date:'请选择信用卡有效期',
+            param:this.props.navigation.state.params,
         };
     }
 
@@ -76,7 +78,14 @@ class NewBindBankCardPage extends BasePage {
     }
 
     choseDate=()=>{
-        console.log('123321')
+        TimePicker.showTimePicker((value) => {
+            console.log('--->' + value)
+            let dates = value.toString().split(',')
+            this.setState({
+                    date:dates[0] + '-' + dates[1]
+                }
+            )
+        },'Y-M')
     }
 
     renderTopView =()=>{
@@ -86,7 +95,7 @@ class NewBindBankCardPage extends BasePage {
         return(
             <View>
                 <CommonInput data={nameData} editable={false} onChangeText={(text) => this.setState({name: text})}/>
-                <CommonInput data={cardNumData} keyboardType = {'number-pad'} onChangeText={(text) => this.setState({idCardNo: text})} onBlur ={()=>this.onBlur()}/>
+                <CommonInput data={cardNumData} keyboardType = {'number-pad'} onChangeText={(text) => this.setState({cardNo: text})} onBlur ={()=>this.onBlur()}/>
                 <CommonInput data={idCardNameData} editable={false} noEditText={this.state.openBankName}/>
             </View>
         )
@@ -95,12 +104,12 @@ class NewBindBankCardPage extends BasePage {
 
     renderMidView =()=>{
         const CVV2Data = {'key': 'CVV2', 'placeholder': '信用卡背面签名栏末三位数字', isLine: true}
-        const dateInfo = {'key': '有效期', 'placeholder': '请选择信用卡有效期', isLine: true}
-        if(!this.state.isCreditCard){
+        const dateInfo = {'key': '有效期', 'placeholder':this.state.date, isLine: true}
+        if(this.state.isCreditCard){
             return(
                 <View>
-                    <CommonInput data={CVV2Data} onChangeText={(text) => this.setState({idCardNo: text})}/>
-                    <CommonInput data={dateInfo} editable={false} noEditText={this.state.openBankName} tapClick={()=>this.choseDate()}/>
+                    <CommonInput data={CVV2Data} onChangeText={(text) => this.setState({cvv2: text})}/>
+                    <CommonInput data={dateInfo} editable={false} noEditText={this.state.date} tapClick={()=>this.choseDate()}/>
                 </View>
             )
         }else{
@@ -118,9 +127,9 @@ class NewBindBankCardPage extends BasePage {
                 {this.renderTopView()}
                 {this.renderMidView()}
                 <View style={{height: 10}}/>
-                <CommonInput data={phoneData} editable={false} onChangeText={(text) => this.setState({bindPhone: text})}/>
+                <CommonInput data={phoneData}  onChangeText={(text) => this.setState({bindPhone: text})}/>
                 <CommonInput data={verifyCodeData} phone={this.state.bindPhone}
-                             onChangeText={(text) => this.setState({smsCode: text})}/>
+                             onChangeText={(text) => this.setState({smsCode: text})} type = {2} info={{cardNo:this.state.cardNo,bindCardType:this.state.param.type,cvv2:this.state.cvv2,validDate:this.state.date,phone:this.state.bindPhone}}/>
                 <CommonButton value='确定' style={{marginTop: 75}} onPress={() => this.commit()}/>
             </View>
         );

@@ -1,6 +1,24 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+getCerfitySMSCode = (callback) => {
+    NetUtil.post(APIS.SMSCODE_USER_CERFITY, {}, (data) => {
+        callback(data)
+    })
+}
+
+getBindBankCardSMSCode = (req, callback) => {
+    NetUtil.post(APIS.SMSCODE_BIND_BANKCARD, req, (data) => {
+        callback(data)
+    })
+}
+
+submitUserCerfity = (req, callback) => {
+    NetUtil.post(APIS.USER_CERFITY, req, (data) => {
+        callback(data)
+    })
+}
+
 getProvinceList = (callback) => {
     NetUtil.post(APIS.GET_PROVINCE_LIST, {}, (data) => {
         callback(data)
@@ -206,6 +224,9 @@ withdraworder=(request,callback)=>{
     })
 }
 export default {
+    getCerfitySMSCode,
+    getBindBankCardSMSCode ,
+    submitUserCerfity,
     getProvinceList,
     getCityList,
     getRpDetail,

@@ -7,6 +7,9 @@ export const APIS = {
     /**
      * 网络请求-api
      */
+    SMSCODE_USER_CERFITY:"user/send_auth_user_sms",
+    SMSCODE_BIND_BANKCARD:"bank/send_bind_bank_card_code",
+    USER_CERFITY:"user/auth_user",
     GET_PROVINCE_LIST:"assist/query_province_list",
     GET_CITY_LIST:"assist/query_area_list",
     RP_GET_RP_DETAIL:"packet/get_red_packet_info",

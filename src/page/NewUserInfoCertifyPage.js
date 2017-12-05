@@ -24,51 +24,58 @@ class NewUserInfoCertifyPage extends BasePage {
         this.state = {
             name: '',
             idCardNo: '',
-            bankCardNo: '',
-            bankCode: '',
-            bindPhone: '',
+            Phone: '',
             smsCode: '',
             openBankName: '',
             dataDetail:{provinceName:'选择省、',provinceCode:'',cityName:'市、',cityCode:'',areaName:'区',areaCode:''},
+            occupation:'请选择'
         };
     }
 
     commit = () => {
-        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD)
-        // const {name, idCardNo, bankCardNo, bankCode, bindPhone, smsCode} = this.state
-        // if (StringUtils.isEmpty(name)) {
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:2})
+        // if (StringUtils.isEmpty(this.state.name)) {
         //     NativeModules.commModule.toast('姓名不能为空')
         //     return
         // }
-        // if (StringUtils.isEmpty(idCardNo)) {
+        // if (StringUtils.isEmpty(this.state.idCardNo)) {
         //     NativeModules.commModule.toast('身份证号不能为空')
         //     return
         // }
-        // // if(StringUtils.isEmpty(bankCode)){
-        // //     NativeModules.commModule.toast('银行卡号不能为空')
-        // //     return
-        // // }
-        // if (StringUtils.isEmpty(smsCode)) {
+        // if (StringUtils.isEmpty(this.state.dataDetail.provinceCode) || StringUtils.isEmpty(this.state.dataDetail.cityCode) || StringUtils.isEmpty(this.state.dataDetail.areaCode)) {
+        //     NativeModules.commModule.toast('居住所在地不能为空')
+        //     return
+        // }
+        // if (StringUtils.isEmpty(this.state.occupation)) {
+        //     NativeModules.commModule.toast('职业类别不能为空')
+        //     return
+        // }
+        // if (StringUtils.isEmpty(this.state.smsCode)) {
         //     NativeModules.commModule.toast('验证码不能为空')
         // }
-        // //提交添加银行卡
-        // const req = {
-        //     'name': name,
-        //     'certNo': idCardNo,
-        //     'cardNo': bankCardNo,
-        //     'bankCode': 'ABC',
-        //     'phone': bindPhone,
-        //     'smsCode': smsCode,
-        //     'bindCardType': 2
-        // }
-        // ApiManager.bindBankCard(req,data=>{
         //
+        // let body = {
+        //     realName:this.state.name,
+        //     certNo:this.state.idCardNo,
+        //     proCode:this.state.dataDetail.provinceCode,
+        //     cityCode:this.state.dataDetail.cityCode,
+        //     areaCode:this.state.dataDetail.areaCode,
+        //     jobType:this.state.occupation,
+        //     verifyCode:this.state.smsCode,
+        // };
+        //
+        // ApiManager.submitUserCerfity(body,data=>{
+        //     this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:1})
         // })
 
     }
 
     choseCityClick =()=>{
         this.props.navigation.navigate(RouterPaths.CHOSE_CITY,{type:1})
+    }
+
+    choseOccupationClick = ()=>{
+        this.props.navigation.navigate(RouterPaths.CHOSE_OCCUPATION)
     }
 
     onBlur = () => {
@@ -89,6 +96,11 @@ class NewUserInfoCertifyPage extends BasePage {
                 console.log('^^^^'+ this.state.dataDetail.areaName)
                 // console.log('^^^^'+ event.data.areaName)
                 break;
+            case "choseOccupation"://选择红包主题
+                this.setState({
+                    occupation:event.data.type
+                });
+                break;
         }
 
     };
@@ -97,7 +109,7 @@ class NewUserInfoCertifyPage extends BasePage {
         const nameData = {'key': '姓名', 'placeholder': '请填写真实姓名', isLine: true}
         const idCardNameData = {'key': '身份证号', 'placeholder': '请填写身份证号', isLine: true}
         const cardNumData = {'key': '居住所在地', 'placeholder': this.state.dataDetail.provinceName+this.state.dataDetail.cityName+this.state.dataDetail.areaName, isLine: true}
-        const openAccountBankData = {'key': '职业类别', 'placeholder': '请选择'}
+        const openAccountBankData = {'key': '职业类别', 'placeholder': this.state.occupation}
         const phoneData = {'key': '手机号', 'placeholder': '请填写银行预留手机号', 'keyboard': 'numeric', isLine: true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
         const tips = '注:认证通过后，该账号关联的信息不可更改'
@@ -108,11 +120,11 @@ class NewUserInfoCertifyPage extends BasePage {
                 <CommonInput data={nameData} onChangeText={(text) => this.setState({name: text})}/>
                 <CommonInput data={idCardNameData} onChangeText={(text) => this.setState({idCardNo: text})}/>
                 <CommonInput data={cardNumData} editable={false} noEditText={this.state.openBankName} tapClick={()=>this.choseCityClick()}/>
-                <CommonInput data={openAccountBankData} editable={false} noEditText={this.state.openBankName}/>
+                <CommonInput data={openAccountBankData} editable={false} noEditText={this.state.openBankName} tapClick={()=>this.choseOccupationClick()}/>
                 <View style={{height: 10}}/>
                 <CommonInput data={phoneData} onChangeText={(text) => this.setState({bindPhone: text})}/>
                 <CommonInput data={verifyCodeData} phone={this.state.bindPhone}
-                             onChangeText={(text) => this.setState({smsCode: text})}/>
+                             onChangeText={(text) => this.setState({smsCode: text})} type={1}/>
                 <Text style={styles.tips}>{tips}</Text>
                 <CommonButton value='确定' style={{marginTop: 75}} onPress={() => this.commit()}/>
             </View>

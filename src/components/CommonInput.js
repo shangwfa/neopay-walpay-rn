@@ -34,7 +34,7 @@ class CommonInput extends Component {
 
     renderVerifyCode = (isVerfyCode) => {
         if (isVerfyCode) {
-            return <TimerButton phone={this.props.phone}/>
+            return <TimerButton phone={this.props.phone} type = {this.props.type} info={this.props.info}/>
         }
     }
 
