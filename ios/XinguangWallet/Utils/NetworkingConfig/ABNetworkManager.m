@@ -138,15 +138,8 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html",@"application/x-www-form-urlencoded",nil];
     manager.responseSerializer.stringEncoding = kCFStringEncodingUTF8;
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    
-    if([url isEqualToString:@"trade/execute_barcode_trade"])
-    {
-        manager.requestSerializer.timeoutInterval = 20.f;
-    }else
-    {
-        manager.requestSerializer.timeoutInterval = 10.f;
-    }
-    
+    manager.requestSerializer.timeoutInterval = 10.f;
+
     [manager.requestSerializer
      setValue:@"application/x-www-form-urlencoded;charset=utf-8"
      forHTTPHeaderField:@"Content-Type"];

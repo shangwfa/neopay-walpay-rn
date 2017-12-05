@@ -142,7 +142,7 @@ static NSString *const cellId = @"cellId";
     }];
     
     [icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(27*kSizeRatioW, 38.5*kSizeRatioW));
+        make.size.mas_equalTo(CGSizeMake(kScaledSizeW(40),kScaledSizeW(40)));
         make.right.equalTo(cell).with.offset(-34*kSizeRatioW);
         make.centerY.equalTo(cell);
     }];

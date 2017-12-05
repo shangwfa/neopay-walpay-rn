@@ -45,6 +45,7 @@
         [weakself refreshData];
     }];
     tableView.mj_header = header;
+    [header setTitle:@"拼命加载中" forState:MJRefreshStateRefreshing];
     header.automaticallyChangeAlpha=YES;
     header.lastUpdatedTimeLabel.hidden=YES;
     
@@ -63,9 +64,9 @@
         for (NSDictionary*dict in responseAfter) {
             XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];
-            [self.tableView.mj_footer endRefreshing];
             [self.tableView reloadData];
         }
+        [self.tableView.mj_footer endRefreshing];
         _currentPage++;
     } andFailerFn:^(NSError *error) {
         [self.tableView.mj_footer endRefreshing];
@@ -86,9 +87,9 @@
         for (NSDictionary*dict in responseAfter) {
             XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];
-            [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
         }
+        [self.tableView.mj_header endRefreshing];
         _currentPage=2;
     } andFailerFn:^(NSError *error) {
             [self.tableView.mj_header endRefreshing];
