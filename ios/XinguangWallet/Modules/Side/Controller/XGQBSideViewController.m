@@ -37,7 +37,7 @@
     UITapGestureRecognizer *tapOnIcon = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tableHeaderClicked)];
     
     [sideView.headerView.headerIcon addGestureRecognizer:tapOnIcon];
-        
+    [sideView.headerView.regBtn addTarget:self action:@selector(goRegBtnClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - 懒加载相关

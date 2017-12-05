@@ -34,7 +34,7 @@ class CommonInput extends Component {
 
     renderVerifyCode = (isVerfyCode) => {
         if (isVerfyCode) {
-            return <TimerButton phone={this.props.phone}/>
+            return <TimerButton phone={this.props.phone} type = {this.props.type} info={this.props.info}/>
         }
     }
 
@@ -67,7 +67,7 @@ class CommonInput extends Component {
             )
         }else{
             return(
-                <TouchableWithoutFeedback onPress={() => this.props.tapClick()}>
+                <TouchableWithoutFeedback onPress={this.props.tapClick?() => this.props.tapClick():()=>this.click()}>
                     <Text
                         style={styles.content}
                         underlineColorAndroid={'transparent'}

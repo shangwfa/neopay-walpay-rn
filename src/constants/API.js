@@ -7,6 +7,9 @@ export const APIS = {
     /**
      * 网络请求-api
      */
+    SMSCODE_USER_CERFITY:"user/send_auth_user_sms",
+    SMSCODE_BIND_BANKCARD:"bank/send_bind_bank_card_code",
+    USER_CERFITY:"user/auth_user",
     GET_PROVINCE_LIST:"assist/query_province_list",
     GET_CITY_LIST:"assist/query_area_list",
     RP_GET_RP_DETAIL:"packet/get_red_packet_info",
@@ -33,6 +36,7 @@ export const APIS = {
     QUERY_BALANCE_RECORD_PAGE: "balance/query_balance_record_page",//获取余额交易记录
     PHONE_RECHARGE_ORDER_QUERY: "pcharge/phone_recharge_order_query",//获取手机充值和流量充值结果
     PHONE_RECHARGE_PRODUCT_LIST: "pcharge/query_phone_recharge_product_list",//获取手机充值产品列表
+    QUERY_PHONE_RECHARGE_DATA_LIST:"pcharge/query_phone_recharge_data_list",//根据充值面额code获取充值产品列表
     QUERY_USER_RECEIVABLE_RED_PACKET_PAGE: "packet/query_user_receivable_red_packet_page",//查询用户未领取的红包列表
     QUERY_SQUARE_RED_PACKET_LIST: "packet/query_square_red_packet_list",//获取广场红包Page
     GET_RECENT_PAY_TYPE: "pay/get_recent_pay_type",//获取上一次付款方式

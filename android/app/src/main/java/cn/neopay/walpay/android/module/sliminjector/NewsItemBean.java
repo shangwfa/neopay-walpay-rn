@@ -11,7 +11,7 @@ import android.view.View;
 public class NewsItemBean {
     private String avatar;
     private String name;
-    private String time;
+    private long time;
     private int isSelectState;
     private String content;
     private View.OnClickListener onClickListener;
@@ -40,11 +40,11 @@ public class NewsItemBean {
         this.name = name;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

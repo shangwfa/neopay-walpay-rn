@@ -28,7 +28,6 @@ import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
-import cn.neopay.walpay.android.module.rnParams.TestParams;
 import cn.neopay.walpay.android.rn.RNCacheViewManager;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 import cn.neopay.walpay.android.view.dialog.LoadingDialog;
@@ -56,13 +55,11 @@ public class RNActivity extends BaseRNActivity {
     @Nullable
     public Bundle getLaunchOptions() {
         Bundle bundle = new Bundle();
-        initLaunchOptions(bundle, activityParams.getRnPage());
+        initLaunchOptions(bundle, activityParams);
         return bundle;
     }
 
-    private void initLaunchOptions(Bundle bundle, String pageType) {
-        TestParams params = new TestParams();
-        params.setPage(pageType);
+    private void initLaunchOptions(Bundle bundle, RNActivityParams params) {
         bundle.putString("params", new Gson().toJson(params));
     }
 
@@ -174,7 +171,17 @@ public class RNActivity extends BaseRNActivity {
 
     public static void jumpToRNPage(Context context, String pageType) {
         RNActivityParams activityParams = new RNActivityParams();
-        activityParams.setRnPage(pageType);
+        activityParams.setPage(pageType);
         MainRouter.getSingleton().jumpToRNPage(context, activityParams);
+    }
+
+    /**
+     * 最新调用方法
+     *
+     * @param context
+     * @param params
+     */
+    public static void jumpToRNPage(Context context, RNActivityParams params) {
+        MainRouter.getSingleton().jumpToRNPage(context, params);
     }
 }

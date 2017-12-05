@@ -5,6 +5,7 @@ import {
     Text,
     Image,
     FlatList,
+    DeviceEventEmitter,
     TouchableWithoutFeedback
 } from 'react-native'
 import BasePage from "../page/BasePage"
@@ -12,7 +13,7 @@ import ScreenUtils from "../utils/ScreenUtils"
 import Header from '../components/Header'
 
 
-const occupationList = [{index:0,key:'政',des:'公务员'},{index:1,key:'事',des:'事业单位员工'},{index:2,key:'管',des:'企业高管'},{index:3,key:'私',des:'私营业主'},{index:4,key:'金',des:'金融从业人员'},{index:5,key:'法',des:'律师'},{index:6,key:'会',des:'会计师'},{index:7,key:'医',des:'医护人员'},{index:8,key:'学',des:'学生'},{index:9,key:'员',des:'公司员工'},{index:10,key:'商',des:'商业服务人员'},{index:11,key:'工',des:'工人'},{index:12,key:'农',des:'农林牧副渔'},{index:13,key:'军',des:'军人民警'},{index:14,key:'文',des:'问题工作者'},{index:15,key:'家',des:'家庭主妇'},{index:16,key:'退',des:'退休'},{index:17,key:'自',des:'自由职业者'},{index:18,key:'其',des:'其他'}];
+const occupationList = [{index:0,key:'政',des:'公务员',type:'OFFICIAL'},{index:1,key:'事',des:'事业单位员工',type:'PUBLIC_SECTOR_EMPLOYEES'},{index:2,key:'管',des:'企业高管',type:'ENTERPRISE_SENIOR_MANAGER'},{index:3,key:'私',des:'私营业主',type:'PRIVATE_BUSINESS_OWNER'},{index:4,key:'金',des:'金融从业人员',type:'EMPLOYEE_IN_FINANCE'},{index:5,key:'法',des:'律师',type:'LAWYER'},{index:6,key:'会',des:'会计师',type:'ACCOUNTANT'},{index:7,key:'医',des:'医护人员',type:'MEDICAL_WORKERS'},{index:8,key:'学',des:'学生',type:'STUDENT'},{index:9,key:'员',des:'公司员工',type:'EMPLOYEES'},{index:10,key:'商',des:'商业服务人员',type:'COMMERCIAL_SERVICE_WORKERS'},{index:11,key:'工',des:'工人',type:'WORKERS'},{index:12,key:'农',des:'农林牧副渔',type:'AGRICULTURE_SECTOR'},{index:13,key:'军',des:'军人民警',type:'SOLDIER'},{index:14,key:'文',des:'问题工作者',type:'LITERATURE_SPORTS_WORKERS'},{index:15,key:'家',des:'家庭主妇',type:'HOUSEWIFE'},{index:16,key:'退',des:'退休',type:'RETIRE'},{index:17,key:'自',des:'自由职业者',type:'FREELANCERS'},{index:18,key:'其',des:'其他',type:'OTHER'}];
 
 class OccupationSelectionPage extends BasePage {
 
@@ -56,7 +57,7 @@ class OccupationSelectionPage extends BasePage {
             iconColor ='#C3C3C3';
         }
         return(
-            <TouchableWithoutFeedback onPress={()=>this.pressItem(item.index)}>
+            <TouchableWithoutFeedback onPress={()=>this.pressItem(item)}>
                 <View style={styles.cellContainer}>
                     <View style={styles.cellContainerView}>
                         <View style={[styles.iconView,{backgroundColor:iconColor}]}>
@@ -83,10 +84,12 @@ class OccupationSelectionPage extends BasePage {
         )}
 
 
-    pressItem =(index)=>{
+    pressItem =(item)=>{
         this.setState({
-            selectedIndex:index,
+            selectedIndex:item.index,
         });
+        DeviceEventEmitter.emit('userInfoCerfity', {type: 'choseOccupation', data: item})
+        this.props.navigation.goBack();
     }
 }
 

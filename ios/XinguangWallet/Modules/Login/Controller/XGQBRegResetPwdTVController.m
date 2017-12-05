@@ -106,7 +106,7 @@
 {
     [super viewWillDisappear:animated];
     
-    //判断是否需要传手机号会登录界面
+    //判断是否需要传手机号回登录界面
     if ([self.navigationController.viewControllers[0] isKindOfClass:[XGQBLoginViewController class]]) {
         XGQBLoginViewController *loginVC = self.navigationController.viewControllers[0];
         loginVC.userName = _phoneNoTextField.text;

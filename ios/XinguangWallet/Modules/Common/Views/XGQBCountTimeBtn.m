@@ -17,8 +17,8 @@
     {
         self.titleLabel.font = kSYSTEMFONT(12);
         self.layer.cornerRadius = 5.0;
-        self.layer.borderWidth = 1.0;
-        self.layer.borderColor = kAPPTheamColor.CGColor;
+//        self.layer.borderWidth = 1.0;
+//        self.layer.borderColor = kAPPTheamColor.CGColor;
         [self setTitle:@"获取验证码" forState:UIControlStateNormal];
         [self setTitleColor:kAPPTheamColor forState:UIControlStateNormal];
 //        [self addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];

@@ -1,15 +1,12 @@
 package cn.neopay.walpay.android.ui.fragment.newsfragment;
 
-import com.xgjk.common.lib.utils.HandlerUtils;
-
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.neopay.walpay.android.WalpayApp;
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.request.BaseRequest;
 import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
 import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
@@ -17,8 +14,6 @@ import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsActivitiesItemBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsItemBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
-import cn.neopay.walpay.android.rn.RNPackage;
-import cn.neopay.walpay.android.rn.module.CommModule;
 import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
@@ -33,7 +28,7 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
     @Override
     public void getNewsInfo() {
         ApiManager.getSingleton().getHomeNewsInfo(new BaseRequest(),
-                new BaseSubscriber(mActivity, o -> mView.setNewsViewData((List<GetNewsResponseBean>) o)));
+                new BaseSubscriber(mActivity, o -> mView.setNewsViewData((List<GetNewsResponseBean>) o), false));
     }
 
     @Override
@@ -96,7 +91,7 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
     private void handleActivityNews(GetNewsResponseBean getNewsResponseBean, ArrayList<Object> mDataList) {
         NewsActivitiesItemBean newsActivitiesItemBean = new NewsActivitiesItemBean();
         newsActivitiesItemBean.setAvatar(getNewsResponseBean.getIconUrl());
-        newsActivitiesItemBean.setTime(MessageFormat.format("{0}", getNewsResponseBean.getCreateTimeMs()));
+        newsActivitiesItemBean.setTime(getNewsResponseBean.getCreateTimeMs());
         newsActivitiesItemBean.setContent(getNewsResponseBean.getNoticeImageUrl());
         newsActivitiesItemBean.setOnClickListener(view -> {
             MainRouter.getSingleton().jumpToCommonWebPage(getNewsResponseBean.getNoticeUrl());
@@ -109,7 +104,7 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         mNewsItemBean = new NewsItemBean();
         mNewsItemBean.setAvatar(getNewsResponseBean.getIconUrl());
         mNewsItemBean.setName(getNewsResponseBean.getMsgTypeText());
-        mNewsItemBean.setTime(MessageFormat.format("{0}", getNewsResponseBean.getCreateTimeMs()));
+        mNewsItemBean.setTime(getNewsResponseBean.getCreateTimeMs());
         mNewsItemBean.setContent(getNewsResponseBean.getContentString());
         mNewsItemBean.setIsSelectState(getNewsResponseBean.getReadStatus());
     }
@@ -128,13 +123,12 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
             if (1 == getNewsResponseBean.getReadStatus()) {
                 RNActivity.jumpToRNPage(mActivity, RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
             }
-            RNActivity.jumpToRNPage(mActivity, RNActivity.PageType.RP_DETAIL_PAGE);
-            HandlerUtils.runOnUiThreadDelay(() -> {
-                RNPackage rnPackage = WalpayApp.getRnPackage();
-                CommModule mModule = rnPackage.mModule;
-                mModule.nativeCallRnRedPacketDetail(getNewsResponseBean.getPacketCode());
-            }, 1000);
-
+            RNActivityParams params = new RNActivityParams();
+            params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
+            RNActivityParams.Data data = new RNActivityParams.Data();
+            data.setPacketCode(getNewsResponseBean.getPacketCode());
+            params.setData(data);
+            RNActivity.jumpToRNPage(mActivity, params);
             updateNewsStatus(getNewsResponseBean);
         });
         mDataList.add(newsRedPacketItemBean);

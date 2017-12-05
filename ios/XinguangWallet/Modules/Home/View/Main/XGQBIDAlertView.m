@@ -60,6 +60,7 @@
     
     //立即认证
     XGQBPureColorBtn *confirmBtn =[XGQBPureColorBtn buttonWithText:@"立即认证" andColor:kButtonColor];
+    confirmBtn.titleLabel.font= kSYSTEMFONT(14.0);
     [confirmBtn addTarget:self action:@selector(registerBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:confirmBtn];
     

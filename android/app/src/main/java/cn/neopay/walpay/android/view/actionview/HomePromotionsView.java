@@ -85,7 +85,7 @@ public class HomePromotionsView extends FrameLayout {
     private void handleViewClick() {
         mBinding.homeMeetingMoreTv.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.ACTIVITY_LIST_PAGE);
+            activityParams.setPage(RNActivity.PageType.ACTIVITY_LIST_PAGE);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
     }

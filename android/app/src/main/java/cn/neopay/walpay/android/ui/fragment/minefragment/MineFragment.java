@@ -106,7 +106,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mSetting.setItemName("设置");
         mSetting.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.SETTING_PAGE);
+            activityParams.setPage(RNActivity.PageType.SETTING_PAGE);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mSetting);
@@ -118,7 +118,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyBill.setItemName("我的账单");
         mMyBill.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.MY_ORDER_PAGE);
+            activityParams.setPage(RNActivity.PageType.MY_ORDER_PAGE);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyBill);
@@ -127,7 +127,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mAsset.setItemName("我的资产");
         mAsset.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.MY_ASSET);
+            activityParams.setPage(RNActivity.PageType.MY_ASSET);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mAsset);
@@ -136,7 +136,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyBank.setItemName("我的银行卡");
         mMyBank.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.MY_BANK);
+            activityParams.setPage(RNActivity.PageType.MY_BANK);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyBank);
@@ -146,7 +146,7 @@ public class MineFragment extends BaseFragment<MineFragmentPresenter, FragmentMi
         mMyWinReCord.setItemName("我的中奖记录");
         mMyWinReCord.setOnClickListener(v -> {
             RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setRnPage(RNActivity.PageType.MY_LOTTER_RECORD);
+            activityParams.setPage(RNActivity.PageType.MY_LOTTER_RECORD);
             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
         });
         data.add(mMyWinReCord);

@@ -8,6 +8,11 @@
 
 #import "XGQBHeaderIconView.h"
 
+@interface XGQBHeaderIconView()
+
+
+@end
+
 @implementation XGQBHeaderIconView
 
 
@@ -16,24 +21,27 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubviews];
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     }
     return self;
 }
 
 -(void)addSubviews
 {
+    //背景图
+    UIImageView *bgImg =[[UIImageView alloc]initWithImage:[UIImage imageNamed: (kiPhoneX?@"sy_beijing7_x":@"sy_beijing7")]];
+    [self addSubview:bgImg];
+    
     //头像按钮
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
-//    headerBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    kViewRadius(headerBtn.imageView, 15);
+//    kViewRadius(headerBtn.imageView, 15);
+    kViewRadius(headerBtn, 15);
     _headerBtn=headerBtn;
     [self addSubview:headerBtn];
     
     //用户名标签
     UILabel *userNameLabel = [[UILabel alloc]init];
-    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].name];
+    userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
     userNameLabel.font = kSYSTEMFONT(14.0);
     userNameLabel.textColor = kWhiteColor;
     [self addSubview:userNameLabel];
@@ -52,10 +60,13 @@
     [phoneBtn addTarget:self action:@selector(homeIconBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     kWeakSelf(self);
+    [bgImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakself);
+    }];
     [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(30, 30));
         make.left.equalTo(weakself).with.offset(13);
-        make.top.equalTo(weakself).with.offset(33);
+        make.top.equalTo(weakself).with.offset(33+(kiPhoneX?24:0));
     }];
     
     [userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,14 +77,13 @@
     [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.right.equalTo(weakself).with.offset(-13);
-        make.top.equalTo(weakself).with.offset(33);
+        make.top.equalTo(weakself).with.offset(33+(kiPhoneX?24:0));
     }];
     [redPBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.right.equalTo(phoneBtn.mas_left).with.offset(-35);
-        make.top.equalTo(weakself).with.offset(33);
+        make.top.equalTo(weakself).with.offset(33+(kiPhoneX?24:0));
     }];
-    
 }
 
 -(void)homeIconBtnClicked:(UIButton*)btn

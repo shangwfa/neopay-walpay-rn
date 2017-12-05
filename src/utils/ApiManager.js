@@ -1,6 +1,24 @@
 import NetUtil from '../utils/NetUtil'
 import {APIS} from "../constants/API"
 
+getCerfitySMSCode = (callback) => {
+    NetUtil.post(APIS.SMSCODE_USER_CERFITY, {}, (data) => {
+        callback(data)
+    })
+}
+
+getBindBankCardSMSCode = (req, callback) => {
+    NetUtil.post(APIS.SMSCODE_BIND_BANKCARD, req, (data) => {
+        callback(data)
+    })
+}
+
+submitUserCerfity = (req, callback) => {
+    NetUtil.post(APIS.USER_CERFITY, req, (data) => {
+        callback(data)
+    })
+}
+
 getProvinceList = (callback) => {
     NetUtil.post(APIS.GET_PROVINCE_LIST, {}, (data) => {
         callback(data)
@@ -145,6 +163,11 @@ getPhoneRechargeProductList = (request, callback) => {
         callback(data);
     });
 };
+queryPhoneRechargeDataList = (request, callback) => {
+    NetUtil.post(APIS.QUERY_PHONE_RECHARGE_DATA_LIST,request,(data)=>{
+        callback(data);
+    });
+};
 getUserReceivableRedPacket = (request, callback) => {
     NetUtil.post(APIS.QUERY_USER_RECEIVABLE_RED_PACKET_PAGE, request, (data) => {
         callback(data);
@@ -206,6 +229,9 @@ withdraworder=(request,callback)=>{
     })
 }
 export default {
+    getCerfitySMSCode,
+    getBindBankCardSMSCode ,
+    submitUserCerfity,
     getProvinceList,
     getCityList,
     getRpDetail,
@@ -232,6 +258,7 @@ export default {
     getBalanceRecordList,
     getPhoneRechargeOrderQuery,
     getPhoneRechargeProductList,
+    queryPhoneRechargeDataList,
     getUserReceivableRedPacket,
     getSquareRedPacketList,
     getRecentPayType,

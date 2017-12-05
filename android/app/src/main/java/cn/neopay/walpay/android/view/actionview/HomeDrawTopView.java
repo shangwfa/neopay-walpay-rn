@@ -66,8 +66,6 @@ public class HomeDrawTopView extends FrameLayout {
         if (BuildConfig.DEBUG) {
             mBinding.homeAvatarDesTv.setOnClickListener(v -> MainRouter.getSingleton().jumpToEnvironmentSettingActivityPage());
         }
-        mBinding.homeDrawBigRedPacketLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIG_RED_PACKET_SIMPLE_PAGE)));
-        mBinding.homeDrawRechargeLl.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_TOPUP_PAGE)));
         mBinding.homeSimpleBigRedPacketIv.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIG_RED_PACKET_SIMPLE_PAGE)));
         mBinding.homeSimplePhoneChargeIv.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_TOPUP_PAGE)));
     }
@@ -90,12 +88,18 @@ public class HomeDrawTopView extends FrameLayout {
         }
     }
 
+    public void setHeaderViewChange(Float viewAlpha) {
+        mBinding.homeDrawSimpleAvatarContainerLl.setVisibility(0.4F >= viewAlpha ? GONE : VISIBLE);
+        mBinding.homeDrawSimpleAvatarContainerLl.setAlpha(viewAlpha);
+        mBinding.homeDrawAvatarContainerLl.setAlpha(1 - viewAlpha);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeHomeTopViewEvent(HomeTopViewEventBean homeTopViewEventBean) {
         if (null == homeTopViewEventBean) {
             return;
         }
-//        mBinding.getRoot().scrollBy(0, homeTopViewEventBean.getScrollY());
+
     }
 
 }

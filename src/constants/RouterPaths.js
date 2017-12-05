@@ -3,6 +3,7 @@
  */
 
 export const RouterPaths = {
+    CHOSE_OCCUPATION:"occupationSelection",
     TRANSACTION_DETAILS: "transactionDetails",
     SPLASH_PAGE: 'splash',
     HOME_PAGE: 'home',

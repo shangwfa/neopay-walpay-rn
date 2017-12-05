@@ -6,7 +6,8 @@ import {
     Image,
     SectionList,
     ListView,
-    FlatList
+    FlatList,
+    DeviceEventEmitter,
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
@@ -33,7 +34,7 @@ class RpDetailPage extends BasePage {
         this.state = {
             dataDetail:{},
             dataSource:[],
-            param:this.props.navigation.state.params
+            param:this.props.navigation.state.params.data?this.props.navigation.state.params.data:this.props.navigation.state.params
         }
     }
 
@@ -42,9 +43,22 @@ class RpDetailPage extends BasePage {
         this._postRpReceiverList();
     }
 
+    emitEvent = (event) => {
+        switch (event.type) {
+            case "RedPacketDetail"://选择红包主题
+                this.setState({
+                    dataDetail:event.data
+                });
+                console.log('^^^^'+ this.state.dataDetail.packetCode)
+                // console.log('^^^^'+ event.data.areaName)
+                break;
+        }
+
+    };
+
     _postRpDetail = () =>{
         let body = {
-            packetCode: this.state.param.packetCode
+            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
         };
         ApiManager.getRpDetail(body, (data) => {
             this.setState({
@@ -55,7 +69,7 @@ class RpDetailPage extends BasePage {
 
     _postRpReceiverList = () => {
         let body = {
-            packetCode: this.state.param.packetCode
+            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
         };
         ApiManager.getRpReceiverList(body, (data) => {
             this.setState({
