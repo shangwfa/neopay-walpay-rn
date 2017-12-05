@@ -32,9 +32,9 @@ class RpDetailPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            dataDetail:{},
-            dataSource:[],
-            param:this.props.navigation.state.params
+            dataDetail: {},
+            dataSource: [],
+            param: this.props.navigation.state.params
         }
     }
 
@@ -47,18 +47,18 @@ class RpDetailPage extends BasePage {
         switch (event.type) {
             case "RedPacketDetail"://选择红包主题
                 this.setState({
-                    dataDetail:event.data
+                    dataDetail: event.data
                 });
-                console.log('^^^^'+ this.state.dataDetail.packetCode)
+                console.log('^^^^' + this.state.dataDetail.packetCode)
                 // console.log('^^^^'+ event.data.areaName)
                 break;
         }
 
     };
 
-    _postRpDetail = () =>{
+    _postRpDetail = () => {
         let body = {
-            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
+            packetCode: this.state.param ? this.state.param.packetCode : this.state.dataDetail.packetCode
         };
         ApiManager.getRpDetail(body, (data) => {
             this.setState({
@@ -69,7 +69,7 @@ class RpDetailPage extends BasePage {
 
     _postRpReceiverList = () => {
         let body = {
-            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
+            packetCode: this.state.param ? this.state.param.packetCode : this.state.dataDetail.packetCode
         };
         ApiManager.getRpReceiverList(body, (data) => {
             this.setState({
@@ -78,7 +78,7 @@ class RpDetailPage extends BasePage {
         });
     };
 
-    _pushSendRpPage=()=>{
+    _pushSendRpPage = () => {
         this.props.navigation.navigate(RouterPaths.SEND_RED_PACKET);
     }
 
@@ -90,15 +90,15 @@ class RpDetailPage extends BasePage {
                                middleUpValue={item.robberName} middleBottomValue={item.createTime}
                                rightUpValue={item.luckyMoney}
                                isLine={true}
-                               imgIconUrl={item.luckyFlag==1?require("../res/img/rp_max_num.png"):' '} />
+                               imgIconUrl={item.luckyFlag == 1 ? require("../res/img/rp_max_num.png") : ' '}/>
             </View>
         )
 
     }
 
-    _renderMainView = () =>{
-        return(
-            <View style = {{height:ScreenUtils.height - 50}}>
+    _renderMainView = () => {
+        return (
+            <View style={{height: ScreenUtils.height - 50}}>
                 <Header
                     navigation={this.props.navigation}
                     backgroundColor="#D83E3E"
@@ -112,10 +112,11 @@ class RpDetailPage extends BasePage {
                                 fromValue={this.state.dataDetail.bossName}
                                 remarkValue={this.state.dataDetail.message}
                                 stateValue={this.state.dataDetail.redPacketReceiveStatusText}
-                                isMax = {this.state.dataDetail.bestLuckyBool}/>
-                <View style = {styles.mid_view}>
-                    <Text style = {styles.num_text}>{this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>
-                    <Text style = {styles.amount_text}>{'总额¥' + this.state.dataDetail.amount}</Text>
+                                isMax={this.state.dataDetail.bestLuckyBool}/>
+                <View style={styles.mid_view}>
+                    <Text
+                        style={styles.num_text}>{this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>
+                    <Text style={styles.amount_text}>{'总额¥' + this.state.dataDetail.amount}</Text>
                 </View>
                 <FlatList
                     style={{marginTop: 0,}}
@@ -128,19 +129,22 @@ class RpDetailPage extends BasePage {
         )
     }
 
-    _renderBottom=()=>{
-        if(!this.state.dataSource.ownerBool){
+    _renderBottom = () => {
+        if (!this.state.dataSource.ownerBool) {
             return (
-                <View style = {styles.bg_bottom}>
-                    <ImageButton value='我也要发红包' style={{marginBottom:0,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
+                <View style={styles.bg_bottom}>
+                    <ImageButton value='我也要发红包' style={{marginBottom: 0, flex: 1}} textColor={colors.one_color}
+                                 icon={require("../res/img/rp_giveRp.png")} onPress={() => this._pushSendRpPage()}/>
                 </View>
             )
-        }else{
+        } else {
             return (
-                <View style = {styles.bg_bottom}>
-                    <ImageButton value='分享该红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
-                    <View style={{width:1,backgroundColor:colors.divider }}/>
-                    <ImageButton value='我也要发红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
+                <View style={styles.bg_bottom}>
+                    <ImageButton value='分享该红包' style={{marginBottom: 0, flex: 1}} textColor={colors.one_color}
+                                 icon={require("../res/img/rp_share.png")} onPress={() => this._pushSendRpPage()}/>
+                    <View style={{width: 1, backgroundColor: colors.divider}}/>
+                    <ImageButton value='我也要发红包' style={{marginBottom: 0, flex: 1}} textColor={colors.one_color}
+                                 icon={require("../res/img/rp_giveRp.png")} onPress={() => this.pushRecordPage()}/>
                 </View>
             )
         }
@@ -169,24 +173,24 @@ const styles = StyleSheet.create({
     },
     mid_view: {
         backgroundColor: colors.page_background,
-        height:40,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+        height: 40,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     num_text: {
-        fontSize:15,
-        marginLeft:15,
-        color:colors.balck_more_light,
+        fontSize: 15,
+        marginLeft: 15,
+        color: colors.balck_more_light,
     },
     amount_text: {
-        fontSize:15,
-        marginRight:15,
-        color:colors.balck_more_light
+        fontSize: 15,
+        marginRight: 15,
+        color: colors.balck_more_light
     },
-    bg_bottom:{
-        marginTop:0,
-        flexDirection:'row'
+    bg_bottom: {
+        marginTop: 0,
+        flexDirection: 'row'
 
     }
 });
