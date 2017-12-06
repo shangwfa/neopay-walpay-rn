@@ -32,7 +32,7 @@ class PhoneTopUpPage extends BasePage {
 const PhoneTopUpTabNavigator = TabNavigator({
 
     MoneyTopUp:{
-        screen:props=> <MoneyTopUpView{...props} viewType={false}/>,
+        screen:props=> <MoneyTopUpView{...props} viewType={false}/>,//viewType=false,充话费;viewType=true,充流量
         navigationOptions: ({navigation}) => ({
             tabBarLabel: '充话费',
         }),
@@ -40,7 +40,7 @@ const PhoneTopUpTabNavigator = TabNavigator({
     CelluarTopUp:{
         screen:props=> <MoneyTopUpView{...props} viewType={true}/>,
         navigationOptions: ({navigation}) => ({
-            tabBarLabel: '冲流量',
+            tabBarLabel: '充流量',
         }),
     }
     },

@@ -100,7 +100,6 @@ RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
     //序列化
     NSData *jsonData = [params dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-    [dict writeToFile:(@"/Users/bossking/Desktop/test.plist") atomically:YES];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([dict[@"page"] isEqualToString:@"resetLoginPwd"]) {
