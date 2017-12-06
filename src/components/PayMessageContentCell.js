@@ -38,7 +38,7 @@ const PayMessageContentCell = props => {
                     <Text style = {styles.titleDate}>{createTime}</Text>
                 </View>
                 <View style = {styles.countView}>
-                    <Text style = {styles.countText}>{amount}</Text>
+                    <Text style = {styles.countText}>{amount.toFixed(2)}</Text>
                 </View>
                 <View style = {styles.separatorLineView}>
                 <View style = {styles.separatorLine}>
@@ -77,6 +77,8 @@ const styles = StyleSheet.create({
         marginTop:0,
         marginBottom:0,
         borderRadius:5,
+        borderWidth:1,
+        borderColor:'#DDDDDD',
         // backgroundColor:'gray',
     },
     titleView:{
