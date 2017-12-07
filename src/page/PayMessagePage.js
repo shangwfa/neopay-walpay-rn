@@ -61,7 +61,7 @@ class PayMessagePage extends BasePage {
             <View>
                 {this.renderSectionHeader(item)}
                 <PayMessageCell createTime={item.createTime}
-                               payNoticeType={item.payNoticeTypeText} payBy={item.payNoticeTypeText}
+                               payNoticeType={item.payNoticeTypeText} payBy={item.payTypeDesc}
                                payTo={item.tradObject}
                                 remark = {item.remark}
                                 amount = {item.amount}/>
