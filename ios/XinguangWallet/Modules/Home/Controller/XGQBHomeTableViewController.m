@@ -61,12 +61,24 @@
     [body setObject:[NSNumber numberWithInt:_currentPage] forKey:@"pageNo"];
     [body setObject:@10 forKey:@"pageSize"];
     [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
-        for (NSDictionary*dict in responseAfter) {
-            XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
+//        for (NSDictionary*dict in responseAfter) {
+//            XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
+//            [self.messArr addObject:mess];
+//            [self.tableView layoutIfNeeded];
+//        }
+        for(int i=0;i<[(NSArray*)responseAfter count];i++)
+        {
+            NSDictionary *dict = responseAfter[i];
+            XGQBMessage *mess = [XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];
-            [self.tableView reloadData];
+            [self.tableView insertRowAtIndexPath:[NSIndexPath indexPathForRow:_messArr.count-1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
         }
-        [self.tableView.mj_footer endRefreshing];
+        if([(NSArray*)responseAfter count]<10)//判断是否加载完成
+        {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.tableView.mj_footer endRefreshing];
+        }
         _currentPage++;
     } andFailerFn:^(NSError *error) {
         [self.tableView.mj_footer endRefreshing];
@@ -90,6 +102,13 @@
             [self.tableView reloadData];
         }
         [self.tableView.mj_header endRefreshing];
+        
+        if([(NSArray*)responseAfter count]<10)//判断是否加载完成
+        {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.tableView.mj_footer resetNoMoreData];
+        }
         _currentPage=2;
     } andFailerFn:^(NSError *error) {
             [self.tableView.mj_header endRefreshing];
@@ -105,6 +124,7 @@
     self.tableView.sectionFooterHeight=0;
     
     self.tableView.estimatedRowHeight=84;
+
     self.tableView.rowHeight=UITableViewAutomaticDimension;
 
 }

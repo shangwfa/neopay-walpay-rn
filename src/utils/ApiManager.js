@@ -143,6 +143,21 @@ geUserBankCardList = (request, callback) => {
         callback(data);
     });
 };
+getUserPayTypeList = (request, callback) => {
+    NetUtil.post(APIS.GET_USER_PAY_TYPE_LIST, request, (data) => {
+        callback(data);
+    });
+};
+payRedPacketVerify = (request, callback) => {
+    NetUtil.post(APIS.PAY_RED_PACKET_VERIFY, request, (data) => {
+        callback(data);
+    });
+};
+getRedPacketPayStatus = (request, callback) => {
+    NetUtil.post(APIS.GET_RED_PACKET_PAY_STATUS, request, (data) => {
+        callback(data);
+    });
+};
 getBankCardRecordPage = (request, callback) => {
     NetUtil.post(APIS.QUERY_BANK_CARD_RECORD_PAGE, request, (data) => {
         callback(data);
@@ -164,7 +179,7 @@ getPhoneRechargeProductList = (request, callback) => {
     });
 };
 queryPhoneRechargeDataList = (request, callback) => {
-    NetUtil.post(APIS.QUERY_PHONE_RECHARGE_DATA_LIST,request,(data)=>{
+    NetUtil.post(APIS.QUERY_PHONE_RECHARGE_DATA_LIST, request, (data) => {
         callback(data);
     });
 };
@@ -198,39 +213,39 @@ queryUserBill = (request, callback) => {
         callback(data);
     })
 };
-queryPayMessage=(request,callback)=>{
-    NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE,request,(data)=>{
+queryPayMessage = (request, callback) => {
+    NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE, request, (data) => {
         callback(data);
     })
 };
-createPhoneRechargeOrder=(request, callback)=>{
-    NetUtil.post(APIS.CREATE_PHONE_RECHARGE_ORDER,request,(data)=>{
+createPhoneRechargeOrder = (request, callback) => {
+    NetUtil.post(APIS.CREATE_PHONE_RECHARGE_ORDER, request, (data) => {
         callback(data);
     })
 };
-getUserRedPacketStats=(request, callback)=>{
-    NetUtil.post(APIS.GET_USER_RED_PACKET_STATS,request,(data)=>{
+getUserRedPacketStats = (request, callback) => {
+    NetUtil.post(APIS.GET_USER_RED_PACKET_STATS, request, (data) => {
         callback(data);
     })
 };
-getwithdrawbalance=(request,callback)=>{
-    NetUtil.post(APIS.GET_WITHDRAW_BALANCE,request,(data)=>{
+getwithdrawbalance = (request, callback) => {
+    NetUtil.post(APIS.GET_WITHDRAW_BALANCE, request, (data) => {
         callback(data);
     })
 };
-createWithdrawOrder=(request,callback)=>{
-    NetUtil.post(APIS.CREATE_WITHDRAW_BALANCE,request,(data)=>{
+createWithdrawOrder = (request, callback) => {
+    NetUtil.post(APIS.CREATE_WITHDRAW_BALANCE, request, (data) => {
         callback(data);
     })
 };
-withdraworder=(request,callback)=>{
-    NetUtil.post(APIS.WITHDRAW_ORDER,request,(data)=>{
+withdraworder = (request, callback) => {
+    NetUtil.post(APIS.WITHDRAW_ORDER, request, (data) => {
         callback(data);
     })
 }
 export default {
     getCerfitySMSCode,
-    getBindBankCardSMSCode ,
+    getBindBankCardSMSCode,
     submitUserCerfity,
     getProvinceList,
     getCityList,
@@ -254,6 +269,9 @@ export default {
     getUserMerchantList,
     getCreatePayQRCode,
     geUserBankCardList,
+    getUserPayTypeList,
+    payRedPacketVerify,
+    getRedPacketPayStatus,
     getBankCardRecordPage,
     getBalanceRecordList,
     getPhoneRechargeOrderQuery,

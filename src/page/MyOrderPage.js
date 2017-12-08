@@ -52,10 +52,10 @@ class MyOrderPage extends BasePage {
     loadData = (pageNo,isLoadMore) => {
         const req={
             pageNo: pageNo,
-            queryType:this.queryType,
-            payDirection:this.payDirection,
-            startTime:this.startTime,
-            endTime:this.endTime
+            queryType:this.queryType?this.queryType:"",
+            payDirection:this.payDirection?this.payDirection:"",
+            startTime:this.startTime?this.startTime:"",
+            endTime:this.endTime?this.endTime:""
         }
         ApiManager.queryUserBill(req, data => {
             if(isLoadMore){
@@ -96,7 +96,6 @@ class MyOrderPage extends BasePage {
         this.loadData(1,false)
     }
     onLoadMore = (page) => {
-        console.log("上拉加载更多")
         this.loadData(page,true)
     }
 

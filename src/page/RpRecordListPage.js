@@ -88,9 +88,7 @@ class RpRecordListPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title={this.getTitle()} onRightPress={() => {
-                    this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
-                }}/>
+                <Header navigation={this.props.navigation} title={this.getTitle()}/>
                 <RefreshList
                     data={this.state.dataSource}
                     renderItem={this.renderRow}

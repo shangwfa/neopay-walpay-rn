@@ -59,13 +59,13 @@ public class CommonVerificationCodeView extends FrameLayout {
                 if (null != mCallback) {
                     mCallback.callback(false);
                 }
-                ViewUtils.setBackground(mBinding.verificationCode, R.drawable.shape_verification_code_box);
+//                ViewUtils.setBackground(mBinding.verificationCode, R.drawable.shape_verification_code_box);
                 ViewUtils.setTextViewColor(mBinding.verificationCode, R.color.color_two_type);
             }
 
             @Override
             public void onUpdate(int currentRemainingSeconds) {
-                mBinding.verificationCode.setText(String.format("%ds", currentRemainingSeconds));
+                mBinding.verificationCode.setText(String.format("%ds后重新获取", currentRemainingSeconds));
             }
         });
         mBinding.getRoot().setOnClickListener((v) -> {
@@ -88,8 +88,8 @@ public class CommonVerificationCodeView extends FrameLayout {
     private void handleRegisterCode(Countdown mCountdown) {
         ToastUtils.show(getContext().getString(R.string.str_send_smscode));
         mCountdown.start();
-        ViewUtils.setBackground(mBinding.verificationCode, R.drawable.shape_round_gray);
-        ViewUtils.setTextViewColor(mBinding.verificationCode, R.color.common_white);
+//        ViewUtils.setBackground(mBinding.verificationCode, R.drawable.shape_round_gray);
+//        ViewUtils.setTextViewColor(mBinding.verificationCode, R.color.common_white);
         if (null != mCallback) {
             mCallback.callback(true);
         }

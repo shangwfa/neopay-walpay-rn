@@ -95,12 +95,12 @@
 
         [desText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(bgImgV.mas_centerY).with.offset(-10);
-            make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(98));
+            make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(108));
         }];
         
         [shopText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(bgImgV.mas_centerY).with.offset(10);
-            make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(98));
+            make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(108));
         }];
     }
     //支付消息

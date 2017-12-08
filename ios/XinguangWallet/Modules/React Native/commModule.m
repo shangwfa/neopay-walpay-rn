@@ -54,10 +54,10 @@ RCT_EXPORT_METHOD(showLoadingDialog){
     dispatch_async(dispatch_get_main_queue(), ^{
         [SVProgressHUD show];
     });
-    //临时:2s后取消网络加载框
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [SVProgressHUD dismiss];
-    });
+//    //临时:2s后取消网络加载框
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [SVProgressHUD dismiss];
+//    });
 }
 
 //RN取消显示网络加载
@@ -100,7 +100,6 @@ RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
     //序列化
     NSData *jsonData = [params dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-    [dict writeToFile:(@"/Users/bossking/Desktop/test.plist") atomically:YES];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([dict[@"page"] isEqualToString:@"resetLoginPwd"]) {

@@ -196,7 +196,7 @@ public class CommonInputView extends FrameLayout {
         mBinding.passWordEye.setVisibility(VISIBLE);
         mBinding.value.setInputType(InputType.TYPE_CLASS_NUMBER);
         mBinding.value.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        ViewUtils.setBackground(mBinding.passWordEye, showImgId);
+        ViewUtils.setBackground(mBinding.passWordEye, hideImgId);
         mBinding.value.setInputType(InputType.TYPE_CLASS_NUMBER);
         mBinding.passWordEye.setOnClickListener((v -> {
             if (isEyeOpen) {

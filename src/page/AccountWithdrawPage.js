@@ -49,8 +49,13 @@ class AccountWithdrawPage extends BasePage {
                     bankCardItemClick={this.handleBankCardItemClick.bind(this)}
                     closeClick={this.handleSelectPayStyleCloseClick.bind(this)}
                     isShow={this.state.isShowSelectPayStyle}/>
-                <PayPwdModal isShow={this.state.isPayShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
-                             onForgetPwd={()=>{}} onEnd={(text)=>this.pwdInputFinished(text)}/>
+                <PayPwdModal isShow={this.state.isPayShow}
+                             contentFront='实付金额'
+                             contentBack='67.89元'
+                             payTypeContent='中信银行储蓄卡（5678）'
+                             onClose={()=>this.setState({isPayShow:false})}
+                             onForgetPwd={()=>{}}
+                             onEnd={(text)=>this.pwdInputFinished(text)}/>
             </View>
         );
     }
