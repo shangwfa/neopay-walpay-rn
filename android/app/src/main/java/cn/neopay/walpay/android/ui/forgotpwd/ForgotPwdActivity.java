@@ -45,7 +45,7 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
                 mPageBinding.commonHeader.setHeaderLeftImg("重置支付密码");
                 mViewBinding.commonInputPhone.getEditText().setText(userName);
                 mViewBinding.commonInputPhone.getEditText().setEnabled(false);
-                mViewBinding.commonInputPassword.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PAY, "6位数字", R.mipmap.img_pay_pwd);
+                mViewBinding.commonInputPassword.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PAY, "设置支付密码，6位数字", R.mipmap.img_pay_pwd);
                 mViewBinding.commonInputVerification.setVerificationCode(IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PAY_PWD);
                 break;
             default:

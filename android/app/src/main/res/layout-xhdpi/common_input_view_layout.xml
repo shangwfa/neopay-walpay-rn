@@ -86,7 +86,6 @@
                         android:layout_width="@dimen/size_18dp"
                         android:layout_height="@dimen/size_18dp"
                         android:layout_marginLeft="@dimen/size_2dp"
-                        android:layout_marginRight="@dimen/size_10dp"
                         android:background="@mipmap/img_input_clear"
                         android:visibility="invisible" />
 
@@ -95,7 +94,6 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_marginLeft="@dimen/size_5dp"
-                        android:layout_marginRight="10dp"
                         android:visibility="gone" />
 
                     <RelativeLayout
@@ -110,7 +108,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
                             android:visibility="gone" />
                     </RelativeLayout>
                 </LinearLayout>

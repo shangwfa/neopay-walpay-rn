@@ -29,7 +29,7 @@ class SelectPayStyleModal extends Component {
     }
 
     componentWillMount() {
-        ApiManager.geUserBankCardList({}, (data) => {
+        ApiManager.getUserPayTypeList({}, (data) => {
             this.setState({
                 selectPayStyleData: data,
             });
