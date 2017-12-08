@@ -163,7 +163,6 @@
     //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
-    
     [manager POST:url parameters:body progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
