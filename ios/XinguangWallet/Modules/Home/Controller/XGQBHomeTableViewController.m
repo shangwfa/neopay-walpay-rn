@@ -61,18 +61,19 @@
     [body setObject:[NSNumber numberWithInt:_currentPage] forKey:@"pageNo"];
     [body setObject:@10 forKey:@"pageSize"];
     [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
-//        for (NSDictionary*dict in responseAfter) {
-//            XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
-//            [self.messArr addObject:mess];
-//            [self.tableView layoutIfNeeded];
-//        }
-        for(int i=0;i<[(NSArray*)responseAfter count];i++)
-        {
-            NSDictionary *dict = responseAfter[i];
-            XGQBMessage *mess = [XGQBMessage modelWithJSON:dict];
+        for (NSDictionary*dict in responseAfter) {
+            XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];
-            [self.tableView insertRowAtIndexPath:[NSIndexPath indexPathForRow:_messArr.count-1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
+            [self.tableView reloadData];
         }
+//        for(int i=0;i<[(NSArray*)responseAfter count];i++)
+//        {
+//            NSDictionary *dict = responseAfter[i];
+//            XGQBMessage *mess = [XGQBMessage modelWithJSON:dict];
+//            [self.messArr addObject:mess];
+//            [self.tableView insertRowAtIndexPath:[NSIndexPath indexPathForRow:_messArr.count-1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
+//        }
+        
         if([(NSArray*)responseAfter count]<10)//判断是否加载完成
         {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -124,9 +125,8 @@
     self.tableView.sectionFooterHeight=0;
     
     self.tableView.estimatedRowHeight=84;
-
     self.tableView.rowHeight=UITableViewAutomaticDimension;
-
+    
 }
 
 -(NSMutableArray *)messArr
@@ -156,6 +156,7 @@
         cell = [XGQBMsgTableViewCell cellWithMessage:mess];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+//    cell.textLabel.text=[NSString stringWithFormat:@"当前行:%ld",indexPath.row];
     return cell;
 }
 

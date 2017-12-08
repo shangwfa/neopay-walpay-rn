@@ -355,6 +355,7 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
     },
     itemCellSelected:{
+        height:55,
         borderWidth:0.5,
         borderColor:'red',
         borderRadius:3,
