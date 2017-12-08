@@ -71,7 +71,7 @@ class MyBalancePage extends BasePage {
 
     componentDidMount() {
 
-        NetUtil.post('/balance/get_user_balance', {}, (data) => {
+        NetUtil.post('balance/get_user_balance', {}, (data) => {
             this.setState({
                 data: data
             })

@@ -124,7 +124,7 @@ class PhoneTopUpMoneyView extends Component {
 
         NativeAppEventEmitter.addListener('ContactSelected',(data)=>this.receivedContactPhoneNo(data));
 
-        if(ScreenUtils.isIOS=true){
+        if(ScreenUtils.isIOS===true){
             NativeModules.commModule.contactCommNumber((data)=>{
                 this.setState({
                     phoneNo:data

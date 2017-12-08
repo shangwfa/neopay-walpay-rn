@@ -16,6 +16,6 @@ public class DateHandle {
      * @return 时间格式 11/26 11:20
      */
     public static String getMDHSTime(long dataMs) {
-        return DateUtils.convertDate2String(new Date(dataMs), "mm-dd HH:mm").replace("-", "/");
+        return DateUtils.convertDate2String(new Date(dataMs), "MM-dd HH:mm").replace("-", "/");
     }
 }

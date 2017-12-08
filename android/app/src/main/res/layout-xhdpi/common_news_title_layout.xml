@@ -11,7 +11,7 @@
             android:layout_width="180dp"
             android:layout_height="@dimen/size_30dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/size_14dp"
+            android:layout_marginTop="@dimen/size_10dp"
             android:scaleType="fitXY" />
 
         <TextView
