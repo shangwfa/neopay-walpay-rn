@@ -131,14 +131,14 @@ class RpDetailPage extends BasePage {
     _renderBottom=()=>{
         if(!this.state.dataSource.ownerBool){
             return (
-                <View style = {styles.bg_bottom}>
-                    <ImageButton value='我也要发红包' style={{marginBottom:0,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
-                </View>
+                <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
+                    <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
+                </Image>
             )
         }else{
             return (
-                <View style = {styles.bg_bottom}>
-                    <ImageButton value='分享该红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
+                <View style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
+                    <ImageButton value='分享该红包' style={{marginTop:2,marginBottom:2,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
                     <View style={{width:1,backgroundColor:colors.divider }}/>
                     <ImageButton value='我也要发红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
                 </View>
@@ -185,9 +185,10 @@ const styles = StyleSheet.create({
         color:colors.balck_more_light
     },
     bg_bottom:{
+        width:ScreenUtils.width,
         marginTop:0,
-        flexDirection:'row'
-
+        flexDirection:'row',
+        resizeMode:'cover'
     }
 });
 
