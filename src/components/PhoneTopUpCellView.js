@@ -14,6 +14,7 @@ import {colors} from '../constants/index'
 import ScreenUtils from '../utils/ScreenUtils'
 import ApiManager from '../utils/ApiManager'
 import PayPwdModal from '../modal/PayPwdModal'
+import SelectPayStyleModal from '../modal/SelectPayStyleModal'
 import {RouterPaths} from "../constants/RouterPaths"
 
 const marginBetween=13;
@@ -33,7 +34,13 @@ class PhoneTopUpMoneyView extends Component {
             CelluarPriceList:[],
             showContactIcon:true,
             phoneNo:'',
+            payAmount:0.0,
             isPayShow:false,
+            bankId:0,
+            isShowSelectPayStyle:false,
+            selectedBankId:0,
+            selectedBankName:'',
+            selectedBankCardNo:'',
         }
     }
 
@@ -66,11 +73,52 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={{marginTop:50}}>
                     {this.renderCelluarCell()}
                 </View>
-                <PayPwdModal isShow={this.state.isPayShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
-                             onForgetPwd={()=>{}} onEnd={(text)=>this.pwdInputFinished(text)}/>
+                <SelectPayStyleModal
+                    title="选择付款方式"
+                    selectBankId={this.state.bankId}
+                    bankCardFooterItemClick={this.handleBankCardFooterItemClick.bind(this)}
+                    bankCardItemClick={this.handleBankCardItemClick.bind(this)}
+                    closeClick={this.handleSelectPayStyleCloseClick.bind(this)}
+                    isShow={this.state.isShowSelectPayStyle}/>
+                <PayPwdModal isShow={this.state.isPayShow}
+                             contentFront='实付金额'
+                             contentBack={this.state.payAmount}
+                             payTypeContent={this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')'}
+                             onClose={()=>this.setState({isPayShow:false})}
+                             onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
+                             onEnd={(text)=>this.pwdInputFinished(text)}
+                             selectPayStyleClick={()=>{this.selectPayStyleBtnClick()}}/>
             </View>
         );
     }
+
+    handleBankCardFooterItemClick=()=>{
+        // console.log('点击了添加银行卡')
+        this.setState({
+            isShowSelectPayStyle: false,
+        });
+        nav.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
+    }
+
+    handleBankCardItemClick=(bankCardData)=>{
+        this.setState({
+            isShowSelectPayStyle: false,
+            selectedBankId:bankCardData.id,
+            selectedBankName:bankCardData.bankName,
+            selectedBankCardNo:bankCardData.cardNo,
+        });
+        this.setState({
+            isPayShow:true,
+        });
+    }
+
+    handleSelectPayStyleCloseClick=()=>{
+        this.setState({
+            isShowSelectPayStyle:false,
+            isPayShow:true,
+        })
+    }
+
 
     componentDidMount() {
 
@@ -127,8 +175,6 @@ class PhoneTopUpMoneyView extends Component {
                         <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
                             <Text
                                 style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.CelluarItemList[i].rechargeAmout}</Text>
-                            <Text
-                                style={i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText}>售价:{this.state.CelluarItemList[i].tradeAmount.toFixed(2)}</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 )
@@ -180,7 +226,8 @@ class PhoneTopUpMoneyView extends Component {
 
     celluarOrderBtnClicked=(i)=>{
         this.setState({
-            isPayShow:true
+            isPayShow:true,
+            payAmount:this.state.CelluarPriceList[i].tradeAmount.toFixed(2),
         });
     };
 
@@ -190,6 +237,7 @@ class PhoneTopUpMoneyView extends Component {
             this.setState({
                 selectedItemIndex:i,
                 isPayShow:true,
+                payAmount:this.state.MoneyItemList[i].tradeAmount.toFixed(2),
             });
         }else {
             NativeModules.commModule.toast("请输入正确手机号");
@@ -262,6 +310,22 @@ class PhoneTopUpMoneyView extends Component {
         });
     }
 
+    //弹框忘记密码按钮点击
+    forgetPayPwdBtnClicked =()=>{
+        this.setState({
+            isPayShow:false
+        })
+        const params = {page: 'resetPayPwd'};
+        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
+    }
+
+     选择银行卡按钮点击
+    selectPayStyleBtnClick=()=>{
+        this.setState({
+            isPayShow:false,
+            isShowSelectPayStyle:true
+        })
+    }
 }
 
 const styles = StyleSheet.create({
@@ -295,6 +359,7 @@ const styles = StyleSheet.create({
         borderColor:'red',
         borderRadius:3,
         alignItems:'center',
+        justifyContent:'center',
         width:(ScreenUtils.width-4*marginBetween)/3.0,
         marginLeft:marginBetween,
         marginTop:marginCellTop,
@@ -306,6 +371,7 @@ const styles = StyleSheet.create({
         borderColor:'red',
         borderRadius:3,
         alignItems:'center',
+        justifyContent:'center',
         width:(ScreenUtils.width-4*marginBetween)/3.0,
         marginLeft:marginBetween,
         marginTop:marginCellTop,
@@ -314,13 +380,10 @@ const styles = StyleSheet.create({
     amountText:{
         color:'red',
         fontSize:16,
-        marginTop:13,
-
     },
     amountTextSelected:{
         color:'#FFFFFF',
         fontSize:16,
-        marginTop:13,
     },
     priceText:{
         color:'red',
