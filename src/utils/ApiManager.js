@@ -158,6 +158,16 @@ getRedPacketPayStatus = (request, callback) => {
         callback(data);
     });
 };
+getServiceInfo = (request, callback) => {
+    NetUtil.post(APIS.GET_SERVICE_INFO, request, (data) => {
+        callback(data);
+    });
+};
+logoutUser = (request, callback) => {
+    NetUtil.post(APIS.LOGOUT_USER, request, (data) => {
+        callback(data);
+    });
+};
 getBankCardRecordPage = (request, callback) => {
     NetUtil.post(APIS.QUERY_BANK_CARD_RECORD_PAGE, request, (data) => {
         callback(data);
@@ -272,6 +282,8 @@ export default {
     getUserPayTypeList,
     payRedPacketVerify,
     getRedPacketPayStatus,
+    getServiceInfo,
+    logoutUser,
     getBankCardRecordPage,
     getBalanceRecordList,
     getPhoneRechargeOrderQuery,

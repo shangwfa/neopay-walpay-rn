@@ -13,13 +13,13 @@ import {
 } from 'react-native'
 import ApiManager from "../utils/ApiManager";
 import Header from "../components/Header";
-import {SwRefreshListView} from "react-native-swRefresh";
 import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
 import {RouterPaths} from "../constants/RouterPaths";
 import img_question from "../res/img/img_question.png"
 import BasePage from "./BasePage";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
+import RecivedRedPacket from '../data/RecivedRedPacket.json'
 class ReceiveRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
@@ -52,6 +52,7 @@ class ReceiveRedPacketPage extends BasePage {
                     onLoadMore={this._onLoadMore}
                     footerStatus={this.state.footerStatus}/>
                 <ReceiveRedPacketModal
+                    action={RecivedRedPacket}
                     isShow={this.state.isShowProcess}/>
             </View>
         );

@@ -71,7 +71,7 @@ class SelectPayStyleModal extends Component {
     _renderItem = ({item, index}) => {
         return (
             <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.5}
                 onPress={this._handleBankCardItemClick.bind(this, item)}>
                 <View
                     style={styles.item_container}>
@@ -89,7 +89,7 @@ class SelectPayStyleModal extends Component {
         return (
 
             <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.5}
                 onPress={this._handleBankCardFooterItemClick.bind(this)}>
                 {this._handleNoDataView()}
                 <View
@@ -119,7 +119,7 @@ class SelectPayStyleModal extends Component {
     _renderTitle = () => {
         return <View style={styles.item_container}>
             <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.5}
                 onPress={this.props.closeClick}>
                 <Image
                     style={styles.img_close}
@@ -140,7 +140,7 @@ class SelectPayStyleModal extends Component {
         }
     };
     _handleBankCardItemNickName = (item) => {
-        let str = StringUtils.isContainChildrenStr(item.bankName, "余额") ? item.cardNo : FormatUtils.bankCardEnd(item.cardNo);
+        let str = item.id === -1 ? item.cardNo : FormatUtils.bankCardEnd(item.cardNo);
         return (item.bankName + "(" + str + ")");
     };
     _handleBankCardItemClick = (item) => {

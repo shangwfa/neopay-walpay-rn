@@ -5,7 +5,6 @@
         android:id="@+id/verification_code"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_verification_code_box"
         android:gravity="center"
         android:padding="@dimen/size_2dp"
         android:text="@string/str_get_verification_code"

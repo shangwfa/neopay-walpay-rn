@@ -25,6 +25,8 @@ import ApiManager from "../utils/ApiManager";
 import {RouterPaths} from "../constants/RouterPaths";
 import SelectPayStyleModal from "../modal/SelectPayStyleModal";
 import SendPhoneAuthCodeModal from "../modal/SendPhoneAuthCodeModal";
+import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
+import WarpRedPacket from '../data/WarpRedPacket.json'
 class SendRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
@@ -35,6 +37,7 @@ class SendRedPacketPage extends BasePage {
             redPacketMessage: "",
             isRandomRedPacket: true,
             isShowSelectPayStyle: false,
+            isShowWarpAction: false,
             redPacketAmountText: "金额",
             isShow: false,
             isShowPay: false,
@@ -143,6 +146,9 @@ class SendRedPacketPage extends BasePage {
                     closeClick={this._handleAuthMsgCloseClick}
                     authMsgTextChangeClick={this._handleAuthMsgTextChangeClick.bind(this)}
                 />
+                <ReceiveRedPacketModal
+                    action={WarpRedPacket}
+                    isShow={this.state.isShowWarpAction}/>
             </View>
         );
     }
@@ -162,10 +168,15 @@ class SendRedPacketPage extends BasePage {
                 totalCount: this.state.payResultSourceData.totalCount,
                 payTypeDesc: this.state.payResultSourceData.payTypeDesc,
             };
-            ApiManager.payRedPacketVerify(request, (data) => {
-                this._handleRedPacketJump(data, redPacketResult);
-                this._handleRedPackProcess(data, redPacketResult);
+            this.setState({
+                isShowWarpAction: true
             });
+            ApiManager.payRedPacketVerify(request, (data) => {
+                setTimeout(() => {
+                    this._handleRedPacketJump(data, redPacketResult);
+                    this._handleRedPackProcess(data, redPacketResult);
+                }, 2000);
+            })
         }
     };
 
@@ -178,6 +189,9 @@ class SendRedPacketPage extends BasePage {
                 const nowStamp = Date.now();
                 if (nowStamp > overTimeStamp) {
                     /* 倒计时结束*/
+                    this.setState({
+                        isShowWarpAction: false
+                    });
                     this.interval && clearInterval(this.interval);
                     redPacketResult.redPacketState = false;
                     this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
@@ -189,6 +203,9 @@ class SendRedPacketPage extends BasePage {
                         this._handleRedPacketJump(data, redPacketResult);
                         if (1 === data.payStatus || 2 === data.payStatus) {
                             this.interval && clearInterval(this.interval);
+                            this.setState({
+                                isShowWarpAction: false
+                            });
                         }
                     });
                 }
@@ -286,13 +303,24 @@ class SendRedPacketPage extends BasePage {
             this.setState({
                 payResultSourceData: data
             });
-            if (1 === data.smsFlag) {//需要短信验证
-                this.setState({
-                    isAuthMsgShow: true
-                })
-            } else if (2 === data.smsFlag) {
-                this._handlePayRedPacketResult(data);
-            }
+            this.setState({
+                isShowWarpAction: true
+            });
+            setTimeout(() => {
+                if (1 === data.smsFlag) {//需要短信验证
+                    this.setState({
+                        isAuthMsgShow: true,
+                        isShowWarpAction: false
+                    })
+                } else if (2 === data.smsFlag) {
+                    this._handlePayRedPacketResult(data);
+                    if (1 === data.payStatus || 2 === data.payStatus) {
+                        this.setState({
+                            isShowWarpAction: false
+                        });
+                    }
+                }
+            }, 2000);
         });
 
     };
