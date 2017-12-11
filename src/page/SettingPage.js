@@ -53,7 +53,7 @@ class SettingPage extends BasePage {
                 <CommonButton value='退出登录' style={{marginTop: 50}} onPress={() => this.toLogout()}/>
                 <TwoButtonModal
                     isShow={this.state.isShowLogout}
-                    content={`\n确定退出登录\n`}
+                    content={`\n确定退出登录？\n`}
                     oneBtnText="关闭弹窗"
                     twoBtnText="确定退出"
                     onePress={this.handleCloseClick}
@@ -71,6 +71,7 @@ class SettingPage extends BasePage {
     handleExitClick = () => {
         ApiManager.logoutUser({}, (data) => {
             NativeModules.commModule.closeRNPage();
+            this.handleCloseClick();
             NativeModules.commModule.jumpToLoginPage();
         })
     }

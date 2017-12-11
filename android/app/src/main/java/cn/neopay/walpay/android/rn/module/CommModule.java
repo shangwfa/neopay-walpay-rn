@@ -76,7 +76,7 @@ public class CommModule extends ReactContextBaseJavaModule {
     public void rnCallNativeCallPhone(String phone) {
         // 跳转到打电话界面
         Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CALL);
+        intent.setAction(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 跳转需要添加flag, 否则报错
         mContext.startActivity(intent);

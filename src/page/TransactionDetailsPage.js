@@ -5,7 +5,7 @@
  */
 import React, {Component} from 'react'
 import {
-    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView,
+    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView,NativeModules
 } from 'react-native'
 import BasePage from "./BasePage";
 import Header from "../components/Header";
