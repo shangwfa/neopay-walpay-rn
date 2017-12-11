@@ -53,7 +53,7 @@ const PhoneTopupMsgCell = props => {
         },
 
         topupType: {
-            marginTop:25,
+            marginTop:30,
             color: colors.black,
             fontSize: 15
         },
@@ -62,7 +62,7 @@ const PhoneTopupMsgCell = props => {
             marginTop:22,
             marginLeft: 10,
             color: colors.black,
-            fontSize: 25
+            fontSize: 30
         },
 
         middle_view:{
@@ -145,8 +145,8 @@ const PhoneTopupMsgCell = props => {
                 <Text style={styles.dateLab}>{dateValue}</Text>
 
                 <View style = {styles.middle_view}>
-                    <Text style={styles.topupType}>{topupTypeValue}</Text>
-                    <Text style={styles.priceValue}>{priceValue}</Text>
+                    <Text style={styles.topupType}>{topupTypeValue.substring(0,4)}</Text>
+                    <Text style={styles.priceValue}>{topupTypeValue.substring(4,topupTypeValue.length)}</Text>
                 </View>
 
                 <View style = {styles.middle_line}>

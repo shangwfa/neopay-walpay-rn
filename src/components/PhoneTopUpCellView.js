@@ -161,7 +161,7 @@ class PhoneTopUpMoneyView extends Component {
                     <TouchableWithoutFeedback key={i} onPress={() => this.moneyCellSelected(i)}>
                         <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.MoneyItemList[i].rechargeAmout}元</Text>
+                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.MoneyItemList[i].rechargeAmout}</Text>
                             <Text
                                 style={i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText}>售价:{this.state.MoneyItemList[i].tradeAmount.toFixed(2)}</Text>
                         </View>
@@ -355,6 +355,7 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
     },
     itemCellSelected:{
+        height:55,
         borderWidth:0.5,
         borderColor:'red',
         borderRadius:3,
