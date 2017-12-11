@@ -5,7 +5,7 @@
  */
 import React, {Component} from 'react'
 import {
-    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView,
+    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView,NativeModules
 } from 'react-native'
 import BasePage from "./BasePage";
 import Header from "../components/Header";
@@ -22,6 +22,7 @@ class TransactionDetailsPage extends BasePage {
         super(props);
         this.state = {
             sourceData: {},
+            serviceSourceData: {},
             orderNo: this.props.navigation.state.params.orderNo,
         }
     }
@@ -31,6 +32,11 @@ class TransactionDetailsPage extends BasePage {
             this.setState({
                 sourceData: data,
             });
+        });
+        ApiManager.getServiceInfo({}, (data) => {
+            this.setState({
+                serviceSourceData: data
+            })
         });
     }
 
@@ -99,7 +105,7 @@ class TransactionDetailsPage extends BasePage {
         );
     };
     _tipClick = () => {
-        alert("致电客服");
+        NativeModules.commModule.rnCallNativeCallPhone(this.state.serviceSourceData.serviceTel);
     };
     /*处理底部按钮*/
     _handleButtonView = (item) => {

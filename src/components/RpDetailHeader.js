@@ -14,7 +14,7 @@ const imgWidth = (ScreenUtils.width - 30)/4;
 
 const itemHeight = ScreenUtils.height/6;
 
-const imgHeight = ScreenUtils.width/4;
+const imgHeight = ScreenUtils.width/5;
 
 const RpDetailHeader = props => {
     const {
@@ -111,7 +111,7 @@ const RpDetailHeader = props => {
                 <View style = {styles.middle_container}>
                     <View style={{flex:1}} />
                     <Text style={styles.remark_value}>{remarkValue}</Text>
-                    <View style={{flex:1,backgroundColor:'transparent'}}>
+                    <View style={{flex:1,alignItems:"flex-end",backgroundColor:'transparent'}}>
                         <Image style = {styles.maxImg} source = {true?require("../res/img/rp_max_text.png"):' '} ></Image>
                     </View>
 

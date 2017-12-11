@@ -30,7 +30,7 @@ class RefreshList extends Component {
         super(props)
         this.state = {
             isError: false,
-            isEmpty:false
+            isEmpty: false
         }
     }
 
@@ -82,7 +82,7 @@ class RefreshList extends Component {
     onEndReached = () => {
         if ((!this.state.isError) && this.isNoraml()) {
             let dataLength = this.props.data.length
-            let curPage = dataLength % defaulePageSize ? (parseInt(dataLength / defaulePageSize + 1)) : parseInt((dataLength / defaulePageSize + 2))
+            let curPage = dataLength % defaulePageSize >= 0 ? (parseInt(dataLength / defaulePageSize + 1)) : parseInt((dataLength / defaulePageSize + 2))
             this.props.onLoadMore(curPage)
         }
     }
@@ -90,12 +90,12 @@ class RefreshList extends Component {
     renderEmpty = () => {
         return (
             <View >
-                <Image style={{height:200,width:200}} source={list_empty_icon}/>
+                <Image style={{height: 200, width: 200}} source={list_empty_icon}/>
             </View>)
     }
 
     render() {
-        const {data, renderItem, onRefresh, isEmpty,extraData, ...attributes} = this.props
+        const {data, renderItem, onRefresh, isEmpty, extraData, ...attributes} = this.props
         if (data.length > 0) {
             return (
                 <FlatList
@@ -115,9 +115,9 @@ class RefreshList extends Component {
                 />
             )
         } else {
-            if(isEmpty){
+            if (isEmpty) {
                 return (
-                    <View style={{flex: 1, width:ScreenUtils.width,alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flex: 1, width: ScreenUtils.width, alignItems: 'center', justifyContent: 'center'}}>
                         {this.renderEmpty()}
                     </View>)
             }

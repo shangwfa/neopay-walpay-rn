@@ -7,6 +7,7 @@
         android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/home_draw_container_fl"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

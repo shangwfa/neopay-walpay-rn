@@ -71,7 +71,9 @@ isDecimal = (input) => {
 isContainChildrenStr = (str, childrenStr) => {
     return str.indexOf(childrenStr) >= 0;
 };
-
+phoneTuoMi = (phone) => {
+    return phone.length === 11 ? phone.substring(0, 3) + "****" + phone.substring(phone.length - 4, phone.length) : "";
+};
 export default {
     isEmpty,
     isNoEmpty,
@@ -90,4 +92,5 @@ export default {
     isNumeric,
     isDecimal,
     isContainChildrenStr,
+    phoneTuoMi,
 }

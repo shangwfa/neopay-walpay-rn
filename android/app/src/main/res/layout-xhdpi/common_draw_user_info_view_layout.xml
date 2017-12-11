@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_280dp"
+    android:layout_height="@dimen/size_304dp"
     android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/img_mine_draw_bg_iv"
         android:layout_width="match_parent"
-        android:layout_height="166dp"
+        android:layout_height="191dp"
         android:scaleType="fitXY" />
 
     <LinearLayout

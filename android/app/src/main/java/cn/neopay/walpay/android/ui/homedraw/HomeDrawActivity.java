@@ -5,11 +5,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.gyf.barlibrary.ImmersionBar;
 import com.nineoldandroids.view.ViewHelper;
 import com.xgjk.common.lib.base.BaseActivity;
 import com.xgjk.common.lib.manager.storage.StoreManager;
+import com.xgjk.common.lib.utils.ScreenUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,8 +48,17 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
     }
 
     @Override
+    protected void handleStatusBar() {
+        ImmersionBar.with(this)
+                .fullScreen(true)
+                .init();
+    }
+
+
+    @Override
     public void initView() {
         handleView();
+        handleBottomKeyLayout();
     }
 
     private void handleView() {
@@ -76,7 +88,7 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
                         () -> RNActivity.jumpToRNPage(this, RNActivity.PageType.PHONE_TOPUP_PAGE)));
 
         mViewBinding.homeDrawContainerNsv.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (nestedScrollView, x, y, oldX, oldY) -> {
-            float mAlpha = y / 400F;
+            float mAlpha = y / 350F;
             mViewBinding.commonHomeDrawTopView.setHeaderViewChange(mAlpha);
             mViewBinding.homeDrawPayTopFl.homeDrawPayTopContainerLl.setAlpha(1 - mAlpha);
             handleScrollView(nestedScrollView);
@@ -90,6 +102,14 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
         homeViewChangeEvent.setScrollY(nestedScrollView.getScrollY());
         homeViewChangeEvent.setBottom(isBottom);
         EventBus.getDefault().post(homeViewChangeEvent);
+    }
+
+    private void handleBottomKeyLayout() {
+        if (ScreenUtils.hasSoftKeys(this)) {
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mViewBinding.homeDrawContainerNsv.getLayoutParams();
+            params.setMargins(0, 0, 0, ScreenUtils.getBottomSoftKeysHeight(this));
+            mViewBinding.homeDrawContainerNsv.setLayoutParams(params);
+        }
     }
 
     DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.DrawerListener() {

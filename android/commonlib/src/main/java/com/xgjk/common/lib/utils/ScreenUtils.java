@@ -115,6 +115,7 @@ public class ScreenUtils {
 
     /**
      * 判断屏幕下方是否有虚拟导航栏
+     *
      * @param activity
      * @return
      */
@@ -141,4 +142,30 @@ public class ScreenUtils {
 
         return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
     }
+
+    /**
+     * 判断屏幕下方是否有虚拟导航栏
+     *
+     * @param activity
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static int getBottomSoftKeysHeight(Activity activity) {
+        Display d = activity.getWindowManager().getDefaultDisplay();
+
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        d.getRealMetrics(realDisplayMetrics);
+
+        int realHeight = realDisplayMetrics.heightPixels;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        d.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+
+
+        return (realHeight - displayHeight);
+    }
+
+
 }
