@@ -36,11 +36,12 @@ class PhoneTopUpMoneyView extends Component {
             showContactIcon:true,
             phoneNo:'',
             payAmount:0.0,
+            selectedNameCode:0,
+            selectedPayType:2,
             isPayShow:false,
-            bankId:0,
             isShowSelectPayStyle:false,
-            selectedBankId:0,
-            selectedBankName:'',
+            selectedBankId:-1,
+            selectedBankName:'余额',
             selectedBankCardNo:'',
         }
     }
@@ -76,7 +77,7 @@ class PhoneTopUpMoneyView extends Component {
                 </View>
                 <SelectPayStyleModal
                     title="选择付款方式"
-                    selectBankId={this.state.bankId}
+                    selectBankId={this.state.selectedBankId}
                     bankCardFooterItemClick={this.handleBankCardFooterItemClick.bind(this)}
                     bankCardItemClick={this.handleBankCardItemClick.bind(this)}
                     closeClick={this.handleSelectPayStyleCloseClick.bind(this)}
@@ -84,7 +85,7 @@ class PhoneTopUpMoneyView extends Component {
                 <PayPwdModal isShow={this.state.isPayShow}
                              contentFront='实付金额'
                              contentBack={this.state.payAmount}
-                             payTypeContent={this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')'}
+                             payTypeContent={this.retPayTypeContent()}
                              onClose={()=>this.setState({isPayShow:false})}
                              onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
                              onEnd={(text)=>this.pwdInputFinished(text)}
@@ -92,44 +93,6 @@ class PhoneTopUpMoneyView extends Component {
             </View>
         );
     }
-
-    formatPhoneNo=(phoneNo)=>{
-
-        let newPhoneNo = phoneNo.replace('-','');
-
-        if (newPhoneNo.length===11){
-            return `${newPhoneNo.substring(0,3)}-${newPhoneNo.substring(3,7)}-${newPhoneNo.substring(7,11)}`;
-        }else
-            return newPhoneNo;
-    }
-
-    handleBankCardFooterItemClick=()=>{
-        // console.log('点击了添加银行卡')
-        this.setState({
-            isShowSelectPayStyle: false,
-        });
-        nav.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
-    }
-
-    handleBankCardItemClick=(bankCardData)=>{
-        this.setState({
-            isShowSelectPayStyle: false,
-            selectedBankId:bankCardData.id,
-            selectedBankName:bankCardData.bankName,
-            selectedBankCardNo:bankCardData.cardNo,
-        });
-        this.setState({
-            isPayShow:true,
-        });
-    }
-
-    handleSelectPayStyleCloseClick=()=>{
-        this.setState({
-            isShowSelectPayStyle:false,
-            isPayShow:true,
-        })
-    }
-
 
     componentDidMount() {
 
@@ -154,7 +117,7 @@ class PhoneTopUpMoneyView extends Component {
                 });
             });
         }
-        
+
     }
     //接收到手机号
     receivedContactPhoneNo=(data)=>{
@@ -163,6 +126,55 @@ class PhoneTopUpMoneyView extends Component {
             phoneNo:data,
         })
     }
+
+    //处理银行卡信息
+    retPayTypeContent=()=>{
+        if (this.state.selectedBankId==-1)
+            return this.state.selectedBankName;
+        else
+            return this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')';
+    }
+
+    //处理手机号格式
+    formatPhoneNo=(phoneNo)=>{
+
+        let newPhoneNo = phoneNo.replace('-','');
+
+        if (newPhoneNo.length===11){
+            return `${newPhoneNo.substring(0,3)}-${newPhoneNo.substring(3,7)}-${newPhoneNo.substring(7,11)}`;
+        }else
+            return newPhoneNo;
+    }
+
+    //处理选择银行卡弹窗
+    handleBankCardFooterItemClick=()=>{
+        // console.log('点击了添加银行卡')
+        this.setState({
+            isShowSelectPayStyle: false,
+        });
+        nav.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
+    }
+
+    handleBankCardItemClick=(bankCardData)=>{
+        this.setState({
+            isShowSelectPayStyle: false,
+            selectedBankId:bankCardData.id,
+            selectedBankName:bankCardData.bankName,
+            selectedBankCardNo:bankCardData.cardNo,
+            selectedPayType:bankCardData.id==-1?2:1,
+        });
+        this.setState({
+            isPayShow:true,
+        });
+    }
+
+    handleSelectPayStyleCloseClick=()=>{
+        this.setState({
+            isShowSelectPayStyle:false,
+            isPayShow:true,
+        })
+    }
+
 
     renderCells= ()=>{
         let itemCells = [];
@@ -235,26 +247,16 @@ class PhoneTopUpMoneyView extends Component {
         }
     };
 
+    //冲流量按钮点击
     celluarOrderBtnClicked=(i)=>{
         this.setState({
             isPayShow:true,
             payAmount:this.state.CelluarPriceList[i].tradeAmount.toFixed(2),
+            selectedNameCode:this.state.CelluarPriceList[i].nameCode,
         });
     };
 
-    moneyCellSelected = (i)=>{
-
-        if(this.state.phoneNo.length==11){
-            this.setState({
-                selectedItemIndex:i,
-                isPayShow:true,
-                payAmount:this.state.MoneyItemList[i].tradeAmount.toFixed(2),
-            });
-        }else {
-            NativeModules.commModule.toast("请输入正确手机号");
-        }
-    };
-
+    //冲流量套餐选择
     celluarCellSelected = (i)=>{
 
         if(this.state.phoneNo.length==11){
@@ -272,6 +274,23 @@ class PhoneTopUpMoneyView extends Component {
             NativeModules.commModule.toast("请输入正确手机号");
         }
     };
+
+    //充话费按钮点击
+    moneyCellSelected = (i)=>{
+
+        if(this.state.phoneNo.length==11){
+            this.setState({
+                selectedItemIndex:i,
+                isPayShow:true,
+                payAmount:this.state.MoneyItemList[i].tradeAmount.toFixed(2),
+                selectedNameCode:this.state.MoneyItemList[i].nameCode,
+            });
+        }else {
+            NativeModules.commModule.toast("请输入正确手机号");
+        }
+    };
+
+
     //处理输入框逻辑
     textInputFocus = (event)=>{
         if(event.nativeEvent.text!=='')
@@ -315,7 +334,7 @@ class PhoneTopUpMoneyView extends Component {
         this.setState({
             isPayShow:false
         });
-        ApiManager.createPhoneRechargeOrder({"phone":this.state.phoneNo,"payType":1,"nameCode":1,"payPassword":text},(data)=>{
+        ApiManager.createPhoneRechargeOrder({"phone":this.state.phoneNo,"payType":this.state.selectedPayType,"nameCode":this.state.selectedNameCode,"payPassword":text,'bankCardId':this.state.selectedBankId},(data)=>{
             //创建订单成功,跳转结果页
             nav.navigate(RouterPaths.CHARGE_FLUX_RESULT,{pageTitle:this.props.viewType?'流量充值':'手机充值',orderNo:data['orderNo']});
         });
@@ -330,7 +349,7 @@ class PhoneTopUpMoneyView extends Component {
         NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
     }
 
-     选择银行卡按钮点击
+     //选择银行卡按钮点击
     selectPayStyleBtnClick=()=>{
         this.setState({
             isPayShow:false,
