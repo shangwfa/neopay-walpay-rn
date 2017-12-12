@@ -243,6 +243,16 @@ getwithdrawbalance = (request, callback) => {
         callback(data);
     })
 };
+getRecentWithdrawBankCard = (request, callback) => {
+    NetUtil.post(APIS.GET_RECENT_WITHDRAW_BANKCARD, request, (data) => {
+        callback(data);
+    })
+};
+getUserBankCardList = (request, callback)=>{
+    NetUtil.post(APIS.GET_USER_BANK_CARD_LIST,request,(data)=>{
+        callback(data);
+    })
+}
 createWithdrawOrder = (request, callback) => {
     NetUtil.post(APIS.CREATE_WITHDRAW_BALANCE, request, (data) => {
         callback(data);
@@ -299,6 +309,8 @@ export default {
     createPhoneRechargeOrder,
     getUserRedPacketStats,
     getwithdrawbalance,
+    getRecentWithdrawBankCard,
+    getUserBankCardList,
     createWithdrawOrder,
     withdraworder
 }

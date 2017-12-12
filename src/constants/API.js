@@ -51,6 +51,8 @@ export const APIS = {
     QUERY_PAY_MESSAGE_PAGE: 'message/query_pay_msg_page',//获取支付消息
     CREATE_PHONE_RECHARGE_ORDER: 'pcharge/create_phone_recharge_order',//创建手机充值订单
     GET_USER_RED_PACKET_STATS: 'packet/get_user_red_packet_stats',//获取用户红包统计
+    GET_RECENT_WITHDRAW_BANKCARD: 'bank/get_recent_withdraw_bank_card', //获取上次提现银行卡
+    GET_USER_BANKCARD_LIST:'bank/get_user_bank_card_list',//获取用户银行卡列表
     GET_WITHDRAW_BALANCE: 'balance/get_withdraw_balance',//获取可提现金额
     CREATE_WITHDRAW_BALANCE: 'balance/create_withdraw_order',//创建提现订单
     WITHDRAW_ORDER: 'balance/withdraw_order',//提现

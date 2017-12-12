@@ -29,11 +29,19 @@ class SelectPayStyleModal extends Component {
     }
 
     componentWillMount() {
-        ApiManager.getUserPayTypeList({}, (data) => {
-            this.setState({
-                selectPayStyleData: data,
+        if(this.props.bankCardOnly === true){
+            ApiManager.getUserBankCardList({}, (data) => {
+                this.setState({
+                    selectPayStyleData: data,
+                });
             });
-        });
+        }else{
+            ApiManager.getUserPayTypeList({}, (data) => {
+                this.setState({
+                    selectPayStyleData: data,
+                });
+            });
+        }
     }
 
 
@@ -50,7 +58,7 @@ class SelectPayStyleModal extends Component {
                     {/*line*/}
                     <View style={styles.line}/>
                     {/*支付方式*/}
-                    <View style={{height: 250}}>
+                    <View>
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             style={{backgroundColor: colors.white}}

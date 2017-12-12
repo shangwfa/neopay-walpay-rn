@@ -18,6 +18,7 @@ const PayMessageContentCell = props => {
         payTo,
         remark,
         amount,
+        payDirection,
         ...attributes
     } = props
 
@@ -38,7 +39,7 @@ const PayMessageContentCell = props => {
                     <Text style = {styles.titleDate}>{createTime}</Text>
                 </View>
                 <View style = {styles.countView}>
-                    <Text style = {styles.countText}>{amount.toFixed(2)}</Text>
+                    <Text style = {styles.countText}>{`${payDirection==1?'+':'-'}${amount.toFixed(2)}`}</Text>
                 </View>
                 <View style = {styles.separatorLineView}>
                 <View style = {styles.separatorLine}>
