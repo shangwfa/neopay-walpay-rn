@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 import {colors} from '../constants/index'
 import StringUtils from '../utils/StringUtils'
-import NetUtil from '../utils/NetUtil'
 import ApiManager from '../utils/ApiManager'
 
 class TimerButton extends Component {
@@ -99,7 +98,6 @@ class TimerButton extends Component {
     }
 
     sendindBankCardCode=()=>{
-        console.log('321123')
         if(this.props.type == 1)
         {
             this.postGetCerfitySMSCode()

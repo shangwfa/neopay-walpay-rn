@@ -11,8 +11,8 @@
 
 #import "ABNetworkManager.h"
 
-//#define Host_Url  @"http://172.22.1.47:8202/walpay-web"
-#define Host_Url  @"http://139.224.11.160:8202/walpay-web"
+#define Host_Url  @"http://172.22.1.47:8202/walpay-web"
+//#define Host_Url  @"http://139.224.11.160:8202/walpay-web"
 //#define Host_Url  @"http://172.16.33.182:8080/TestProject"
 
 #endif /* ABNetworkCofing_h */

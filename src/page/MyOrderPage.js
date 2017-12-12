@@ -13,6 +13,8 @@ import CommonItemTwo from '../components/CommonItemTwo'
 import {RouterPaths} from '../constants/RouterPaths'
 import ApiManager from '../utils/ApiManager'
 import RefreshList from '../components/RefreshList'
+import DateUtils from '../utils/DateUtils'
+import FormatUtils from '../utils/FormatUtils'
 class MyOrderPage extends BasePage {
     queryType=''//订单类型
     payDirection=''//交易方向
@@ -76,8 +78,8 @@ class MyOrderPage extends BasePage {
                 {this.renderSectionHeader(item)}
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.title}
-                               middleBottomValue={item.tradeTime}
-                               rightUpValue={item.amount}
+                               middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.tradeTimeMs)}
+                               rightUpValue={FormatUtils.money(item.amount)}
                                rightBottomValue={item.status}
                                isLine={true}
                                onPress={()=>{
@@ -89,7 +91,7 @@ class MyOrderPage extends BasePage {
     }
     renderSectionHeader = (item) => {
         if (item.displayDate) {
-            return <SectionHeader title={item.tradeTime} value='查看月账单'/>
+            return <SectionHeader title={DateUtils.yyyyYearMmMonth(item.tradeTimeMs)} value='查看月账单'/>
         }
     }
     onRefresh = () => {
