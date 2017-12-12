@@ -9,7 +9,7 @@ import {
 
 import colors from '../constants/colors'
 import Space from '../components/Space'
-import right_arrow from '../res/img/right_arrow.png'
+import filter_arrow from '../res/img/filter_arrow.png'
 
 class CommonItemOne extends Component {
     static defaultProps = {
@@ -37,7 +37,7 @@ class CommonItemOne extends Component {
 
     arrowImg = () => {
         if (this.props.isShowArrow) {
-            return <Image style={styles.img} source={right_arrow}/>
+            return <Image style={styles.img} source={filter_arrow}/>
         } else {
             return null
         }
@@ -49,7 +49,7 @@ class CommonItemOne extends Component {
 
 const styles = StyleSheet.create({
     img: {
-        width: 10,
+        width: 15,
         height: 15,
         marginRight: 10
     },

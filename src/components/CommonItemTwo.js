@@ -56,7 +56,7 @@ const CommonItemTwo = props => {
             fontSize: 15
         },
         middle_container: {
-            marginLeft: 15,
+            marginLeft: 10,
         },
         content_container: {
             flexDirection: 'row',
