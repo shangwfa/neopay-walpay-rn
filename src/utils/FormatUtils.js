@@ -11,19 +11,17 @@ bankCardEnd = (bankCard) => {
     }
 }
 
-money=(amount)=>{
-    let money=amount.toString()
-    if(money.indexOf('.')>0){
-        let moneyArr=money.split('.')
-        if(moneyArr[1].length===0) return money+'00'
-        if(moneyArr[1].length===1) return money+'0'
-        if(moneyArr[1].length===2) return money
-        if(moneyArr[1].length>2) return money.slice(0,4)
+money = (amount) => {
+    let money = amount.toString();
+    if (money.indexOf('.') > 0) {
+        let moneyArr = money.split('.');
+        if (moneyArr[1].length === 0) return `${moneyArr[0]}.00`;
+        if (moneyArr[1].length === 1) return `${money}0`;
+        if (moneyArr[1].length === 2) return money;
+        if (moneyArr[1].length > 2) return `${moneyArr[0]}.${moneyArr[1].slice(0, 2)}`;
     }
-
-    return money+'.00'
-
-}
+    return `${money}.00`
+};
 
 
 export default {

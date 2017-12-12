@@ -15,6 +15,7 @@ import ApiManager from '../utils/ApiManager'
 import RefreshList from '../components/RefreshList'
 import DateUtils from '../utils/DateUtils'
 import FormatUtils from '../utils/FormatUtils'
+import StringUtils from "../utils/StringUtils";
 class MyOrderPage extends BasePage {
     queryType=''//订单类型
     payDirection=''//交易方向
@@ -53,6 +54,7 @@ class MyOrderPage extends BasePage {
 
     loadData = (pageNo,isLoadMore) => {
         const req={
+
             pageNo: pageNo,
             queryType:this.queryType?this.queryType:"",
             payDirection:this.payDirection?this.payDirection:"",
@@ -79,7 +81,7 @@ class MyOrderPage extends BasePage {
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.title}
                                middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.tradeTimeMs)}
-                               rightUpValue={FormatUtils.money(item.amount)}
+                               rightUpValue={(item.payDirection==1?'+':'-')+FormatUtils.money(item.amount)}
                                rightBottomValue={item.status}
                                isLine={true}
                                onPress={()=>{

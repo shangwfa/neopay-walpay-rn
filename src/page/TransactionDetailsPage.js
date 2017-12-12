@@ -5,7 +5,7 @@
  */
 import React, {Component} from 'react'
 import {
-    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView,NativeModules
+    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView, NativeModules
 } from 'react-native'
 import BasePage from "./BasePage";
 import Header from "../components/Header";
@@ -16,6 +16,7 @@ import ApiManager from "../utils/ApiManager";
 import OrderStateComponent from "../components/OrderStateComponent";
 import TransactionTypeDescUtils from "../utils/TransactionTypeDescUtils";
 import ButtonComponent from "../components/ButtonComponent";
+import {RouterPaths} from "../constants/RouterPaths";
 let mData = [];
 class TransactionDetailsPage extends BasePage {
     constructor(props) {
@@ -119,14 +120,14 @@ class TransactionDetailsPage extends BasePage {
             case 17://商户付款成功
             case 25://账户提现退款
                 return this._renderButtonView(true, "查看原订单交易详情", () => {
-                    alert("查看原订单交易详情");
+                    nav.goBack();
                 }, {marginTop: 100});
                 break;
             case 6://红包领取成功
             case 7://红包付款成功
             case 10://红包退款成功
                 return this._renderButtonView(true, "查看红包领取情况", () => {
-                    alert("查看红包领取情况");
+                    this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
                 }, {marginTop: 50});
                 break;
         }

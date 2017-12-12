@@ -122,6 +122,7 @@ class FilterPage extends BasePage {
                 <Header
                     navigation={this.props.navigation}
                     title='筛选'/>
+                <View style={{height:10}}/>
                 <FilterItem
                     title='交易方式'
                     source={trade_icon}

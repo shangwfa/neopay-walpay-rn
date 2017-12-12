@@ -25,7 +25,7 @@ class RedPacketInputComponent extends Component {
                 <Text style={[styles.content_type_txt]}>{this.props.contentType}</Text>
                 <Space/>
                 <TextInput
-                    style={styles.text_input_txt}
+                    style={[styles.text_input_txt, this.props.textInputStyle]}
                     placeholder={this.props.placeholderType}
                     placeholderTextColor="#DDD"
                     underlineColorAndroid='transparent'
@@ -35,7 +35,7 @@ class RedPacketInputComponent extends Component {
                     editable={this.props.isEditable}
                     onChangeText={this._handleTextInputChangeText.bind(this)}
                 />
-                <Text style={{fontSize: 14, marginLeft:ScreenUtils.isIOS?0: -2, color: "#333"}}>{this.props.contentEndUnit}</Text>
+                <Text style={{fontSize: 14, color: "#666"}}>{this.props.contentEndUnit}</Text>
                 {this._renderRightArrow()}
             </TouchableOpacity>
         );
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     text_input_txt: {
         flex: 1,
         fontSize: 14,
-        color: "#333",
+        color: "#666",
     },
     img_arrow: {
         marginLeft: 10,

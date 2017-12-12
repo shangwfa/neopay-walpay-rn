@@ -29,7 +29,9 @@ class ReceiveRedPacketModal extends Component {
                         <Animation
                             ref={animation => {
                                 if (animation)
-                                    animation.play();
+                                    setTimeout(() => {
+                                        animation.play();
+                                    }, 200);
                             }}
                             style={{
                                 width: 315,

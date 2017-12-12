@@ -6,18 +6,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
-import com.xgjk.common.lib.utils.HandlerUtils;
-import com.xgjk.common.lib.utils.ToastUtils;
+import com.xgjk.common.lib.utils.DensityUtils;
+import com.xgjk.common.lib.view.xrecyclerview.ArrowRefreshHeader;
 import com.xgjk.common.lib.view.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.neopay.walpay.android.R;
@@ -30,11 +31,10 @@ import cn.neopay.walpay.android.databinding.HomeDrawMiddleViewBinding;
 import cn.neopay.walpay.android.module.event.HomeViewChangeEvent;
 import cn.neopay.walpay.android.module.event.MineEventBean;
 import cn.neopay.walpay.android.module.event.NewsEventBean;
-import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
-import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.BusniessUtils;
+import cn.neopay.walpay.android.view.actionview.XRecyclerViewLoadMoreView;
 
 /**
  * @author carlos.guo
@@ -45,9 +45,9 @@ import cn.neopay.walpay.android.utils.BusniessUtils;
 public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNewsLayoutBinding> implements NewsFragmentContract.IView {
 
     private SlimAdapter mNewsAdapter;
-    private ArrayList<Object> mDataList;
     private UserInfoResponseBean mUserInfoBean;
     private HomeDrawMiddleViewBinding mBinding;
+    private Boolean isNoLoadMoreData = false;
 
     @Override
     public int getLayoutId() {
@@ -68,25 +68,33 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
                 .register(R.layout.common_line_item_layout, new MineLineSlimInjector());
         handleMiddleView();
         mViewBinding.mineNewsXrv.setAdapter(mNewsAdapter);
+        handleRefreshHeader();
         mPresenter.getNewsInfo();
         mViewBinding.mineNewsXrv.setLoadingMoreEnabled(false);
         mViewBinding.mineNewsXrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                XRecyclerViewLoadMoreView.loadMoreViewEnd();
                 mPresenter.getNewsInfo();
                 mViewBinding.mineNewsXrv.refreshComplete();
             }
 
             @Override
             public void onLoadMore() {
-                HandlerUtils.runOnUiThreadDelay(() -> {
-                    ToastUtils.show("加载更多");
-                    mViewBinding.mineNewsXrv.loadMoreComplete();
-                }, 2000);
-
 
             }
         });
+    }
+
+    private void handleRefreshHeader() {
+        ArrowRefreshHeader refreshHeader = new ArrowRefreshHeader(getActivity());
+        ImageView arrowImageView = refreshHeader.getArrowImageView();
+        refreshHeader.setImgAnimation(false);
+        int width = DensityUtils.dip2px(getActivity(), 50);
+        int height = DensityUtils.dip2px(getActivity(), 50);
+        Glide.with(getActivity()).load(R.mipmap.img_refresh).
+                override(width, height).fitCenter().placeholder(R.mipmap.img_refresh).into(arrowImageView);
+        mViewBinding.mineNewsXrv.setRefreshHeader(refreshHeader);
     }
 
     private void handleMiddleView() {
@@ -130,15 +138,16 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
 
 
     @Override
-    public void setNewsViewData(List<GetNewsResponseBean> newsBeanList) {
-        if (null == newsBeanList) {
+    public void setNewsViewData(List<Object> mDataList) {
+        if (null == mDataList) {
             return;
         }
-        mDataList = new ArrayList<>();
-        mDataList.add(new CommonLineItemBean());
-        mPresenter.handleNewsData(newsBeanList, mDataList);
-        mDataList.remove(mDataList.size() - 1);
         mNewsAdapter.updateData(mDataList);
+    }
+
+    @Override
+    public void setNoMoreData(Boolean isNoMoreData) {
+        isNoLoadMoreData = isNoMoreData;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -150,6 +159,12 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
     public void HandleCurrentPageChangeEvent(HomeViewChangeEvent homeViewChangeEvent) {
         mViewBinding.mineNewsXrv.setNestedScrollingEnabled(0 == homeViewChangeEvent.getScrollY());
         if (homeViewChangeEvent.isBottom()) {
+            if (isNoLoadMoreData) {
+                XRecyclerViewLoadMoreView.loadNoMoreView();
+            } else {
+                XRecyclerViewLoadMoreView.loadMoreViewStart();
+                mPresenter.getNewsInfoLoadMore();
+            }
 
         }
     }
