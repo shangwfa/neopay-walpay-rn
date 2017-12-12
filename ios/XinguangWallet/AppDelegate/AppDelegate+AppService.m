@@ -50,7 +50,7 @@
     //IQKeyboardManager设置
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside=YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].toolbarManageBehaviour = IQAutoToolbarByPosition;
     [IQKeyboardManager sharedManager].placeholderFont = kSYSTEMFONT(12.0f);
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 20;

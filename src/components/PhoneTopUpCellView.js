@@ -18,7 +18,8 @@ import SelectPayStyleModal from '../modal/SelectPayStyleModal'
 import {RouterPaths} from "../constants/RouterPaths"
 
 const marginBetween=13;
-const marginCellTop= 15;
+const marginCellTop= 15*ScreenUtils.height/667.0;
+const heightRatio = ScreenUtils.height/667.0;
 
 class PhoneTopUpMoneyView extends Component {
 
@@ -51,7 +52,7 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={styles.phoneNumberTextInputView}>
                     <TextInput style={styles.phoneNumberTextInput}
                                placeholder={'请输入手机号'}
-                               value={this.state.phoneNo}
+                               value={this.formatPhoneNo(this.state.phoneNo)}
                                keyboardType='numeric'
                                clearButtonMode='while-editing'
                                placeholderTextColor='#999999'
@@ -59,7 +60,7 @@ class PhoneTopUpMoneyView extends Component {
                                onBlur={(event)=>this.textInputBlur(event)}
                                onChange={(event)=>this.textInputChange(event)}
 
-                    />
+                    ></TextInput>
                     <TouchableWithoutFeedback onPress={()=>this.contactBtnClicked()}>
                     <Image style={[styles.contactIcon,{width:this.state.showContactIcon?20:0}]}
                            source={require('../res/img/HomePage/sy_tongxunlu.png')}
@@ -70,7 +71,7 @@ class PhoneTopUpMoneyView extends Component {
                 <View style={styles.cellItemsContainer}>
                     {this.renderCells()}
                 </View>
-                <View style={{marginTop:50}}>
+                <View style={{position:'absolute', bottom:0}}>
                     {this.renderCelluarCell()}
                 </View>
                 <SelectPayStyleModal
@@ -90,6 +91,16 @@ class PhoneTopUpMoneyView extends Component {
                              selectPayStyleClick={()=>{this.selectPayStyleBtnClick()}}/>
             </View>
         );
+    }
+
+    formatPhoneNo=(phoneNo)=>{
+
+        let newPhoneNo = phoneNo.replace('-','');
+
+        if (newPhoneNo.length===11){
+            return `${newPhoneNo.substring(0,3)}-${newPhoneNo.substring(3,7)}-${newPhoneNo.substring(7,11)}`;
+        }else
+            return newPhoneNo;
     }
 
     handleBankCardFooterItemClick=()=>{
@@ -189,12 +200,12 @@ class PhoneTopUpMoneyView extends Component {
             for(let i=0; i<this.state.CelluarPriceList.length;i++){
                 celluarPriceItem.push(
                     <View>
-                        <View style={{flexDirection:'row',alignItems:'center',marginTop:12}}>
+                        <View style={{flexDirection:'row',alignItems:'center',marginTop:12*heightRatio}}>
                             <View style={{marginLeft:14}}>
                                 <Text style={{fontSize:13, color:'#333333'}}>
                                     {this.state.CelluarItemList[this.state.selectedItemIndex].rechargeAmout+' '+this.state.CelluarPriceList[i].rechargeTypeText}
                                 </Text>
-                                <Text style={{fontSize:12, color:'#999999',marginTop:13}} >
+                                <Text style={{fontSize:12, color:'#999999',marginTop:13*heightRatio}} >
                                     {this.state.CelluarPriceList[i].productDesc}
                                 </Text>
                             </View>
@@ -206,7 +217,7 @@ class PhoneTopUpMoneyView extends Component {
                                     {'¥'+this.state.CelluarPriceList[i].tradeAmount}
                                 </Text>
                                 <TouchableWithoutFeedback onPress={()=>this.celluarOrderBtnClicked(i)}>
-                                <View style={{height:26,width:61,borderColor:'red',borderRadius:3,borderWidth:1,alignItems:'center',justifyContent:'center',marginTop:11}}>
+                                <View style={{height:26,width:61,borderColor:'red',borderRadius:3,borderWidth:1,alignItems:'center',justifyContent:'center',marginTop:11*heightRatio}}>
                                     <Text style={{color:'#F34646',fontSize:13}}>
                                         立即购买
                                     </Text>
@@ -214,7 +225,7 @@ class PhoneTopUpMoneyView extends Component {
                                 </TouchableWithoutFeedback>
                             </View>
                         </View>
-                        <View style={{height:i==(this.state.CelluarPriceList.length-1)?0:1, width:ScreenUtils.width,backgroundColor:'#DADADA',marginTop:12}}>
+                        <View style={{height:i==(this.state.CelluarPriceList.length-1)?0:1, width:ScreenUtils.width,backgroundColor:'#DADADA',marginTop:12*heightRatio}}>
 
                         </View>
                     </View>
@@ -291,8 +302,8 @@ class PhoneTopUpMoneyView extends Component {
             })
         }
         this.setState({
-            phoneNo:event.nativeEvent.text
-        })
+            phoneNo:event.nativeEvent.text.replace('-','')
+    })
     };
     //通讯录图标点击
     contactBtnClicked = ()=>{
@@ -338,7 +349,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
     },
     phoneNumberTextInput:{
-        height:62,
+        height:62*heightRatio,
         width:ScreenUtils.width-27,
         marginLeft:14,
         marginRight:13,
@@ -348,14 +359,14 @@ const styles = StyleSheet.create({
     contactIcon:{
         position:'absolute',
         right:13,
-        bottom:20,
+        bottom:20*heightRatio,
     },
     cellItemsContainer:{
         flexDirection:'row',
         flexWrap:'wrap',
     },
     itemCellSelected:{
-        height:55,
+        height:55*heightRatio,
         borderWidth:0.5,
         borderColor:'red',
         borderRadius:3,
@@ -367,7 +378,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#FD686C',
     },
     itemCell:{
-        height:55,
+        height:55*heightRatio,
         borderWidth:0.5,
         borderColor:'red',
         borderRadius:3,
