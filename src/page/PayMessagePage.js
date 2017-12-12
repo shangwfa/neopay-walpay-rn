@@ -76,7 +76,7 @@ class PayMessagePage extends BasePage {
     renderSectionHeader = (item) => {
         if (item.disPlayDate) {
 
-            return <View style={styles.dateHeader}><Text style={styles.dateHeaderText}>{item.createTime}</Text></View>
+            return <View style={styles.dateHeader}><Text style={styles.dateHeaderText}>{DateUtils.getRecentDate(item.createTimeMs)}</Text></View>
         }
     }
 

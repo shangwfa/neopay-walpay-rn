@@ -79,13 +79,13 @@ static NSString *const cellId = @"cellId";
     
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.text = @"员工贷款";
-    titleLabel.font = kSYSTEMFONT(14.0*kSizeRatioW);
+    titleLabel.font = kSYSTEMFONT(14.0);
     titleLabel.textColor = UIColorHex(333333);
     [firstCell addSubview:titleLabel];
     
     UILabel *desLabel = [[UILabel alloc]init];
     desLabel.text = @"快速低息";
-    desLabel.font = kSYSTEMFONT(13.0*kSizeRatioW);
+    desLabel.font = kSYSTEMFONT(13.0);
     desLabel.textColor = UIColorHex(999999);
     [firstCell addSubview:desLabel];
     
@@ -118,13 +118,15 @@ static NSString *const cellId = @"cellId";
     
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.text = title;
-    titleLabel.font = kSYSTEMFONT(14.0*kSizeRatioW);
+//    titleLabel.font = kSYSTEMFONT(14.0*kSizeRatioW);
+    titleLabel.font = kSYSTEMFONT(14.0);
     titleLabel.textColor = UIColorHex(333333);
     [cell addSubview:titleLabel];
     
     UILabel *desLabel = [[UILabel alloc]init];
     desLabel.text = des;
-    desLabel.font = kSYSTEMFONT(13.0*kSizeRatioW);
+//    desLabel.font = kSYSTEMFONT(13.0*kSizeRatioW);
+    desLabel.font=kSYSTEMFONT(13.0);
     desLabel.textColor = UIColorHex(999999);
     [cell addSubview:desLabel];
     

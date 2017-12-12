@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         marginTop:0,
         marginBottom:0,
         borderRadius:5,
-        borderWidth:1,
+        borderWidth:0.5,
         borderColor:'#DDDDDD',
         // backgroundColor:'gray',
     },
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     },
     titleText:{
         fontSize:17,
+        color:'#000',
     },
     titleDate:{
         marginTop:7,
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
         // backgroundColor:'tomato'
     },
     separatorLine:{
-        height:1,
+        height:0.5,
         width:ScreenUtil.width*0.864,
         backgroundColor:'#DDDDDD',
     },

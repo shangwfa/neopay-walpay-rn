@@ -45,7 +45,7 @@ class AccountWithdrawPage extends BasePage {
                 <SelectPayStyleModal
                     title="选择提现银行卡"
                     bankCardOnly={true}
-                    selectBankId={this.state.bankId}
+                    selectBankId={this.state.selectedBankId}
                     bankCardFooterItemClick={this.handleBankCardFooterItemClick.bind(this)}
                     bankCardItemClick={this.handleBankCardItemClick.bind(this)}
                     closeClick={this.handleSelectPayStyleCloseClick.bind(this)}
