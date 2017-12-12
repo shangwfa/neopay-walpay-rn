@@ -95,7 +95,7 @@ class ReceiveRedPacketPage extends BasePage {
                 isShowProcess: false
             });
             this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
-        }, 3000);
+        }, 2000);
 
     };
     _handleRightArrowClick = () => {
@@ -106,7 +106,7 @@ class ReceiveRedPacketPage extends BasePage {
             <TouchableOpacity
                 activeOpacity={0.8} onPress={this._clickItem.bind(this, item)}>
                 <View style={[styles.red_container]}>
-                    <View style={[styles.time_container, {height: 10}]}/>
+                    <View style={[styles.time_container, {height: 10,backgroundColor:"#FFF"}]}/>
                     <RedPacketTypeComponent
                         redPacketData={item}/>
                 </View>

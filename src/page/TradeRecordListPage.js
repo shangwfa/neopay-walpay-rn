@@ -17,7 +17,9 @@ import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
 import ApiManager from "../utils/ApiManager";
+import DateUtils from "../utils/DateUtils";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
+import {RouterPaths} from "../constants/RouterPaths";
 
 class TradeRecordListPage extends BasePage {
     constructor(props) {
@@ -27,7 +29,7 @@ class TradeRecordListPage extends BasePage {
             footerStatus: RefreshStatus.IDLE,
             pageType: this.props.navigation.state.params.pageType,
             title: '',
-            cardId:this.props.navigation.state.params.cardId
+            cardId: this.props.navigation.state.params.cardId
         }
     }
 
@@ -70,14 +72,14 @@ class TradeRecordListPage extends BasePage {
     renderSectionHeader = (item) => {
         if (item.disPlayDate) {
             return <BankOrderListSectionHeader
-                title={item.tradeTimeMs}
+                title={DateUtils.yyyyYearMmMonth(item.tradeTimeMs)}
                 value={"收入:" + item.incomeMoney + "元  " + "支出:" + item.outMoney + "元"}/>
         }
     };
     onLoadMore = (pageSize) => {
         let params = {
             pageNo: pageSize,
-            cardId:this.state.cardId?this.state.cardId:''
+            cardId: this.state.cardId ? this.state.cardId : ''
         };
         switch (this.state.pageType) {
             case 0://余额
@@ -117,14 +119,14 @@ class TradeRecordListPage extends BasePage {
         this._handleCurrentPageType();
     };
     _handleItemClick = (item) => {
-        alert(item.title);
+        nav.navigate(RouterPaths.TRANSACTION_DETAILS, {orderNo: item.orderNo})
     };
 
     _handleCurrentPageType = () => {
         let txtContent;
         let params = {
             pageNo: 1,
-            cardId:this.state.cardId?this.state.cardId:''
+            cardId: this.state.cardId ? this.state.cardId : ''
         }
         switch (this.state.pageType) {
             case 0://余额

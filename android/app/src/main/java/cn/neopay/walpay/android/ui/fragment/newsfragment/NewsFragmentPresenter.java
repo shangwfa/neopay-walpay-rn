@@ -1,5 +1,7 @@
 package cn.neopay.walpay.android.ui.fragment.newsfragment;
 
+import com.xgjk.common.lib.utils.PageUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
-import cn.neopay.walpay.android.module.request.BaseRequest;
+import cn.neopay.walpay.android.module.request.GetHomeNewsInfoRequestBean;
 import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
 import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
@@ -24,11 +26,29 @@ import cn.neopay.walpay.android.ui.RNActivity;
 
 public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
     NewsItemBean mNewsItemBean;
+    private final ArrayList<Object> mDataList = new ArrayList<>();
+    private final ArrayList<Object> mDataPageList = new ArrayList<>();
 
     @Override
     public void getNewsInfo() {
-        ApiManager.getSingleton().getHomeNewsInfo(new BaseRequest(),
-                new BaseSubscriber(mActivity, o -> mView.setNewsViewData((List<GetNewsResponseBean>) o), false));
+        handleRefresh(true);
+    }
+
+    @Override
+    public void getNewsInfoLoadMore() {
+        handleRefresh(false);
+    }
+
+    private void handleRefresh(boolean isRefresh) {
+        if (isRefresh) {
+            mDataList.clear();
+            mDataPageList.clear();
+            mView.setNoMoreData(false);
+        }
+        GetHomeNewsInfoRequestBean requestBean = new GetHomeNewsInfoRequestBean();
+        requestBean.setPageNo(PageUtils.getPageNo(mDataPageList));
+        ApiManager.getSingleton().getHomeNewsInfo(requestBean,
+                new BaseSubscriber(mActivity, o -> handleNewsData((List<GetNewsResponseBean>) o, isRefresh), false));
     }
 
     @Override
@@ -39,7 +59,15 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
     }
 
     @Override
-    public void handleNewsData(List<GetNewsResponseBean> newsBeanList, ArrayList<Object> mDataList) {
+    public void handleNewsData(List<GetNewsResponseBean> newsBeanList, boolean isRefresh) {
+        if (newsBeanList == null) {
+            return;
+        }
+        mDataPageList.addAll(newsBeanList);
+        if (PageUtils.isLoadNoMoreItem(mDataPageList.size())) {
+            mView.setNoMoreData(true);
+        }
+        mDataList.add(new CommonLineItemBean());
         for (GetNewsResponseBean getNewsResponseBean : newsBeanList) {
             switch (getNewsResponseBean.getMsgType()) {
                 case 1://红包消息--集合
@@ -67,6 +95,8 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
             }
             mDataList.add(new CommonLineItemBean());
         }
+        mDataList.remove(mDataList.size() - 1);
+        mView.setNewsViewData(mDataList);
     }
 
 

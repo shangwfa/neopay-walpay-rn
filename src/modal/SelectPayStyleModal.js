@@ -50,7 +50,7 @@ class SelectPayStyleModal extends Component {
                     {/*line*/}
                     <View style={styles.line}/>
                     {/*支付方式*/}
-                    <View style={{height: 250}}>
+                    <View >
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             style={{backgroundColor: colors.white}}
@@ -140,7 +140,7 @@ class SelectPayStyleModal extends Component {
         }
     };
     _handleBankCardItemNickName = (item) => {
-        let str = item.id === -1 ? item.cardNo : FormatUtils.bankCardEnd(item.cardNo);
+        let str = item.id === -1 ? FormatUtils.money(item.cardNo) : FormatUtils.bankCardEnd(item.cardNo);
         return (item.bankName + "(" + str + ")");
     };
     _handleBankCardItemClick = (item) => {
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     line: {
-        height: 1,
+        height: 0.5,
         backgroundColor: "#DCDCDC"
     },
     img_close: {

@@ -54,6 +54,7 @@ class MyOrderPage extends BasePage {
 
     loadData = (pageNo,isLoadMore) => {
         const req={
+
             pageNo: pageNo,
             queryType:this.queryType?this.queryType:"",
             payDirection:this.payDirection?this.payDirection:"",
