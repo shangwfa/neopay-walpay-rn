@@ -16,6 +16,7 @@ getTimestamp = (dateStr) => {
     return Date.parse(new Date(dateStr));
 };
 
+
 /**
  * @param fmt  时间格式 ("yyyy-MM-dd"、"yyyy-MM-dd HH:mm:ss")
  * @param date  Date()
@@ -70,7 +71,8 @@ isToYear = (date = new Date()) => {
  * @param date Date()
  * @returns 最近的时间日期 (20分钟前、11:43、昨天11:14、11-14 11：20 、2017-11-14 11：20)
  */
-getRecentDate = (date = new Date()) => {
+getRecentDate = (timestamp) => {
+    let date = new Date(timestamp)
     if (isToday(date)) {//当天
         return date.getMinutes() <= 59 ? `${date.getMinutes()}分钟前` : dateFmt("HH:mm", date);
     } else if (isYesterday(date)) {//昨天
@@ -82,6 +84,24 @@ getRecentDate = (date = new Date()) => {
     }
 };
 
+mmDdHhMmDateFmt = (timestamp) => {
+    return dateFmt("MM-dd HH:mm", new Date(timestamp))
+}
+
+isToYearAndMonth = (date) => {
+    return isToYear(date) && (new Date().getMonth() === date.getMonth())
+}
+
+yyyyYearMmMonth = (timestamp) => {
+    let date = new Date(timestamp)
+
+    if (isToYearAndMonth(date)) {
+        return '本月'
+    }
+
+    return date.getYear() + '年' + date.getMonth() + '月'
+}
+
 export default {
     isYesterday,
     isToday,
@@ -89,5 +109,7 @@ export default {
     dateFmt,
     getRecentDate,
     getTimestamp,
+    mmDdHhMmDateFmt,
+    yyyyYearMmMonth
 }
 
