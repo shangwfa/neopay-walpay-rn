@@ -16,59 +16,61 @@ import RefreshList from '../components/RefreshList'
 import DateUtils from '../utils/DateUtils'
 import FormatUtils from '../utils/FormatUtils'
 import StringUtils from "../utils/StringUtils";
+import TransactionTypeDescUtils from "../utils/TransactionTypeDescUtils";
+import BusinessUtils from "../utils/BusinessUtils";
 class MyOrderPage extends BasePage {
-    queryType=''//订单类型
-    payDirection=''//交易方向
-    startTime=''//开始时间
-    endTime=''//结束时间
-    isResult=false
+    queryType = ''//订单类型
+    payDirection = ''//交易方向
+    startTime = ''//开始时间
+    endTime = ''//结束时间
+    isResult = false
 
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            isEmpty:false
+            isEmpty: false
         }
 
-        if(this.props.navigation.state.params) {
-            const {tradeType,incomeType,startTime,endTime,isResult}=this.props.navigation.state.params
-            this.queryType=tradeType
-            this.payDirection=incomeType
-            this.startTime=startTime
-            this.endTime=endTime
-            this.isResult=isResult
+        if (this.props.navigation.state.params) {
+            const {tradeType, incomeType, startTime, endTime, isResult} = this.props.navigation.state.params
+            this.queryType = tradeType
+            this.payDirection = incomeType
+            this.startTime = startTime
+            this.endTime = endTime
+            this.isResult = isResult
         }
     }
 
     componentWillMount() {
-        this.loadData(1,false)
+        this.loadData(1, false)
     }
 
-    emitEvent=(event)=>{
-        this.queryType=event.data.tradeType
-        this.payDirection=event.data.incomeType
-        this.startTime=event.data.startTime
-        this.endTime=event.data.endTime
-        this.loadData(1,false)
+    emitEvent = (event) => {
+        this.queryType = event.data.tradeType
+        this.payDirection = event.data.incomeType
+        this.startTime = event.data.startTime
+        this.endTime = event.data.endTime
+        this.loadData(1, false)
     }
 
-    loadData = (pageNo,isLoadMore) => {
-        const req={
+    loadData = (pageNo, isLoadMore) => {
+        const req = {
 
             pageNo: pageNo,
-            queryType:this.queryType?this.queryType:"",
-            payDirection:this.payDirection?this.payDirection:"",
-            startTime:this.startTime?this.startTime:"",
-            endTime:this.endTime?this.endTime:""
+            queryType: this.queryType ? this.queryType : "",
+            payDirection: this.payDirection ? this.payDirection : "",
+            startTime: this.startTime ? this.startTime : "",
+            endTime: this.endTime ? this.endTime : ""
         }
         ApiManager.queryUserBill(req, data => {
-            if(isLoadMore){
-                const arrData=this.state.data
+            if (isLoadMore) {
+                const arrData = this.state.data
                 arrData.push(...data)
                 this.setState({data: arrData})
-            }else {
-                const empty=!data||data.length<=0
-                this.setState({data: data,isEmpty:empty})
+            } else {
+                const empty = !data || data.length <= 0
+                this.setState({data: data, isEmpty: empty})
             }
 
 
@@ -81,12 +83,13 @@ class MyOrderPage extends BasePage {
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.title}
                                middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.tradeTimeMs)}
-                               rightUpValue={(item.payDirection==1?'+':'-')+FormatUtils.money(item.amount)}
-                               rightBottomValue={item.status}
+                               rightUpValue={TransactionTypeDescUtils._handleAmountType(item.payDirection) + FormatUtils.money(item.amount)}
+                               rightBottomValue={item.billProcessStatus === 3 ? "" : item.billStatusText}
+                               rightBottomStyle={{color: BusinessUtils.getColorByBillState(item.billProcessStatus)}}
                                isLine={true}
-                               onPress={()=>{
-                                    nav.navigate(RouterPaths.TRANSACTION_DETAILS,{orderNo:item.orderNo})
-                                }}/>
+                               onPress={() => {
+                                   nav.navigate(RouterPaths.TRANSACTION_DETAILS, {orderNo: item.orderNo})
+                               }}/>
             </View>
         )
 
@@ -97,23 +100,24 @@ class MyOrderPage extends BasePage {
         }
     }
     onRefresh = () => {
-        this.loadData(1,false)
+        this.loadData(1, false)
     }
     onLoadMore = (page) => {
-        this.loadData(page,true)
+        this.loadData(page, true)
     }
 
-    renderHeader=()=>{
-        if(this.isResult){
-            return(<Header navigation={this.props.navigation} title='我的账单'/>)
-        }else {
-            return(
+    renderHeader = () => {
+        if (this.isResult) {
+            return (<Header navigation={this.props.navigation} title='我的账单'/>)
+        } else {
+            return (
                 <Header navigation={this.props.navigation} title='我的账单' rightTitle='筛选' onRightPress={() => {
                     this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
             )
         }
     }
+
     render() {
         return (
             <View style={styles.container}>

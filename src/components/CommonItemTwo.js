@@ -53,7 +53,7 @@ const CommonItemTwo = props => {
         },
         middle_up_value: {
             color: colors.black,
-            fontSize: 15
+            fontSize: 15,
         },
         middle_container: {
             marginLeft: 10,
@@ -84,7 +84,7 @@ const CommonItemTwo = props => {
     }
 
     const renderRightValue = () => {
-        return <View style={styles.right_container}>
+        return <View style={[styles.right_container]}>
             {renderRightUp()}
             {renderRightBottom()}
 
@@ -98,7 +98,7 @@ const CommonItemTwo = props => {
     }
     const renderRightUp=()=>{
         if(rightUpValue){
-            return <Text style={styles.middle_up_value}>{rightUpValue}</Text>
+            return <Text style={[styles.middle_up_value,{textAlign:"right"}]}>{rightUpValue}</Text>
         }
     }
     const renderRightIcon=()=>{

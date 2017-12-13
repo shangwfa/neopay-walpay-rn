@@ -229,6 +229,15 @@ public class CommModule extends ReactContextBaseJavaModule {
         callback.invoke(new Gson().toJson(paramsBean));
     }
 
+    /**
+     * 获取用户手机号码
+     */
+    @ReactMethod
+    public void contactCommNumber(Callback callback) {
+        String userName = BusniessUtils.getUserName().substring(0, BusniessUtils.getUserName().length());
+        callback.invoke(userName);
+    }
+
     @ReactMethod
     public void showCommDialog(String dialogType, Callback callback) {
         HandlerUtils.runOnUiThread(() -> {
