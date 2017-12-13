@@ -43,6 +43,7 @@ class PhoneTopUpMoneyView extends Component {
             selectedBankId:-1,
             selectedBankName:'余额',
             selectedBankCardNo:'',
+            selectedRechargeType:1,
         }
     }
 
@@ -60,6 +61,7 @@ class PhoneTopUpMoneyView extends Component {
                                onFocus={(event)=>this.textInputFocus(event)}
                                onBlur={(event)=>this.textInputBlur(event)}
                                onChange={(event)=>this.textInputChange(event)}
+                               onChangeText={(text)=>this.textInputChanged(text)}
 
                     ></TextInput>
                     <TouchableWithoutFeedback onPress={()=>this.contactBtnClicked()}>
@@ -68,7 +70,7 @@ class PhoneTopUpMoneyView extends Component {
                            />
                     </TouchableWithoutFeedback>
                 </View>
-                <View style={{backgroundColor:'#DADADA',height:1}}></View>
+                <View style={{backgroundColor:'#EEE',height:1.0}}></View>
                 <View style={styles.cellItemsContainer}>
                     {this.renderCells()}
                 </View>
@@ -96,27 +98,40 @@ class PhoneTopUpMoneyView extends Component {
 
     componentDidMount() {
 
+        //获取上次充值手机号
+        ApiManager.getRecentPhoneRechargePhone({},(data)=>{
+
+            this.setState({
+               phoneNo:data.phone,
+           });
+
+            if(!this.state.phoneNo){
+                NativeModules.commModule.contactCommNumber((data)=>{
+                    this.setState({
+                        phoneNo:data
+                    });
+                });
+            }
+
+        if (this.state.phoneNo.length===11){
+               ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
+                   if(this.props.viewType){
+                       this.setState({
+                           CelluarItemList:data,
+                       })
+                   }else {
+                       this.setState({
+                           MoneyItemList: data,
+                       })
+                   }
+               });
+           }
+
+        });
+
         NativeAppEventEmitter.addListener('ContactSelected',(data)=>this.receivedContactPhoneNo(data));
 
-        if(ScreenUtils.isIOS===true){
-            NativeModules.commModule.contactCommNumber((data)=>{
-                this.setState({
-                    phoneNo:data
 
-                });
-                ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
-                    if(this.props.viewType){
-                        this.setState({
-                            CelluarItemList:data,
-                        })
-                    }else {
-                        this.setState({
-                            MoneyItemList: data,
-                        })
-                    }
-                });
-            });
-        }
 
     }
     //接收到手机号
@@ -125,6 +140,23 @@ class PhoneTopUpMoneyView extends Component {
         this.setState({
             phoneNo:data,
         })
+
+        if(this.state.phoneNo.length===11){
+
+            ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
+                if(this.props.viewType){
+                    this.setState({
+                        CelluarItemList:data,
+                    })
+                }else {
+                    this.setState({
+                        MoneyItemList: data,
+                    })
+                }
+            });
+
+        }
+
     }
 
     //处理银行卡信息
@@ -253,6 +285,7 @@ class PhoneTopUpMoneyView extends Component {
             isPayShow:true,
             payAmount:this.state.CelluarPriceList[i].tradeAmount.toFixed(2),
             selectedNameCode:this.state.CelluarPriceList[i].nameCode,
+            selectedRechargeType:i===0?3:2,
         });
     };
 
@@ -322,7 +355,25 @@ class PhoneTopUpMoneyView extends Component {
         }
         this.setState({
             phoneNo:event.nativeEvent.text.replace('-','')
-    })
+        })
+    };
+    textInputChanged =(text)=>{
+
+        if(text.length===11){
+
+            ApiManager.getPhoneRechargeProductList({"phone":text,"productType":this.props.viewType?2:1},(data)=>{
+                if(this.props.viewType){
+                    this.setState({
+                        CelluarItemList:data,
+                    })
+                }else {
+                    this.setState({
+                        MoneyItemList: data,
+                    })
+                }
+            });
+
+        }
     };
     //通讯录图标点击
     contactBtnClicked = ()=>{
@@ -334,7 +385,7 @@ class PhoneTopUpMoneyView extends Component {
         this.setState({
             isPayShow:false
         });
-        ApiManager.createPhoneRechargeOrder({"phone":this.state.phoneNo,"payType":this.state.selectedPayType,"nameCode":this.state.selectedNameCode,"payPassword":text,'bankCardId':this.state.selectedBankId},(data)=>{
+        ApiManager.createPhoneRechargeOrder({"phone":this.state.phoneNo,"payType":this.state.selectedPayType,"rechargeType":this.state.selectedRechargeType,"nameCode":this.state.selectedNameCode,"payPassword":text,'bankCardId':this.state.selectedBankId},(data)=>{
             //创建订单成功,跳转结果页
             nav.navigate(RouterPaths.CHARGE_FLUX_RESULT,{pageTitle:this.props.viewType?'流量充值':'手机充值',orderNo:data['orderNo']});
         });

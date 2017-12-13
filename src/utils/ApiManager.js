@@ -262,7 +262,12 @@ withdraworder = (request, callback) => {
     NetUtil.post(APIS.WITHDRAW_ORDER, request, (data) => {
         callback(data);
     })
-}
+};
+getRecentPhoneRechargePhone = (request, callback)=>{
+    NetUtil.post(APIS.GET_RECENT_PHONE_RECHARGE_PHONE,request,(data)=>{
+        callback(data);
+    })
+};
 export default {
     getCerfitySMSCode,
     getBindBankCardSMSCode,
@@ -312,5 +317,6 @@ export default {
     getRecentWithdrawBankCard,
     getUserBankCardList,
     createWithdrawOrder,
-    withdraworder
+    withdraworder,
+    getRecentPhoneRechargePhone,
 }

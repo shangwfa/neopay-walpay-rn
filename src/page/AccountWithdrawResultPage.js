@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF',
     },
     separatorLine:{
-        backgroundColor:'#DCDCDC',
-        height:1,
+        backgroundColor:'#DADADA',
+        height:0.5,
         width:ScrnUtil.width-12,
     },
     headerView:{

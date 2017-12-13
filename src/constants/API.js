@@ -56,4 +56,5 @@ export const APIS = {
     GET_WITHDRAW_BALANCE: 'balance/get_withdraw_balance',//获取可提现金额
     CREATE_WITHDRAW_BALANCE: 'balance/create_withdraw_order',//创建提现订单
     WITHDRAW_ORDER: 'balance/withdraw_order',//提现
+    GET_RECENT_PHONE_RECHARGE_PHONE:'pcharge/get_recent_phone_recharge_phone',//获取上次手机充值手机号
 };
