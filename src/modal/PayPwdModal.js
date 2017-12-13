@@ -53,7 +53,7 @@ class PayPwdModal extends Component {
                         <View style={styles.content_container}>
                             {this.renderTop()}
                             <View style={styles.line}/>
-                            <Text style={{color: colors.black, fontSize: 14}}>{this.props.contentFront}<Text
+                            <Text style={{color: colors.black, fontSize: 14,marginTop:10,}}>{this.props.contentFront}<Text
                                 style={{color: colors.black, fontSize: 20}}> {this.props.contentBack}</Text></Text>
                             <PasswordInput style={{width: 290, marginTop: 10}} maxLength={6}
                                            onEnd={(text) => this.props.onEnd(text)}/>

@@ -11,8 +11,6 @@ import {
     Image, Modal, Animated
 } from 'react-native'
 import Animation from 'lottie-react-native'
-import demo from '../data/data.json'
-import CommonButton from "../components/CommonButton";
 class ReceiveRedPacketModal extends Component {
 
     constructor(props) {
@@ -27,19 +25,20 @@ class ReceiveRedPacketModal extends Component {
                 onRequestClose={() => {
                 }}>
                 <View style={styles.modalStyle}>
-                    <View>
+                    <View style={styles.container}>
                         <Animation
                             ref={animation => {
-                                if(animation)
-                                    setTimeout(()=>{
+                                if (animation)
+                                    setTimeout(() => {
                                         animation.play();
-                                    },200)
+                                    }, 200);
                             }}
                             style={{
-                                width: 200,
+                                width: 315,
                                 height: 200,
                             }}
-                            source={demo}
+                            loop={true}
+                            source={this.props.action}
                         />
                     </View>
 
@@ -58,6 +57,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
     },
+    container: {
+        width: 315,
+        height: 200,
+        backgroundColor: "#FFF",
+        borderRadius: 5,
+    }
 });
 
 export default ReceiveRedPacketModal

@@ -54,3 +54,5 @@ buck-out/
 /node_modules/
 /__tests__/
 /android/gradle.properties
+!/android/build.gradle
+!/android/gradle.properties

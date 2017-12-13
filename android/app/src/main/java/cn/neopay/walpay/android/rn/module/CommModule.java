@@ -14,6 +14,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.gson.Gson;
 import com.tbruyelle.rxpermissions.RxPermissions;
+import com.xgjk.common.lib.manager.ActivityManager;
+import com.xgjk.common.lib.manager.storage.StoreManager;
 import com.xgjk.common.lib.utils.HandlerUtils;
 import com.xgjk.common.lib.utils.ScreenUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
@@ -71,11 +73,10 @@ public class CommModule extends ReactContextBaseJavaModule {
      * @param phone
      */
     @ReactMethod
-    public void rnCallNative(String phone) {
-
+    public void rnCallNativeCallPhone(String phone) {
         // 跳转到打电话界面
         Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CALL);
+        intent.setAction(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 跳转需要添加flag, 否则报错
         mContext.startActivity(intent);
@@ -199,6 +200,19 @@ public class CommModule extends ReactContextBaseJavaModule {
     }
 
     /**
+     * 功能：用户退出并且跳转登录页面容器
+     */
+    @ReactMethod
+    public void jumpToLoginPage() {
+        HandlerUtils.runOnUiThread(() -> {
+            ActivityManager.getInstance().killAllActivity();
+            StoreManager.getSingleton().putString(false, IWalpayConstants.ACCESS_TOKEN, "");
+            MainRouter.getSingleton().jumpToLoginPage(BusniessUtils.getUserName());
+        });
+    }
+
+
+    /**
      * 功能：toast消息
      */
     @ReactMethod
@@ -213,6 +227,15 @@ public class CommModule extends ReactContextBaseJavaModule {
     public void netCommParas(Callback callback) {
         final NetCommonParamsBean paramsBean = new NetCommonParamsBean();
         callback.invoke(new Gson().toJson(paramsBean));
+    }
+
+    /**
+     * 获取用户手机号码
+     */
+    @ReactMethod
+    public void contactCommNumber(Callback callback) {
+        String userName = BusniessUtils.getUserName().substring(0, BusniessUtils.getUserName().length());
+        callback.invoke(userName);
     }
 
     @ReactMethod

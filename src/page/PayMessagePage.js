@@ -14,6 +14,7 @@ import PayMessageCell from '../components/PayMessageContentCell'
 import {RefreshStatus} from "../components/RefreshList"
 import RefreshList from '../components/RefreshList'
 import ApiManager from '../utils/ApiManager'
+import DateUtils from "../utils/DateUtils";
 
 
 class PayMessagePage extends BasePage {
@@ -64,14 +65,18 @@ class PayMessagePage extends BasePage {
                                payNoticeType={item.payNoticeTypeText} payBy={item.payTypeDesc}
                                payTo={item.tradObject}
                                 remark = {item.remark}
-                                amount = {item.amount}/>
+                                amount = {item.amount}
+                                payDirection = {item.payDirection}
+
+                />
             </View>
         )
 
     }
     renderSectionHeader = (item) => {
         if (item.disPlayDate) {
-            return <View style={styles.dateHeader}><Text style={styles.dateHeaderText}>{item.createTime}</Text></View>
+
+            return <View style={styles.dateHeader}><Text style={styles.dateHeaderText}>{DateUtils.getRecentDate(item.createTimeMs)}</Text></View>
         }
     }
 

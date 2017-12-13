@@ -29,11 +29,19 @@ class SelectPayStyleModal extends Component {
     }
 
     componentWillMount() {
-        ApiManager.getUserPayTypeList({}, (data) => {
-            this.setState({
-                selectPayStyleData: data,
+        if(this.props.bankCardOnly === true){
+            ApiManager.getUserBankCardList({}, (data) => {
+                this.setState({
+                    selectPayStyleData: data,
+                });
             });
-        });
+        }else{
+            ApiManager.getUserPayTypeList({}, (data) => {
+                this.setState({
+                    selectPayStyleData: data,
+                });
+            });
+        }
     }
 
 
@@ -50,7 +58,8 @@ class SelectPayStyleModal extends Component {
                     {/*line*/}
                     <View style={styles.line}/>
                     {/*支付方式*/}
-                    <View style={{height: 250}}>
+                    <View>
+
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             style={{backgroundColor: colors.white}}
@@ -71,7 +80,7 @@ class SelectPayStyleModal extends Component {
     _renderItem = ({item, index}) => {
         return (
             <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.5}
                 onPress={this._handleBankCardItemClick.bind(this, item)}>
                 <View
                     style={styles.item_container}>
@@ -89,7 +98,7 @@ class SelectPayStyleModal extends Component {
         return (
 
             <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.5}
                 onPress={this._handleBankCardFooterItemClick.bind(this)}>
                 {this._handleNoDataView()}
                 <View
@@ -119,7 +128,7 @@ class SelectPayStyleModal extends Component {
     _renderTitle = () => {
         return <View style={styles.item_container}>
             <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.5}
                 onPress={this.props.closeClick}>
                 <Image
                     style={styles.img_close}
@@ -140,7 +149,7 @@ class SelectPayStyleModal extends Component {
         }
     };
     _handleBankCardItemNickName = (item) => {
-        let str = StringUtils.isContainChildrenStr(item.bankName, "余额") ? item.cardNo : FormatUtils.bankCardEnd(item.cardNo);
+        let str = item.id === -1 ? FormatUtils.money(item.cardNo) : FormatUtils.bankCardEnd(item.cardNo);
         return (item.bankName + "(" + str + ")");
     };
     _handleBankCardItemClick = (item) => {
@@ -171,7 +180,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     line: {
-        height: 1,
+        height: 0.5,
         backgroundColor: "#DCDCDC"
     },
     img_close: {

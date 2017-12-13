@@ -9,7 +9,7 @@ import {
     View,
     Text,
     TextInput,
-    NativeModules, DeviceEventEmitter,
+    NativeModules, DeviceEventEmitter, ScrollView,
     Image, TouchableOpacity,
 } from 'react-native'
 import BasePage from "./BasePage";
@@ -25,6 +25,9 @@ import ApiManager from "../utils/ApiManager";
 import {RouterPaths} from "../constants/RouterPaths";
 import SelectPayStyleModal from "../modal/SelectPayStyleModal";
 import SendPhoneAuthCodeModal from "../modal/SendPhoneAuthCodeModal";
+import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
+import WarpRedPacket from '../data/WarpRedPacket.json'
+import FormatUtils from "../utils/FormatUtils";
 class SendRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
@@ -35,6 +38,7 @@ class SendRedPacketPage extends BasePage {
             redPacketMessage: "",
             isRandomRedPacket: true,
             isShowSelectPayStyle: false,
+            isShowWarpAction: false,
             redPacketAmountText: "金额",
             isShow: false,
             isShowPay: false,
@@ -83,43 +87,51 @@ class SendRedPacketPage extends BasePage {
                     onRightPress={this._handleRightArrowClick.bind(this)}
                     navigation={this.props.navigation}
                     title='发红包'/>
-                <RedPacketInputComponent
-                    containerTypeStyle={{marginTop: 10}}
-                    contentType="红包个数"
-                    placeholderType="请填写红包个数"
-                    keybordType="numeric"
-                    onTextInputClick={this._handleTextInputClick.bind(this)}
-                    textInputChangeListener={this._handleRedPacketNumListener.bind(this)}/>
-                {this._renderLineView()}
-                {this._renderRedPacketTypeView()}
-                <RedPacketInputComponent
-                    contentType={this.state.redPacketAmountText}
-                    placeholderType="塞进红包的金额"
-                    keybordType="numeric"
-                    contentEndUnit="元"
-                    onTextInputClick={this._handleTextInputClick.bind(this)}
-                    textInputChangeListener={this._handleRedPacketAmountListener.bind(this)}/>
-                {this._renderLineView()}
-                <RedPacketInputComponent
-                    contentType="红包主题"
-                    conentValue={this.state.redThemeName}
-                    isEditable={false}
-                    isShowArrow={true}
-                    onTextInputClick={this._handleRedThemeClick.bind(this)}
-                    textInputChangeListener={this._handleRedPacketListener.bind(this)}/>
-                <RedPacketInputComponent
-                    containerTypeStyle={{marginTop: 10}}
-                    contentType="留言"
-                    conentValue={this.state.redPacketMessage}
-                    keybordType="default"
-                    onTextInputClick={this._handleTextInputClick.bind(this)}
-                    textInputChangeListener={this._handleRedPacketMessageListener.bind(this)}/>
-                <CommonButton value='发红包啦！' style={{marginTop: 68}} onPress={this._handleButtonClick.bind(this)}/>
-                <OneButtonModal
-                    onPress={this._handleBtnModalClick}
-                    btnTitle="确定"
-                    content={this.state.contentModal}
-                    isShow={this.state.isShow}/>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}>
+                    <RedPacketInputComponent
+                        containerTypeStyle={{marginTop: 10}}
+                        contentType="红包个数"
+                        placeholderType="请填写红包个数"
+                        keybordType="numeric"
+                        onTextInputClick={this._handleTextInputClick.bind(this)}
+                        textInputChangeListener={this._handleRedPacketNumListener.bind(this)}/>
+                    {this._renderLineView()}
+                    {this._renderRedPacketTypeView()}
+                    <RedPacketInputComponent
+                        textInputStyle={{marginRight: 8}}
+                        contentType={this.state.redPacketAmountText}
+                        placeholderType="塞进红包的金额"
+                        keybordType="numeric"
+                        contentEndUnit="元"
+                        onTextInputClick={this._handleTextInputClick.bind(this)}
+                        textInputChangeListener={this._handleRedPacketAmountListener.bind(this)}/>
+                    {this._renderLineView()}
+                    <RedPacketInputComponent
+                        contentType="红包主题"
+                        conentValue={this.state.redThemeName}
+                        isEditable={false}
+                        isShowArrow={true}
+                        onTextInputClick={this._handleRedThemeClick.bind(this)}
+                        textInputChangeListener={this._handleRedPacketListener.bind(this)}/>
+                    <RedPacketInputComponent
+                        textInputStyle={{color: "#DDD"}}
+                        containerTypeStyle={{marginTop: 10}}
+                        contentType="留言"
+                        conentValue={this.state.redPacketMessage}
+                        keybordType="default"
+                        onTextInputClick={this._handleTextInputClick.bind(this)}
+                        textInputChangeListener={this._handleRedPacketMessageListener.bind(this)}/>
+                    <CommonButton value='发红包啦！' style={{marginTop: 68}} onPress={this._handleButtonClick.bind(this)}/>
+                    <OneButtonModal
+                        onPress={this._handleBtnModalClick}
+                        btnTitle="确定"
+                        content={this.state.contentModal}
+                        isShow={this.state.isShow}/>
+                    <View style={{alignItems: "center"}}>
+                        <Text style={styles.tip_txt}>24小时未被领取，金额退回余额中</Text>
+                    </View>
+                </ScrollView>
                 <PayPwdModal
                     isShow={this.state.isShowPay}
                     onForgetPwd={this._handlePayOnForgetPwdClick}
@@ -131,7 +143,7 @@ class SendRedPacketPage extends BasePage {
                     onEnd={this._handlePayEndClick}/>
                 <SelectPayStyleModal
                     title="更换付款方式"
-                    selectBankId={this.state.bankId}
+                    selectBankId={this.state.bankCardId}
                     bankCardFooterItemClick={this._handleBankCardFooterItemClick.bind(this)}
                     bankCardItemClick={this._handleBankCardItemClick.bind(this)}
                     closeClick={this._handleSelectPayStyleCloseClick.bind(this)}
@@ -143,6 +155,9 @@ class SendRedPacketPage extends BasePage {
                     closeClick={this._handleAuthMsgCloseClick}
                     authMsgTextChangeClick={this._handleAuthMsgTextChangeClick.bind(this)}
                 />
+                <ReceiveRedPacketModal
+                    action={WarpRedPacket}
+                    isShow={this.state.isShowWarpAction}/>
             </View>
         );
     }
@@ -162,10 +177,15 @@ class SendRedPacketPage extends BasePage {
                 totalCount: this.state.payResultSourceData.totalCount,
                 payTypeDesc: this.state.payResultSourceData.payTypeDesc,
             };
-            ApiManager.payRedPacketVerify(request, (data) => {
-                this._handleRedPacketJump(data, redPacketResult);
-                this._handleRedPackProcess(data, redPacketResult);
+            this.setState({
+                isShowWarpAction: true
             });
+            ApiManager.payRedPacketVerify(request, (data) => {
+                setTimeout(() => {
+                    this._handleRedPacketJump(data, redPacketResult);
+                    this._handleRedPackProcess(data, redPacketResult);
+                }, 2000);
+            })
         }
     };
 
@@ -178,6 +198,9 @@ class SendRedPacketPage extends BasePage {
                 const nowStamp = Date.now();
                 if (nowStamp > overTimeStamp) {
                     /* 倒计时结束*/
+                    this.setState({
+                        isShowWarpAction: false
+                    });
                     this.interval && clearInterval(this.interval);
                     redPacketResult.redPacketState = false;
                     this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
@@ -189,6 +212,9 @@ class SendRedPacketPage extends BasePage {
                         this._handleRedPacketJump(data, redPacketResult);
                         if (1 === data.payStatus || 2 === data.payStatus) {
                             this.interval && clearInterval(this.interval);
+                            this.setState({
+                                isShowWarpAction: false
+                            });
                         }
                     });
                 }
@@ -258,7 +284,7 @@ class SendRedPacketPage extends BasePage {
                         <TouchableOpacity
                             activeOpacity={0.8}
                             onPress={this._handleIsEquRedPacketTypeClick}
-                            style={[styles.red_packet_type_container, {marginLeft: 24,}, {backgroundColor: !this.state.isRandomRedPacket ? "#F34646" : "#FFF"},
+                            style={[styles.red_packet_type_container, {marginLeft: 15,}, {backgroundColor: !this.state.isRandomRedPacket ? "#F34646" : "#FFF"},
                                 this.state.isRandomRedPacket ? styles.border_style : styles.border_style_no]}>
                             <Text
                                 style={[{fontSize: 13}, {color: !this.state.isRandomRedPacket ? "#FFF" : "#F34646"}]}>等额红包</Text>
@@ -286,13 +312,24 @@ class SendRedPacketPage extends BasePage {
             this.setState({
                 payResultSourceData: data
             });
-            if (1 === data.smsFlag) {//需要短信验证
-                this.setState({
-                    isAuthMsgShow: true
-                })
-            } else if (2 === data.smsFlag) {
-                this._handlePayRedPacketResult(data);
-            }
+            this.setState({
+                isShowWarpAction: true
+            });
+            setTimeout(() => {
+                if (1 === data.smsFlag) {//需要短信验证
+                    this.setState({
+                        isAuthMsgShow: true,
+                        isShowWarpAction: false
+                    })
+                } else if (2 === data.smsFlag) {
+                    this._handlePayRedPacketResult(data);
+                    if (1 === data.payStatus || 2 === data.payStatus) {
+                        this.setState({
+                            isShowWarpAction: false
+                        });
+                    }
+                }
+            }, 2000);
         });
 
     };
@@ -401,7 +438,7 @@ class SendRedPacketPage extends BasePage {
         });
     };
     _handleBankCardItemClick = (bankCardData) => {
-        let nameDes = bankCardData.id === -1 ? `(${bankCardData.cardNo})` : `(${bankCardData.cardNo.substring(bankCardData.cardNo.length - 4, bankCardData.cardNo.length)})`;
+        let nameDes = bankCardData.id === -1 ? `(${FormatUtils.money(bankCardData.cardNo)})` : `(${bankCardData.cardNo.substring(bankCardData.cardNo.length - 4, bankCardData.cardNo.length)})`;
         this.setState({
             isShowSelectPayStyle: false,
             payTypeContent: bankCardData.bankName + nameDes,
@@ -453,7 +490,7 @@ class SendRedPacketPage extends BasePage {
     };
     _handleShowPayModal = () => {
         let contentFront = `实付金额`;
-        let contentBack = `${this.state.redPacketNum * this.state.redPacketAmount}元`;
+        let contentBack = `${FormatUtils.money(this.state.redPacketNum * this.state.redPacketAmount)}元`;
         this.setState({
             contentFront: contentFront,
             contentBack: contentBack,
@@ -473,7 +510,7 @@ const styles = StyleSheet.create({
         height: 25,
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 10,
+        borderRadius: 12,
     },
     red_packet_view_container: {
         flexDirection: "row",
@@ -485,7 +522,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#CCC"
     },
-    border_style_no: {}
+    border_style_no: {},
+    tip_txt: {
+        fontSize: 12,
+        color: "#666",
+        marginTop: 206,
+        marginBottom: 14
+    }
 });
 
 export default SendRedPacketPage

@@ -13,13 +13,13 @@ import {
 } from 'react-native'
 import ApiManager from "../utils/ApiManager";
 import Header from "../components/Header";
-import {SwRefreshListView} from "react-native-swRefresh";
 import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
 import {RouterPaths} from "../constants/RouterPaths";
 import img_question from "../res/img/img_question.png"
 import BasePage from "./BasePage";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
+import RecivedRedPacket from '../data/RecivedRedPacket.json'
 class ReceiveRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
@@ -52,6 +52,7 @@ class ReceiveRedPacketPage extends BasePage {
                     onLoadMore={this._onLoadMore}
                     footerStatus={this.state.footerStatus}/>
                 <ReceiveRedPacketModal
+                    action={RecivedRedPacket}
                     isShow={this.state.isShowProcess}/>
             </View>
         );
@@ -94,7 +95,7 @@ class ReceiveRedPacketPage extends BasePage {
                 isShowProcess: false
             });
             this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
-        }, 3000);
+        }, 2000);
 
     };
     _handleRightArrowClick = () => {
@@ -105,7 +106,7 @@ class ReceiveRedPacketPage extends BasePage {
             <TouchableOpacity
                 activeOpacity={0.8} onPress={this._clickItem.bind(this, item)}>
                 <View style={[styles.red_container]}>
-                    <View style={[styles.time_container, {height: 10}]}/>
+                    <View style={[styles.time_container, {height: 10,backgroundColor:"#FFF"}]}/>
                     <RedPacketTypeComponent
                         redPacketData={item}/>
                 </View>

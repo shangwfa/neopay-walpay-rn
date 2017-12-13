@@ -54,8 +54,8 @@ class MyBalancePage extends BasePage {
                     </Text>
                 </View>
 
-                <CommonButton style={styles.topupBtn} value={'充值'} onPress={()=>this.topupBtnClicked()}/>
-                <CommonButton style={styles.withDrawBtn} backgroundColor={'#FFFFFF'} textColor={'#999999'}  value={'提现'} onPress={()=>this.withdrawBtnClicked()}/>
+                {/*<CommonButton style={styles.topupBtn} value={'充值'} onPress={()=>this.topupBtnClicked()}/>*/}
+                <CommonButton style={styles.withDrawBtn} value={'提现'} onPress={()=>this.withdrawBtnClicked()}/>
             </View>
         );
     }
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         // backgroundColor:'green'
     },
     withDrawBtn:{
-        marginTop:20*sizeRatio,
+        marginTop:65*sizeRatio,
     }
 });
 

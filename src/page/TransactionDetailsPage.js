@@ -5,7 +5,7 @@
  */
 import React, {Component} from 'react'
 import {
-    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView,
+    StyleSheet, View, Text, Image, FlatList, TouchableOpacity, TouchableWithoutFeedback, ScrollView, NativeModules
 } from 'react-native'
 import BasePage from "./BasePage";
 import Header from "../components/Header";
@@ -16,12 +16,15 @@ import ApiManager from "../utils/ApiManager";
 import OrderStateComponent from "../components/OrderStateComponent";
 import TransactionTypeDescUtils from "../utils/TransactionTypeDescUtils";
 import ButtonComponent from "../components/ButtonComponent";
+import {RouterPaths} from "../constants/RouterPaths";
+import FormatUtils from "../utils/FormatUtils";
 let mData = [];
 class TransactionDetailsPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
             sourceData: {},
+            serviceSourceData: {},
             orderNo: this.props.navigation.state.params.orderNo,
         }
     }
@@ -31,6 +34,11 @@ class TransactionDetailsPage extends BasePage {
             this.setState({
                 sourceData: data,
             });
+        });
+        ApiManager.getServiceInfo({}, (data) => {
+            this.setState({
+                serviceSourceData: data
+            })
         });
     }
 
@@ -49,13 +57,13 @@ class TransactionDetailsPage extends BasePage {
                         {/*订单状态的状态*/}
                         {this._handleOrderStateView(this.state.sourceData)}
                         <Text
-                            style={styles.order_amount}>{this._handleOrderAmountTypeView()}{this.state.sourceData.amount}</Text>
+                            style={styles.order_amount}>{TransactionTypeDescUtils._handleAmountType(this.state.sourceData.payDirection)}{FormatUtils.money(this.state.sourceData.amount ? this.state.sourceData.amount : "")}</Text>
                         {/*订单状态的提示*/}
                         {this._handleOrderStateTipView(this.state.sourceData)}
                     </View>
                     {/*详情列表*/}
                     <FlatList
-                        style={{marginTop: 7}}
+                        style={{marginTop: 10}}
                         ref='FlatList'
                         ItemSeparatorComponent={this._renderItemLine}
                         renderItem={this._renderItem}
@@ -99,7 +107,7 @@ class TransactionDetailsPage extends BasePage {
         );
     };
     _tipClick = () => {
-        alert("致电客服");
+        NativeModules.commModule.rnCallNativeCallPhone(this.state.serviceSourceData.serviceTel);
     };
     /*处理底部按钮*/
     _handleButtonView = (item) => {
@@ -113,14 +121,14 @@ class TransactionDetailsPage extends BasePage {
             case 17://商户付款成功
             case 25://账户提现退款
                 return this._renderButtonView(true, "查看原订单交易详情", () => {
-                    alert("查看原订单交易详情");
+                    nav.goBack();
                 }, {marginTop: 100});
                 break;
             case 6://红包领取成功
             case 7://红包付款成功
             case 10://红包退款成功
                 return this._renderButtonView(true, "查看红包领取情况", () => {
-                    alert("查看红包领取情况");
+                    this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
                 }, {marginTop: 50});
                 break;
         }
@@ -190,17 +198,6 @@ class TransactionDetailsPage extends BasePage {
             return null;
         }
     };
-    /*处理订单金额的支出方式*/
-    _handleOrderAmountTypeView = () => {
-        switch (this.state.sourceData.payDrection) {
-            case 1://收款
-                return "-";
-                break;
-            case 2://付款
-                return "+";
-                break;
-        }
-    };
     _renderOrderStateTipView = (tip) => {
         return <Text style={styles.order_state_tip}>{tip}</Text>;
     };
@@ -213,7 +210,7 @@ class TransactionDetailsPage extends BasePage {
     _renderOrderStateTitleView = () => {
         return <View style={[styles.order_state_title_container, {marginTop: 23}]}>
             <Image
-                style={{width: 25, height: 25, resizeMode: "cover"}}
+                style={{width: 25, height: 25, borderRadius: 5, resizeMode: "cover"}}
                 source={{uri: this.state.sourceData.iconUrl}}/>
             <Text style={{
                 marginLeft: 9, fontSize: 16, color: "#000000"

@@ -3,7 +3,7 @@ import {
     StyleSheet,
     View,
     Text,
-    TextInput,
+    TextInput, NativeModules,
 } from 'react-native'
 import BasePage from './BasePage'
 import {colors} from '../constants/index'
@@ -44,21 +44,41 @@ class AccountWithdrawPage extends BasePage {
                 <CommonButton style={{marginTop:50}} value={'提现'} onPress={() => this.withdrawBtnClicked()}/>
                 <SelectPayStyleModal
                     title="选择提现银行卡"
-                    selectBankId={this.state.bankId}
+                    bankCardOnly={true}
+                    selectBankId={this.state.selectedBankId}
                     bankCardFooterItemClick={this.handleBankCardFooterItemClick.bind(this)}
                     bankCardItemClick={this.handleBankCardItemClick.bind(this)}
                     closeClick={this.handleSelectPayStyleCloseClick.bind(this)}
                     isShow={this.state.isShowSelectPayStyle}/>
                 <PayPwdModal isShow={this.state.isPayShow}
-                             contentFront='实付金额'
-                             contentBack='67.89元'
-                             payTypeContent='中信银行储蓄卡（5678）'
+                             contentFront='提现金额'
+                             contentBack={this.state.withdrawAmount}
+                             payTypeContent={this.retPayTypeContent()}
                              onClose={()=>this.setState({isPayShow:false})}
-                             onForgetPwd={()=>{}}
+                             onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
                              onEnd={(text)=>this.pwdInputFinished(text)}/>
             </View>
         );
     }
+
+    //处理银行卡信息
+    retPayTypeContent=()=>{
+        if (this.state.selectedBankId==-1)
+            return this.state.selectedBankName;
+        else
+            return this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')';
+    }
+
+
+    //忘记支付密码按钮点击
+    forgetPayPwdBtnClicked =()=>{
+        this.setState({
+            isPayShow:false
+        })
+        const params = {page: 'resetPayPwd'};
+        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
+    }
+
 
 
     //输入密码完成
@@ -145,15 +165,21 @@ class AccountWithdrawPage extends BasePage {
 
     withdrawBtnClicked() {
 
-        ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
-            //创建订单成功,跳转结果页
-            this.setState({
-                isPayShow:true
-            })
-            this.setState({
-                orderNo:data.orderNo
-            })
-        });
+        if(this.state.withdrawAmount!=0)
+        {
+            ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
+                //创建订单成功,跳转结果页
+                this.setState({
+                    isPayShow:true
+                })
+                this.setState({
+                    orderNo:data.orderNo
+                })
+            });
+        }else {
+            NativeModules.commModule.toast("请输入正确提现金额");
+        }
+
 
         // this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE)
     }
@@ -162,6 +188,13 @@ class AccountWithdrawPage extends BasePage {
         ApiManager.getwithdrawbalance({},(data)=>{
             this.setState({
                 withdrawBalance:data.withdrawBalance
+            })
+        })
+        ApiManager.getRecentWithdrawBankCard({},(data)=>{
+            this.setState({
+                selectedBankId:data.id,
+                selectedBankName:data.bankName,
+                selectedBankCardNo:data.cardNo
             })
         })
     }

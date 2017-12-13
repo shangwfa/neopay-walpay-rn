@@ -22,6 +22,7 @@ class Header extends Component {
         backgroundColor: colors.white,
         textColor: colors.black,
         isWhiteArrow: false,
+        rightTextColor:colors.black,
         onRightPress:()=>{}
     };
     static propTypes = {

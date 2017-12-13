@@ -158,6 +158,16 @@ getRedPacketPayStatus = (request, callback) => {
         callback(data);
     });
 };
+getServiceInfo = (request, callback) => {
+    NetUtil.post(APIS.GET_SERVICE_INFO, request, (data) => {
+        callback(data);
+    });
+};
+logoutUser = (request, callback) => {
+    NetUtil.post(APIS.LOGOUT_USER, request, (data) => {
+        callback(data);
+    });
+};
 getBankCardRecordPage = (request, callback) => {
     NetUtil.post(APIS.QUERY_BANK_CARD_RECORD_PAGE, request, (data) => {
         callback(data);
@@ -233,6 +243,16 @@ getwithdrawbalance = (request, callback) => {
         callback(data);
     })
 };
+getRecentWithdrawBankCard = (request, callback) => {
+    NetUtil.post(APIS.GET_RECENT_WITHDRAW_BANKCARD, request, (data) => {
+        callback(data);
+    })
+};
+getUserBankCardList = (request, callback)=>{
+    NetUtil.post(APIS.GET_USER_BANK_CARD_LIST,request,(data)=>{
+        callback(data);
+    })
+}
 createWithdrawOrder = (request, callback) => {
     NetUtil.post(APIS.CREATE_WITHDRAW_BALANCE, request, (data) => {
         callback(data);
@@ -272,6 +292,8 @@ export default {
     getUserPayTypeList,
     payRedPacketVerify,
     getRedPacketPayStatus,
+    getServiceInfo,
+    logoutUser,
     getBankCardRecordPage,
     getBalanceRecordList,
     getPhoneRechargeOrderQuery,
@@ -287,6 +309,8 @@ export default {
     createPhoneRechargeOrder,
     getUserRedPacketStats,
     getwithdrawbalance,
+    getRecentWithdrawBankCard,
+    getUserBankCardList,
     createWithdrawOrder,
     withdraworder
 }

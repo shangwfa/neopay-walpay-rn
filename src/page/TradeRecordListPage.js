@@ -17,7 +17,11 @@ import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
 import ApiManager from "../utils/ApiManager";
+import DateUtils from "../utils/DateUtils";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
+import {RouterPaths} from "../constants/RouterPaths";
+import FormatUtils from "../utils/FormatUtils";
+import TransactionTypeDescUtils from "../utils/TransactionTypeDescUtils";
 
 class TradeRecordListPage extends BasePage {
     constructor(props) {
@@ -27,7 +31,7 @@ class TradeRecordListPage extends BasePage {
             footerStatus: RefreshStatus.IDLE,
             pageType: this.props.navigation.state.params.pageType,
             title: '',
-            cardId:this.props.navigation.state.params.cardId
+            cardId: this.props.navigation.state.params.cardId
         }
     }
 
@@ -59,8 +63,8 @@ class TradeRecordListPage extends BasePage {
                     onPress={this._handleItemClick.bind(this, item)}
                     orderAvatar={item.iconUrl}
                     middleUpValue={item.title}
-                    middleBottomValue={item.tradeTimeMs}
-                    rightUpValue={item.amount}
+                    middleBottomValue={DateUtils.dateFmt("MM-dd HH:mm", new Date(item.tradeTimeMs))}
+                    rightUpValue={TransactionTypeDescUtils._handleAmountType(item.payDirection) + FormatUtils.money(item.amount)}
                     rightBottomValue={item.balance}
                     isLine={true}/>
             </View>
@@ -70,14 +74,14 @@ class TradeRecordListPage extends BasePage {
     renderSectionHeader = (item) => {
         if (item.disPlayDate) {
             return <BankOrderListSectionHeader
-                title={item.tradeTimeMs}
-                value={"收入:" + item.incomeMoney + "元  " + "支出:" + item.outMoney + "元"}/>
+                title={DateUtils.yyyyYearMmMonth(item.tradeTimeMs)}
+                value={`收入:+${FormatUtils.money(item.incomeMoney)}元  支出:-${FormatUtils.money(item.outMoney)}元`}/>
         }
     };
     onLoadMore = (pageSize) => {
         let params = {
             pageNo: pageSize,
-            cardId:this.state.cardId?this.state.cardId:''
+            cardId: this.state.cardId ? this.state.cardId : ''
         };
         switch (this.state.pageType) {
             case 0://余额
@@ -117,14 +121,14 @@ class TradeRecordListPage extends BasePage {
         this._handleCurrentPageType();
     };
     _handleItemClick = (item) => {
-        alert(item.title);
+        nav.navigate(RouterPaths.TRANSACTION_DETAILS, {orderNo: item.orderNo})
     };
 
     _handleCurrentPageType = () => {
         let txtContent;
         let params = {
             pageNo: 1,
-            cardId:this.state.cardId?this.state.cardId:''
+            cardId: this.state.cardId ? this.state.cardId : ''
         }
         switch (this.state.pageType) {
             case 0://余额

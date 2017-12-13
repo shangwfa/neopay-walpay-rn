@@ -7,7 +7,7 @@ import {
     Image
 } from 'react-native';
 import {colors} from '../constants/index'
-import right_arrow from '../res/img/right_arrow.png'
+import right_arrow from '../res/img/filter_arrow.png'
 
 const SectionHeader = props => {
     const {

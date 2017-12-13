@@ -88,7 +88,7 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
                         () -> RNActivity.jumpToRNPage(this, RNActivity.PageType.PHONE_TOPUP_PAGE)));
 
         mViewBinding.homeDrawContainerNsv.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (nestedScrollView, x, y, oldX, oldY) -> {
-            float mAlpha = y / 350F;
+            float mAlpha = y / 300F;
             mViewBinding.commonHomeDrawTopView.setHeaderViewChange(mAlpha);
             mViewBinding.homeDrawPayTopFl.homeDrawPayTopContainerLl.setAlpha(1 - mAlpha);
             handleScrollView(nestedScrollView);

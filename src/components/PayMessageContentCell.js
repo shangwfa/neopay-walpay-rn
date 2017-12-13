@@ -18,6 +18,7 @@ const PayMessageContentCell = props => {
         payTo,
         remark,
         amount,
+        payDirection,
         ...attributes
     } = props
 
@@ -38,7 +39,7 @@ const PayMessageContentCell = props => {
                     <Text style = {styles.titleDate}>{createTime}</Text>
                 </View>
                 <View style = {styles.countView}>
-                    <Text style = {styles.countText}>{amount.toFixed(2)}</Text>
+                    <Text style = {styles.countText}>{`${payDirection==1?'+':'-'}${amount.toFixed(2)}`}</Text>
                 </View>
                 <View style = {styles.separatorLineView}>
                 <View style = {styles.separatorLine}>
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
         marginTop:0,
         marginBottom:0,
         borderRadius:5,
-        borderWidth:1,
+        borderWidth:0.5,
         borderColor:'#DDDDDD',
         // backgroundColor:'gray',
     },
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
     },
     titleText:{
         fontSize:17,
+        color:'#000',
     },
     titleDate:{
         marginTop:7,
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
         // backgroundColor:'tomato'
     },
     separatorLine:{
-        height:1,
+        height:0.5,
         width:ScreenUtil.width*0.864,
         backgroundColor:'#DDDDDD',
     },

@@ -25,9 +25,9 @@ class ButtonComponent extends Component {
         return (
             <TouchableWithoutFeedback onPress={this.props.btnClick}>
                 <View style={styles.container_item}>
-                    <Text style={[styles.title, {color: "#999999", marginLeft: 13}]}>{this.props.leftTitle}</Text>
+                    <Text style={[styles.title, {color: "#333", marginLeft: 13}]}>{this.props.leftTitle}</Text>
                     <Space/>
-                    <Text style={[styles.title, {color: "#666666", marginRight: 10}]}>{this.props.rightTitle}</Text>
+                    <Text style={[styles.title, {color: "#666", marginRight: 10}]}>{this.props.rightTitle}</Text>
                     {this._arrowImg(this.props.isShowRightArrows)}
                 </View>
             </TouchableWithoutFeedback>
