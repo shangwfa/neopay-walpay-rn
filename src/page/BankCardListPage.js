@@ -46,9 +46,10 @@ class BankCardListPage extends BasePage {
     _renderItem = ({item}) => {
         return <BankCardCell imgIconUrl={item.iconUrl}
                              bankNameValue={item.bankName}
-                             bankTypeValue={item.cardType}
+                             bankTypeValue={item.cardTypeText}
                              cardNoValue={item.cardNo}
-                             onPress = {()=>this.pushNext(item)}/>
+                             onPress = {()=>this.pushNext(item)}
+                             imgBackGroundUrl = {item.backgroundUrl}/>
     }
 
     renderEmptyView = () =>{
@@ -66,7 +67,7 @@ class BankCardListPage extends BasePage {
     renderHead=()=>{
         if(this.state.dataSource.length>0)
         {
-            return <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:20, height:20}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
+            return <Header navigation={this.props.navigation} title='银行卡列表' rightIconStyle = {{width:25, height:25}} rightIcon={require("../res/img/add_icon.png")} onRightPress = {()=>this.addBankCard()}/>
         }else {
             return <Header navigation={this.props.navigation} title='银行卡列表' />
         }

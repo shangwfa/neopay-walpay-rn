@@ -50,7 +50,7 @@ class RpTitleStylePage extends BasePage {
     _renderFlatListItem = ({item, index}) => {
         return (
             <View>
-                <RpTitleStyleItem style={{flexDirection: "column"} } imgBackGroundUrl={item.imageUrl}
+                <RpTitleStyleItem style={{flexDirection: "column"} } imgBackGroundUrl={item.sendImageReceiveUrl}
                                   click={() => this._choseRpTheme(item)}>
                 </RpTitleStyleItem>
             </View>
@@ -61,7 +61,7 @@ class RpTitleStylePage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='红包主题'/>
-                <RedPacketItemComponent imgUrl={this.state.choseItem.imageUrl}/>
+                <RedPacketItemComponent imgUrl={this.state.choseItem.sendImageReceiveUrl}/>
                 <Text style={styles.middle_text}>选择主题</Text>
                 <FlatList
                     style={{marginTop: 5,}}

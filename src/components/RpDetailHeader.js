@@ -61,10 +61,10 @@ const RpDetailHeader = props => {
         remark_value: {
             marginTop:30,
             fontSize:15,
-            color:colors.orange,
+            color:'#fbd49d',
             flex:1,
             textAlign:'center',
-            backgroundColor:'transparent'
+            backgroundColor:'transparent',
         },
         amount_value: {
             marginTop:5,
@@ -76,7 +76,6 @@ const RpDetailHeader = props => {
             width: imgWidth,
             height:imgWidth,
             borderRadius: imgWidth/2,
-            backgroundColor:colors.black,
         },
         maxImg: {
             width: imgHeight,
@@ -94,6 +93,15 @@ const RpDetailHeader = props => {
             fontSize:15,
             color:colors.one_color
         },
+        amount_bg:{
+            flexDirection:'row',
+        },
+        rmbIcon:{
+            fontSize:18,
+            color:colors.orange,
+            backgroundColor:'transparent',
+            marginTop:26,
+        }
 
     });
 
@@ -110,13 +118,16 @@ const RpDetailHeader = props => {
             <View style = {styles.top_View}>
                 <View style = {styles.middle_container}>
                     <View style={{flex:1}} />
-                    <Text style={styles.remark_value}>{remarkValue}</Text>
+                    <Text style={styles.remark_value} numberOfLines={1}>remarkValue</Text>
                     <View style={{flex:1,alignItems:"flex-end",backgroundColor:'transparent'}}>
                         <Image style = {styles.maxImg} source = {true?require("../res/img/rp_max_text.png"):' '} ></Image>
                     </View>
 
                 </View>
-                <Text style={styles.amount_value}>{amountValue==0?' 199876 ':amountValue}</Text>
+                <View style={styles.amount_bg}>
+                    <Text style={styles.rmbIcon}>{amountValue==0?' ':'¥'}</Text>
+                    <Text style={styles.amount_value}>{amountValue==0?' ':amountValue}</Text>
+                </View>
             </View>
 
             <Image style = {styles.mid_Image} source = {require("../res/img/rp_mid_bg.png")}>
