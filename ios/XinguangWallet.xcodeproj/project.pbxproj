@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2DA62DDF03A34E24A5B3C3B2 /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4F49D009044D08A1DB82DA /* libRCTContacts.a */; };
 		4210AF401F95CE6D008132C5 /* XGQBCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */; };
+		42122F071FE0F7B400DB69FF /* xiala.gif in Resources */ = {isa = PBXBuildFile; fileRef = 42122F041FE0F7B400DB69FF /* xiala.gif */; };
+		42122F081FE0F7B400DB69FF /* shangla.gif in Resources */ = {isa = PBXBuildFile; fileRef = 42122F061FE0F7B400DB69FF /* shangla.gif */; };
+		42122F0B1FE1169F00DB69FF /* XGQBRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 42122F0A1FE1169F00DB69FF /* XGQBRefreshHeader.m */; };
+		42122F0E1FE1177500DB69FF /* XGQBRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42122F0D1FE1177500DB69FF /* XGQBRefreshFooter.m */; };
 		422231751FC50F8900C415BE /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 422231741FC50F8900C415BE /* assets */; };
 		422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */; };
 		42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */; };
@@ -100,6 +104,12 @@
 /* Begin PBXFileReference section */
 		4210AF3E1F95CE6D008132C5 /* XGQBCommissionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBCommissionViewController.h; sourceTree = "<group>"; };
 		4210AF3F1F95CE6D008132C5 /* XGQBCommissionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBCommissionViewController.m; sourceTree = "<group>"; };
+		42122F041FE0F7B400DB69FF /* xiala.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = xiala.gif; sourceTree = "<group>"; };
+		42122F061FE0F7B400DB69FF /* shangla.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shangla.gif; sourceTree = "<group>"; };
+		42122F091FE1169F00DB69FF /* XGQBRefreshHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRefreshHeader.h; sourceTree = "<group>"; };
+		42122F0A1FE1169F00DB69FF /* XGQBRefreshHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRefreshHeader.m; sourceTree = "<group>"; };
+		42122F0C1FE1177500DB69FF /* XGQBRefreshFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRefreshFooter.h; sourceTree = "<group>"; };
+		42122F0D1FE1177500DB69FF /* XGQBRefreshFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRefreshFooter.m; sourceTree = "<group>"; };
 		422231741FC50F8900C415BE /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		422A2D801F8F02F500485DB5 /* XGQBHomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleView.h; sourceTree = "<group>"; };
 		422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleView.m; sourceTree = "<group>"; };
@@ -291,6 +301,10 @@
 			children = (
 				42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */,
 				42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */,
+				42122F091FE1169F00DB69FF /* XGQBRefreshHeader.h */,
+				42122F0A1FE1169F00DB69FF /* XGQBRefreshHeader.m */,
+				42122F0C1FE1177500DB69FF /* XGQBRefreshFooter.h */,
+				42122F0D1FE1177500DB69FF /* XGQBRefreshFooter.m */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -675,6 +689,8 @@
 				42C351341FD5324500E54EAA /* sy_beijing@2x.gif */,
 				42C351361FD5324600E54EAA /* sy_beijing@3x.gif */,
 				42C351371FD5324700E54EAA /* sy_beijing_x.gif */,
+				42122F041FE0F7B400DB69FF /* xiala.gif */,
+				42122F061FE0F7B400DB69FF /* shangla.gif */,
 				6AF9E4081F78DDB6005E901C /* LaunchScreen.storyboard */,
 				42DE35F91FB56F2200A73DB3 /* main.jsbundle */,
 				6AF9E4331F78DEFB005E901C /* PrefixHeader.pch */,
@@ -984,6 +1000,8 @@
 				42C351381FD5324700E54EAA /* sy_beijing@2x.gif in Resources */,
 				42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */,
 				42C351391FD5324700E54EAA /* sy_beijing@3x.gif in Resources */,
+				42122F071FE0F7B400DB69FF /* xiala.gif in Resources */,
+				42122F081FE0F7B400DB69FF /* shangla.gif in Resources */,
 				6AF9E40A1F78DDB6005E901C /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1065,6 +1083,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42122F0B1FE1169F00DB69FF /* XGQBRefreshHeader.m in Sources */,
 				42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */,
 				42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */,
 				6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */,
@@ -1076,6 +1095,7 @@
 				6AE813A81F7B52D40044B072 /* XGQBHomeViewController.m in Sources */,
 				6A5F69C71F7B930200B16B31 /* XGQBPureColorBtn.m in Sources */,
 				6AE813A71F7B52960044B072 /* XGQBAppManager.m in Sources */,
+				42122F0E1FE1177500DB69FF /* XGQBRefreshFooter.m in Sources */,
 				42D128BD1FCBEC74007CC8A1 /* XGQBHeaderIconView.m in Sources */,
 				42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */,
 				6AF78B901F8B617E002EAAB2 /* XGQBHomeCellView.m in Sources */,
