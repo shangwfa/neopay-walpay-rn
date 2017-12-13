@@ -51,7 +51,7 @@ _incomeTypeItem = (mData, item) => {
 _tradeTypeItem = (mData, item) => {
     let tradeType = {
         transformType: "交易方式",
-        transformContent: item.tradeType,
+        transformContent: item.tradeTypeText,
         isShowArrows: true,
     };
     tradeType.onclick = () => {
@@ -124,6 +124,20 @@ _rechargeContentItem = (mData, item) => {
     };
     mData.push(tipContent);
 };
+
+/*处理订单金额的支出方式*/
+_handleAmountType = (payDirection) => {
+    switch (payDirection) {
+        case 1://收款
+            return "+";
+            break;
+        case 2://付款
+            return "-";
+            break;
+        default:
+            return "";
+    }
+};
 export default {
     _payTypeItem,
     _payTypeNoClickItem,
@@ -135,4 +149,5 @@ export default {
     _tradePrepaidContentItem,
     _tradeTipContentItem,
     _rechargeContentItem,
+    _handleAmountType,
 }

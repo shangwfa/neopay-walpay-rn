@@ -17,6 +17,7 @@ import OrderStateComponent from "../components/OrderStateComponent";
 import TransactionTypeDescUtils from "../utils/TransactionTypeDescUtils";
 import ButtonComponent from "../components/ButtonComponent";
 import {RouterPaths} from "../constants/RouterPaths";
+import FormatUtils from "../utils/FormatUtils";
 let mData = [];
 class TransactionDetailsPage extends BasePage {
     constructor(props) {
@@ -56,13 +57,13 @@ class TransactionDetailsPage extends BasePage {
                         {/*订单状态的状态*/}
                         {this._handleOrderStateView(this.state.sourceData)}
                         <Text
-                            style={styles.order_amount}>{this._handleOrderAmountTypeView()}{this.state.sourceData.amount}</Text>
+                            style={styles.order_amount}>{TransactionTypeDescUtils._handleAmountType(this.state.sourceData.payDirection)}{FormatUtils.money(this.state.sourceData.amount ? this.state.sourceData.amount : "")}</Text>
                         {/*订单状态的提示*/}
                         {this._handleOrderStateTipView(this.state.sourceData)}
                     </View>
                     {/*详情列表*/}
                     <FlatList
-                        style={{marginTop: 7}}
+                        style={{marginTop: 10}}
                         ref='FlatList'
                         ItemSeparatorComponent={this._renderItemLine}
                         renderItem={this._renderItem}
@@ -197,17 +198,6 @@ class TransactionDetailsPage extends BasePage {
             return null;
         }
     };
-    /*处理订单金额的支出方式*/
-    _handleOrderAmountTypeView = () => {
-        switch (this.state.sourceData.payDrection) {
-            case 1://收款
-                return "-";
-                break;
-            case 2://付款
-                return "+";
-                break;
-        }
-    };
     _renderOrderStateTipView = (tip) => {
         return <Text style={styles.order_state_tip}>{tip}</Text>;
     };
@@ -220,7 +210,7 @@ class TransactionDetailsPage extends BasePage {
     _renderOrderStateTitleView = () => {
         return <View style={[styles.order_state_title_container, {marginTop: 23}]}>
             <Image
-                style={{width: 25, height: 25, resizeMode: "cover"}}
+                style={{width: 25, height: 25, borderRadius: 5, resizeMode: "cover"}}
                 source={{uri: this.state.sourceData.iconUrl}}/>
             <Text style={{
                 marginLeft: 9, fontSize: 16, color: "#000000"

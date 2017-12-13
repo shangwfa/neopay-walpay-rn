@@ -20,6 +20,8 @@ import ApiManager from "../utils/ApiManager";
 import DateUtils from "../utils/DateUtils";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import {RouterPaths} from "../constants/RouterPaths";
+import FormatUtils from "../utils/FormatUtils";
+import TransactionTypeDescUtils from "../utils/TransactionTypeDescUtils";
 
 class TradeRecordListPage extends BasePage {
     constructor(props) {
@@ -61,8 +63,8 @@ class TradeRecordListPage extends BasePage {
                     onPress={this._handleItemClick.bind(this, item)}
                     orderAvatar={item.iconUrl}
                     middleUpValue={item.title}
-                    middleBottomValue={item.tradeTimeMs}
-                    rightUpValue={item.amount}
+                    middleBottomValue={DateUtils.dateFmt("MM-dd HH:mm", new Date(item.tradeTimeMs))}
+                    rightUpValue={TransactionTypeDescUtils._handleAmountType(item.payDirection) + FormatUtils.money(item.amount)}
                     rightBottomValue={item.balance}
                     isLine={true}/>
             </View>
@@ -73,7 +75,7 @@ class TradeRecordListPage extends BasePage {
         if (item.disPlayDate) {
             return <BankOrderListSectionHeader
                 title={DateUtils.yyyyYearMmMonth(item.tradeTimeMs)}
-                value={"收入:" + item.incomeMoney + "元  " + "支出:" + item.outMoney + "元"}/>
+                value={`收入:+${FormatUtils.money(item.incomeMoney)}元  支出:-${FormatUtils.money(item.outMoney)}元`}/>
         }
     };
     onLoadMore = (pageSize) => {

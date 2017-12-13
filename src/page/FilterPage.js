@@ -26,34 +26,29 @@ class FilterPage extends BasePage {
             tradeTypes: [
                 {
                     index: 0,
-                    name: '新光币',
+                    name: '余额',
                     type: "1",
                     selected: false
                 },
                 {
                     index: 1,
-                    name: '余额',
+                    name: '账户提现',
                     type: "2",
                     selected: false
                 },
                 {
                     index: 2,
-                    name: '账户提现',
-                    type: "3",
-                    selected: false
-                },
-                {
-                    index: 3,
-                    name: '账户充值',
+                    name: '大红包',
                     type: "4",
                     selected: false
                 },
                 {
-                    index: 4,
-                    name: '大红包',
+                    index: 3,
+                    name: '手机充值',
                     type: "5",
                     selected: false
                 },
+
             ],
             incomeTypes: [
                 {
