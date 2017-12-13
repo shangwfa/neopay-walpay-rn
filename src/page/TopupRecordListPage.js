@@ -78,8 +78,8 @@ class TopupRecordListPage extends BasePage {
 
     }
     renderSectionHeader = (item) => {
-        if (item.isShowTime) {
-            return <SectionHeader title={item.month} value='支出:-8888'/>
+        if (item.disPlayDate) {
+            return <SectionHeader title={item.monthCode} value={'支出:' + item.outMoney} isShowArrow={false}/>
         }
     }
 
