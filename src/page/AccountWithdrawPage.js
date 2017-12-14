@@ -25,9 +25,11 @@ class AccountWithdrawPage extends BasePage {
             withdrawAmount:0.00,
             withdrawBalance:0.00,
             isShowSelectPayStyle:false,
+            bankCardExist:false,
             selectedBankId:0,
             selectedBankName:'',
             selectedBankCardNo:'',
+            selectedBankIconUrl:'',
             isPayShow:false,
             orderNo:'',
         }
@@ -95,14 +97,10 @@ class AccountWithdrawPage extends BasePage {
 
     renderBankCardIcon=()=>{
 
-        if(this.state.selectedBankName==='中国工商银行'){
-            return(require("../res/img/BankIcon/sy_gongshang.png"))
-        }else if (this.state.selectedBankName==='中国建设银行'){
-            return(require("../res/img/BankIcon/sy_jianshe.png"))
-        }else {
-            return null
+        if(this.state.selectedBankIconUrl)
+        {
+            return {uri:this.state.selectedBankIconUrl}
         }
-
     }
 
     handleBankCardFooterItemClick=()=>{
@@ -118,9 +116,10 @@ class AccountWithdrawPage extends BasePage {
             isShowSelectPayStyle: false,
             selectedBankId:bankCardData.id,
             selectedBankName:bankCardData.bankName,
-            selectedBankCardNo:bankCardData.cardNo
+            selectedBankCardNo:bankCardData.cardNo,
+            selectedBankIconUrl:bankCardData.iconUrl,
         });
-        console.log(bankCardData)
+        // console.log(bankCardData)
 
     }
     handleSelectPayStyleCloseClick=()=>{
@@ -190,13 +189,27 @@ class AccountWithdrawPage extends BasePage {
                 withdrawBalance:data.withdrawBalance
             })
         })
-        ApiManager.getRecentWithdrawBankCard({},(data)=>{
-            this.setState({
-                selectedBankId:data.id,
-                selectedBankName:data.bankName,
-                selectedBankCardNo:data.cardNo
-            })
+
+        ApiManager.getUserBankCardList({},(data)=>{
+            if(data.length>0){
+
+                ApiManager.getRecentWithdrawBankCard({},(data)=>{
+                    this.setState({
+                        selectedBankId:data.id,
+                        selectedBankName:data.bankName,
+                        selectedBankCardNo:data.cardNo,
+                        selectedBankIconUrl:data.iconUrl
+                    })
+                })
+            }else {
+                this.setState({
+                    bankCardExist:false
+                })
+            }
+
         })
+
+
     }
 
 }

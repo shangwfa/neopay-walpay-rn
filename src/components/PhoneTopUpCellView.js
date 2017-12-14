@@ -62,7 +62,7 @@ class PhoneTopUpMoneyView extends Component {
                                onBlur={(event)=>this.textInputBlur(event)}
                                onChange={(event)=>this.textInputChange(event)}
                                onChangeText={(text)=>this.textInputChanged(text)}
-
+                               underlineColorAndroid={'transparent'}
                     ></TextInput>
                     <TouchableWithoutFeedback onPress={()=>this.contactBtnClicked()}>
                     <Image style={[styles.contactIcon,{width:this.state.showContactIcon?20:0}]}
@@ -317,6 +317,7 @@ class PhoneTopUpMoneyView extends Component {
                 isPayShow:true,
                 payAmount:this.state.MoneyItemList[i].tradeAmount.toFixed(2),
                 selectedNameCode:this.state.MoneyItemList[i].nameCode,
+                selectedRechargeType:1
             });
         }else {
             NativeModules.commModule.toast("请输入正确手机号");
