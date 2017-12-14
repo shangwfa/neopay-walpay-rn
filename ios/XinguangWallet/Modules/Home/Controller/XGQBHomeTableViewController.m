@@ -71,14 +71,7 @@
             [self.messArr addObject:mess];
             [self.tableView reloadData];
         }
-//        for(int i=0;i<[(NSArray*)responseAfter count];i++)
-//        {
-//            NSDictionary *dict = responseAfter[i];
-//            XGQBMessage *mess = [XGQBMessage modelWithJSON:dict];
-//            [self.messArr addObject:mess];
-//            [self.tableView insertRowAtIndexPath:[NSIndexPath indexPathForRow:_messArr.count-1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
-//        }
-        
+
         if([(NSArray*)responseAfter count]<10)//判断是否加载完成
         {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -108,8 +101,8 @@
             [self.messArr addObject:mess];
             [self.tableView reloadData];
         }
-        
-        [self.tableView.mj_header endRefreshing];
+        [(XGQBRefreshHeader*)self.tableView.mj_header showRefreshSuccessGifAndText];
+//        [self.tableView.mj_header endRefreshing];
         
         if([(NSArray*)responseAfter count]<10)//判断是否加载完成
         {

@@ -10,4 +10,6 @@
 
 @interface XGQBRefreshHeader : MJRefreshGifHeader
 
+-(void)showRefreshSuccessGifAndText;
+
 @end
