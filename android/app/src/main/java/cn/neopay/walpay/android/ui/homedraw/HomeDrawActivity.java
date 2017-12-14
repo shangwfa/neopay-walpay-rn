@@ -97,7 +97,7 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
     }
 
     private void handleScrollView(NestedScrollView nestedScrollView) {
-        boolean isBottom = nestedScrollView.getChildAt(0).getHeight() - nestedScrollView.getHeight() == nestedScrollView.getScrollY();
+        boolean isBottom = nestedScrollView.getChildAt(0).getHeight() - nestedScrollView.getHeight() == nestedScrollView.getScrollY() && nestedScrollView.getScrollY() > 0;
         HomeViewChangeEvent homeViewChangeEvent = new HomeViewChangeEvent();
         homeViewChangeEvent.setScrollY(nestedScrollView.getScrollY());
         homeViewChangeEvent.setBottom(isBottom);

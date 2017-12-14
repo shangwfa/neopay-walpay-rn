@@ -11,18 +11,19 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/xrv_load_more_iv"
-                android:layout_width="@dimen/size_40dp"
-                android:layout_height="@dimen/size_40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:scaleType="fitXY" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="@dimen/size_10dp"
                 android:layout_toEndOf="@+id/xrv_load_more_iv"
                 android:layout_toRightOf="@+id/xrv_load_more_iv"

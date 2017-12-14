@@ -44,7 +44,7 @@ public class XRecyclerViewLoadMoreView extends FrameLayout {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.xrecyclerview_loadmore_view, null, false);
         addView(mBinding.getRoot());
         Glide.with(context).load(R.mipmap.img_load_more).
-                fitCenter().placeholder(R.mipmap.img_load_more).into(mBinding.xrvLoadMoreIv);
+                placeholder(R.mipmap.img_load_more).into(mBinding.xrvLoadMoreIv);
     }
 
 
