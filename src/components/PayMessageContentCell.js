@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     },
     countText:{
         fontSize:27,
+        color:'#000',
     },
     separatorLineView:{
         alignItems:'center',

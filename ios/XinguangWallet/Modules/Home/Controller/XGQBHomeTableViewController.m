@@ -102,7 +102,7 @@
     [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
         //获取到数据
         self.messArr=nil;
-
+        
         for (NSDictionary*dict in responseAfter) {
             XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];

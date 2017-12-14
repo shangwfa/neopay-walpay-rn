@@ -31,7 +31,7 @@ class RedPacketRecord extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='红包记录' rightTitle='交易明细'onRightPress={() => {
+                <Header navigation={this.props.navigation} title='红包记录' rightTitle='红包交易明细'onRightPress={() => {
                     this.props.navigation.navigate(RouterPaths.RED_PACKET_RECORD_LIST,{QueryType:3})
                 }} header_middleStyle={{flex:1.4}}/>
                 <RedPacketRecordCell cellType={true} amount={this.state.data.receiveAmount} count={this.state.data.receiveCount}/>
