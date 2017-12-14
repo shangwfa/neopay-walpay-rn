@@ -28,7 +28,6 @@ import cn.neopay.walpay.android.adapter.sliminjector.NewsItemSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.NewsRedPacketSlimInjector;
 import cn.neopay.walpay.android.databinding.FragmentNewsLayoutBinding;
 import cn.neopay.walpay.android.databinding.HomeDrawMiddleViewBinding;
-import cn.neopay.walpay.android.module.event.HomeViewChangeEvent;
 import cn.neopay.walpay.android.module.event.MineEventBean;
 import cn.neopay.walpay.android.module.event.NewsEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
@@ -46,7 +45,6 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
 
     private SlimAdapter mNewsAdapter;
     private UserInfoResponseBean mUserInfoBean;
-    private HomeDrawMiddleViewBinding mBinding;
     private Boolean isNoLoadMoreData = false;
 
     @Override
@@ -70,18 +68,22 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         mViewBinding.mineNewsXrv.setAdapter(mNewsAdapter);
         handleRefreshHeader();
         mPresenter.getNewsInfo();
-        mViewBinding.mineNewsXrv.setLoadingMoreEnabled(false);
+        mViewBinding.mineNewsXrv.setLoadingMoreEnabled(true);
         mViewBinding.mineNewsXrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                XRecyclerViewLoadMoreView.loadMoreViewEnd();
                 mPresenter.getNewsInfo();
                 mViewBinding.mineNewsXrv.refreshComplete();
             }
 
             @Override
             public void onLoadMore() {
-
+                if (isNoLoadMoreData) {
+                    XRecyclerViewLoadMoreView.loadNoMoreView();
+                    return;
+                }
+                mPresenter.getNewsInfoLoadMore();
+                mViewBinding.mineNewsXrv.loadMoreComplete();
             }
         });
     }
@@ -95,11 +97,13 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         Glide.with(getActivity()).load(R.mipmap.img_refresh).
                 override(width, height).fitCenter().placeholder(R.mipmap.img_refresh).into(arrowImageView);
         mViewBinding.mineNewsXrv.setRefreshHeader(refreshHeader);
+        XRecyclerViewLoadMoreView xRecyclerViewLoadMoreView = new XRecyclerViewLoadMoreView(getActivity());
+        mViewBinding.mineNewsXrv.setFootView(xRecyclerViewLoadMoreView);
     }
 
     private void handleMiddleView() {
         final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.home_draw_middle_view, null, false);
+        HomeDrawMiddleViewBinding mBinding = DataBindingUtil.inflate(inflater, R.layout.home_draw_middle_view, null, false);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         View middleView = mBinding.getRoot();
         middleView.setLayoutParams(layoutParams);
@@ -153,19 +157,5 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectCurrentPageCallBack(MineEventBean mineEventBean) {
         mPresenter.getNewsInfo();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void HandleCurrentPageChangeEvent(HomeViewChangeEvent homeViewChangeEvent) {
-        mViewBinding.mineNewsXrv.setNestedScrollingEnabled(0 == homeViewChangeEvent.getScrollY());
-        if (homeViewChangeEvent.isBottom()) {
-            if (isNoLoadMoreData) {
-                XRecyclerViewLoadMoreView.loadNoMoreView();
-            } else {
-                XRecyclerViewLoadMoreView.loadMoreViewStart();
-                mPresenter.getNewsInfoLoadMore();
-            }
-
-        }
     }
 }

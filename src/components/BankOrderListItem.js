@@ -66,7 +66,7 @@ const BankOrderListItem = props => {
     };
 
     const renderMiddleValue = () => {
-        return <View>
+        return <View style={{marginLeft: 9}}>
             <Text style={styles.middle_up_value}>{middleUpValue}</Text>
             <Text style={styles.middle_bottom_value}>{middleBottomValue}</Text>
         </View>

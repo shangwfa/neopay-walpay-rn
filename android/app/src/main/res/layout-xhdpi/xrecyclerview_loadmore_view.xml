@@ -4,57 +4,92 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#efefef">
+        android:background="#efefef"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/xrv_load_more_container_rl"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:visibility="gone">
 
-            <ImageView
-                android:id="@+id/xrv_load_more_iv"
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY" />
+                android:layout_weight="1" />
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/xrv_load_more_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_load_more" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:layout_toEndOf="@+id/xrv_load_more_iv"
+                    android:layout_toRightOf="@+id/xrv_load_more_iv"
+                    android:text="拼命加载中…" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="@dimen/size_10dp"
-                android:layout_toEndOf="@+id/xrv_load_more_iv"
-                android:layout_toRightOf="@+id/xrv_load_more_iv"
-                android:text="拼命加载中…" />
-        </RelativeLayout>
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/xrv_no_load_more_container_rl"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="1dp"
-                android:background="#b5b5b5" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/size_10dp"
-                android:layout_marginRight="@dimen/size_10dp"
-                android:text="没有更多内容啦！" />
+                android:layout_weight="1" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="1dp"
-                android:background="#b5b5b5" />
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="1dp"
+                    android:background="#b5b5b5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_10dp"
+                    android:layout_marginRight="@dimen/size_10dp"
+                    android:text="没有更多内容啦！" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="1dp"
+                    android:background="#b5b5b5" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
         </LinearLayout>
 
 

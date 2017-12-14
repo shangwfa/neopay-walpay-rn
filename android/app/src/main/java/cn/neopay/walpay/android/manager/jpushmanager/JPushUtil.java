@@ -19,6 +19,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.neopay.walpay.android.WalpayApp;
+import cn.neopay.walpay.android.utils.BusniessUtils;
+
+import static cn.neopay.walpay.android.manager.jpushmanager.JPushTagAliasOperatorHelper.sequence;
 
 public class JPushUtil {
     public static final String PREFS_NAME = "JPUSH_EXAMPLE";
@@ -121,5 +125,25 @@ public class JPushUtil {
 
     public static String getDeviceId(Context context) {
         return JPushInterface.getUdid(context);
+    }
+
+    public static void setAlias(String alias) {
+        handleAlias(alias, JPushTagAliasOperatorHelper.ACTION_SET);
+    }
+
+    public static void getAlias() {
+        handleAlias(BusniessUtils.getUuid(), JPushTagAliasOperatorHelper.ACTION_SET);
+        JPushInterface.getAlias(WalpayApp.application, sequence);
+    }
+
+    private static void handleAlias(String alias, int action) {
+        if (!TextUtils.isEmpty(alias) && isValidTagAndAlias(alias)) {
+            JPushTagAliasOperatorHelper.TagAliasBean tagAliasBean = new JPushTagAliasOperatorHelper.TagAliasBean();
+            tagAliasBean.alias = alias;
+            tagAliasBean.action = action;
+            tagAliasBean.isAliasAction = true;
+            sequence++;
+            JPushTagAliasOperatorHelper.getInstance().handleAction(WalpayApp.application, sequence, tagAliasBean);
+        }
     }
 }

@@ -65,6 +65,7 @@ public class HomeDrawTopView extends FrameLayout {
         }
         if (BuildConfig.DEBUG) {
             mBinding.homeAvatarDesTv.setOnClickListener(v -> MainRouter.getSingleton().jumpToEnvironmentSettingActivityPage());
+            mBinding.homeSimpleAvatarDesTv.setOnClickListener(v -> MainRouter.getSingleton().jumpToEnvironmentSettingActivityPage());
         }
         mBinding.homeSimpleBigRedPacketIv.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIG_RED_PACKET_SIMPLE_PAGE)));
         mBinding.homeSimplePhoneChargeIv.setOnClickListener(v -> BusniessUtils.handleCertification(context, mUserInfoBean, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.PHONE_TOPUP_PAGE)));
@@ -76,6 +77,8 @@ public class HomeDrawTopView extends FrameLayout {
 
     public void setHomeDrawAvatarClick(OnClickListener homeDrawAvatar) {
         mBinding.homeAvatarIv.setOnClickListener(homeDrawAvatar);
+        mBinding.homeSimpleAvatarIv.setOnClickListener(homeDrawAvatar);
+
     }
 
     public void setmUserInfoBean(UserInfoResponseBean mUserInfoBean) {
@@ -93,6 +96,15 @@ public class HomeDrawTopView extends FrameLayout {
         mBinding.homeDrawSimpleAvatarContainerLl.setAlpha(viewAlpha);
         mBinding.homeDrawAvatarContainerLl.setAlpha(1 - viewAlpha);
     }
+
+    public FrameLayout getHomeDrawSimpleAvatarContainerLl() {
+        return mBinding.homeDrawSimpleAvatarContainerLl;
+    }
+
+    public FrameLayout getHomeDrawAvatarContainerLl() {
+        return mBinding.homeDrawAvatarContainerLl;
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeHomeTopViewEvent(HomeTopViewEventBean homeTopViewEventBean) {

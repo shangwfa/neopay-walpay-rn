@@ -79,7 +79,7 @@
             android:name=".ui.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.homedraw.HomeDrawActivity"
+            android:name=".ui.homedraw.HomeDrawCoordinatorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.forgotpwd.ForgotPwdActivity"

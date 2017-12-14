@@ -1,11 +1,10 @@
 package cn.neopay.walpay.android.ui.homedraw;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.barlibrary.ImmersionBar;
@@ -15,14 +14,10 @@ import com.xgjk.common.lib.manager.storage.StoreManager;
 import com.xgjk.common.lib.utils.ScreenUtils;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
-import cn.neopay.walpay.android.databinding.ActivityHomeDrawLayoutBinding;
-import cn.neopay.walpay.android.module.event.HomeTopViewEventBean;
-import cn.neopay.walpay.android.module.event.HomeViewChangeEvent;
+import cn.neopay.walpay.android.databinding.ActivityHomeDrawCoordinatorLayoutBinding;
 import cn.neopay.walpay.android.module.event.MineEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
@@ -33,10 +28,10 @@ import cn.neopay.walpay.android.utils.BusniessUtils;
 /**
  * @author carlos.guo
  * @date 2017/11/17
- * @describe HomeDrawActivity 抽屉主页面
+ * @describe HomeDrawCoordinatorActivity 抽屉主页面
  */
-@Route(path = IWalpayConstants.TO_HOME_DRAW_PAGE)
-public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHomeDrawLayoutBinding> implements HomeDrawContract.IView {
+@Route(path = IWalpayConstants.TO_HOME_DRAW_COORDINATOR_PAGE)
+public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinatorPresenter, ActivityHomeDrawCoordinatorLayoutBinding> implements HomeDrawCoordinatorContract.IView, AppBarLayout.OnOffsetChangedListener {
 
     private MineDrawFragment mMineFragment;
     private NewsFragment mNewsFragment;
@@ -44,7 +39,7 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_home_draw_layout;
+        return R.layout.activity_home_draw_coordinator_layout;
     }
 
     @Override
@@ -75,40 +70,33 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
         fragmentTransaction.add(R.id.home_fl, mNewsFragment);
         fragmentTransaction.commit();
         mViewBinding.homeDrawerDl.addDrawerListener(mDrawerListener);
+
         mViewBinding.commonHomeDrawTopView.setHomeDrawAvatarClick(view -> {
             if (!mViewBinding.homeDrawerDl.isDrawerOpen(Gravity.START)) {
                 mViewBinding.homeDrawerDl.openDrawer(Gravity.START);
             }
         });
-        mViewBinding.homeDrawPayTopFl.homeDrawBigRedPacketTopLl.setOnClickListener(v ->
+        mViewBinding.homeDrawCoordinatorAbl.addOnOffsetChangedListener(this);
+        mViewBinding.homeDrawCoordinatorTop.homeDrawBigRedPacketTopLl.setOnClickListener(v ->
                 BusniessUtils.handleCertification(this, mUserInfoBean,
                         () -> RNActivity.jumpToRNPage(this, RNActivity.PageType.BIG_RED_PACKET_SIMPLE_PAGE)));
-        mViewBinding.homeDrawPayTopFl.homeDrawRechargeTopLl.setOnClickListener(v ->
+        mViewBinding.homeDrawCoordinatorTop.homeDrawRechargeTopLl.setOnClickListener(v ->
                 BusniessUtils.handleCertification(this, mUserInfoBean,
                         () -> RNActivity.jumpToRNPage(this, RNActivity.PageType.PHONE_TOPUP_PAGE)));
 
-        mViewBinding.homeDrawContainerNsv.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (nestedScrollView, x, y, oldX, oldY) -> {
-            float mAlpha = y / 300F;
-            mViewBinding.commonHomeDrawTopView.setHeaderViewChange(mAlpha);
-            mViewBinding.homeDrawPayTopFl.homeDrawPayTopContainerLl.setAlpha(1 - mAlpha);
-            handleScrollView(nestedScrollView);
-
-        });
     }
 
-    private void handleScrollView(NestedScrollView nestedScrollView) {
-        boolean isBottom = nestedScrollView.getChildAt(0).getHeight() - nestedScrollView.getHeight() == nestedScrollView.getScrollY() && nestedScrollView.getScrollY() > 0;
-        HomeViewChangeEvent homeViewChangeEvent = new HomeViewChangeEvent();
-        homeViewChangeEvent.setScrollY(nestedScrollView.getScrollY());
-        homeViewChangeEvent.setBottom(isBottom);
-        EventBus.getDefault().post(homeViewChangeEvent);
+    @Override
+    protected void onResume() {
+        mPresenter.getUserInfo();
+        super.onResume();
     }
 
     private void handleBottomKeyLayout() {
         if (ScreenUtils.hasSoftKeys(this)) {
-            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mViewBinding.homeDrawContainerNsv.getLayoutParams();
+            DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mViewBinding.homeDrawCoordinatorCl.getLayoutParams();
             params.setMargins(0, 0, 0, ScreenUtils.getBottomSoftKeysHeight(this));
-            mViewBinding.homeDrawContainerNsv.setLayoutParams(params);
+            mViewBinding.homeDrawCoordinatorCl.setLayoutParams(params);
         }
     }
 
@@ -152,10 +140,16 @@ public class HomeDrawActivity extends BaseActivity<HomeDrawPresenter, ActivityHo
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void changeHomeTopViewEvent(HomeTopViewEventBean homeTopViewEventBean) {
-        if (null == homeTopViewEventBean) {
-            return;
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        int totalScrollRange = appBarLayout.getTotalScrollRange();
+        int offset = Math.abs(verticalOffset);
+        if (offset >= 3 * totalScrollRange / 4) {
+            mViewBinding.commonHomeDrawTopView.getHomeDrawSimpleAvatarContainerLl().setVisibility(View.VISIBLE);
+            mViewBinding.commonHomeDrawTopView.getHomeDrawAvatarContainerLl().setVisibility(View.GONE);
+        } else {
+            mViewBinding.commonHomeDrawTopView.getHomeDrawSimpleAvatarContainerLl().setVisibility(View.GONE);
+            mViewBinding.commonHomeDrawTopView.getHomeDrawAvatarContainerLl().setVisibility(View.VISIBLE);
         }
     }
 }

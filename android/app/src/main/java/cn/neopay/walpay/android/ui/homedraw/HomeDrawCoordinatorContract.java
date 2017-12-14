@@ -11,7 +11,7 @@ import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
  * @describe
  */
 
-public interface HomeDrawContract {
+public interface HomeDrawCoordinatorContract {
     interface IView extends BaseView {
         void setViewData(UserInfoResponseBean userInfoBean);
     }
