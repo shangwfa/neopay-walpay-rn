@@ -17,6 +17,7 @@ import ApiManager from '../utils/ApiManager'
 import SelectPayStyleModal from '../modal/SelectPayStyleModal'
 import PayPwdModal from '../modal/PayPwdModal'
 
+
 class AccountWithdrawPage extends BasePage {
     constructor(props){
         super(props)
@@ -40,7 +41,10 @@ class AccountWithdrawPage extends BasePage {
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title={'提现'} rightIcon={require("../res/img/HomePage/sy_wenhao.png")} rightIconStyle={{height: 20}}/>
 
-                <CommonItemThree style={{marginTop: 10}} source={this.renderBankCardIcon()} title={this.state.selectedBankName+'('+this.state.selectedBankCardNo+')'} onPress={()=>this.selectBankCard()}/>
+                <CommonItemThree style={{marginTop: 10}}
+                                 source={this.renderBankCardIcon()}
+                                 title={this.state.bankCardExist?`${this.state.selectedBankName}(${this.state.selectedBankCardNo})`:'添加绑定银行卡'}
+                                 onPress={()=>this.selectBankCard()}/>
 
                 {this.renderDetailRow()}
                 <CommonButton style={{marginTop:50}} value={'提现'} onPress={() => this.withdrawBtnClicked()}/>
@@ -90,7 +94,7 @@ class AccountWithdrawPage extends BasePage {
         });
 
         ApiManager.withdraworder({'orderNo':this.state.orderNo,'payPassword':text,'tradeNo':this.state.orderNo},(data)=>{
-            nav.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE,{orderNo:data['orderNo']});
+            nav.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE,{data:data});
         })
 
     }
@@ -100,6 +104,8 @@ class AccountWithdrawPage extends BasePage {
         if(this.state.selectedBankIconUrl)
         {
             return {uri:this.state.selectedBankIconUrl}
+        }else {
+            return (require('../res/img/img_bank.png'))
         }
     }
 
@@ -131,9 +137,15 @@ class AccountWithdrawPage extends BasePage {
 
     selectBankCard=()=>{
         // console.log('点击了银行卡选择')
-        this.setState({
-            isShowSelectPayStyle:true
-        })
+
+        if(this.state.bankCardExist){
+            this.setState({
+                isShowSelectPayStyle:true
+            })
+        }else {
+            this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
+        }
+
     }
 
     renderDetailRow = () => {
@@ -166,15 +178,21 @@ class AccountWithdrawPage extends BasePage {
 
         if(this.state.withdrawAmount!=0)
         {
-            ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
-                //创建订单成功,跳转结果页
-                this.setState({
-                    isPayShow:true
-                })
-                this.setState({
-                    orderNo:data.orderNo
-                })
-            });
+            // if(this.state.withdrawAmount>this.state.withdrawBalance){
+            //     NativeModules.commModule.toast('超过可提现金额');
+            // }else {
+
+                ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
+                    //创建订单成功,跳转结果页
+                    this.setState({
+                        isPayShow:true
+                    })
+                    this.setState({
+                        orderNo:data.orderNo
+                    })
+                });
+            // }
+
         }else {
             NativeModules.commModule.toast("请输入正确提现金额");
         }
@@ -192,9 +210,9 @@ class AccountWithdrawPage extends BasePage {
 
         ApiManager.getUserBankCardList({},(data)=>{
             if(data.length>0){
-
                 ApiManager.getRecentWithdrawBankCard({},(data)=>{
                     this.setState({
+                        bankCardExist:true,
                         selectedBankId:data.id,
                         selectedBankName:data.bankName,
                         selectedBankCardNo:data.cardNo,
