@@ -35,7 +35,7 @@ public interface IWalpayConstants {
     String USER_INFO = "user_info";
     String USER_INFO_AUTH = "user_info_auth";
     String IS_FIRST_INSTALL = "is_install_state";
-    String IS_INSTALL_SET_ALIAS = "is_install_set_alias";
+    String ALIAS_VALUE = "alias_value";
     String IS_FIRST_CERTIFICATION = "is_certification_state";
     String ACCESS_TOKEN = "accessToken";
 

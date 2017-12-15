@@ -118,6 +118,11 @@ getRedPacketList = (request, callback) => {
         callback(data);
     });
 };
+receiveRedPacket = (request, callback) => {
+    NetUtil.post(APIS.RECEIVE_RED_PACKET, request, (data) => {
+        callback(data);
+    });
+};
 getMerchantBannerList = (request, callback) => {
     NetUtil.post(APIS.QUERY_MERCHANT_BANNER_LIST, request, (data) => {
         callback(data);
@@ -248,8 +253,8 @@ getRecentWithdrawBankCard = (request, callback) => {
         callback(data);
     })
 };
-getUserBankCardList = (request, callback)=>{
-    NetUtil.post(APIS.GET_USER_BANK_CARD_LIST,request,(data)=>{
+getUserBankCardList = (request, callback) => {
+    NetUtil.post(APIS.GET_USER_BANK_CARD_LIST, request, (data) => {
         callback(data);
     })
 }
@@ -263,8 +268,8 @@ withdraworder = (request, callback) => {
         callback(data);
     })
 };
-getRecentPhoneRechargePhone = (request, callback)=>{
-    NetUtil.post(APIS.GET_RECENT_PHONE_RECHARGE_PHONE,request,(data)=>{
+getRecentPhoneRechargePhone = (request, callback) => {
+    NetUtil.post(APIS.GET_RECENT_PHONE_RECHARGE_PHONE, request, (data) => {
         callback(data);
     })
 };
@@ -301,6 +306,7 @@ export default {
     logoutUser,
     getBankCardRecordPage,
     getBalanceRecordList,
+    receiveRedPacket,
     getPhoneRechargeOrderQuery,
     getPhoneRechargeProductList,
     queryPhoneRechargeDataList,

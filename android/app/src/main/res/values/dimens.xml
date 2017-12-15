@@ -27,6 +27,7 @@
     <dimen name="size_202dp">202dp</dimen>
     <dimen name="size_184dp">184dp</dimen>
     <dimen name="size_177dp">177dp</dimen>
+    <dimen name="size_178dp">178dp</dimen>
     <dimen name="size_161dp">161dp</dimen>
     <dimen name="size_162dp">162dp</dimen>
     <dimen name="size_148dp">148dp</dimen>
@@ -94,6 +95,7 @@
     <dimen name="size_3dp">3dp</dimen>
     <dimen name="size_2dp">2dp</dimen>
     <dimen name="size_1dp">1dp</dimen>
+    <dimen name="size_0.5dp">0.5dp</dimen>
 
 
     <dimen name="size_24sp">24sp</dimen>

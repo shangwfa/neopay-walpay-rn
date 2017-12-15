@@ -26,7 +26,7 @@ import {RouterPaths} from "../constants/RouterPaths";
 import SelectPayStyleModal from "../modal/SelectPayStyleModal";
 import SendPhoneAuthCodeModal from "../modal/SendPhoneAuthCodeModal";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
-import WarpRedPacket from '../data/WarpRedPacket.json'
+import WarpRedPacket from '../data/RecivedRedPacket.json'
 import FormatUtils from "../utils/FormatUtils";
 class SendRedPacketPage extends BasePage {
     constructor(props) {
@@ -393,7 +393,7 @@ class SendRedPacketPage extends BasePage {
     _handleTextInputClick = () => {
     };
     _handleRedThemeClick = (item) => {
-        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE);
+        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE, {blessingWords: this.state.redPacketMessage});
     };
     _handleRedPacketListener = (text) => {
     };

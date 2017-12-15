@@ -40,19 +40,19 @@ const BankCardCell = props => {
             marginTop: 20,
             color: colors.white,
             fontSize: 15,
-            backgroundColor:'transparent'
+            backgroundColor: 'transparent'
         },
         bankType_value: {
             marginTop: 5,
             color: colors.white,
             fontSize: 11,
-            backgroundColor:'transparent',
+            backgroundColor: 'transparent',
         },
         cardNo_value: {
             marginTop: 10,
             color: colors.white,
             fontSize: 15,
-            backgroundColor:'transparent',
+            backgroundColor: 'transparent',
         },
         middle_container: {
             marginLeft: 20,
@@ -63,8 +63,8 @@ const BankCardCell = props => {
             marginTop: 10,
             marginLeft: 10,
             marginRight: 10,
-            borderRadius:5,
-            resizeMode:'cover',
+            borderRadius: 5,
+            resizeMode: 'cover',
         },
         container: {
             backgroundColor: colors.black
@@ -72,7 +72,7 @@ const BankCardCell = props => {
 
         background_container: {
             height: 140,
-            backgroundColor:colors.white,
+            backgroundColor: colors.white,
         }
     });
 
@@ -85,9 +85,9 @@ const BankCardCell = props => {
     }
 
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} onPress ={click} {...attributes}>
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} onPress={click} {...attributes}>
             <View style={styles.background_container}>
-                <Image style={styles.content_container} source={{uri:imgBackGroundUrl}}>
+                <Image style={styles.content_container} source={{uri: imgBackGroundUrl}}>
                     <Image style={styles.avatar}/>
                     {renderbankContent()}
                 </Image>

@@ -26,10 +26,10 @@ public class HomeDrawCoordinatorPresenter extends HomeDrawCoordinatorContract.Pr
     }
 
     private void handleSetAlias(UserInfoResponseBean infoResponseBean) {
-        final boolean isFirstSetAlias = StoreManager.getSingleton().getBoolean(false, IWalpayConstants.IS_INSTALL_SET_ALIAS, true);
-        if (null != infoResponseBean && isFirstSetAlias) {
+        String aliasStr = StoreManager.getSingleton().getString(false, IWalpayConstants.ALIAS_VALUE, "");
+        if (null != infoResponseBean && !aliasStr.equals(infoResponseBean.getUuid())) {
             JPushUtil.setAlias(infoResponseBean.getUuid());
-            StoreManager.getSingleton().putBoolean(false, IWalpayConstants.IS_INSTALL_SET_ALIAS, false);
+            StoreManager.getSingleton().putString(false, IWalpayConstants.ALIAS_VALUE, infoResponseBean.getUuid());
         }
     }
 }

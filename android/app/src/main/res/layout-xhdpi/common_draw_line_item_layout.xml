@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/line_item_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_1dp"
+        android:layout_height="@dimen/size_0.5dp"
         android:layout_marginLeft="@dimen/size_46dp"
         android:background="#EEE" />
 </FrameLayout>
