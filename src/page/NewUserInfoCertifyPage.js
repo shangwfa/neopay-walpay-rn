@@ -68,7 +68,7 @@ class NewUserInfoCertifyPage extends BasePage {
         };
 
         ApiManager.submitUserCerfity(body,data=>{
-            this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:1})
+            this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:2})
         })
     }
 

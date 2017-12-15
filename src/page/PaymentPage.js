@@ -168,7 +168,7 @@ class PaymentPage extends BasePage {
                 <View style={{flex:1,height:1}}/>
                 {this.renderKeyboard()}
                 <TwoButtonModal isShow={this.state.isShow}  title='余额不足，绑定银行卡支付' content={'账户余额 675.87元'+'\n'+'实付金额 898.87元'} oneBtnText='关闭弹窗' twoBtnText='去绑卡'
-                onePress={() => this.setState({isShow:false})} twoPress={() => {this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE)}}/>
+                onePress={() => this.setState({isShow:false})} twoPress={() => {this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:3})}}/>
                 <PayPwdModal isShow={this.state.isPayShow} contentFront='实付金额' contentBack='67.89元' payTypeContent='中信银行储蓄卡（5678）' onClose={()=>this.setState({isPayShow:false})}
                              onForgetPwd={()=>{}} onEnd={(text)=>{console.log('输出密码'+text)}}/>
             </View>

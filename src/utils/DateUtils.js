@@ -82,6 +82,39 @@ getRecentDate = (timestamp) => {
     } else {//其他
         return dateFmt("yyyy-MM-dd HH:mm", date)
     }
+};/**
+ * @param timestamp
+ * @returns 最近的时间日期 (今天 09-01 2016-09-09)
+ */
+getPhoneTopupMsgDate = (timestamp) => {
+    let date = new Date(timestamp);
+    if (isToday(date)) {//当天
+        return `今天`;
+    }else if (isToYear(date)) {//今年
+        return dateFmt("MM-dd", date);
+    } else {//其他
+        return dateFmt("yyyy-MM-dd", date)
+    }
+};
+/**
+ * @param timestamp
+ * @returns 最近的时间日期 (本月 09 2016-09-09)
+ */
+getRpRecordList = (timestamp) => {
+    let date = new Date(timestamp);
+    if (isToYearAndMonth(date)) {//当月
+        return `本月`;
+    }else if (isToYear(date)) {//今年
+        if(dateFmt("MM", date) == '10' || dateFmt("MM", date) == '11' || dateFmt("MM", date) == '12')
+        {
+            return dateFmt("MM" + '月', date);
+        }else
+        {
+            return dateFmt("M" + '月', date);
+        }
+    } else {//其他
+        return dateFmt("yyyy-MM", date)
+    }
 };
 
 mmDdHhMmDateFmt = (timestamp) => {
@@ -110,5 +143,7 @@ export default {
     getTimestamp,
     mmDdHhMmDateFmt,
     yyyyYearMmMonth,
+    getPhoneTopupMsgDate,
+    getRpRecordList,
 }
 

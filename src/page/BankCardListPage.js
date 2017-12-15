@@ -118,7 +118,7 @@ class BankCardListPage extends BasePage {
     }
 
     addBankCard() {
-        this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE)
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:1})
     }
 }
 

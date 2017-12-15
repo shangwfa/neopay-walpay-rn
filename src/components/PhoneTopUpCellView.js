@@ -184,7 +184,7 @@ class PhoneTopUpMoneyView extends Component {
         this.setState({
             isShowSelectPayStyle: false,
         });
-        nav.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
+        nav.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:3});
     }
 
     handleBankCardItemClick=(bankCardData)=>{

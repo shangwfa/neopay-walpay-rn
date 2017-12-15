@@ -30,7 +30,6 @@ const RpTitleStyleItem = props => {
         },
 
         container: {
-            backgroundColor: colors.orange,
             width:itemWidth,
             height:itemWidth*3/7,
             marginLeft:10,

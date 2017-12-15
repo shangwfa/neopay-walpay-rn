@@ -428,9 +428,10 @@ class SendRedPacketPage extends BasePage {
             isShowPay: false,
         });
         let params = {
-            pageType: 1
+            pageType: 1,
+            type:3
         };
-        this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE, params);
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, params);
     };
     _handleSelectPayStyleCloseClick = () => {
         this.setState({

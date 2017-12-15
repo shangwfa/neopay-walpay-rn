@@ -65,7 +65,7 @@ class PersonalInfoPage extends BasePage {
                 isLine={true}
                 isArrow={isNoRealName}
                 value={isNoRealName?'':this.state.data.name}
-                onPress={() => {if(isNoRealName)this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE)}
+                onPress={() => {if(isNoRealName)this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:2})}
                 }/>)
     }
 

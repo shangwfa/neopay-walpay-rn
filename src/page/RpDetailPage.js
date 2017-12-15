@@ -86,7 +86,7 @@ class RpDetailPage extends BasePage {
         console.log('----xxx' + item)
         return (
             <View>
-                <CommonItemTwo imgUrl={item.iconUrl}
+                <CommonItemTwo imgUrl={item.robberAvatar}
                                middleUpValue={item.robberName} middleBottomValue={item.createTime}
                                rightUpValue={item.luckyMoney}
                                isLine={true}
@@ -129,7 +129,7 @@ class RpDetailPage extends BasePage {
     }
 
     _renderBottom=()=>{
-        if(!this.state.dataSource.ownerBool){
+        if(this.state.dataDetail.ownerBool == false){
             return (
                 <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
                     <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
@@ -137,11 +137,11 @@ class RpDetailPage extends BasePage {
             )
         }else{
             return (
-                <View style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
+                <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
                     <ImageButton value='分享该红包' style={{marginTop:2,marginBottom:2,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
-                    <View style={{width:1,backgroundColor:colors.divider }}/>
-                    <ImageButton value='我也要发红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
-                </View>
+                    <View style={{marginTop:2,width:1,backgroundColor:colors.divider }}/>
+                    <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
+                </Image>
             )
         }
 

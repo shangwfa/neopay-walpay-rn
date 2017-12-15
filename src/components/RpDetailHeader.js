@@ -25,6 +25,7 @@ const RpDetailHeader = props => {
         remarkValue,
         stateValue,
         isMax,
+        isGet,
         ...attributes
     } = props
 
@@ -68,7 +69,7 @@ const RpDetailHeader = props => {
         },
         amount_value: {
             marginTop:5,
-            fontSize:40,
+            fontSize:amountValue==0?20:40,
             color:colors.orange,
             backgroundColor:'transparent'
         },
@@ -118,15 +119,15 @@ const RpDetailHeader = props => {
             <View style = {styles.top_View}>
                 <View style = {styles.middle_container}>
                     <View style={{flex:1}} />
-                    <Text style={styles.remark_value} numberOfLines={1}>remarkValue</Text>
+                    <Text style={styles.remark_value} numberOfLines={1}>{remarkValue}</Text>
                     <View style={{flex:1,alignItems:"flex-end",backgroundColor:'transparent'}}>
-                        <Image style = {styles.maxImg} source = {true?require("../res/img/rp_max_text.png"):' '} ></Image>
+                        <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
                     </View>
 
                 </View>
                 <View style={styles.amount_bg}>
                     <Text style={styles.rmbIcon}>{amountValue==0?' ':'¥'}</Text>
-                    <Text style={styles.amount_value}>{amountValue==0?' ':amountValue}</Text>
+                    <Text style={styles.amount_value}>{amountValue==0?stateValue:amountValue}</Text>
                 </View>
             </View>
 
@@ -135,7 +136,7 @@ const RpDetailHeader = props => {
             </Image>
 
             <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
-            <Text style={styles.state_value}>{stateValue}</Text>
+            <Text style={styles.state_value}>{amountValue==0?'':stateValue}</Text>
         </View>
     );
 };

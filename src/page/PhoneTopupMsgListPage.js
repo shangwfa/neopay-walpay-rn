@@ -16,6 +16,7 @@ import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
 import MsgCell from  '../components/PhoneTopupMsgCell'
 import ApiManager from '../utils/ApiManager'
+import DateUtils from '../utils/DateUtils'
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import {
     SwRefreshListView,
@@ -73,7 +74,7 @@ class PhoneTopupMsgListPage extends BasePage {
             <View>
                 <MsgCell
                     isShow = {item.disPlayDate}
-                    showDate = {item.dayCode}
+                    showDate = {DateUtils.getPhoneTopupMsgDate(item.createTimeMs)}
                     dateValue = {item.updateTime}
                     topupTypeValue = {item.content}
                     priceValue = {item.amount}
