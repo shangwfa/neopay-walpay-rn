@@ -11,7 +11,7 @@ class BasePage extends Component {
         console.log("当前页面======"+nav.state.routeName)
     }
 
-    /*event={type:'xxxxx',data:{}*/
+    /*event={type:'xxxxx',data:{}}*/
     componentDidMount() {
         this.emitterListener=DeviceEventEmitter.addListener(nav.state.routeName, (event) => {
             this.emitEvent(event)

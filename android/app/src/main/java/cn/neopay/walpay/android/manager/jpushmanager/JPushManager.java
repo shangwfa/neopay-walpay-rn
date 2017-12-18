@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
 import org.json.JSONException;
@@ -15,6 +16,10 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.neopay.walpay.android.WalpayApp;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
+import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
  * @author carlos.guo
@@ -37,7 +42,7 @@ public class JPushManager extends BroadcastReceiver {
                     jPushConnectionState(intent);
                     break;
                 case JPushInterface.ACTION_NOTIFICATION_OPENED://通知被用户点击
-                    jPushNotificationOpende();
+                    jPushNotificationOpended(bundle);
                     break;
                 case JPushInterface.ACTION_NOTIFICATION_RECEIVED://通知消息 无内容不显示通知，可获取内容外的其他信息
                     jPushNotification(bundle);
@@ -101,10 +106,69 @@ public class JPushManager extends BroadcastReceiver {
                 "\nnotifacationExtras：" + notifacationExtras + "\nnotificationId: " + notificationId);
     }
 
-    private void jPushNotificationOpende() {
+    private void jPushNotificationOpended(Bundle bundle) {
         //拥有和通知一样的信息，可以进出处理点击事件
         //如果未配置此action 默认打开首页，反之处理响应
+        String notifacationExtras = bundle.getString(JPushInterface.EXTRA_EXTRA);
         Logger.d(TAG, "jPushNotificationOpende: true");
+        handleNotificationOpended(notifacationExtras);
+    }
+
+    private void handleNotificationOpended(String notifacationExtras) {
+        Gson gson = new Gson();
+        JPushDataBean jPushDataBean = gson.fromJson(notifacationExtras, JPushDataBean.class);
+        if (null != jPushDataBean && null != jPushDataBean.getExtraParam()) {
+            JPushDataExtraBean jPushDataExtraBean = gson.fromJson(jPushDataBean.getExtraParam(), JPushDataExtraBean.class);
+            if (null != jPushDataExtraBean && null != jPushDataExtraBean.getParams()) {
+                JPushDataParamsBean jPushDataParamsBean = gson.fromJson(jPushDataExtraBean.getParams(), JPushDataParamsBean.class);
+                if (null != jPushDataParamsBean) {
+                    switch (jPushDataExtraBean.getRedirectType()) {
+                        case 1://原生
+                            handleJumpNative(jPushDataExtraBean, jPushDataParamsBean);
+                            break;
+                        case 2://h5
+                            handleJumpH5(jPushDataExtraBean);
+                            break;
+                    }
+                }
+            }
+        }else {
+            MainRouter.getSingleton().jumpToHomeDrawPage();
+        }
+    }
+
+    private void handleJumpH5(JPushDataExtraBean jPushDataExtraBean) {
+        switch (jPushDataExtraBean.getNoticeType()) {
+            case 5://商家广播
+            case 6://聚惠进行时
+            case 7://系统消息
+            case 8://系统活动
+            default://默认
+                MainRouter.getSingleton().jumpToCommonWebPage(jPushDataExtraBean.getRedirectUrl());
+                break;
+        }
+    }
+
+    private void handleJumpNative(JPushDataExtraBean jPushDataExtraBean, JPushDataParamsBean jPushDataParamsBean) {
+        switch (jPushDataExtraBean.getNoticeType()) {
+            case 1://"红包来了"
+                RNActivityParams params = new RNActivityParams();
+                params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
+                RNActivityParams.Data data = params.getData();
+                data.setPacketCode(jPushDataParamsBean.getRedPacketCode());
+                MainRouter.getSingleton().jumpToRNPage(WalpayApp.application, params);
+                break;
+            case 2://支付消息
+                RNActivity.jumpToRNPage(WalpayApp.application, RNActivity.PageType.PAY_MESSAGE_PAGE);
+                break;
+            case 3://手机话费到账成功
+            case 4://手机流量到账成功
+                RNActivity.jumpToRNPage(WalpayApp.application, RNActivity.PageType.TOPUP_MSG_LIST_PAGE);
+                break;
+            default://默认首页
+                MainRouter.getSingleton().jumpToHomeDrawPage();
+                break;
+        }
     }
 
 
