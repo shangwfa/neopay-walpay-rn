@@ -480,7 +480,8 @@ class SendRedPacketPage extends BasePage {
             NativeModules.commModule.toast('请输入金额');
             return;
         }
-        if (2000 < this.state.redPacketNum * this.state.redPacketAmount) {
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.redPacketNum * this.state.redPacketAmount;
+        if (2000 < tempAmount) {
             let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为${this.state.redPacketNum * this.state.redPacketAmount}元`;
             this.setState({
                 contentModal: contentModal,
@@ -507,7 +508,8 @@ class SendRedPacketPage extends BasePage {
     };
     _handleShowPayModal = () => {
         let contentFront = `实付金额`;
-        let contentBack = `${FormatUtils.money(this.state.redPacketNum * this.state.redPacketAmount)}元`;
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.redPacketNum * this.state.redPacketAmount;
+        let contentBack = `${FormatUtils.money(tempAmount)}元`;
         this.setState({
             contentFront: contentFront,
             contentBack: contentBack,
