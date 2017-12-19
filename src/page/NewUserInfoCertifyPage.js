@@ -28,7 +28,8 @@ class NewUserInfoCertifyPage extends BasePage {
             smsCode: '',
             inCity: '选择省、市、区',
             dataDetail:{provinceName:'选择省、',provinceCode:'',cityName:'市、',cityCode:'',areaName:'区',areaCode:''},
-            occupation:'请选择'
+            occupation:'请选择',
+            occupationCode:''
         };
     }
 
@@ -63,7 +64,7 @@ class NewUserInfoCertifyPage extends BasePage {
             proCode:this.state.dataDetail.provinceCode,
             cityCode:this.state.dataDetail.cityCode,
             areaCode:this.state.dataDetail.areaCode,
-            jobType:this.state.occupation,
+            jobType:this.state.occupationCode,
             verifyCode:this.state.smsCode,
         };
 
@@ -101,7 +102,8 @@ class NewUserInfoCertifyPage extends BasePage {
                 break;
             case "choseOccupation"://选择红包主题
                 this.setState({
-                    occupation:event.data.des
+                    occupation:event.data.des,
+                    occupationCode:event.data.index
                 });
                 break;
         }
@@ -127,7 +129,7 @@ class NewUserInfoCertifyPage extends BasePage {
                 <CommonInput data={occupationData} editable={false} noEditText={this.state.occupation} isShowArrow={true} tapClick={()=>this.choseOccupationClick()}/>
                 <View style={{height: 10}}/>
                 <CommonInput data={phoneData} editable={false}/>
-                <CommonInput data={verifyCodeData} phone={this.state.bindPhone}
+                <CommonInput data={verifyCodeData} phone={this.state.Phone}
                              onChangeText={(text) => this.setState({smsCode: text})} type={1}/>
                 <Text style={styles.tips}>{tips}</Text>
                 <CommonButton value='确定' style={{marginTop: 75}} onPress={() => this.commit()}/>
