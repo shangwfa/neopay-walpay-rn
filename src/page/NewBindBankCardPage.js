@@ -81,7 +81,7 @@ class NewBindBankCardPage extends BasePage {
         }
 
         ApiManager.bindBankCard(body,data=>{
-
+            this.props.navigation.goBack();
         })
 
     }

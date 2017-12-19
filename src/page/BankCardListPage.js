@@ -110,7 +110,7 @@ class BankCardListPage extends BasePage {
     }
 
     pushAddBankCard = () =>{
-
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:1})
     }
 
     pushNext(item){

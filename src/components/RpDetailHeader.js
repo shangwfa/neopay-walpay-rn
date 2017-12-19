@@ -9,6 +9,7 @@ import {
 import {colors} from '../constants/index'
 import Divider from '../components/Divider'
 import ScreenUtils from '../utils/ScreenUtils'
+import DateUtils from "../utils/DateUtils";
 
 const imgWidth = (ScreenUtils.width - 30)/4;
 
@@ -70,7 +71,7 @@ const RpDetailHeader = props => {
         amount_value: {
             marginTop:5,
             fontSize:amountValue==0?20:40,
-            color:colors.orange,
+            color:'#fbd49d',
             backgroundColor:'transparent'
         },
         iconImg: {
@@ -99,7 +100,7 @@ const RpDetailHeader = props => {
         },
         rmbIcon:{
             fontSize:18,
-            color:colors.orange,
+            color:'#fbd49d',
             backgroundColor:'transparent',
             marginTop:26,
         }

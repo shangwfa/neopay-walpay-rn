@@ -7,7 +7,7 @@ import {
     SectionList,
     ListView,
     DeviceEventEmitter,
-    FlatList
+    FlatList,
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
