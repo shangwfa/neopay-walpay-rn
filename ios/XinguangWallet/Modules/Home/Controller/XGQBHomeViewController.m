@@ -50,6 +50,7 @@
 
 #pragma mark - VC生命周期
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = UIColorHex(EFEFEF);
@@ -147,7 +148,7 @@
 -(void)checkIDStatus
 {
     //检查实名认证信息
-    if (YES) {
+    if ([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized) {
         XGQBIDAlertViewController *alertIDVC = [XGQBIDAlertViewController new];
         
         alertIDVC.transitioningDelegate = self;

@@ -269,7 +269,7 @@ class PhoneTopUpMoneyView extends Component {
                                 </TouchableWithoutFeedback>
                             </View>
                         </View>
-                        <View style={{height:i==(this.state.CelluarPriceList.length-1)?0:1, width:ScreenUtils.width,backgroundColor:'#DADADA',marginTop:12*heightRatio}}>
+                        <View style={{height:i==(this.state.CelluarPriceList.length-1)?0:0.5, width:ScreenUtils.width,backgroundColor:'#DADADA',marginTop:12*heightRatio}}>
 
                         </View>
                     </View>

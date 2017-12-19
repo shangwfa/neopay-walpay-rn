@@ -41,7 +41,8 @@ const BankOrderListItem = props => {
         },
         middle_up_value: {
             color: colors.black,
-            fontSize: 15
+            fontSize: 15,
+            textAlign:"right"
         },
         middle_container: {
             marginLeft: 20,
