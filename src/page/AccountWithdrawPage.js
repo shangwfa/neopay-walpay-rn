@@ -33,6 +33,7 @@ class AccountWithdrawPage extends BasePage {
             selectedBankIconUrl:'',
             isPayShow:false,
             orderNo:'',
+            // textInputFontSize:14,
         }
     }
 
@@ -151,12 +152,12 @@ class AccountWithdrawPage extends BasePage {
     renderDetailRow = () => {
         return (
             <View style={styles.numberRowView}>
-                <Text style={styles.numberRowViewText}>{'可提现金额'+this.state.withdrawBalance.toFixed(2)+'元'}</Text>
+                <Text style={styles.numberRowViewText}>{'可提现金额 '+this.state.withdrawBalance.toFixed(2)+'元'}</Text>
                 <View style={styles.numberRowViewNoView}>
                     <Text style={styles.numberRowViewRMB}>¥</Text>
                     <TextInput
                         placeholder='请输入提现金额'
-                        style={styles.numberRowViewNumber}
+                        style={[styles.numberRowViewNumber]}
                         keyboardType={'numeric'}
                         underlineColorAndroid={'transparent'}
                         onChangeText={(text)=>this.onChangeText(text)}
@@ -172,6 +173,15 @@ class AccountWithdrawPage extends BasePage {
         this.setState({
             withdrawAmount:text
         })
+        // if(text){
+        //     this.setState({
+        //         textInputFontSize:33,
+        //     })
+        // }else {
+        //     this.setState({
+        //         textInputFontSize:14,
+        //     })
+        // }
     }
 
     withdrawBtnClicked() {
@@ -272,6 +282,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 50,
         marginTop: 20,
+        alignItems:'flex-start'
     },
     numberRowViewRMB: {
         fontSize: 30,
@@ -280,9 +291,11 @@ const styles = StyleSheet.create({
         marginTop: ScrnUtil.isIOS ? 3 : 0
     },
     numberRowViewNumber: {
-        fontSize: 14,
+        fontWeight:'bold',
         marginLeft: 10,
         flex: 1,
+        height:40,
+        fontSize:33,
     },
     //分割线
     numberRowViewUnderlineView: {

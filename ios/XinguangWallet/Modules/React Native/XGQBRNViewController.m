@@ -133,7 +133,7 @@
 
 -(void)RNJumpBackToNativeResetPayPwd
 {
-    if (arc4random()%2) {
+    if ([GVUserDefaults standardUserDefaults].authStatus == XGQBUserAuthStatusUnauthorized) {//未实名
         XGQBRegResetPwdTVController *resetPayPwdVC = [XGQBRegResetPwdTVController tableVCWithType:XGQBRegResetPwdTVConTypeResetPayPwdNoID];
         [self.navigationController pushViewController:resetPayPwdVC animated:YES];
     }else
