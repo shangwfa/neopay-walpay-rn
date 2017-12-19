@@ -11,7 +11,7 @@
 #import "XGQBLoginViewController.h"
 #import "XGQBRootNavigationController.h"
 #import "XGQBAPPRootViewController.h"
-
+#import "XGQBRNViewController.h"
 
 @implementation AppDelegate (AppService)
 
@@ -126,6 +126,16 @@
     anima.duration = 0.3f;
     
     [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
+    
+    //判断是否跳转消息页
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.msgType==XGQBMsgTypeRedPacket) {
+        JKLog(@"开始跳转");
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType=@"redList";
+        [appRootVC.rootNAV pushViewController:RNVC animated:YES];
+        [kApplication setApplicationIconBadgeNumber:0];
+    }
 }
 
 -(void)logoutUserInfo
