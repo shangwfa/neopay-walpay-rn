@@ -17,7 +17,8 @@ class PayPwdModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false
+            show: false,
+            modalFlex:1
         }
     }
 
@@ -48,7 +49,7 @@ class PayPwdModal extends Component {
                 }}
                 onRequestClose={() => {
                 }}>
-                <View style={styles.modalStyle}>
+                <View style={[styles.modalStyle,{flex:this.state.modalFlex}]} ref='modalView'>
                     <View style={styles.container}>
                         <View style={styles.content_container}>
                             {this.renderTop()}
@@ -56,7 +57,9 @@ class PayPwdModal extends Component {
                             <Text style={{color: colors.black, fontSize: 14,marginTop:10,}}>{this.props.contentFront}<Text
                                 style={{color: colors.black, fontSize: 20}}> {this.props.contentBack}</Text></Text>
                             <PasswordInput style={{width: 290, marginTop: 10}} maxLength={6}
-                                           onEnd={(text) => this.props.onEnd(text)}/>
+                                           onEnd={(text) => this.props.onEnd(text)}
+                            onTextFocus={()=>this.onTextFocus()}
+                            onTextBlur={()=>this.onTextBlur()}/>
                             <TouchableOpacity
                                 style={{flexDirection: 'row', alignItems: 'center',}}
                                 onPress={() => this.props.selectPayStyleClick()}>
@@ -74,7 +77,23 @@ class PayPwdModal extends Component {
             </Modal>
         );
     }
+
+    //增加弹窗在键盘聚焦的时候改变位置
+    onTextFocus=()=>{
+        // console.log('收到键盘focus事件')
+        this.setState({
+            modalFlex:0.7,
+        })
+    }
+    onTextBlur=()=>{
+        // console.log('收到键盘blur事件')
+        this.setState({
+            modalFlex:1.0,
+        })
+    }
 }
+
+
 
 const styles = StyleSheet.create({
     close_icon: {
@@ -102,7 +121,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#cccccc80',
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1,
     },
     line: {
         backgroundColor: colors.divider,
