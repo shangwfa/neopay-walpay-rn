@@ -144,12 +144,12 @@ class NewBindBankCardPage extends BasePage {
 
     renderMidView =()=>{
         const CVV2Data = {'key': 'CVV2', 'placeholder': '信用卡背面签名栏末三位数字', isLine: true}
-        const dateInfo = {'key': '有效期', 'placeholder':this.state.date, isLine: true}
+        const dateInfo = {'key': '有效期', 'placeholder':'请选择信用卡有效期', isLine: true}
         if(this.state.isCreditCard){
             return(
                 <View>
                     <CommonInput data={CVV2Data} onChangeText={(text) => this.setState({cvv2: text})}/>
-                    <CommonInput data={dateInfo} editable={false} noEditText={this.state.date} tapClick={()=>this.choseDate()}/>
+                    <CommonInput data={dateInfo} editable={false} noEditText={this.state.date} isShowArrow = {true} tapClick={()=>this.choseDate()}/>
                 </View>
             )
         }else{
