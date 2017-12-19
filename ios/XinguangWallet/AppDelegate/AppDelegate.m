@@ -18,6 +18,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //
+    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    if (remoteNotification) {
+        if ([remoteNotification[@"noticeType"] integerValue]) {//红包消息
+            _msgType= [remoteNotification[@"noticeType"] integerValue];
+            [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"收到消息类型%ld",(long)_msgType]];
+        }
+    }
+    
+    
     ///初始化用户登录通知和网络改变通知
     [self initService];
     
@@ -35,7 +46,6 @@
     
     //初始化Jpush推送服务
     [self initJpushServiceWithOptions:launchOptions];
-    
     
     return YES;
 }
@@ -76,11 +86,11 @@
         [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
-    
+    JKLog();
 }
 //手动消除以下方法的报警,原因是block参数缺少void
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wstrict-prototypes"
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wstrict-prototypes"
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler NS_AVAILABLE_IOS(10.0) {
     // Required
     NSDictionary * userInfo = response.notification.request.content.userInfo;
@@ -88,9 +98,10 @@
         [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler();  // 系统要求执行这个方法
+    JKLog();
 }
 
-#pragma clang diagnostic pop
+//#pragma clang diagnostic pop
 
 
 //临时增加RN服务器切换地址

@@ -15,12 +15,25 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
+typedef NS_ENUM(NSInteger,XGQBMsgType){
+    XGQBMsgTypeRedPacket=1,
+    XGQBMsgTypePayNotice,
+    XGQBMsgTypePhoneRechargeSuccess,
+    XGQBMsgTypePhoneDataRechargeSuccess,
+    XGQBMsgTypeMerchantBroadcast,
+    XGQBMsgTypeDiscountsNotice,
+    XGQBMsgTypeSystemNotice,
+    XGQBMsgTypeSystemActNotice,
+} ;
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, JPUSHRegisterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic,strong) NSArray *jsCodeLocationArr;
+
+@property (nonatomic,assign) XGQBMsgType msgType;
 
 @end
 
