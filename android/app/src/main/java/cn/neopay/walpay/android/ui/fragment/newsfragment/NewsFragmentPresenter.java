@@ -150,7 +150,7 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         newsRedPacketItemBean.setPacketCode(getNewsResponseBean.getPacketCode());
         newsRedPacketItemBean.setReceiveStatus(getNewsResponseBean.getReceiveStatus());
         newsRedPacketItemBean.setOnClickListener(view -> {
-            if (1 == getNewsResponseBean.getReadStatus()) {
+            if (1 == getNewsResponseBean.getReceiveStatus()) {
                 RNActivity.jumpToRNPage(mActivity, RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
             }
             RNActivityParams params = new RNActivityParams();

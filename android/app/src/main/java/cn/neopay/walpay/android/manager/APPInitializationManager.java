@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 import com.xgjk.common.lib.base.BaseApp;
 import com.xgjk.common.lib.manager.PushManager;
 import com.xgjk.common.lib.utils.ToastUtils;
@@ -23,12 +26,21 @@ import cn.neopay.walpay.android.manager.environmentmanager.IEnvironmentConfigMan
 
 public class APPInitializationManager {
 
+    public static UMShareAPI umShareAPI;
+
     public static void init(final Context context) {
         initARounter();
 //        initBugly(context);
 //        initPush(context);
         initToastUtils();
         initJPush(context);
+        initShare(context);
+    }
+
+    private static void initShare(Context context) {
+        Config.DEBUG = true;
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        umShareAPI = UMShareAPI.get(context);
     }
 
     private static void initJPush(Context context) {
