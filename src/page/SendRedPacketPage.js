@@ -315,6 +315,7 @@ class SendRedPacketPage extends BasePage {
     };
     _handleSelectPayStyleClick = () => {
         this.setState({
+            isShowPay:false,
             isShowSelectPayStyle: true,
         });
     };
@@ -325,6 +326,9 @@ class SendRedPacketPage extends BasePage {
             payType: this.state.payType,
             bankCardId: this.state.bankCardId
         };
+        this.setState({
+            isShowPay:false
+        })
         ApiManager.payRedPacket(request, (data) => {
             this.setState({
                 payResultSourceData: data
@@ -456,7 +460,8 @@ class SendRedPacketPage extends BasePage {
     };
     _handleSelectPayStyleCloseClick = () => {
         this.setState({
-            isShowSelectPayStyle: false
+            isShowSelectPayStyle: false,
+            isShowPay:true,
         });
     };
     _handleBankCardItemClick = (bankCardData) => {
@@ -466,6 +471,7 @@ class SendRedPacketPage extends BasePage {
             payTypeContent: bankCardData.bankName + nameDes,
             payType: bankCardData.id === -1 ? 2 : 1,
             bankCardId: bankCardData.id,
+            isShowPay:true
         });
 
     };
