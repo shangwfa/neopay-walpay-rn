@@ -189,6 +189,7 @@ class SendRedPacketPage extends BasePage {
                 setTimeout(() => {
                     this._handleRedPacketJump(data, redPacketResult);
                     this._handleRedPackProcess(data, redPacketResult);
+                    this._handleRedPacketWrapClose(data);
                 }, 2000);
             })
         }
@@ -232,10 +233,10 @@ class SendRedPacketPage extends BasePage {
     }
 
     _handleRedPacketJump(data, redPacketResult) {
-        if (1 === data.payStatus) {//success
+        if (2 === data.payStatus) {//success
             redPacketResult.redPacketState = true;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
-        } else if (2 === data.payStatus) {//fail
+        } else if (4 === data.payStatus) {//fail
             redPacketResult.redPacketState = false;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
         }
@@ -339,16 +340,20 @@ class SendRedPacketPage extends BasePage {
                     })
                 } else if (2 === data.smsFlag) {
                     this._handlePayRedPacketResult(data);
-                    if (1 === data.payStatus || 2 === data.payStatus) {
-                        this.setState({
-                            isShowWarpAction: false
-                        });
-                    }
+                    this._handleRedPacketWrapClose(data);
                 }
             }, 2000);
         });
 
     };
+
+    _handleRedPacketWrapClose(data) {
+        if (4 === data.payStatus || 2 === data.payStatus) {
+            this.setState({
+                isShowWarpAction: false
+            });
+        }
+    }
 
     _handlePayRedPacketResult(data) {
         if (this.state.payResultSourceData) {

@@ -14,6 +14,7 @@ import ApiManager from "../utils/ApiManager";
 import {SwRefreshListView} from "react-native-swRefresh";
 import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
+import DateUtils from "../utils/DateUtils";
 
 class RedListPage extends BasePage {
 
@@ -24,6 +25,7 @@ class RedListPage extends BasePage {
             footerStatus: RefreshStatus.IDLE,
         };
     }
+
     componentWillMount() {
         this._handleRefresh();
     }
@@ -85,7 +87,8 @@ class RedListPage extends BasePage {
                 activeOpacity={0.8} onPress={this._clickItem.bind(this, item)}>
                 <View style={[styles.red_container]}>
                     <View style={[styles.time_container, {height: isShow ? 40 : 10}]}>
-                        {isShow ? (<Text style={[styles.time]}>{item.createTimeMs}</Text>) : (null)}
+                        {isShow ? (<Text
+                            style={[styles.time]}>{DateUtils.getPhoneTopupMsgDate(item.createTimeMs)}</Text>) : (null)}
                     </View>
                     <RedPacketTypeComponent
                         redPacketData={item}/>

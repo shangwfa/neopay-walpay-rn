@@ -150,16 +150,18 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         newsRedPacketItemBean.setPacketCode(getNewsResponseBean.getPacketCode());
         newsRedPacketItemBean.setReceiveStatus(getNewsResponseBean.getReceiveStatus());
         newsRedPacketItemBean.setOnClickListener(view -> {
-            if (1 == getNewsResponseBean.getReceiveStatus()) {
+            //1 领取中  2 成功 3 过期 4 领完 5 无权限
+            if (1 != getNewsResponseBean.getReceiveStatus()) {
                 RNActivity.jumpToRNPage(mActivity, RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
+            } else {
+                RNActivityParams params = new RNActivityParams();
+                params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
+                RNActivityParams.Data data = new RNActivityParams.Data();
+                data.setPacketCode(getNewsResponseBean.getPacketCode());
+                params.setData(data);
+                RNActivity.jumpToRNPage(mActivity, params);
+                updateNewsStatus(getNewsResponseBean);
             }
-            RNActivityParams params = new RNActivityParams();
-            params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
-            RNActivityParams.Data data = new RNActivityParams.Data();
-            data.setPacketCode(getNewsResponseBean.getPacketCode());
-            params.setData(data);
-            RNActivity.jumpToRNPage(mActivity, params);
-            updateNewsStatus(getNewsResponseBean);
         });
         mDataList.add(newsRedPacketItemBean);
     }

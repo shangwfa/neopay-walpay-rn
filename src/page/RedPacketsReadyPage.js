@@ -68,7 +68,7 @@ class RedPacketsReadyPage extends BasePage {
         }else {
             return(
                 <FlatList
-                    data={[{key: '红包总价值',value:this.props.navigation.state.params.totalCount}, {key: '付款方式',value:this.props.navigation.state.params.payTypeDesc}]}
+                    data={[{key: '红包总价值',value:this.props.navigation.state.params.amount}, {key: '付款方式',value:this.props.navigation.state.params.payTypeDesc}]}
                     renderItem={this.renderReadyCell}
                     ListHeaderComponent = {this.renderReadyHeader}
                     ListFooterComponent = {this.renderReadyFooter}
@@ -94,7 +94,7 @@ class RedPacketsReadyPage extends BasePage {
         return(
             <View style={{backgroundColor:'#FFFFFF',alignItems:'center',marginBottom:9}}>
                 <Image source={require('../res/img/HomePage/sy_fasong.png')} style={{marginTop:16}}/>
-                <Text style={{fontSize:16,color:'#09BB07',marginTop:14,marginBottom:23}}>{this.props.navigation.state.params.amount?this.props.navigation.state.params.amount+'个':''}红包好啦</Text>
+                <Text style={{fontSize:16,color:'#09BB07',marginTop:14,marginBottom:23}}>{this.props.navigation.state.params.totalCount?this.props.navigation.state.params.totalCount+'个':''}红包好啦</Text>
             </View>
         )
     }

@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="316dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_round_white"
         android:gravity="center"
@@ -19,6 +19,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_28dp"
+            android:layout_marginRight="@dimen/size_28dp"
             android:layout_marginTop="@dimen/size_21dp"
             android:gravity="center"
             android:text="为了您的账户安全，\n 实名认证用户才可以使用支付等功能。\n请添加银行卡完成实名认证"
