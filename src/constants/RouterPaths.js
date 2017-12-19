@@ -41,6 +41,7 @@ export const RouterPaths = {
     RED_PACKET_RECEIVER:'redPacketReceiver',
     RP_MONTH_DETAILRECORD:'rpMonthDetailRecord',
     NEW_BIND_BANKCARD:'newBindBankCard',
+    NEW_USER_CERFITY:'userInfoCerfity',
 };
 
 

@@ -28,7 +28,7 @@ class NewBindBankCardPage extends BasePage {
             bankCode: '',
             bindPhone: '',
             smsCode: '',
-            openBankName: '',
+            openBankName: '开户银行',
             date:'请选择信用卡有效期',
             param:this.props.navigation.state.params,
         };
@@ -93,6 +93,7 @@ class NewBindBankCardPage extends BasePage {
                 name:data.name,
                 bindPhone:data.phone
             })
+            console.log('name is ' + this.state.name)
         })
     }
 
@@ -128,14 +129,14 @@ class NewBindBankCardPage extends BasePage {
     }
 
     renderTopView =()=>{
-        const nameData = {'key': '姓名', 'placeholder': this.state.name, isLine: true}
+        const nameData = {'key': '姓名', 'placeholder': this.state.name==''?'':'*' + this.state.name.substring(1,this.state.name.length), isLine: true}
         const cardNumData = {'key': '卡号', 'placeholder': '请填写银行卡号', isLine: true}
         const idCardNameData = {'key': '开户银行', 'placeholder': '开户银行', isLine: true}
         return(
             <View>
                 <CommonInput data={nameData} editable={false}/>
                 <CommonInput data={cardNumData} keyboardType = {'number-pad'} onChangeText={(text) => this.setState({cardNo: text})} onBlur ={()=>this.onBlur()}/>
-                <CommonInput data={idCardNameData} editable={false} noEditText={this.state.openBankName}/>
+                <CommonInput data={idCardNameData} editable={false} noEditText={this.state.openBankName} isShowArrow = {true}/>
             </View>
         )
 
@@ -158,7 +159,7 @@ class NewBindBankCardPage extends BasePage {
     }
 
     render() {
-        const phoneData = {'key': '手机号', 'placeholder': '请填写银行预留手机号', 'keyboard': 'numeric', isLine: true}
+        const phoneData = {'key': '手机号', 'placeholder': this.state.bindPhone, 'keyboard': 'numeric', isLine: true,'inputOver':true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
         return (
             <View style={styles.container}>
