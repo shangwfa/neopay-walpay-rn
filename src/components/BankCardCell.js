@@ -59,7 +59,7 @@ const BankCardCell = props => {
         },
         content_container: {
             flexDirection: 'row',
-            height: 130,
+            height: 140,
             marginTop: 10,
             marginLeft: 10,
             marginRight: 10,
@@ -71,7 +71,7 @@ const BankCardCell = props => {
         },
 
         background_container: {
-            height: 140,
+            height: 150,
             backgroundColor: colors.white,
         }
     });
@@ -88,7 +88,7 @@ const BankCardCell = props => {
         <TouchableOpacity activeOpacity={0.8} style={[styles.container]} onPress={click} {...attributes}>
             <View style={styles.background_container}>
                 <Image style={styles.content_container} source={{uri: imgBackGroundUrl}}>
-                    <Image style={styles.avatar}/>
+                    <Image style={styles.avatar} source={{uri: imgIconUrl}} />
                     {renderbankContent()}
                 </Image>
             </View>

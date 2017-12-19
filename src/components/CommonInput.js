@@ -12,6 +12,7 @@ import close_input_img from '../res/img/input_clear.png'
 import Divider from '../components/Divider'
 import TimerButton from '../components/TimerButton'
 import StringUtils from "../utils/StringUtils";
+import filter_arrow from '../res/img/filter_arrow.png'
 
 class CommonInput extends Component {
     static defaultProps = {
@@ -57,6 +58,7 @@ class CommonInput extends Component {
                     style={styles.input}
                     underlineColorAndroid={'transparent'}
                     placeholder={data.placeholder}
+                    placeholderTextColor={data.inputOver?colors.black:colors.divider}
                     numberOfLines={1}
                     onChangeText={this.onChangeText}
                     keyboardType={keybordType}
@@ -66,10 +68,11 @@ class CommonInput extends Component {
                 />
             )
         }else{
+            console.log(data.placeholder + '<--->' + this.props.noEditText)
             return(
                 <TouchableWithoutFeedback onPress={this.props.tapClick?() => this.props.tapClick():()=>this.click()}>
                     <Text
-                        style={styles.content}
+                        style={this.props.noEditText == data.placeholder?styles.content_init:styles.content}
                         underlineColorAndroid={'transparent'}
                     >{this.props.noEditText == ''? data.placeholder : this.props.noEditText}</Text>
                 </TouchableWithoutFeedback>
@@ -92,13 +95,21 @@ class CommonInput extends Component {
                 <View style={styles.content_container}>
                     {this.renderLeft()}
                     {this.renderInput()}
-                    {this.input_close_img()}
+                    {this.showStateImg()}
+
                     {this.renderVerifyCode(isVerfyCode)}
                 </View>
                 {this.renderLine(isLine)}
             </View>)
     }
 
+    showStateImg=()=>{
+        if(this.props.editable){
+          return  this.input_close_img();
+        }else {
+            return this.addArrow()
+        }
+    }
     renderLine = (isLine) => {
         if (isLine) return <Divider style={{marginLeft: 10}}/>
     }
@@ -131,6 +142,15 @@ class CommonInput extends Component {
         }
     }
 
+    addArrow=(data)=>{
+            if(this.props.isShowArrow)
+            {
+                return (
+                    <Image style={styles.close_input_img} source={filter_arrow}/>
+                )
+            }
+    }
+
     clear_input = () => {
         console.log("清除输入内容")
         this.setState({
@@ -151,13 +171,25 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         flex: 1,
         fontSize: 15,
-        color: colors.black
+        color:colors.black
+    },
+    input_no: {
+        marginLeft: 10,
+        flex: 1,
+        fontSize: 15,
+        color:colors.divider
     },
     content: {
         marginLeft: 10,
         flex: 1,
         fontSize: 15,
         color: colors.black
+    },
+    content_init: {
+        marginLeft: 10,
+        flex: 1,
+        fontSize: 15,
+        color: colors.divider
     },
     title: {
         width: 80,
@@ -179,7 +211,12 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: colors.white
-    }
+    },
+    img: {
+        width: 15,
+        height: 15,
+        marginRight: 10
+    },
 })
 
 export default CommonInput
