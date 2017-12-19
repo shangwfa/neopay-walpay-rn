@@ -42,7 +42,6 @@ const BankOrderListItem = props => {
         middle_up_value: {
             color: colors.black,
             fontSize: 15,
-            textAlign:"right"
         },
         middle_container: {
             marginLeft: 20,
@@ -75,7 +74,7 @@ const BankOrderListItem = props => {
 
     const renderRightValue = () => {
         return <View style={styles.right_container}>
-            <Text style={styles.middle_up_value}>{rightUpValue}</Text>
+            <Text style={[styles.middle_up_value,{textAlign:"right"}]}>{rightUpValue}</Text>
             {renderRightBottom()}
 
         </View>
