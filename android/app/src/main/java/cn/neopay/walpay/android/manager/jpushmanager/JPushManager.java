@@ -132,7 +132,7 @@ public class JPushManager extends BroadcastReceiver {
                     }
                 }
             }
-        }else {
+        } else {
             MainRouter.getSingleton().jumpToHomeDrawPage();
         }
     }
@@ -154,8 +154,9 @@ public class JPushManager extends BroadcastReceiver {
             case 1://"红包来了"
                 RNActivityParams params = new RNActivityParams();
                 params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
-                RNActivityParams.Data data = params.getData();
+                RNActivityParams.Data data = new RNActivityParams.Data();
                 data.setPacketCode(jPushDataParamsBean.getRedPacketCode());
+                params.setData(data);
                 MainRouter.getSingleton().jumpToRNPage(WalpayApp.application, params);
                 break;
             case 2://支付消息

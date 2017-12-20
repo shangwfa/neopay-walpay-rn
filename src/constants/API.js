@@ -35,6 +35,7 @@ export const APIS = {
     GET_USER_PAY_TYPE_LIST: "bank/get_user_pay_type_list",//获取用户支付方式列表
     PAY_RED_PACKET_VERIFY: "packet/pay_red_packet_verify",//支付红包短信验证
     RECEIVE_RED_PACKET: "packet/receive_red_packet",//用户收红包
+    ADD_RED_PACKET_RECEIVER: "packet/add_red_packet_receiver",//添加红包领取人
     GET_SERVICE_INFO: "assist/get_service_info",//获取客服电话
     LOGOUT_USER: "user/logout_user",//用户登出
     GET_RED_PACKET_PAY_STATUS: "packet/get_red_packet_pay_status",//获取红包的支付状态

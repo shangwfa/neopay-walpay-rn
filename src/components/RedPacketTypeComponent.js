@@ -6,6 +6,7 @@ import {
     Image,
 } from 'react-native'
 import ScreenUtils from "../utils/ScreenUtils";
+import FormatUtils from "../utils/FormatUtils";
 /**
  * @author: carlos.guo
  * @data:  2017/11/3.
@@ -82,7 +83,7 @@ class RedPacketTypeComponent extends Component {
     _renderGeneralRedPacketView = (redPacketData) => {
         return <View style={{marginLeft: 97}}>
             <Text
-                style={[{color: this.state.redThemeTxtColor}, styles.general_red_packet_txt]}>￥{redPacketData.luckyAmount}</Text>
+                style={[{color: this.state.redThemeTxtColor}, styles.general_red_packet_txt]}>￥{FormatUtils.money(redPacketData.luckyAmount)}</Text>
             <Text
                 style={[{color: this.state.redThemeTxtColor}, styles.general_red_packet_msg_txt]}>{redPacketData.message}</Text>
             <View style={[styles.message_from_container, {marginTop: 16}]}>

@@ -20,6 +20,7 @@ import StringUtils from '../utils/StringUtils'
 import {RouterPaths} from '../constants/RouterPaths'
 import {events} from '../constants/index'
 import regular from '../constants/regular'
+import ApiManager from "../utils/ApiManager";
 
 class RedPacketReceiverPage extends BasePage {
 
@@ -28,87 +29,96 @@ class RedPacketReceiverPage extends BasePage {
         this.state = {
             inputPhone: '',
             data: [],
-            tip:'领取人列表(0人)'
+            tip: 0
         };
     }
 
     componentWillMount() {
         DeviceEventEmitter.addListener(events.CONTACTS_EVENT, (contacts) => {
-            let arr=[]
-            console.log('contacts:'+contacts);
+            let arr = []
+            console.log('contacts:' + contacts);
             for (let item of contacts.values()) {
                 console.log(item);
-                arr.push({name:item.name,phone:item.phone})
+                arr.push({name: item.name, phone: item.phone})
             }
-            this.setState({data:arr,tip:'领取人列表('+arr.length+'人)'})
+            this.state.data.map((item) => {
+                arr.push({name: item.name, phone: item.phone});
+            });
+            this.setState({data: arr, tip: arr.length})
         })
     }
+
     addPhone = () => {
         console.log('添加手机号')
-        if(StringUtils.isNoEmpty(this.state.inputPhone)){
-            if(regular.phone.test(this.state.inputPhone)){
-                let arr=this.state.data
-                arr.push({name:'--',phone:this.state.inputPhone})
-                this.setState({data:arr,inputPhone:''})
+        if (StringUtils.isNoEmpty(this.state.inputPhone)) {
+            if (regular.phone.test(this.state.inputPhone)) {
+                let arr = this.state.data
+                arr.push({name: '', phone: this.state.inputPhone})
+                this.setState({
+                    data: arr,
+                    inputPhone: '',
+                    tip: arr.length
+                })
                 const dismissKeyboard = require('dismissKeyboard')
                 dismissKeyboard()
                 NativeModules.commModule.toast('添加成功')
-            }else {
+            } else {
                 NativeModules.commModule.toast('输入的手机号不正确')
             }
-
-        }else {
+        } else {
             NativeModules.commModule.toast('手机号不能为空')
         }
     }
 
-    clearPhone=(item)=>{
-        let arr=this.state.data.filter(value=>{
-            return !StringUtils.equals(value.phone,item.phone)
+    clearPhone = (item) => {
+        let arr = this.state.data.filter(value => {
+            return !StringUtils.equals(value.phone, item.phone)
         })
-        this.setState({data:arr})
+        this.setState({data: arr})
     }
 
-    clearAllPhones=()=>{
-        this.setState({data:[]})
+    clearAllPhones = () => {
+        this.setState({data: []})
     }
 
     renderHeader = () => {
         return (
-            <View style={{height: 44, justifyContent: 'center', backgroundColor: 'white',paddingLeft:10}}>
-                <Text>{this.state.tip}</Text>
+            <View style={{height: 44, justifyContent: 'center', backgroundColor: 'white', paddingLeft: 10}}>
+                <Text>{`领取人列表(${this.state.tip}人)`}</Text>
             </View>)
     }
 
     renderFooter = () => {
         return (
             <View style={{backgroundColor: 'white', alignItems: 'center', paddingTop: 17, paddingBottom: 18}}>
-                <Text style={styles.clear_btn} onPress={()=>this.clearAllPhones()}>清空列表</Text>
+                <Text style={styles.clear_btn} onPress={() => this.clearAllPhones()}>清空列表</Text>
             </View>)
     }
 
-    renderItemName=(name)=>{
-        if(StringUtils.isNoEmpty(name)){
-            return <Text style={{flex:1,fontSize:14,color:colors.black}}>{name}</Text>
+    renderItemName = (name) => {
+        if (StringUtils.isNoEmpty(name)) {
+            return <Text style={{flex: 1, fontSize: 14, color: colors.black}}>{name}</Text>
         }
     }
     renderItem = ({item}) => {
         return (
-            <View style={{height:45,backgroundColor:'white'}}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <TouchableOpacity style={{height:44,width:30,justifyContent:'center',marginLeft:10,marginRight:10}} onPress={()=>this.clearPhone(item)}>
-                        <Image style={{height:20,width:20,}} source={clear_contacts_icon}/>
+            <View style={{height: 45, backgroundColor: 'white'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <TouchableOpacity
+                        style={{height: 44, width: 30, justifyContent: 'center', marginLeft: 10, marginRight: 10}}
+                        onPress={() => this.clearPhone(item)}>
+                        <Image style={{height: 20, width: 20,}} source={clear_contacts_icon}/>
                     </TouchableOpacity>
                     {this.renderItemName(item.name)}
-                    <Text style={{flex:5,fontSize:14,color:colors.black_light}}>{item.phone}</Text>
+                    <Text style={{flex: 5, fontSize: 14, color: colors.black_light}}>{item.phone}</Text>
                 </View>
-                <View style={{height:0.5,backgroundColor:'#DADADA',marginLeft:38}}/>
+                <View style={{height: 0.5, backgroundColor: '#DADADA', marginLeft: 38}}/>
             </View>)
     }
-
-    renderList=()=>{
-        if(this.state.data.length>0){
-            return(
+    //ListFooterComponent={this.renderFooter()}
+    renderList = () => {
+        if (this.state.data.length > 0) {
+            return (
                 <FlatList
                     style={{marginTop: 20}}
                     data={this.state.data}
@@ -118,24 +128,91 @@ class RedPacketReceiverPage extends BasePage {
                     }}
                     extraData={this.state}
                     ListHeaderComponent={this.renderHeader()}
-                    ListFooterComponent={this.renderFooter()}
                 />
             )
+        } else {
+            return <View style={{flex: 1}}/>
         }
     }
+
     render() {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='红包领取人'/>
-                <RedPaketReceiverInput value={this.state.inputPhone} style={{marginTop: 10}} onChangeText={(phone) => {this.setState({inputPhone: phone})}}
-                                       onRightBtnPress={() => {this.addPhone()}}/>
-                <CommonItemThree style={{marginTop: 10}} source={contacts_icon} title='手机通讯录选择添加' onPress={()=>{
-                    this.props.navigation.navigate(RouterPaths.CONTACTS_PAGE)
-                }}/>
+                <RedPaketReceiverInput
+                    value={this.state.inputPhone}
+                    style={{marginTop: 10}}
+                    onChangeText={(phone) => {
+                        this.setState({inputPhone: phone})
+                    }}
+                    onRightBtnPress={() => {
+                        this.addPhone()
+                    }}/>
+                <CommonItemThree
+                    style={{marginTop: 10}}
+                    source={contacts_icon}
+                    title='手机通讯录选择添加'
+                    onPress={() => {
+                        this.props.navigation.navigate(RouterPaths.CONTACTS_PAGE)
+                    }}/>
                 {this.renderList()}
+
+                <View style={{justifyContent: "flex-end", flexDirection: "row"}}>
+                    <TouchableOpacity
+                        style={[{backgroundColor: "#F9F9F9"}, styles.send_red_packet_btn]}
+                        onPress={this.handleClearRedPacketContacts}>
+                        <Text style={[styles.send_red_packet_txt, {color: "#F34646"}]}>清空列表</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[{backgroundColor: "#F34646"}, styles.send_red_packet_btn]}
+                        onPress={this.handleSendWithRedPacketContacts}>
+                        <Text style={[styles.send_red_packet_txt, {color: "#FFF"}]}>确定发送</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
+
+    handleSendWithRedPacketContacts = () => {
+        let redPacketPhones = "";
+        this.state.data.map((item) => {
+            redPacketPhones += item.phone + ",";
+        });
+        let request = {
+            packetCode: this.props.navigation.state.params.packetCode,
+            phones: redPacketPhones,
+        };
+        let desMsg = `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人`;
+        ApiManager.addRedPacketReceiver(request, (data) => {
+            this.props.navigation.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
+                desMsg: desMsg,
+                isReady: true,
+                amount: this.props.navigation.state.params.amount,
+                payTypeDesc: this.props.navigation.state.params.payTypeDesc,
+            })
+        }, (errorData) => {
+            this.handleError(errorData);
+        });
+    };
+
+    handleError(errorData) {
+        //1、成功 2、失败 3、提醒
+        if (2 === errorData.netCode) {
+            let desMsg = `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人`;
+            this.props.navigation.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
+                desMsg: desMsg,
+                isReady: false,
+                amount: this.props.navigation.state.params.amount,
+                payTypeDesc: this.props.navigation.state.params.payTypeDesc,
+            })
+        } else {
+            NativeModules.commModule.toast(errorData.retMsg)
+        }
+    }
+
+    handleClearRedPacketContacts = () => {
+        this.clearAllPhones();
+    };
 }
 
 const styles = StyleSheet.create({
@@ -150,6 +227,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.page_background,
+    },
+    send_red_packet_btn: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    send_red_packet_txt: {
+        marginTop: 18,
+        marginBottom: 18,
+        fontSize: 15,
     }
 });
 

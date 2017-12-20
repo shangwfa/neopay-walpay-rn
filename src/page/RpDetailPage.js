@@ -24,6 +24,7 @@ import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
 import DateUtils from "../utils/DateUtils";
+import FormatUtils from "../utils/FormatUtils";
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
@@ -90,7 +91,7 @@ class RpDetailPage extends BasePage {
             <View>
                 <CommonItemTwo imgUrl={item.robberAvatar}
                                middleUpValue={item.robberName} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
-                               rightUpValue={item.luckyAmount}
+                               rightUpValue={FormatUtils.money(item.luckyAmount)}
                                isLine={true}
                                imgIconUrl={item.luckyFlag==1?require("../res/img/rp_max_num.png"):' '} />
             </View>
@@ -110,14 +111,14 @@ class RpDetailPage extends BasePage {
                     rightTextColor={colors.white}
                     title='红包详情'/>
                 <RpDetailHeader imgIconUrl={this.state.dataDetail.bossAvatarUrl}
-                                amountValue={this.state.dataDetail.luckyMoney}
+                                amountValue={FormatUtils.money(this.state.dataDetail.luckyMoney)}
                                 fromValue={this.state.dataDetail.bossName}
                                 remarkValue={this.state.dataDetail.message}
                                 stateValue={this.state.dataDetail.redPacketReceiveStatusText}
                                 isMax = {this.state.dataDetail.bestLuckyBool}/>
                 <View style = {styles.mid_view}>
-                    <Text style = {styles.num_text}>{'已领取' + this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>
-                    <Text style = {styles.amount_text}>{'总额¥' + this.state.dataDetail.amount}</Text>
+                    <Text style = {styles.num_text}>{'已领取' + this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount +'个'}</Text>
+                    <Text style = {styles.amount_text}>{'总额¥' + FormatUtils.money(this.state.dataDetail.amount)}</Text>
                 </View>
                 <FlatList
                     style={{marginTop: 0,}}
