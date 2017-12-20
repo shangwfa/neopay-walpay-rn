@@ -14,6 +14,8 @@
 {
     self = [super initWithFrame:frame];
     
+    [kNotificationCenter addObserver:self selector:@selector(updateAvatarAndNickName) name:kNotificationSideViewUpdateAvatar object:nil];
+    
     [self setupViewComponentsWithFrame:frame];
     
     return self;
@@ -23,6 +25,31 @@
 {
     [super layoutSubviews];
     
+}
+
+-(void)updateAvatarAndNickName
+{
+    //更新头像
+    [_headerIcon sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] placeholderImage:kIMAGENAMED(@"wd_touxiang")];
+    
+    //更新实名认证标签
+    NSString *imageName = [GVUserDefaults standardUserDefaults].authStatus==2?@"wd_yishiming":@"wd_weishiming";
+    [_regIcon setImage:[UIImage imageNamed:imageName]];
+    
+    //更新用户名标签
+    [_userNameView removeFromSuperview];
+    UIView *userNameView = [self getUserNameViewWithFrame:CGRectMake(0,0, self.frame.size.width, self.frame.size.height)];
+    _userNameView = userNameView;
+    [self addSubview:userNameView];
+    
+    kWeakSelf(self);
+    [userNameView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakself);
+        make.right.equalTo(weakself);
+        make.top.equalTo(_headerIcon.mas_bottom);
+        make.bottom.equalTo(weakself);
+    }];
+
 }
 
 -(void)setupViewComponentsWithFrame:(CGRect)frame
@@ -39,10 +66,12 @@
     //认证标签
     NSString *imageName = [GVUserDefaults standardUserDefaults].authStatus==2?@"wd_yishiming":@"wd_weishiming";
     UIImageView *regIcon = [[UIImageView alloc]initWithImage:kIMAGENAMED(imageName)];
+    _regIcon=regIcon;
     [self addSubview:regIcon];
     
     //用户名视图
     UIView *userNameView = [self getUserNameViewWithFrame:frame];
+    _userNameView = userNameView;
     [self addSubview:userNameView];
     
     kWeakSelf(self);

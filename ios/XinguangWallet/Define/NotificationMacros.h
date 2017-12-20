@@ -34,6 +34,8 @@
 #define kNotificationNavPopToFirstLevel @"NavPopToFirstLevel"
 //进行实名认证通知
 #define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"
+//侧边栏更新头像和用户名
+#define kNotificationSideViewUpdateAvatar @"kNotificationSideViewUpdateAvatar"
 
 
 #pragma mark - ——————— 网络状态相关 ————————
