@@ -30,7 +30,7 @@ class NetUtil extends Component {
         })
     }
 
-    static post(urlPath, data, successCallbak, isShowLoading = true) {
+    static post(urlPath, data, successCallbak, errorCallback, netWorkCallback, isShowLoading = true) {
         if (isShowLoading) {
             NativeModules.commModule.showLoadingDialog()
         }
@@ -56,14 +56,22 @@ class NetUtil extends Component {
                     console.log(responseText)
                     let response = JSON.parse(responseText);
                     if (netCode.netOk === response.retCode) {
-                        successCallbak(response.data)
+                        successCallbak(response.data);
                     } else {
-                        this.handleException(response.netCode, response.retMsg)
+                        let errorData = {
+                            netCode: response.netCode,
+                            retMsg: response.retMsg,
+                        };
+                        errorCallback ? errorCallback(errorData) : this.handleException(response.netCode, response.retMsg)
                     }
                 })
                 .catch((err) => {
-                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
-                    console.log(err)
+                    if (isShowLoading) NativeModules.commModule.hideLoadingDialog();
+                    console.log(err);
+                    if (netWorkCallback) {
+                        let errData = {errMsg: err};
+                        netWorkCallback(errData);
+                    }
                     NativeModules.commModule.toast('网络不给力')
                 })
                 .done()
@@ -118,7 +126,7 @@ class NetUtil extends Component {
     static transform(hostUrl, methodUrl, obj) {
         let responseUrl = hostUrl + methodUrl + '?';
         for (var key in obj) {//用javascript的for/in循环遍历对象的属性
-           let value=obj[key]?obj[key]:"";
+            let value = obj[key] ? obj[key] : "";
             responseUrl += key + "=" + value + "&";
         }
         let index = responseUrl.lastIndexOf('&');
