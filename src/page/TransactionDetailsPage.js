@@ -63,7 +63,7 @@ class TransactionDetailsPage extends BasePage {
                     </View>
                     {/*详情列表*/}
                     <FlatList
-                        style={{marginTop: 7}}
+                        style={{marginTop: 10}}
                         ref='FlatList'
                         ItemSeparatorComponent={this._renderItemLine}
                         renderItem={this._renderItem}
@@ -210,7 +210,7 @@ class TransactionDetailsPage extends BasePage {
     _renderOrderStateTitleView = () => {
         return <View style={[styles.order_state_title_container, {marginTop: 23}]}>
             <Image
-                style={{width: 25, height: 25, resizeMode: "cover"}}
+                style={{width: 25, height: 25, borderRadius: 5, resizeMode: "cover"}}
                 source={{uri: this.state.sourceData.iconUrl}}/>
             <Text style={{
                 marginLeft: 9, fontSize: 16, color: "#000000"

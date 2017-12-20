@@ -108,7 +108,6 @@ dependencies {
     compile project(':react-native-picker')
     compile project(':react-native-contacts')
     compile project(':lottie-react-native')
-
     compile rootProject.ext.dependencies["appcompatv7"]
     compile rootProject.ext.dependencies["constraint_layout"]
     compile rootProject.ext.dependencies["jpush"]
@@ -116,5 +115,7 @@ dependencies {
     compile rootProject.ext.dependencies["fresco_animated_gif"]
     annotationProcessor rootProject.ext.dependencies["aroutercompiler"]
     testCompile 'junit:junit:4.12'
-
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }

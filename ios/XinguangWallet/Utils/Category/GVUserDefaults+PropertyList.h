@@ -8,6 +8,11 @@
 
 #import <GVUserDefaults/GVUserDefaults.h>
 
+typedef NS_ENUM(NSInteger, XGQBUserAuthStatus){
+    XGQBUserAuthStatusUnauthorized =1,
+    XGQBUserAuthStatusAuthorized,
+};
+
 //#import "StoreModel.h"
 
 @interface GVUserDefaults (PropertyList)
@@ -18,7 +23,7 @@
 @property (nonatomic,strong)NSString* phone;
 @property (nonatomic,strong)NSString* nickName;
 @property (nonatomic,strong)NSString* avatarUrl;
-@property (nonatomic,assign)int authStatus;
+@property (nonatomic,assign)XGQBUserAuthStatus authStatus;
 
 
 @property (nonatomic,assign)int runCount;

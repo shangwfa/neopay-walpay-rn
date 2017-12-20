@@ -25,10 +25,13 @@ money = (amount) => {
     }
     return `${money}.00`;
 };
-
+moneyWithTag=(amount)=>{
+    return  `¥${money(amount)}`;
+};
 
 export default {
     tuoMinPhone,
     bankCardEnd,
     money,
+    moneyWithTag,
 }

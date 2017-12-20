@@ -35,6 +35,11 @@ public class BusniessUtils {
         return null == userInfoBean ? "" : userInfoBean.getPhone();
     }
 
+    public static String getUuid() {
+        final UserInfoResponseBean userInfoBean = StoreManager.getSingleton().get(true, IWalpayConstants.USER_INFO, UserInfoResponseBean.class);
+        return null == userInfoBean ? "" : userInfoBean.getUuid();
+    }
+
     public static void handleCertification(Context context, UserInfoResponseBean userInfoBean, ICertificationCallBack iCertificationCallBack) {
         if (null == userInfoBean) {
             return;

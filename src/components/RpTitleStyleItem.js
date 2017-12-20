@@ -30,14 +30,15 @@ const RpTitleStyleItem = props => {
         },
 
         container: {
-            backgroundColor: colors.orange,
             width:itemWidth,
             height:itemWidth*3/7,
             marginLeft:10,
             marginTop:15,
             borderRadius:5,
             flexDirection:'row',
-            alignItems:'center'
+            alignItems:'center',
+            resizeMode:'cover'
+
         },
         iconImg: {
             width: itemWidth/7 + 10,

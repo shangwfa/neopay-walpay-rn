@@ -9,7 +9,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_158dp"
+            android:layout_height="@dimen/size_178dp"
             android:background="@mipmap/img_home_draw_bg" />
 
         <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_height="@dimen/size_103dp"
             android:layout_marginLeft="@dimen/size_12dp"
             android:layout_marginRight="@dimen/size_12dp"
-            android:layout_marginTop="85dp"
+            android:layout_marginTop="95dp"
             android:background="@mipmap/img_home_draw_white_bg"
             android:gravity="center"
             android:orientation="horizontal">

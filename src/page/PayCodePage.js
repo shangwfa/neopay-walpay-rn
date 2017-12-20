@@ -137,7 +137,7 @@ class PayCodePage extends BasePage {
         this.setState({
             isShowSelectPayStyle: false,
         });
-        this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:3});
     };
 
     _handleBtnClick = () => {

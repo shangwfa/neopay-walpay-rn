@@ -7,12 +7,13 @@ import {
     Image
 } from 'react-native';
 import {colors} from '../constants/index'
-import right_arrow from '../res/img/right_arrow.png'
+import right_arrow from '../res/img/filter_arrow.png'
 
 const SectionHeader = props => {
     const {
         title,
         value,
+        isShowArrow,
         ...attributes
     } = props
 
@@ -20,7 +21,7 @@ const SectionHeader = props => {
         img: {
             width: 10,
             height: 15,
-            marginRight: 10
+            marginRight: 10,
         },
         value:{
             color: colors.black_light,
@@ -40,17 +41,30 @@ const SectionHeader = props => {
         },
     });
 
-    return (
-        <TouchableOpacity activeOpacity={0.8}  {...attributes}>
-            <View style={styles.container}>
-                <Text style={styles.title}>{title}</Text>
-                <View style={{flex:1}}/>
-                <Text style={styles.value}>{value}</Text>
-                <Image style={styles.img} source={right_arrow}/>
-            </View>
+    if(isShowArrow == false){
+        return (
+            <TouchableOpacity activeOpacity={0.8}  {...attributes}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{title}</Text>
+                    <View style={{flex:1}}/>
+                    <Text style={styles.value}>{value}</Text>
+                </View>
 
-        </TouchableOpacity>
-    );
+            </TouchableOpacity>
+        );
+    }else {
+        return (
+            <TouchableOpacity activeOpacity={0.8}  {...attributes}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{title}</Text>
+                    <View style={{flex:1}}/>
+                    <Text style={styles.value}>{value}</Text>
+                    <Image style={styles.img} source={right_arrow}/>
+                </View>
+
+            </TouchableOpacity>
+        );
+    }
 };
 
 

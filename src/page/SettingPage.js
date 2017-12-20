@@ -45,12 +45,16 @@ class SettingPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='设置'/>
-                <CommonKeyValueItem title='重置登录密码' isLine={true} isArrow={true} style={{marginTop: 10}}
+                <CommonKeyValueItem rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
+                                    title='重置登录密码' isLine={true} isArrow={true} style={{marginTop: 10}}
                                     onPress={() => this.toLoginPwd()}/>
-                <CommonKeyValueItem title='重置支付密码' isLine={false} isArrow={true} onPress={() => this.toPayPwd()}/>
-                <CommonKeyValueItem title='意见反馈' isLine={false} isArrow={true} style={{marginTop: 10}}
+                <CommonKeyValueItem rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
+                                    title='重置支付密码' isLine={false} isArrow={true} onPress={() => this.toPayPwd()}/>
+                <CommonKeyValueItem rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
+                                    title='意见反馈' isLine={false} isArrow={true} style={{marginTop: 10}}
                                     onPress={() => this.toFeedback()}/>
-                <CommonButton value='退出登录' style={{marginTop: 50}} onPress={() => this.toLogout()}/>
+                <CommonButton rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
+                              value='退出登录' style={{marginTop: 50}} onPress={() => this.toLogout()}/>
                 <TwoButtonModal
                     isShow={this.state.isShowLogout}
                     content={`\n确定退出登录？\n`}

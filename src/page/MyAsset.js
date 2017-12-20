@@ -10,14 +10,15 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import my_asset from '../res/img/my_asset.png'
 import NetUtil from '../utils/NetUtil'
+import FormatUtils from "../utils/FormatUtils";
 
 class MyAsset extends BasePage {
 
     constructor(props) {
         super(props);
         this.state = {
-            data:{
-                balance:'0.00'
+            data: {
+                balance: '0.00'
             }
         }
     }
@@ -29,19 +30,20 @@ class MyAsset extends BasePage {
             })
         })
     }
+
     renderItem = () => {
         return (
             <View style={styles.item_container}>
                 <View style={styles.point}/>
                 <Text style={styles.item_key}>账户余额</Text>
-                <View style={{flex:1}}/>
-                <Text style={styles.item_value}>{this.state.data.balance}</Text>
+                <View style={{flex: 1}}/>
+                <Text style={styles.item_value}>{FormatUtils.moneyWithTag(this.state.data.balance)}</Text>
             </View>
         )
     }
     renderTop = () => {
         return (
-            <View style={{marginTop: 60,alignItems:'center'}}>
+            <View style={{marginTop: 60, alignItems: 'center'}}>
                 <Image style={styles.img} source={my_asset}>
                     <View style={{marginLeft: 65, marginTop: 90}}>
                         <Text style={styles.amount_title}>总资产(元)</Text>
@@ -64,41 +66,41 @@ class MyAsset extends BasePage {
 }
 
 const styles = StyleSheet.create({
-    item_value:{
-        fontSize:15,
-        color:'#E66941',
-        marginRight:18
+    item_value: {
+        fontSize: 15,
+        color: '#E66941',
+        marginRight: 18
     },
-    item_key:{
-        marginLeft:10,
-        fontSize:15,
-        color:colors.black
+    item_key: {
+        marginLeft: 10,
+        fontSize: 15,
+        color: colors.black
     },
     point: {
         width: 10,
         height: 10,
-        borderRadius:5,
-        marginLeft:18,
+        borderRadius: 5,
+        marginLeft: 18,
         backgroundColor: '#E38D33',
     },
-    item_container:{
-        height:40,
-        flexDirection:'row',
-        marginTop:60,
-        alignItems:'center',
+    item_container: {
+        height: 40,
+        flexDirection: 'row',
+        marginTop: 60,
+        alignItems: 'center',
     },
     amount_title: {
-        width:100,
+        width: 100,
         fontSize: 15,
         color: colors.balck_more_light,
-        textAlign:'center'
+        textAlign: 'center'
     },
     amount: {
-        width:100,
+        width: 100,
         fontSize: 19,
         color: colors.one_color,
         marginTop: 10,
-        textAlign:'center'
+        textAlign: 'center'
     },
     img: {
         width: 258,

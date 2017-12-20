@@ -56,7 +56,7 @@ public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoRespo
                     if (1 == data.getAuthStatus()) {//未实名认证
                         view.setVisibility(View.VISIBLE);
                         injector.background(R.id.mine_draw_auth_state_iv, R.mipmap.img_not_auth_tag);
-                        view.setOnClickListener(v -> RNActivity.jumpToRNPage(v.getContext(), RNActivity.PageType.BIND_BANK_CARD));
+                        view.setOnClickListener(v -> RNActivity.jumpToRNPage(v.getContext(), RNActivity.PageType.USER_INFO_CERFITY));
                     }
 
                 })

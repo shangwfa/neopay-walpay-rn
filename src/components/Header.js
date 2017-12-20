@@ -20,8 +20,9 @@ class Header extends Component {
     static defaultProps = {
         isShowLine: true,
         backgroundColor: colors.white,
-        textColor: colors.black,
+        textColor: colors.absolute_black,
         isWhiteArrow: false,
+        rightTextColor:colors.absolute_black,
         onRightPress:()=>{}
     };
     static propTypes = {

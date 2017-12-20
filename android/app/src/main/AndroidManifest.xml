@@ -79,7 +79,7 @@
             android:name=".ui.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.homedraw.HomeDrawActivity"
+            android:name=".ui.homedraw.HomeDrawCoordinatorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.forgotpwd.ForgotPwdActivity"
@@ -106,6 +106,18 @@
         <activity
             android:name=".ui.environment.EnvironmentSettingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <!--share start-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59e983fc734be479430008dd" />
+        <!--share end-->
         <!--JPush Start-->
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

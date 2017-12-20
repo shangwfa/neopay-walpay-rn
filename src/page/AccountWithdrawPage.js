@@ -17,6 +17,7 @@ import ApiManager from '../utils/ApiManager'
 import SelectPayStyleModal from '../modal/SelectPayStyleModal'
 import PayPwdModal from '../modal/PayPwdModal'
 
+
 class AccountWithdrawPage extends BasePage {
     constructor(props){
         super(props)
@@ -25,11 +26,14 @@ class AccountWithdrawPage extends BasePage {
             withdrawAmount:0.00,
             withdrawBalance:0.00,
             isShowSelectPayStyle:false,
+            bankCardExist:false,
             selectedBankId:0,
             selectedBankName:'',
             selectedBankCardNo:'',
+            selectedBankIconUrl:'',
             isPayShow:false,
             orderNo:'',
+            // textInputFontSize:14,
         }
     }
 
@@ -38,7 +42,10 @@ class AccountWithdrawPage extends BasePage {
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title={'提现'} rightIcon={require("../res/img/HomePage/sy_wenhao.png")} rightIconStyle={{height: 20}}/>
 
-                <CommonItemThree style={{marginTop: 10}} source={this.renderBankCardIcon()} title={this.state.selectedBankName+'('+this.state.selectedBankCardNo+')'} onPress={()=>this.selectBankCard()}/>
+                <CommonItemThree style={{marginTop: 10}}
+                                 source={this.renderBankCardIcon()}
+                                 title={this.state.bankCardExist?`${this.state.selectedBankName}(${this.state.selectedBankCardNo})`:'添加绑定银行卡'}
+                                 onPress={()=>this.selectBankCard()}/>
 
                 {this.renderDetailRow()}
                 <CommonButton style={{marginTop:50}} value={'提现'} onPress={() => this.withdrawBtnClicked()}/>
@@ -88,21 +95,19 @@ class AccountWithdrawPage extends BasePage {
         });
 
         ApiManager.withdraworder({'orderNo':this.state.orderNo,'payPassword':text,'tradeNo':this.state.orderNo},(data)=>{
-            nav.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE,{orderNo:data['orderNo']});
+            nav.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE,{data:data});
         })
 
     }
 
     renderBankCardIcon=()=>{
 
-        if(this.state.selectedBankName==='中国工商银行'){
-            return(require("../res/img/BankIcon/sy_gongshang.png"))
-        }else if (this.state.selectedBankName==='中国建设银行'){
-            return(require("../res/img/BankIcon/sy_jianshe.png"))
+        if(this.state.selectedBankIconUrl)
+        {
+            return {uri:this.state.selectedBankIconUrl}
         }else {
-            return null
+            return (require('../res/img/img_bank.png'))
         }
-
     }
 
     handleBankCardFooterItemClick=()=>{
@@ -110,7 +115,7 @@ class AccountWithdrawPage extends BasePage {
         this.setState({
             isShowSelectPayStyle: false,
         });
-        this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE, {pageTitle: "添加绑定银行卡"});
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:2});
     }
     handleBankCardItemClick=(bankCardData)=>{
         // console.log('点击了选择银行卡')
@@ -118,9 +123,10 @@ class AccountWithdrawPage extends BasePage {
             isShowSelectPayStyle: false,
             selectedBankId:bankCardData.id,
             selectedBankName:bankCardData.bankName,
-            selectedBankCardNo:bankCardData.cardNo
+            selectedBankCardNo:bankCardData.cardNo,
+            selectedBankIconUrl:bankCardData.iconUrl,
         });
-        console.log(bankCardData)
+        // console.log(bankCardData)
 
     }
     handleSelectPayStyleCloseClick=()=>{
@@ -132,20 +138,26 @@ class AccountWithdrawPage extends BasePage {
 
     selectBankCard=()=>{
         // console.log('点击了银行卡选择')
-        this.setState({
-            isShowSelectPayStyle:true
-        })
+
+        if(this.state.bankCardExist){
+            this.setState({
+                isShowSelectPayStyle:true
+            })
+        }else {
+            this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:1});
+        }
+
     }
 
     renderDetailRow = () => {
         return (
             <View style={styles.numberRowView}>
-                <Text style={styles.numberRowViewText}>{'可提现金额'+this.state.withdrawBalance.toFixed(2)+'元'}</Text>
+                <Text style={styles.numberRowViewText}>{'可提现金额 '+this.state.withdrawBalance.toFixed(2)+'元'}</Text>
                 <View style={styles.numberRowViewNoView}>
                     <Text style={styles.numberRowViewRMB}>¥</Text>
                     <TextInput
                         placeholder='请输入提现金额'
-                        style={styles.numberRowViewNumber}
+                        style={[styles.numberRowViewNumber]}
                         keyboardType={'numeric'}
                         underlineColorAndroid={'transparent'}
                         onChangeText={(text)=>this.onChangeText(text)}
@@ -161,21 +173,36 @@ class AccountWithdrawPage extends BasePage {
         this.setState({
             withdrawAmount:text
         })
+        // if(text){
+        //     this.setState({
+        //         textInputFontSize:33,
+        //     })
+        // }else {
+        //     this.setState({
+        //         textInputFontSize:14,
+        //     })
+        // }
     }
 
     withdrawBtnClicked() {
 
         if(this.state.withdrawAmount!=0)
         {
-            ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
-                //创建订单成功,跳转结果页
-                this.setState({
-                    isPayShow:true
-                })
-                this.setState({
-                    orderNo:data.orderNo
-                })
-            });
+            // if(this.state.withdrawAmount>this.state.withdrawBalance){
+            //     NativeModules.commModule.toast('超过可提现金额');
+            // }else {
+
+                ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
+                    //创建订单成功,跳转结果页
+                    this.setState({
+                        isPayShow:true
+                    })
+                    this.setState({
+                        orderNo:data.orderNo
+                    })
+                });
+            // }
+
         }else {
             NativeModules.commModule.toast("请输入正确提现金额");
         }
@@ -190,13 +217,27 @@ class AccountWithdrawPage extends BasePage {
                 withdrawBalance:data.withdrawBalance
             })
         })
-        ApiManager.getRecentWithdrawBankCard({},(data)=>{
-            this.setState({
-                selectedBankId:data.id,
-                selectedBankName:data.bankName,
-                selectedBankCardNo:data.cardNo
-            })
+
+        ApiManager.getUserBankCardList({},(data)=>{
+            if(data.length>0){
+                ApiManager.getRecentWithdrawBankCard({},(data)=>{
+                    this.setState({
+                        bankCardExist:true,
+                        selectedBankId:data.id,
+                        selectedBankName:data.bankName,
+                        selectedBankCardNo:data.cardNo,
+                        selectedBankIconUrl:data.iconUrl
+                    })
+                })
+            }else {
+                this.setState({
+                    bankCardExist:false
+                })
+            }
+
         })
+
+
     }
 
 }
@@ -241,6 +282,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 50,
         marginTop: 20,
+        alignItems:'flex-start'
     },
     numberRowViewRMB: {
         fontSize: 30,
@@ -249,9 +291,11 @@ const styles = StyleSheet.create({
         marginTop: ScrnUtil.isIOS ? 3 : 0
     },
     numberRowViewNumber: {
-        fontSize: 14,
+        fontWeight:'bold',
         marginLeft: 10,
         flex: 1,
+        height:40,
+        fontSize:33,
     },
     //分割线
     numberRowViewUnderlineView: {

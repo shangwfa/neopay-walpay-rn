@@ -54,7 +54,7 @@ public class MainRouter {
     }
 
     public void jumpToHomeDrawPage() {
-        ARouter.getInstance().build(IWalpayConstants.TO_HOME_DRAW_PAGE)
+        ARouter.getInstance().build(IWalpayConstants.TO_HOME_DRAW_COORDINATOR_PAGE)
                 .navigation();
     }
 
@@ -82,7 +82,7 @@ public class MainRouter {
         }
 
         ARouter.getInstance().build(IWalpayConstants.TO_RN_PAGE)
-                .withParcelable("activityParams",activityParams)
+                .withParcelable("activityParams", activityParams)
                 .navigation();
     }
 

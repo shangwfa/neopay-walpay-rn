@@ -24,6 +24,7 @@ import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
 import cn.neopay.walpay.android.module.sliminjector.MineTextImgItemBean;
 import cn.neopay.walpay.android.ui.RNActivity;
+import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
  * @author carlos.guo
@@ -35,6 +36,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
 
     private SlimAdapter mMineSlimAdapter;
     private ArrayList<Object> mData;
+    private UserInfoResponseBean mUserInfoBean;
 
     @Override
     public int getLayoutId() {
@@ -69,6 +71,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
 
     @Override
     public void setUserInfoData(UserInfoResponseBean userInfoResponseBean) {
+        mUserInfoBean = userInfoResponseBean;
         ArrayList<Object> data = getMineItemData(userInfoResponseBean);
         mMineSlimAdapter.updateData(data);
     }
@@ -118,9 +121,11 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         mAsset.setItemImgId(R.mipmap.img_mine_draw_money);
         mAsset.setItemName("我的资产");
         mAsset.setOnClickListener(v -> {
-            RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setPage(RNActivity.PageType.MY_ASSET);
-            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+            BusniessUtils.handleCertification(getContext(), mUserInfoBean, () -> {
+                RNActivityParams activityParams = new RNActivityParams();
+                activityParams.setPage(RNActivity.PageType.MY_ASSET);
+                MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+            });
         });
         data.add(mAsset);
         mData.add(new CommonLineItemBean());

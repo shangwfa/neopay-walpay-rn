@@ -28,7 +28,7 @@ class NewBindBankCardPage extends BasePage {
             bankCode: '',
             bindPhone: '',
             smsCode: '',
-            openBankName: '',
+            openBankName: '开户银行',
             date:'请选择信用卡有效期',
             param:this.props.navigation.state.params,
         };
@@ -81,7 +81,7 @@ class NewBindBankCardPage extends BasePage {
         }
 
         ApiManager.bindBankCard(body,data=>{
-
+            this.props.navigation.goBack();
         })
 
     }
@@ -93,6 +93,7 @@ class NewBindBankCardPage extends BasePage {
                 name:data.name,
                 bindPhone:data.phone
             })
+            console.log('name is ' + this.state.name)
         })
     }
 
@@ -128,14 +129,14 @@ class NewBindBankCardPage extends BasePage {
     }
 
     renderTopView =()=>{
-        const nameData = {'key': '姓名', 'placeholder': this.state.name, isLine: true}
+        const nameData = {'key': '姓名', 'placeholder': this.state.name==''?'':'*' + this.state.name.substring(1,this.state.name.length), isLine: true}
         const cardNumData = {'key': '卡号', 'placeholder': '请填写银行卡号', isLine: true}
         const idCardNameData = {'key': '开户银行', 'placeholder': '开户银行', isLine: true}
         return(
             <View>
                 <CommonInput data={nameData} editable={false}/>
                 <CommonInput data={cardNumData} keyboardType = {'number-pad'} onChangeText={(text) => this.setState({cardNo: text})} onBlur ={()=>this.onBlur()}/>
-                <CommonInput data={idCardNameData} editable={false} noEditText={this.state.openBankName}/>
+                <CommonInput data={idCardNameData} editable={false} noEditText={this.state.openBankName} isShowArrow = {true}/>
             </View>
         )
 
@@ -143,12 +144,12 @@ class NewBindBankCardPage extends BasePage {
 
     renderMidView =()=>{
         const CVV2Data = {'key': 'CVV2', 'placeholder': '信用卡背面签名栏末三位数字', isLine: true}
-        const dateInfo = {'key': '有效期', 'placeholder':this.state.date, isLine: true}
+        const dateInfo = {'key': '有效期', 'placeholder':'请选择信用卡有效期', isLine: true}
         if(this.state.isCreditCard){
             return(
                 <View>
                     <CommonInput data={CVV2Data} onChangeText={(text) => this.setState({cvv2: text})}/>
-                    <CommonInput data={dateInfo} editable={false} noEditText={this.state.date} tapClick={()=>this.choseDate()}/>
+                    <CommonInput data={dateInfo} editable={false} noEditText={this.state.date} isShowArrow = {true} tapClick={()=>this.choseDate()}/>
                 </View>
             )
         }else{
@@ -158,7 +159,7 @@ class NewBindBankCardPage extends BasePage {
     }
 
     render() {
-        const phoneData = {'key': '手机号', 'placeholder': '请填写银行预留手机号', 'keyboard': 'numeric', isLine: true}
+        const phoneData = {'key': '手机号', 'placeholder': this.state.bindPhone, 'keyboard': 'numeric', isLine: true,'inputOver':true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
         return (
             <View style={styles.container}>

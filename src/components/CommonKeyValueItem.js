@@ -16,6 +16,8 @@ import right_arrow from '../res/img/right_arrow.png'
 const CommonKeyValueItem = props => {
     const {
         title,
+        rightTextStyle,
+        leftTextStyle,
         value,
         realNameValue,
         imgUrl,
@@ -72,7 +74,7 @@ const CommonKeyValueItem = props => {
     }
 
     const renderValue = () => {
-        if (value) return <Text style={styles.title}>{value}</Text>
+        if (value) return <Text style={[styles.title,rightTextStyle]}>{value}</Text>
     }
 
     const renderRealName = () => {
@@ -85,7 +87,7 @@ const CommonKeyValueItem = props => {
     return (
         <MoreClickComponet activeOpacity={0.8} style={[styles.container,style&&style]} {...attributes}>
             <View style={styles.content_container}>
-                <Text style={styles.key}>
+                <Text style={[styles.key,leftTextStyle]}>
                     {title}
                 </Text>
                 <View style={{flex: 1, height: 1}}/>

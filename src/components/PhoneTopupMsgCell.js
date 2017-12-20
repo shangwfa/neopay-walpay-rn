@@ -48,7 +48,7 @@ const PhoneTopupMsgCell = props => {
             marginLeft: 15,
             marginTop:10,
             fontSize: 14,
-            color: colors.black,
+            color: colors.balck_more_light,
             height: 20
         },
 
@@ -117,7 +117,9 @@ const PhoneTopupMsgCell = props => {
             borderRadius:5,
             backgroundColor:colors.white,
             marginLeft:15,
-            marginRight:15
+            marginRight:15,
+            borderWidth:1,
+            borderColor:'#efefef'
         },
 
         bottom_line:{
@@ -129,7 +131,7 @@ const PhoneTopupMsgCell = props => {
     renderSectionHeader = () => {
         if (isShow) {
             return <View style = {styles.headr}>
-                <Text>{showDate}</Text>
+                <Text style={{color:colors.black_light}}>{showDate}</Text>
             </View>
         }else {
             return <View style={styles.headr_bottom}/>

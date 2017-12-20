@@ -26,7 +26,7 @@ import {RouterPaths} from "../constants/RouterPaths";
 import SelectPayStyleModal from "../modal/SelectPayStyleModal";
 import SendPhoneAuthCodeModal from "../modal/SendPhoneAuthCodeModal";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
-import WarpRedPacket from '../data/WarpRedPacket.json'
+import WarpRedPacket from '../data/RecivedRedPacket.json'
 import FormatUtils from "../utils/FormatUtils";
 class SendRedPacketPage extends BasePage {
     constructor(props) {
@@ -67,14 +67,7 @@ class SendRedPacketPage extends BasePage {
                 bankCardId: data.bankCardId,
             });
         });
-        ApiManager.getRedPacketThemeList((data) => {
-            this.setState({
-                redPacketThemeSourceData: data,
-                redPacketMessage: data[0].blessingWords,
-                redThemeName: data[0].name,
-                redPacketThemeCode: data[0].themeCode,
-            });
-        });
+        this._handleRedPacketTheme();
 
     }
 
@@ -94,6 +87,7 @@ class SendRedPacketPage extends BasePage {
                         contentType="红包个数"
                         placeholderType="请填写红包个数"
                         keybordType="numeric"
+                        conentValue={this.state.redPacketNum}
                         onTextInputClick={this._handleTextInputClick.bind(this)}
                         textInputChangeListener={this._handleRedPacketNumListener.bind(this)}/>
                     {this._renderLineView()}
@@ -103,6 +97,7 @@ class SendRedPacketPage extends BasePage {
                         contentType={this.state.redPacketAmountText}
                         placeholderType="塞进红包的金额"
                         keybordType="numeric"
+                        conentValue={this.state.redPacketAmount}
                         contentEndUnit="元"
                         onTextInputClick={this._handleTextInputClick.bind(this)}
                         textInputChangeListener={this._handleRedPacketAmountListener.bind(this)}/>
@@ -162,6 +157,16 @@ class SendRedPacketPage extends BasePage {
         );
     }
 
+    _handleRedPacketTheme = () => {
+        ApiManager.getRedPacketThemeList((data) => {
+            this.setState({
+                redPacketThemeSourceData: data,
+                redPacketMessage: data[0].blessingWords,
+                redThemeName: data[0].name,
+                redPacketThemeCode: data[0].themeCode,
+            });
+        });
+    };
     _handleAuthMsgTextChangeClick = (text) => {
         if (text.length === 6) {
             let request = {
@@ -184,6 +189,7 @@ class SendRedPacketPage extends BasePage {
                 setTimeout(() => {
                     this._handleRedPacketJump(data, redPacketResult);
                     this._handleRedPackProcess(data, redPacketResult);
+                    this._handleRedPacketWrapClose(data);
                 }, 2000);
             })
         }
@@ -227,10 +233,10 @@ class SendRedPacketPage extends BasePage {
     }
 
     _handleRedPacketJump(data, redPacketResult) {
-        if (1 === data.payStatus) {//success
+        if (2 === data.payStatus) {//success
             redPacketResult.redPacketState = true;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
-        } else if (2 === data.payStatus) {//fail
+        } else if (4 === data.payStatus) {//fail
             redPacketResult.redPacketState = false;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
         }
@@ -255,6 +261,17 @@ class SendRedPacketPage extends BasePage {
                     payTypeContent: event.payTypeContent
                 });
                 break;
+            case "redPacketResultGoBack"://红包结果页面返回redPacketResultGoBack
+                this.setState({
+                    redPacketAmount: "",
+                    redPacketNum: ""
+                });
+                this._handleRedPacketTheme();
+                break;
+            case "redPacketResultRePay"://红包重新支付redPacketResultRePay
+                this._handleShowPayModal();
+                break;
+
         }
 
     };
@@ -298,6 +315,7 @@ class SendRedPacketPage extends BasePage {
     };
     _handleSelectPayStyleClick = () => {
         this.setState({
+            isShowPay:false,
             isShowSelectPayStyle: true,
         });
     };
@@ -308,6 +326,9 @@ class SendRedPacketPage extends BasePage {
             payType: this.state.payType,
             bankCardId: this.state.bankCardId
         };
+        this.setState({
+            isShowPay:false
+        })
         ApiManager.payRedPacket(request, (data) => {
             this.setState({
                 payResultSourceData: data
@@ -323,16 +344,20 @@ class SendRedPacketPage extends BasePage {
                     })
                 } else if (2 === data.smsFlag) {
                     this._handlePayRedPacketResult(data);
-                    if (1 === data.payStatus || 2 === data.payStatus) {
-                        this.setState({
-                            isShowWarpAction: false
-                        });
-                    }
+                    this._handleRedPacketWrapClose(data);
                 }
             }, 2000);
         });
 
     };
+
+    _handleRedPacketWrapClose(data) {
+        if (4 === data.payStatus || 2 === data.payStatus) {
+            this.setState({
+                isShowWarpAction: false
+            });
+        }
+    }
 
     _handlePayRedPacketResult(data) {
         if (this.state.payResultSourceData) {
@@ -393,7 +418,7 @@ class SendRedPacketPage extends BasePage {
     _handleTextInputClick = () => {
     };
     _handleRedThemeClick = (item) => {
-        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE);
+        this.props.navigation.navigate(RouterPaths.RP_TITLE_STYLE, {blessingWords: this.state.redPacketMessage});
     };
     _handleRedPacketListener = (text) => {
     };
@@ -428,13 +453,15 @@ class SendRedPacketPage extends BasePage {
             isShowPay: false,
         });
         let params = {
-            pageType: 1
+            pageType: 1,
+            type: 3
         };
-        this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE, params);
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, params);
     };
     _handleSelectPayStyleCloseClick = () => {
         this.setState({
-            isShowSelectPayStyle: false
+            isShowSelectPayStyle: false,
+            isShowPay:true,
         });
     };
     _handleBankCardItemClick = (bankCardData) => {
@@ -444,6 +471,7 @@ class SendRedPacketPage extends BasePage {
             payTypeContent: bankCardData.bankName + nameDes,
             payType: bankCardData.id === -1 ? 2 : 1,
             bankCardId: bankCardData.id,
+            isShowPay:true
         });
 
     };
@@ -463,7 +491,8 @@ class SendRedPacketPage extends BasePage {
             NativeModules.commModule.toast('请输入金额');
             return;
         }
-        if (2000 < this.state.redPacketNum * this.state.redPacketAmount) {
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.redPacketNum * this.state.redPacketAmount;
+        if (2000 < tempAmount) {
             let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为${this.state.redPacketNum * this.state.redPacketAmount}元`;
             this.setState({
                 contentModal: contentModal,
@@ -490,7 +519,8 @@ class SendRedPacketPage extends BasePage {
     };
     _handleShowPayModal = () => {
         let contentFront = `实付金额`;
-        let contentBack = `${FormatUtils.money(this.state.redPacketNum * this.state.redPacketAmount)}元`;
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.redPacketNum * this.state.redPacketAmount;
+        let contentBack = `${FormatUtils.money(tempAmount)}元`;
         this.setState({
             contentFront: contentFront,
             contentBack: contentBack,

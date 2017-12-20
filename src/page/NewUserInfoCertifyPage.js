@@ -26,9 +26,10 @@ class NewUserInfoCertifyPage extends BasePage {
             idCardNo: '',
             Phone: '',
             smsCode: '',
-            openBankName: '',
+            inCity: '选择省、市、区',
             dataDetail:{provinceName:'选择省、',provinceCode:'',cityName:'市、',cityCode:'',areaName:'区',areaCode:''},
-            occupation:'请选择'
+            occupation:'请选择',
+            occupationCode:''
         };
     }
 
@@ -63,12 +64,12 @@ class NewUserInfoCertifyPage extends BasePage {
             proCode:this.state.dataDetail.provinceCode,
             cityCode:this.state.dataDetail.cityCode,
             areaCode:this.state.dataDetail.areaCode,
-            jobType:this.state.occupation,
+            jobType:this.state.occupationCode,
             verifyCode:this.state.smsCode,
         };
 
         ApiManager.submitUserCerfity(body,data=>{
-            this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:1})
+            this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD,{type:2})
         })
     }
 
@@ -89,27 +90,20 @@ class NewUserInfoCertifyPage extends BasePage {
         this.props.navigation.navigate(RouterPaths.CHOSE_OCCUPATION)
     }
 
-    onBlur = () => {
-        ApiManager.getBankInfoByCardNo({'cardNo': this.state.cardNo},data=>{
-            this.setState({
-                    openBankName: data.bankName
-                }
-            )
-        })
-    }
-
     emitEvent = (event) => {
         switch (event.type) {
             case "choseCity"://选择红包主题
                 this.setState({
-                    dataDetail:event.data
+                    dataDetail:event.data,
+                    inCity:event.data.provinceName + event.data.cityName + event.data.areaName
                 });
                 console.log('^^^^'+ this.state.dataDetail.areaName)
                 // console.log('^^^^'+ event.data.areaName)
                 break;
             case "choseOccupation"://选择红包主题
                 this.setState({
-                    occupation:event.data.type
+                    occupation:event.data.des,
+                    occupationCode:event.data.index
                 });
                 break;
         }
@@ -119,8 +113,9 @@ class NewUserInfoCertifyPage extends BasePage {
     render() {
         const nameData = {'key': '姓名', 'placeholder': '请填写真实姓名', isLine: true}
         const idCardNameData = {'key': '身份证号', 'placeholder': '请填写身份证号', isLine: true}
-        const cardNumData = {'key': '居住所在地', 'placeholder': this.state.dataDetail.provinceName+this.state.dataDetail.cityName+this.state.dataDetail.areaName, isLine: true}
-        const openAccountBankData = {'key': '职业类别', 'placeholder': this.state.occupation}
+        const cityData = {'key': '居住所在地', 'placeholder':'选择省、市、区', isLine: true}
+        const occupationData = {'key': '职业类别', 'placeholder': '请选择'}
+
         const phoneData = {'key': '手机号', 'placeholder': this.state.Phone, 'keyboard': 'numeric', isLine: true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
         const tips = '注:认证通过后，该账号关联的信息不可更改'
@@ -130,11 +125,11 @@ class NewUserInfoCertifyPage extends BasePage {
                 <View style={{height: 10}}/>
                 <CommonInput data={nameData} onChangeText={(text) => this.setState({name: text})}/>
                 <CommonInput data={idCardNameData} onChangeText={(text) => this.setState({idCardNo: text})}/>
-                <CommonInput data={cardNumData} editable={false} noEditText={this.state.openBankName} tapClick={()=>this.choseCityClick()}/>
-                <CommonInput data={openAccountBankData} editable={false} noEditText={this.state.openBankName} tapClick={()=>this.choseOccupationClick()}/>
+                <CommonInput data={cityData} editable={false} noEditText={this.state.inCity} isShowArrow={true} tapClick={()=>this.choseCityClick()}/>
+                <CommonInput data={occupationData} editable={false} noEditText={this.state.occupation} isShowArrow={true} tapClick={()=>this.choseOccupationClick()}/>
                 <View style={{height: 10}}/>
                 <CommonInput data={phoneData} editable={false}/>
-                <CommonInput data={verifyCodeData} phone={this.state.bindPhone}
+                <CommonInput data={verifyCodeData} phone={this.state.Phone}
                              onChangeText={(text) => this.setState({smsCode: text})} type={1}/>
                 <Text style={styles.tips}>{tips}</Text>
                 <CommonButton value='确定' style={{marginTop: 75}} onPress={() => this.commit()}/>

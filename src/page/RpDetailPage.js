@@ -8,6 +8,7 @@ import {
     ListView,
     FlatList,
     DeviceEventEmitter,
+    ScrollView
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
@@ -22,6 +23,7 @@ import ScreenUtils from '../utils/ScreenUtils'
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
+import DateUtils from "../utils/DateUtils";
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
@@ -86,8 +88,8 @@ class RpDetailPage extends BasePage {
         console.log('----xxx' + item)
         return (
             <View>
-                <CommonItemTwo imgUrl={item.iconUrl}
-                               middleUpValue={item.robberName} middleBottomValue={item.createTime}
+                <CommonItemTwo imgUrl={item.robberAvatar}
+                               middleUpValue={item.robberName} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
                                rightUpValue={item.luckyMoney}
                                isLine={true}
                                imgIconUrl={item.luckyFlag==1?require("../res/img/rp_max_num.png"):' '} />
@@ -98,7 +100,7 @@ class RpDetailPage extends BasePage {
 
     _renderMainView = () =>{
         return(
-            <View style = {{height:ScreenUtils.height - 50}}>
+            <ScrollView style = {{height:ScreenUtils.height - 50}}>
                 <Header
                     navigation={this.props.navigation}
                     backgroundColor="#D83E3E"
@@ -114,7 +116,7 @@ class RpDetailPage extends BasePage {
                                 stateValue={this.state.dataDetail.redPacketReceiveStatusText}
                                 isMax = {this.state.dataDetail.bestLuckyBool}/>
                 <View style = {styles.mid_view}>
-                    <Text style = {styles.num_text}>{this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>
+                    <Text style = {styles.num_text}>{'已领取' + this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount}</Text>
                     <Text style = {styles.amount_text}>{'总额¥' + this.state.dataDetail.amount}</Text>
                 </View>
                 <FlatList
@@ -124,24 +126,24 @@ class RpDetailPage extends BasePage {
                     renderItem={this._renderRow}
                     refreshing={false}
                 />
-            </View>
+            </ScrollView>
         )
     }
 
     _renderBottom=()=>{
-        if(!this.state.dataSource.ownerBool){
+        if(this.state.dataDetail.ownerBool == false){
             return (
                 <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
-                    <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
+                    <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
                 </Image>
             )
         }else{
             return (
-                <View style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
-                    <ImageButton value='分享该红包' style={{marginTop:2,marginBottom:2,flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
-                    <View style={{width:1,backgroundColor:colors.divider }}/>
-                    <ImageButton value='我也要发红包' style={{marginBottom:0 , flex:1}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
-                </View>
+                <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
+                    <ImageButton value='分享该红包' style={{marginTop:2,marginBottom:2,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
+                    <View style={{marginTop:2,width:1,backgroundColor:colors.divider }}/>
+                    <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
+                </Image>
             )
         }
 

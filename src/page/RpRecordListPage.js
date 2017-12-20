@@ -16,6 +16,7 @@ import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
 import ApiManager from '../utils/ApiManager'
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
+import DateUtils from "../utils/DateUtils";
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
@@ -70,8 +71,8 @@ class RpRecordListPage extends BasePage {
             <View>
                 {this.renderSectionHeader(item)}
                 <CommonItemTwo imgUrl={item.iconUrl}
-                               middleUpValue={item.title} middleBottomValue={item.tradeTime}
-                               rightUpValue={item.amount} rightBottomValue={item.status}
+                               middleUpValue={item.title} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
+                               rightUpValue={item.payDirection==2?'-' + item.amount:'+' + item.amount} rightBottomValue={item.status}
                                isLine={true}
                                imgIconUrl={item.bestFlag==1?require("../res/img/rp_max_num.png"):' '}/>
             </View>
@@ -80,7 +81,7 @@ class RpRecordListPage extends BasePage {
     }
     renderSectionHeader = (item) => {
         if (item.displayDate) {
-            return <SectionHeader title={item.monthCode} value='查看月红包' onPress ={()=>this.pushMontnDetailPage(item)}/>
+            return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} value='查看月红包' onPress ={()=>this.pushMontnDetailPage(item)}/>
         }
     }
 

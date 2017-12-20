@@ -17,6 +17,7 @@ class AccountWithdrawResultPage extends BasePage {
         super(props);
         this.state = {
             retResult:true,
+            data:this.props.navigation.state.params.data,
         }
     }
     render() {
@@ -26,7 +27,7 @@ class AccountWithdrawResultPage extends BasePage {
                     nav.goBack(backKey)
                 }}/>
                 <FlatList
-                    data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:'中信银行信用卡(9889)'},{key: '提现服务费',data:'1.23元'}]}
+                    data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:this.state.data.incomeTypeDesc},{key: '提现服务费',data:`${this.state.data.feePay}`}]}
                     renderItem={this._renderItemComponent}
                     ListHeaderComponent ={this.state.retResult?this._renderListHeaderComponentSuc:this._renderListHeaderComponentFail}
                 />
@@ -34,6 +35,7 @@ class AccountWithdrawResultPage extends BasePage {
             </View>
         );
     }
+
     _renderItemComponent = ({item}) => {
         return (
             <View>
@@ -70,26 +72,26 @@ class AccountWithdrawResultPage extends BasePage {
         return(
             <View style={styles.headerView}>
                 <View style={sucStyles.headerViewTitle}>
-                    <Image source={require("../res/img/HomePage/sy_chulizhong.png")} style={sucStyles.headerViewImg}/>
+                    <Image source={{uri:this.state.data.procImgUrl}} style={sucStyles.headerViewImg}/>
                     <View>
                         <Text style={sucStyles.headerViewText1}>
-                            提现申请提交成功
+                            {this.state.data.procDesc1}
                         </Text>
                         <View style={sucStyles.headerViewTextSep}>
                         </View>
                         <Text style={sucStyles.headerViewText2}>
-                            处理中
+                            {this.state.data.procDesc2}
                         </Text>
                     </View>
                 </View>
 
                 <View>
                     <Text style={sucStyles.headerViewNoText}>
-                        +38.00
+                        {this.state.data.amount}
                     </Text>
                 </View>
                     <Text style={sucStyles.headerViewDesText}>
-                        申请成功后,金额最迟2个小时之内到账,请注意查收
+                        {this.state.data.procStatusText}
                     </Text>
 
             </View>
@@ -123,8 +125,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF',
     },
     separatorLine:{
-        backgroundColor:'#DCDCDC',
-        height:1,
+        backgroundColor:'#DADADA',
+        height:0.5,
         width:ScrnUtil.width-12,
     },
     headerView:{
@@ -147,6 +149,7 @@ const sucStyles = StyleSheet.create({
     headerViewTitle:{
         flexDirection:'row',
         marginTop:22,
+        height:84,
     },
     headerViewImg:{
         marginRight:13,

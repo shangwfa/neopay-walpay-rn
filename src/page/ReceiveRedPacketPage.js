@@ -9,7 +9,7 @@ import {
     View,
     Text,
     Image,
-    ListView, TouchableOpacity,
+    ListView, TouchableOpacity, NativeModules
 } from 'react-native'
 import ApiManager from "../utils/ApiManager";
 import Header from "../components/Header";
@@ -27,6 +27,7 @@ class ReceiveRedPacketPage extends BasePage {
             dataSource: [],
             isShowProcess: false,
             footerStatus: RefreshStatus.IDLE,
+            resultState: false,
         }
     }
 
@@ -90,12 +91,23 @@ class ReceiveRedPacketPage extends BasePage {
         this.setState({
             isShowProcess: true
         });
+        let request = {
+            packetCode: item.packetCode
+        };
+        ApiManager.receiveRedPacket(request, (data) => {
+            setTimeout(() => {
+                this.setState({
+                    isShowProcess: false
+                });
+                this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
+            }, 2000);
+        });
+        //TODO 处理数据异常、网络超时异常
         setTimeout(() => {
             this.setState({
                 isShowProcess: false
             });
-            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
-        }, 2000);
+        }, 10000);
 
     };
     _handleRightArrowClick = () => {
@@ -106,7 +118,7 @@ class ReceiveRedPacketPage extends BasePage {
             <TouchableOpacity
                 activeOpacity={0.8} onPress={this._clickItem.bind(this, item)}>
                 <View style={[styles.red_container]}>
-                    <View style={[styles.time_container, {height: 10,backgroundColor:"#FFF"}]}/>
+                    <View style={[styles.time_container, {height: 10, backgroundColor: "#FFF"}]}/>
                     <RedPacketTypeComponent
                         redPacketData={item}/>
                 </View>

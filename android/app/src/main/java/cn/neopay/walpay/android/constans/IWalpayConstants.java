@@ -35,6 +35,7 @@ public interface IWalpayConstants {
     String USER_INFO = "user_info";
     String USER_INFO_AUTH = "user_info_auth";
     String IS_FIRST_INSTALL = "is_install_state";
+    String ALIAS_VALUE = "alias_value";
     String IS_FIRST_CERTIFICATION = "is_certification_state";
     String ACCESS_TOKEN = "accessToken";
 
@@ -46,6 +47,7 @@ public interface IWalpayConstants {
     String TO_LOGIN_PAGE = "/appModule/LoginActivity";
     String TO_HOME_PAGE = "/appModule/HomeActivity";
     String TO_HOME_DRAW_PAGE = "/appModule/HomeDrawActivity";
+    String TO_HOME_DRAW_COORDINATOR_PAGE = "/appModule/HomeDrawCoordinatorActivity";
     String TO_REGISTER_PAGE = "/appModule/RegisterActivity";
     String TO_FORGOTPWD_PAGE = "/appModule/ForgotPwdActivity";
     String TO_RN_PAGE = "/appModule/RNActivity";

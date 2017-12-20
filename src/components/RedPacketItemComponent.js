@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     backgroundImg:{
         height:(ScreenUtils.width-24)*310/700.0,
         width:ScreenUtils.width-24,
+        borderRadius: 8,
     },
 
 
@@ -76,12 +77,12 @@ const styles = StyleSheet.create({
         marginLeft:100,
         marginTop:54 *(ScreenUtils.width/375.0),
         backgroundColor:'transparent',
-        color:'#FBDEB0',
+        color:colors.white,
     },
     shopText:{
         marginLeft:100,
         marginTop:16,
-        color:'#F2BE9A',
+        color:colors.white,
         fontSize:14,
         backgroundColor:'transparent',
     },

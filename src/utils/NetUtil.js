@@ -1,28 +1,29 @@
 import React, {Component} from 'react'
-import {NativeModules,DeviceEventEmitter} from 'react-native'
+import {NativeModules, DeviceEventEmitter} from 'react-native'
 import netCode from '../constants/netCode'
 import {events} from '../constants/index'
 const TEST_URL = "http://139.224.11.160:8202/walpay-web/";
 const MOCK_URL = "http://172.16.33.151:8888/walpay-web/";
-const PROXY_URL="http://172.22.1.47:8202/walpay-web/";
+const PROXY_URL = "http://172.22.1.47:8202/walpay-web/";
 
 class NetUtil extends Component {
 
     static baseUrl = TEST_URL;
+
     static handleException(code, msg) {
-        let isShowMsg=true
+        let isShowMsg = true
         switch (code) {
             case 104://用户未登录
                 break
         }
 
-        if(isShowMsg) NativeModules.commModule.toast(msg)
+        if (isShowMsg) NativeModules.commModule.toast(msg)
     }
 
     /**设置超时时间*/
     static timeout(ms, promise) {
-        return new Promise(function(resolve, reject) {
-            setTimeout(function() {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
                 reject(new Error("timeout"))
             }, ms)
             promise.then(resolve, reject)
@@ -34,7 +35,7 @@ class NetUtil extends Component {
             NativeModules.commModule.showLoadingDialog()
         }
         NativeModules.commModule.netCommParas((originalata) => {
-            console.log('公共参数'+originalata)
+            console.log('公共参数' + originalata)
             let params = JSON.parse(originalata)
             Object.assign(data, params);
             var fetchOption = {
@@ -45,7 +46,7 @@ class NetUtil extends Component {
                 },
                 body: JSON.stringify(data)
             }
-            NetUtil.timeout(10000,fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption))
+            NetUtil.timeout(10000, fetch(NetUtil.transform(NetUtil.baseUrl, urlPath, data), fetchOption))
                 .then((response) => {
                     console.log(response)
                     return response.text()
@@ -117,7 +118,8 @@ class NetUtil extends Component {
     static transform(hostUrl, methodUrl, obj) {
         let responseUrl = hostUrl + methodUrl + '?';
         for (var key in obj) {//用javascript的for/in循环遍历对象的属性
-            responseUrl += key + "=" + obj[key] + "&";
+           let value=obj[key]?obj[key]:"";
+            responseUrl += key + "=" + value + "&";
         }
         let index = responseUrl.lastIndexOf('&');
         responseUrl = responseUrl.substring(0, index);

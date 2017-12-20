@@ -68,6 +68,8 @@ export default class PasswordInput extends Component {
                                 }
                             }
                         }
+                        onFocus={()=>this.props.onTextFocus()}
+                        onBlur={()=>this.props.onTextBlur()}
                     />
                     {
                         this._getInputItem()

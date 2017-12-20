@@ -30,7 +30,7 @@ const BankCardCell = props => {
         },
 
         textAvatar: {
-            marginLeft: 10
+            marginLeft: 20
         },
 
         right_container: {
@@ -39,37 +39,40 @@ const BankCardCell = props => {
         bankName_value: {
             marginTop: 20,
             color: colors.white,
-            fontSize: 15
+            fontSize: 15,
+            backgroundColor: 'transparent'
         },
         bankType_value: {
             marginTop: 5,
             color: colors.white,
-            fontSize: 11
+            fontSize: 11,
+            backgroundColor: 'transparent',
         },
         cardNo_value: {
             marginTop: 10,
             color: colors.white,
-            fontSize: 15
+            fontSize: 15,
+            backgroundColor: 'transparent',
         },
         middle_container: {
             marginLeft: 20,
         },
         content_container: {
             flexDirection: 'row',
-            height: 130,
+            height: 140,
             marginTop: 10,
             marginLeft: 10,
             marginRight: 10,
-            borderRadius:5,
-            backgroundColor:colors.orange
+            borderRadius: 5,
+            resizeMode: 'cover',
         },
         container: {
             backgroundColor: colors.black
         },
 
         background_container: {
-            height: 140,
-            backgroundColor:colors.white
+            height: 150,
+            backgroundColor: colors.white,
         }
     });
 
@@ -82,12 +85,12 @@ const BankCardCell = props => {
     }
 
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} onPress ={click} {...attributes}>
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container]} onPress={click} {...attributes}>
             <View style={styles.background_container}>
-                <View style={styles.content_container} >
-                    <Image style={styles.avatar} source={{uri:imgIconUrl}}/>
+                <Image style={styles.content_container} source={{uri: imgBackGroundUrl}}>
+                    <Image style={styles.avatar} source={{uri: imgIconUrl}} />
                     {renderbankContent()}
-                </View>
+                </Image>
             </View>
 
         </TouchableOpacity>

@@ -9,6 +9,7 @@ import {
 import {colors} from '../constants/index'
 import Divider from '../components/Divider'
 import ScreenUtils from '../utils/ScreenUtils'
+import DateUtils from "../utils/DateUtils";
 
 const imgWidth = (ScreenUtils.width - 30)/4;
 
@@ -25,6 +26,7 @@ const RpDetailHeader = props => {
         remarkValue,
         stateValue,
         isMax,
+        isGet,
         ...attributes
     } = props
 
@@ -61,22 +63,21 @@ const RpDetailHeader = props => {
         remark_value: {
             marginTop:30,
             fontSize:15,
-            color:colors.orange,
+            color:'#fbd49d',
             flex:1,
             textAlign:'center',
-            backgroundColor:'transparent'
+            backgroundColor:'transparent',
         },
         amount_value: {
             marginTop:5,
-            fontSize:40,
-            color:colors.orange,
+            fontSize:amountValue==0?20:40,
+            color:'#fbd49d',
             backgroundColor:'transparent'
         },
         iconImg: {
             width: imgWidth,
             height:imgWidth,
             borderRadius: imgWidth/2,
-            backgroundColor:colors.black,
         },
         maxImg: {
             width: imgHeight,
@@ -94,6 +95,15 @@ const RpDetailHeader = props => {
             fontSize:15,
             color:colors.one_color
         },
+        amount_bg:{
+            flexDirection:'row',
+        },
+        rmbIcon:{
+            fontSize:18,
+            color:'#fbd49d',
+            backgroundColor:'transparent',
+            marginTop:26,
+        }
 
     });
 
@@ -110,13 +120,16 @@ const RpDetailHeader = props => {
             <View style = {styles.top_View}>
                 <View style = {styles.middle_container}>
                     <View style={{flex:1}} />
-                    <Text style={styles.remark_value}>{remarkValue}</Text>
+                    <Text style={styles.remark_value} numberOfLines={1}>{remarkValue}</Text>
                     <View style={{flex:1,alignItems:"flex-end",backgroundColor:'transparent'}}>
-                        <Image style = {styles.maxImg} source = {true?require("../res/img/rp_max_text.png"):' '} ></Image>
+                        <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
                     </View>
 
                 </View>
-                <Text style={styles.amount_value}>{amountValue==0?' 199876 ':amountValue}</Text>
+                <View style={styles.amount_bg}>
+                    <Text style={styles.rmbIcon}>{amountValue==0?' ':'¥'}</Text>
+                    <Text style={styles.amount_value}>{amountValue==0?stateValue:amountValue}</Text>
+                </View>
             </View>
 
             <Image style = {styles.mid_Image} source = {require("../res/img/rp_mid_bg.png")}>
@@ -124,7 +137,7 @@ const RpDetailHeader = props => {
             </Image>
 
             <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
-            <Text style={styles.state_value}>{stateValue}</Text>
+            <Text style={styles.state_value}>{amountValue==0?'':stateValue}</Text>
         </View>
     );
 };

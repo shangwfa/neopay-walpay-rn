@@ -50,6 +50,7 @@
 
 #pragma mark - VC生命周期
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = UIColorHex(EFEFEF);
@@ -147,7 +148,7 @@
 -(void)checkIDStatus
 {
     //检查实名认证信息
-    if (YES) {
+    if ([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized) {
         XGQBIDAlertViewController *alertIDVC = [XGQBIDAlertViewController new];
         
         alertIDVC.transitioningDelegate = self;
@@ -210,18 +211,18 @@
 {
     XGQBMessage *message = _homeTVC.messArr[indexPath.row];
 
-    if (message.msgType.intValue==1) {
+    if (message.msgType==XGQBMessageTypeRedPacket) {
         XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
         RNVC.pageType = @"redList";
         RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
         [self.navigationController pushViewController:RNVC animated:YES];
     }
-    else if(message.msgType.intValue==2)
+    else if(message.msgType==XGQBMessageTypePayMessage)
     {
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType = @"payMessage";
         [self.navigationController pushViewController:RNVC animated:YES];
-    }else if(message.msgType.intValue==3)
+    }else if(message.msgType==XGQBMessageTypePhoneRecharge)
     {
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType = @"topupMsgList";

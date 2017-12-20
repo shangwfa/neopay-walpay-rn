@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     FlatList,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    DeviceEventEmitter,
 } from 'react-native'
 import {NavigationActions} from 'react-navigation'
 
@@ -19,27 +20,43 @@ import {RouterPaths} from "../constants/RouterPaths";
 
 class RedPacketsReadyPage extends BasePage {
 
-    static defaultProps ={
-        isReady:true,
-        amount:0,
-        value:0.00,
-        bankId:0,
-        bankName:'中信银行储蓄卡',
-        bankNo:'123123123123',
-    };
+    // static defaultProps ={
+    //     isReady:false,
+    //     amount:0,
+    //     value:0.00,
+    //     bankId:0,
+    //     bankName:'中信银行储蓄卡',
+    //     bankNo:'123123123123',
+    // };
+
+    // constructor(props){
+    //     super(props);
+    //     this.state={
+    //         isReady:this.props.navigation.state.params.redPacketResult.state.redPacketState
+    //     };
+    // }
 
     render() {
         return (
-            <View style={[styles.container,{backgroundColor:this.props.isReady?'#F2F2F2':'#FFFFFF'}]}>
-                <Header navigation={this.props.navigation} title='发红包'/>
+            <View style={[styles.container,{backgroundColor:this.props.navigation.state.params.redPacketState?'#F2F2F2':'#FFFFFF'}]}>
+                <Header navigation={this.props.navigation} title='发红包' onLeftPress={()=>{this.headerLeftBtnPress()}}/>
                 {this.renderContent()}
                 {this.renderBottom()}
             </View>
         );
     }
 
+    headerLeftBtnPress=()=>{
+        DeviceEventEmitter.emit('sendRedPacket',{type:'redPacketResultGoBack'})
+        this.props.navigation.goBack();
+    }
+
+    componentDidMount(){
+        console.log(this.props.navigation.state.params);
+    }
+
     renderContent=()=>{
-        if(!this.props.isReady){
+        if(!this.props.navigation.state.params.redPacketState){
             return(
                 <View style={styles.failedView}>
                     <Image source={require('../res/img/HomePage/sy_shibai.png')} style={styles.failedIcon}/>
@@ -51,7 +68,7 @@ class RedPacketsReadyPage extends BasePage {
         }else {
             return(
                 <FlatList
-                    data={[{key: '红包总价值',value:this.props.value}, {key: '付款方式',value:this.props.bankName+this.props.bankNo}]}
+                    data={[{key: '红包总价值',value:this.props.navigation.state.params.amount}, {key: '付款方式',value:this.props.navigation.state.params.payTypeDesc}]}
                     renderItem={this.renderReadyCell}
                     ListHeaderComponent = {this.renderReadyHeader}
                     ListFooterComponent = {this.renderReadyFooter}
@@ -77,7 +94,7 @@ class RedPacketsReadyPage extends BasePage {
         return(
             <View style={{backgroundColor:'#FFFFFF',alignItems:'center',marginBottom:9}}>
                 <Image source={require('../res/img/HomePage/sy_fasong.png')} style={{marginTop:16}}/>
-                <Text style={{fontSize:16,color:'#09BB07',marginTop:14,marginBottom:23}}>{this.props.amount?this.props.amount+'个':''}红包好啦</Text>
+                <Text style={{fontSize:16,color:'#09BB07',marginTop:14,marginBottom:23}}>{this.props.navigation.state.params.totalCount?this.props.navigation.state.params.totalCount+'个':''}红包好啦</Text>
             </View>
         )
     }
@@ -96,7 +113,7 @@ class RedPacketsReadyPage extends BasePage {
     }
 
     renderBottom=()=>{
-        if(!this.props.isReady) return;
+        if(!this.props.navigation.state.params.redPacketState) return;
         return(
             <View style={{marginLeft:13}}>
                 <View style={{flexDirection:'row',height:20,alignItems:'center',marginBottom:20}}>
@@ -115,7 +132,9 @@ class RedPacketsReadyPage extends BasePage {
         )
     }
 
+    //点击重新包一下按钮
     reloadRedPacket=()=>{
+        DeviceEventEmitter.emit('sendRedPacket',{type:'redPacketResultRePay'});
         nav.dispatch(NavigationActions.back());
         console.log('红包页点击返回');
     }

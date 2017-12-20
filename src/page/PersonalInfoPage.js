@@ -57,30 +57,41 @@ class PersonalInfoPage extends BasePage {
     }
 
     renderRealNameItem = () => {
-        const isNoRealName=(1===this.state.data.authStatus)
+        const isNoRealName = (1 === this.state.data.authStatus)
         return (
             <CommonKeyValueItem
+                rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
                 title='实名认证'
-                realNameValue={isNoRealName?'前往实名':''}
+                realNameValue={isNoRealName ? '前往实名' : ''}
                 isLine={true}
                 isArrow={isNoRealName}
-                value={isNoRealName?'':this.state.data.name}
-                onPress={() => {if(isNoRealName)this.props.navigation.navigate(RouterPaths.BIND_BANK_CARD_PAGE)}
+                value={isNoRealName ? '' : this.state.data.name}
+                onPress={() => {
+                    if (isNoRealName) this.props.navigation.navigate(RouterPaths.NEW_USER_CERFITY, {type: 2})
+                }
                 }/>)
     }
+
 
     render() {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='个人信息'/>
                 <View style={{height: 10}}/>
-                <CommonKeyValueItem title='头像' imgUrl={this.state.data.avatarUrl} isLine={true} isArrow={true}
-                                    onPress={() => {NativeModules.commModule.showCommDialog('updatePersonalAvatar', () => {})
+                <CommonKeyValueItem rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
+                                    title='头像' imgUrl={this.state.data.avatarUrl} isLine={true} isArrow={true}
+                                    onPress={() => {
+                                        NativeModules.commModule.showCommDialog('updatePersonalAvatar', () => {
+                                        })
                                     }}/>
-                <CommonKeyValueItem title='昵称' value={this.state.data.nickName} isLine={true} isArrow={true}
-                                    onPress={() => {nav.navigate(RouterPaths.CHANGE_NAME_PAGE)}}/>
+                <CommonKeyValueItem rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
+                                    title='昵称' value={this.state.data.nickName} isLine={true} isArrow={true}
+                                    onPress={() => {
+                                        nav.navigate(RouterPaths.CHANGE_NAME_PAGE)
+                                    }}/>
                 {this.renderRealNameItem()}
-                <CommonKeyValueItem title='新光钱包账号' value={FormatUtils.tuoMinPhone(this.state.data.phone)}/>
+                <CommonKeyValueItem rightTextStyle={{color: colors.black_light}} leftTextStyle={{color: colors.black}}
+                                    title='新光钱包账号' value={FormatUtils.tuoMinPhone(this.state.data.phone)}/>
             </View>
         )
     }

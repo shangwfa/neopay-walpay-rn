@@ -17,9 +17,13 @@
 
 #import "XGQBMsgTableViewCell.h"
 
+#import "XGQBRefreshHeader.h"
+#import "XGQBRefreshFooter.h"
+
 @interface XGQBHomeTableViewController ()
 
 @property (nonatomic,assign) int currentPage;
+//@property (nonatomic,strong) NSMutableArray *freshImagesPull;
 
 @end
 
@@ -41,19 +45,20 @@
 
     //下拉刷新
     kWeakSelf(self);
-    MJRefreshNormalHeader *header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    XGQBRefreshHeader *header =[XGQBRefreshHeader headerWithRefreshingBlock:^{
         [weakself refreshData];
     }];
-    tableView.mj_header = header;
-    [header setTitle:@"拼命加载中" forState:MJRefreshStateRefreshing];
-    header.automaticallyChangeAlpha=YES;
-    header.lastUpdatedTimeLabel.hidden=YES;
     
+    tableView.mj_header = header;
+
     //上拉加载
-    tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    XGQBRefreshFooter *footer = [XGQBRefreshFooter footerWithRefreshingBlock:^{
         [weakself loadMoreData];
     }];
+    tableView.mj_footer = footer;
+    
 }
+
 
 -(void)loadMoreData
 {
@@ -66,14 +71,7 @@
             [self.messArr addObject:mess];
             [self.tableView reloadData];
         }
-//        for(int i=0;i<[(NSArray*)responseAfter count];i++)
-//        {
-//            NSDictionary *dict = responseAfter[i];
-//            XGQBMessage *mess = [XGQBMessage modelWithJSON:dict];
-//            [self.messArr addObject:mess];
-//            [self.tableView insertRowAtIndexPath:[NSIndexPath indexPathForRow:_messArr.count-1 inSection:0] withRowAnimation:UITableViewRowAnimationLeft];
-//        }
-        
+
         if([(NSArray*)responseAfter count]<10)//判断是否加载完成
         {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -88,21 +86,23 @@
 
 -(void)refreshData
 {
+    
     //发送请求获取消息数据
     NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
     [body setObject:@10 forKey:@"pageSize"];
     [body setObject:@1 forKey:@"pageNo"];
     [self.tableView.mj_header beginRefreshing];
     [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
-        
+        //获取到数据
         self.messArr=nil;
-
+        
         for (NSDictionary*dict in responseAfter) {
             XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];
             [self.tableView reloadData];
         }
-        [self.tableView.mj_header endRefreshing];
+        [(XGQBRefreshHeader*)self.tableView.mj_header showRefreshSuccessGifAndText];
+//        [self.tableView.mj_header endRefreshing];
         
         if([(NSArray*)responseAfter count]<10)//判断是否加载完成
         {

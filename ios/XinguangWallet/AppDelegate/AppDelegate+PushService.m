@@ -30,12 +30,16 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
     // init Push
     // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
     // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
-//    NSString *appKey = [NSString stringWithFormat:@"13dcf601d46a529f33bd1d5f"];
     NSString *channel = [NSString stringWithFormat:@"App Store"];
     
     [JPUSHService setupWithOption:launchOptions appKey:appKey
                           channel:channel
                  apsForProduction:0];
+    
+    NSSet *tags = [[NSSet alloc]initWithObjects:@"test", nil];
+    
+    [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+    } seq:999];
 }
 
 //Jpush相关系统方法替换
@@ -43,24 +47,28 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
     
     /// Required - 注册 DeviceToken
     [JPUSHService registerDeviceToken:deviceToken];
+    JKLog();
 }
 
 //optional 实现注册APN失败接口
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+    JKLog();
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
     // Required, iOS 7 Support
     [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+    JKLog();
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
+    JKLog();
 }
 
 
