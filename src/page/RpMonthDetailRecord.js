@@ -12,6 +12,7 @@ import Header from '../components/Header'
 import RedPacketRecordCell from '../components/RedPacketRecordCell'
 import {RouterPaths} from '../constants/RouterPaths'
 import ApiManager from '../utils/ApiManager'
+import FormatUtils from "../utils/FormatUtils";
 
 
 
@@ -33,8 +34,8 @@ class RpMonthDetailRecord extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title={this.state.param.createTime.slice(5,7) + '月红包记录'} header_middleStyle={{flex:1.4}}/>
-                <RedPacketRecordCell isShowBtn = {false} cellType={true} amount={this.state.data.receiveAmount} count={this.state.data.receiveCount}/>
-                <RedPacketRecordCell isShowBtn = {false} cellType={false} amount={this.state.data.sendAmount} count={this.state.data.sendCount}/>
+                <RedPacketRecordCell isShowBtn = {false} cellType={true} amount={FormatUtils.money(this.state.data.receiveAmount)} count={this.state.data.receiveCount}/>
+                <RedPacketRecordCell isShowBtn = {false} cellType={false} amount={FormatUtils.money(this.state.data.sendAmount)} count={this.state.data.sendCount}/>
             </View>
         );
     }
