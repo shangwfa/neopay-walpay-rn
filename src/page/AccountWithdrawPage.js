@@ -63,7 +63,9 @@ class AccountWithdrawPage extends BasePage {
                              payTypeContent={this.retPayTypeContent()}
                              onClose={()=>this.setState({isPayShow:false})}
                              onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
-                             onEnd={(text)=>this.pwdInputFinished(text)}/>
+                             onEnd={(text)=>this.pwdInputFinished(text)}
+                             selectPayStyleClick={()=>{this.selectPayStyleBtnClick()}}
+                />
             </View>
         );
     }
@@ -100,6 +102,14 @@ class AccountWithdrawPage extends BasePage {
 
     }
 
+    //选择银行卡按钮点击
+    selectPayStyleBtnClick=()=>{
+        this.setState({
+            isPayShow:false,
+            isShowSelectPayStyle:true
+        })
+    }
+
     renderBankCardIcon=()=>{
 
         if(this.state.selectedBankIconUrl)
@@ -126,13 +136,19 @@ class AccountWithdrawPage extends BasePage {
             selectedBankCardNo:bankCardData.cardNo,
             selectedBankIconUrl:bankCardData.iconUrl,
         });
+        if(this.state.withdrawAmount){
+            this.setState({
+                isPayShow:true,
+            })
+        }
         // console.log(bankCardData)
 
     }
     handleSelectPayStyleCloseClick=()=>{
         // console.log('点击了关闭按钮')
         this.setState({
-            isShowSelectPayStyle:false
+            isShowSelectPayStyle:false,
+            isPayShow:true,
         })
     }
 
