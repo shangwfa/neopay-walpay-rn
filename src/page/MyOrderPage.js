@@ -41,7 +41,7 @@ class MyOrderPage extends BasePage {
     }
 
     componentWillMount() {
-        this.loadData(1,false)
+        this.loadData(1,false,true)
     }
 
     emitEvent=(event)=>{
@@ -52,7 +52,7 @@ class MyOrderPage extends BasePage {
         this.loadData(1,false)
     }
 
-    loadData = (pageNo,isLoadMore) => {
+    loadData = (pageNo,isLoadMore,isLoadding=false) => {
         const req={
 
             pageNo: pageNo,
@@ -72,7 +72,7 @@ class MyOrderPage extends BasePage {
             }
 
 
-        })
+        },isLoadding)
     }
     renderItem = ({item}) => {
         return (
