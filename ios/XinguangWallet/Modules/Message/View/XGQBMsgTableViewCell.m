@@ -40,7 +40,7 @@
         if ((message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==3)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==1)) {
             bgImgUrl=message.noticeImageUrl;
         }
-        [bgImgV sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:bgImg];
+        [bgImgV sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:bgImg options:SDWebImageRefreshCached];
         kViewRadius(bgImgV, 5);
 
         //分割线
