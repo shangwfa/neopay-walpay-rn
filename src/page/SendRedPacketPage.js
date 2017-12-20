@@ -68,7 +68,6 @@ class SendRedPacketPage extends BasePage {
             });
         });
         this._handleRedPacketTheme();
-
     }
 
     render() {
@@ -118,15 +117,15 @@ class SendRedPacketPage extends BasePage {
                         onTextInputClick={this._handleTextInputClick.bind(this)}
                         textInputChangeListener={this._handleRedPacketMessageListener.bind(this)}/>
                     <CommonButton value='发红包啦！' style={{marginTop: 68}} onPress={this._handleButtonClick.bind(this)}/>
-                    <OneButtonModal
-                        onPress={this._handleBtnModalClick}
-                        btnTitle="确定"
-                        content={this.state.contentModal}
-                        isShow={this.state.isShow}/>
                     <View style={{alignItems: "center"}}>
                         <Text style={styles.tip_txt}>24小时未被领取，金额退回余额中</Text>
                     </View>
                 </ScrollView>
+                <OneButtonModal
+                    onPress={this._handleBtnModalClick}
+                    btnTitle="确定"
+                    content={this.state.contentModal}
+                    isShow={this.state.isShow}/>
                 <PayPwdModal
                     isShow={this.state.isShowPay}
                     onForgetPwd={this._handlePayOnForgetPwdClick}
@@ -189,7 +188,6 @@ class SendRedPacketPage extends BasePage {
                 setTimeout(() => {
                     this._handleRedPacketJump(data, redPacketResult);
                     this._handleRedPackProcess(data, redPacketResult);
-                    this._handleRedPacketWrapClose(data);
                 }, 2000);
             })
         }
@@ -204,9 +202,7 @@ class SendRedPacketPage extends BasePage {
                 const nowStamp = Date.now();
                 if (nowStamp > overTimeStamp) {
                     /* 倒计时结束*/
-                    this.setState({
-                        isShowWarpAction: false
-                    });
+                    this._handleRedPacketWrapClose();
                     this.interval && clearInterval(this.interval);
                     redPacketResult.redPacketState = false;
                     this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
@@ -215,13 +211,10 @@ class SendRedPacketPage extends BasePage {
                         packetCode: this.state.payResultSourceData.packetCode,
                     };
                     ApiManager.getRedPacketPayStatus(request, (data) => {
-                        this._handleRedPacketJump(data, redPacketResult);
-                        if (1 === data.payStatus || 2 === data.payStatus) {
+                        if (2 === data.payStatus || 4 === data.payStatus) {
                             this.interval && clearInterval(this.interval);
-                            this.setState({
-                                isShowWarpAction: false
-                            });
                         }
+                        this._handleRedPacketJump(data, redPacketResult);
                     });
                 }
             }, 1000);
@@ -234,9 +227,11 @@ class SendRedPacketPage extends BasePage {
 
     _handleRedPacketJump(data, redPacketResult) {
         if (2 === data.payStatus) {//success
+            this._handleRedPacketWrapClose();
             redPacketResult.redPacketState = true;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
         } else if (4 === data.payStatus) {//fail
+            this._handleRedPacketWrapClose();
             redPacketResult.redPacketState = false;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_READY_PAGE, redPacketResult);
         }
@@ -315,7 +310,7 @@ class SendRedPacketPage extends BasePage {
     };
     _handleSelectPayStyleClick = () => {
         this.setState({
-            isShowPay:false,
+            isShowPay: false,
             isShowSelectPayStyle: true,
         });
     };
@@ -327,7 +322,7 @@ class SendRedPacketPage extends BasePage {
             bankCardId: this.state.bankCardId
         };
         this.setState({
-            isShowPay:false
+            isShowPay: false
         })
         ApiManager.payRedPacket(request, (data) => {
             this.setState({
@@ -340,23 +335,23 @@ class SendRedPacketPage extends BasePage {
                 if (1 === data.smsFlag) {//需要短信验证
                     this.setState({
                         isAuthMsgShow: true,
-                        isShowWarpAction: false
-                    })
+                    });
+                    this._handleRedPacketWrapClose();
                 } else if (2 === data.smsFlag) {
                     this._handlePayRedPacketResult(data);
-                    this._handleRedPacketWrapClose(data);
                 }
             }, 2000);
         });
 
     };
 
-    _handleRedPacketWrapClose(data) {
-        if (4 === data.payStatus || 2 === data.payStatus) {
+    _handleRedPacketWrapClose() {
+        setTimeout(() => {
             this.setState({
                 isShowWarpAction: false
             });
-        }
+        }, 200);
+
     }
 
     _handlePayRedPacketResult(data) {
@@ -461,7 +456,7 @@ class SendRedPacketPage extends BasePage {
     _handleSelectPayStyleCloseClick = () => {
         this.setState({
             isShowSelectPayStyle: false,
-            isShowPay:true,
+            isShowPay: true,
         });
     };
     _handleBankCardItemClick = (bankCardData) => {
@@ -471,7 +466,7 @@ class SendRedPacketPage extends BasePage {
             payTypeContent: bankCardData.bankName + nameDes,
             payType: bankCardData.id === -1 ? 2 : 1,
             bankCardId: bankCardData.id,
-            isShowPay:true
+            isShowPay: true
         });
 
     };

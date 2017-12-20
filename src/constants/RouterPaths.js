@@ -30,6 +30,7 @@ export const RouterPaths = {
     RED_PACKET_RECORD: "redPacketRecord",
     RP_TITLE_STYLE: "rpTitleStyle",
     RED_PACKETS_READY_PAGE: "redPacketReady",
+    RED_PACKETS_RESULT_PAGE:"redPacketResult",
     ACCOUNT_TOPUP_RESULT: 'accountTopupResult',
     TRADE_RECORD_LIST_PAGE: 'tradeRecordList',
     PAYMENT: 'payment',

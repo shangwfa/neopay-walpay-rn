@@ -47,7 +47,7 @@ class MyAsset extends BasePage {
                 <Image style={styles.img} source={my_asset}>
                     <View style={{marginLeft: 65, marginTop: 90}}>
                         <Text style={styles.amount_title}>总资产(元)</Text>
-                        <Text style={styles.amount}>{this.state.data.balance}</Text>
+                        <Text style={styles.amount}>{FormatUtils.money(this.state.data.balance)}</Text>
                     </View>
                 </Image>
             </View>

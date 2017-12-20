@@ -12,4 +12,6 @@
 
 @property (nonatomic,strong) NSMutableArray *messArr;
 
+-(void)refreshData;
+
 @end

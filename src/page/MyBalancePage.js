@@ -14,6 +14,7 @@ import CommonButton from "../components/CommonButton"
 import {RouterPaths} from "../constants/RouterPaths"
 import ScreenUtils from "../utils/ScreenUtils"
 import NetUtil from "../utils/NetUtil"
+import FormatUtils from "../utils/FormatUtils";
 
 
 let sizeRatio = ScreenUtils.width/375.0;
@@ -50,7 +51,7 @@ class MyBalancePage extends BasePage {
                         ¥
                     </Text>
                     <Text style ={styles.numberText}>
-                        {this.state.data.balance}
+                        {FormatUtils.money(this.state.data.balance)}
                     </Text>
                 </View>
 

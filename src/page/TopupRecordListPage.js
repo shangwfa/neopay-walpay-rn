@@ -17,6 +17,7 @@ import {RouterPaths} from '../constants/RouterPaths'
 import ApiManager from '../utils/ApiManager'
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import DateUtils from "../utils/DateUtils";
+import FormatUtils from "../utils/FormatUtils";
 import {
     SwRefreshListView,
 } from 'react-native-swRefresh'
@@ -72,7 +73,7 @@ class TopupRecordListPage extends BasePage {
                 {this.renderSectionHeader(item)}
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.title} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
-                               rightUpValue={'-' + item.amount} rightBottomValue={item.status}
+                               rightUpValue={'-' + FormatUtils.money(item.amount)} rightBottomValue={item.status}
                                isLine={true}/>
             </View>
         )
@@ -80,7 +81,7 @@ class TopupRecordListPage extends BasePage {
     }
     renderSectionHeader = (item) => {
         if (item.disPlayDate) {
-            return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} value={'支出:-' + item.outMoney} isShowArrow={false}/>
+            return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} value={'支出:-' + FormatUtils.money(item.outMoney)} isShowArrow={false}/>
         }
     }
 
