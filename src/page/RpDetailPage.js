@@ -90,7 +90,7 @@ class RpDetailPage extends BasePage {
             <View>
                 <CommonItemTwo imgUrl={item.robberAvatar}
                                middleUpValue={item.robberName} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
-                               rightUpValue={item.luckyMoney}
+                               rightUpValue={item.luckyAmount}
                                isLine={true}
                                imgIconUrl={item.luckyFlag==1?require("../res/img/rp_max_num.png"):' '} />
             </View>
