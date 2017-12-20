@@ -12,7 +12,7 @@ import Header from '../components/Header'
 import RedPacketRecordCell from '../components/RedPacketRecordCell'
 import {RouterPaths} from '../constants/RouterPaths'
 import ApiManager from '../utils/ApiManager'
-
+import FormatUtils from "../utils/FormatUtils";
 
 
 class RedPacketRecord extends BasePage {
@@ -34,8 +34,8 @@ class RedPacketRecord extends BasePage {
                 <Header navigation={this.props.navigation} title='红包记录' rightTitle='红包交易明细'onRightPress={() => {
                     this.props.navigation.navigate(RouterPaths.RED_PACKET_RECORD_LIST,{QueryType:3})
                 }} header_middleStyle={{flex:1.4}}/>
-                <RedPacketRecordCell cellType={true} amount={this.state.data.receiveAmount} count={this.state.data.receiveCount}/>
-                <RedPacketRecordCell cellType={false} amount={this.state.data.sendAmount} count={this.state.data.sendCount}/>
+                <RedPacketRecordCell cellType={true} amount={FormatUtils.money(this.state.data.receiveAmount)} count={this.state.data.receiveCount}/>
+                <RedPacketRecordCell cellType={false} amount={FormatUtils.money(this.state.data.sendAmount)} count={this.state.data.sendCount}/>
             </View>
         );
     }
