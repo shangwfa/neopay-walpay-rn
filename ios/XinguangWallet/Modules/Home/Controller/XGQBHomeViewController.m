@@ -71,6 +71,8 @@
     self.navigationController.navigationBarHidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.view.transform = CGAffineTransformIdentity;
+    
+    //刷新头像和用户名标签
     [self refreshAvatarAndNickName];
 }
 
@@ -97,8 +99,7 @@
         [_headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
         _userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
         
-//        XGQBAPPRootViewController *appRootVC = (XGQBAPPRootViewController*)self.parentViewController.parentViewController;
-
+        [kNotificationCenter postNotificationName:kNotificationSideViewUpdateAvatar object:nil];
         
     } andFailerFn:^(NSError *error) {
         

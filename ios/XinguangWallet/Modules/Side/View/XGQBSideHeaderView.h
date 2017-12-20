@@ -12,5 +12,7 @@
 
 @property (nonatomic,weak) UIButton *regBtn;
 @property (nonatomic,weak) UIImageView *headerIcon;
+@property (nonatomic,weak) UIImageView *regIcon;
+@property (nonatomic,weak) UIView *userNameView;
 
 @end
