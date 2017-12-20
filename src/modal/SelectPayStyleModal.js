@@ -48,6 +48,7 @@ class SelectPayStyleModal extends Component {
     render() {
         return (
             <Modal
+                animationType='fade'
                 transparent={true}
                 visible={this.props.isShow}
                 onRequestClose={() => {

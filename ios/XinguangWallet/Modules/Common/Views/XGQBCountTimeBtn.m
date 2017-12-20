@@ -49,7 +49,7 @@
         [_timer invalidate];
         _timer = nil;
         self.userInteractionEnabled = YES;
-        self.layer.borderColor = kAPPTheamColor.CGColor;
+//        self.layer.borderColor = kAPPTheamColor.CGColor;
         self.backgroundColor = [UIColor clearColor];
         [self setTitle:@"获取验证码" forState:UIControlStateNormal];
         [self setTitleColor:kAPPTheamColor forState:UIControlStateNormal];
@@ -57,10 +57,10 @@
     }else
     {
         self.userInteractionEnabled = NO;
-        self.layer.borderColor = UIColorHex(CCCCCC).CGColor;
-        self.backgroundColor = UIColorHex(CCCCCC);
+//        self.layer.borderColor = UIColorHex(CCCCCC).CGColor;
+        self.backgroundColor = kClearColor;
         [self setTitle:[NSString stringWithFormat:@"%dS后重新获取",_second] forState:UIControlStateNormal];
-        [self setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        [self setTitleColor:kAPPTheamColor forState:UIControlStateNormal];
         
         _second --;
     }

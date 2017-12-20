@@ -165,6 +165,7 @@
                 //            NSLog(@"responseBefore:%@",responseBefore);
             {
                 [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         } andFailerFn:^(NSError *error) {
             

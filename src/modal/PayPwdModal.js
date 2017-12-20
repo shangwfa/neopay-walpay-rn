@@ -44,6 +44,7 @@ class PayPwdModal extends Component {
     render() {
         return (
             <Modal
+                animationType='fade'
                 transparent={true}
                 visible={this.props.isShow}
                 onShow={() => {
