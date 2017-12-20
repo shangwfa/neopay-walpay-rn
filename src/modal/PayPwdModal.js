@@ -12,6 +12,7 @@ import {colors} from '../constants/index'
 import close_icon from '../res/img/close_icon.png'
 import right_arrow from '../res/img/right_arrow.png'
 import PasswordInput from '../components/PasswordInput'
+import ScreenUtils from "../utils/ScreenUtils";
 class PayPwdModal extends Component {
 
     constructor(props) {
@@ -81,12 +82,14 @@ class PayPwdModal extends Component {
     //增加弹窗在键盘聚焦的时候改变位置
     onTextFocus=()=>{
         // console.log('收到键盘focus事件')
+        if (!ScreenUtils.isIOS) return;
         this.setState({
             modalFlex:0.7,
         })
     }
     onTextBlur=()=>{
         // console.log('收到键盘blur事件')
+        if (!ScreenUtils.isIOS) return;
         this.setState({
             modalFlex:1.0,
         })
