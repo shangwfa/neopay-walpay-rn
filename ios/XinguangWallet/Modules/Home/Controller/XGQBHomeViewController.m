@@ -66,10 +66,45 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+//    JKLog();
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.view.transform = CGAffineTransformIdentity;
+    [self refreshAvatarAndNickName];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    [self.homeTVC refreshData];
+}
+
+-(void)refreshAvatarAndNickName
+{
+    //获取用户信息
+    [MemberCoreService getUserInfo:@{@"accessToken":[GVUserDefaults standardUserDefaults].accessToken}.mutableCopy andSuccessFn:^(id responseAfter, id responseBefore) {
+        
+        //设置公共参数
+        [GVUserDefaults standardUserDefaults].name=[responseAfter objectForKey:@"name"];
+        [GVUserDefaults standardUserDefaults].uuid=[responseAfter objectForKey:@"uuid"];
+        [GVUserDefaults standardUserDefaults].phone=[responseAfter objectForKey:@"phone"];
+        [GVUserDefaults standardUserDefaults].userStatus=[[responseAfter objectForKey:@"userStatus"]intValue];
+        [GVUserDefaults standardUserDefaults].nickName=[responseAfter objectForKey:@"nickName"];
+        [GVUserDefaults standardUserDefaults].authStatus=[[responseAfter objectForKey:@"authStatus"]intValue];
+        [GVUserDefaults standardUserDefaults].avatarUrl=[responseAfter objectForKey:@"avatarUrl"];
+        
+        [_headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
+        _userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
+        
+//        XGQBAPPRootViewController *appRootVC = (XGQBAPPRootViewController*)self.parentViewController.parentViewController;
+
+        
+    } andFailerFn:^(NSError *error) {
+        
+    }];
+    
+
 }
 
 #pragma mark - 设置视图组件

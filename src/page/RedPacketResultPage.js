@@ -20,7 +20,7 @@ import {RouterPaths} from "../constants/RouterPaths";
 
 const sizeRatioH = ScreenUtils.height/667.0;
 
-class RedPacketsReadyPage extends BasePage {
+class RedPacketResultPage extends BasePage {
 
     // static defaultProps ={
     //     isReady:false,
@@ -34,13 +34,13 @@ class RedPacketsReadyPage extends BasePage {
     constructor(props){
         super(props);
         this.state={
-            isReady:true
+            isReady:false
         };
     }
 
     render() {
         return (
-            <View style={[styles.container,{backgroundColor:this.state.isReady?'#F2F2F2':'#FFFFFF'}]}>
+            <View style={[styles.container,{backgroundColor:'#F2F2F2'}]}>
                 <Header navigation={this.props.navigation} title='发红包' onLeftPress={()=>{this.headerLeftBtnPress()}}/>
                 {this.renderContent()}
                 {this.renderBottom()}
@@ -58,35 +58,24 @@ class RedPacketsReadyPage extends BasePage {
     }
 
     renderContent=()=>{
-        if(!this.props.navigation.state.params.redPacketState){
-            return(
-                <View style={styles.failedView}>
-                    <Image source={require('../res/img/HomePage/sy_shibai.png')} style={styles.failedIcon}/>
-                    <Text style={styles.failedText1}>红包没包好</Text>
-                    <Text style={styles.failedText2}>红包付款失败，请再来一次</Text>
-                    <CommonBtn onPress={()=>{this.reloadRedPacket()}} style={styles.failedBtn} value={'重新包一下'}></CommonBtn>
-                </View>
-            )
-        }else {
             return(
                 <FlatList
-                    data={[{key: '红包总价值',value:this.props.navigation.state.params.amount}, {key: '付款方式',value:this.props.navigation.state.params.payTypeDesc}]}
+                    data={this.state.isReady?[{key:'领取人',value:'12312332123胡萝卜等56人'},{key: '红包总价值',value:this.props.navigation.state.params.amount}, {key: '付款方式',value:this.props.navigation.state.params.payTypeDesc}]:[{key: '红包总价值',value:this.props.navigation.state.params.amount}, {key: '付款方式',value:this.props.navigation.state.params.payTypeDesc}]}
                     renderItem={this.renderReadyCell}
                     ListHeaderComponent = {this.renderReadyHeader}
                     ListFooterComponent = {this.renderReadyFooter}
                 />
             )
-        }
     };
 
     renderReadyCell=({item}) => {
         return(
             <View>
-            <View style={styles.readyCellView}>
-                <Text style={styles.readyCellName}>{item.key}</Text>
-                <View style={styles.readyCellSep}></View>
-                <Text style={styles.readyCellDes}>{item.value}</Text>
-            </View>
+                <View style={styles.readyCellView}>
+                    <Text style={styles.readyCellName}>{item.key}</Text>
+                    <View style={styles.readyCellSep}></View>
+                    <Text style={styles.readyCellDes}>{item.value}</Text>
+                </View>
                 <Divider style={{marginLeft:12}}/>
             </View>
         )
@@ -95,27 +84,34 @@ class RedPacketsReadyPage extends BasePage {
     renderReadyHeader=()=>{
         return(
             <View style={{backgroundColor:'#FFFFFF',alignItems:'center',marginBottom:9}}>
-                <Image source={require('../res/img/HomePage/sy_fasong.png')} style={{marginTop:16}}/>
-                <Text style={{fontSize:16,color:'#09BB07',marginTop:14,marginBottom:23}}>{this.props.navigation.state.params.totalCount?this.props.navigation.state.params.totalCount+'个':''}红包好啦</Text>
+                <Image source={this.state.isReady?require('../res/img/HomePage/sy_fasong.png'):require('../res/img/HomePage/sy_shibai.png')} style={{marginTop:16}}/>
+                <Text style={{fontSize:16,color:this.state.isReady?'#09BB07':'#E94D3D',marginTop:14,marginBottom:23}}>{this.props.navigation.state.params.totalCount?this.props.navigation.state.params.totalCount+'个':''}{this.state.isReady?'发送成功':'发送失败'}</Text>
             </View>
         )
     }
 
     renderReadyFooter=()=>{
-        return(
-            <View>
+        if(this.state.isReady){
+            return(
+                <View>
                 <CommonBtn style={{width:ScreenUtils.width, marginTop:51*sizeRatioH,}} value={'分享红包至微信领取'}/>
-                <CommonBtn style={{width:ScreenUtils.width, marginTop:20*sizeRatioH}}
-                           backgroundColor={'#FFFFFF'}
-                           textColor={'#CCCCCC'}
-                           value={'添加指定领取人领取'}
-                           onPress={()=>nav.navigate(RouterPaths.RED_PACKET_RECEIVER)}/>
-            </View>
-        )
+                </View>
+                )
+            }else {
+                return(
+                    <View>
+                        <CommonBtn style={{width:ScreenUtils.width, marginTop:51*sizeRatioH,}} value={'分享红包至微信领取'}/>
+                        <CommonBtn style={{width:ScreenUtils.width, marginTop:20*sizeRatioH}}
+                                   backgroundColor={'#FFFFFF'}
+                                   textColor={'#CCCCCC'}
+                                   value={'重新发送'}
+                                   onPress={()=>nav.navigate(RouterPaths.RED_PACKET_RECEIVER)}/>
+                    </View>
+                )
+        }
     }
 
     renderBottom=()=>{
-        if(!this.state.isReady) return;
         return(
             <View style={{marginLeft:13}}>
                 <View style={{flexDirection:'row',height:20,alignItems:'center',marginBottom:20*sizeRatioH}}>
@@ -192,4 +188,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default RedPacketsReadyPage
+export default RedPacketResultPage

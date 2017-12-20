@@ -57,6 +57,7 @@ import BigRedPacketSimplePage from "../page/BigRedPacketSimplePage";
 import RpMonthDetailRecord from "../page/RpMonthDetailRecord"
 import NewBindBankCard from "../page/NewBindBankCardPage"
 import NewUserInfoCertify from "../page/NewUserInfoCertifyPage"
+import RedPacketResult from "../page/RedPacketResultPage";
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -105,6 +106,7 @@ const RouterSetting = {
     creditCardInput: {screen: CreditCardInput},
     phoneTopUp: {screen: PhoneTopUpPage},
     redPacketReady: {screen: RedPacketReady},
+    redPacketResult:{screen:RedPacketResult},
     redPacketRecord: {screen: RedPacketRecord},
     contacts: {screen: Contacts},
     redPacketReceiver: {screen: RedPacketReceiver},
