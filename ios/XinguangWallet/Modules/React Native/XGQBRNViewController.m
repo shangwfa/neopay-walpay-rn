@@ -17,6 +17,8 @@
 #import <ContactsUI/ContactsUI.h>
 #import "AliyunOSSiOS.h"
 #import "RCTBridgeModule.h"
+#import <UShareUI/UShareUI.h>
+
 
 @interface XGQBRNViewController () <CNContactPickerDelegate,UIImagePickerControllerDelegate>
 
@@ -53,6 +55,7 @@
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToFirstLevel) name:kNotificationRNJumpBackToFirstLevel object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNModalContactList:) name:kNotificationRNModalContactList object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNModalPictureActionSheet) name:kNotificationRNModalPicSelActSheet object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(RNShareRedPacket:) name:kNotificaitonRNCallNativeCallShare object:nil];
     //预先加载RN页面
     
     AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -346,5 +349,47 @@
 }
 
 
+-(void)RNShareRedPacket:(NSNotification*)notification
+{
+    JKLog(@"%@",notification);
+    //显示分享面板
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
+        [self shareWebPageToPlatformType:platformType withNotification:notification];
+    }];
+}
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType withNotification:(NSNotification*)notification
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象
+    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用新光钱包" descr:@"快来新光钱包抢红包啦" thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+    }];
+}
 
 @end

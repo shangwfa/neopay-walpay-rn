@@ -80,6 +80,13 @@ PODS:
     - SDWebImage/Core (= 4.1.2)
   - SDWebImage/Core (4.1.2)
   - SVProgressHUD (2.2.1)
+  - UMengUShare/Core (6.4.7):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.7)
+  - UMengUShare/Social/ReducedWeChat (6.4.7):
+    - UMengUShare/Core
+  - UMengUShare/UI (6.4.7):
+    - UMengUShare/Core
   - Yoga (0.48.4.React)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
@@ -115,6 +122,8 @@ DEPENDENCIES:
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - SDWebImage (~> 4.1.2)
   - SVProgressHUD (~> 2.2.1)
+  - UMengUShare/Social/ReducedWeChat (~> 6.4.7)
+  - UMengUShare/UI (~> 6.4.7)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
   - YYKit (~> 1.0.9)
 
@@ -148,9 +157,10 @@ SPEC CHECKSUMS:
   react-native-camera: 16adf5f4a105010e25841711ab6ed8f98499cc09
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
+  UMengUShare: 5055d0e01c844379e173bdca0840fc9fa9297d88
   Yoga: ccefa1454b2e9825dce3b2df98088b7f0e3c2675
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 9dc14959c2c2f0522d7ef3ef82f92ea7acccea90
+PODFILE CHECKSUM: 31e3b505c0b322e4019c9b5ce4a4f82771bbf901
 
 COCOAPODS: 1.3.1

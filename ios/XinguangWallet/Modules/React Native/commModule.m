@@ -179,5 +179,12 @@ RCT_EXPORT_METHOD(showCommDialog:(NSString*)title:(RCTResponseSenderBlock)callba
         [kNotificationCenter postNotificationName:kNotificationRNModalPicSelActSheet object:nil];
     }
 }
+
+//RN页面分享红包
+RCT_EXPORT_METHOD(rnCallNativeCallShare:(NSString*)packetCode:(NSString*)shareType){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [kNotificationCenter postNotificationName:kNotificaitonRNCallNativeCallShare object:nil userInfo:@{@"packetCode":packetCode,@"shareType":shareType}];
+    });
+}
     
 @end

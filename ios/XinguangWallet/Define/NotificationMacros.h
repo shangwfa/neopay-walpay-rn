@@ -38,6 +38,8 @@
 #define kNotificationSideViewUpdateAvatar @"kNotificationSideViewUpdateAvatar"
 //RN请求原生图片,更换头像
 #define kNotificationRNModalPicSelActSheet @"kNotificationRNModalPicSelActSheet"
+//RN页面分享红包
+#define kNotificaitonRNCallNativeCallShare @"kNotificaitonRNCallNativeCallShare"
 
 #pragma mark - ——————— 网络状态相关 ————————
 

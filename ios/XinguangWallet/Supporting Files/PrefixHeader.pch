@@ -38,6 +38,7 @@
 #import <SDWebImage/UIImage+GIF.h>
 #import "IQKeyboardManager.h"
 #import "MJRefresh.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 //通用视图组件
 #import "XGQBTextField.h"
