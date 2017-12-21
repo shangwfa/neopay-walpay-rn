@@ -32,29 +32,17 @@ class ContactsPage extends BasePage {
         this.pinyin = new Pinyin({charCase: 0});
     }
 
-    emitEvent=()=>{
+    emitEvent = () => {
 
     }
 
     componentWillMount() {
-        Contacts.checkPermission((err, permission) => {
-            if (permission === 'undefined') {
-                Contacts.requestPermission((err, permission) => {
-
-                })
-            }
-            if (permission === 'authorized') {
-                Contacts.getAll((err, contacts) => {
-                    if (err === 'denied') {
-                        console.log(err)
-                    } else {
-                        console.log(contacts)
-                        this.setState({data: this.getContacts(contacts)})
-                    }
-                })
-            }
-            if (permission === 'denied') {
-                // x.x
+        Contacts.getAll((err, contacts) => {
+            if (err === 'denied') {
+                console.log(err)
+            } else {
+                console.log(contacts)
+                this.setState({data: this.getContacts(contacts)})
             }
         })
     }
@@ -63,8 +51,10 @@ class ContactsPage extends BasePage {
         let filterData = []
         contacts.map(item => {
             if (this.isContact(item)) {
+                let familyName=StringUtils.isNoEmpty(item.familyName)?item.familyName:''
                 let middleName = StringUtils.isNoEmpty(item.middleName) ? item.middleName : ''
-                let name = item.familyName + middleName + item.givenName
+                let givenName=StringUtils.isNoEmpty(item.givenName)?item.givenName:''
+                let name = familyName + middleName + givenName
                 let key = this.pinyin.getCamelChars(name)[0]
                 filterData.push({
                     uri: StringUtils.isNoEmpty(item.thumbnailPath) ? item.thumbnailPath : url,
@@ -143,7 +133,7 @@ class ContactsPage extends BasePage {
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='红包领取人' rightTitle='确定' onRightPress={() => {
                     this.props.navigation.goBack();
-                    DeviceEventEmitter.emit(events.CONTACTS_EVENT,this.state.selectedData); //显示弹窗
+                    DeviceEventEmitter.emit(events.CONTACTS_EVENT, this.state.selectedData); //显示弹窗
                     console.log(this.state.selectedData)
                 }}/>
                 {this.renderSearchBar()}

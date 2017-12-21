@@ -11,10 +11,12 @@ import {
     Image, Modal, Animated
 } from 'react-native'
 import Animation from 'lottie-react-native'
+
 class ReceiveRedPacketModal extends Component {
 
     constructor(props) {
         super(props);
+        this.isGetAnimRef=false
     }
 
     render() {
@@ -28,10 +30,10 @@ class ReceiveRedPacketModal extends Component {
                     <View style={styles.container}>
                         <Animation
                             ref={animation => {
-                                if (animation)
-                                    setTimeout(() => {
-                                        animation.play();
-                                    }, 200);
+                                if(animation&&!this.isGetAnimRef){
+                                    this.isGetAnimRef=true
+                                    animation.play()
+                                }
                             }}
                             style={{
                                 width: 315,
