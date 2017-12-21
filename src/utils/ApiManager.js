@@ -234,10 +234,10 @@ payRedPacket = (request, callback) => {
         callback(data);
     });
 }
-queryUserBill = (request, callback) => {
+queryUserBill = (request, callback,isLoadding) => {
     NetUtil.post(APIS.USER_BILL_RECORD, request, (data) => {
         callback(data);
-    })
+    },isLoadding)
 };
 queryPayMessage = (request, callback) => {
     NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE, request, (data) => {
