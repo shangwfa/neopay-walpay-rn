@@ -15,13 +15,15 @@
 
 #import <Contacts/Contacts.h>
 #import <ContactsUI/ContactsUI.h>
-
+#import "AliyunOSSiOS.h"
 #import "RCTBridgeModule.h"
 
-@interface XGQBRNViewController () <CNContactPickerDelegate>
+@interface XGQBRNViewController () <CNContactPickerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic,weak) RCTRootView *rootView;
 //@property (nonatomic,copy) RCTResponseSenderBlock contactCommBlock;
+
+@property(nonatomic,strong) UIImage *chosenAvatarImg;
 
 @end
 
@@ -164,6 +166,7 @@
 
 }
 
+#pragma mark - Image Picker
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
 {
     CNPhoneNumber *phoneNumber = (CNPhoneNumber*)contactProperty.value;
@@ -201,6 +204,7 @@
 -(void)RNModalPictureActionSheet
 {
     UIImagePickerController *imgPicVC = [[UIImagePickerController alloc]init];
+    imgPicVC.delegate = self;
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
@@ -211,14 +215,13 @@
             JKLog();
         }];
     }];
-
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         imgPicVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [weakself presentViewController:imgPicVC animated:YES completion:^{
             JKLog();
         }];
     }];
-
+        
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         JKLog();
     }];
@@ -229,8 +232,119 @@
 
     [self presentViewController:alertVC animated:YES completion:nil];
     
-
 }
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
+{
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    JKLog(@"%@",info);
+    
+    if ([mediaType isEqualToString:@"public.image"]) {
+        //获取到图片
+        UIImage *imageOrigin = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        
+        UIGraphicsBeginImageContext(CGSizeMake(500,500));
+        [imageOrigin drawInRect:CGRectMake(0, 0, 500, 500)];
+        imageOrigin = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        _chosenAvatarImg = imageOrigin;
+        [self getSecurityToken];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)getSecurityToken
+{
+    [MemberCoreService getSecurityToken:[@{@"type":@2} mutableCopy] andSuccessFn:^(id responseAfter, id responseBefore) {
+        JKLog(@"%@",responseAfter);
+        [self uploadDataWith:responseAfter and:_chosenAvatarImg];
+    } andFailerFn:^(NSError *error) {
+        nil;
+    }];
+}
+
+-(void)uploadDataWith:(id)responseAfter and:(UIImage*)image
+{
+        NSString *endpoint = [responseAfter objectForKey:@"endpoint"];
+        id<OSSCredentialProvider> credential = [[OSSStsTokenCredentialProvider alloc]initWithAccessKeyId:[responseAfter objectForKey:@"accessKeyId"] secretKeyId:[responseAfter objectForKey:@"accessKeySecret"] securityToken:[responseAfter objectForKey:@"securityToken"]];
+        
+        OSSClient* client = [[OSSClient alloc] initWithEndpoint:endpoint credentialProvider:credential];
+        
+        OSSPutObjectRequest * put = [OSSPutObjectRequest new];
+        put.bucketName = [responseAfter objectForKey:@"bucket"];
+        NSString* uuid = [[[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""] lowercaseString];
+        
+        put.objectKey = [NSString stringWithFormat:@"%@%@%@",[responseAfter objectForKey:@"directory"],uuid,[self typeForImageData:UIImageJPEGRepresentation(image,1)]];
+    
+        put.uploadingData = UIImageJPEGRepresentation(image,.3);
+        
+        put.uploadProgress = ^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
+            JKLog(@"%lld, %lld, %lld", bytesSent, totalByteSent, totalBytesExpectedToSend);
+        };
+        OSSTask * putTask = [client putObject:put];
+    
+        [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在上传"]];
+    
+        [putTask continueWithBlock:^id(OSSTask *task) {
+            
+            if (!task.error) {
+                NSString* imgUrl = [responseAfter objectForKey:@"fileTemplateUrl"];
+                
+                imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@"${bucket}" withString:[responseAfter objectForKey:@"bucket"]];
+                imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@"${directory}" withString:[responseAfter objectForKey:@"directory"]];
+                imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@"${fileName}" withString:[NSString stringWithFormat:@"%@%@",uuid,[self typeForImageData:UIImageJPEGRepresentation(image,1)]]];
+                
+                //                NSString* imgUrl = [NSString stringWithFormat:@"http://%@.oss-cn-shanghai.aliyuncs.com/%@%@%@",[responseAfter objectForKey:@"bucket"],[responseAfter objectForKey:@"directory"],uuid,[self typeForImageData:UIImageJPEGRepresentation(images[indexI],1)]];
+                
+                JKLog(@"upload object success!");
+                
+                JKLog(@"url is %@",imgUrl);
+                
+                [self postChosenAvatarWithURL:(NSString*)imgUrl];
+                
+            } else {
+                [SVProgressHUD dismiss];
+                JKLog(@"upload object failed, error: %@" , task.error);
+            }
+            return nil;
+        }];
+    
+}
+
+- (NSString *)typeForImageData:(NSData *)data
+{
+    uint8_t c;
+    
+    [data getBytes:&c length:1];
+    
+    switch (c) {
+            
+        case 0xFF:
+            
+            return @".jpg";
+            
+        case 0x89:
+            
+            return @".png";
+    }
+    return nil;
+}
+
+-(void)postChosenAvatarWithURL:(NSString*)imgUrl
+{
+    NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+    [body setObject:imgUrl forKey:@"avatarUrl"];
+    
+    [MemberCoreService modifyUserAvatarURL:body andSuccessFn:^(id responseAfter, id responseBefore) {
+        [SVProgressHUD showSuccessWithStatus:@"头像上传成功"];
+    } andFailerFn:^(NSError *error) {
+        nil;
+    }];
+    
+}
+
 
 
 @end
