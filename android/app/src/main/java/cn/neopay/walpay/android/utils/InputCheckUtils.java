@@ -4,6 +4,8 @@ import com.xgjk.common.lib.utils.StringUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 import com.xgjk.common.lib.utils.ValidInputUtils;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by shangwf on 2017/5/8.
  * InputCheckUtils 通用的输入的检测
@@ -284,4 +286,23 @@ public class InputCheckUtils {
         ToastUtils.show("原始密码和新密码不能相等");
         return false;
     }
+
+    /**
+     * 正则表达式:验证身份证
+     */
+    public static boolean checkIdCardNumber(String idCard) {
+        final String REGEX_ID_CARD = "(^\\d{15}$)|(^\\d{17}([0-9]|X)$)";
+        if (StringUtils.isEmpty(idCard)) {
+            ToastUtils.show("请输入实名认证的身份证号");
+            return false;
+        }
+        if (Pattern.matches(REGEX_ID_CARD, idCard)) {
+            return true;
+        } else {
+            ToastUtils.show("请输入有效的身份证号");
+            return false;
+        }
+    }
+
+
 }

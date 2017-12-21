@@ -6,7 +6,6 @@ import com.xgjk.common.lib.base.BaseView;
 
 import java.util.List;
 
-import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
 import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 
 /**
@@ -28,8 +27,6 @@ public interface NewsFragmentContract {
         public abstract void getNewsInfoLoadMore();
 
         public abstract void handleNewsData(List<GetNewsResponseBean> newsBeanList, boolean isRefresh);
-
-        public abstract void updateNewsStatus(UpdateNewsReadStatusRequestBean requestBean);
 
         @Override
         public void onAttached() {

@@ -89,6 +89,7 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
     @Override
     protected void onResume() {
         mPresenter.getUserInfo();
+        EventBus.getDefault().post(new MineEventBean());
         super.onResume();
     }
 

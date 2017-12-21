@@ -17,6 +17,28 @@ public class NewsActivitiesItemBean {
     private int msgType;
     private int payNoticeType;
     private View.OnClickListener onClickListener;
+    private Long id;
+    private String noticeUrl;
+
+    public String getNoticeUrl() {
+        return noticeUrl;
+    }
+
+    public void setNoticeUrl(String noticeUrl) {
+        this.noticeUrl = noticeUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setMsgType(Integer msgType) {
+        this.msgType = msgType;
+    }
 
     public View.OnClickListener getOnClickListener() {
         return onClickListener;

@@ -65,6 +65,7 @@ public interface IWalpayConstants {
     String COMMONINPUTVIEW_TYPE_PAYPWD = "payPwd";
     String COMMONINPUTVIEW_TYPE_NUM_AND_STR = "num_str";
     String COMMONINPUTVIEW_TYPE_PAY = "pay";
+    String COMMONINPUTVIEW_TYPE_REAL_MSG = "realMsg";
     String FORGOTPWD_TYPE_LOGIN = "forgotPwd_login";
     String FORGOTPWD_TYPE_PAY = "forgotPwd_pay";
     //---------------------------verification view code---------------------//

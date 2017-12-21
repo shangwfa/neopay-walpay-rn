@@ -4,7 +4,12 @@ import com.xgjk.common.lib.adapter.slimadapter.SlimInjector;
 import com.xgjk.common.lib.adapter.slimadapter.viewinjector.IViewInjector;
 
 import cn.neopay.walpay.android.R;
+import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.MineTextImgItemBean;
+import cn.neopay.walpay.android.ui.RNActivity;
+import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
  * @author carlos.guo
@@ -21,6 +26,32 @@ public class MineDrawTextImgSlimInjector implements SlimInjector<MineTextImgItem
         }
         injector.background(R.id.img_draw_item_iv, data.getItemImgId())
                 .text(R.id.text_draw_item_tv, data.getItemName())
-                .clicked(R.id.text_img_draw_item_ll, data.getOnClickListener());
+                .clicked(R.id.text_img_draw_item_ll, v -> {
+                    RNActivityParams activityParams = new RNActivityParams();
+                    switch (data.getTypeClick()) {
+                        case "settings":
+                            activityParams.setPage(RNActivity.PageType.SETTING_PAGE);
+                            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+                            break;
+                        case "myOder":
+                            activityParams.setPage(RNActivity.PageType.MY_ORDER_PAGE);
+                            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+                            break;
+                        case "myAsset":
+                            UserInfoResponseBean infoResponseBean = new UserInfoResponseBean();
+                            infoResponseBean.setAuthStatus(data.getAuthStatus());
+                            BusniessUtils.handleCertification(v.getContext(), infoResponseBean, () -> {
+                                activityParams.setPage(RNActivity.PageType.MY_ASSET);
+                                MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+                            });
+                            break;
+                        case "myBank":
+                            activityParams.setPage(RNActivity.PageType.MY_BANK);
+                            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+                            break;
+                        case "about":
+                            break;
+                    }
+                });
     }
 }

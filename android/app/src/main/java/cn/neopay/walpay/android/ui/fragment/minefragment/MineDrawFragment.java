@@ -17,14 +17,10 @@ import cn.neopay.walpay.android.adapter.sliminjector.MineDrawTextImgSlimInjector
 import cn.neopay.walpay.android.adapter.sliminjector.MineDrawUserInforSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.MineLineSlimInjector;
 import cn.neopay.walpay.android.databinding.FragmentMineLayoutBinding;
-import cn.neopay.walpay.android.manager.routermanager.MainRouter;
-import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.event.MineEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
 import cn.neopay.walpay.android.module.sliminjector.MineTextImgItemBean;
-import cn.neopay.walpay.android.ui.RNActivity;
-import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
  * @author carlos.guo
@@ -90,19 +86,13 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         MineTextImgItemBean mAbout = new MineTextImgItemBean();
         mAbout.setItemImgId(R.mipmap.img_mine_draw_about);
         mAbout.setItemName("关于我们");
-        mAbout.setOnClickListener(v -> {
-
-        });
+        mAbout.setTypeClick("about");
         data.add(mAbout);
         mData.add(new CommonLineItemBean());
         MineTextImgItemBean mSetting = new MineTextImgItemBean();
         mSetting.setItemImgId(R.mipmap.img_mine_draw_settings);
         mSetting.setItemName("设置");
-        mSetting.setOnClickListener(v -> {
-            RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setPage(RNActivity.PageType.SETTING_PAGE);
-            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
-        });
+        mSetting.setTypeClick("settings");
         data.add(mSetting);
     }
 
@@ -110,33 +100,20 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         MineTextImgItemBean mMyBill = new MineTextImgItemBean();
         mMyBill.setItemImgId(R.mipmap.img_mine_draw_bill);
         mMyBill.setItemName("我的账单");
-        mMyBill.setOnClickListener(v -> {
-            RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setPage(RNActivity.PageType.MY_ORDER_PAGE);
-            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
-        });
+        mMyBill.setTypeClick("myOder");
         data.add(mMyBill);
         mData.add(new CommonLineItemBean());
         MineTextImgItemBean mAsset = new MineTextImgItemBean();
         mAsset.setItemImgId(R.mipmap.img_mine_draw_money);
         mAsset.setItemName("我的资产");
-        mAsset.setOnClickListener(v -> {
-            BusniessUtils.handleCertification(getContext(), mUserInfoBean, () -> {
-                RNActivityParams activityParams = new RNActivityParams();
-                activityParams.setPage(RNActivity.PageType.MY_ASSET);
-                MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
-            });
-        });
+        mAsset.setTypeClick("myAsset");
+        mAsset.setAuthStatus(mUserInfoBean != null ? mUserInfoBean.getAuthStatus() : 1);
         data.add(mAsset);
         mData.add(new CommonLineItemBean());
         MineTextImgItemBean mMyBank = new MineTextImgItemBean();
         mMyBank.setItemImgId(R.mipmap.img_mine_draw_bank_card);
         mMyBank.setItemName("我的银行卡");
-        mMyBank.setOnClickListener(v -> {
-            RNActivityParams activityParams = new RNActivityParams();
-            activityParams.setPage(RNActivity.PageType.MY_BANK);
-            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
-        });
+        mMyBank.setTypeClick("myBank");
         data.add(mMyBank);
         mData.add(new CommonLineItemBean());
     }

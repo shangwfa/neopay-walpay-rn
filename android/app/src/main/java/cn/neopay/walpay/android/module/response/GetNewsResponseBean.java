@@ -61,7 +61,7 @@ public class GetNewsResponseBean {
     private String msgTypeText;
     private String dayCode;
     private boolean disPlayDate;
-    private int id;
+    private long id;
     private String uuid;
     private int billId;
     private double amount;
@@ -158,11 +158,11 @@ public class GetNewsResponseBean {
         this.disPlayDate = disPlayDate;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

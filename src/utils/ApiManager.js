@@ -102,6 +102,11 @@ getUserInfo = (callback) => {
         callback(data)
     })
 }
+modifyUserAvatarUrl = (request,callback) => {
+    NetUtil.post(APIS.MODIFY_USER_AVATAR_URL,request, (data) => {
+        callback(data)
+    })
+};
 
 getUserBillDetail = (request, callback) => {
     NetUtil.post(APIS.QUERY_USER_BILL_DETAIL, request, (data) => {
@@ -328,6 +333,7 @@ export default {
     createRedPacket,
     payRedPacket,
     queryUserBill,
+    modifyUserAvatarUrl,
     queryPayMessage,
     createPhoneRechargeOrder,
     getUserRedPacketStats,

@@ -14,7 +14,35 @@ public class NewsItemBean {
     private long time;
     private int isSelectState;
     private String content;
+    private String typeClick;
     private View.OnClickListener onClickListener;
+    private Integer msgType;
+    private Long id;
+    private String noticeUrl;
+
+    public String getNoticeUrl() {
+        return noticeUrl;
+    }
+
+    public void setNoticeUrl(String noticeUrl) {
+        this.noticeUrl = noticeUrl;
+    }
+
+    public Integer getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(Integer msgType) {
+        this.msgType = msgType;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public View.OnClickListener getOnClickListener() {
         return onClickListener;
@@ -22,6 +50,14 @@ public class NewsItemBean {
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public String getTypeClick() {
+        return typeClick;
+    }
+
+    public void setTypeClick(String typeClick) {
+        this.typeClick = typeClick;
     }
 
     public String getAvatar() {
