@@ -36,7 +36,8 @@
 #define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"
 //侧边栏更新头像和用户名
 #define kNotificationSideViewUpdateAvatar @"kNotificationSideViewUpdateAvatar"
-
+//RN请求原生图片,更换头像
+#define kNotificationRNModalPicSelActSheet @"kNotificationRNModalPicSelActSheet"
 
 #pragma mark - ——————— 网络状态相关 ————————
 

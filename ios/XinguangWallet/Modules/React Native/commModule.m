@@ -172,5 +172,12 @@ RCT_EXPORT_METHOD(contactCommNumber:(RCTResponseSenderBlock)callback){
     [self.bridge.eventDispatcher sendAppEventWithName:@"ContactSelected"
                                                  body:notification.userInfo[@"PhoneNo"]];
 }
+
+//RN页面请求访问原生图片,更换头像
+RCT_EXPORT_METHOD(showCommDialog:(NSString*)title:(RCTResponseSenderBlock)callback){
+    if ([title isEqualToString:@"updatePersonalAvatar"]) {
+        [kNotificationCenter postNotificationName:kNotificationRNModalPicSelActSheet object:nil];
+    }
+}
     
 @end

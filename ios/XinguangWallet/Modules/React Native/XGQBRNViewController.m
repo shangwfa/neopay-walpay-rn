@@ -50,6 +50,7 @@
     [kNotificationCenter addObserver:self selector:@selector(RNJumpIntoSecondLevel) name:kNotificationRNJumpIntoSecondLevel object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNJumpBackToFirstLevel) name:kNotificationRNJumpBackToFirstLevel object:nil];
     [kNotificationCenter addObserver:self selector:@selector(RNModalContactList:) name:kNotificationRNModalContactList object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(RNModalPictureActionSheet) name:kNotificationRNModalPicSelActSheet object:nil];
     //预先加载RN页面
     
     AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -196,5 +197,40 @@
     [kNotificationCenter postNotificationName:kNotificationGetContactPhoneNoToRN object:nil userInfo:@{@"PhoneNo":phoneNumberStr}];
     
 }
+
+-(void)RNModalPictureActionSheet
+{
+    UIImagePickerController *imgPicVC = [[UIImagePickerController alloc]init];
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+
+    kWeakSelf(self);
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        imgPicVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [weakself presentViewController:imgPicVC animated:YES completion:^{
+            JKLog();
+        }];
+    }];
+
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        imgPicVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [weakself presentViewController:imgPicVC animated:YES completion:^{
+            JKLog();
+        }];
+    }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        JKLog();
+    }];
+
+    [alertVC addAction:action1];
+    [alertVC addAction:action2];
+    [alertVC addAction:cancelAction];
+
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+
+}
+
 
 @end
