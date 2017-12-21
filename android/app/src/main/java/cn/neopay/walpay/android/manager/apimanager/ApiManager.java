@@ -80,6 +80,7 @@ import cn.neopay.walpay.android.module.request.SendBindBankCardCodeRequestBean;
 import cn.neopay.walpay.android.module.request.SendRegisterCodeRequestBean;
 import cn.neopay.walpay.android.module.request.SendResetLoginPasswordCodeRequestBean;
 import cn.neopay.walpay.android.module.request.SendResetPayPasswordCodeRequestBean;
+import cn.neopay.walpay.android.module.request.ShareRequestBean;
 import cn.neopay.walpay.android.module.request.UnbindBankCardRequestBean;
 import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
 import cn.neopay.walpay.android.module.response.SecurityTokenResponseBean;
@@ -775,6 +776,16 @@ public class ApiManager {
     public void updateNewsReadStatus(BaseRequest requestBean, BaseSubscriber subscriber) {
         Api.getInstance().getApiService()
                 .updateNewsReadStatus(ReflectUtils.convertObjToMap(requestBean))
+                .compose(RxUtils.rxNet())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取分享的信息
+     */
+    public void getShareMsg(ShareRequestBean requestBean, BaseSubscriber subscriber) {
+        Api.getInstance().getApiService()
+                .getShareMsg(ReflectUtils.convertObjToMap(requestBean))
                 .compose(RxUtils.rxNet())
                 .subscribe(subscriber);
     }

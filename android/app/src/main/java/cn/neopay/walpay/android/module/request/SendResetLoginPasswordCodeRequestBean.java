@@ -9,6 +9,9 @@ public class SendResetLoginPasswordCodeRequestBean extends BaseRequest {
 	 */
 	private String phone;
 
+	public SendResetLoginPasswordCodeRequestBean(String phone) {
+		this.phone = phone;
+	}
 
 	public String getPhone() {
 		return this.phone;

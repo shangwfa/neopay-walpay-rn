@@ -122,6 +122,9 @@ public class CommonInputView extends FrameLayout {
             case IWalpayConstants.COMMONINPUTVIEW_TYPE_PHONE:
                 setPhone();
                 break;
+            case IWalpayConstants.COMMONINPUTVIEW_TYPE_REAL_MSG:
+                setRealMsg();
+                break;
             case IWalpayConstants.COMMONINPUTVIEW_TYPE_VERIFICATION_CODE:
                 setVerificationCode();
                 break;
@@ -155,6 +158,10 @@ public class CommonInputView extends FrameLayout {
             ViewUtils.setEditTextValue(mBinding.value, value);
             mBinding.commonInputClose.setVisibility(INVISIBLE);
         }
+    }
+
+    private void setRealMsg() {
+        mBinding.value.setInputType(InputType.TYPE_CLASS_PHONE);
     }
 
     private void setPayPwd() {

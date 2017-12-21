@@ -37,7 +37,7 @@ public class NewsRedPacketItemBean {
     private String msgTypeText;
     private String dayCode;
     private boolean disPlayDate;
-    private int id;
+    private long id;
     private String packetCode;
     private String uuid;
     private int readStatus;
@@ -101,11 +101,11 @@ public class NewsRedPacketItemBean {
         this.disPlayDate = disPlayDate;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

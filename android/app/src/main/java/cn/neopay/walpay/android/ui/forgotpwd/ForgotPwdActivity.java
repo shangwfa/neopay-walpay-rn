@@ -2,6 +2,7 @@ package cn.neopay.walpay.android.ui.forgotpwd;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -13,6 +14,7 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityForgotpwdLayoutBinding;
 import cn.neopay.walpay.android.module.bean.ResetPwdParameterBean;
+import cn.neopay.walpay.android.utils.BusniessUtils;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 
 /**
@@ -40,13 +42,16 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
                 mPageBinding.commonHeader.setHeaderLeftImg("重置登录密码");
                 mViewBinding.commonInputPassword.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PASSWORD, ResUtils.getText(this, R.string.reset_setting_login_pwd_hint), R.mipmap.img_pwd_gray);
                 mViewBinding.commonInputVerification.setVerificationCode(IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PWD);
+                mViewBinding.commonRealMsg.setVisibility(View.GONE);
                 break;
             case IWalpayConstants.FORGOTPWD_TYPE_PAY:
                 mPageBinding.commonHeader.setHeaderLeftImg("重置支付密码");
-                mViewBinding.commonInputPhone.getEditText().setText(userName);
+                mViewBinding.commonInputPhone.getEditText().setText(BusniessUtils.getUserName());
                 mViewBinding.commonInputPhone.getEditText().setEnabled(false);
                 mViewBinding.commonInputPassword.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PAY, "设置支付密码，6位数字", R.mipmap.img_pay_pwd);
                 mViewBinding.commonInputVerification.setVerificationCode(IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PAY_PWD);
+                mViewBinding.commonRealMsg.setVisibility(View.VISIBLE);
+                mViewBinding.commonRealMsg.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_REAL_MSG, "请输入实名认证的身份证号", R.mipmap.img_id_card);
                 break;
             default:
                 break;
@@ -60,7 +65,11 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
 
     private void handleViewClick() {
         mViewBinding.passwordBtn.setOnClickListener((v) -> {
-            ResetPwdParameterBean resetPwdParameterBean = new ResetPwdParameterBean(forgotPwdType, mViewBinding.commonInputPhone.getText(), mViewBinding.commonInputVerification.getText(), mViewBinding.commonInputPassword.getText());
+            ResetPwdParameterBean resetPwdParameterBean = new ResetPwdParameterBean(forgotPwdType,
+                    mViewBinding.commonInputPhone.getText(),
+                    mViewBinding.commonInputVerification.getText(),
+                    mViewBinding.commonInputPassword.getText(),
+                    mViewBinding.commonRealMsg.getText());
             mPresenter.resetPassword(resetPwdParameterBean);
         });
 
