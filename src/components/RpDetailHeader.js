@@ -34,7 +34,7 @@ const RpDetailHeader = props => {
         background_container: {
             backgroundColor: colors.white,
             width:ScreenUtils.width,
-            height:ScreenUtils.height/2 - 20,
+            height:ScreenUtils.height/2 -40,
             alignItems:'center'
         },
 
@@ -91,7 +91,7 @@ const RpDetailHeader = props => {
             color:colors.black
         },
         state_value: {
-            marginTop:15,
+            marginBottom:15,
             fontSize:15,
             color:colors.one_color
         },
