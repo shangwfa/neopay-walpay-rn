@@ -48,7 +48,7 @@ class MyBalancePage extends BasePage {
                 </View>
                 <View style={styles.numberTextView}>
                     <Text style={styles.RMBText}>
-                        ¥
+                        {`¥ `}
                     </Text>
                     <Text style ={styles.numberText}>
                         {FormatUtils.money(this.state.data.balance)}

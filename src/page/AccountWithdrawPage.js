@@ -16,6 +16,7 @@ import CommonItemThree from '../components/CommonItemThree'
 import ApiManager from '../utils/ApiManager'
 import SelectPayStyleModal from '../modal/SelectPayStyleModal'
 import PayPwdModal from '../modal/PayPwdModal'
+import FormatUtils from "../utils/FormatUtils";
 
 
 class AccountWithdrawPage extends BasePage {
@@ -33,7 +34,8 @@ class AccountWithdrawPage extends BasePage {
             selectedBankIconUrl:'',
             isPayShow:false,
             orderNo:'',
-            // textInputFontSize:14,
+            textInputFontSize:14,
+            textInputPlaceHolder:'请输入提现金额',
         }
     }
 
@@ -59,7 +61,7 @@ class AccountWithdrawPage extends BasePage {
                     isShow={this.state.isShowSelectPayStyle}/>
                 <PayPwdModal isShow={this.state.isPayShow}
                              contentFront='提现金额'
-                             contentBack={this.state.withdrawAmount}
+                             contentBack={FormatUtils.money(this.state.withdrawAmount)}
                              payTypeContent={this.retPayTypeContent()}
                              onClose={()=>this.setState({isPayShow:false})}
                              onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
@@ -172,11 +174,12 @@ class AccountWithdrawPage extends BasePage {
                 <View style={styles.numberRowViewNoView}>
                     <Text style={styles.numberRowViewRMB}>¥</Text>
                     <TextInput
-                        placeholder='请输入提现金额'
-                        style={[styles.numberRowViewNumber]}
+                        placeholder={this.state.textInputPlaceHolder}
+                        style={[styles.numberRowViewNumber,{fontSize:this.state.textInputFontSize}]}
                         keyboardType={'numeric'}
                         underlineColorAndroid={'transparent'}
                         onChangeText={(text)=>this.onChangeText(text)}
+                        // placeholderTextColor={'red'}
                     />
                 </View>
                 <Divider style={{marginTop:16,marginLeft:10,marginRight:10}}/>
@@ -189,15 +192,17 @@ class AccountWithdrawPage extends BasePage {
         this.setState({
             withdrawAmount:text
         })
-        // if(text){
-        //     this.setState({
-        //         textInputFontSize:33,
-        //     })
-        // }else {
-        //     this.setState({
-        //         textInputFontSize:14,
-        //     })
-        // }
+        if(text){
+            this.setState({
+                textInputFontSize:33,
+                textInputPlaceHolder:'',
+            })
+        }else{
+            this.setState({
+                textInputFontSize:14,
+                textInputPlaceHolder:'请输入提现金额',
+            })
+        }
     }
 
     withdrawBtnClicked() {
@@ -298,20 +303,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 50,
         marginTop: 20,
-        alignItems:'flex-start'
+        alignItems:'flex-end',
+        // backgroundColor:'gray',
     },
     numberRowViewRMB: {
         fontSize: 30,
         color: '#000000',
         marginLeft: 12,
-        marginTop: ScrnUtil.isIOS ? 3 : 0
+        marginTop: ScrnUtil.isIOS ? 3 : 0,
+        // backgroundColor:'yellow',
     },
     numberRowViewNumber: {
-        fontWeight:'bold',
+        // fontWeight:'bold',
+        // backgroundColor:'red',
         marginLeft: 10,
         flex: 1,
         height:40,
-        fontSize:33,
+        paddingTop:5,
+            // fontSize:33,
     },
     //分割线
     numberRowViewUnderlineView: {

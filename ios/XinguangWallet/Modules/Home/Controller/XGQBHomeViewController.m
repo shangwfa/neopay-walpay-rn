@@ -259,11 +259,25 @@
 {
     XGQBMessage *message = _homeTVC.messArr[indexPath.row];
 
+    //红包消息
     if (message.msgType==XGQBMessageTypeRedPacket) {
-        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-        RNVC.pageType = @"redList";
-        RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
-        [self.navigationController pushViewController:RNVC animated:YES];
+        //先检查实名认证状态
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            if (message.receiveStatus==XGQBRedPacketReceiveStatusReceived) {
+                //红包已领取,跳转红包广场
+                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                RNVC.pageType = @"redList";
+                [self.navigationController pushViewController:RNVC animated:YES];
+            }else{//红包未领取,跳转红包领取页
+                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                RNVC.pageType = @"rpDetail";
+                RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
+                [self.navigationController pushViewController:RNVC animated:YES];
+            }
+
+        }
     }
     else if(message.msgType==XGQBMessageTypePayMessage)
     {

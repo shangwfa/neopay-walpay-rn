@@ -14,4 +14,6 @@
 
 +(XGQBMsgTableViewCell*)cellWithMessage:(XGQBMessage*)message;
 
+-(void)updateWithNewMessage:(XGQBMessage*)message;
+
 @end
