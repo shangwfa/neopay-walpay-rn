@@ -102,7 +102,7 @@
     UIView *userNameView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     
     //未实名并且昵称为空
-    if ([GVUserDefaults standardUserDefaults].authStatus==1&&[GVUserDefaults standardUserDefaults].nickName==nil)
+    if ([GVUserDefaults standardUserDefaults].authStatus==1&&[[GVUserDefaults standardUserDefaults].nickName isEqualToString:[GVUserDefaults standardUserDefaults].phone])
     {
 
         //手机号标签
@@ -128,7 +128,7 @@
         }];
     }
     //未实名并且昵称不为空
-    else if ([GVUserDefaults standardUserDefaults].authStatus==1&&[GVUserDefaults standardUserDefaults].nickName!=nil)
+    else if ([GVUserDefaults standardUserDefaults].authStatus==1&&![[GVUserDefaults standardUserDefaults].nickName isEqualToString:[GVUserDefaults standardUserDefaults].phone])
     {
         
         //用户名标签
@@ -193,8 +193,12 @@
             make.top.equalTo(nameLabel.mas_bottom).with.offset(12);
         }];
     }
-    
+    [_regBtn addTarget:self action:@selector(sideViewRegBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     return userNameView;
+}
+
+-(void)sideViewRegBtnClicked{
+    [kNotificationCenter postNotificationName:kNotificationRegisterIDAction object:nil];
 }
 
 

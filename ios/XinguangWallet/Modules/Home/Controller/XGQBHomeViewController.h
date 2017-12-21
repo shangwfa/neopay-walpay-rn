@@ -12,4 +12,6 @@
 
 @property (nonatomic,weak) UIButton *headerBtn;
 
+-(void)checkIDStatus;
+
 @end

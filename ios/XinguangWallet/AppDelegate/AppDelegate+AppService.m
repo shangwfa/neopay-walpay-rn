@@ -69,13 +69,13 @@
 -(void)initUserManager{
 
     //如果是第一次使用APP,显示BootVC
-    if([GVUserDefaults standardUserDefaults].runCount == 0)
-    {
-        [GVUserDefaults standardUserDefaults].runCount ++ ;
-        self.window.rootViewController = [[XGQBAPPBootViewController alloc] init];
-    }
-    else
-    {
+//    if([GVUserDefaults standardUserDefaults].runCount == 0)
+//    {
+//        [GVUserDefaults standardUserDefaults].runCount ++ ;
+//        self.window.rootViewController = [[XGQBAPPBootViewController alloc] init];
+//    }
+//    else
+//    {
         [GVUserDefaults standardUserDefaults].runCount ++ ;
         //判断是否含有登录信息
         if (![GVUserDefaults standardUserDefaults].accessToken) {
@@ -85,7 +85,7 @@
             //有token,自动进入主页
             [self setupAndJumpIntoMainInterface];
             
-        }
+//        }
     }
 }
 

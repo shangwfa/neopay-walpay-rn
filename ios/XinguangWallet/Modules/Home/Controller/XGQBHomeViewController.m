@@ -208,8 +208,9 @@
 
 #pragma mark - 实名认证页面
 -(void)registerID
-
 {
+    XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)kAppWindow.rootViewController;
+    [rootVC closeSideView];
     XGQBRNViewController *RNVC = [XGQBRNViewController new];
     RNVC.pageType = @"userInfoCerfity";
     [self.navigationController pushViewController:RNVC animated:YES];
@@ -217,14 +218,25 @@
 
 #pragma mark - XGQBHomeTitleViewBtnDelegate
 - (void)homeTitleBtnClicked:(XGQBHomeTitleBtn *)btn {
+    //大红包按钮点击
     if ([btn.titleLabel.text isEqualToString:@"大红包"]) {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"bigRedPacketSimple";
-        [self.navigationController pushViewController:RNVC animated:YES];
-    }else if ([btn.titleLabel.text isEqualToString:@"手机充值"]){
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"phoneTopUp";
-        [self.navigationController pushViewController:RNVC animated:YES];
+        
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"bigRedPacketSimple";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }
+    }else if ([btn.titleLabel.text isEqualToString:@"手机充值"]){//手机充值按钮点击
+        
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"phoneTopUp";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }
     }
 }
 
@@ -247,11 +259,25 @@
 {
     XGQBMessage *message = _homeTVC.messArr[indexPath.row];
 
+    //红包消息
     if (message.msgType==XGQBMessageTypeRedPacket) {
-        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-        RNVC.pageType = @"redList";
-        RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
-        [self.navigationController pushViewController:RNVC animated:YES];
+        //先检查实名认证状态
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            if (message.receiveStatus==XGQBRedPacketReceiveStatusReceived) {
+                //红包已领取,跳转红包广场
+                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                RNVC.pageType = @"redList";
+                [self.navigationController pushViewController:RNVC animated:YES];
+            }else{//红包未领取,跳转红包领取页
+                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                RNVC.pageType = @"rpDetail";
+                RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
+                [self.navigationController pushViewController:RNVC animated:YES];
+            }
+
+        }
     }
     else if(message.msgType==XGQBMessageTypePayMessage)
     {

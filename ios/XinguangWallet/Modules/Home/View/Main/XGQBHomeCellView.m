@@ -156,13 +156,18 @@ static NSString *const cellId = @"cellId";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //点击余额按钮
     if (indexPath.section==0&&indexPath.row==2) {
-       
+
         XGQBAPPRootViewController *rootVC =(XGQBAPPRootViewController*)kAppWindow.rootViewController;
         
-        XGQBRNViewController *RNVC =[XGQBRNViewController new];
-        RNVC.pageType=@"myBalance";
-        [rootVC.rootNAV pushViewController:RNVC animated:YES];
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [rootVC.homeVC checkIDStatus];
+        }else{
+            XGQBRNViewController *RNVC =[XGQBRNViewController new];
+            RNVC.pageType=@"myBalance";
+            [rootVC.rootNAV pushViewController:RNVC animated:YES];
+        }
     }else{
         JKLog();
     }
