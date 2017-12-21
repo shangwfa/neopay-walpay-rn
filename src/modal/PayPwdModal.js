@@ -5,7 +5,8 @@ import {
     Text,
     Modal,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Animated,
 } from 'react-native'
 import {Divider} from '../components/index'
 import {colors} from '../constants/index'
@@ -19,7 +20,7 @@ class PayPwdModal extends Component {
         super(props);
         this.state = {
             show: false,
-            modalFlex:1
+            modalFlex: new Animated.Value(1.0)
         }
     }
 
@@ -51,7 +52,7 @@ class PayPwdModal extends Component {
                 }}
                 onRequestClose={() => {
                 }}>
-                <View style={[styles.modalStyle,{flex:this.state.modalFlex}]} ref='modalView'>
+                <Animated.View style={[styles.modalStyle,{flex:this.state.modalFlex}]} ref='modalView'>
                     <View style={styles.container}>
                         <View style={styles.content_container}>
                             {this.renderTop()}
@@ -75,7 +76,7 @@ class PayPwdModal extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </View>
+                </Animated.View>
             </Modal>
         );
     }
@@ -84,16 +85,26 @@ class PayPwdModal extends Component {
     onTextFocus=()=>{
         // console.log('收到键盘focus事件')
         if (!ScreenUtils.isIOS) return;
-        this.setState({
-            modalFlex:0.7,
-        })
+
+        Animated.timing(
+            this.state.modalFlex,
+            {
+                toValue:0.7,
+                duration:200,
+            }
+        ).start();
     }
     onTextBlur=()=>{
         // console.log('收到键盘blur事件')
         if (!ScreenUtils.isIOS) return;
-        this.setState({
-            modalFlex:1.0,
-        })
+
+        Animated.timing(
+            this.state.modalFlex,
+            {
+                toValue:1.0,
+                duration:200,
+            }
+        ).start();
     }
 }
 
