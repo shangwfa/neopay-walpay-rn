@@ -118,9 +118,20 @@ getRedPacketList = (request, callback) => {
         callback(data);
     });
 };
-receiveRedPacket = (request, callback) => {
+receiveRedPacket = (request, callback, errorCallback, netWorkCallback) => {
     NetUtil.post(APIS.RECEIVE_RED_PACKET, request, (data) => {
         callback(data);
+    }, (errorData) => {
+        errorCallback(errorData);
+    }, (errData) => {
+        netWorkCallback(errData);
+    });
+};
+addRedPacketReceiver = (request, callback, errorCallback) => {
+    NetUtil.post(APIS.ADD_RED_PACKET_RECEIVER, request, (data) => {
+        callback(data);
+    }, (errorData) => {
+        errorCallback(errorData);
     });
 };
 getMerchantBannerList = (request, callback) => {
@@ -302,6 +313,7 @@ export default {
     getUserPayTypeList,
     payRedPacketVerify,
     getRedPacketPayStatus,
+    addRedPacketReceiver,
     getServiceInfo,
     logoutUser,
     getBankCardRecordPage,

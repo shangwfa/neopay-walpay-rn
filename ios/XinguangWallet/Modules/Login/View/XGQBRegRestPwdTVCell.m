@@ -51,6 +51,7 @@
         case XGQBRegResetPwdTVCellTypeRegCode:
             [cell addsubviewsWithLeftImageNamed:@"dl_yanzhengma" placeHolder:@"请输入验证码" rightBtn:countTimeBtn];
             cell.textField.type = XGQBTextFieldTypeRegisterCode;
+            cell.textField.clearButtonMode=UITextFieldViewModeNever;
             break;
         case XGQBRegResetPwdTVCellTypeLoginPwd:
             [cell addsubviewsWithLeftImageNamed:@"dl_mima1" placeHolder:@"设置登录密码,6-18位字母加数字" rightBtn:readPwdBtn];
@@ -115,7 +116,7 @@
         }];
     }else{
         [textField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(weakself.contentView.width-leftImageView.size.width-rightBtn.size.width-15,32));
+            make.size.mas_equalTo(CGSizeMake(weakself.contentView.width-leftImageView.size.width-rightBtn.size.width-15-14,32));
             make.bottom.equalTo(weakself.contentView);
             make.left.equalTo(leftImageView.mas_right).with.offset(16);
         }];

@@ -208,8 +208,9 @@
 
 #pragma mark - 实名认证页面
 -(void)registerID
-
 {
+    XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)kAppWindow.rootViewController;
+    [rootVC closeSideView];
     XGQBRNViewController *RNVC = [XGQBRNViewController new];
     RNVC.pageType = @"userInfoCerfity";
     [self.navigationController pushViewController:RNVC animated:YES];
@@ -217,14 +218,25 @@
 
 #pragma mark - XGQBHomeTitleViewBtnDelegate
 - (void)homeTitleBtnClicked:(XGQBHomeTitleBtn *)btn {
+    //大红包按钮点击
     if ([btn.titleLabel.text isEqualToString:@"大红包"]) {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"bigRedPacketSimple";
-        [self.navigationController pushViewController:RNVC animated:YES];
-    }else if ([btn.titleLabel.text isEqualToString:@"手机充值"]){
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"phoneTopUp";
-        [self.navigationController pushViewController:RNVC animated:YES];
+        
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"bigRedPacketSimple";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }
+    }else if ([btn.titleLabel.text isEqualToString:@"手机充值"]){//手机充值按钮点击
+        
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"phoneTopUp";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }
     }
 }
 

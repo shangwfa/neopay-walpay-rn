@@ -5,20 +5,22 @@ import {
     Text,
     Modal,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Animated,
 } from 'react-native'
 import {Divider} from '../components/index'
 import {colors} from '../constants/index'
 import close_icon from '../res/img/close_icon.png'
 import right_arrow from '../res/img/right_arrow.png'
 import PasswordInput from '../components/PasswordInput'
+import ScreenUtils from "../utils/ScreenUtils";
 class PayPwdModal extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            modalFlex:1
+            modalFlex: new Animated.Value(1.0)
         }
     }
 
@@ -43,13 +45,14 @@ class PayPwdModal extends Component {
     render() {
         return (
             <Modal
+                animationType='fade'
                 transparent={true}
                 visible={this.props.isShow}
                 onShow={() => {
                 }}
                 onRequestClose={() => {
                 }}>
-                <View style={[styles.modalStyle,{flex:this.state.modalFlex}]} ref='modalView'>
+                <Animated.View style={[styles.modalStyle,{flex:this.state.modalFlex}]} ref='modalView'>
                     <View style={styles.container}>
                         <View style={styles.content_container}>
                             {this.renderTop()}
@@ -73,7 +76,7 @@ class PayPwdModal extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </View>
+                </Animated.View>
             </Modal>
         );
     }
@@ -81,15 +84,27 @@ class PayPwdModal extends Component {
     //增加弹窗在键盘聚焦的时候改变位置
     onTextFocus=()=>{
         // console.log('收到键盘focus事件')
-        this.setState({
-            modalFlex:0.7,
-        })
+        if (!ScreenUtils.isIOS) return;
+
+        Animated.timing(
+            this.state.modalFlex,
+            {
+                toValue:0.7,
+                duration:200,
+            }
+        ).start();
     }
     onTextBlur=()=>{
         // console.log('收到键盘blur事件')
-        this.setState({
-            modalFlex:1.0,
-        })
+        if (!ScreenUtils.isIOS) return;
+
+        Animated.timing(
+            this.state.modalFlex,
+            {
+                toValue:1.0,
+                duration:200,
+            }
+        ).start();
     }
 }
 

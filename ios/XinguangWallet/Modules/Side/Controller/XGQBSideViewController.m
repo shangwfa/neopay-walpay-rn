@@ -99,9 +99,19 @@
         [rootVC closeSideView];
         return;
     }
+    
     XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)self.parentViewController;
-    [rootVC.rootNAV pushViewController:RNVC animated:YES];
-    [rootVC closeSideView];
+
+    //点击我的资产,判断是否已经实名
+    if (indexPath.section==0&&indexPath.row==1&&[GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized) {
+        [rootVC closeSideView];
+        [rootVC.homeVC checkIDStatus];
+    }else{
+        [rootVC.rootNAV pushViewController:RNVC animated:YES];
+        [rootVC closeSideView];
+    }
+    
+
 }
 
 #pragma mark - 处理按钮点击

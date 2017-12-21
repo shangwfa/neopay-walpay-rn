@@ -184,7 +184,11 @@
         }else
         {
             [self LogSuccessResponse:responseObject successFn:successFn];
+            
+            NSString *retMsg = [responseObject objectForKey:@"retMsg"];
+            if(![retMsg isEqualToString:@"该手机号已注册"]){
             [SVProgressHUD showInfoWithStatus:[responseObject objectForKey:@"retMsg"]];
+            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //        [self parseResponse:error successFn:successFn failureFn:failerFn];
