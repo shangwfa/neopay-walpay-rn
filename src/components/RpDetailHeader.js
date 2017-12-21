@@ -13,7 +13,7 @@ import DateUtils from "../utils/DateUtils";
 
 const imgWidth = (ScreenUtils.width - 30)/4;
 
-const itemHeight = ScreenUtils.height/6;
+const itemHeight = (ScreenUtils.height/6);
 
 const imgHeight = ScreenUtils.width/5;
 
@@ -34,7 +34,7 @@ const RpDetailHeader = props => {
         background_container: {
             backgroundColor: colors.white,
             width:ScreenUtils.width,
-            height:ScreenUtils.height/2,
+            height:ScreenUtils.height/2 -40,
             alignItems:'center'
         },
 
@@ -86,12 +86,12 @@ const RpDetailHeader = props => {
             resizeMode:'contain'
         },
         from_value: {
-            marginTop:30,
-            fontSize:20,
+            marginTop:15,
+            fontSize:18,
             color:colors.black
         },
         state_value: {
-            marginTop:20,
+            marginBottom:15,
             fontSize:15,
             color:colors.one_color
         },
