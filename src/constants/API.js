@@ -60,4 +60,5 @@ export const APIS = {
     CREATE_WITHDRAW_BALANCE: 'balance/create_withdraw_order',//创建提现订单
     WITHDRAW_ORDER: 'balance/withdraw_order',//提现
     GET_RECENT_PHONE_RECHARGE_PHONE: 'pcharge/get_recent_phone_recharge_phone',//获取上次手机充值手机号
+    QUERY_MSG_BILL_DETAIL:'message/query_msg_bill_detail',//获取消息账单详情并更新消息阅读状态
 };

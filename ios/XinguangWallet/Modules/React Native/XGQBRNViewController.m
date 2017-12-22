@@ -371,7 +371,7 @@
     NSString *shareType = [notification.userInfo objectForKey:@"shareType"];
     
     NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
-    [body setObject:packetCode forKey:@"packetCode"];
+    [body setObject:packetCode forKey:@"code"];
     [body setObject:shareType forKey:@"shareType"];
     
     [MemberCoreService addShare:body andSuccessFn:^(id responseAfter, id responseBefore) {

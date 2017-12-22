@@ -26,15 +26,29 @@ class TransactionDetailsPage extends BasePage {
             sourceData: {},
             serviceSourceData: {},
             orderNo: this.props.navigation.state.params.orderNo,
+            msgType: this.props.navigation.state.params.msgType,
+            billId: this.props.navigation.state.params.billId,
+            id: this.props.navigation.state.params.id,
         }
     }
 
     componentWillMount() {
-        ApiManager.getUserBillDetail({"orderNo": this.state.orderNo}, (data) => {
-            this.setState({
-                sourceData: data,
+
+        //判断是否是由支付消息页面点击过来
+        if(this.state.msgType===2||this.state.msgType===3){
+            ApiManager.queryMsgBillDetail({"billId": this.state.billId,"msgType":this.state.msgType,"id":this.state.id}, (data) => {
+                this.setState({
+                    sourceData: data,
+                });
             });
-        });
+        }else{
+            ApiManager.getUserBillDetail({"orderNo": this.state.orderNo}, (data) => {
+                this.setState({
+                    sourceData: data,
+                });
+            });
+        }
+
         ApiManager.getServiceInfo({}, (data) => {
             this.setState({
                 serviceSourceData: data

@@ -289,6 +289,11 @@ getRecentPhoneRechargePhone = (request, callback) => {
         callback(data);
     })
 };
+queryMsgBillDetail=(request,callback)=>{
+    NetUtil.post(APIS.QUERY_MSG_BILL_DETAIL, request, (data) => {
+        callback(data);
+    })
+}
 export default {
     getCerfitySMSCode,
     getBindBankCardSMSCode,
@@ -343,4 +348,5 @@ export default {
     createWithdrawOrder,
     withdraworder,
     getRecentPhoneRechargePhone,
+    queryMsgBillDetail,
 }

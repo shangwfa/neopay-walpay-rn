@@ -5,7 +5,7 @@ import {
     Text,
     Image,
     SectionList,
-    ListView
+    ListView,
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
@@ -15,6 +15,7 @@ import {RefreshStatus} from "../components/RefreshList"
 import RefreshList from '../components/RefreshList'
 import ApiManager from '../utils/ApiManager'
 import DateUtils from "../utils/DateUtils";
+import {RouterPaths} from "../constants/RouterPaths";
 
 
 class PayMessagePage extends BasePage {
@@ -67,6 +68,7 @@ class PayMessagePage extends BasePage {
                                 remark = {item.remark}
                                 amount = {item.amount}
                                 payDirection = {item.payDirection}
+                                onPress={()=>this.pressOnItem(item)}
 
                 />
             </View>
@@ -79,6 +81,12 @@ class PayMessagePage extends BasePage {
             return <View style={styles.dateHeader}><Text style={styles.dateHeaderText}>{DateUtils.getRecentDate(item.createTimeMs)}</Text></View>
         }
     }
+
+    pressOnItem = (item)=>{
+        // console.log('点击了消息条目');
+        nav.navigate(RouterPaths.TRANSACTION_DETAILS,{billId:item.billId,msgType:item.msgType,id:item.id});
+        // console.log(`点击消息条目billId:${item.billId} msgType:${item.msgType}`);
+    };
 
 
     render() {
