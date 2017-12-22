@@ -25,7 +25,7 @@ const ImageTitleButton = props => {
             fontSize: 15,
         },
         container:{
-            backgroundColor:colors.page_background,
+            backgroundColor:colors.backgroundColor,
             height: 50,
             flexDirection:'row',
             justifyContent:'center',
@@ -42,11 +42,22 @@ const ImageTitleButton = props => {
         }
     });
 
+    renderImage=()=>{
+        if(icon == '')
+        {
+            return null;
+        }else
+        {
+            console.log('<~~~~~>');
+           return <Image style = {styles.imgIcon} source={icon}></Image>
+
+        }
+    }
+
     return (
         <TouchableOpacity {...attributes}>
             <View style={styles.container}>
-                <Image style = {styles.imgIcon} source={icon}></Image>
-
+                {this.renderImage()}
                 <Text style={styles.value}>
                     {value}
                 </Text>
