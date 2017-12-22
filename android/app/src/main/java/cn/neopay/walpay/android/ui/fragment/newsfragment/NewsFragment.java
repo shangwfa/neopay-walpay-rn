@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.logger.Logger;
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
 import com.xgjk.common.lib.utils.DensityUtils;
@@ -29,7 +30,6 @@ import cn.neopay.walpay.android.adapter.sliminjector.NewsRedPacketSlimInjector;
 import cn.neopay.walpay.android.databinding.FragmentNewsLayoutBinding;
 import cn.neopay.walpay.android.databinding.HomeDrawMiddleViewBinding;
 import cn.neopay.walpay.android.module.event.MineEventBean;
-import cn.neopay.walpay.android.module.event.NewsEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.BusniessUtils;
@@ -135,18 +135,13 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         return true;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void selectCurrentPageCallBack(NewsEventBean newsEventBean) {
-        initView();
-    }
-
-
     @Override
     public void setNewsViewData(List<Object> mDataList) {
         if (null == mDataList) {
             return;
         }
         mNewsAdapter.updateData(mDataList);
+        mNewsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -156,6 +151,7 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectCurrentPageCallBack(MineEventBean mineEventBean) {
+        Logger.d(mineEventBean.toString());
         mPresenter.getNewsInfo();
     }
 }

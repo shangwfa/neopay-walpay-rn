@@ -73,6 +73,7 @@ import cn.neopay.walpay.android.module.request.QueryUserMerchantListRequestBean;
 import cn.neopay.walpay.android.module.request.QueryUserOrderPageRequestBean;
 import cn.neopay.walpay.android.module.request.QueryUserReceivableRedPacketPageRequestBean;
 import cn.neopay.walpay.android.module.request.ReceiveRedPacketRequestBean;
+import cn.neopay.walpay.android.module.request.RedPacketStateRequestBean;
 import cn.neopay.walpay.android.module.request.RegisterUserRequestBean;
 import cn.neopay.walpay.android.module.request.ResetLoginPasswordRequestBean;
 import cn.neopay.walpay.android.module.request.ResetPayPasswordRequestBean;
@@ -786,6 +787,15 @@ public class ApiManager {
     public void getShareMsg(ShareRequestBean requestBean, BaseSubscriber subscriber) {
         Api.getInstance().getApiService()
                 .getShareMsg(ReflectUtils.convertObjToMap(requestBean))
+                .compose(RxUtils.rxNet())
+                .subscribe(subscriber);
+    }
+    /**
+     * 跟新红包的状态的信息
+     */
+    public void updateRedPacketState(RedPacketStateRequestBean requestBean, BaseSubscriber subscriber) {
+        Api.getInstance().getApiService()
+                .updateRedPacketStatus(ReflectUtils.convertObjToMap(requestBean))
                 .compose(RxUtils.rxNet())
                 .subscribe(subscriber);
     }

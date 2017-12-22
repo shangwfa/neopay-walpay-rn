@@ -17,6 +17,7 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
+import cn.neopay.walpay.android.module.request.RedPacketStateRequestBean;
 import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
 import cn.neopay.walpay.android.ui.RNActivity;
@@ -46,16 +47,18 @@ public class NewsRedPacketSlimInjector implements SlimInjector<NewsRedPacketItem
     }
 
     private void handleRedPacketClick(NewsRedPacketItemBean data, View view) {
-        //1 领取中  2 成功 3 过期 4 领完 5 无权限
-        if (1 != data.getReceiveStatus()) {
+        //1 未领取
+        if (1 == data.getReceiveStatus()) {
+            ApiManager.getSingleton().updateRedPacketState(new RedPacketStateRequestBean(data.getPacketCode()), new BaseSubscriber((Activity) view.getContext(), o -> {
+                RNActivityParams params = new RNActivityParams();
+                params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
+                RNActivityParams.Data dataParams = new RNActivityParams.Data();
+                dataParams.setPacketCode(data.getPacketCode());
+                params.setData(dataParams);
+                RNActivity.jumpToRNPage(view.getContext(), params);
+            }));
+        } else {//2 成功 3 过期 4 领完 5 无权限
             RNActivity.jumpToRNPage(view.getContext(), RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
-        } else {
-            RNActivityParams params = new RNActivityParams();
-            params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
-            RNActivityParams.Data dataParams = new RNActivityParams.Data();
-            dataParams.setPacketCode(data.getPacketCode());
-            params.setData(dataParams);
-            RNActivity.jumpToRNPage(view.getContext(), params);
         }
 
         UpdateNewsReadStatusRequestBean requestBean = new UpdateNewsReadStatusRequestBean();
