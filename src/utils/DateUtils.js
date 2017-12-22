@@ -74,7 +74,10 @@ isToYear = (date = new Date()) => {
 getRecentDate = (timestamp) => {
     let date = new Date(timestamp);
     if (isToday(date)) {//当天
-        return date.getMinutes() <= 59 ? `${date.getMinutes()}分钟前` : dateFmt("HH:mm", date);
+        let nowDate = new Date();
+        console.log(nowDate.getTime() + '~~~~~~' + timestamp);
+        let con = (nowDate.getTime() - timestamp)/1000/60;
+        return con <= 59 ? `${Math.ceil(con)}分钟前` : dateFmt("HH:mm", date);
     } else if (isYesterday(date)) {//昨天
         return `昨天${dateFmt("HH:mm", date)}`;
     } else if (isToYear(date)) {//今年
