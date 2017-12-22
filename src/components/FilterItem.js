@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import {colors} from '../constants/index'
 import ScreenUtils from "../utils/ScreenUtils";
-
+import img_select_shape from "../res/img/img_selecte_shape.png"
+import img_unselect_shape from "../res/img/img_unselecte_shape.png"
 class FilterItem extends Component {
 
     constructor(props) {
@@ -26,19 +27,21 @@ class FilterItem extends Component {
         this.setState({
             data: items
         })
-        if(this.props.callback){
-            let filterData=''
-            this.state.data.map(item=>{
-                if(item.selected){
-                    filterData+=(item.type+',')
+        if (this.props.callback) {
+            let filterData = ''
+            this.state.data.map(item => {
+                if (item.selected) {
+                    filterData += (item.type + ',')
                 }
             })
             this.props.callback(filterData)
         }
     }
     renderItem = ({item}) => (
-        <TouchableOpacity  style={item.selected?styles.button_container_selected:styles.button_container}onPress={() => this.onPress(item)}>
-            <Text style={item.selected ? styles.button_selected : styles.button}>{item.name}</Text>
+        <TouchableOpacity activeOpacity={1} onPress={() => this.onPress(item)}>
+            <Image style={styles.button_container} source={item.selected ? img_select_shape : img_unselect_shape}>
+                <Text style={item.selected ? styles.button_selected : styles.button}>{item.name}</Text>
+            </Image>
         </TouchableOpacity>
 
     )
@@ -52,12 +55,12 @@ class FilterItem extends Component {
                 </View>
                 <View style={{height: 4}}/>
                 <FlatList
-                    style={{marginLeft:ScreenUtils.width/25}}
+                    style={{marginLeft: ScreenUtils.width / 25}}
                     data={this.state.data}
                     renderItem={this.renderItem}
                     numColumns={4}
                     extraData={this.state}
-                    keyExtractor={(item)=>item.index}
+                    keyExtractor={(item) => item.index}
                 />
                 <View style={{height: 15}}/>
             </View>
@@ -66,27 +69,14 @@ class FilterItem extends Component {
 }
 
 const styles = StyleSheet.create({
-    button_container_selected:{
-        width: (ScreenUtils.width/25*5),
+    button_container: {
+        width: (ScreenUtils.width / 25 * 5),
         height: 34,
-        borderColor: colors.one_color,
-        borderWidth: ScreenUtils.onePixel,
-        marginRight: (ScreenUtils.width/25),
-        borderRadius:3,
+        marginRight: (ScreenUtils.width / 25),
         marginTop: 10,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    button_container:{
-        width: (ScreenUtils.width/25*5),
-        height: 34,
-        borderColor: colors.balck_more_light,
-        borderWidth: ScreenUtils.onePixel,
-        borderRadius:3,
-        marginRight: (ScreenUtils.width/25),
-        marginTop: 10,
-        justifyContent:'center',
-        alignItems:'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: "contain"
     },
     button_selected: {
         color: colors.one_color,

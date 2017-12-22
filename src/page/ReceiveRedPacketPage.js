@@ -107,11 +107,11 @@ class ReceiveRedPacketPage extends BasePage {
 
     };
 
-    handleShowProcess() {
+    handleShowProcess = () => {
         this.setState({
             isShowProcess: false
         });
-    }
+    };
 
     _handleRightArrowClick = () => {
         this.props.navigation.navigate(RouterPaths.INSTRUCTIONS_PAGE);
