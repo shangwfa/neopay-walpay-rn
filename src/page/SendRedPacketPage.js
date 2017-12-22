@@ -318,9 +318,7 @@ class SendRedPacketPage extends BasePage {
             payType: this.state.payType,
             bankCardId: this.state.bankCardId
         };
-        this.setState({
-            isShowPay: false
-        })
+
         ApiManager.payRedPacket(request, (data) => {
             this.setState({
                 payResultSourceData: data
@@ -328,6 +326,9 @@ class SendRedPacketPage extends BasePage {
             this.setState({
                 isShowWarpAction: true
             });
+            this.setState({
+                isShowPay: false
+            })
             setTimeout(() => {
                 if (1 === data.smsFlag) {//需要短信验证
                     this.setState({

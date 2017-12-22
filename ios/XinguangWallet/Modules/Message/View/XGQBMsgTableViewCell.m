@@ -56,7 +56,7 @@
 
         //分割线
         UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 8)];
-        sepLine.backgroundColor=UIColorHex(F5F5F5);
+        sepLine.backgroundColor=UIColorHex(EFEFEF);
         
         [cell.contentView addSubview:titleImgV];
         [cell.contentView addSubview:timeLabel];
