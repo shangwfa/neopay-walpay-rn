@@ -35,8 +35,9 @@ public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoRespo
         injector.with(R.id.mine_draw_user_avatar_iv, view -> {
             if (null == data.getAvatarUrl() || TextUtils.isEmpty(data.getAvatarUrl())) {
                 injector.background(R.id.mine_draw_user_avatar_iv, R.mipmap.img_default_avater);
+            } else {
+                GlideManager.loadNetCircleImage((ImageView) view, data.getAvatarUrl());
             }
-            GlideManager.loadNetCircleImage((ImageView) view, data.getAvatarUrl());
             view.setOnClickListener(v -> {
                 RNActivityParams activityParams = new RNActivityParams();
                 activityParams.setPage(RNActivity.PageType.PERSONAL_INFO_PAGE);
@@ -84,7 +85,7 @@ public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoRespo
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 2 == data.getAuthStatus()) {// 设置昵称且实名认证
             injector.visibility(R.id.mine_draw_auth_state_ll, View.VISIBLE);
             injector.visibility(R.id.mine_draw_go_auth_two_iv, View.GONE);
-            view.setText(String.format("%s(%s)", nickName, FormatUtils.nameTuomin(name)));
+            view.setText(String.format("%s(%s)", nickName, name));
         }
         if (!StringUtils.isEmpty(nickName) && null != data.getAuthStatus() && 1 == data.getAuthStatus()) {//设置昵称未实名认证
             injector.visibility(R.id.mine_draw_auth_state_ll, View.VISIBLE);

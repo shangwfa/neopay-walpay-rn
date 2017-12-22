@@ -102,6 +102,11 @@ getUserInfo = (callback) => {
         callback(data)
     })
 }
+modifyUserAvatarUrl = (request,callback) => {
+    NetUtil.post(APIS.MODIFY_USER_AVATAR_URL,request, (data) => {
+        callback(data)
+    })
+};
 
 getUserBillDetail = (request, callback) => {
     NetUtil.post(APIS.QUERY_USER_BILL_DETAIL, request, (data) => {
@@ -234,10 +239,10 @@ payRedPacket = (request, callback) => {
         callback(data);
     });
 }
-queryUserBill = (request, callback) => {
+queryUserBill = (request, callback,isLoadding) => {
     NetUtil.post(APIS.USER_BILL_RECORD, request, (data) => {
         callback(data);
-    })
+    },isLoadding)
 };
 queryPayMessage = (request, callback) => {
     NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE, request, (data) => {
@@ -284,6 +289,11 @@ getRecentPhoneRechargePhone = (request, callback) => {
         callback(data);
     })
 };
+queryMsgBillDetail=(request,callback)=>{
+    NetUtil.post(APIS.QUERY_MSG_BILL_DETAIL, request, (data) => {
+        callback(data);
+    })
+}
 export default {
     getCerfitySMSCode,
     getBindBankCardSMSCode,
@@ -328,6 +338,7 @@ export default {
     createRedPacket,
     payRedPacket,
     queryUserBill,
+    modifyUserAvatarUrl,
     queryPayMessage,
     createPhoneRechargeOrder,
     getUserRedPacketStats,
@@ -337,4 +348,5 @@ export default {
     createWithdrawOrder,
     withdraworder,
     getRecentPhoneRechargePhone,
+    queryMsgBillDetail,
 }

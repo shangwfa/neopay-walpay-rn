@@ -38,7 +38,7 @@
 #define homeNAVHeight 75
 
 @interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UITableViewDelegate,XGQBHomeTitleViewBtnDelegate,XGQBHomeHeaderIconBtnDelegata>
-@property (nonatomic,weak) UIView *headerIconView;
+@property (nonatomic,weak) XGQBHeaderIconView *headerIconView;
 @property (nonatomic,weak) UILabel *userNameLabel;
 @property (nonatomic,weak) XGQBHomeTitleView *homeTitleView;
 @property (nonatomic,weak) XGQBHomeTableView* homeTableView;
@@ -98,6 +98,11 @@
         
         [_headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
         _userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
+        
+        [_headerIconView.headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
+        
+        _headerIconView.userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
+        
         
         [kNotificationCenter postNotificationName:kNotificationSideViewUpdateAvatar object:nil];
         
@@ -259,11 +264,25 @@
 {
     XGQBMessage *message = _homeTVC.messArr[indexPath.row];
 
+    //红包消息
     if (message.msgType==XGQBMessageTypeRedPacket) {
-        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-        RNVC.pageType = @"redList";
-        RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
-        [self.navigationController pushViewController:RNVC animated:YES];
+        //先检查实名认证状态
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            if (message.receiveStatus==XGQBRedPacketReceiveStatusReceived) {
+                //红包已领取,跳转红包广场
+                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                RNVC.pageType = @"redList";
+                [self.navigationController pushViewController:RNVC animated:YES];
+            }else{//红包未领取,跳转红包领取页
+                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                RNVC.pageType = @"rpDetail";
+                RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
+                [self.navigationController pushViewController:RNVC animated:YES];
+            }
+
+        }
     }
     else if(message.msgType==XGQBMessageTypePayMessage)
     {

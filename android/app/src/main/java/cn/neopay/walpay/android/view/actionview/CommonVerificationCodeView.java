@@ -16,10 +16,13 @@ import com.xgjk.common.lib.utils.ToastUtils;
 import com.xgjk.common.lib.utils.ViewUtils;
 
 import cn.neopay.walpay.android.R;
+import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.CommonVerificationCodeViewLayoutBinding;
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.module.request.SendRegisterCodeRequestBean;
+import cn.neopay.walpay.android.module.request.SendResetLoginPasswordCodeRequestBean;
+import cn.neopay.walpay.android.module.request.SendResetPayPasswordCodeRequestBean;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 
 /**
@@ -75,14 +78,33 @@ public class CommonVerificationCodeView extends FrameLayout {
             } else if (!InputCheckUtils.checkPhone(mEditText.getText().toString())) {
                 return;
             }
-
-            ApiManager.getSingleton().sendRegisterCode(new SendRegisterCodeRequestBean(mEditText.getText().toString()),
-                    new BaseSubscriber((Activity) context, o ->
-                            handleRegisterCode(mCountdown)
-                            , false));
-
+            handleSmsCode((Activity) context, mCountdown);
         });
         addView(mBinding.getRoot());
+    }
+
+    private void handleSmsCode(Activity context, Countdown mCountdown) {
+        //处理多个严验证码逻辑
+        switch (codeType) {
+            case IWalpayConstants.VERIFICATION_CODE_TYPE_REGISTER://注册验证码
+                ApiManager.getSingleton().sendRegisterCode(new SendRegisterCodeRequestBean(mEditText.getText().toString()),
+                        new BaseSubscriber(context, o ->
+                                handleRegisterCode(mCountdown)
+                                , false));
+                break;
+            case IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PWD://重置登录验证码
+                ApiManager.getSingleton().sendResetLoginPasswordCode(new SendResetLoginPasswordCodeRequestBean(mEditText.getText().toString()),
+                        new BaseSubscriber(context, o ->
+                                handleRegisterCode(mCountdown)
+                                , false));
+                break;
+            case IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PAY_PWD://重置支付验证码
+                ApiManager.getSingleton().sendResetPayPasswordCode(new SendResetPayPasswordCodeRequestBean(mEditText.getText().toString()),
+                        new BaseSubscriber(context, o ->
+                                handleRegisterCode(mCountdown)
+                                , false));
+                break;
+        }
     }
 
     private void handleRegisterCode(Countdown mCountdown) {

@@ -9,6 +9,15 @@
 #import "XGQBMsgTableViewCell.h"
 #import "XGQBMessage.h"
 
+@interface XGQBMsgTableViewCell()
+
+@property(nonatomic,weak) UIImageView *bgImgV;
+@property(nonatomic,weak) UILabel *timeLabel;
+@property(nonatomic,weak) UIImageView *readIcon;
+@property(nonatomic,weak) UILabel *desLabel;
+
+@end
+
 @implementation XGQBMsgTableViewCell
 
 +(XGQBMsgTableViewCell *)cellWithMessage:(XGQBMessage *)message
@@ -29,6 +38,7 @@
         
         //时间标签
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
+        cell.timeLabel = timeLabel;
         timeLabel.font = kSYSTEMFONT(11.0);
         timeLabel.textColor=UIColorHex(999999);
         timeLabel.text=[message.createTime formatDate];
@@ -37,6 +47,7 @@
         UIImage *bgImg = kIMAGENAMED(@"beijing");
         UIImageView *bgImgV =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth-2*12, kScaledSizeW(155))];
         NSString *bgImgUrl = message.themeUrl;
+        cell.bgImgV=bgImgV;
         if ((message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==3)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==1)) {
             bgImgUrl=message.noticeImageUrl;
         }
@@ -152,9 +163,9 @@
         else if (message.receiveStatus==XGQBRedPacketReceiveStatusReceived){
             //金额
             UILabel *luckyAmountLabel = [[UILabel alloc]initWithFrame:CGRectMake(131, 50, 120, 22)];
-            luckyAmountLabel.text = message.luckyAmount;
+            luckyAmountLabel.text = [NSString stringWithFormat:@"¥ %.2f",[message.luckyAmount doubleValue]];
             luckyAmountLabel.font = kSYSTEMFONT(27);
-            luckyAmountLabel.textColor = message.themeType==XGQBRedPacketTypeBirthday?UIColorHex(FBDEB0):UIColorHex(FFFFFF);
+            luckyAmountLabel.textColor = message.themeType==XGQBRedPacketTypeBirthday?UIColorHex(FFFFFF):UIColorHex(FBDEB0);
             
             //文字描述
             UILabel *desText = [[UILabel alloc]initWithFrame:CGRectMake(98, 90, 160, 17)];
@@ -191,7 +202,7 @@
        
     }
     }
-    //支付消息
+    //支付消息,其他消息
     else
     {
         //标题
@@ -206,12 +217,14 @@
         
         //未读红点
         UIImageView *readIcon = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 5, 5)];
+        cell.readIcon=readIcon;
         kViewRadius(readIcon, 2.5);
         readIcon.backgroundColor=UIColorHex(F34646);
         readIcon.alpha=message.readStatus?1.0:0.0;
         
         //时间标签
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
+        cell.timeLabel=timeLabel;
         timeLabel.font = kSYSTEMFONT(11.0);
         timeLabel.textColor=UIColorHex(999999);
         timeLabel.text=[message.createTime formatDate];
@@ -224,6 +237,7 @@
         
         //描述文字
         UILabel *desLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 53, 13)];
+        cell.desLabel=desLabel;
         desLabel.text = message.contentString;
         desLabel.font = kSYSTEMFONT(13.0);
         desLabel.textColor=UIColorHex(999999);
@@ -277,6 +291,24 @@
     }
     
     return cell;
+}
+
+-(void)updateWithNewMessage:(XGQBMessage *)message
+{
+    if (_bgImgV) {
+        NSString *bgImgUrl = message.noticeImageUrl;
+        UIImage *bgImg = kIMAGENAMED(@"beijing");
+        [_bgImgV sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:bgImg options:SDWebImageRefreshCached];
+    }
+    if (_timeLabel){
+        _timeLabel.text=[message.createTime formatDate];
+    }
+    if (_desLabel) {
+        _desLabel.text= message.contentString;
+    }
+    if (_readIcon) {
+        _readIcon.alpha=message.readStatus?1.0:0.0;
+    }
 }
 
 @end

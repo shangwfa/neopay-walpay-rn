@@ -24,6 +24,7 @@
 {
    self = [super init];
     [kNotificationCenter addObserver:self selector:@selector(sendContactNumber:) name:kNotificationGetContactPhoneNoToRN object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(sendAvatarURLToRN:) name:kNotificationNativeSendAvatarURLToRN object:nil];
     return self;
 }
 
@@ -171,6 +172,28 @@ RCT_EXPORT_METHOD(contactCommNumber:(RCTResponseSenderBlock)callback){
     //显示方法过期,但为了与Android那边保持一致的代码,还是使用eventDispatcher发送事件
     [self.bridge.eventDispatcher sendAppEventWithName:@"ContactSelected"
                                                  body:notification.userInfo[@"PhoneNo"]];
+}
+
+//RN页面请求访问原生图片,更换头像
+RCT_EXPORT_METHOD(showCommDialog:(NSString*)title:(RCTResponseSenderBlock)callback){
+    if ([title isEqualToString:@"updatePersonalAvatar"]) {
+        [kNotificationCenter postNotificationName:kNotificationRNModalPicSelActSheet object:nil];
+    }
+}
+
+//RN页面分享红包
+RCT_EXPORT_METHOD(rnCallNativeCallShare:(NSString*)packetCode:(NSString*)shareType){
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [kNotificationCenter postNotificationName:kNotificaitonRNCallNativeCallShare object:nil userInfo:@{@"packetCode":packetCode,@"shareType":shareType}];
+    });
+}
+
+//头像上传成功后,发送URL至RN页面
+- (void)sendAvatarURLToRN:(NSNotification *)notification
+{
+    //显示方法过期,但为了与Android那边保持一致的代码,还是使用eventDispatcher发送事件
+    [self.bridge.eventDispatcher sendAppEventWithName:@"updateHeadImg"
+                                                 body:notification.userInfo[@"avatarURL"]];
 }
     
 @end

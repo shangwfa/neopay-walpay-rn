@@ -4,8 +4,8 @@ package cn.neopay.walpay.android.module.request;
  * 更新首页消息的状态
  */
 public class UpdateNewsReadStatusRequestBean extends BaseRequest {
-    private int msgType;
-    private long id;
+    private Integer msgType;
+    private Long id;
 
     public int getMsgType() {
         return msgType;

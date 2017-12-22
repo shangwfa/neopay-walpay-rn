@@ -10,7 +10,7 @@ import {
 import {colors} from '../constants/index'
 import {Divider} from '../components/index'
 import MoreClickComponet from '../components/MoreClickComponet'
-import right_arrow from '../res/img/right_arrow.png'
+import right_arrow from '../res/img/filter_arrow.png'
 
 
 const CommonKeyValueItem = props => {

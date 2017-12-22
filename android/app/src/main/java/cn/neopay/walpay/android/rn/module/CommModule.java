@@ -30,6 +30,7 @@ import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
+import cn.neopay.walpay.android.module.request.ShareRequestBean;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
@@ -80,6 +81,23 @@ public class CommModule extends ReactContextBaseJavaModule {
         intent.setData(Uri.parse("tel:" + phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 跳转需要添加flag, 否则报错
         mContext.startActivity(intent);
+    }
+
+    /**
+     * RN调用Native的方法
+     *
+     * @param packetCode 红包编号
+     * @param shareType  分享类型
+     */
+
+    @ReactMethod
+    public void rnCallNativeCallShare(String packetCode, String shareType) {
+        HandlerUtils.runOnUiThread(() -> {
+            ShareRequestBean requestBean = new ShareRequestBean();
+            requestBean.setShareType(Integer.valueOf(shareType));
+            requestBean.setCode(packetCode);
+            DialogManager.getSingleton().showShareDialog(getCurrentActivity(), requestBean);
+        });
     }
 
     /**
@@ -177,7 +195,7 @@ public class CommModule extends ReactContextBaseJavaModule {
             case "resetLoginPwd"://修改登录密码页面
                 MainRouter.getSingleton().jumpToForgotPwdPage("", IWalpayConstants.FORGOTPWD_TYPE_LOGIN);
                 break;
-            case "resetPayPwd"://修改登录密码页面
+            case "resetPayPwd"://修改支付密码页面
                 MainRouter.getSingleton().jumpToForgotPwdPage("", IWalpayConstants.FORGOTPWD_TYPE_PAY);
                 break;
             default:

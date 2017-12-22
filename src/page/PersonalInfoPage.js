@@ -44,9 +44,12 @@ class PersonalInfoPage extends BasePage {
     updatePhotoListener = () => {
         DeviceEventEmitter.addListener('updateHeadImg', (imgUrl) => {
             this.setState({
-                data: {...data, avatarUrl: imgUrl}
-            })
-        })
+                data: {...this.state.data, avatarUrl: imgUrl}
+            });
+            ApiManager.modifyUserAvatarUrl({avatarUrl: this.state.data.avatarUrl}, (data) => {
+                NativeModules.commModule.toast('修改头像成功');
+            });
+        });
     }
     userInfo = () => {
         ApiManager.getUserInfo(data => {

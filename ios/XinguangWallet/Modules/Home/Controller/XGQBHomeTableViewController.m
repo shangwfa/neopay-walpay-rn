@@ -151,13 +151,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XGQBMessage *mess = self.messArr[indexPath.row];
-    XGQBMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mess.msgTypeText];
-    if (!cell) {
-        cell = [XGQBMsgTableViewCell cellWithMessage:mess];
+    //如果是红包来啦消息,直接展示,不需要复用
+    if (mess.msgType==XGQBMessageTypeRedPacket) {
+        XGQBMsgTableViewCell *cell = [XGQBMsgTableViewCell cellWithMessage:mess];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        return cell;
+    }else{//其他类型消息,需要复用
+        XGQBMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mess.msgTypeText];
+        if (!cell) {
+            cell = [XGQBMsgTableViewCell cellWithMessage:mess];
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    [cell updateWithNewMessage:mess];
 //    cell.textLabel.text=[NSString stringWithFormat:@"当前行:%ld",indexPath.row];
     return cell;
+    }
 }
 
 

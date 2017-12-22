@@ -4,6 +4,7 @@ import {
     View,
     Text,
     Image,
+    TouchableWithoutFeedback
 } from 'react-native'
 import {colors} from '../constants/index'
 import Divider from '../components/Divider'
@@ -19,6 +20,7 @@ const PayMessageContentCell = props => {
         remark,
         amount,
         payDirection,
+        onPress,
         ...attributes
     } = props
 
@@ -32,6 +34,7 @@ const PayMessageContentCell = props => {
         }
     }
     return (
+        <TouchableWithoutFeedback onPress={onPress}>
         <View style = {styles.container}>
             <View style={styles.content_container}>
                 <View style ={styles.titleView}>
@@ -60,7 +63,7 @@ const PayMessageContentCell = props => {
             </View>
 
         </View>
-
+        </TouchableWithoutFeedback>
     );
 };
 

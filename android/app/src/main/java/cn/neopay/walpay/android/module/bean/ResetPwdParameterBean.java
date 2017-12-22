@@ -11,12 +11,14 @@ public class ResetPwdParameterBean {
     String phone;
     String verificationCode;
     String newPassword;
+    String realMsg;
 
-    public ResetPwdParameterBean(String forgotPwdType, String phone, String verificationCode, String newPassword) {
+    public ResetPwdParameterBean(String forgotPwdType, String phone, String verificationCode, String newPassword, String realMsg) {
         this.forgotPwdType = forgotPwdType;
         this.phone = phone;
         this.verificationCode = verificationCode;
         this.newPassword = newPassword;
+        this.realMsg = realMsg;
     }
 
     public String getForgotPwdType() {
@@ -49,5 +51,13 @@ public class ResetPwdParameterBean {
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+
+    public String getRealMsg() {
+        return realMsg;
+    }
+
+    public void setRealMsg(String realMsg) {
+        this.realMsg = realMsg;
     }
 }

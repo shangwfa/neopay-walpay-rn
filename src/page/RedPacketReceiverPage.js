@@ -20,7 +20,8 @@ import StringUtils from '../utils/StringUtils'
 import {RouterPaths} from '../constants/RouterPaths'
 import {events} from '../constants/index'
 import regular from '../constants/regular'
-import ApiManager from "../utils/ApiManager";
+import ApiManager from "../utils/ApiManager"
+import Contacts from 'react-native-contacts'
 
 class RedPacketReceiverPage extends BasePage {
 
@@ -36,7 +37,6 @@ class RedPacketReceiverPage extends BasePage {
     componentWillMount() {
         DeviceEventEmitter.addListener(events.CONTACTS_EVENT, (contacts) => {
             let arr = []
-            console.log('contacts:' + contacts);
             for (let item of contacts.values()) {
                 console.log(item);
                 arr.push({name: item.name, phone: item.phone})
@@ -49,7 +49,6 @@ class RedPacketReceiverPage extends BasePage {
     }
 
     addPhone = () => {
-        console.log('添加手机号')
         if (StringUtils.isNoEmpty(this.state.inputPhone)) {
             if (regular.phone.test(this.state.inputPhone)) {
                 let arr = this.state.data
@@ -153,7 +152,21 @@ class RedPacketReceiverPage extends BasePage {
                     source={contacts_icon}
                     title='手机通讯录选择添加'
                     onPress={() => {
-                        this.props.navigation.navigate(RouterPaths.CONTACTS_PAGE)
+                        Contacts.checkPermission((err, permission) => {
+                            if (permission === 'authorized') {
+                                this.props.navigation.navigate(RouterPaths.CONTACTS_PAGE)
+                            }else {
+                                Contacts.requestPermission((err, permission) => {
+                                    if (permission === 'authorized') {
+                                        this.props.navigation.navigate(RouterPaths.CONTACTS_PAGE)
+                                    }else {
+                                        NativeModules.commModule.toast('设置查看联系人权限')
+                                    }
+                                })
+                            }
+
+                        })
+
                     }}/>
                 {this.renderList()}
 

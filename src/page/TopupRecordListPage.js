@@ -74,11 +74,19 @@ class TopupRecordListPage extends BasePage {
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.title} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
                                rightUpValue={'-' + FormatUtils.money(item.amount)} rightBottomValue={item.status}
-                               isLine={true}/>
+                               isLine={true}
+                               onPress={()=>this.pressOnItem(item)}
+                />
             </View>
         )
 
     }
+
+    pressOnItem=(item)=>{
+        // console.log('点击了充值记录条目')
+        nav.navigate(RouterPaths.TRANSACTION_DETAILS,{orderNo:item.orderNo});
+    }
+
     renderSectionHeader = (item) => {
         if (item.disPlayDate) {
             return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} value={'支出:-' + FormatUtils.money(item.outMoney)} isShowArrow={false}/>

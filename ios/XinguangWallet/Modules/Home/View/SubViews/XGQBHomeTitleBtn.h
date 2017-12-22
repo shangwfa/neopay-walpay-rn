@@ -11,3 +11,4 @@
 @interface XGQBHomeTitleBtn : UIButton
 
 @end
+

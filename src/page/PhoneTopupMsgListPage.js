@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     SectionList,
-    ListView
+    ListView,
+    TouchableWithoutFeedback
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
@@ -71,6 +72,7 @@ class PhoneTopupMsgListPage extends BasePage {
     _renderRow = ({item}) => {
         console.log(item)
         return (
+
             <View>
                 <MsgCell
                     isShow = {item.disPlayDate}
@@ -80,10 +82,16 @@ class PhoneTopupMsgListPage extends BasePage {
                     priceValue = {item.amount}
                     topupPhoneNum = {item.phone}
                     payType = {item.payTypeDesc}
-                    relustTilte = {item.title}/>
+                    relustTilte = {item.title}
+                    onPress={()=>this.pressOnItem(item)}/>
             </View>
         )
 
+    }
+
+    pressOnItem=(item)=>{
+        console.log('点击了手机充值条目');
+        nav.navigate(RouterPaths.TRANSACTION_DETAILS,{billId:item.billId,msgType:item.msgType,id:item.id});
     }
 
     render() {
