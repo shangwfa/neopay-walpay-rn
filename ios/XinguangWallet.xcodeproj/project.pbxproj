@@ -13,7 +13,6 @@
 		42122F081FE0F7B400DB69FF /* shangla.gif in Resources */ = {isa = PBXBuildFile; fileRef = 42122F061FE0F7B400DB69FF /* shangla.gif */; };
 		42122F0B1FE1169F00DB69FF /* XGQBRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 42122F0A1FE1169F00DB69FF /* XGQBRefreshHeader.m */; };
 		42122F0E1FE1177500DB69FF /* XGQBRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 42122F0D1FE1177500DB69FF /* XGQBRefreshFooter.m */; };
-		422231751FC50F8900C415BE /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 422231741FC50F8900C415BE /* assets */; };
 		422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */; };
 		42395CEB1F8E00A800D20130 /* XGQBIDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */; };
 		42395CEE1F8E00FA00D20130 /* XGQBIDAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42395CED1F8E00FA00D20130 /* XGQBIDAlertViewController.m */; };
@@ -46,6 +45,7 @@
 		42D128BD1FCBEC74007CC8A1 /* XGQBHeaderIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D128BC1FCBEC74007CC8A1 /* XGQBHeaderIconView.m */; };
 		42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */; };
 		42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */; };
+		42DB51031FED0E5300F98531 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 42DB51021FED0E5300F98531 /* assets */; };
 		42DC3A1A1FE26AA6005EC281 /* TestMessage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42DC3A181FE26AA5005EC281 /* TestMessage.plist */; };
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
 		42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42DE35F91FB56F2200A73DB3 /* main.jsbundle */; };
@@ -111,7 +111,6 @@
 		42122F0A1FE1169F00DB69FF /* XGQBRefreshHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRefreshHeader.m; sourceTree = "<group>"; };
 		42122F0C1FE1177500DB69FF /* XGQBRefreshFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRefreshFooter.h; sourceTree = "<group>"; };
 		42122F0D1FE1177500DB69FF /* XGQBRefreshFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRefreshFooter.m; sourceTree = "<group>"; };
-		422231741FC50F8900C415BE /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		422A2D801F8F02F500485DB5 /* XGQBHomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleView.h; sourceTree = "<group>"; };
 		422A2D811F8F02F500485DB5 /* XGQBHomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleView.m; sourceTree = "<group>"; };
 		42395CE91F8E00A700D20130 /* XGQBIDAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBIDAlertView.m; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		42D44AA01F8CCF060064A32D /* XGQBRNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRNViewController.m; sourceTree = "<group>"; };
 		42D44AA21F8CD3CC0064A32D /* XGQBHomeTitleBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTitleBtn.h; sourceTree = "<group>"; };
 		42D44AA31F8CD3CC0064A32D /* XGQBHomeTitleBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBHomeTitleBtn.m; sourceTree = "<group>"; };
+		42DB51021FED0E5300F98531 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = SOURCE_ROOT; };
 		42DC3A181FE26AA5005EC281 /* TestMessage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestMessage.plist; sourceTree = "<group>"; };
 		42DE35F91FB56F2200A73DB3 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
@@ -686,7 +686,7 @@
 		6AF9E4321F78DEFB005E901C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				422231741FC50F8900C415BE /* assets */,
+				42DB51021FED0E5300F98531 /* assets */,
 				424F391E1F8C67CD00079543 /* Assets.xcassets */,
 				42C351341FD5324500E54EAA /* sy_beijing@2x.gif */,
 				42C351361FD5324600E54EAA /* sy_beijing@3x.gif */,
@@ -997,12 +997,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				422231751FC50F8900C415BE /* assets in Resources */,
 				42C3513A1FD5324700E54EAA /* sy_beijing_x.gif in Resources */,
 				42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */,
 				42C351381FD5324700E54EAA /* sy_beijing@2x.gif in Resources */,
 				42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */,
 				42C351391FD5324700E54EAA /* sy_beijing@3x.gif in Resources */,
+				42DB51031FED0E5300F98531 /* assets in Resources */,
 				42122F071FE0F7B400DB69FF /* xiala.gif in Resources */,
 				42122F081FE0F7B400DB69FF /* shangla.gif in Resources */,
 				42DC3A1A1FE26AA6005EC281 /* TestMessage.plist in Resources */,
