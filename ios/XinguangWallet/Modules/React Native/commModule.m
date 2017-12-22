@@ -24,6 +24,7 @@
 {
    self = [super init];
     [kNotificationCenter addObserver:self selector:@selector(sendContactNumber:) name:kNotificationGetContactPhoneNoToRN object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(sendAvatarURLToRN:) name:kNotificationNativeSendAvatarURLToRN object:nil];
     return self;
 }
 
@@ -185,6 +186,14 @@ RCT_EXPORT_METHOD(rnCallNativeCallShare:(NSString*)packetCode:(NSString*)shareTy
     dispatch_async(dispatch_get_main_queue(), ^{
         [kNotificationCenter postNotificationName:kNotificaitonRNCallNativeCallShare object:nil userInfo:@{@"packetCode":packetCode,@"shareType":shareType}];
     });
+}
+
+//头像上传成功后,发送URL至RN页面
+- (void)sendAvatarURLToRN:(NSNotification *)notification
+{
+    //显示方法过期,但为了与Android那边保持一致的代码,还是使用eventDispatcher发送事件
+    [self.bridge.eventDispatcher sendAppEventWithName:@"updateHeadImg"
+                                                 body:notification.userInfo[@"avatarURL"]];
 }
     
 @end

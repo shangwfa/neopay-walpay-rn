@@ -38,7 +38,7 @@
 #define homeNAVHeight 75
 
 @interface XGQBHomeViewController () <UIViewControllerTransitioningDelegate,UITableViewDelegate,XGQBHomeTitleViewBtnDelegate,XGQBHomeHeaderIconBtnDelegata>
-@property (nonatomic,weak) UIView *headerIconView;
+@property (nonatomic,weak) XGQBHeaderIconView *headerIconView;
 @property (nonatomic,weak) UILabel *userNameLabel;
 @property (nonatomic,weak) XGQBHomeTitleView *homeTitleView;
 @property (nonatomic,weak) XGQBHomeTableView* homeTableView;
@@ -98,6 +98,11 @@
         
         [_headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
         _userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
+        
+        [_headerIconView.headerBtn sd_setImageWithURL:[NSURL URLWithString:[GVUserDefaults standardUserDefaults].avatarUrl] forState:UIControlStateNormal placeholderImage:kIMAGENAMED(@"sy_touxiang")];
+        
+        _headerIconView.userNameLabel.text = [NSString stringWithFormat:@"Hi，%@",[GVUserDefaults standardUserDefaults].nickName];
+        
         
         [kNotificationCenter postNotificationName:kNotificationSideViewUpdateAvatar object:nil];
         

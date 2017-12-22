@@ -38,6 +38,8 @@
 #define kNotificationSideViewUpdateAvatar @"kNotificationSideViewUpdateAvatar"
 //RN请求原生图片,更换头像
 #define kNotificationRNModalPicSelActSheet @"kNotificationRNModalPicSelActSheet"
+//原生上传完成头像后,给RN发送URL通知
+#define kNotificationNativeSendAvatarURLToRN @"kNotificationNativeSendAvatarURLToRN"
 //RN页面分享红包
 #define kNotificaitonRNCallNativeCallShare @"kNotificaitonRNCallNativeCallShare"
 

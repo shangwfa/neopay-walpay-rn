@@ -16,4 +16,5 @@
 
 @property(nonatomic,weak)id<XGQBHomeHeaderIconBtnDelegata> delegate;
 @property (nonatomic,weak) UIButton *headerBtn;
+@property (nonatomic,weak) UILabel *userNameLabel;
 @end
