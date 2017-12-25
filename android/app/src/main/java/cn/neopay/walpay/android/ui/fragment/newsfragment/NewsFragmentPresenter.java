@@ -51,17 +51,21 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
     }
 
     private void handleNetWorkError() {
+        mDataList.clear();
         mDataList.add(new CommonLineItemBean());
         NewsNetworkErrorBean errorBean = new NewsNetworkErrorBean();
         errorBean.setOnClickListener(view -> getNewsInfo());
         mDataList.add(errorBean);
+        mView.setNewsViewData(mDataList);
     }
 
     private void handleNoData() {
+        mDataList.clear();
         mDataList.add(new CommonLineItemBean());
         NewsNoDataBean noDataBean = new NewsNoDataBean();
         noDataBean.setOnClickListener(view -> getNewsInfo());
         mDataList.add(noDataBean);
+        mView.setNewsViewData(mDataList);
     }
 
     @Override

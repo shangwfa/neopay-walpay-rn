@@ -1,15 +1,19 @@
 package cn.neopay.walpay.android.ui.register;
 
 import com.xgjk.common.lib.manager.ActivityManager;
+import com.xgjk.common.lib.manager.storage.StoreManager;
 import com.xgjk.common.lib.utils.ToastUtils;
 
+import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.RegisterParameterBean;
+import cn.neopay.walpay.android.module.request.LoginUserRequestBean;
 import cn.neopay.walpay.android.module.request.RegisterUserRequestBean;
 import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.response.VerifyRegisterPhoneResponseBean;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 import rx.Observable;
@@ -51,10 +55,21 @@ public class RegisterPresenter extends RegisterContract.Presenter {
         userRequestBean.setPayPassword(payPwd);
         userRequestBean.setSmsCode(SmsCode);
         ApiManager.getSingleton().registerUser(userRequestBean, new BaseSubscriber(mActivity, o -> {
-            ActivityManager.getInstance().killAllActivity();
-            MainRouter.getSingleton().jumpToHomeDrawPage();
-            ToastUtils.show("注册成功");
+            handleLogin(phone, Password);
         }));
+    }
 
+    private void handleLogin(String phone, String Password) {
+        ApiManager.getSingleton().loginUser(new LoginUserRequestBean(phone, Password),
+                new BaseSubscriber(mActivity, userInfoResponseBean -> {
+                    handleLogin((UserInfoResponseBean) userInfoResponseBean);
+                }));
+    }
+
+    private void handleLogin(UserInfoResponseBean userInfoResponseBean) {
+        StoreManager.getSingleton().putString(false, IWalpayConstants.ACCESS_TOKEN, userInfoResponseBean.getAccessToken());
+        ActivityManager.getInstance().killAllActivity();
+        MainRouter.getSingleton().jumpToHomeDrawPage();
+        ToastUtils.show("注册成功");
     }
 }

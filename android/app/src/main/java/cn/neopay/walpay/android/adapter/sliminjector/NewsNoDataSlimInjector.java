@@ -18,6 +18,6 @@ public class NewsNoDataSlimInjector implements SlimInjector<NewsNoDataBean> {
         if (null == data) {
             return;
         }
-        injector.clicked(R.id.no_data_container_fl, view -> data.getOnClickListener());
+        injector.with(R.id.no_data_container_fl, view -> view.setOnClickListener(data.getOnClickListener()));
     }
 }
