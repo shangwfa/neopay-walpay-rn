@@ -124,7 +124,7 @@
             //描述文字
             UILabel *desText = [[UILabel alloc]initWithFrame:CGRectMake(90, 40, 163, 14)];
             desText.text = message.message;
-            desText.font = kSYSTEMFONT(13);
+            desText.font = kSYSTEMFONT(14);
             desText.textColor = message.themeType==XGQBRedPacketTypeBirthday?UIColorHex(FFFFFF):UIColorHex(FBDEB0);
             
             //过期文字描述
@@ -146,11 +146,11 @@
             
             [desText mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(bgImgV).with.offset(30);
-                make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(80));
+                make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(85));
             }];
             
             [desText2 mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(bgImgV.mas_centerY).with.offset(10);
+                make.top.equalTo(bgImgV.mas_centerY).with.offset(5);
                 make.left.equalTo(cell.contentView).with.offset(kScaledSizeW(108));
             }];
             

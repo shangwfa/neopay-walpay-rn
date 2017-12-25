@@ -28,6 +28,7 @@
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
 		42990E791F99942000B20EBA /* XGQBNetworkFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */; };
 		42990E7C1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */; };
+		42A0A0E61FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A0A0E51FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.m */; };
 		42B7453D1FCFA2E100807CA6 /* XGQBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B7453C1FCFA2E100807CA6 /* XGQBMessage.m */; };
 		42B745411FCFDE0B00807CA6 /* XGQBMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B745401FCFDE0B00807CA6 /* XGQBMsgTableViewCell.m */; };
 		42B98A371FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B98A361FA2FC2700850FDB /* XGQBAccountExistAlertViewController.m */; };
@@ -141,6 +142,8 @@
 		42990E781F99942000B20EBA /* XGQBNetworkFailureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBNetworkFailureViewController.m; sourceTree = "<group>"; };
 		42990E7A1F99D06D00B20EBA /* XGQBRegResetPwdTVController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRegResetPwdTVController.h; sourceTree = "<group>"; };
 		42990E7B1F99D06D00B20EBA /* XGQBRegResetPwdTVController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRegResetPwdTVController.m; sourceTree = "<group>"; };
+		42A0A0E41FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMsgNoContentTableViewCell.h; sourceTree = "<group>"; };
+		42A0A0E51FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMsgNoContentTableViewCell.m; sourceTree = "<group>"; };
 		42B7453B1FCFA2E100807CA6 /* XGQBMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMessage.h; sourceTree = "<group>"; };
 		42B7453C1FCFA2E100807CA6 /* XGQBMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBMessage.m; sourceTree = "<group>"; };
 		42B7453F1FCFDE0B00807CA6 /* XGQBMsgTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBMsgTableViewCell.h; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 			children = (
 				42B7453F1FCFDE0B00807CA6 /* XGQBMsgTableViewCell.h */,
 				42B745401FCFDE0B00807CA6 /* XGQBMsgTableViewCell.m */,
+				42A0A0E41FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.h */,
+				42A0A0E51FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1133,6 +1138,7 @@
 				6AF9E4371F78E039005E901C /* AppDelegate.m in Sources */,
 				6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */,
 				6AF9E43D1F78E0E9005E901C /* AppDelegate+AppService.m in Sources */,
+				42A0A0E61FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.m in Sources */,
 				6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */,
 				42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */,
 				6AF9E40D1F78DDB6005E901C /* main.m in Sources */,
