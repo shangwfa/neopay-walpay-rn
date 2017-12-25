@@ -12,6 +12,8 @@ import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsActivitiesItemBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsItemBean;
+import cn.neopay.walpay.android.module.sliminjector.NewsNetworkErrorBean;
+import cn.neopay.walpay.android.module.sliminjector.NewsNoDataBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
 
 /**
@@ -44,12 +46,28 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         GetHomeNewsInfoRequestBean requestBean = new GetHomeNewsInfoRequestBean();
         requestBean.setPageNo(PageUtils.getPageNo(mDataPageList));
         ApiManager.getSingleton().getHomeNewsInfo(requestBean,
-                new BaseSubscriber(mActivity, o -> handleNewsData((List<GetNewsResponseBean>) o, isRefresh), false));
+                new BaseSubscriber(mActivity, o -> handleNewsData((List<GetNewsResponseBean>) o, isRefresh),
+                        false, t -> handleNetWorkError()));
+    }
+
+    private void handleNetWorkError() {
+        mDataList.add(new CommonLineItemBean());
+        NewsNetworkErrorBean errorBean = new NewsNetworkErrorBean();
+        errorBean.setOnClickListener(view -> getNewsInfo());
+        mDataList.add(errorBean);
+    }
+
+    private void handleNoData() {
+        mDataList.add(new CommonLineItemBean());
+        NewsNoDataBean noDataBean = new NewsNoDataBean();
+        noDataBean.setOnClickListener(view -> getNewsInfo());
+        mDataList.add(noDataBean);
     }
 
     @Override
     public void handleNewsData(List<GetNewsResponseBean> newsBeanList, boolean isRefresh) {
         if (newsBeanList == null) {
+            handleNoData();
             return;
         }
         mDataPageList.addAll(newsBeanList);

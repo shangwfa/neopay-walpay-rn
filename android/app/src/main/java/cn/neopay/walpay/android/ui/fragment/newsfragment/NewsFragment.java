@@ -26,6 +26,8 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.adapter.sliminjector.MineLineSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.NewsActivitiesSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.NewsItemSlimInjector;
+import cn.neopay.walpay.android.adapter.sliminjector.NewsNetworkErrorSlimInjector;
+import cn.neopay.walpay.android.adapter.sliminjector.NewsNoDataSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.NewsRedPacketSlimInjector;
 import cn.neopay.walpay.android.databinding.FragmentNewsLayoutBinding;
 import cn.neopay.walpay.android.databinding.HomeDrawMiddleViewBinding;
@@ -63,7 +65,9 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
                 .register(R.layout.common_news_red_packet_layout, new NewsRedPacketSlimInjector())
                 .register(R.layout.common_news_activities_layout, new NewsActivitiesSlimInjector())
                 .register(R.layout.common_news_item_layout, new NewsItemSlimInjector())
-                .register(R.layout.common_line_item_layout, new MineLineSlimInjector());
+                .register(R.layout.common_line_item_layout, new MineLineSlimInjector())
+                .register(R.layout.common_no_network_layout, new NewsNetworkErrorSlimInjector())
+                .register(R.layout.common_no_data_layout, new NewsNoDataSlimInjector());
         handleMiddleView();
         mViewBinding.mineNewsXrv.setAdapter(mNewsAdapter);
         handleRefreshHeader();

@@ -9,8 +9,8 @@ package cn.neopay.walpay.android.constans;
 public interface IWalpayConstants {
     //---------------------------EnvironmentConfig---------------------//
     String HTTP_URL_KEY = "http_url";
-    String BASE_HTTPURL_TEST = "http://139.224.11.160:8202/walpay-web/";
-    String BASE_HTTPURL_DEVELOP = "http://139.224.11.160:8101/walpay-web/";
+    String BASE_HTTPURL_TEST = "http://walpayapi.dneopay.cn/walpay-web/";
+    String BASE_HTTPURL_DEVELOP = "http://139.224.11.160:8102/walpay-web/";
     String BASE_HTTPURL_PRODUCT = "https://shopay.neopay.cn/walpay-web/";
     String BASE_HTTPURL_MOCK = "http://172.16.33.151:8888/walpay-web/";
     String TEST_TAG = "0";

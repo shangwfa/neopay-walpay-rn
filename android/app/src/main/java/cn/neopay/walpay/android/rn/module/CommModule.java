@@ -26,7 +26,9 @@ import org.json.JSONObject;
 
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.manager.dialogmanager.DialogManager;
+import cn.neopay.walpay.android.manager.environmentmanager.EnvironmentConfigManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.bean.NetCommonBaseUrl;
 import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
@@ -244,6 +246,16 @@ public class CommModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void netCommParas(Callback callback) {
         final NetCommonParamsBean paramsBean = new NetCommonParamsBean();
+        callback.invoke(new Gson().toJson(paramsBean));
+    }
+
+    /**
+     * 获取网络请求baseUrl
+     */
+    @ReactMethod
+    public void netCommUrl(Callback callback) {
+        final NetCommonBaseUrl paramsBean = new NetCommonBaseUrl();
+        paramsBean.setBaseUrl(EnvironmentConfigManager.getSingleton().getCurrentEnvHttpUrl());
         callback.invoke(new Gson().toJson(paramsBean));
     }
 
