@@ -20,7 +20,7 @@
 #import <UShareUI/UShareUI.h>
 
 
-@interface XGQBRNViewController () <CNContactPickerDelegate,UIImagePickerControllerDelegate>
+@interface XGQBRNViewController () <CNContactPickerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic,weak) RCTRootView *rootView;
 //@property (nonatomic,copy) RCTResponseSenderBlock contactCommBlock;
