@@ -35,7 +35,8 @@ class NetUtil extends Component {
             NativeModules.commModule.showLoadingDialog()
         }
         NativeModules.commModule.netCommUrl((url) => {
-            NetUtil.baseUrl = url.baseUrl;
+            let baseUrl = JSON.parse(url);
+            NetUtil.baseUrl = baseUrl.baseUrl;
         });
         NativeModules.commModule.netCommParas((originalata) => {
             console.log('公共参数' + originalata)
