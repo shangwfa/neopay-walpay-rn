@@ -145,11 +145,11 @@
         //判断登录密码
         if([_idNoTextField.text isEqualToString:@""])
         {
-            [SVProgressHUD showInfoWithStatus:@"登录密码不能为空"];
+            [SVProgressHUD showInfoWithStatus:@"身份证号不能为空"];
             return;
         }else if (![_idNoTextField.text simpleVerifyIdentityCardNum])
         {
-            [SVProgressHUD showInfoWithStatus:@"请输入6至20位字母加数字"];
+            [SVProgressHUD showInfoWithStatus:@"请输入正确身份证号"];
             return;
         }
         
