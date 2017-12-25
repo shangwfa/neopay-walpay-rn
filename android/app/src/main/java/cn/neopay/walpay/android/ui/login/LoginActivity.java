@@ -55,10 +55,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ActivityLoginLay
         mViewBinding.loginPhone.setHint(getString(R.string.str_input_phone));
         mViewBinding.loginPwd.setType(CommonLoginView.LoginInputType.LOGIN_PWD, R.mipmap.img_pwd_red);
         mViewBinding.loginPwd.setHint(getString(R.string.str_input_pwd));
-        //TODO 测试账号 需要清理
-        mViewBinding.loginPhone.getEditTextView().setText("18081840103");
-        mViewBinding.loginPwd.getEditTextView().setText("yan18081840103");
-
         mViewBinding.loginBtn.setOnClickListener(v -> handleLoginClick());
         mViewBinding.loginForgetPwd.setOnClickListener(v -> mPresenter.forgetPassword(mViewBinding.loginPhone.getEditText()));
         mViewBinding.loginRegister.setOnClickListener(v -> mPresenter.register(mViewBinding.loginPhone.getEditText()));

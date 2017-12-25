@@ -18,6 +18,6 @@ public class NewsNetworkErrorSlimInjector implements SlimInjector<NewsNetworkErr
         if (null == data) {
             return;
         }
-        injector.clicked(R.id.no_network_container_fl, view -> data.getOnClickListener());
+        injector.with(R.id.no_network_container_fl, view -> view.setOnClickListener(data.getOnClickListener()));
     }
 }
