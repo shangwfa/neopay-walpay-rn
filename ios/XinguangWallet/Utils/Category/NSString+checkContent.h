@@ -15,6 +15,7 @@
 - (BOOL)checkPassword;
 - (BOOL)checkPayPassword;
 - (BOOL)isValidateEmail;
+- (BOOL)checkRegCode;
 -(NSString*)secPhoneStr;
 -(NSString*)secureName;
 -(NSString*)formatDate;

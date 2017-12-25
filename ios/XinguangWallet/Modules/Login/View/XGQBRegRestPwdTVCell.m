@@ -48,6 +48,10 @@
             [cell addsubviewsWithLeftImageNamed:@"dl_shouji1" placeHolder:@"请输入手机号" rightBtn:nil];
             cell.textField.type = XGQBTextFieldTypePhoneNo;
             break;
+        case XGQBRegRestPwdTVCellTypeRegPhoneNo:
+            [cell addsubviewsWithLeftImageNamed:@"dl_shouji1" placeHolder:@"请输入手机号" rightBtn:nil];
+            cell.textField.type = XGQBTextFieldTypePhoneNoReg;
+            break;
         case XGQBRegResetPwdTVCellTypeRegCode:
             [cell addsubviewsWithLeftImageNamed:@"dl_yanzhengma" placeHolder:@"请输入验证码" rightBtn:countTimeBtn];
             cell.textField.type = XGQBTextFieldTypeRegisterCode;

@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, XGQBTextFieldType) {
     XGQBTextFieldTypeBankCard,
     XGQBTextFieldTypeSecurityPhoneNo,
     XGQBTextFieldTypePhoneNo,
+    XGQBTextFieldTypePhoneNoReg,
     XGQBTextFieldTypeRegisterCode,
     XGQBTextFieldTypeLoginPassword,
     XGQBTextFieldTypePayPassword,

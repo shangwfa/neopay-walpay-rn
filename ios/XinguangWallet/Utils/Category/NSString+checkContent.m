@@ -26,6 +26,17 @@
     }
 }
 
+
+- (BOOL)checkRegCode
+{
+    if (self.length != 6)
+    {
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
 - (BOOL)simpleVerifyIdentityCardNum
 {
     NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
