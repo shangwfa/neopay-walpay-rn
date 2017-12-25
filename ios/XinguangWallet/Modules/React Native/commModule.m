@@ -95,6 +95,28 @@ RCT_EXPORT_METHOD(netCommParas:(RCTResponseSenderBlock)callback){
         callback(@[netPaStrAfter]);
 }
 
+//传递API地址
+RCT_EXPORT_METHOD(netCommUrl:(RCTResponseSenderBlock)callback){
+    
+    NSMutableDictionary *HostURL = [NSMutableDictionary dictionary];
+    
+    [HostURL setObject:[NSString stringWithFormat:@"%@/",Host_Url] forKey:@"baseUrl"];
+
+//    //将字典转换成JSON字符串
+//    NSData *hostURLData = [NSJSONSerialization dataWithJSONObject:HostURL options:NSJSONWritingPrettyPrinted error:nil];
+//
+//    NSString *hostURLStr = [[NSString alloc]initWithData:hostURLData encoding:NSUTF8StringEncoding];
+//    NSMutableString *hostURLAfter = [hostURLStr mutableCopy];
+//
+//    [hostURLAfter replaceOccurrencesOfString:@" " withString:@"" options:(NSLiteralSearch) range:NSMakeRange(0, hostURLStr.length)];
+//
+//    [hostURLAfter replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, hostURLAfter.length)];
+    
+    NSString *hostURLAfter = [HostURL modelToJSONString];
+    
+    callback(@[hostURLAfter]);
+}
+
 //跳转至原生特定页面
 RCT_EXPORT_METHOD(jumpToNativePage:(id)type:(id)params){
 

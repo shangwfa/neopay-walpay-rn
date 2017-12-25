@@ -54,6 +54,8 @@
     cell.btn=btn;
     [cell.contentView addSubview:btn];
     
+    [btn addTarget:cell action:@selector(refreshBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    
 //    //分割线
 //    UIView *sepLine =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 8)];
 //    sepLine.backgroundColor=UIColorHex(E3E3E3);
@@ -85,5 +87,10 @@
 //    }];
     
     return cell;
+}
+
+-(void)refreshBtnClicked
+{
+    [kNotificationCenter postNotificationName:kNotificationRefreshDataForHomePage object:nil];
 }
 @end

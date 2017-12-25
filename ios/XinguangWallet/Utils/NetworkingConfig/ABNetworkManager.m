@@ -134,6 +134,9 @@
 {
     AFHTTPSessionManager* manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:Host_Url]];
     
+    //支持https访问未受信任网站
+    manager.securityPolicy.validatesDomainName=NO;
+    
     //设置manager参数
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html",@"application/x-www-form-urlencoded",nil];
     manager.responseSerializer.stringEncoding = kCFStringEncodingUTF8;
@@ -158,11 +161,12 @@
     [body setObject:@"123" forKey:@"macUrl"];
     [body setObject:@"CDMA" forKey:@"operator"];
     
-    //返回类型默认为二进制，可以修改为JSON
-    //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    
+//    返回类型默认为二进制，可以修改为JSON
+//        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+//
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "].invertedSet];
+    
     [manager POST:url parameters:body progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

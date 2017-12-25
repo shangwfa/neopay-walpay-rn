@@ -42,6 +42,8 @@
 #define kNotificationNativeSendAvatarURLToRN @"kNotificationNativeSendAvatarURLToRN"
 //RN页面分享红包
 #define kNotificaitonRNCallNativeCallShare @"kNotificaitonRNCallNativeCallShare"
+//原生通知首页刷新数据
+#define kNotificationRefreshDataForHomePage @"kNotificationRefreshDataForHomePage"
 
 #pragma mark - ——————— 网络状态相关 ————————
 

@@ -133,6 +133,7 @@
     self.tableView.estimatedRowHeight=84;
     self.tableView.rowHeight=UITableViewAutomaticDimension;
     
+    [kNotificationCenter addObserver:self selector:@selector(refreshData) name:kNotificationRefreshDataForHomePage object:nil];
 }
 
 -(NSMutableArray *)messArr
@@ -177,12 +178,12 @@
         if (self.wifiStatus) {//网路正常,无数据
             XGQBMsgNoContentTableViewCell *cell=[XGQBMsgNoContentTableViewCell cellWithType:XGQBMsgNoContentTypeNormal];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            [cell.btn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.btn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }else{//网络异常
             XGQBMsgNoContentTableViewCell *cell=[XGQBMsgNoContentTableViewCell cellWithType:XGQBMsgNoContentTypeWifi];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            [cell.btn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.btn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
     }

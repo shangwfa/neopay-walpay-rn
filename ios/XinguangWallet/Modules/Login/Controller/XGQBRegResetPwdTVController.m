@@ -223,7 +223,7 @@
     if (self.type == XGQBRegResetPwdTVConTypeRegister) {
         [MemberCoreService sendRegisterCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
 //            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
-            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
+//            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {
                 [SVProgressHUD showSuccessWithStatus:@"验证码发送成功"];

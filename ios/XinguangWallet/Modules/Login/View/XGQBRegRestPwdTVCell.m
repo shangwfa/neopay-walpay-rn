@@ -37,7 +37,7 @@
     
     switch (type) {
         case XGQBRegResetPwdTVCellTypeIDNo:
-            [cell addsubviewsWithLeftImageNamed:@"dl_yanzhengma" placeHolder:@"请输入实名认证的身份证号" rightBtn:nil];
+            [cell addsubviewsWithLeftImageNamed:@"wd_shenfenzheng" placeHolder:@"请输入实名认证的身份证号" rightBtn:nil];
             cell.textField.type = XGQBTextFieldTypeIDNo;
             break;
         case XGQBRegResetPwdTVCellTypePayPwd:
