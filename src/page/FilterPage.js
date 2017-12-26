@@ -111,12 +111,17 @@ class FilterPage extends BasePage {
         })
     }
 
+    back=()=>{
+        TimePicker.hideTimePicker()
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Header
                     navigation={this.props.navigation}
-                    title='筛选'/>
+                    title='筛选'
+                    back={()=>this.back()}/>
                 <View style={{height:10}}/>
                 <FilterItem
                     title='交易方式'

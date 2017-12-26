@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     modalStyle: {
-        backgroundColor: '#cccccc80',
+        backgroundColor: colors.mask,
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,

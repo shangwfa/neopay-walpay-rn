@@ -11,6 +11,7 @@ import {
     Image, Modal, Animated
 } from 'react-native'
 import Animation from 'lottie-react-native'
+import colors from '../constants/colors'
 
 class ReceiveRedPacketModal extends Component {
 
@@ -54,7 +55,7 @@ class ReceiveRedPacketModal extends Component {
 
 const styles = StyleSheet.create({
     modalStyle: {
-        backgroundColor: '#cccccc80',
+        backgroundColor: colors.mask,
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,

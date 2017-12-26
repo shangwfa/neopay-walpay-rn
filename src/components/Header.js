@@ -5,7 +5,8 @@ import {
     View,
     Image,
     TouchableWithoutFeedback,
-    TouchableOpacity
+    TouchableOpacity,
+    DeviceEventEmitter
 } from 'react-native';
 import Divider from '../components/Divider'
 import colors from '../constants/colors'
@@ -14,6 +15,7 @@ import img_left_arrow from '../res/img/img_left_arrow.png'
 import three_points from '../res/img/three_points.png'
 import PropTypes from 'prop-types'
 import white_back_arrow from '../res/img/white_back_arrow.png'
+import events from '../constants/events'
 
 
 class Header extends Component {
@@ -22,8 +24,9 @@ class Header extends Component {
         backgroundColor: colors.white,
         textColor: colors.absolute_black,
         isWhiteArrow: false,
-        rightTextColor:colors.absolute_black,
-        onRightPress:()=>{}
+        rightTextColor: colors.absolute_black,
+        onRightPress: () => {
+        }
     };
     static propTypes = {
         rightIcon: React.PropTypes.any,
@@ -49,10 +52,13 @@ class Header extends Component {
     }
 
     goback = () => {
-        if(this.props.onLeftPress){
+        if (this.props.onLeftPress) {
             this.props.onLeftPress()
-        }else {
-            this.props.navigation.goBack();
+        } else {
+            if(this.props.back){
+                this.props.back()
+            }
+            this.props.navigation.goBack()
         }
     }
     renderDivider = () => {
@@ -77,7 +83,8 @@ class Header extends Component {
                     </TouchableOpacity>
 
                     {/*header中间*/}
-                    <View style={[styles.header_middle,this.props.header_middleStyle&&this.props.header_middleStyle]}>
+                    <View
+                        style={[styles.header_middle, this.props.header_middleStyle && this.props.header_middleStyle]}>
                         <Text style={[styles.title, {color: this.props.textColor}]}> {this.props.title}</Text>
                     </View>
                     {/*header右侧*/}

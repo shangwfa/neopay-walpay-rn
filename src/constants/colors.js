@@ -9,5 +9,6 @@ export default {
     balck_more_light:'#999999',
     divider:'#dadada',
     rp_bg_def:'#d83e3e',
-    transparent:'#0000'
+    transparent:'#0000',
+    mask:'#0000005E'
 }
