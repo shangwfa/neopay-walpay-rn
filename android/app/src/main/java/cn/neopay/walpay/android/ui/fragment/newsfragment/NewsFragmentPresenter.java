@@ -29,15 +29,15 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
 
     @Override
     public void getNewsInfo() {
-        handleRefresh(true);
+        handleRefresh(true, false);
     }
 
     @Override
     public void getNewsInfoLoadMore() {
-        handleRefresh(false);
+        handleRefresh(false, false);
     }
 
-    private void handleRefresh(boolean isRefresh) {
+    private void handleRefresh(boolean isRefresh, boolean isShowLoading) {
         if (isRefresh) {
             mDataList.clear();
             mDataPageList.clear();
@@ -47,14 +47,14 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         requestBean.setPageNo(PageUtils.getPageNo(mDataPageList));
         ApiManager.getSingleton().getHomeNewsInfo(requestBean,
                 new BaseSubscriber(mActivity, o -> handleNewsData((List<GetNewsResponseBean>) o, isRefresh),
-                        false, t -> handleNetWorkError()));
+                        isShowLoading, t -> handleNetWorkError()));
     }
 
     private void handleNetWorkError() {
         mDataList.clear();
         mDataList.add(new CommonLineItemBean());
         NewsNetworkErrorBean errorBean = new NewsNetworkErrorBean();
-        errorBean.setOnClickListener(view -> getNewsInfo());
+        errorBean.setOnClickListener(view -> handleRefresh(true, true));
         mDataList.add(errorBean);
         mView.setNewsViewData(mDataList);
     }
@@ -63,14 +63,14 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         mDataList.clear();
         mDataList.add(new CommonLineItemBean());
         NewsNoDataBean noDataBean = new NewsNoDataBean();
-        noDataBean.setOnClickListener(view -> getNewsInfo());
+        noDataBean.setOnClickListener(view -> handleRefresh(true, true));
         mDataList.add(noDataBean);
         mView.setNewsViewData(mDataList);
     }
 
     @Override
     public void handleNewsData(List<GetNewsResponseBean> newsBeanList, boolean isRefresh) {
-        if (newsBeanList == null) {
+        if (null == newsBeanList) {
             handleNoData();
             return;
         }

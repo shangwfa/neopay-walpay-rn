@@ -197,6 +197,9 @@ public class InputCheckUtils {
         if (StringUtils.isEmpty(password)) {
             ToastUtils.show("请设置新的支付密码");
             return false;
+        } else if (6 > password.length()) {
+            ToastUtils.show("支付密码支持6位数字");
+            return false;
         } else if (ValidInputUtils.isValididPayPassword(password)) {
             return true;
         } else {
@@ -232,6 +235,9 @@ public class InputCheckUtils {
     public static boolean checkLoginPassword(String password) {
         if (StringUtils.isEmpty(password)) {
             ToastUtils.show("请设置登录密码");
+            return false;
+        } else if (6 > password.length()) {
+            ToastUtils.show("登录密码支持6至18位字母加数字");
             return false;
         } else if (ValidInputUtils.isValididPassword(password)) {
             return true;
