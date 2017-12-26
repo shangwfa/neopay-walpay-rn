@@ -20,7 +20,7 @@ _payTypeItem = (mData, item) => {
     };
     payType.onclick = () => {
         let pageType = StringUtils.isContainChildrenStr(item.payTypeDesc, "余额") ? 0 : 1;
-        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType});
+        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType,cardId:item.id});
     };
     mData.push(payType);
 };
