@@ -27,6 +27,7 @@ const BankCardCell = props => {
             borderRadius: 17,
             marginLeft: 20,
             marginTop: 20,
+            backgroundColor:colors.white
         },
 
         textAvatar: {

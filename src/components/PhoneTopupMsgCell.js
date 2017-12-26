@@ -41,7 +41,7 @@ const PhoneTopupMsgCell = props => {
             marginTop:15,
             fontSize: 18,
             color: colors.black,
-            height: 20
+            height: 24
         },
 
         dateLab: {

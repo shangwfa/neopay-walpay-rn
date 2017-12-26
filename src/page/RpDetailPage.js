@@ -136,13 +136,13 @@ class RpDetailPage extends BasePage {
         if(this.state.dataDetail.ownerBool == false){
             return (
                 <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
-                    <ImageButton value='我也要发红包' style={{marginTop:1,marginBottom:1,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
+                    <ImageButton value='我也要发红包' style={{marginTop:0.5,marginBottom:0.5,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
                 </Image>
             )
         }else{
             return (
                 <View style = {styles.bg_bottom}>
-                    <ImageButton value='我也要发红包' style={{marginTop:1,marginBottom:1,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
+                    <ImageButton value='我也要发红包' style={{marginTop:0.5,marginBottom:0.5,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
                     <ImageButton value='分享该红包' style={{marginTop:0,marginBottom:0,flex:1,backgroundColor:colors.one_color}} textColor = {colors.white} icon = '' onPress={()=>this.pushRecordPage()}/>
                 </View>
             )
