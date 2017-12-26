@@ -83,7 +83,7 @@ class RedPacketTypeComponent extends Component {
     _renderGeneralRedPacketView = (redPacketData) => {
         return <View style={{marginLeft: 97}}>
             <Text
-                style={[{color: this.state.redThemeTxtColor}, styles.general_red_packet_txt]}>￥{FormatUtils.money(redPacketData.luckyAmount)}</Text>
+                style={[{color: this.state.redThemeTxtColor}, styles.general_red_packet_txt]}>{FormatUtils.moneyWithTag(redPacketData.luckyAmount)}</Text>
             <Text
                 style={[{color: this.state.redThemeTxtColor}, styles.general_red_packet_msg_txt]}>{redPacketData.message}</Text>
             <View style={[styles.message_from_container, {marginTop: 16}]}>

@@ -37,7 +37,7 @@
     
     switch (type) {
         case XGQBRegResetPwdTVCellTypeIDNo:
-            [cell addsubviewsWithLeftImageNamed:@"dl_yanzhengma" placeHolder:@"请输入实名认证的身份证号" rightBtn:nil];
+            [cell addsubviewsWithLeftImageNamed:@"wd_shenfenzheng" placeHolder:@"请输入实名认证的身份证号" rightBtn:nil];
             cell.textField.type = XGQBTextFieldTypeIDNo;
             break;
         case XGQBRegResetPwdTVCellTypePayPwd:
@@ -47,6 +47,10 @@
         case XGQBRegResetPwdTVCellTypePhoneNo:
             [cell addsubviewsWithLeftImageNamed:@"dl_shouji1" placeHolder:@"请输入手机号" rightBtn:nil];
             cell.textField.type = XGQBTextFieldTypePhoneNo;
+            break;
+        case XGQBRegRestPwdTVCellTypeRegPhoneNo:
+            [cell addsubviewsWithLeftImageNamed:@"dl_shouji1" placeHolder:@"请输入手机号" rightBtn:nil];
+            cell.textField.type = XGQBTextFieldTypePhoneNoReg;
             break;
         case XGQBRegResetPwdTVCellTypeRegCode:
             [cell addsubviewsWithLeftImageNamed:@"dl_yanzhengma" placeHolder:@"请输入验证码" rightBtn:countTimeBtn];

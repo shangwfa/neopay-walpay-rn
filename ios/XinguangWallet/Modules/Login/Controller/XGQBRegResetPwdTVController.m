@@ -91,7 +91,7 @@
     [btn addTarget:self action:@selector(comfirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.tableFooterView = footerView;
-    
+    [kNotificationCenter addObserver:self selector:@selector(alertAccountExist) name:kNotificationPhoneNoAlreadyExist object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -129,16 +129,61 @@
         return;
     }
     
-    if([_loginPwdTextField.text isEqualToString:@""])
+    //判断验证码
+    if([_regCodeTextField.text isEqualToString:@""])
     {
-        [SVProgressHUD showInfoWithStatus:@"密码不能为空"];
+        [SVProgressHUD showInfoWithStatus:@"验证码不能为空"];
         return;
-    }else if (![_loginPwdTextField.text checkPassword])
+    }else if (![_regCodeTextField.text checkRegCode])
     {
-        [SVProgressHUD showInfoWithStatus:@"请输入6至20位字母加数字"];
+        [SVProgressHUD showInfoWithStatus:@"请输入正确验证码"];
         return;
     }
     
+    //判断身份证号
+    if(self.type == XGQBRegResetPwdTVConTypeResetPayPwdWithID){
+        //判断登录密码
+        if([_idNoTextField.text isEqualToString:@""])
+        {
+            [SVProgressHUD showInfoWithStatus:@"身份证号不能为空"];
+            return;
+        }else if (![_idNoTextField.text simpleVerifyIdentityCardNum])
+        {
+            [SVProgressHUD showInfoWithStatus:@"请输入正确身份证号"];
+            return;
+        }
+        
+    }
+    
+    if(self.type == XGQBRegResetPwdTVConTypeRegister||self.type==XGQBRegResetPwdTVConTypeResetLoginPwd){
+        //判断登录密码
+        if([_loginPwdTextField.text isEqualToString:@""])
+        {
+            [SVProgressHUD showInfoWithStatus:@"登录密码不能为空"];
+            return;
+        }else if (![_loginPwdTextField.text checkPassword])
+        {
+            [SVProgressHUD showInfoWithStatus:@"请输入6至20位字母加数字"];
+            return;
+        }
+        
+    }
+    
+    if (self.type==XGQBRegResetPwdTVConTypeRegister||self.type==XGQBRegResetPwdTVConTypeResetPayPwdNoID||
+        self.type==XGQBRegResetPwdTVConTypeResetPayPwdWithID) {
+        //判断支付密码
+        if([_payPwdTextField.text isEqualToString:@""])
+        {
+            [SVProgressHUD showInfoWithStatus:@"支付密码不能为空"];
+            return;
+        }else if (![_payPwdTextField.text checkPayPassword])
+        {
+            [SVProgressHUD showInfoWithStatus:@"请输入正确支付密码"];
+            return;
+        }
+    }
+   
+ 
     NSMutableDictionary* body = [NSMutableDictionary dictionaryWithCapacity:0];
     if (_phoneNoTextField.text) {
         [body setObject:_phoneNoTextField.text forKey:@"phone"];
@@ -159,10 +204,8 @@
     if (self.type == XGQBRegResetPwdTVConTypeRegister) {
         //发送注册请求
         [MemberCoreService registerUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
-//            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
-            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
+
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
-                //            NSLog(@"responseBefore:%@",responseBefore);
             {
                 [SVProgressHUD showSuccessWithStatus:@"注册成功"];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -175,7 +218,6 @@
     else if(self.type == XGQBRegResetPwdTVConTypeResetLoginPwd){
         [MemberCoreService resetLoginPassword:body andSuccessFn:^(id responseAfter, id responseBefore) {
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
-                //            NSLog(@"responseBefore:%@",responseBefore);
             {
                 [SVProgressHUD showSuccessWithStatus:@"重置密码成功"];
             }
@@ -222,11 +264,10 @@
     //注册页面获取验证码
     if (self.type == XGQBRegResetPwdTVConTypeRegister) {
         [MemberCoreService sendRegisterCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
-//            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
-            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
+
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {
-                [SVProgressHUD showSuccessWithStatus:@"验证码发送成功"];
+                [SVProgressHUD showSuccessWithStatus:@"验证码已发送，请注意查收"];
                 [btn startCountDown];
             }else if ([[responseBefore objectForKey:@"retCode"] intValue] == 2)
             {
@@ -253,7 +294,7 @@
     else if(self.type == XGQBRegResetPwdTVConTypeResetPayPwdNoID||self.type == XGQBRegResetPwdTVConTypeResetPayPwdWithID){
         [MemberCoreService sendResetPayPasswordCode:body andSuccessFn:^(id responseAfter, id responseBefore) {
 //            NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
-            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
+//            [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {
                 [SVProgressHUD showSuccessWithStatus:@"验证码发送成功"];
@@ -292,13 +333,24 @@
     
     if (indexPath.section==0&&indexPath.row==0) {
         //第一行手机号
-      XGQBRegRestPwdTVCell*cell = [XGQBRegRestPwdTVCell cellWithType:XGQBRegResetPwdTVCellTypePhoneNo];
-        _phoneNoTextField = cell.textField;
-        //判断是否有手机号输入信息,将其输入
-        if (_userName) {
-            _phoneNoTextField.text = _userName;
+        if(self.type ==XGQBRegResetPwdTVConTypeRegister){//注册页面
+            XGQBRegRestPwdTVCell*cell = [XGQBRegRestPwdTVCell cellWithType:XGQBRegRestPwdTVCellTypeRegPhoneNo];
+            _phoneNoTextField = cell.textField;
+            //判断是否有手机号输入信息,将其输入
+            if (_userName) {
+                _phoneNoTextField.text = _userName;
+            }
+            return cell;
+        }else{//其他页面
+            XGQBRegRestPwdTVCell*cell = [XGQBRegRestPwdTVCell cellWithType:XGQBRegResetPwdTVCellTypePhoneNo];
+            _phoneNoTextField = cell.textField;
+            //判断是否有手机号输入信息,将其输入
+            if (_userName) {
+                _phoneNoTextField.text = _userName;
+            }
+            return cell;
         }
-        return cell;
+
     }else if (indexPath.section==0&&indexPath.row==1) {
         //第二行验证码
        XGQBRegRestPwdTVCell *cell = [XGQBRegRestPwdTVCell cellWithType:XGQBRegResetPwdTVCellTypeRegCode];

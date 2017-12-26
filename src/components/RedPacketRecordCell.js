@@ -35,7 +35,7 @@ class RedPacketRecordCell extends Component {
                     </View>
                     <View style={styles.numberView}>
                         <Text style={styles.numberViewRMB}>
-                            ¥
+                            {`¥ `}
                         </Text>
                         <Text style={styles.numberViewText}>
                             {this.props.amount}
@@ -99,14 +99,18 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         marginTop:45*sizeRatio,
         backgroundColor:'transparent'
+        // backgroundColor:'gray'
     },
     numberViewRMB:{
         fontSize:15,
         color:'#FFFFFF',
+        marginBottom:3,
+        // backgroundColor:'yellow'
     },
     numberViewText:{
         fontSize:27,
         color:'#FFFFFF',
+        // backgroundColor:'red',
     },
     bottomBtnView:{
         alignItems:'center',

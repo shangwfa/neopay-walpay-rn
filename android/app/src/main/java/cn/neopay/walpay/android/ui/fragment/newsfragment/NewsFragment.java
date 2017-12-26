@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.logger.Logger;
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
 import com.xgjk.common.lib.utils.DensityUtils;
@@ -25,11 +26,12 @@ import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.adapter.sliminjector.MineLineSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.NewsActivitiesSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.NewsItemSlimInjector;
+import cn.neopay.walpay.android.adapter.sliminjector.NewsNetworkErrorSlimInjector;
+import cn.neopay.walpay.android.adapter.sliminjector.NewsNoDataSlimInjector;
 import cn.neopay.walpay.android.adapter.sliminjector.NewsRedPacketSlimInjector;
 import cn.neopay.walpay.android.databinding.FragmentNewsLayoutBinding;
 import cn.neopay.walpay.android.databinding.HomeDrawMiddleViewBinding;
 import cn.neopay.walpay.android.module.event.MineEventBean;
-import cn.neopay.walpay.android.module.event.NewsEventBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.BusniessUtils;
@@ -63,7 +65,9 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
                 .register(R.layout.common_news_red_packet_layout, new NewsRedPacketSlimInjector())
                 .register(R.layout.common_news_activities_layout, new NewsActivitiesSlimInjector())
                 .register(R.layout.common_news_item_layout, new NewsItemSlimInjector())
-                .register(R.layout.common_line_item_layout, new MineLineSlimInjector());
+                .register(R.layout.common_line_item_layout, new MineLineSlimInjector())
+                .register(R.layout.common_no_network_layout, new NewsNetworkErrorSlimInjector())
+                .register(R.layout.common_no_data_layout, new NewsNoDataSlimInjector());
         handleMiddleView();
         mViewBinding.mineNewsXrv.setAdapter(mNewsAdapter);
         handleRefreshHeader();
@@ -135,18 +139,13 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         return true;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void selectCurrentPageCallBack(NewsEventBean newsEventBean) {
-        initView();
-    }
-
-
     @Override
     public void setNewsViewData(List<Object> mDataList) {
         if (null == mDataList) {
             return;
         }
         mNewsAdapter.updateData(mDataList);
+        mNewsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -156,6 +155,7 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectCurrentPageCallBack(MineEventBean mineEventBean) {
+        Logger.d(mineEventBean.toString());
         mPresenter.getNewsInfo();
     }
 }

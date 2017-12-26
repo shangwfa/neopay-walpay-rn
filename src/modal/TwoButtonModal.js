@@ -58,21 +58,28 @@ const styles = StyleSheet.create({
         backgroundColor: colors.divider,
         height: 15,
         width: 0.5,
-        marginTop:20
+        // marginTop:20
     },
     btn: {
-        height: 50,
+        // height: 50,
         textAlign: 'center',
-        textAlignVertical: 'center'
+        textAlignVertical: 'center',
+        // backgroundColor:'gray',
+        alignItems:'center',
     },
     btn_container: {
-        flex: 1
+        height:50,
+        flex: 1,
+        // backgroundColor:'yellow',
+        justifyContent:'center',
+        alignItems:'center',
     },
     btns_container: {
         width: 316,
         flexDirection: 'row',
         marginTop: 20,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems:'center',
     },
     text_content: {
         fontSize: 13,

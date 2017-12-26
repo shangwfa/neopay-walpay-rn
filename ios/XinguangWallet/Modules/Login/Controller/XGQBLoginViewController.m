@@ -224,13 +224,13 @@
         return;
     }else if (![self.userNameIV.textField.text checkMobile])
     {
-        [SVProgressHUD showInfoWithStatus:@"请输入正确手机号"];
+        [SVProgressHUD showInfoWithStatus:@"手机号格式错误"];
         return;
     }
     
     if([self.pwdIV.textField.text isEqualToString:@""])
     {
-        [SVProgressHUD showInfoWithStatus:@"密码不能为空"];
+        [SVProgressHUD showInfoWithStatus:@"请输入登录密码"];
         return;
     }else if (![self.pwdIV.textField.text checkPassword])
     {

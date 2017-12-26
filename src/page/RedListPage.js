@@ -15,6 +15,8 @@ import {SwRefreshListView} from "react-native-swRefresh";
 import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import DateUtils from "../utils/DateUtils";
+import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
+import RecivedRedPacket from '../data/RecivedRedPacket.json'
 
 class RedListPage extends BasePage {
 
@@ -23,6 +25,7 @@ class RedListPage extends BasePage {
         this.state = {
             dataSource: [],
             footerStatus: RefreshStatus.IDLE,
+            isShowProcess: false,
         };
     }
 
@@ -43,6 +46,9 @@ class RedListPage extends BasePage {
                     onLoadMore={this._onLoadMore}
                     footerStatus={this.state.footerStatus}
                 />
+                <ReceiveRedPacketModal
+                    action={RecivedRedPacket}
+                    isShow={this.state.isShowProcess}/>
             </View>
         );
 
@@ -77,8 +83,27 @@ class RedListPage extends BasePage {
         });
     };
     _clickItem = (item) => {
-        // 红包详情跳转
-        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
+        this.setState({
+            isShowProcess: true
+        });
+        let request = {
+            packetCode: item.packetCode
+        };
+        ApiManager.receiveRedPacket(request, (data) => {
+            setTimeout(() => {
+                this.handleShowProcess();
+                this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
+            }, 2000);
+        }, (errorData) => {//数据错误
+            this.handleShowProcess();
+        }, (errData) => {//网络超时
+            this.handleShowProcess();
+        });
+    };
+    handleShowProcess = () => {
+        this.setState({
+            isShowProcess: false
+        });
     };
     _renderItem = ({item}) => {
         let isShow = item.disPlayDate;

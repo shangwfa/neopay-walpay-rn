@@ -383,11 +383,12 @@ class PhoneTopUpMoneyView extends Component {
 
     //输入密码完成
     pwdInputFinished =(text) =>{
-        this.setState({
-            isPayShow:false
-        });
+
         ApiManager.createPhoneRechargeOrder({"phone":this.state.phoneNo,"payType":this.state.selectedPayType,"rechargeType":this.state.selectedRechargeType,"nameCode":this.state.selectedNameCode,"payPassword":text,'bankCardId':this.state.selectedBankId},(data)=>{
             //创建订单成功,跳转结果页
+            this.setState({
+                isPayShow:false
+            });
             nav.navigate(RouterPaths.CHARGE_FLUX_RESULT,{pageTitle:this.props.viewType?'流量充值':'手机充值',orderNo:data['orderNo']});
         });
     }

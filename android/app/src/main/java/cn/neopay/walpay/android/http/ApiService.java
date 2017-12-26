@@ -457,14 +457,22 @@ public interface ApiService {
 
     @POST("assist/get_security_token")
     Observable<Result<SecurityTokenResponseBean>> getSecurityToken(@Query("type") int type);
+
     /**
      * 更新消息的状态
      */
     @POST("message/update_read_status_msg")
     Observable<Result<BaseResponse>> updateNewsReadStatus(@QueryMap Map<String, Object> updateNewsReadStatusRequestBean);
+
     /**
      * 分享
      */
     @POST("assist/add_share")
     Observable<Result<ShareResponseBean>> getShareMsg(@QueryMap Map<String, Object> updateNewsReadStatusRequestBean);
+
+    /**
+     * 更新红包状态
+     */
+    @POST("packet/receive_red_packet")
+    Observable<Result<BaseResponse>> updateRedPacketStatus(@QueryMap Map<String, Object> updateReadPacketStatusRequestBean);
 }

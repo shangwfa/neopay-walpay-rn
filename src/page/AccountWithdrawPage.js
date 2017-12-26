@@ -94,11 +94,11 @@ class AccountWithdrawPage extends BasePage {
 
     //输入密码完成
     pwdInputFinished =(text) =>{
-        this.setState({
-            isPayShow:false
-        });
 
         ApiManager.withdraworder({'orderNo':this.state.orderNo,'payPassword':text,'tradeNo':this.state.orderNo},(data)=>{
+            this.setState({
+                isPayShow:false
+            });
             nav.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE,{data:data});
         })
 

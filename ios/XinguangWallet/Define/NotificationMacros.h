@@ -42,6 +42,10 @@
 #define kNotificationNativeSendAvatarURLToRN @"kNotificationNativeSendAvatarURLToRN"
 //RN页面分享红包
 #define kNotificaitonRNCallNativeCallShare @"kNotificaitonRNCallNativeCallShare"
+//原生通知首页刷新数据
+#define kNotificationRefreshDataForHomePage @"kNotificationRefreshDataForHomePage"
+//原生注册时验证手机号已经注册
+#define kNotificationPhoneNoAlreadyExist @"kNotificationPhoneNoAlreadyExist"
 
 #pragma mark - ——————— 网络状态相关 ————————
 

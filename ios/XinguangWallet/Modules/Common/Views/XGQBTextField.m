@@ -57,6 +57,9 @@
             self.keyboardType = UIKeyboardTypeNumberPad;
             self.secureTextEntry = YES;
             
+        case XGQBTextFieldTypePhoneNoReg:
+            self.secureTextEntry = NO;
+            self.keyboardType = UIKeyboardTypeNumberPad;
         default:
             break;
     }
@@ -122,7 +125,7 @@
         }
     }
     //处理手机号输入
-    else if (textField.type == XGQBTextFieldTypePhoneNo){
+    else if (textField.type == XGQBTextFieldTypePhoneNo||textField.type==XGQBTextFieldTypePhoneNoReg){
         if (textField.text.length>10 && ![string isEqualToString:@""]) {
             [SVProgressHUD showInfoWithStatus:@"请输入正确手机号"];
         }
@@ -157,7 +160,28 @@
     }
     else if (textField.type == XGQBTextFieldTypePhoneNo){
         if (textField.text.length!=11 && textField.text.length>0) {
-            [SVProgressHUD showInfoWithStatus:@"请输入正确手机号"];
+            [SVProgressHUD showInfoWithStatus:@"手机号格式错误"];
+        }
+        else if (textField.text.length==0){
+            [SVProgressHUD showInfoWithStatus:@"请先输入手机号"];
+        }
+    }
+    else if (textField.type == XGQBTextFieldTypePhoneNoReg){
+        if (textField.text.length!=11 && textField.text.length>0) {
+            [SVProgressHUD showInfoWithStatus:@"手机号格式错误"];
+        }
+        else if(textField.text.length==0){
+            [SVProgressHUD showInfoWithStatus:@"请先输入手机号"];
+        }
+        else if(textField.text.length==11){
+            [MemberCoreService verifyRegisterPhone:[@{@"phone":textField.text} mutableCopy] andSuccessFn:^(id responseAfter, id responseBefore) {
+                if ([[responseAfter objectForKey:@"registered"]integerValue]==1) {
+                    //已经注册,发送通知弹窗
+                    [kNotificationCenter postNotificationName:kNotificationPhoneNoAlreadyExist object:nil];
+                }
+            } andFailerFn:^(NSError *error) {
+                JKLog();
+            }];
         }
     }
 }

@@ -262,46 +262,47 @@
 #pragma mark - tableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XGQBMessage *message = _homeTVC.messArr[indexPath.row];
-
-    //红包消息
-    if (message.msgType==XGQBMessageTypeRedPacket) {
-        //先检查实名认证状态
-        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
-            [self checkIDStatus];
-        }else{
-            if (message.receiveStatus==XGQBRedPacketReceiveStatusReceived) {
-                //红包已领取,跳转红包广场
-                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-                RNVC.pageType = @"redList";
-                [self.navigationController pushViewController:RNVC animated:YES];
-            }else{//红包未领取,跳转红包领取页
-                XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-                RNVC.pageType = @"rpDetail";
-                RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
-                [self.navigationController pushViewController:RNVC animated:YES];
+    if (_homeTVC.messArr.count) {//如果有消息
+        XGQBMessage *message = _homeTVC.messArr[indexPath.row];
+        
+        //红包消息
+        if (message.msgType==XGQBMessageTypeRedPacket) {
+            //先检查实名认证状态
+            if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+                [self checkIDStatus];
+            }else{
+                if (message.receiveStatus==XGQBRedPacketReceiveStatusReceived) {
+                    //红包已领取,跳转红包广场
+                    XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                    RNVC.pageType = @"redList";
+                    [self.navigationController pushViewController:RNVC animated:YES];
+                }else{//红包未领取,跳转红包领取页
+                    XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                    RNVC.pageType = @"rpDetail";
+                    RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
+                    [self.navigationController pushViewController:RNVC animated:YES];
+                }
+                
             }
-
         }
+        else if(message.msgType==XGQBMessageTypePayMessage)
+        {
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"payMessage";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }else if(message.msgType==XGQBMessageTypePhoneRecharge)
+        {
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"topupMsgList";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }
+        else{
+            return;
+        }
+    }else{//没有消息
+        return;
     }
-    else if(message.msgType==XGQBMessageTypePayMessage)
-    {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"payMessage";
-        [self.navigationController pushViewController:RNVC animated:YES];
-    }else if(message.msgType==XGQBMessageTypePhoneRecharge)
-    {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"topupMsgList";
-        [self.navigationController pushViewController:RNVC animated:YES];
-    }
-    else if (arc4random()%2) {
-        XGQBNoContentViewController *noContentVC = [XGQBNoContentViewController new];
-        [self.navigationController pushViewController:noContentVC animated:YES];
-    }else{
-        XGQBNetworkFailureViewController *netWorkFailVC = [XGQBNetworkFailureViewController new];
-        [self.navigationController pushViewController:netWorkFailVC animated:YES];
-    }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
