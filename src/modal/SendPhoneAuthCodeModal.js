@@ -91,7 +91,7 @@ class SendPhoneAuthCodeModal extends Component {
 const styles = StyleSheet.create({
     modalStyle: {
         flex: 1,
-        backgroundColor: '#cccccc80',
+        backgroundColor: colors.mask,
         alignItems: 'center',
         justifyContent: 'center',
     },

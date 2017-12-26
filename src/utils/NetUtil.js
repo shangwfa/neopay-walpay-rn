@@ -18,6 +18,7 @@ class NetUtil extends Component {
         }
 
         if (isShowMsg) NativeModules.commModule.toast(msg)
+
     }
 
     /**设置超时时间*/
@@ -63,10 +64,10 @@ class NetUtil extends Component {
                         successCallbak(response.data);
                     } else {
                         let errorData = {
-                            netCode: response.netCode,
+                            retCode: response.retCode,
                             retMsg: response.retMsg,
                         };
-                        errorCallback ? errorCallback(errorData) : this.handleException(response.netCode, response.retMsg)
+                        errorCallback ? errorCallback(errorData) : this.handleException(response.retCode, response.retMsg)
                     }
                 })
                 .catch((err) => {
@@ -113,7 +114,7 @@ class NetUtil extends Component {
                     if (netCode.netOk == response.retCode) {
                         successCallbak(response.data)
                     } else {
-                        this.handleException(response.netCode, response.retMsg)
+                        this.handleException(response.retCode, response.retMsg)
                     }
                     if (isShowLoading) NativeModules.commModule.hideLoadingDialog()
                 })

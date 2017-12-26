@@ -44,6 +44,8 @@ class PhoneTopUpMoneyView extends Component {
             selectedBankName:'余额',
             selectedBankCardNo:'',
             selectedRechargeType:1,
+            itemSelectable:false,
+            itemTextColor:'gray'
         }
     }
 
@@ -88,7 +90,7 @@ class PhoneTopUpMoneyView extends Component {
                              contentFront='实付金额'
                              contentBack={this.state.payAmount}
                              payTypeContent={this.retPayTypeContent()}
-                             onClose={()=>this.setState({isPayShow:false})}
+                             onClose={()=>this.setState({isPayShow:false,selectedItemIndex:null})}
                              onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
                              onEnd={(text)=>this.pwdInputFinished(text)}
                              selectPayStyleClick={()=>{this.selectPayStyleBtnClick()}}/>
@@ -118,10 +120,14 @@ class PhoneTopUpMoneyView extends Component {
                    if(this.props.viewType){
                        this.setState({
                            CelluarItemList:data,
+                           itemSelectable:true,
+                           itemTextColor:'#F34646',
                        })
                    }else {
                        this.setState({
                            MoneyItemList: data,
+                           itemSelectable:true,
+                           itemTextColor:'#F34646',
                        })
                    }
                });
@@ -147,10 +153,14 @@ class PhoneTopUpMoneyView extends Component {
                 if(this.props.viewType){
                     this.setState({
                         CelluarItemList:data,
+                        itemSelectable:true,
+                        itemTextColor:'#F34646',
                     })
                 }else {
                     this.setState({
                         MoneyItemList: data,
+                        itemSelectable:true,
+                        itemTextColor:'#F34646',
                     })
                 }
             });
@@ -213,12 +223,12 @@ class PhoneTopUpMoneyView extends Component {
         if(this.props.viewType===false) {
             for (let i = 0; i < this.state.MoneyItemList.length; i++) {
                 itemCells.push(
-                    <TouchableWithoutFeedback key={i} onPress={() => this.moneyCellSelected(i)}>
-                        <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
+                    <TouchableWithoutFeedback key={i} onPress={() => this.moneyCellSelected(i)} disabled={!this.state.itemSelectable}>
+                        <View style={[i === this.state.selectedItemIndex ? styles.itemCellSelected :styles.itemCell,{borderColor:this.state.itemSelectable?'#F34646':'gray'}]}>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.MoneyItemList[i].rechargeAmout}</Text>
+                                style={[{color:this.state.itemTextColor},i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText]}>{this.state.MoneyItemList[i].rechargeAmout}</Text>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText}>售价:{this.state.MoneyItemList[i].tradeAmount.toFixed(2)}</Text>
+                                style={[{color:this.state.itemTextColor},i === this.state.selectedItemIndex ? styles.priceTextSelected : styles.priceText]}>售价:{this.state.MoneyItemList[i].tradeAmount.toFixed(2)}</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 )
@@ -226,10 +236,10 @@ class PhoneTopUpMoneyView extends Component {
         }else if (this.props.viewType ===true){
             for (let i = 0; i < this.state.CelluarItemList.length; i++) {
                 itemCells.push(
-                    <TouchableWithoutFeedback key={i} onPress={()=>this.celluarCellSelected(i)}>
-                        <View style={i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell}>
+                    <TouchableWithoutFeedback key={i} onPress={()=>this.celluarCellSelected(i)} disabled={!this.state.itemSelectable}>
+                        <View style={[i === this.state.selectedItemIndex ? styles.itemCellSelected : styles.itemCell,{borderColor:this.state.itemSelectable?'#F34646':'gray'}]}>
                             <Text
-                                style={i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText}>{this.state.CelluarItemList[i].rechargeAmout}</Text>
+                                style={[{color:this.state.itemTextColor},i === this.state.selectedItemIndex ? styles.amountTextSelected : styles.amountText]}>{this.state.CelluarItemList[i].rechargeAmout}</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 )
@@ -241,40 +251,43 @@ class PhoneTopUpMoneyView extends Component {
     renderCelluarCell=()=>{
         let celluarPriceItem =[];
         if(this.props.viewType==true){
-            for(let i=0; i<this.state.CelluarPriceList.length;i++){
-                celluarPriceItem.push(
-                    <View>
-                        <View style={{flexDirection:'row',alignItems:'center',marginTop:12*heightRatio}}>
-                            <View style={{marginLeft:14}}>
-                                <Text style={{fontSize:13, color:'#333333'}}>
-                                    {this.state.CelluarItemList[this.state.selectedItemIndex].rechargeAmout+' '+this.state.CelluarPriceList[i].rechargeTypeText}
-                                </Text>
-                                <Text style={{fontSize:12, color:'#999999',marginTop:13*heightRatio}} >
-                                    {this.state.CelluarPriceList[i].productDesc}
-                                </Text>
-                            </View>
-                            <View style={{flex:1}}>
-
-                            </View>
-                            <View style={{marginRight:14,alignItems:'flex-end'}}>
-                                <Text style={{fontSize:16, color:'#333333'}}>
-                                    {'¥'+this.state.CelluarPriceList[i].tradeAmount}
-                                </Text>
-                                <TouchableWithoutFeedback onPress={()=>this.celluarOrderBtnClicked(i)}>
-                                <View style={{height:26,width:61,borderColor:'red',borderRadius:3,borderWidth:1,alignItems:'center',justifyContent:'center',marginTop:11*heightRatio}}>
-                                    <Text style={{color:'#F34646',fontSize:13}}>
-                                        立即购买
+            if(this.state.selectedItemIndex){
+                for(let i=0; i<this.state.CelluarPriceList.length;i++){
+                    celluarPriceItem.push(
+                        <View>
+                            <View style={{flexDirection:'row',alignItems:'center',marginTop:12*heightRatio}}>
+                                <View style={{marginLeft:14}}>
+                                    <Text style={{fontSize:13, color:'#333333'}}>
+                                        {this.state.CelluarItemList[this.state.selectedItemIndex].rechargeAmout+' '+this.state.CelluarPriceList[i].rechargeTypeText}
+                                    </Text>
+                                    <Text style={{fontSize:12, color:'#999999',marginTop:13*heightRatio}} >
+                                        {this.state.CelluarPriceList[i].productDesc}
                                     </Text>
                                 </View>
-                                </TouchableWithoutFeedback>
+                                <View style={{flex:1}}>
+
+                                </View>
+                                <View style={{marginRight:14,alignItems:'flex-end'}}>
+                                    <Text style={{fontSize:16, color:'#333333'}}>
+                                        {'¥'+this.state.CelluarPriceList[i].tradeAmount}
+                                    </Text>
+                                    <TouchableWithoutFeedback onPress={()=>this.celluarOrderBtnClicked(i)}>
+                                        <View style={{height:26,width:61,borderColor:'red',borderRadius:3,borderWidth:1,alignItems:'center',justifyContent:'center',marginTop:11*heightRatio}}>
+                                            <Text style={{color:'#F34646',fontSize:13}}>
+                                                立即购买
+                                            </Text>
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                </View>
+                            </View>
+                            <View style={{height:i==(this.state.CelluarPriceList.length-1)?0:0.5, width:ScreenUtils.width,backgroundColor:'#DADADA',marginTop:12*heightRatio}}>
+
                             </View>
                         </View>
-                        <View style={{height:i==(this.state.CelluarPriceList.length-1)?0:0.5, width:ScreenUtils.width,backgroundColor:'#DADADA',marginTop:12*heightRatio}}>
-
-                        </View>
-                    </View>
-                )
+                    )
+                }
             }
+
             return celluarPriceItem;
         }
     };
@@ -317,7 +330,7 @@ class PhoneTopUpMoneyView extends Component {
                 isPayShow:true,
                 payAmount:this.state.MoneyItemList[i].tradeAmount.toFixed(2),
                 selectedNameCode:this.state.MoneyItemList[i].nameCode,
-                selectedRechargeType:1
+                selectedRechargeType:1,
             });
         }else {
             NativeModules.commModule.toast("请输入正确手机号");
@@ -366,14 +379,33 @@ class PhoneTopUpMoneyView extends Component {
                 if(this.props.viewType){
                     this.setState({
                         CelluarItemList:data,
+                        itemSelectable:true,
+                        itemTextColor:'#F34646',
                     })
                 }else {
                     this.setState({
                         MoneyItemList: data,
+                        itemSelectable:true,
+                        itemTextColor:'#F34646',
                     })
                 }
             });
 
+        }else if (text.replace('-','').length>11){
+            NativeModules.commModule.toast("手机号有误，请重新输入");
+            this.setState({
+                itemTextColor:'#F34646',
+                itemSelectable:false,
+                itemTextColor:'gray',
+                selectedItemIndex:null,
+            })
+        }
+        else{
+            this.setState({
+                itemSelectable:false,
+                itemTextColor:'gray',
+                selectedItemIndex:null,
+            })
         }
     };
     //通讯录图标点击
@@ -447,7 +479,7 @@ const styles = StyleSheet.create({
         width:(ScreenUtils.width-4*marginBetween)/3.0,
         marginLeft:marginBetween,
         marginTop:marginCellTop,
-        backgroundColor:'#FD686C',
+        backgroundColor:'#F34646',
     },
     itemCell:{
         height:55*heightRatio,
@@ -462,7 +494,7 @@ const styles = StyleSheet.create({
 
     },
     amountText:{
-        color:'red',
+        // color:'red',
         fontSize:16,
     },
     amountTextSelected:{
@@ -470,7 +502,7 @@ const styles = StyleSheet.create({
         fontSize:16,
     },
     priceText:{
-        color:'red',
+        // color:'red',
         fontSize:11,
     },
     priceTextSelected:{

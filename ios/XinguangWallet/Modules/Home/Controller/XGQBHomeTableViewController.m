@@ -93,7 +93,7 @@
     NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
     [body setObject:@10 forKey:@"pageSize"];
     [body setObject:@1 forKey:@"pageNo"];
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing]; 造成死循环bug
     [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
         //获取到数据
         self.messArr=nil;
@@ -102,8 +102,8 @@
         for (NSDictionary*dict in responseAfter) {
             XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];
-            [self.tableView reloadData];
         }
+        [self.tableView reloadData];
         [(XGQBRefreshHeader*)self.tableView.mj_header showRefreshSuccessGifAndText];
 //        [self.tableView.mj_header endRefreshing];
         
@@ -116,7 +116,9 @@
         _currentPage=2;
     } andFailerFn:^(NSError *error) {
         //刷新失败
-        [self.tableView.mj_header endRefreshing];
+        if([self.tableView.mj_header isRefreshing]){
+            [self.tableView.mj_header endRefreshing];
+        }
         self.wifiStatus =false;
         [self.tableView reloadData];
     }];
@@ -130,10 +132,15 @@
     self.tableView.sectionHeaderHeight=0;
     self.tableView.sectionFooterHeight=0;
     
-    self.tableView.estimatedRowHeight=84;
+    self.tableView.estimatedRowHeight=184;
     self.tableView.rowHeight=UITableViewAutomaticDimension;
     
-    [kNotificationCenter addObserver:self selector:@selector(refreshData) name:kNotificationRefreshDataForHomePage object:nil];
+//    [kNotificationCenter addObserver:self selector:@selector(refreshData) name:kNotificationRefreshDataForHomePage object:nil];
+    
+    kWeakSelf(self);
+    [kNotificationCenter addObserverForName:kNotificationRefreshDataForHomePage object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakself.tableView.mj_header beginRefreshing];
+    }];
 }
 
 -(NSMutableArray *)messArr

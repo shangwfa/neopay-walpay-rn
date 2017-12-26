@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         borderRadius:5
     },
     modalStyle: {
-        backgroundColor:'#cccccc80',
+        backgroundColor:colors.mask,
         alignItems: 'center',
         justifyContent:'center',
         flex:1,

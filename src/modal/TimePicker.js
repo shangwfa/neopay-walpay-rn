@@ -91,9 +91,12 @@ const showTimePicker = (onPicker,type) => {
     Picker.show();
 };
 
+const hideTimePicker=()=>Picker.hide()
+
 
 
 export default {
-    showTimePicker
+    showTimePicker,
+    hideTimePicker
 }
 
