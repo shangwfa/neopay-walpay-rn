@@ -234,7 +234,7 @@
         return;
     }else if (![self.pwdIV.textField.text checkPassword])
     {
-        [SVProgressHUD showInfoWithStatus:@"请输入6至20位字母加数字"];
+        [SVProgressHUD showInfoWithStatus:@"登录密码为6至18位字母加数字"];
         return;
     }
     

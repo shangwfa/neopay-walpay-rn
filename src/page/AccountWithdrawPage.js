@@ -239,7 +239,7 @@ class AccountWithdrawPage extends BasePage {
         else if (this.state.withdrawAmount > this.state.withdrawBalance) {
             NativeModules.commModule.toast("提现金额不能大于可提现余额");
         }
-        else if (this.state.withdrawAmount === 0) {
+        else if (this.state.withdrawAmount == 0) {
             NativeModules.commModule.toast("提现金额必须大于0.01元");
         }
         else if (this.state.withdrawAmount > 20000) {

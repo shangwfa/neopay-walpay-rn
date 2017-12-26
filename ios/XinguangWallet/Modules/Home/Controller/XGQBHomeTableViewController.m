@@ -104,8 +104,10 @@
             [self.messArr addObject:mess];
         }
         [self.tableView reloadData];
-        [(XGQBRefreshHeader*)self.tableView.mj_header showRefreshSuccessGifAndText];
-//        [self.tableView.mj_header endRefreshing];
+        
+        if([(XGQBRefreshHeader*)self.tableView.mj_header isRefreshing]){
+            [(XGQBRefreshHeader*)self.tableView.mj_header showRefreshSuccessGifAndText];
+        }
         
         if([(NSArray*)responseAfter count]<10)//判断是否加载完成
         {
@@ -113,6 +115,7 @@
         }else{
             [self.tableView.mj_footer resetNoMoreData];
         }
+        
         _currentPage=2;
     } andFailerFn:^(NSError *error) {
         //刷新失败
