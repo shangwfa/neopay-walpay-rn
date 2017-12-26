@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     modalStyle: {
-        backgroundColor: '#cccccc80',
+        backgroundColor: colors.mask,
         justifyContent: 'flex-end',
         flex: 1,
     },
