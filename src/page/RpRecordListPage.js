@@ -28,43 +28,43 @@ class RpRecordListPage extends BasePage {
         super(props);
         this.state = {
             dataSource: [],
-            footerStatus: RefreshStatus.IDLE,
+            isEmpty: false
         }
     }
 
     componentWillMount() {
-        this._handleRefresh();
+        this.getRpRecordList(1,false,true)
     }
 
-    _handleRefresh = () => {
-        //采用变量传递网络参数的时候,无法获取到相应参数,很奇怪
-        ApiManager.getRedPacketRecord({pageSize:10,redpTradeQueryType:this.props.navigation.state.params.QueryType}, (data) => {
-            this.setState({
-                dataSource: data,
-            });
-        });
-    };
+    onRefresh = () => {
+        this.getRpRecordList(1, false)
+    }
 
-    _onRefresh = () => {
-        this._handleRefresh();
-    };
+    onLoadMore = (page) => {
+        this.getRpRecordList(page, true)
+    }
 
-    _onLoadMore = (pageSize) => {
+    getRpRecordList =(pageNo,isLoadMore,isLoadding=false)=>{
 
-        ApiManager.getRedPacketRecord({pageSize: pageSize,redpTradeQueryType:this.props.navigation.state.params.QueryType}, (data) => {
-            if (data) {
-                let allData = this.state.dataSource;
-                allData.push(...data);
-                this.setState({
-                    dataSource: allData,
-                });
+        let body={
+            pageNo: pageNo,
+            redpTradeQueryType:this.props.navigation.state.params.QueryType
+        }
+
+        ApiManager.getRedPacketRecord(body, data => {
+            if (isLoadMore) {
+                const arrData = this.state.dataSource
+                arrData.push(...data)
+                this.setState({dataSource: arrData})
             } else {
-                this.setState({
-                    footerStatus: RefreshStatus.END
-                });
+                const empty = !data || data.length <= 0
+                this.setState({dataSource: data, isEmpty: empty})
             }
-        });
-    };
+        },isLoadding)
+    }
+
+
+
 
     renderRow = ({item}) => {
         console.log('rop---' + item)
@@ -94,9 +94,9 @@ class RpRecordListPage extends BasePage {
                 <RefreshList
                     data={this.state.dataSource}
                     renderItem={this.renderRow}
-                    onRefresh={this._onRefresh}
-                    onLoadMore={this._onLoadMore}
-                    footerStatus={this.state.footerStatus}
+                    onRefresh={this.onRefresh}
+                    onLoadMore={this.onLoadMore}
+                    isEmpty={this.state.isEmpty}
                 />
             </View>
         );

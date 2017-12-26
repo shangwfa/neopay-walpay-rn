@@ -43,22 +43,25 @@ class NewBindBankCardPage extends BasePage {
             NativeModules.commModule.toast('银行卡号不能为空')
             return
         }
-        if (StringUtils.isEmpty(this.state.bindPhone)) {
-            NativeModules.commModule.toast('手机号不能为空')
-        }
-        if (StringUtils.isEmpty(this.state.smsCode)) {
-            NativeModules.commModule.toast('验证码不能为空')
-        }
-
         if(this.state.isCreditCard)
         {
             if (StringUtils.isEmpty(this.state.cvv2)) {
                 NativeModules.commModule.toast('cvv2不能为空')
+                return
             }
 
             if (this.state.date == '请选择信用卡有效期') {
                 NativeModules.commModule.toast('请选择信用卡有效期')
+                return
             }
+        }
+        if (StringUtils.isEmpty(this.state.bindPhone)) {
+            NativeModules.commModule.toast('手机号不能为空')
+            return
+        }
+        if (StringUtils.isEmpty(this.state.smsCode)) {
+            NativeModules.commModule.toast('验证码不能为空')
+            return
         }
 
         let body;

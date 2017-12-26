@@ -42,6 +42,31 @@ class PayPwdModal extends Component {
         )
     }
 
+    renderBottom=()=>{
+        if(!this.props.isHiddenBottom)
+        {
+            return (
+                <TouchableOpacity
+                    style={{flexDirection: 'row', alignItems: 'center',}}
+                    onPress={() => this.props.selectPayStyleClick()}>
+                    <View style={styles.select_pay_style_container}>
+                        <Text style={styles.select_pay_style_txt}>付款方式</Text>
+                        <View style={{flex: 1}}/>
+                        <Text style={styles.select_pay_content_txt}>{this.props.payTypeContent}</Text>
+                        <Image style={{marginLeft: 8, width: 7, height: 12, marginRight: 10}}
+                               source={right_arrow}/>
+                    </View>
+                </TouchableOpacity>
+            )
+
+        }else
+        {
+            return (
+                <View style={{height:20}}/>
+            )
+        }
+    }
+
     render() {
         return (
             <Modal
@@ -63,17 +88,7 @@ class PayPwdModal extends Component {
                                            onEnd={(text) => this.props.onEnd(text)}
                             onTextFocus={()=>this.onTextFocus()}
                             onTextBlur={()=>this.onTextBlur()}/>
-                            <TouchableOpacity
-                                style={{flexDirection: 'row', alignItems: 'center',}}
-                                onPress={() => this.props.selectPayStyleClick()}>
-                                <View style={styles.select_pay_style_container}>
-                                    <Text style={styles.select_pay_style_txt}>付款方式</Text>
-                                    <View style={{flex: 1}}/>
-                                    <Text style={styles.select_pay_content_txt}>{this.props.payTypeContent}</Text>
-                                    <Image style={{marginLeft: 8, width: 7, height: 12, marginRight: 10}}
-                                           source={right_arrow}/>
-                                </View>
-                            </TouchableOpacity>
+                            {this.renderBottom()}
                         </View>
                     </View>
                 </Animated.View>
