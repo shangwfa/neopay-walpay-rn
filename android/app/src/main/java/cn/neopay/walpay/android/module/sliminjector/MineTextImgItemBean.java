@@ -12,6 +12,27 @@ public class MineTextImgItemBean {
     private int itemImgId;
     private String itemName;
     private View.OnClickListener onClickListener;
+    private String typeClick;
+    /**
+     * 实名认证状态
+     */
+    private Integer authStatus;
+
+    public Integer getAuthStatus() {
+        return authStatus;
+    }
+
+    public void setAuthStatus(Integer authStatus) {
+        this.authStatus = authStatus;
+    }
+
+    public String getTypeClick() {
+        return typeClick;
+    }
+
+    public void setTypeClick(String typeClick) {
+        this.typeClick = typeClick;
+    }
 
     public int getItemImgId() {
         return itemImgId;

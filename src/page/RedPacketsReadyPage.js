@@ -5,7 +5,7 @@ import {
     Text,
     Image,
     FlatList,
-    TouchableWithoutFeedback,
+    TouchableWithoutFeedback, NativeModules,
     DeviceEventEmitter,
 } from 'react-native'
 import {NavigationActions} from 'react-navigation'
@@ -117,7 +117,8 @@ class RedPacketsReadyPage extends BasePage {
     renderReadyFooter = () => {
         return (
             <View>
-                <CommonBtn style={{width: ScreenUtils.width, marginTop: 51 * sizeRatioH,}} value={'分享红包至微信领取'}/>
+                <CommonBtn style={{width: ScreenUtils.width, marginTop: 51 * sizeRatioH,}} value={'分享红包至微信领取'}
+                           onPress={this.handleShare}/>
                 <CommonBtn style={{width: ScreenUtils.width, marginTop: 20 * sizeRatioH}}
                            backgroundColor={'#FFFFFF'}
                            textColor={'#CCCCCC'}
@@ -133,6 +134,11 @@ class RedPacketsReadyPage extends BasePage {
             </View>
         )
     }
+    handleShare = () => {
+        let packetCode = this.props.navigation.state.params.packetCode;
+        let shareType = "1";
+        NativeModules.commModule.rnCallNativeCallShare(packetCode, shareType);
+    };
 
     renderBottom = () => {
         if (!this.state.isReady) return;

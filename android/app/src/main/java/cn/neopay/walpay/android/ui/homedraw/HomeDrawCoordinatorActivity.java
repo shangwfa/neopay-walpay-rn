@@ -53,7 +53,7 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
     @Override
     public void initView() {
         handleView();
-        handleBottomKeyLayout();
+        mPageBinding.getRoot().getViewTreeObserver().addOnGlobalLayoutListener(this::handleBottomKeyLayout);
     }
 
     private void handleView() {
@@ -89,6 +89,7 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
     @Override
     protected void onResume() {
         mPresenter.getUserInfo();
+        EventBus.getDefault().post(new MineEventBean());
         super.onResume();
     }
 
@@ -96,6 +97,10 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
         if (ScreenUtils.hasSoftKeys(this)) {
             DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mViewBinding.homeDrawCoordinatorCl.getLayoutParams();
             params.setMargins(0, 0, 0, ScreenUtils.getBottomSoftKeysHeight(this));
+            mViewBinding.homeDrawCoordinatorCl.setLayoutParams(params);
+        } else {
+            DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) mViewBinding.homeDrawCoordinatorCl.getLayoutParams();
+            params.setMargins(0, 0, 0, 0);
             mViewBinding.homeDrawCoordinatorCl.setLayoutParams(params);
         }
     }

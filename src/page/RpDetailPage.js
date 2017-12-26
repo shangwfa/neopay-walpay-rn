@@ -18,6 +18,7 @@ import CommonItemTwo from '../components/CommonItemTwo'
 import RpDetailHeader from '../components/RpDetailHeader'
 import CommonButton from '../components/CommonButton'
 import ImageButton from '../components/ImageTitleButton'
+import ButtonNormal from '../components/ButtonNormal'
 import ApiManager from '../utils/ApiManager'
 import ScreenUtils from '../utils/ScreenUtils'
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
@@ -93,7 +94,7 @@ class RpDetailPage extends BasePage {
                                middleUpValue={item.robberName} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
                                rightUpValue={FormatUtils.money(item.luckyAmount)}
                                isLine={true}
-                               imgIconUrl={item.luckyFlag==1?require("../res/img/rp_max_num.png"):' '} />
+                               imgIconUrl={item.luckyFlag==3?require("../res/img/rp_max_num.png"):' '} />
             </View>
         )
 
@@ -135,16 +136,15 @@ class RpDetailPage extends BasePage {
         if(this.state.dataDetail.ownerBool == false){
             return (
                 <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
-                    <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this._pushSendRpPage()}/>
+                    <ImageButton value='我也要发红包' style={{marginTop:0.5,marginBottom:0.5,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
                 </Image>
             )
         }else{
             return (
-                <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
-                    <ImageButton value='分享该红包' style={{marginTop:2,marginBottom:2,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = {require("../res/img/rp_share.png")} onPress={()=>this._pushSendRpPage()}/>
-                    <View style={{marginTop:2,width:1,backgroundColor:colors.divider }}/>
-                    <ImageButton value='我也要发红包' style={{marginTop:2,marginBottom:2,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = {require("../res/img/rp_giveRp.png")} onPress={()=>this.pushRecordPage()}/>
-                </Image>
+                <View style = {styles.bg_bottom}>
+                    <ImageButton value='我也要发红包' style={{marginTop:0.5,marginBottom:0.5,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
+                    <ImageButton value='分享该红包' style={{marginTop:0,marginBottom:0,flex:1,backgroundColor:colors.one_color}} textColor = {colors.white} icon = '' onPress={()=>this.pushRecordPage()}/>
+                </View>
             )
         }
 
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         width:ScreenUtils.width,
         marginTop:0,
         flexDirection:'row',
-        resizeMode:'cover'
+        backgroundColor:colors.divider
     }
 });
 

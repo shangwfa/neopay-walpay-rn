@@ -49,5 +49,11 @@
 
 /// 获取首页消息列表
 +(void)messageOverview:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
+
+/// 获取图片上传Token
++(void)getSecurityToken:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
+
+/// 修改用户头像
++(void)modifyUserAvatarURL:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
 @end
 

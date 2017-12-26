@@ -42,7 +42,10 @@ class AccountWithdrawPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title={'提现'} rightIcon={require("../res/img/HomePage/sy_wenhao.png")} rightIconStyle={{height: 20}}/>
+                <Header navigation={this.props.navigation}
+                        title={'提现'} rightIcon={require("../res/img/HomePage/sy_wenhao.png")}
+                        rightIconStyle={{height: 20}}
+                        onRightPress={()=>this.questionmarkPressed()}/>
 
                 <CommonItemThree style={{marginTop: 10}}
                                  source={this.renderBankCardIcon()}
@@ -67,17 +70,24 @@ class AccountWithdrawPage extends BasePage {
                              onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
                              onEnd={(text)=>this.pwdInputFinished(text)}
                              selectPayStyleClick={()=>{this.selectPayStyleBtnClick()}}
+                             payTypeBalanceOnly={true}
                 />
             </View>
         );
     }
 
+    //点击标题栏问号图标
+    questionmarkPressed=()=>{
+        this.props.navigation.navigate(RouterPaths.INSTRUCTIONS_PAGE);
+    }
+
     //处理银行卡信息
     retPayTypeContent=()=>{
-        if (this.state.selectedBankId==-1)
-            return this.state.selectedBankName;
-        else
-            return this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')';
+        // if (this.state.selectedBankId==-1)
+        //     return this.state.selectedBankName;
+        // else
+        //     return this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')';
+        return '余额';
     }
 
 
@@ -94,11 +104,11 @@ class AccountWithdrawPage extends BasePage {
 
     //输入密码完成
     pwdInputFinished =(text) =>{
-        this.setState({
-            isPayShow:false
-        });
 
         ApiManager.withdraworder({'orderNo':this.state.orderNo,'payPassword':text,'tradeNo':this.state.orderNo},(data)=>{
+            this.setState({
+                isPayShow:false
+            });
             nav.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE,{data:data});
         })
 
@@ -106,10 +116,10 @@ class AccountWithdrawPage extends BasePage {
 
     //选择银行卡按钮点击
     selectPayStyleBtnClick=()=>{
-        this.setState({
-            isPayShow:false,
-            isShowSelectPayStyle:true
-        })
+        // this.setState({
+        //     isPayShow:false,
+        //     isShowSelectPayStyle:true
+        // })
     }
 
     renderBankCardIcon=()=>{
@@ -150,7 +160,6 @@ class AccountWithdrawPage extends BasePage {
         // console.log('点击了关闭按钮')
         this.setState({
             isShowSelectPayStyle:false,
-            isPayShow:true,
         })
     }
 
@@ -203,29 +212,38 @@ class AccountWithdrawPage extends BasePage {
                 textInputPlaceHolder:'请输入提现金额',
             })
         }
+
+        if(text>this.state.withdrawBalance){
+            NativeModules.commModule.toast("提现金额不能大于可提现余额");
+        }
+        else if(text>20000){
+            NativeModules.commModule.toast("单笔提现金额不能大于2万元");
+        }
     }
 
     withdrawBtnClicked() {
 
-        if(this.state.withdrawAmount!=0)
-        {
-            // if(this.state.withdrawAmount>this.state.withdrawBalance){
-            //     NativeModules.commModule.toast('超过可提现金额');
-            // }else {
-
-                ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
-                    //创建订单成功,跳转结果页
-                    this.setState({
-                        isPayShow:true
-                    })
-                    this.setState({
-                        orderNo:data.orderNo
-                    })
-                });
-            // }
-
-        }else {
-            NativeModules.commModule.toast("请输入正确提现金额");
+        if(this.state.withdrawAmount>this.state.withdrawBalance){
+            NativeModules.commModule.toast("提现金额不能大于可提现余额");
+        }
+        else if(this.state.withdrawAmount===0){
+            NativeModules.commModule.toast("提现金额必须大于0.01元");
+        }
+        else if(this.state.withdrawAmount>20000) {
+            NativeModules.commModule.toast("单笔提现金额不能大于2万元");
+        }else if(this.state.selectedBankId<=0){
+            NativeModules.commModule.toast("请选择提现储蓄卡");
+        }
+        else{
+            ApiManager.createWithdrawOrder({"bankCardId":this.state.selectedBankId,"withdrawAmount":this.state.withdrawAmount},(data)=>{
+                //创建订单成功,跳转结果页
+                this.setState({
+                    isPayShow:true
+                })
+                this.setState({
+                    orderNo:data.orderNo
+                })
+            });
         }
 
 

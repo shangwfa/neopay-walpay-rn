@@ -22,6 +22,7 @@ export const APIS = {
     QUERY_RECENT_RED_PACKET_LIST: "packet/query_recent_red_packet_list",  //获取红包列表
     QUERY_RED_PACKET_MSG_PAGE: "message/query_red_packet_msg_page",  //获取红包消息分页
     GET_USER_INFO: 'user/get_user_info',//获取用户信息
+    MODIFY_USER_AVATAR_URL: "user/modify_user_avatar_url",//修改用户头像
     QUERY_USER_BILL_DETAIL: "pay/query_user_bill_detail",//查询用户账单详情
     GET_BANK_INFO_BY_CARD_NO: 'bank/get_bank_info_by_card_no',
     QUERY_BANNER_LIST: 'merchant/query_banner_list',
@@ -59,4 +60,5 @@ export const APIS = {
     CREATE_WITHDRAW_BALANCE: 'balance/create_withdraw_order',//创建提现订单
     WITHDRAW_ORDER: 'balance/withdraw_order',//提现
     GET_RECENT_PHONE_RECHARGE_PHONE: 'pcharge/get_recent_phone_recharge_phone',//获取上次手机充值手机号
+    QUERY_MSG_BILL_DETAIL:'message/query_msg_bill_detail',//获取消息账单详情并更新消息阅读状态
 };

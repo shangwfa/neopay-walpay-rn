@@ -34,6 +34,7 @@ import cn.neopay.walpay.android.module.response.RedPacketResponseBean;
 import cn.neopay.walpay.android.module.response.RedPacketThemeResponseBean;
 import cn.neopay.walpay.android.module.response.RegisterUserResponseBean;
 import cn.neopay.walpay.android.module.response.SecurityTokenResponseBean;
+import cn.neopay.walpay.android.module.response.ShareResponseBean;
 import cn.neopay.walpay.android.module.response.UserActivityInfoResponseBean;
 import cn.neopay.walpay.android.module.response.UserActivityResponseBean;
 import cn.neopay.walpay.android.module.response.UserActivityStatisResponseBean;
@@ -454,9 +455,24 @@ public interface ApiService {
     @POST("message/message_overview")
     Observable<Result<List<GetNewsResponseBean>>> getHomeNewsInfo(@QueryMap Map<String, String> homeNewsInfoRequestBean);
 
-    @POST("file/get_security_token")
+    @POST("assist/get_security_token")
     Observable<Result<SecurityTokenResponseBean>> getSecurityToken(@Query("type") int type);
 
+    /**
+     * 更新消息的状态
+     */
     @POST("message/update_read_status_msg")
-    Observable<Result<BaseResponse>> updateNewsReadStatus(@QueryMap Map<String, String> updateNewsReadStatusRequestBean);
+    Observable<Result<BaseResponse>> updateNewsReadStatus(@QueryMap Map<String, Object> updateNewsReadStatusRequestBean);
+
+    /**
+     * 分享
+     */
+    @POST("assist/add_share")
+    Observable<Result<ShareResponseBean>> getShareMsg(@QueryMap Map<String, Object> updateNewsReadStatusRequestBean);
+
+    /**
+     * 更新红包状态
+     */
+    @POST("packet/receive_red_packet")
+    Observable<Result<BaseResponse>> updateRedPacketStatus(@QueryMap Map<String, Object> updateReadPacketStatusRequestBean);
 }

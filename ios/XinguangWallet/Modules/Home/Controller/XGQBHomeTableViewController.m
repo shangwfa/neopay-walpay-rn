@@ -16,6 +16,7 @@
 #import "XGQBHomeTableView.h"
 
 #import "XGQBMsgTableViewCell.h"
+#import "XGQBMsgNoContentTableViewCell.h"
 
 #import "XGQBRefreshHeader.h"
 #import "XGQBRefreshFooter.h"
@@ -24,6 +25,7 @@
 
 @property (nonatomic,assign) int currentPage;
 //@property (nonatomic,strong) NSMutableArray *freshImagesPull;
+@property (nonatomic,assign) BOOL wifiStatus;
 
 @end
 
@@ -91,16 +93,17 @@
     NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
     [body setObject:@10 forKey:@"pageSize"];
     [body setObject:@1 forKey:@"pageNo"];
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing]; 造成死循环bug
     [MemberCoreService messageOverview:body andSuccessFn:^(id responseAfter, id responseBefore) {
         //获取到数据
         self.messArr=nil;
+        self.wifiStatus=true;
         
         for (NSDictionary*dict in responseAfter) {
             XGQBMessage *mess =[XGQBMessage modelWithJSON:dict];
             [self.messArr addObject:mess];
-            [self.tableView reloadData];
         }
+        [self.tableView reloadData];
         [(XGQBRefreshHeader*)self.tableView.mj_header showRefreshSuccessGifAndText];
 //        [self.tableView.mj_header endRefreshing];
         
@@ -112,7 +115,12 @@
         }
         _currentPage=2;
     } andFailerFn:^(NSError *error) {
+        //刷新失败
+        if([self.tableView.mj_header isRefreshing]){
             [self.tableView.mj_header endRefreshing];
+        }
+        self.wifiStatus =false;
+        [self.tableView reloadData];
     }];
 }
 
@@ -124,9 +132,15 @@
     self.tableView.sectionHeaderHeight=0;
     self.tableView.sectionFooterHeight=0;
     
-    self.tableView.estimatedRowHeight=84;
+    self.tableView.estimatedRowHeight=184;
     self.tableView.rowHeight=UITableViewAutomaticDimension;
     
+//    [kNotificationCenter addObserver:self selector:@selector(refreshData) name:kNotificationRefreshDataForHomePage object:nil];
+    
+    kWeakSelf(self);
+    [kNotificationCenter addObserverForName:kNotificationRefreshDataForHomePage object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakself.tableView.mj_header beginRefreshing];
+    }];
 }
 
 -(NSMutableArray *)messArr
@@ -144,27 +158,41 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.messArr.count;
+    return self.messArr.count?self.messArr.count:1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XGQBMessage *mess = self.messArr[indexPath.row];
-    //如果是红包来啦消息,直接展示,不需要复用
-    if (mess.msgType==XGQBMessageTypeRedPacket) {
-        XGQBMsgTableViewCell *cell = [XGQBMsgTableViewCell cellWithMessage:mess];
+    if(_messArr.count){//如果有数据,展示数据
+        XGQBMessage *mess = self.messArr[indexPath.row];
+        //如果是红包来啦消息,直接展示,不需要复用
+        if (mess.msgType==XGQBMessageTypeRedPacket) {
+            XGQBMsgTableViewCell *cell = [XGQBMsgTableViewCell cellWithMessage:mess];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            return cell;
+        }else{//其他类型消息,需要复用
+            XGQBMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mess.msgTypeText];
+                if (!cell) {
+                    cell = [XGQBMsgTableViewCell cellWithMessage:mess];
+            }
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        [cell updateWithNewMessage:mess];
+    //    cell.textLabel.text=[NSString stringWithFormat:@"当前行:%ld",indexPath.row];
         return cell;
-    }else{//其他类型消息,需要复用
-        XGQBMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mess.msgTypeText];
-        if (!cell) {
-            cell = [XGQBMsgTableViewCell cellWithMessage:mess];
-    }
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    [cell updateWithNewMessage:mess];
-//    cell.textLabel.text=[NSString stringWithFormat:@"当前行:%ld",indexPath.row];
-    return cell;
+        }
+    }else{//没有数据,展示没有数据
+        if (self.wifiStatus) {//网路正常,无数据
+            XGQBMsgNoContentTableViewCell *cell=[XGQBMsgNoContentTableViewCell cellWithType:XGQBMsgNoContentTypeNormal];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+//            [cell.btn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
+            return cell;
+        }else{//网络异常
+            XGQBMsgNoContentTableViewCell *cell=[XGQBMsgNoContentTableViewCell cellWithType:XGQBMsgNoContentTypeWifi];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+//            [cell.btn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
+            return cell;
+        }
     }
 }
 

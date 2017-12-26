@@ -50,12 +50,13 @@ class NewUserInfoCertifyPage extends BasePage {
             NativeModules.commModule.toast('居住所在地不能为空')
             return
         }
-        if (StringUtils.isEmpty(this.state.occupation)) {
+        if (this.state.occupation == '请选择') {
             NativeModules.commModule.toast('职业类别不能为空')
             return
         }
         if (StringUtils.isEmpty(this.state.smsCode)) {
             NativeModules.commModule.toast('验证码不能为空')
+            return
         }
 
         let body = {

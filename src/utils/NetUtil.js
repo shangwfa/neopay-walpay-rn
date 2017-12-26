@@ -8,7 +8,7 @@ const PROXY_URL = "http://172.22.1.47:8202/walpay-web/";
 
 class NetUtil extends Component {
 
-    static baseUrl = TEST_URL;
+    static baseUrl;
 
     static handleException(code, msg) {
         let isShowMsg = true
@@ -35,6 +35,10 @@ class NetUtil extends Component {
         if (isShowLoading) {
             NativeModules.commModule.showLoadingDialog()
         }
+        NativeModules.commModule.netCommUrl((url) => {
+            let baseUrl = JSON.parse(url);
+            NetUtil.baseUrl = baseUrl.baseUrl;
+        });
         NativeModules.commModule.netCommParas((originalata) => {
             console.log('公共参数' + originalata)
             let params = JSON.parse(originalata)

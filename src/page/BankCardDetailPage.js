@@ -71,9 +71,10 @@ class BankCardDetailPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/moreItemsIcon.png")} onRightPress={()=>this.rightClick()}/>
-                <BankCardCell imgBackGroundUrl = {this.state.param.backgroundUrl}
+                <BankCardCell imgIconUrl={this.state.param.iconUrl}
+                              imgBackGroundUrl = {this.state.param.backgroundUrl}
                               bankNameValue={this.state.param.bankName}
-                              bankTypeValue={this.state.param.cardType}
+                              bankTypeValue={this.state.param.cardTypeText}
                               cardNoValue={this.state.param.cardNo}/>
                 <CommonButton value='查看该张银行卡交易记录' style={{marginTop:50 }} onPress={()=>this.pushRecordPage()}/>
 

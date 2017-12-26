@@ -39,7 +39,7 @@ public class APPInitializationManager {
 
     private static void initShare(Context context) {
         Config.DEBUG = true;
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setWeixin("wx7806efd01313fbd6", "0c4da4cea0793eefff758e7f280783d0");
         umShareAPI = UMShareAPI.get(context);
     }
 

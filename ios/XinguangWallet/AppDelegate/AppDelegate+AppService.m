@@ -59,7 +59,8 @@
     [SVProgressHUD setBackgroundColor:UIColorHex(333333)];
     [SVProgressHUD setForegroundColor:kWhiteColor];
     [SVProgressHUD setMinimumDismissTimeInterval:2];
-    //    [SVProgressHUD setInfoImage:nil];
+    [SVProgressHUD setInfoImage:nil];
+    [SVProgressHUD setSuccessImage:nil];
     //    [SVProgressHUD setImageViewSize:CGSizeMake(10, 10)];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
 }

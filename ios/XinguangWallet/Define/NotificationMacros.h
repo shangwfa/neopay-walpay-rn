@@ -36,7 +36,16 @@
 #define kNotificationRegisterIDAction @"KNotificationRegisterIDAction"
 //侧边栏更新头像和用户名
 #define kNotificationSideViewUpdateAvatar @"kNotificationSideViewUpdateAvatar"
-
+//RN请求原生图片,更换头像
+#define kNotificationRNModalPicSelActSheet @"kNotificationRNModalPicSelActSheet"
+//原生上传完成头像后,给RN发送URL通知
+#define kNotificationNativeSendAvatarURLToRN @"kNotificationNativeSendAvatarURLToRN"
+//RN页面分享红包
+#define kNotificaitonRNCallNativeCallShare @"kNotificaitonRNCallNativeCallShare"
+//原生通知首页刷新数据
+#define kNotificationRefreshDataForHomePage @"kNotificationRefreshDataForHomePage"
+//原生注册时验证手机号已经注册
+#define kNotificationPhoneNoAlreadyExist @"kNotificationPhoneNoAlreadyExist"
 
 #pragma mark - ——————— 网络状态相关 ————————
 

@@ -40,6 +40,13 @@ public class BaseSubscriber<T> extends Subscriber<T> {
         this.mErrorCallback = errorCallback;
     }
 
+    public BaseSubscriber(Activity activity, SuccessCallback<T> mCallback, boolean isShowLoading, ErrorCallback errorCallback) {
+        this.mActivity = activity;
+        this.mCallback = mCallback;
+        this.mErrorCallback = errorCallback;
+        this.mIsShowLoading = isShowLoading;
+    }
+
     @Override
     public void onStart() {
         //检查网络

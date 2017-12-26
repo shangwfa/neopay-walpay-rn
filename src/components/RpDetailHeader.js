@@ -34,7 +34,7 @@ const RpDetailHeader = props => {
         background_container: {
             backgroundColor: colors.white,
             width:ScreenUtils.width,
-            height:ScreenUtils.height/2 -40,
+            height:ScreenUtils.height/6*2 + 60,
             alignItems:'center'
         },
 
@@ -44,14 +44,19 @@ const RpDetailHeader = props => {
             backgroundColor:colors.rp_bg_def,
             alignItems:'center'
         },
+        bottom_View:{
+            width:ScreenUtils.width,
+            height:60,
+            backgroundColor:colors.white,
+            alignItems:'center'
+        },
 
         mid_Image:{
             width:ScreenUtils.width,
-            height:itemHeight-4,
+            height:itemHeight,
             resizeMode:'cover',
             backgroundColor:colors.white,
             alignItems:'center',
-            justifyContent:'flex-end'
         },
 
         middle_container: {
@@ -64,7 +69,7 @@ const RpDetailHeader = props => {
             marginTop:30,
             fontSize:15,
             color:'#fbd49d',
-            flex:1,
+            width:ScreenUtils.width - 120,
             textAlign:'center',
             backgroundColor:'transparent',
         },
@@ -78,22 +83,23 @@ const RpDetailHeader = props => {
             width: imgWidth,
             height:imgWidth,
             borderRadius: imgWidth/2,
+            marginTop:15,
         },
         maxImg: {
-            width: imgHeight,
-            height:imgHeight*0.6,
+            width: 50,
+            height:50,
             marginRight:10,
             resizeMode:'contain'
         },
         from_value: {
-            marginTop:15,
+            marginTop:10,
             fontSize:18,
             color:colors.black
         },
         state_value: {
-            marginBottom:15,
-            fontSize:15,
-            color:colors.one_color
+            marginTop:10,
+            fontSize:12,
+            color:'#5870AB'
         },
         amount_bg:{
             flexDirection:'row',
@@ -119,9 +125,9 @@ const RpDetailHeader = props => {
         <View style = {styles.background_container} >
             <View style = {styles.top_View}>
                 <View style = {styles.middle_container}>
-                    <View style={{flex:1}} />
+                    <View style={{width:60}} />
                     <Text style={styles.remark_value} numberOfLines={1}>{remarkValue}</Text>
-                    <View style={{flex:1,alignItems:"flex-end",backgroundColor:'transparent'}}>
+                    <View style={{width:60,alignItems:"flex-end",backgroundColor:'transparent'}}>
                         <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
                     </View>
 
@@ -136,8 +142,10 @@ const RpDetailHeader = props => {
                 <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
             </Image>
 
-            <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
-            <Text style={styles.state_value}>{amountValue==0?'':stateValue}</Text>
+            <View style = {styles.bottom_View}>
+                <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
+                <Text style={styles.state_value}>{amountValue==0?'':stateValue}</Text>
+            </View>
         </View>
     );
 };

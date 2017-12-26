@@ -155,11 +155,11 @@ class RedPacketReceiverPage extends BasePage {
                         Contacts.checkPermission((err, permission) => {
                             if (permission === 'authorized') {
                                 this.props.navigation.navigate(RouterPaths.CONTACTS_PAGE)
-                            }else {
+                            } else {
                                 Contacts.requestPermission((err, permission) => {
                                     if (permission === 'authorized') {
                                         this.props.navigation.navigate(RouterPaths.CONTACTS_PAGE)
-                                    }else {
+                                    } else {
                                         NativeModules.commModule.toast('设置查看联系人权限')
                                     }
                                 })
@@ -189,13 +189,14 @@ class RedPacketReceiverPage extends BasePage {
     handleSendWithRedPacketContacts = () => {
         let redPacketPhones = "";
         this.state.data.map((item) => {
-            redPacketPhones += item.phone + ",";
+            let phone = item.phone.toString().replace(/\s/g, "");
+            redPacketPhones += phone + ",";
         });
         let request = {
             packetCode: this.props.navigation.state.params.packetCode,
             phones: redPacketPhones,
         };
-        let desMsg = `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人`;
+        let desMsg = this.state.data[0] ? `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人` : "";
         ApiManager.addRedPacketReceiver(request, (data) => {
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
                 desMsg: desMsg,

@@ -9,6 +9,7 @@ import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.ResetPwdParameterBean;
 import cn.neopay.walpay.android.module.request.ResetLoginPasswordRequestBean;
+import cn.neopay.walpay.android.module.request.ResetPayPasswordRequestBean;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 import rx.Observable;
 
@@ -25,11 +26,19 @@ public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
                 .filter(a -> InputCheckUtils.checkPhone(bean.getPhone()))
                 .filter(b -> InputCheckUtils.checkVerificationCode(bean.getVerificationCode()))
                 .filter(c -> checkPwdOrPayPwd(bean.getForgotPwdType(), bean.getNewPassword()))
-                .subscribe(s -> resetPwdOperate(bean.getForgotPwdType(), bean.getPhone(), bean.getVerificationCode(), bean.getNewPassword()));
+                .filter(c -> checkRealMag(bean.getForgotPwdType(), bean.getRealMsg()))
+                .subscribe(s -> resetPwdOperate(bean.getForgotPwdType(), bean.getPhone(), bean.getVerificationCode(), bean.getNewPassword(), bean.getRealMsg()));
 
     }
 
-    private void resetPwdOperate(String resetType, String phone, String smsCode, String newPassword) {
+    private Boolean checkRealMag(String forgotPwdType, String realMsg) {
+        if (IWalpayConstants.FORGOTPWD_TYPE_PAY.equals(forgotPwdType)) {
+            return InputCheckUtils.checkIdCardNumber(realMsg);
+        }
+        return true;
+    }
+
+    private void resetPwdOperate(String resetType, String phone, String smsCode, String newPassword, String realMsg) {
         //TODO 忘记密码处理逻辑
         switch (resetType) {
             case IWalpayConstants.FORGOTPWD_TYPE_LOGIN:
@@ -44,13 +53,15 @@ public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
                 }));
                 break;
             case IWalpayConstants.FORGOTPWD_TYPE_PAY:
-//                resetPwdMap.put("payPassword", newPassword);
-//                Api.getInstance().getApiService().resetPayPwd(resetPwdMap)
-//                        .compose(RxUtils.rxNet())
-//                        .subscribe(new BaseSubscriber<>(mActivity, emptyDTo -> {
-//                            ToastUtils.show("密码重置成功");
-//                            mView.closePage();
-//                        }));
+                ResetPayPasswordRequestBean payPasswordRequestBean = new ResetPayPasswordRequestBean();
+                payPasswordRequestBean.setPhone(phone);
+                payPasswordRequestBean.setPayPassword(newPassword);
+                payPasswordRequestBean.setSmsCode(smsCode);
+                payPasswordRequestBean.setCertNo(realMsg);
+                ApiManager.getSingleton().resetPayPassword(payPasswordRequestBean, new BaseSubscriber(mActivity, o -> {
+                    ToastUtils.show("支付密码重置成功");
+                    mView.finishActivity();
+                }));
                 break;
         }
     }

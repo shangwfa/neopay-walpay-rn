@@ -1,5 +1,6 @@
 package cn.neopay.walpay.android.adapter.sliminjector;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,10 +10,17 @@ import com.xgjk.common.lib.adapter.slimadapter.SlimInjector;
 import com.xgjk.common.lib.adapter.slimadapter.viewinjector.IViewInjector;
 import com.xgjk.common.lib.manager.glide.GlideManager;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 
 import cn.neopay.walpay.android.R;
+import cn.neopay.walpay.android.http.BaseSubscriber;
+import cn.neopay.walpay.android.manager.apimanager.ApiManager;
+import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
+import cn.neopay.walpay.android.module.request.RedPacketStateRequestBean;
+import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
+import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.utils.DateHandle;
 
 /**
@@ -35,8 +43,32 @@ public class NewsRedPacketSlimInjector implements SlimInjector<NewsRedPacketItem
         injector.background(R.id.common_news_type_icon_iv, R.mipmap.img_red_packet_banner)
                 .with(R.id.red_packet_bg_iv, view -> GlideManager.loadNetImage((ImageView) view, data.getThemeUrl()))
                 .text(R.id.common_news_type_time_tv, DateHandle.getMDHSTime(data.getCreateTimeMs()))
-                .clicked(R.id.common_news_red_packet_ll, data.getOnClickListener());
+                .clicked(R.id.common_news_red_packet_ll, view -> handleRedPacketClick(data, view));
     }
+
+    private void handleRedPacketClick(NewsRedPacketItemBean data, View view) {
+        //1 未领取
+        if (1 == data.getReceiveStatus()) {
+            ApiManager.getSingleton().updateRedPacketState(new RedPacketStateRequestBean(data.getPacketCode()), new BaseSubscriber((Activity) view.getContext(), o -> {
+                RNActivityParams params = new RNActivityParams();
+                params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
+                RNActivityParams.Data dataParams = new RNActivityParams.Data();
+                dataParams.setPacketCode(data.getPacketCode());
+                params.setData(dataParams);
+                RNActivity.jumpToRNPage(view.getContext(), params);
+            }));
+        } else {//2 成功 3 过期 4 领完 5 无权限
+            RNActivity.jumpToRNPage(view.getContext(), RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
+        }
+
+        UpdateNewsReadStatusRequestBean requestBean = new UpdateNewsReadStatusRequestBean();
+        requestBean.setId(data.getId());
+        requestBean.setMsgType(data.getMsgType());
+        ApiManager.getSingleton().updateNewsReadStatus(requestBean,
+                new BaseSubscriber((Activity) view.getContext(), o -> {
+                }, false));
+    }
+
 
     private void handleRedPacketView(NewsRedPacketItemBean data, IViewInjector injector) {
         handleTxtColor(injector);
@@ -73,7 +105,7 @@ public class NewsRedPacketSlimInjector implements SlimInjector<NewsRedPacketItem
                 .visibility(R.id.red_packet_msg_tv, View.GONE)
                 .with(R.id.red_packet_amount_tv, view -> {
                     view.setVisibility(View.VISIBLE);
-                    ((TextView) view).setText(MessageFormat.format("{0}", data.getLuckyAmount()));
+                    ((TextView) view).setText(MessageFormat.format("¥{0}", data.getLuckyAmount().setScale(2, BigDecimal.ROUND_HALF_UP).toString()));
                 });
     }
 

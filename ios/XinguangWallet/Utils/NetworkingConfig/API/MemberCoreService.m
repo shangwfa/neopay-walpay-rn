@@ -101,5 +101,17 @@
     [self AFPOSTNetworkWithUrl:@"message/message_overview" andBody:body andSuccess:successFn andFailer:failerFn];
 }
 
+/// 获取图片上传token
++(void)getSecurityToken:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn
+{
+    [self AFPOSTNetworkWithUrl:@"assist/get_security_token" andBody:body andSuccess:successFn andFailer:failerFn];
+}
+
+/// 修改用户头像
++(void)modifyUserAvatarURL:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn
+{
+    [self AFPOSTNetworkWithUrl:@"user/modify_user_avatar_url" andBody:body andSuccess:successFn andFailer:failerFn];
+}
+
 @end
 

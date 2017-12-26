@@ -6,12 +6,14 @@ import com.xgjk.common.lib.manager.ActivityManager;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
+import cn.neopay.walpay.android.module.request.ShareRequestBean;
 import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
 import cn.neopay.walpay.android.view.dialog.CertificationDialog;
 import cn.neopay.walpay.android.view.dialog.CommonBottomDialog;
 import cn.neopay.walpay.android.view.dialog.CommonDialog;
 import cn.neopay.walpay.android.view.dialog.PhotoSelectDialog;
 import cn.neopay.walpay.android.view.dialog.SelectBankDialog;
+import cn.neopay.walpay.android.view.dialog.ShareDialog;
 
 import static com.xgjk.common.lib.utils.StringUtils.getString;
 
@@ -94,6 +96,10 @@ public class DialogManager {
         final CommonDialog dialog = new CommonDialog(context, "读取联系人权限未开启，如需使用请进入设置中开启联系人权限");
         dialog.setCancelText("取消");
         dialog.setEnsureText("");
+        dialog.show();
+    }
+    public void showShareDialog(Context context, ShareRequestBean requestBean) {
+        final ShareDialog dialog = new ShareDialog(context,requestBean);
         dialog.show();
     }
 }

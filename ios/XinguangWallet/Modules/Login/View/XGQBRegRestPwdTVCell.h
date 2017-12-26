@@ -11,6 +11,7 @@
 
 typedef NS_ENUM(NSInteger, XGQBRegResetPwdTVCellType) {
     XGQBRegResetPwdTVCellTypePhoneNo = 0,
+    XGQBRegRestPwdTVCellTypeRegPhoneNo,
     XGQBRegResetPwdTVCellTypeRegCode,
     XGQBRegResetPwdTVCellTypeLoginPwd,
     XGQBRegResetPwdTVCellTypePayPwd,

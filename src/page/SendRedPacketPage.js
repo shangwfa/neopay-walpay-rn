@@ -26,7 +26,7 @@ import {RouterPaths} from "../constants/RouterPaths";
 import SelectPayStyleModal from "../modal/SelectPayStyleModal";
 import SendPhoneAuthCodeModal from "../modal/SendPhoneAuthCodeModal";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
-import WarpRedPacket from '../data/RecivedRedPacket.json'
+import WarpRedPacket from '../data/WarpRedPacket.json'
 import FormatUtils from "../utils/FormatUtils";
 class SendRedPacketPage extends BasePage {
     constructor(props) {
@@ -79,48 +79,45 @@ class SendRedPacketPage extends BasePage {
                     onRightPress={this._handleRightArrowClick.bind(this)}
                     navigation={this.props.navigation}
                     title='发红包'/>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}>
-                    <RedPacketInputComponent
-                        containerTypeStyle={{marginTop: 10}}
-                        contentType="红包个数"
-                        placeholderType="请填写红包个数"
-                        keybordType="numeric"
-                        conentValue={this.state.redPacketNum}
-                        onTextInputClick={this._handleTextInputClick.bind(this)}
-                        textInputChangeListener={this._handleRedPacketNumListener.bind(this)}/>
-                    {this._renderLineView()}
-                    {this._renderRedPacketTypeView()}
-                    <RedPacketInputComponent
-                        textInputStyle={{marginRight: 8}}
-                        contentType={this.state.redPacketAmountText}
-                        placeholderType="塞进红包的金额"
-                        keybordType="numeric"
-                        conentValue={this.state.redPacketAmount}
-                        contentEndUnit="元"
-                        onTextInputClick={this._handleTextInputClick.bind(this)}
-                        textInputChangeListener={this._handleRedPacketAmountListener.bind(this)}/>
-                    {this._renderLineView()}
-                    <RedPacketInputComponent
-                        contentType="红包主题"
-                        conentValue={this.state.redThemeName}
-                        isEditable={false}
-                        isShowArrow={true}
-                        onTextInputClick={this._handleRedThemeClick.bind(this)}
-                        textInputChangeListener={this._handleRedPacketListener.bind(this)}/>
-                    <RedPacketInputComponent
-                        textInputStyle={{color: "#DDD"}}
-                        containerTypeStyle={{marginTop: 10}}
-                        contentType="留言"
-                        conentValue={this.state.redPacketMessage}
-                        keybordType="default"
-                        onTextInputClick={this._handleTextInputClick.bind(this)}
-                        textInputChangeListener={this._handleRedPacketMessageListener.bind(this)}/>
-                    <CommonButton value='发红包啦！' style={{marginTop: 68}} onPress={this._handleButtonClick.bind(this)}/>
-                    <View style={{alignItems: "center"}}>
-                        <Text style={styles.tip_txt}>24小时未被领取，金额退回余额中</Text>
-                    </View>
-                </ScrollView>
+                <RedPacketInputComponent
+                    containerTypeStyle={{marginTop: 10}}
+                    contentType="红包个数"
+                    placeholderType="请填写红包个数"
+                    keybordType="numeric"
+                    conentValue={this.state.redPacketNum}
+                    onTextInputClick={this._handleTextInputClick.bind(this)}
+                    textInputChangeListener={this._handleRedPacketNumListener.bind(this)}/>
+                {this._renderLineView()}
+                {this._renderRedPacketTypeView()}
+                <RedPacketInputComponent
+                    textInputStyle={{marginRight: 8}}
+                    contentType={this.state.redPacketAmountText}
+                    placeholderType="塞进红包的金额"
+                    keybordType="numeric"
+                    conentValue={this.state.redPacketAmount}
+                    contentEndUnit="元"
+                    onTextInputClick={this._handleTextInputClick.bind(this)}
+                    textInputChangeListener={this._handleRedPacketAmountListener.bind(this)}/>
+                {this._renderLineView()}
+                <RedPacketInputComponent
+                    contentType="红包主题"
+                    conentValue={this.state.redThemeName}
+                    isEditable={false}
+                    isShowArrow={true}
+                    onTextInputClick={this._handleRedThemeClick.bind(this)}
+                    textInputChangeListener={this._handleRedPacketListener.bind(this)}/>
+                <RedPacketInputComponent
+                    containerTypeStyle={{marginTop: 10}}
+                    contentType="留言"
+                    conentValue={this.state.redPacketMessage}
+                    keybordType="default"
+                    onTextInputClick={this._handleTextInputClick.bind(this)}
+                    textInputChangeListener={this._handleRedPacketMessageListener.bind(this)}/>
+                <CommonButton value='发红包啦！' style={{marginTop: 68}} onPress={this._handleButtonClick.bind(this)}/>
+                <Space/>
+                <View style={{alignItems: "center"}}>
+                    <Text style={styles.tip_txt}>24小时未被领取，金额退回余额中</Text>
+                </View>
                 <OneButtonModal
                     onPress={this._handleBtnModalClick}
                     btnTitle="确定"
@@ -321,9 +318,7 @@ class SendRedPacketPage extends BasePage {
             payType: this.state.payType,
             bankCardId: this.state.bankCardId
         };
-        this.setState({
-            isShowPay: false
-        })
+
         ApiManager.payRedPacket(request, (data) => {
             this.setState({
                 payResultSourceData: data
@@ -331,6 +326,9 @@ class SendRedPacketPage extends BasePage {
             this.setState({
                 isShowWarpAction: true
             });
+            this.setState({
+                isShowPay: false
+            })
             setTimeout(() => {
                 if (1 === data.smsFlag) {//需要短信验证
                     this.setState({
@@ -551,7 +549,6 @@ const styles = StyleSheet.create({
     tip_txt: {
         fontSize: 12,
         color: "#666",
-        marginTop: 206,
         marginBottom: 14
     }
 });

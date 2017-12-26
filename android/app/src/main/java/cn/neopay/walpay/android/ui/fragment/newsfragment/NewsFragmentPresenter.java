@@ -7,16 +7,14 @@ import java.util.List;
 
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
-import cn.neopay.walpay.android.manager.routermanager.MainRouter;
-import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.request.GetHomeNewsInfoRequestBean;
-import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
 import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsActivitiesItemBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsItemBean;
+import cn.neopay.walpay.android.module.sliminjector.NewsNetworkErrorBean;
+import cn.neopay.walpay.android.module.sliminjector.NewsNoDataBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
-import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
  * @author carlos.guo
@@ -25,7 +23,7 @@ import cn.neopay.walpay.android.ui.RNActivity;
  */
 
 public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
-    NewsItemBean mNewsItemBean;
+    private NewsItemBean mNewsItemBean;
     private final ArrayList<Object> mDataList = new ArrayList<>();
     private final ArrayList<Object> mDataPageList = new ArrayList<>();
 
@@ -48,19 +46,32 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         GetHomeNewsInfoRequestBean requestBean = new GetHomeNewsInfoRequestBean();
         requestBean.setPageNo(PageUtils.getPageNo(mDataPageList));
         ApiManager.getSingleton().getHomeNewsInfo(requestBean,
-                new BaseSubscriber(mActivity, o -> handleNewsData((List<GetNewsResponseBean>) o, isRefresh), false));
+                new BaseSubscriber(mActivity, o -> handleNewsData((List<GetNewsResponseBean>) o, isRefresh),
+                        false, t -> handleNetWorkError()));
     }
 
-    @Override
-    public void updateNewsStatus(UpdateNewsReadStatusRequestBean requestBean) {
-        ApiManager.getSingleton().updateNewsReadStatus(requestBean,
-                new BaseSubscriber(mActivity, o -> {
-                }, false));
+    private void handleNetWorkError() {
+        mDataList.clear();
+        mDataList.add(new CommonLineItemBean());
+        NewsNetworkErrorBean errorBean = new NewsNetworkErrorBean();
+        errorBean.setOnClickListener(view -> getNewsInfo());
+        mDataList.add(errorBean);
+        mView.setNewsViewData(mDataList);
+    }
+
+    private void handleNoData() {
+        mDataList.clear();
+        mDataList.add(new CommonLineItemBean());
+        NewsNoDataBean noDataBean = new NewsNoDataBean();
+        noDataBean.setOnClickListener(view -> getNewsInfo());
+        mDataList.add(noDataBean);
+        mView.setNewsViewData(mDataList);
     }
 
     @Override
     public void handleNewsData(List<GetNewsResponseBean> newsBeanList, boolean isRefresh) {
         if (newsBeanList == null) {
+            handleNoData();
             return;
         }
         mDataPageList.addAll(newsBeanList);
@@ -75,18 +86,16 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
                     break;
                 case 2://支付消息--集合
                     handlePayTypeNews(getNewsResponseBean);
-                    mNewsItemBean.setOnClickListener(view -> {
-                        RNActivity.jumpToRNPage(mActivity, RNActivity.PageType.PAY_MESSAGE_PAGE);
-                        updateNewsStatus(getNewsResponseBean);
-                    });
+                    mNewsItemBean.setTypeClick("payNews");
+                    mNewsItemBean.setMsgType(getNewsResponseBean.getMsgType());
+                    mNewsItemBean.setId(getNewsResponseBean.getId());
                     mDataList.add(mNewsItemBean);
                     break;
                 case 3://手机充值消息--集合
                     handlePayTypeNews(getNewsResponseBean);
-                    mNewsItemBean.setOnClickListener(view -> {
-                        RNActivity.jumpToRNPage(mActivity, RNActivity.PageType.TOPUP_MSG_LIST_PAGE);
-                        updateNewsStatus(getNewsResponseBean);
-                    });
+                    mNewsItemBean.setTypeClick("phoneNews");
+                    mNewsItemBean.setMsgType(getNewsResponseBean.getMsgType());
+                    mNewsItemBean.setId(getNewsResponseBean.getId());
                     mDataList.add(mNewsItemBean);
                     break;
                 case 4://其他消息
@@ -109,10 +118,10 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
             case 2://系统消息
             case 4://商家广播
                 handlePayTypeNews(getNewsResponseBean);
-                mNewsItemBean.setOnClickListener(view -> {
-                    MainRouter.getSingleton().jumpToCommonWebPage(getNewsResponseBean.getNoticeUrl());
-                    updateNewsStatus(getNewsResponseBean);
-                });
+                mNewsItemBean.setTypeClick("otherNews");
+                mNewsItemBean.setMsgType(getNewsResponseBean.getMsgType());
+                mNewsItemBean.setId(getNewsResponseBean.getId());
+                mNewsItemBean.setNoticeUrl(getNewsResponseBean.getNoticeUrl());
                 mDataList.add(mNewsItemBean);
                 break;
         }
@@ -123,10 +132,9 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         newsActivitiesItemBean.setAvatar(getNewsResponseBean.getIconUrl());
         newsActivitiesItemBean.setTime(getNewsResponseBean.getCreateTimeMs());
         newsActivitiesItemBean.setContent(getNewsResponseBean.getNoticeImageUrl());
-        newsActivitiesItemBean.setOnClickListener(view -> {
-            MainRouter.getSingleton().jumpToCommonWebPage(getNewsResponseBean.getNoticeUrl());
-            updateNewsStatus(getNewsResponseBean);
-        });
+        newsActivitiesItemBean.setMsgType(getNewsResponseBean.getMsgType());
+        newsActivitiesItemBean.setId(getNewsResponseBean.getId());
+        newsActivitiesItemBean.setNoticeUrl(getNewsResponseBean.getNoticeUrl());
         mDataList.add(newsActivitiesItemBean);
     }
 
@@ -149,28 +157,9 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         newsRedPacketItemBean.setLuckyAmount(getNewsResponseBean.getLuckyAmount());
         newsRedPacketItemBean.setPacketCode(getNewsResponseBean.getPacketCode());
         newsRedPacketItemBean.setReceiveStatus(getNewsResponseBean.getReceiveStatus());
-        newsRedPacketItemBean.setOnClickListener(view -> {
-            //1 领取中  2 成功 3 过期 4 领完 5 无权限
-            if (1 != getNewsResponseBean.getReceiveStatus()) {
-                RNActivity.jumpToRNPage(mActivity, RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
-            } else {
-                RNActivityParams params = new RNActivityParams();
-                params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
-                RNActivityParams.Data data = new RNActivityParams.Data();
-                data.setPacketCode(getNewsResponseBean.getPacketCode());
-                params.setData(data);
-                RNActivity.jumpToRNPage(mActivity, params);
-                updateNewsStatus(getNewsResponseBean);
-            }
-        });
+        newsRedPacketItemBean.setId(getNewsResponseBean.getId());
+        newsRedPacketItemBean.setMsgType(getNewsResponseBean.getMsgType());
         mDataList.add(newsRedPacketItemBean);
-    }
-
-    private void updateNewsStatus(GetNewsResponseBean getNewsResponseBean) {
-        UpdateNewsReadStatusRequestBean requestBean = new UpdateNewsReadStatusRequestBean();
-        requestBean.setId(getNewsResponseBean.getId());
-        requestBean.setMsgType(getNewsResponseBean.getMsgType());
-        updateNewsStatus(requestBean);
     }
 
 }
