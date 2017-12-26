@@ -34,6 +34,7 @@ class RedPacketsReadyPage extends BasePage {
 
     constructor(props) {
         super(props);
+        global.backKey = nav.state.key
         this.state = {
             isReady: true
         };

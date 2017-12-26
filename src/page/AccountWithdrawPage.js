@@ -233,7 +233,10 @@ class AccountWithdrawPage extends BasePage {
 
     withdrawBtnClicked() {
 
-        if (this.state.withdrawAmount > this.state.withdrawBalance) {
+        if(this.state.selectedBankId==0){
+            NativeModules.commModule.toast("请先选择提现银行卡");
+        }
+        else if (this.state.withdrawAmount > this.state.withdrawBalance) {
             NativeModules.commModule.toast("提现金额不能大于可提现余额");
         }
         else if (this.state.withdrawAmount === 0) {

@@ -53,7 +53,7 @@ class RedPacketResultPage extends BasePage {
 
     headerLeftBtnPress = () => {
         DeviceEventEmitter.emit('sendRedPacket', {type: 'redPacketResultGoBack'})
-        this.props.navigation.goBack();
+        this.props.navigation.goBack(backKey);
     }
 
     componentDidMount() {
