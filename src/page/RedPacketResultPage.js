@@ -6,7 +6,7 @@ import {
     Image,
     FlatList,
     TouchableWithoutFeedback,
-    DeviceEventEmitter,
+    DeviceEventEmitter, NativeModules,
 } from 'react-native'
 import {NavigationActions} from 'react-navigation'
 
@@ -66,10 +66,10 @@ class RedPacketResultPage extends BasePage {
                 data={this.state.isReady ? [{
                     key: '领取人',
                     value: this.props.navigation.state.params.desMsg
-                }, {key: '红包总价值', value: FormatUtils.money(this.props.navigation.state.params.amount)}, {
+                }, {key: '红包总价值', value: `¥ ${FormatUtils.money(this.props.navigation.state.params.amount)}`}, {
                     key: '付款方式',
                     value: this.props.navigation.state.params.payTypeDesc
-                }] : [{key: '红包总价值', value: this.props.navigation.state.params.amount}, {
+                }] : [{key: '红包总价值', value: `¥ ${this.props.navigation.state.params.amount}`}, {
                     key: '付款方式',
                     value: this.props.navigation.state.params.payTypeDesc
                 }]}
@@ -113,13 +113,15 @@ class RedPacketResultPage extends BasePage {
         if (this.state.isReady) {
             return (
                 <View>
-                    <CommonBtn style={{width: ScreenUtils.width, marginTop: 51 * sizeRatioH,}} value={'分享红包至微信领取'}/>
+                    <CommonBtn style={{width: ScreenUtils.width, marginTop: 51 * sizeRatioH,}} value={'分享红包至微信领取'}
+                               onPress={this.handleShare}/>
                 </View>
             )
         } else {
             return (
                 <View>
-                    <CommonBtn style={{width: ScreenUtils.width, marginTop: 51 * sizeRatioH,}} value={'分享红包至微信领取'}/>
+                    <CommonBtn style={{width: ScreenUtils.width, marginTop: 51 * sizeRatioH,}} value={'分享红包至微信领取'}
+                               onPress={this.handleShare}/>
                     <CommonBtn style={{width: ScreenUtils.width, marginTop: 20 * sizeRatioH}}
                                backgroundColor={'#FFFFFF'}
                                textColor={'#CCCCCC'}
@@ -129,6 +131,12 @@ class RedPacketResultPage extends BasePage {
             )
         }
     }
+
+    handleShare = () => {
+        let packetCode = this.props.navigation.state.params.packetCode;
+        let shareType = "1";
+        NativeModules.commModule.rnCallNativeCallShare(packetCode, shareType);
+    };
 
     renderBottom = () => {
         return (

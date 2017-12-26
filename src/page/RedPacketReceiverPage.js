@@ -203,6 +203,7 @@ class RedPacketReceiverPage extends BasePage {
                 isReady: true,
                 amount: this.props.navigation.state.params.amount,
                 payTypeDesc: this.props.navigation.state.params.payTypeDesc,
+                packetCode:this.props.navigation.state.params.packetCode,
             })
         }, (errorData) => {
             this.handleError(errorData);
@@ -218,6 +219,7 @@ class RedPacketReceiverPage extends BasePage {
                 isReady: false,
                 amount: this.props.navigation.state.params.amount,
                 payTypeDesc: this.props.navigation.state.params.payTypeDesc,
+                packetCode:this.props.navigation.state.params.packetCode,
             })
         } else {
             NativeModules.commModule.toast(errorData.retMsg)
