@@ -210,7 +210,7 @@ class RedPacketReceiverPage extends BasePage {
 
     handleError(errorData) {
         //1、成功 2、失败 3、提醒
-        if (2 === errorData.netCode) {
+        if (2 === errorData.retCode) {
             let desMsg = `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人`;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
                 desMsg: desMsg,
