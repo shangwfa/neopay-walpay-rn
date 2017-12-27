@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     modalStyle: {
-        backgroundColor: '#cccccc80',
+        backgroundColor: colors.mask,
         alignItems: 'center',
         justifyContent: 'center',
     },

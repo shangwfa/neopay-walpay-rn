@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View,
     Text,
-    NativeModules
+    NativeModules,
+    DeviceEventEmitter
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
@@ -161,12 +162,16 @@ class NewBindBankCardPage extends BasePage {
 
     }
 
+    back=()=>{
+        DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'newBindBankCard'})
+    }
+
     render() {
         const phoneData = {'key': '手机号', 'placeholder': this.state.bindPhone, 'keyboard': 'numeric', isLine: true,'inputOver':true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='绑定银行卡'/>
+                <Header navigation={this.props.navigation} title='绑定银行卡' back={()=>this.back()}/>
                 {this.renderTopView()}
                 {this.renderMidView()}
                 <View style={{height: 10}}/>

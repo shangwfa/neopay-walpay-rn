@@ -6,7 +6,8 @@ import {
     Text,
     Image,
     NativeModules,
-    FlatList
+    FlatList,
+    DeviceEventEmitter
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
@@ -75,11 +76,14 @@ class BankCardDetailPage extends BasePage {
         NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
     }
 
+    back=()=>{
+        DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/moreItemsIcon.png")} onRightPress={()=>this.rightClick()}/>
+                <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/moreItemsIcon.png")} onRightPress={()=>this.rightClick()} back={()=>this.back()}/>
                 <BankCardCell imgIconUrl={this.state.param.iconUrl}
                               imgBackGroundUrl = {this.state.param.backgroundUrl}
                               bankNameValue={this.state.param.bankName}
