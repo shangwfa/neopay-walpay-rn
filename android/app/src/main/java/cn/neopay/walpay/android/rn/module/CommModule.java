@@ -322,7 +322,6 @@ public class CommModule extends ReactContextBaseJavaModule {
         LoadingDialogEvent event = new LoadingDialogEvent();
         event.setShow(true);
         EventBus.getDefault().post(event);
-
     }
 
     @ReactMethod

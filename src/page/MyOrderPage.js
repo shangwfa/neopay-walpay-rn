@@ -42,7 +42,7 @@ class MyOrderPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount(){
         this.loadData(1,false,true)
     }
 
