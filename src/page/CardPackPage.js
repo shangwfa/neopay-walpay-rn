@@ -90,7 +90,7 @@ class CardPackPage extends BasePage {
                 activeOpacity={0.9}
                 onPress={this._handleImageClick.bind(this, item)}>
                 <Image
-                    style={[styles.page, {resizeMode: "cover"}]}
+                    style={[styles.page, {resizeMode: "contain"}]}
                     source={{uri: item.imageUrl}}/>
             </TouchableWithoutFeedback>
         );
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     img_activity: {
         width: 18,
         height: 18,
-        resizeMode: "cover"
+        resizeMode: "contain"
     },
     title_activity: {
         flexDirection: "row",
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     img_item: {
         width: (ScreenUtils.width - 44) / 3,
         height: 73,
-        resizeMode: "cover"
+        resizeMode: "contain"
     },
     img_txt: {
         fontSize: 12,

@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     img: {
         width: ScreenUtils.width - 26,
         height: 155,
-        resizeMode: "cover",
+        resizeMode: "contain",
         justifyContent: 'center',
     },
     message_from_container: {

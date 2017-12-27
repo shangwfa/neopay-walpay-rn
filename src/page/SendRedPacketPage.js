@@ -79,7 +79,7 @@ class SendRedPacketPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header
-                    rightIconStyle={{width: 20, height: 20, resizeMode: "cover"}}
+                    rightIconStyle={{width: 20, height: 20, resizeMode: "contain"}}
                     rightIcon={img_question}
                     onRightPress={this._handleRightArrowClick.bind(this)}
                     navigation={this.props.navigation}
@@ -542,7 +542,7 @@ class SendRedPacketPage extends BasePage {
             payAllAmount: tempAmount,
         });
         if (2000 < tempAmount) {
-            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为${parseFloat(parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount))}元`;
+            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为 ${FormatUtils.money(parseFloat(parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount)))}元`;
             this.setState({
                 contentModal: contentModal,
                 isShow: true,

@@ -21,7 +21,7 @@ class AuthMessageComponent extends Component {
             <View ref="authMsg" style={[{marginLeft: 19, flexDirection: "column"}, this.props.style]}>
                 <View style={{flexDirection: "row", alignItems: 'center', height: 40,}}>
                     <Image
-                        style={{height: 17, width: 16, resizeMode: "cover"}}
+                        style={{height: 17, width: 16, resizeMode: "contain"}}
                         source={this.props.icon}/>
                     <TextInput
                         style={styles.text_input_txt}
