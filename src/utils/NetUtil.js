@@ -31,7 +31,7 @@ class NetUtil extends Component {
         })
     }
 
-    static post(urlPath, data, successCallbak, errorCallback, netWorkCallback, isShowLoading = true) {
+    static post(urlPath, data, successCallbak, isShowLoading = true, errorCallback, netWorkCallback) {
         if (isShowLoading) {
             NativeModules.commModule.showLoadingDialog()
         }
