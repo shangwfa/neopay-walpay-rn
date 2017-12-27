@@ -85,7 +85,7 @@
     }
     //关于我们
     else if (indexPath.section==0&&indexPath.row==3) {
-        RNVC.pageType = @"setting";
+        RNVC.pageType = @"aboutUs";
     }
     //设置
     else if (indexPath.section==0&&indexPath.row==4) {
