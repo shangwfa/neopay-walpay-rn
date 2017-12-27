@@ -60,6 +60,6 @@ public class LoginPresenter extends LoginContract.Presenter {
 
     @Override
     public void forgetPassword(String name) {
-        MainRouter.getSingleton().jumpToForgotPwdPage(name, IWalpayConstants.FORGOTPWD_TYPE_LOGIN);
+        MainRouter.getSingleton().jumpToForgotPwdPage(name, IWalpayConstants.FORGOTPWD_TYPE_NO_LOGIN);
     }
 }

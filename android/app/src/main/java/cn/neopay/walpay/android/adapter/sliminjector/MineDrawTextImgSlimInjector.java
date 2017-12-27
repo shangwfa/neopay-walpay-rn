@@ -1,5 +1,7 @@
 package cn.neopay.walpay.android.adapter.sliminjector;
 
+import android.view.View;
+
 import com.xgjk.common.lib.adapter.slimadapter.SlimInjector;
 import com.xgjk.common.lib.adapter.slimadapter.viewinjector.IViewInjector;
 
@@ -38,20 +40,23 @@ public class MineDrawTextImgSlimInjector implements SlimInjector<MineTextImgItem
                             MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
                             break;
                         case "myAsset":
-                            UserInfoResponseBean infoResponseBean = new UserInfoResponseBean();
-                            infoResponseBean.setAuthStatus(data.getAuthStatus());
-                            BusniessUtils.handleCertification(v.getContext(), infoResponseBean, () -> {
-                                activityParams.setPage(RNActivity.PageType.MY_ASSET);
-                                MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
-                            });
+                            handleAuth(data, v, activityParams, RNActivity.PageType.MY_ASSET);
                             break;
                         case "myBank":
-                            activityParams.setPage(RNActivity.PageType.MY_BANK);
-                            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+                            handleAuth(data, v, activityParams, RNActivity.PageType.MY_BANK);
                             break;
                         case "about":
                             break;
                     }
                 });
+    }
+
+    private void handleAuth(MineTextImgItemBean data, View v, RNActivityParams activityParams, String jumpType) {
+        UserInfoResponseBean infoResponseBean = new UserInfoResponseBean();
+        infoResponseBean.setAuthStatus(data.getAuthStatus());
+        BusniessUtils.handleCertification(v.getContext(), infoResponseBean, () -> {
+            activityParams.setPage(jumpType);
+            MainRouter.getSingleton().jumpToRNPage(v.getContext(), activityParams);
+        });
     }
 }

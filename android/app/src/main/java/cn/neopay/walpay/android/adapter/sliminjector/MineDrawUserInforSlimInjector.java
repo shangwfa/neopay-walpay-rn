@@ -34,7 +34,7 @@ public class MineDrawUserInforSlimInjector implements SlimInjector<UserInfoRespo
         injector.with(R.id.img_mine_draw_bg_iv, view -> GlideManager.loadResImage((ImageView) view, R.mipmap.img_mine_draw_gif_bg));
         injector.with(R.id.mine_draw_user_avatar_iv, view -> {
             if (null == data.getAvatarUrl() || TextUtils.isEmpty(data.getAvatarUrl())) {
-                injector.background(R.id.mine_draw_user_avatar_iv, R.mipmap.img_default_avater);
+                GlideManager.loadLocalResImage((ImageView) view, R.mipmap.img_default_avater);
             } else {
                 GlideManager.loadNetCircleImage((ImageView) view, data.getAvatarUrl());
             }

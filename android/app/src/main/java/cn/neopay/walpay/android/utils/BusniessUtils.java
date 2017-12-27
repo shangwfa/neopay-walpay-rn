@@ -46,7 +46,7 @@ public class BusniessUtils {
         }
 
         if (null == userInfoBean.getAuthStatus() || 2 != userInfoBean.getAuthStatus()) { //未认证
-            DialogManager.getSingleton().showCertificationDialog(context, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.BIND_BANK_CARD));
+            DialogManager.getSingleton().showCertificationDialog(context, () -> RNActivity.jumpToRNPage(context, RNActivity.PageType.USER_INFO_CERFITY));
         } else {//认证
             iCertificationCallBack.authenticated();
         }

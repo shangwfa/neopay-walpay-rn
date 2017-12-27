@@ -16,6 +16,7 @@ import StringUtils from '../utils/StringUtils'
 import {APIS} from "../constants/API"
 import ApiManager from '../utils/ApiManager'
 import TimePicker from '../modal/TimePicker'
+import {RouterPaths} from "../constants/RouterPaths";
 
 
 class NewBindBankCardPage extends BasePage {
@@ -172,7 +173,6 @@ class NewBindBankCardPage extends BasePage {
             DeviceEventEmitter.emit(RouterPaths.SEND_RED_PACKET, {type: 'redPacketBindCard', data: this.state.choseItem})
             DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'newBindBankCard'})
         }
-        this.props.navigation.goBack();
     }
 
     render() {
