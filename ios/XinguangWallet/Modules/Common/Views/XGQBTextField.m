@@ -141,7 +141,7 @@
     //处理支付密码
     else if(textField.type ==XGQBTextFieldTypePayPassword){
         if(textField.text.length>5 && ! [string isEqualToString:@""]){
-            [SVProgressHUD showInfoWithStatus:@"支付密码为六位数字"];
+            [SVProgressHUD showInfoWithStatus:@"支付密码为6位数字"];
         }
     }
     

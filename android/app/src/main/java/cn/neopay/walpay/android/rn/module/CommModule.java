@@ -195,10 +195,10 @@ public class CommModule extends ReactContextBaseJavaModule {
     private void handlePage(JSONObject jsonObject) throws JSONException {
         switch (jsonObject.getString("page")) {
             case "resetLoginPwd"://修改登录密码页面
-                MainRouter.getSingleton().jumpToForgotPwdPage("", IWalpayConstants.FORGOTPWD_TYPE_LOGIN);
+                MainRouter.getSingleton().jumpToForgotPwdPage(BusniessUtils.getUserName(), IWalpayConstants.FORGOTPWD_TYPE_LOGIN);
                 break;
             case "resetPayPwd"://修改支付密码页面
-                MainRouter.getSingleton().jumpToForgotPwdPage("", IWalpayConstants.FORGOTPWD_TYPE_PAY);
+                MainRouter.getSingleton().jumpToForgotPwdPage(BusniessUtils.getUserName(), IWalpayConstants.FORGOTPWD_TYPE_PAY);
                 break;
             default:
                 break;
@@ -322,7 +322,6 @@ public class CommModule extends ReactContextBaseJavaModule {
         LoadingDialogEvent event = new LoadingDialogEvent();
         event.setShow(true);
         EventBus.getDefault().post(event);
-
     }
 
     @ReactMethod

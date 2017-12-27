@@ -73,8 +73,6 @@
             break;
         default:
             break;
-            
-
     }
     
     UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
@@ -163,7 +161,7 @@
             return;
         }else if (![_loginPwdTextField.text checkPassword])
         {
-            [SVProgressHUD showInfoWithStatus:@"请输入6至20位字母加数字"];
+            [SVProgressHUD showInfoWithStatus:@"登录密码为6至18位字母加数字"];
             return;
         }
         
@@ -178,7 +176,7 @@
             return;
         }else if (![_payPwdTextField.text checkPayPassword])
         {
-            [SVProgressHUD showInfoWithStatus:@"请输入正确支付密码"];
+            [SVProgressHUD showInfoWithStatus:@"支付密码为6位数字"];
             return;
         }
     }
@@ -347,6 +345,11 @@
             //判断是否有手机号输入信息,将其输入
             if (_userName) {
                 _phoneNoTextField.text = _userName;
+            }
+            //判断是否已经缓存用户手机号
+            if([GVUserDefaults standardUserDefaults].phone){
+                _phoneNoTextField.text=[GVUserDefaults standardUserDefaults].phone;
+                _phoneNoTextField.enabled=NO;
             }
             return cell;
         }

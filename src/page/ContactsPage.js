@@ -4,7 +4,8 @@ import {
     View,
     Text,
     FlatList,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    NativeModules
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
@@ -51,15 +52,15 @@ class ContactsPage extends BasePage {
         let filterData = []
         contacts.map(item => {
             if (this.isContact(item)) {
-                let familyName=StringUtils.isNoEmpty(item.familyName)?item.familyName:''
+                let familyName = StringUtils.isNoEmpty(item.familyName) ? item.familyName : ''
                 let middleName = StringUtils.isNoEmpty(item.middleName) ? item.middleName : ''
-                let givenName=StringUtils.isNoEmpty(item.givenName)?item.givenName:''
+                let givenName = StringUtils.isNoEmpty(item.givenName) ? item.givenName : ''
                 let name = familyName + middleName + givenName
                 let key = this.pinyin.getCamelChars(name)[0]
                 filterData.push({
                     uri: StringUtils.isNoEmpty(item.thumbnailPath) ? item.thumbnailPath : url,
                     name: name,
-                    phone: item.phoneNumbers[0].number,
+                    phone:item.phoneNumbers[0].number.replace(/[^\w]/g,'').replace(/-/g,''),
                     isSelected: false,
                     key: key
                 })
@@ -81,6 +82,13 @@ class ContactsPage extends BasePage {
         return filterData
     }
 
+    formatePhone(value) {
+
+        let result = StringUtils.replaceAll(value, ' ')
+        result = StringUtils.replaceAll(result, '-')
+        return result
+    }
+
     isContact = (item) => {
         return (StringUtils.isNoEmpty(item.familyName) || StringUtils.isNoEmpty(item.middleName) || StringUtils.isNoEmpty(item.givenName) ) && item.phoneNumbers.length > 0
     }
@@ -92,17 +100,29 @@ class ContactsPage extends BasePage {
             let set = this.state.selectedData
             if (data[index].isSelected) {
                 set.delete(item)
+                this.updateItemStatus(index,set,data)
             } else {
-                set.add(item)
+                if (item.phone.length == 11) {
+                    set.add(item)
+                    this.updateItemStatus(index,set,data)
+                } else {
+                    NativeModules.commModule.toast('手机号不正确')
+                }
+
             }
-            this.setState({selectedData: set})
-            data[index].isSelected = !data[index].isSelected
-            this.setState({data: data})
+
+
         }}/>
     )
 
+    updateItemStatus = (index,set,data) => {
+        this.setState({selectedData: set})
+        data[index].isSelected = !data[index].isSelected
+        this.setState({data: data})
+    }
+
+
     shortcutBarItemPress = (key) => {
-        console.log('key:' + key)
         if (this.state.keyMap.has(key)) {
             this.list.scrollToIndex({viewPosition: 0, index: this.state.keyMap.get(key)});
         }

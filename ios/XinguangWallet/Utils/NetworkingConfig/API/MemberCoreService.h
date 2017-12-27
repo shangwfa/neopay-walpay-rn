@@ -55,5 +55,8 @@
 
 /// 修改用户头像
 +(void)modifyUserAvatarURL:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
+
+/// 已注册用户收红包
++(void)receiveRedPacket:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
 @end
 

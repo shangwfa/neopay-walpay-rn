@@ -70,10 +70,12 @@ isDecimal = (input) => {
 
 isContainChildrenStr = (str, childrenStr) => {
     return str.indexOf(childrenStr) >= 0;
-};
+}
+
 phoneTuoMi = (phone) => {
     return `${StringUtils.isEmpty(phone) && phone.length === 11 ? phone.substring(0, 3) + "****" + phone.substring(phone.length - 4, phone.length) : ""}`;
-};
+}
+
 import StringUtils from './StringUtils'
 export default {
     isEmpty,

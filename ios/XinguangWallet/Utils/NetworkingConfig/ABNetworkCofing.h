@@ -15,7 +15,7 @@
 
 //开发环境
 #define Host_Url  @"http://139.224.11.160:8202/walpay-web"
-//测试环境地址 测试环境api地址：http://walpayapi.dneopay.cn
+//测试环境地址 测试环境api地址：https://walpayapi.dneopay.cn
 //#define Host_Url @"https://walpayapi.dneopay.cn/walpay-web"
 //#define Host_Url  @"http://172.16.33.182:8080/TestProject"
 

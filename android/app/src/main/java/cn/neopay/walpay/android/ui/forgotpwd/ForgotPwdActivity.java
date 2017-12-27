@@ -37,6 +37,7 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
     @Override
     public void initView() {
         ViewUtils.setEditTextValue(mViewBinding.commonInputPhone.getEditText(), userName);
+        mViewBinding.commonInputPhone.setEnable(false);
         switch (forgotPwdType) {
             case IWalpayConstants.FORGOTPWD_TYPE_LOGIN:
                 mPageBinding.commonHeader.setHeaderLeftImg("重置登录密码");
@@ -98,17 +99,21 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
                         if (18 == s.length()) {
                             InputCheckUtils.checkPassword(s.toString());
                         }
-                        if (6 <= s.length()) {
-                            mViewBinding.passwordBtn.setEnabled(true);
-                        } else {
-                            mViewBinding.passwordBtn.setEnabled(false);
-                        }
+//                        handleIsEnabled(s);
                         break;
                     case IWalpayConstants.FORGOTPWD_TYPE_PAY:
                         break;
                 }
             }
         });
+    }
+
+    private void handleIsEnabled(Editable s) {
+        if (6 <= s.length()) {
+            mViewBinding.passwordBtn.setEnabled(true);
+        } else {
+            mViewBinding.passwordBtn.setEnabled(false);
+        }
     }
 
     @Override

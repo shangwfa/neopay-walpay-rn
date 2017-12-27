@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.orhanobut.logger.Logger;
 import com.xgjk.common.lib.adapter.slimadapter.SlimAdapter;
 import com.xgjk.common.lib.base.BaseFragment;
 import com.xgjk.common.lib.utils.DensityUtils;
@@ -72,6 +71,7 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         mViewBinding.mineNewsXrv.setAdapter(mNewsAdapter);
         handleRefreshHeader();
         mPresenter.getNewsInfo();
+        mNewsAdapter.notifyDataSetChanged();
         mViewBinding.mineNewsXrv.setLoadingMoreEnabled(true);
         mViewBinding.mineNewsXrv.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -155,7 +155,6 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectCurrentPageCallBack(MineEventBean mineEventBean) {
-        Logger.d(mineEventBean.toString());
         mPresenter.getNewsInfo();
     }
 }
