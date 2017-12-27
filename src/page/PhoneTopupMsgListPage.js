@@ -30,44 +30,39 @@ class PhoneTopupMsgListPage extends BasePage {
         super(props);
         this.state = {
             dataSource: [],
-            footerStatus: RefreshStatus.IDLE,
+            isEmpty: false
         }
     }
 
     componentWillMount() {
-        this._handleRefresh();
+        this.getPhoneTopupMsg(1,false,true)
     }
 
-    _handleRefresh = () => {
-        ApiManager.getPhoneTopupMsg({}, (data) => {
-            this.setState({
-                dataSource: data,
-            });
-        });
-    };
+    onRefresh = () => {
+        this.getPhoneTopupMsg(1, false)
+    }
 
-    _onRefresh = () => {
-        this._handleRefresh();
-    };
+    onLoadMore = (page) => {
+        this.getPhoneTopupMsg(page, true)
+    }
 
-    _onLoadMore = (pageSize) => {
-        let params = {
-            pageSize: pageSize
-        };
-        ApiManager.getPhoneTopupMsg(params, (data) => {
-            if (data) {
-                let allData = this.state.dataSource;
-                allData.push(...data);
-                this.setState({
-                    dataSource: allData,
-                });
+    getPhoneTopupMsg =(pageNo,isLoadMore,isLoadding=false)=>{
+
+        let body={
+            pageNo: pageNo,
+        }
+
+        ApiManager.getPhoneTopupMsg(body, data => {
+            if (isLoadMore) {
+                const arrData = this.state.dataSource
+                arrData.push(...data)
+                this.setState({dataSource: arrData})
             } else {
-                this.setState({
-                    footerStatus: RefreshStatus.END
-                });
+                const empty = !data || data.length <= 0
+                this.setState({dataSource: data, isEmpty: empty})
             }
-        });
-    };
+        },isLoadding)
+    }
 
     _renderRow = ({item}) => {
         console.log(item)
@@ -103,7 +98,7 @@ class PhoneTopupMsgListPage extends BasePage {
                     renderItem={this._renderRow}
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
-                    footerStatus={this.state.footerStatus}
+                    isEmpty={this.state.isEmpty}
                 />
 
             </View>

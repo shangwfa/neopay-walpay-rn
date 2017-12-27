@@ -373,6 +373,9 @@ class SendRedPacketPage extends BasePage {
     _handlePayOnForgetPwdClick = () => {
         const params = {page: 'resetPayPwd'};
         NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
+        this.setState({
+            isShowPay:false,
+        });
     };
     _handlePayOnCloseClick = () => {
         this.setState({
@@ -421,7 +424,7 @@ class SendRedPacketPage extends BasePage {
         });
     };
     _handleRedPacketAmountListener = (text) => {
-        if (parseInt(text.toString().trim()) > 2000) {
+        if (parseFloat(text.toString().trim()) > 2000) {
             NativeModules.commModule.toast('红包金额不能超过2000元');
             return;
         }
@@ -470,23 +473,26 @@ class SendRedPacketPage extends BasePage {
     };
     _handleCheckText = () => {
         if (StringUtils.isEmpty(this.state.redPacketNum.toString())
-            || parseInt(this.state.redPacketNum.toString().trim()) <= 0) {
+            || parseFloat(this.state.redPacketNum.toString().trim()) <= 0) {
             NativeModules.commModule.toast('红包个数必须大于0');
             return;
         }
         if (StringUtils.isEmpty(this.state.redPacketNum.toString())
-            || parseInt(this.state.redPacketNum.toString().trim()) > 99) {
+            || parseFloat(this.state.redPacketNum.toString().trim()) > 99) {
             NativeModules.commModule.toast('红包个数不能超过99');
             return;
         }
-        if (StringUtils.isEmpty(this.state.redPacketAmount.toString())
-            || parseInt(this.state.redPacketAmount.toString().trim()) <= 0) {
+        if (StringUtils.isEmpty(this.state.redPacketAmount.toString())) {
             NativeModules.commModule.toast('请输入金额');
             return;
         }
-        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.redPacketNum * this.state.redPacketAmount;
+        if (parseFloat(this.state.redPacketAmount) <= 0) {
+            NativeModules.commModule.toast('付款金额必须大于0');
+            return;
+        }
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount);
         if (2000 < tempAmount) {
-            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为${this.state.redPacketNum * this.state.redPacketAmount}元`;
+            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为${parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount)}元`;
             this.setState({
                 contentModal: contentModal,
                 isShow: true,
@@ -512,7 +518,7 @@ class SendRedPacketPage extends BasePage {
     };
     _handleShowPayModal = () => {
         let contentFront = `实付金额`;
-        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.redPacketNum * this.state.redPacketAmount;
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount);
         let contentBack = `${FormatUtils.money(tempAmount)}元`;
         this.setState({
             contentFront: contentFront,

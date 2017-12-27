@@ -113,5 +113,11 @@
     [self AFPOSTNetworkWithUrl:@"user/modify_user_avatar_url" andBody:body andSuccess:successFn andFailer:failerFn];
 }
 
+/// 已注册用户收红包
++(void)receiveRedPacket:(NSMutableDictionary *)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn
+{
+    [self AFPOSTNetworkWithUrl:@"packet/receive_red_packet" andBody:body andSuccess:successFn andFailer:failerFn];
+}
+
 @end
 

@@ -39,7 +39,6 @@ public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
     }
 
     private void resetPwdOperate(String resetType, String phone, String smsCode, String newPassword, String realMsg) {
-        //TODO 忘记密码处理逻辑
         switch (resetType) {
             case IWalpayConstants.FORGOTPWD_TYPE_LOGIN:
                 ResetLoginPasswordRequestBean requestBean = new ResetLoginPasswordRequestBean();
@@ -47,7 +46,7 @@ public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
                 requestBean.setSmsCode(smsCode);
                 requestBean.setPassword(newPassword);
                 ApiManager.getSingleton().resetLoginPassword(requestBean, new BaseSubscriber(mActivity, o -> {
-                    ToastUtils.show("密码重置成功");
+                    ToastUtils.show("登录密码重置成功");
                     MainRouter.getSingleton().jumpToLoginPage(phone);
                     mView.finishActivity();
                 }));

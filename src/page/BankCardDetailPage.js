@@ -5,6 +5,7 @@ import {
     View,
     Text,
     Image,
+    NativeModules,
     FlatList
 } from 'react-native'
 import BasePage from '../page/BasePage'
@@ -64,7 +65,15 @@ class BankCardDetailPage extends BasePage {
 
             }
         });
-}
+    }
+
+    forgetPayPwdBtnClicked =()=>{
+        this.setState({
+            isPayShow:false
+        })
+        const params = {page: 'resetPayPwd'};
+        NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
+    }
 
 
     render() {
@@ -80,7 +89,7 @@ class BankCardDetailPage extends BasePage {
 
                 <TwoBottomItemModal oneItemTitle='解绑该张银行卡' twoItemTitle='关闭弹窗' isShow={this.state.isShowBottom} close={() => this.close()} ensure={()=>this.unBind()}/>
                 <PayPwdModal isShow={this.state.isPayShow} onClose={()=>this.setState({isPayShow:false})}
-                             onForgetPwd={()=>{}} onEnd={(text)=>this.onEnd(text)}/>
+                             onForgetPwd={()=>{this.forgetPayPwdBtnClicked()}} onEnd={(text)=>this.onEnd(text)} isHiddenBottom={true}/>
             </View>
         );
     }

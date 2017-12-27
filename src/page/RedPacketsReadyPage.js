@@ -34,6 +34,7 @@ class RedPacketsReadyPage extends BasePage {
 
     constructor(props) {
         super(props);
+        global.backKey = nav.state.key
         this.state = {
             isReady: true
         };
@@ -75,7 +76,7 @@ class RedPacketsReadyPage extends BasePage {
         } else {
             return (
                 <FlatList
-                    data={[{key: '红包总价值', value: FormatUtils.money(this.props.navigation.state.params.amount)}, {
+                    data={[{key: '红包总价值', value: `¥ ${FormatUtils.money(this.props.navigation.state.params.amount)}`}, {
                         key: '付款方式',
                         value: this.props.navigation.state.params.payTypeDesc
                     }]}
@@ -150,7 +151,7 @@ class RedPacketsReadyPage extends BasePage {
                 </View>
                 <View>
                     <Text style={{marginBottom: 13 * sizeRatioH, fontSize: 13, color: '#999999'}}>
-                        1. 添加制定领取人，ta将收到红包消息、短信提醒
+                        1. 添加指定领取人，ta将收到红包消息、短信提醒
                     </Text>
                     <Text style={{marginBottom: 20 * sizeRatioH, fontSize: 13, color: '#999999'}}>
                         2. 或可将该红包分享至微信，方便领取

@@ -52,8 +52,8 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mViewBinding.mineRecyclerView.setLayoutManager(layoutManager);
         mViewBinding.mineRecyclerView.setAdapter(mMineSlimAdapter);
-        handleInitView();
         mPresenter.getUserInfoData();
+        handleInitView();
     }
 
     private void handleInitView() {
@@ -121,5 +121,6 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectCurrentPageCallBack(MineEventBean mineEventBean) {
         mPresenter.getUserInfoData();
+        handleInitView();
     }
 }

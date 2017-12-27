@@ -49,16 +49,16 @@ getPhoneTopupRecordList = (req, callback) => {
     })
 }
 
-getPhoneTopupMsg = (req, callback) => {
+getPhoneTopupMsg = (req, callback,isLoadding) => {
     NetUtil.post(APIS.MESSAGE_TOPUP_PHONE, req, (data) => {
         callback(data)
-    })
+    },isLoadding)
 }
 
-getRedPacketRecord = (req, callback) => {
+getRedPacketRecord = (req, callback,isLoadding) => {
     NetUtil.post(APIS.QUERY_RED_PACKET_RECORD, req, (data) => {
         callback(data)
-    })
+    },isLoadding)
 }
 
 postUnBindBankCard = (req, callback) => {

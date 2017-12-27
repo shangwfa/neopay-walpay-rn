@@ -79,7 +79,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self.homeTVC refreshData];
+    [self.homeTVC refreshData];
 }
 
 -(void)refreshAvatarAndNickName
@@ -277,10 +277,21 @@
                     RNVC.pageType = @"redList";
                     [self.navigationController pushViewController:RNVC animated:YES];
                 }else{//红包未领取,跳转红包领取页
-                    XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-                    RNVC.pageType = @"rpDetail";
-                    RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
-                    [self.navigationController pushViewController:RNVC animated:YES];
+                    
+                    //发送领取红包指令
+                    NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+                    [body setObject:message.packetCode forKey:@"packetCode"];
+                    [body setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
+                    [MemberCoreService receiveRedPacket:body andSuccessFn:^(id responseAfter, id responseBefore) {
+                        XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                        RNVC.pageType = @"rpDetail";
+                        RNVC.data=[@{@"packetCode":message.packetCode} mutableCopy];
+                        [self.navigationController pushViewController:RNVC animated:YES];
+                    } andFailerFn:^(NSError *error) {
+                        nil;
+                    }];
+                    
+
                 }
                 
             }
