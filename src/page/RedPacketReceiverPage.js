@@ -22,6 +22,7 @@ import {events} from '../constants/index'
 import regular from '../constants/regular'
 import ApiManager from "../utils/ApiManager"
 import Contacts from 'react-native-contacts'
+import Divider from "../components/Divider";
 
 class RedPacketReceiverPage extends BasePage {
 
@@ -51,22 +52,39 @@ class RedPacketReceiverPage extends BasePage {
     addPhone = () => {
         if (StringUtils.isNoEmpty(this.state.inputPhone)) {
             if (regular.phone.test(this.state.inputPhone)) {
-                let arr = this.state.data
-                arr.push({name: '', phone: this.state.inputPhone})
-                this.setState({
-                    data: arr,
-                    inputPhone: '',
-                    tip: arr.length
-                })
-                const dismissKeyboard = require('dismissKeyboard')
-                dismissKeyboard()
-                NativeModules.commModule.toast('添加成功')
+                if (this.isAddedPhone()) {
+                    NativeModules.commModule.toast('该手机号已被添加')
+                } else {
+                    let arr = this.state.data
+                    arr.push({name: '', phone: this.state.inputPhone})
+                    this.setState({
+                        data: arr,
+                        inputPhone: '',
+                        tip: arr.length
+                    })
+                    const dismissKeyboard = require('dismissKeyboard')
+                    dismissKeyboard()
+                    NativeModules.commModule.toast('添加成功')
+                }
+
+
             } else {
                 NativeModules.commModule.toast('输入的手机号不正确')
             }
         } else {
             NativeModules.commModule.toast('手机号不能为空')
         }
+    }
+
+    isAddedPhone = () => {
+        let isResult = false
+        for (let item of this.state.data) {
+            if (StringUtils.equals(item.phone, this.state.inputPhone)) {
+                isResult = true
+                break
+            }
+        }
+        return isResult
     }
 
     clearPhone = (item) => {
@@ -170,17 +188,22 @@ class RedPacketReceiverPage extends BasePage {
                     }}/>
                 {this.renderList()}
 
-                <View style={{justifyContent: "flex-end", flexDirection: "row"}}>
-                    <TouchableOpacity
-                        style={[{backgroundColor: "#F9F9F9"}, styles.send_red_packet_btn]}
-                        onPress={this.handleClearRedPacketContacts}>
-                        <Text style={[styles.send_red_packet_txt, {color: "#F34646"}]}>清空列表</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[{backgroundColor: "#F34646"}, styles.send_red_packet_btn]}
-                        onPress={this.handleSendWithRedPacketContacts}>
-                        <Text style={[styles.send_red_packet_txt, {color: "#FFF"}]}>确定发送</Text>
-                    </TouchableOpacity>
+
+                <View style={{justifyContent: "flex-end"}}>
+                    <Divider/>
+                    <View style={{justifyContent: "flex-end", flexDirection: "row"}}>
+                        <TouchableOpacity
+                            style={[{backgroundColor: "#F9F9F9"}, styles.send_red_packet_btn]}
+                            onPress={this.handleClearRedPacketContacts}>
+                            <Text style={[styles.send_red_packet_txt, {color: "#F34646"}]}>清空列表</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[{backgroundColor: "#F34646"}, styles.send_red_packet_btn]}
+                            onPress={this.handleSendWithRedPacketContacts}>
+                            <Text style={[styles.send_red_packet_txt, {color: "#FFF"}]}>确定发送</Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
             </View>
         );
@@ -214,7 +237,7 @@ class RedPacketReceiverPage extends BasePage {
         //1、成功 2、失败 3、提醒
         if (2 === errorData.retCode) {
             let desMsg = `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人`;
-            this.props.navigation.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
+            nav.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
                 desMsg: desMsg,
                 isReady: false,
                 amount: this.props.navigation.state.params.amount,

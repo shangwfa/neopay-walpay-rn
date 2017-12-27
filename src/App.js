@@ -57,7 +57,6 @@ class App extends Component {
 
         const defaultStateAction = Navigator.router.getStateForAction
         Navigator.router.getStateForAction = (action, state) => {
-            console.log('xxxxxxxxxxxx')
             if (state && action.type === NavigationActions.BACK && state.routes.length === 1) {
                 console.log("退出RN页面")
                 NativeModules.commModule.closeRNPage()

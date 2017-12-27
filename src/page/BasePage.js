@@ -19,7 +19,10 @@ class BasePage extends Component {
         })
 
         this.backListener = BackHandler.addEventListener('hardwareBackPress', () => {
-            this.back()
+            if(this.back){
+                this.back()
+            }
+
         })
     }
 

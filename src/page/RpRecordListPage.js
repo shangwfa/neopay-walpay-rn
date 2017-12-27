@@ -12,15 +12,11 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import SectionHeader from '../components/SectionHeader'
 import CommonItemTwo from '../components/CommonItemTwo'
-import NetUtil from '../utils/NetUtil'
 import {RouterPaths} from '../constants/RouterPaths'
 import ApiManager from '../utils/ApiManager'
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
 import DateUtils from "../utils/DateUtils";
 import FormatUtils from "../utils/FormatUtils";
-import {
-    SwRefreshListView,
-} from 'react-native-swRefresh'
 
 class RpRecordListPage extends BasePage {
 
@@ -67,7 +63,6 @@ class RpRecordListPage extends BasePage {
 
 
     renderRow = ({item}) => {
-        console.log('rop---' + item)
         return (
             <View>
                 {this.renderSectionHeader(item)}
