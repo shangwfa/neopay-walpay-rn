@@ -34,6 +34,7 @@ export const APIS = {
     CREATE_PAY_QRCODE: "pay/create_pay_qrcode",//创建付款码
     GET_USER_BANK_CARD_LIST: "bank/get_user_bank_card_list",//获取用户银行卡列表
     GET_USER_PAY_TYPE_LIST: "bank/get_user_pay_type_list",//获取用户支付方式列表
+    CHECK_NEED_BIND_CARD: "pay/check_need_bind_card",//是否需要绑定银行卡
     PAY_RED_PACKET_VERIFY: "packet/pay_red_packet_verify",//支付红包短信验证
     RECEIVE_RED_PACKET: "packet/receive_red_packet",//用户收红包
     ADD_RED_PACKET_RECEIVER: "packet/add_red_packet_receiver",//添加红包领取人
@@ -60,5 +61,5 @@ export const APIS = {
     CREATE_WITHDRAW_BALANCE: 'balance/create_withdraw_order',//创建提现订单
     WITHDRAW_ORDER: 'balance/withdraw_order',//提现
     GET_RECENT_PHONE_RECHARGE_PHONE: 'pcharge/get_recent_phone_recharge_phone',//获取上次手机充值手机号
-    QUERY_MSG_BILL_DETAIL:'message/query_msg_bill_detail',//获取消息账单详情并更新消息阅读状态
+    QUERY_MSG_BILL_DETAIL: 'message/query_msg_bill_detail',//获取消息账单详情并更新消息阅读状态
 };

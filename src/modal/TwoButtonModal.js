@@ -17,17 +17,19 @@ class TwoButtonModal extends Component {
     }
 
 
-    renderTitle=()=>{
-        if(this.props.title){
+    renderTitle = () => {
+        if (this.props.title) {
             return <Text style={styles.title}>{this.props.title}</Text>
         }
     }
+
     render() {
         return (
             <Modal
                 transparent={true}
                 visible={this.props.isShow}
-                onRequestClose={()=>{}}>
+                onRequestClose={() => {
+                }}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
                         {this.renderTitle()}
@@ -38,7 +40,7 @@ class TwoButtonModal extends Component {
                             </TouchableOpacity>
                             <View style={styles.line}/>
                             <TouchableOpacity style={styles.btn_container} onPress={this.props.twoPress}>
-                                <Text style={styles.btn}>{this.props.twoBtnText}</Text>
+                                <Text style={[styles.btn, this.props.rightBrtnStyle]}>{this.props.twoBtnText}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -49,7 +51,7 @@ class TwoButtonModal extends Component {
 }
 
 const styles = StyleSheet.create({
-    title:{
+    title: {
         fontSize: 16,
         color: colors.black,
         marginTop: 20,
@@ -65,21 +67,21 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         // backgroundColor:'gray',
-        alignItems:'center',
+        alignItems: 'center',
     },
     btn_container: {
-        height:50,
+        height: 50,
         flex: 1,
         // backgroundColor:'yellow',
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     btns_container: {
         width: 316,
         flexDirection: 'row',
         marginTop: 20,
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
     },
     text_content: {
         fontSize: 13,

@@ -12,7 +12,6 @@ import com.facebook.react.ReactInstanceManager;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.xgjk.common.lib.base.BaseRNActivity;
-import com.xgjk.common.lib.utils.HandlerUtils;
 import com.xgjk.common.lib.utils.PhotoUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 
@@ -169,6 +168,7 @@ public class RNActivity extends BaseRNActivity {
         String PAY_CODE_PAGE = "payCode";
         String BALANCE = "myBalance";
         String BIND_BANK_CARD = "bindBankCard";
+        String NEW_BIND_BANK_CARD = "newBindBankCard";
         String USER_INFO_CERFITY = "userInfoCerfity";
     }
 
