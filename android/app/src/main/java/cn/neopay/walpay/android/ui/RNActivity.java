@@ -12,6 +12,7 @@ import com.facebook.react.ReactInstanceManager;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.xgjk.common.lib.base.BaseRNActivity;
+import com.xgjk.common.lib.utils.HandlerUtils;
 import com.xgjk.common.lib.utils.PhotoUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 

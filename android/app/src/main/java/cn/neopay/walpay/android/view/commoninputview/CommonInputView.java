@@ -35,7 +35,7 @@ import cn.neopay.walpay.android.view.actionview.CommonVerificationCodeView;
 
 public class CommonInputView extends FrameLayout {
     private CommonInputViewLayoutBinding mBinding;
-    private boolean enableClear = true;
+    private boolean enableClear = false;
     private String mInputType;
 
     public CommonInputView(@NonNull Context context) {
