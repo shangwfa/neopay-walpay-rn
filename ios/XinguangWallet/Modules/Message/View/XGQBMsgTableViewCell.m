@@ -129,7 +129,11 @@
             
             //过期文字描述
             UILabel *desText2 = [[UILabel alloc]initWithFrame:CGRectMake(98, 90, 160, 17)];
-            desText2.text=@"啊哦,这个红包已经过期了~";
+            NSString *desText2Str = [NSString stringWithFormat:@"啊哦,这个红包已经过期了~"];
+            if (message.receiveStatus==XGQBRedPacketReceiveStatusReceiveFinished) {
+                desText2Str=@"啊哦,这个红包已经抢完了~";
+            }
+            desText2.text=desText2Str;
             desText2.font = kSYSTEMFONT(17);
             desText2.textColor = message.themeType==XGQBRedPacketTypeBirthday?UIColorHex(FFFFFF):UIColorHex(FBDEB0);
             
@@ -220,7 +224,7 @@
         cell.readIcon=readIcon;
         kViewRadius(readIcon, 2.5);
         readIcon.backgroundColor=UIColorHex(F34646);
-        readIcon.alpha=message.readStatus?1.0:0.0;
+        readIcon.alpha=(message.readStatus==XGQBMsgReadStatusUnread?1.0:0.0);
         
         //时间标签
         UILabel *timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 11)];
@@ -307,7 +311,7 @@
         _desLabel.text= message.contentString;
     }
     if (_readIcon) {
-        _readIcon.alpha=message.readStatus?1.0:0.0;
+        _readIcon.alpha=(message.readStatus==XGQBMsgReadStatusUnread?1.0:0.0);
     }
 }
 

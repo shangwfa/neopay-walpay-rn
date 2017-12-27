@@ -29,6 +29,11 @@ typedef NS_ENUM(NSInteger,XGQBRedPacketReceiveStatus) {
     XGQBRedPacketReceiveStatusNoPermission,
 };
 
+typedef NS_ENUM(NSInteger,XGQBMsgReadStatus) {
+    XGQBMsgReadStatusRead=1,
+    XGQBMsgReadStatusUnread=2,
+};
+
 /*
 1      RECEIVING      领取中
 2      RECEIVED      已领取
@@ -47,7 +52,7 @@ typedef NS_ENUM(NSInteger,XGQBRedPacketReceiveStatus) {
 @property (nonatomic,strong) NSString *ID;
 @property (nonatomic,strong) NSString *packetCode;
 @property (nonatomic,strong) NSString *uuid;
-@property (nonatomic,assign) BOOL readStatus;
+@property (nonatomic,assign) XGQBMsgReadStatus readStatus;
 @property (nonatomic,assign) XGQBRedPacketReceiveStatus receiveStatus;
 @property (nonatomic,strong) NSString *bossName;
 @property (nonatomic,strong) NSString *message;
