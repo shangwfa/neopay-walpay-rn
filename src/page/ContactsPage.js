@@ -57,13 +57,16 @@ class ContactsPage extends BasePage {
                 let givenName = StringUtils.isNoEmpty(item.givenName) ? item.givenName : ''
                 let name = familyName + middleName + givenName
                 let key = this.pinyin.getCamelChars(name)[0]
-                filterData.push({
-                    uri: StringUtils.isNoEmpty(item.thumbnailPath) ? item.thumbnailPath : url,
-                    name: name,
-                    phone:item.phoneNumbers[0].number.replace(/[^\w]/g,'').replace(/-/g,''),
-                    isSelected: false,
-                    key: key
-                })
+                for(let phoneItem of item.phoneNumbers){
+                    filterData.push({
+                        uri: StringUtils.isNoEmpty(item.thumbnailPath) ? item.thumbnailPath : url,
+                        name: name,
+                        phone:phoneItem.number.replace(/[^\w]/g,'').replace(/-/g,''),
+                        isSelected: false,
+                        key: key
+                    })
+                }
+
             }
 
         })

@@ -111,7 +111,7 @@ class MyOrderPage extends BasePage {
         } else {
             return (
                 <Header navigation={this.props.navigation} title='我的账单' rightTitle='筛选' onRightPress={() => {
-                    this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
+                    nav.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
             )
         }

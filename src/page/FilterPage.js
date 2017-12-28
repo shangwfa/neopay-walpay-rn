@@ -128,7 +128,7 @@ class FilterPage extends BasePage {
                     source={trade_icon}
                     data={this.state.tradeTypes}
                     callback={(filter) => {
-                        this.setState = {tradeType: filter}
+                        this.setState({tradeType: filter})
                     }}/>
                 <Divider/>
                 <FilterItem

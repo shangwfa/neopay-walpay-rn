@@ -39,14 +39,28 @@ class RedPacketReceiverPage extends BasePage {
         DeviceEventEmitter.addListener(events.CONTACTS_EVENT, (contacts) => {
             let arr = []
             for (let item of contacts.values()) {
-                console.log(item);
-                arr.push({name: item.name, phone: item.phone})
+                if(!this.isExistPhone(item.phone)){
+                    arr.push({name: item.name, phone: item.phone})
+                }
             }
-            this.state.data.map((item) => {
-                arr.push({name: item.name, phone: item.phone});
-            });
-            this.setState({data: arr, tip: arr.length})
+            this.state.data.map(item=>{
+                arr.push(item)
+            })
+            this.setState({data:arr, tip: arr.length})
         })
+    }
+
+    isExistPhone(phone){
+        let result=false
+        for(let item of this.state.data){
+            if(StringUtils.equals(phone,item.phone)){
+                result=true
+                break
+            }else {
+                result=false
+            }
+        }
+        return result
     }
 
     addPhone = () => {
@@ -91,11 +105,11 @@ class RedPacketReceiverPage extends BasePage {
         let arr = this.state.data.filter(value => {
             return !StringUtils.equals(value.phone, item.phone)
         })
-        this.setState({data: arr})
+        this.setState({data: arr,tip: arr.length})
     }
 
     clearAllPhones = () => {
-        this.setState({data: []})
+        this.setState({data: [],tip:0})
     }
 
     renderHeader = () => {
@@ -114,7 +128,7 @@ class RedPacketReceiverPage extends BasePage {
 
     renderItemName = (name) => {
         if (StringUtils.isNoEmpty(name)) {
-            return <Text style={{flex: 1, fontSize: 14, color: colors.black}}>{name}</Text>
+            return <Text style={{flex: 2, fontSize: 14, color: colors.black}} numberOfLines={1}>{name}</Text>
         }
     }
     renderItem = ({item}) => {

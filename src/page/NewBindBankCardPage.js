@@ -17,6 +17,7 @@ import {APIS} from "../constants/API"
 import ApiManager from '../utils/ApiManager'
 import TimePicker from '../modal/TimePicker'
 import {RouterPaths} from "../constants/RouterPaths"
+import OneButtonModal from "../modal/OneButtonModal";
 
 
 class NewBindBankCardPage extends BasePage {
@@ -33,6 +34,8 @@ class NewBindBankCardPage extends BasePage {
             openBankName: '开户银行',
             date:'请选择信用卡有效期',
             param:this.props.navigation.state.params,
+            contentModal:'',
+            isShow:false,
         };
     }
 
@@ -41,6 +44,25 @@ class NewBindBankCardPage extends BasePage {
     }
 
     commit = () => {
+        if(isCreditCard == true)
+        {
+            if(this.state.param.fromPage == 'redPacket') {
+                this.setState({
+                        isShow: true,
+                        contentModal:'为保障您的账户安全，大红包功能只支持储蓄卡绑定支付'
+                    }
+                )
+                return;
+            }else if(this.state.param.fromPage == 'withdrawCash') {
+                this.setState({
+                        isShow: true,
+                        contentModal:'提现不可以提现至信用卡'
+                    }
+                )
+                return;
+            }
+        }
+
         if (StringUtils.isEmpty(this.state.cardNo)) {
             NativeModules.commModule.toast('银行卡号不能为空')
             return
@@ -90,6 +112,7 @@ class NewBindBankCardPage extends BasePage {
                     NativeModules.commModule.closeRNPage()
                 }else{
                     DeviceEventEmitter.emit(RouterPaths.SEND_RED_PACKET, {type: 'redPacketBindCard', data: this.state.choseItem})
+                    DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
                     this.props.navigation.goBack();
             }
         })
@@ -136,6 +159,13 @@ class NewBindBankCardPage extends BasePage {
                 }
             )
         },'Y-M')
+    }
+
+    sureBtnClick=()=>{
+        this.setState({
+                isShow: false,
+            }
+        )
     }
 
     renderTopView =()=>{
@@ -189,6 +219,11 @@ class NewBindBankCardPage extends BasePage {
                 <CommonInput data={verifyCodeData} phone={this.state.bindPhone}
                              onChangeText={(text) => this.setState({smsCode: text})} type = {2} info={{cardNo:this.state.cardNo,bindCardType:this.state.param.type,cvv2:this.state.cvv2,validDate:this.state.date,phone:this.state.bindPhone,isCreditCard:this.state.isCreditCard}}/>
                 <CommonButton value='确定' style={{marginTop: 75}} onPress={() => this.commit()}/>
+                <OneButtonModal
+                    onPress={this.sureBtnClick}
+                    btnTitle="确定"
+                    content={this.state.contentModal}
+                    isShow={this.state.isShow}/>
             </View>
         );
     }
