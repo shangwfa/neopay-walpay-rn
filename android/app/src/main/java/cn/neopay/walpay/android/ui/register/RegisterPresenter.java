@@ -68,6 +68,7 @@ public class RegisterPresenter extends RegisterContract.Presenter {
 
     private void handleLogin(UserInfoResponseBean userInfoResponseBean) {
         StoreManager.getSingleton().putString(false, IWalpayConstants.ACCESS_TOKEN, userInfoResponseBean.getAccessToken());
+        StoreManager.getSingleton().putBoolean(false, IWalpayConstants.IS_FIRST_SHOW_AUTH, true);
         ActivityManager.getInstance().killAllActivity();
         MainRouter.getSingleton().jumpToHomeDrawPage();
         ToastUtils.show("注册成功");

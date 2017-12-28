@@ -238,6 +238,9 @@
         return;
     }
     
+    //发送网络请求
+    [_loginBtn setEnabled:NO];
+
     NSMutableDictionary* body = [NSMutableDictionary dictionaryWithCapacity:0];
     [body setObject:self.userNameIV.textField.text forKey:@"phone"];
     [body setObject:self.pwdIV.textField.text forKey:@"password"];
@@ -245,8 +248,6 @@
     
     //发送登录请求
     [MemberCoreService loginUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
-//        NSLog(@"successWithRetCode:%d",[[responseBefore objectForKey:@"retCode"] intValue]);
-        [responseBefore writeToFile:@"/Users/bossking/Desktop/responseBefore.plist" atomically:YES];
         if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
 //            NSLog(@"responseBefore:%@",responseBefore);
         {
@@ -267,12 +268,14 @@
                 //发送登录成功通知,跳转首页
                 kPostNotification(kNotificationLoginStateChange, @YES);
             } andFailerFn:^(NSError *error) {
-                nil;
+                [_loginBtn setEnabled:YES];
             }];
         }
-        
+        else{
+            [_loginBtn setEnabled:YES];
+        }
     } andFailerFn:^(NSError *error) {
-
+        [_loginBtn setEnabled:YES];
     }];
 }
 

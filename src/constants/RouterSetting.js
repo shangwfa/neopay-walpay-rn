@@ -58,6 +58,7 @@ import RpMonthDetailRecord from "../page/RpMonthDetailRecord"
 import NewBindBankCard from "../page/NewBindBankCardPage"
 import NewUserInfoCertify from "../page/NewUserInfoCertifyPage"
 import RedPacketResult from "../page/RedPacketResultPage";
+import AboutUsPage from "../page/AboutUsPage";
 
 const RouterSetting = {
     splash: {screen: Splash},
@@ -119,7 +120,8 @@ const RouterSetting = {
     rpMonthDetailRecord: {screen: RpMonthDetailRecord},
     newBindBankCard: {screen: NewBindBankCard},
     userInfoCerfity: {screen: NewUserInfoCertify},
-    occupationSelection: {screen: OccupationSelectionPage}
+    occupationSelection: {screen: OccupationSelectionPage},
+    aboutUs:{screen:AboutUsPage}
 }
 
 export default RouterSetting

@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View,
     Text,
-    NativeModules
+    NativeModules,
+    DeviceEventEmitter
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
@@ -15,6 +16,7 @@ import StringUtils from '../utils/StringUtils'
 import {APIS} from "../constants/API"
 import ApiManager from '../utils/ApiManager'
 import TimePicker from '../modal/TimePicker'
+import {RouterPaths} from "../constants/RouterPaths"
 
 
 class NewBindBankCardPage extends BasePage {
@@ -84,7 +86,12 @@ class NewBindBankCardPage extends BasePage {
         }
 
         ApiManager.bindBankCard(body,data=>{
-            this.props.navigation.goBack();
+                if(this.state.param.type == 2) {
+                    NativeModules.commModule.closeRNPage()
+                }else{
+                    DeviceEventEmitter.emit(RouterPaths.SEND_RED_PACKET, {type: 'redPacketBindCard', data: this.state.choseItem})
+                    this.props.navigation.goBack();
+            }
         })
 
     }
@@ -161,12 +168,20 @@ class NewBindBankCardPage extends BasePage {
 
     }
 
+    back=()=>{
+        if(this.state.param.type == 3) {
+            DeviceEventEmitter.emit(RouterPaths.SEND_RED_PACKET, {type: 'redPacketBindCard', data: this.state.choseItem})
+            DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'newBindBankCard'})
+        }
+        DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
+    }
+
     render() {
         const phoneData = {'key': '手机号', 'placeholder': this.state.bindPhone, 'keyboard': 'numeric', isLine: true,'inputOver':true}
         const verifyCodeData = {'key': '验证码', 'placeholder': '请填写验证码', 'keyboard': 'numeric', 'isVerfyCode': true}
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='绑定银行卡'/>
+                <Header navigation={this.props.navigation} title='绑定银行卡' back={()=>this.back()}/>
                 {this.renderTopView()}
                 {this.renderMidView()}
                 <View style={{height: 10}}/>

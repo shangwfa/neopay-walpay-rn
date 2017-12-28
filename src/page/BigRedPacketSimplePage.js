@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     big_red_packet_img: {
         width: ScreenUtils.width - 120,
         height: ScreenUtils.height - 280,
-        resizeMode: "cover"
+        resizeMode: "contain"
     },
     children_container: {
         alignItems: "center",

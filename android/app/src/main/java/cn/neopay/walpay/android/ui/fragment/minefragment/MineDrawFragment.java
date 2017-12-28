@@ -114,6 +114,7 @@ public class MineDrawFragment extends BaseFragment<MineFragmentPresenter, Fragme
         mMyBank.setItemImgId(R.mipmap.img_mine_draw_bank_card);
         mMyBank.setItemName("我的银行卡");
         mMyBank.setTypeClick("myBank");
+        mMyBank.setAuthStatus(mUserInfoBean != null ? mUserInfoBean.getAuthStatus() : 1);
         data.add(mMyBank);
         mData.add(new CommonLineItemBean());
     }

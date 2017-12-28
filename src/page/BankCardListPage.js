@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     FlatList,
-    ListView
+    ListView,
+    DeviceEventEmitter
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import {colors} from '../constants/index'
@@ -101,6 +102,10 @@ class BankCardListPage extends BasePage {
                 </View>
             );
         }
+    }
+
+    emitEvent = (event) => {
+        this._handleRefresh();
     }
 
     render() {

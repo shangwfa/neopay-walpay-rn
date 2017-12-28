@@ -168,6 +168,7 @@ public class RNActivity extends BaseRNActivity {
         String PAY_CODE_PAGE = "payCode";
         String BALANCE = "myBalance";
         String BIND_BANK_CARD = "bindBankCard";
+        String NEW_BIND_BANK_CARD = "newBindBankCard";
         String USER_INFO_CERFITY = "userInfoCerfity";
     }
 

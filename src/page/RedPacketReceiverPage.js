@@ -240,7 +240,7 @@ class RedPacketReceiverPage extends BasePage {
                 isReady: true,
                 amount: this.props.navigation.state.params.amount,
                 payTypeDesc: this.props.navigation.state.params.payTypeDesc,
-                packetCode:this.props.navigation.state.params.packetCode,
+                packetCode: this.props.navigation.state.params.packetCode,
             })
         }, (errorData) => {
             this.handleError(errorData);
@@ -250,13 +250,13 @@ class RedPacketReceiverPage extends BasePage {
     handleError(errorData) {
         //1、成功 2、失败 3、提醒
         if (2 === errorData.retCode) {
-            let desMsg = `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人`;
+            let desMsg = `${this.state.data[0].phone + this.state.data[0].name}${this.state.data.length >= 2 ? `等${this.state.data.length}个人` : ""}`;
             nav.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
                 desMsg: desMsg,
                 isReady: false,
                 amount: this.props.navigation.state.params.amount,
                 payTypeDesc: this.props.navigation.state.params.payTypeDesc,
-                packetCode:this.props.navigation.state.params.packetCode,
+                packetCode: this.props.navigation.state.params.packetCode,
             })
         } else {
             NativeModules.commModule.toast(errorData.retMsg)

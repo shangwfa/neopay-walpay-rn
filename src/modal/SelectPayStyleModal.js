@@ -29,13 +29,17 @@ class SelectPayStyleModal extends Component {
     }
 
     componentWillMount() {
-        if(this.props.bankCardOnly === true){
+        this._handleRequest();
+    }
+
+    _handleRequest() {
+        if (this.props.bankCardOnly === true) {
             ApiManager.getUserBankCardList({}, (data) => {
                 this.setState({
                     selectPayStyleData: data,
                 });
             });
-        }else{
+        } else {
             ApiManager.getUserPayTypeList({}, (data) => {
                 this.setState({
                     selectPayStyleData: data,
@@ -48,6 +52,7 @@ class SelectPayStyleModal extends Component {
     render() {
         return (
             <Modal
+                ref="selectPayStyleModal"
                 animationType='fade'
                 transparent={true}
                 visible={this.props.isShow}
@@ -143,6 +148,10 @@ class SelectPayStyleModal extends Component {
         </View>;
     };
     _handleBankCardItemSelectImgView = (item) => {
+        let payAmount = this.props.payAmount;
+        if ((item.id === -1 && parseFloat(payAmount) > parseFloat(item.cardNo))) {
+            return <Text style={{fontSize: 16, color: "#000", marginRight: 10}}>余额不足</Text>;
+        }
         if (item.id === this.props.selectBankId) {
             return <Image
                 style={styles.item_arrow}
@@ -151,9 +160,13 @@ class SelectPayStyleModal extends Component {
     };
     _handleBankCardItemNickName = (item) => {
         let str = item.id === -1 ? FormatUtils.money(item.cardNo) : FormatUtils.bankCardEnd(item.cardNo);
-        return (item.bankName + "(" + str + ")");
+        return (`${item.bankName}(${str})`);
     };
     _handleBankCardItemClick = (item) => {
+        let payAmount = this.props.payAmount;
+        if (parseFloat(payAmount) > parseFloat(item.cardNo)) {
+            return;
+        }
         this.props.bankCardItemClick(item);
     };
     _handleBankCardFooterItemClick = () => {

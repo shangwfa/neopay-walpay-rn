@@ -40,7 +40,7 @@ class ReceiveRedPacketPage extends BasePage {
             <View style={styles.container}>
                 {/*标题栏*/}
                 <Header
-                    rightIconStyle={{width: 20, height: 20, resizeMode: "cover"}}
+                    rightIconStyle={{width: 20, height: 20, resizeMode: "contain"}}
                     rightIcon={img_question}
                     onRightPress={this._handleRightArrowClick.bind(this)}
                     navigation={this.props.navigation}

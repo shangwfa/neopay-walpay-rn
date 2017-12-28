@@ -71,7 +71,9 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
     @Override
     public void handleNewsData(List<GetNewsResponseBean> newsBeanList, boolean isRefresh) {
         if (null == newsBeanList) {
-            handleNoData();
+            if (isRefresh) {
+                handleNoData();
+            }
             return;
         }
         mDataPageList.addAll(newsBeanList);

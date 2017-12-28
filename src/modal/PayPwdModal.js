@@ -42,9 +42,8 @@ class PayPwdModal extends Component {
         )
     }
 
-    renderBottom=()=>{
-        if(!this.props.isHiddenBottom)
-        {
+    renderBottom = () => {
+        if (!this.props.isHiddenBottom) {
             return (
                 <TouchableOpacity
                     style={{flexDirection: 'row', alignItems: 'center',}}
@@ -59,10 +58,9 @@ class PayPwdModal extends Component {
                 </TouchableOpacity>
             )
 
-        }else
-        {
+        } else {
             return (
-                <View style={{height:20}}/>
+                <View style={{height: 20}}/>
             )
         }
     }
@@ -70,6 +68,7 @@ class PayPwdModal extends Component {
     render() {
         return (
             <Modal
+                ref="payPwdModal"
                 animationType='fade'
                 transparent={true}
                 visible={this.props.isShow}
@@ -77,17 +76,23 @@ class PayPwdModal extends Component {
                 }}
                 onRequestClose={() => {
                 }}>
-                <Animated.View style={[styles.modalStyle,{flex:this.state.modalFlex}]} ref='modalView'>
+                <Animated.View style={[styles.modalStyle, {flex: this.state.modalFlex}]} ref='modalView'>
                     <View style={styles.container}>
                         <View style={styles.content_container}>
                             {this.renderTop()}
                             <View style={styles.line}/>
-                            <Text style={{color: colors.black, fontSize: 14,marginTop:10,}}>{this.props.contentFront}<Text
+                            <Text style={{
+                                color: colors.black,
+                                fontSize: 14,
+                                marginTop: 10,
+                            }}>{this.props.contentFront}<Text
                                 style={{color: colors.black, fontSize: 20}}> {this.props.contentBack}</Text></Text>
-                            <PasswordInput style={{width: 290, marginTop: 10}} maxLength={6}
-                                           onEnd={(text) => this.props.onEnd(text)}
-                            onTextFocus={()=>this.onTextFocus()}
-                            onTextBlur={()=>this.onTextBlur()}/>
+                            <PasswordInput
+                                ref="textInput"
+                                style={{width: 290, marginTop: 10}} maxLength={6}
+                                onEnd={(text) => this.props.onEnd(text)}
+                                onTextFocus={() => this.onTextFocus()}
+                                onTextBlur={() => this.onTextBlur()}/>
                             {this.renderBottom()}
                         </View>
                     </View>
@@ -95,34 +100,35 @@ class PayPwdModal extends Component {
             </Modal>
         );
     }
-
+    _clearTextInput=()=>{
+      this.refs.textInput._clearTextInputContent();
+    };
     //增加弹窗在键盘聚焦的时候改变位置
-    onTextFocus=()=>{
+    onTextFocus = () => {
         // console.log('收到键盘focus事件')
         if (!ScreenUtils.isIOS) return;
 
         Animated.timing(
             this.state.modalFlex,
             {
-                toValue:0.7,
-                duration:200,
+                toValue: 0.7,
+                duration: 200,
             }
         ).start();
     }
-    onTextBlur=()=>{
+    onTextBlur = () => {
         // console.log('收到键盘blur事件')
         if (!ScreenUtils.isIOS) return;
 
         Animated.timing(
             this.state.modalFlex,
             {
-                toValue:1.0,
-                duration:200,
+                toValue: 1.0,
+                duration: 200,
             }
         ).start();
     }
 }
-
 
 
 const styles = StyleSheet.create({
@@ -148,7 +154,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     modalStyle: {
-        backgroundColor: '#cccccc80',
+        backgroundColor: colors.mask,
         alignItems: 'center',
         justifyContent: 'center',
     },

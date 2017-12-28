@@ -48,7 +48,7 @@
             android:layout_marginLeft="@dimen/size_13dp"
             android:layout_marginRight="@dimen/size_13dp"
             android:layout_marginTop="@dimen/size_52dp"
-            android:background="@mipmap/img_login_btn"
+            android:background="#F34646"
             android:gravity="center"
             android:paddingBottom="@dimen/size_3dp"
             android:text="@string/str_sure"

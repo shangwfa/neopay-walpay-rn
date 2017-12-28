@@ -173,5 +173,11 @@
     return result;
 }
 
+-(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+    JKLog(@"接收到跳转指令");
+    return YES;
+}
+
 
 @end

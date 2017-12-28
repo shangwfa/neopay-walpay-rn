@@ -20,6 +20,7 @@ export const RouterPaths = {
     FILTER_PAGE: 'filter',
     INSTRUCTIONS_PAGE: 'instructions',
     BANKCARD_DETAIL: 'bankCardDetail',
+    BANKCARD_LIST:'bankCardList',
     ACCOUNT_WITHDRAW_PAGE: 'accountWithdraw',
     BIG_RED_PACKET: "bigRedPacket",
     RECEIVE_RED_PACKET: "receiveRedPacket",

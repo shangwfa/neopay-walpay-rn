@@ -218,6 +218,7 @@
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {
                 [SVProgressHUD showSuccessWithStatus:@"重置密码成功"];
+                [kNotificationCenter postNotificationName:kNotificationLoginStateChange object:@NO];
             }
         } andFailerFn:^(NSError *error) {
             
@@ -234,11 +235,11 @@
                 //            NSLog(@"responseBefore:%@",responseBefore);
             {
                 [SVProgressHUD showSuccessWithStatus:@"重置支付密码成功"];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         } andFailerFn:^(NSError *error) {
             
         }];
-        
     }
 
 }

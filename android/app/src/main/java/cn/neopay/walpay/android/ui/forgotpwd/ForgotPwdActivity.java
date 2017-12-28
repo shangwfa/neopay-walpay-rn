@@ -37,10 +37,16 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
     @Override
     public void initView() {
         ViewUtils.setEditTextValue(mViewBinding.commonInputPhone.getEditText(), userName);
-        mViewBinding.commonInputPhone.setEnable(false);
         switch (forgotPwdType) {
+            case IWalpayConstants.FORGOTPWD_TYPE_NO_LOGIN:
+                mPageBinding.commonHeader.setHeaderLeftImg("重置登录密码");
+                mViewBinding.commonInputPassword.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PASSWORD, ResUtils.getText(this, R.string.reset_setting_login_pwd_hint), R.mipmap.img_pwd_gray);
+                mViewBinding.commonInputVerification.setVerificationCode(IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PWD);
+                mViewBinding.commonRealMsg.setVisibility(View.GONE);
+                break;
             case IWalpayConstants.FORGOTPWD_TYPE_LOGIN:
                 mPageBinding.commonHeader.setHeaderLeftImg("重置登录密码");
+                mViewBinding.commonInputPhone.getEditText().setEnabled(false);
                 mViewBinding.commonInputPassword.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PASSWORD, ResUtils.getText(this, R.string.reset_setting_login_pwd_hint), R.mipmap.img_pwd_gray);
                 mViewBinding.commonInputVerification.setVerificationCode(IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PWD);
                 mViewBinding.commonRealMsg.setVisibility(View.GONE);

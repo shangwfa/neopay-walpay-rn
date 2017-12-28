@@ -56,10 +56,11 @@
         case XGQBTextFieldTypePayPassword:
             self.keyboardType = UIKeyboardTypeNumberPad;
             self.secureTextEntry = YES;
-            
+            break;
         case XGQBTextFieldTypePhoneNoReg:
             self.secureTextEntry = NO;
             self.keyboardType = UIKeyboardTypeNumberPad;
+            break;
         default:
             break;
     }

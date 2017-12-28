@@ -65,7 +65,7 @@ const BankCardCell = props => {
             marginLeft: 10,
             marginRight: 10,
             borderRadius: 5,
-            resizeMode: 'cover',
+            resizeMode: 'contain',
         },
         container: {
             backgroundColor: colors.black

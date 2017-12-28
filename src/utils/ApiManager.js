@@ -49,16 +49,16 @@ getPhoneTopupRecordList = (req, callback) => {
     })
 }
 
-getPhoneTopupMsg = (req, callback,isLoadding) => {
+getPhoneTopupMsg = (req, callback, isLoadding) => {
     NetUtil.post(APIS.MESSAGE_TOPUP_PHONE, req, (data) => {
         callback(data)
-    },isLoadding)
+    }, isLoadding)
 }
 
-getRedPacketRecord = (req, callback,isLoadding) => {
+getRedPacketRecord = (req, callback, isLoadding) => {
     NetUtil.post(APIS.QUERY_RED_PACKET_RECORD, req, (data) => {
         callback(data)
-    },isLoadding)
+    }, isLoadding)
 }
 
 postUnBindBankCard = (req, callback) => {
@@ -102,8 +102,8 @@ getUserInfo = (callback) => {
         callback(data)
     })
 }
-modifyUserAvatarUrl = (request,callback) => {
-    NetUtil.post(APIS.MODIFY_USER_AVATAR_URL,request, (data) => {
+modifyUserAvatarUrl = (request, callback) => {
+    NetUtil.post(APIS.MODIFY_USER_AVATAR_URL, request, (data) => {
         callback(data)
     })
 };
@@ -126,7 +126,7 @@ getRedPacketList = (request, callback) => {
 receiveRedPacket = (request, callback, errorCallback, netWorkCallback) => {
     NetUtil.post(APIS.RECEIVE_RED_PACKET, request, (data) => {
         callback(data);
-    }, (errorData) => {
+    }, true, (errorData) => {
         errorCallback(errorData);
     }, (errData) => {
         netWorkCallback(errData);
@@ -135,7 +135,7 @@ receiveRedPacket = (request, callback, errorCallback, netWorkCallback) => {
 addRedPacketReceiver = (request, callback, errorCallback) => {
     NetUtil.post(APIS.ADD_RED_PACKET_RECEIVER, request, (data) => {
         callback(data);
-    }, (errorData) => {
+    }, true, (errorData) => {
         errorCallback(errorData);
     });
 };
@@ -166,6 +166,11 @@ geUserBankCardList = (request, callback) => {
 };
 getUserPayTypeList = (request, callback) => {
     NetUtil.post(APIS.GET_USER_PAY_TYPE_LIST, request, (data) => {
+        callback(data);
+    });
+};
+checkNeedBindCard = (request, callback) => {
+    NetUtil.post(APIS.CHECK_NEED_BIND_CARD, request, (data) => {
         callback(data);
     });
 };
@@ -234,15 +239,17 @@ createRedPacket = (request, callback) => {
         callback(data);
     });
 };
-payRedPacket = (request, callback) => {
+payRedPacket = (request, callback, errorCallback) => {
     NetUtil.post(APIS.PAY_RED_PACKET, request, (data) => {
         callback(data);
+    }, true, (errorData) => {
+        errorCallback(errorData);
     });
-}
-queryUserBill = (request, callback,isLoadding) => {
+};
+queryUserBill = (request, callback, isLoadding) => {
     NetUtil.post(APIS.USER_BILL_RECORD, request, (data) => {
         callback(data);
-    },isLoadding)
+    }, isLoadding)
 };
 queryPayMessage = (request, callback) => {
     NetUtil.post(APIS.QUERY_PAY_MESSAGE_PAGE, request, (data) => {
@@ -287,9 +294,9 @@ withdraworder = (request, callback) => {
 getRecentPhoneRechargePhone = (request, callback) => {
     NetUtil.post(APIS.GET_RECENT_PHONE_RECHARGE_PHONE, request, (data) => {
         callback(data);
-    })
+    },false,null,null,false)
 };
-queryMsgBillDetail=(request,callback)=>{
+queryMsgBillDetail = (request, callback) => {
     NetUtil.post(APIS.QUERY_MSG_BILL_DETAIL, request, (data) => {
         callback(data);
     })
@@ -338,6 +345,7 @@ export default {
     createRedPacket,
     payRedPacket,
     queryUserBill,
+    checkNeedBindCard,
     modifyUserAvatarUrl,
     queryPayMessage,
     createPhoneRechargeOrder,

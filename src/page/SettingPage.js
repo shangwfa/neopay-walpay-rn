@@ -14,6 +14,7 @@ import CommonButton from '../components/CommonButton'
 import {RouterPaths} from '../constants/RouterPaths'
 import TwoButtonModal from "../modal/TwoButtonModal";
 import ApiManager from "../utils/ApiManager";
+import ScreenUtils from "../utils/ScreenUtils";
 
 class SettingPage extends BasePage {
 
@@ -73,9 +74,11 @@ class SettingPage extends BasePage {
         })
     };
     handleExitClick = () => {
+        this.handleCloseClick();
         ApiManager.logoutUser({}, (data) => {
-            NativeModules.commModule.closeRNPage();
-            this.handleCloseClick();
+            if(!ScreenUtils.isIOS){
+                NativeModules.commModule.closeRNPage();
+            }
             NativeModules.commModule.jumpToLoginPage();
         })
     }

@@ -99,12 +99,17 @@
         [self setupAndJumpIntoMainInterface];
     }else{
 
-        XGQBRootNavigationController *loginNavi = [[XGQBRootNavigationController alloc]initWithRootViewController:[XGQBLoginViewController new] ];
+        XGQBLoginViewController *loginVC = [XGQBLoginViewController new];
+        XGQBRootNavigationController *loginNavi = [[XGQBRootNavigationController alloc]initWithRootViewController:loginVC];
    
         CATransition *anima = [CATransition animation];
         anima.type = @"fade";//设置动画的类型
         anima.subtype = kCATransitionFromRight; //设置动画的方向
         anima.duration = 0.3f;
+        
+        if ([GVUserDefaults standardUserDefaults].phone) {
+            loginVC.userName=[GVUserDefaults standardUserDefaults].phone;
+        };
         
         self.window.rootViewController = loginNavi;
         // 清空用户数据
