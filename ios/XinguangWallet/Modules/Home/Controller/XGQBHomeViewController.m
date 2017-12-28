@@ -271,12 +271,8 @@
             if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
                 [self checkIDStatus];
             }else{
-                if (message.receiveStatus==XGQBRedPacketReceiveStatusReceived) {
-                    //红包已领取,跳转红包广场
-                    XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
-                    RNVC.pageType = @"redList";
-                    [self.navigationController pushViewController:RNVC animated:YES];
-                }else{//红包未领取,跳转红包领取页
+                if (message.receiveStatus==XGQBRedPacketReceiveStatusReceiving)
+                {//红包未领取,跳转红包领取页
                     
                     //发送领取红包指令
                     NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
@@ -290,8 +286,12 @@
                     } andFailerFn:^(NSError *error) {
                         nil;
                     }];
-                    
 
+                }else{
+                    //红包已领取,跳转红包广场
+                    XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+                    RNVC.pageType = @"redList";
+                    [self.navigationController pushViewController:RNVC animated:YES];
                 }
                 
             }

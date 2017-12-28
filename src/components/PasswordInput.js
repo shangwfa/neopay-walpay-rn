@@ -58,6 +58,7 @@ export default class PasswordInput extends Component {
                         ref='textInput'
                         maxLength={this.props.maxLength}
                         autoFocus={false}
+                        value={this.state.text}
                         keyboardType="numeric"
                         onChangeText={
                             (text) => {
@@ -68,8 +69,8 @@ export default class PasswordInput extends Component {
                                 }
                             }
                         }
-                        onFocus={()=>this.props.onTextFocus()}
-                        onBlur={()=>this.props.onTextBlur()}
+                        onFocus={() => this.props.onTextFocus()}
+                        onBlur={() => this.props.onTextBlur()}
                     />
                     {
                         this._getInputItem()
@@ -79,6 +80,12 @@ export default class PasswordInput extends Component {
         )
 
     }
+
+    _clearTextInputContent = () => {
+        this.setState({
+            text: ""
+        });
+    };
 
     _getInputItem() {
         let inputItem = [];
@@ -104,7 +111,7 @@ export default class PasswordInput extends Component {
     }
 
     _onPress() {
-        this.refs.textInput.focus();
+        if (this.refs.textInput) this.refs.textInput.focus();
     }
 }
 
@@ -112,7 +119,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flexDirection: 'row',
-        borderWidth: ScreenUtils.isIOS?1.0:0.5,
+        borderWidth: ScreenUtils.isIOS ? 1.0 : 0.5,
         borderColor: '#ccc',
         borderRadius: 5,
         backgroundColor: '#fff'
@@ -124,7 +131,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputItemBorderLeftWidth: {
-        borderLeftWidth: ScreenUtils.isIOS?1.0:0.5,
+        borderLeftWidth: ScreenUtils.isIOS ? 1.0 : 0.5,
         borderColor: '#ccc',
     },
     iconStyle: {

@@ -248,7 +248,6 @@
     
     //发送登录请求
     [MemberCoreService loginUser:body andSuccessFn:^(id responseAfter, id responseBefore) {
-//        [_loginBtn setEnabled:YES];
         if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
 //            NSLog(@"responseBefore:%@",responseBefore);
         {
@@ -269,10 +268,12 @@
                 //发送登录成功通知,跳转首页
                 kPostNotification(kNotificationLoginStateChange, @YES);
             } andFailerFn:^(NSError *error) {
-                nil;
+                [_loginBtn setEnabled:YES];
             }];
         }
-        
+        else{
+            [_loginBtn setEnabled:YES];
+        }
     } andFailerFn:^(NSError *error) {
         [_loginBtn setEnabled:YES];
     }];

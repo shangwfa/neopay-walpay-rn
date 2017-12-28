@@ -116,7 +116,7 @@ public class InputCheckUtils {
         } else if (ValidInputUtils.isValidePhone(phone)) {
             return true;
         } else {
-            ToastUtils.show("请输入正确的手机号");
+            ToastUtils.show("手机号格式错误");
             return false;
         }
     }
@@ -237,12 +237,12 @@ public class InputCheckUtils {
             ToastUtils.show("请设置登录密码");
             return false;
         } else if (6 > password.length()) {
-            ToastUtils.show("登录密码支持6至18位字母加数字");
+            ToastUtils.show("登录密码为6至18位字母加数字");
             return false;
         } else if (ValidInputUtils.isValididPassword(password)) {
             return true;
         } else {
-            ToastUtils.show("登录密码支持6至18位字母加数字");
+            ToastUtils.show("登录密码为6至18位字母加数字");
             return false;
         }
     }
@@ -268,7 +268,7 @@ public class InputCheckUtils {
         } else if (ValidInputUtils.isValididPayPasswordBetter(payPassword)) {
             return true;
         } else {
-            ToastUtils.show("支付密码为6位数字");
+            ToastUtils.show("支付密码为6位数字，不可相同，不可连续");
             return false;
         }
     }

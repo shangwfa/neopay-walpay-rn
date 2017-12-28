@@ -83,7 +83,6 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
         mViewBinding.homeDrawCoordinatorTop.homeDrawRechargeTopLl.setOnClickListener(v ->
                 BusniessUtils.handleCertification(this, mUserInfoBean,
                         () -> RNActivity.jumpToRNPage(this, RNActivity.PageType.PHONE_TOPUP_PAGE)));
-
     }
 
     @Override
@@ -142,6 +141,16 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
         if (null != userInfoBean) {
             mViewBinding.commonHomeDrawTopView.setmUserInfoBean(userInfoBean);
             EventBus.getDefault().post(userInfoBean);
+            handleIsFirstAuth();
+        }
+    }
+
+    private void handleIsFirstAuth() {
+        boolean isFirstAuth = StoreManager.getSingleton().getBoolean(false, IWalpayConstants.IS_FIRST_SHOW_AUTH, false);
+        if (isFirstAuth) {
+            BusniessUtils.handleCertification(this, mUserInfoBean, () -> {
+            });
+            StoreManager.getSingleton().putBoolean(false, IWalpayConstants.IS_FIRST_SHOW_AUTH, false);
         }
     }
 

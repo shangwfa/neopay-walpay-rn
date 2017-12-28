@@ -28,6 +28,7 @@ import SendPhoneAuthCodeModal from "../modal/SendPhoneAuthCodeModal";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
 import WarpRedPacket from '../data/WarpRedPacket.json'
 import FormatUtils from "../utils/FormatUtils";
+import TwoButtonModal from "../modal/TwoButtonModal";
 class SendRedPacketPage extends BasePage {
     constructor(props) {
         super(props);
@@ -39,6 +40,8 @@ class SendRedPacketPage extends BasePage {
             isRandomRedPacket: true,
             isShowSelectPayStyle: false,
             isShowWarpAction: false,
+            isRefreshRequest: false,
+            isShowBindCard: false,
             redPacketAmountText: "金额",
             isShow: false,
             isShowPay: false,
@@ -53,8 +56,9 @@ class SendRedPacketPage extends BasePage {
             redPacketSourceData: {},
             redPacketThemeSourceData: {},
             payResultSourceData: {},
-            redPacketThemeCode: ''
-
+            redPacketThemeCode: '',
+            payAllAmount: "",
+            accountAmount: ""
         };
     }
 
@@ -65,6 +69,7 @@ class SendRedPacketPage extends BasePage {
                 payTypeSourceData: data,
                 payType: data.payType,
                 bankCardId: data.bankCardId,
+                accountAmount: data.amount
             });
         });
         this._handleRedPacketTheme();
@@ -74,7 +79,7 @@ class SendRedPacketPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header
-                    rightIconStyle={{width: 20, height: 20, resizeMode: "cover"}}
+                    rightIconStyle={{width: 20, height: 20, resizeMode: "contain"}}
                     rightIcon={img_question}
                     onRightPress={this._handleRightArrowClick.bind(this)}
                     navigation={this.props.navigation}
@@ -124,6 +129,7 @@ class SendRedPacketPage extends BasePage {
                     content={this.state.contentModal}
                     isShow={this.state.isShow}/>
                 <PayPwdModal
+                    ref="payPwdModal"
                     isShow={this.state.isShowPay}
                     onForgetPwd={this._handlePayOnForgetPwdClick}
                     contentFront={this.state.contentFront}
@@ -133,7 +139,9 @@ class SendRedPacketPage extends BasePage {
                     onClose={this._handlePayOnCloseClick}
                     onEnd={this._handlePayEndClick}/>
                 <SelectPayStyleModal
+                    ref="selectPayStyleModal"
                     title="更换付款方式"
+                    payAmount={this.state.payAllAmount}
                     selectBankId={this.state.bankCardId}
                     bankCardFooterItemClick={this._handleBankCardFooterItemClick.bind(this)}
                     bankCardItemClick={this._handleBankCardItemClick.bind(this)}
@@ -149,9 +157,29 @@ class SendRedPacketPage extends BasePage {
                 <ReceiveRedPacketModal
                     action={WarpRedPacket}
                     isShow={this.state.isShowWarpAction}/>
+                <TwoButtonModal
+                    isShow={this.state.isShowBindCard}
+                    title="余额不足，绑定银行卡支付"
+                    content={`账户余额 ${FormatUtils.money(this.state.accountAmount)}元\n\n实付金额 ${FormatUtils.money(this.state.payAllAmount)}元`}
+                    oneBtnText="关闭弹窗"
+                    twoBtnText="去绑卡"
+                    rightBrtnStyle={{color: "#F34646"}}
+                    onePress={this._handleCloseClick}
+                    twoPress={this._handleExitClick}
+                />
             </View>
         );
     }
+
+    _handleCloseClick = () => {
+        this.setState({
+            isShowBindCard: false
+        })
+    };
+    _handleExitClick = () => {
+        this._handleCloseClick();
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {type: 3});
+    };
 
     _handleRedPacketTheme = () => {
         ApiManager.getRedPacketThemeList((data) => {
@@ -263,7 +291,10 @@ class SendRedPacketPage extends BasePage {
             case "redPacketResultRePay"://红包重新支付redPacketResultRePay
                 this._handleShowPayModal();
                 break;
-
+            case "redPacketBindCard"://绑定银行卡redPacketBindCard
+                this.refs.selectPayStyleModal._handleRequest();
+                this._handleShowPayModal();
+                break;
         }
 
     };
@@ -339,8 +370,10 @@ class SendRedPacketPage extends BasePage {
                     this._handlePayRedPacketResult(data);
                 }
             }, 2000);
+        }, (errorData) => {
+            NativeModules.commModule.toast(errorData.retMsg);
+            this.refs.payPwdModal._clearTextInput();
         });
-
     };
 
     _handleRedPacketWrapClose() {
@@ -374,7 +407,7 @@ class SendRedPacketPage extends BasePage {
         const params = {page: 'resetPayPwd'};
         NativeModules.commModule.jumpToNativePage('normal', JSON.stringify(params))
         this.setState({
-            isShowPay:false,
+            isShowPay: false,
         });
     };
     _handlePayOnCloseClick = () => {
@@ -419,11 +452,25 @@ class SendRedPacketPage extends BasePage {
     _handleRedPacketListener = (text) => {
     };
     _handleRedPacketNumListener = (text) => {
+        let reg = /^[1-9]*$/;
+        if (!reg.test(text)) {
+            NativeModules.commModule.toast('红包个数必须为数字且大于0');
+            return;
+        }
+        if (parseFloat(text.toString()) > 99) {
+            NativeModules.commModule.toast('红包个数不能超过99');
+            return;
+        }
         this.setState({
             redPacketNum: text
         });
     };
     _handleRedPacketAmountListener = (text) => {
+        let reg = /^[1-9]*$\d*(.\d{1,2})?$|^0.\d{1,2}$/;
+        if (!reg.test(text)) {
+            NativeModules.commModule.toast('红包金额必须为数字且保留两位小数');
+            return;
+        }
         if (parseFloat(text.toString().trim()) > 2000) {
             NativeModules.commModule.toast('红包金额不能超过2000元');
             return;
@@ -490,9 +537,12 @@ class SendRedPacketPage extends BasePage {
             NativeModules.commModule.toast('付款金额必须大于0');
             return;
         }
-        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount);
+        let tempAmount = this.state.isRandomRedPacket ? parseFloat(this.state.redPacketAmount) : parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount);
+        this.setState({
+            payAllAmount: tempAmount,
+        });
         if (2000 < tempAmount) {
-            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为${parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount)}元`;
+            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为 ${FormatUtils.money(parseFloat(parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount)))}元`;
             this.setState({
                 contentModal: contentModal,
                 isShow: true,
@@ -511,7 +561,19 @@ class SendRedPacketPage extends BasePage {
                 redPacketSourceData: data
             });
             if (data.packetCode) {
-                this._handleShowPayModal();
+                let request = {
+                    amount: this.state.payAllAmount
+                };
+                // ApiManager.checkNeedBindCard(request, (data) => {
+                //     if (data.needBindCard) {
+                if (true) {
+                    this.setState({
+                        isShowBindCard: true
+                    });
+                } else {
+                    this._handleShowPayModal();
+                }
+                // });
             }
         });
 

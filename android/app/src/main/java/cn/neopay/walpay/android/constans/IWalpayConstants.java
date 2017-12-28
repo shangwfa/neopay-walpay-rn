@@ -37,6 +37,7 @@ public interface IWalpayConstants {
     String IS_FIRST_INSTALL = "is_install_state";
     String ALIAS_VALUE = "alias_value";
     String IS_FIRST_CERTIFICATION = "is_certification_state";
+    String IS_FIRST_SHOW_AUTH = "is_first_show_auth";
     String ACCESS_TOKEN = "accessToken";
 
     //---------------------------time---------------------//
@@ -67,6 +68,7 @@ public interface IWalpayConstants {
     String COMMONINPUTVIEW_TYPE_PAY = "pay";
     String COMMONINPUTVIEW_TYPE_REAL_MSG = "realMsg";
     String FORGOTPWD_TYPE_LOGIN = "forgotPwd_login";
+    String FORGOTPWD_TYPE_NO_LOGIN = "forgotPwd_no_login";
     String FORGOTPWD_TYPE_PAY = "forgotPwd_pay";
     //---------------------------verification view code---------------------//
     int VERIFICATION_CODE_TYPE_REGISTER = 1;
