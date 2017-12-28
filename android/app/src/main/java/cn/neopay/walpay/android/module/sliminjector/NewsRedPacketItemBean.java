@@ -32,7 +32,10 @@ public class NewsRedPacketItemBean {
      * createTimeMs : 1509245955000
      * luckyAmount: 0
      */
-
+    /**
+     * 实名认证状态
+     */
+    private Integer authStatus;
     private int msgType;
     private String msgTypeText;
     private String dayCode;
@@ -59,6 +62,14 @@ public class NewsRedPacketItemBean {
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public Integer getAuthStatus() {
+        return authStatus;
+    }
+
+    public void setAuthStatus(Integer authStatus) {
+        this.authStatus = authStatus;
     }
 
     public BigDecimal getLuckyAmount() {

@@ -170,6 +170,7 @@ public class RNActivity extends BaseRNActivity {
         String BIND_BANK_CARD = "bindBankCard";
         String NEW_BIND_BANK_CARD = "newBindBankCard";
         String USER_INFO_CERFITY = "userInfoCerfity";
+        String ABOUT_US = "aboutUs";
     }
 
     public static void jumpToRNPage(Context context, String pageType) {

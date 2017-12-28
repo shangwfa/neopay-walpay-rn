@@ -7,6 +7,7 @@ import com.xgjk.common.lib.base.BaseView;
 import java.util.List;
 
 import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 
 /**
  * @author carlos.guo
@@ -17,6 +18,8 @@ import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 public interface NewsFragmentContract {
     interface IView extends BaseView {
         void setNewsViewData(List<Object> mDataList);
+
+        UserInfoResponseBean getUserInfo();
 
         void setNoMoreData(Boolean isNoMoreData);
     }

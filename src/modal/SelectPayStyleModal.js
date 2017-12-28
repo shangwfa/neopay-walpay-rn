@@ -40,7 +40,7 @@ class SelectPayStyleModal extends Component {
                 });
             });
         } else {
-            ApiManager.getUserPayTypeList({}, (data) => {
+            ApiManager.getUserPayTypeList({cardType: 1}, (data) => {
                 this.setState({
                     selectPayStyleData: data,
                 });

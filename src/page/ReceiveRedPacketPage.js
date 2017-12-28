@@ -26,8 +26,8 @@ class ReceiveRedPacketPage extends BasePage {
         this.state = {
             dataSource: [],
             isShowProcess: false,
-            footerStatus: RefreshStatus.IDLE,
             resultState: false,
+            isEmpty: false,
         }
     }
 
@@ -51,7 +51,7 @@ class ReceiveRedPacketPage extends BasePage {
                     renderItem={this._renderItem}
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
-                    footerStatus={this.state.footerStatus}/>
+                    isEmpty={this.state.isEmpty}/>
                 <ReceiveRedPacketModal
                     action={RecivedRedPacket}
                     isShow={this.state.isShowProcess}/>
@@ -60,32 +60,28 @@ class ReceiveRedPacketPage extends BasePage {
     }
 
     _handleRefresh = () => {
-        ApiManager.getUserReceivableRedPacket({}, (data) => {
-            this.setState({
-                dataSource: data,
-            });
-        });
+        this.loadData(1, false, true);
     };
     _onRefresh = () => {
         this._handleRefresh();
     };
-    _onLoadMore = (pageSize) => {
+    loadData = (pageNo, isLoadMore, isLoadding = false) => {
         let params = {
-            pageSize: pageSize
+            pageNo: pageNo
         };
-        ApiManager.getUserReceivableRedPacket(params, (data) => {
-            if (data) {
-                let allData = this.state.dataSource;
-                allData.push(...data);
-                this.setState({
-                    dataSource: allData,
-                });
+        ApiManager.getUserReceivableRedPacket(params, data => {
+            if (isLoadMore) {
+                const arrData = this.state.dataSource;
+                arrData.push(...data);
+                this.setState({dataSource: arrData});
             } else {
-                this.setState({
-                    footerStatus: RefreshStatus.END
-                });
+                const empty = !data || data.length <= 0
+                this.setState({dataSource: data, isEmpty: empty})
             }
-        });
+        }, isLoadding)
+    };
+    _onLoadMore = (pageSize) => {
+        this.loadData(pageSize, true, false);
     };
     _clickItem = (item) => {
         this.setState({

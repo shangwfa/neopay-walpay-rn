@@ -509,7 +509,8 @@ class SendRedPacketPage extends BasePage {
         });
         let params = {
             pageType: 1,
-            type: 3
+            type: 3,
+            fromPage: 'redPacket'
         };
         this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, params);
     };
