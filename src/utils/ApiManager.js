@@ -61,10 +61,10 @@ getRedPacketRecord = (req, callback, isLoadding) => {
     }, isLoadding)
 }
 
-postUnBindBankCard = (req, callback) => {
+postUnBindBankCard = (req, callback,errorCallback) => {
     NetUtil.post(APIS.BANK_UNBIND_BANKCARD, req, (data) => {
         callback(data)
-    })
+    },isShowLoading = true, errorCallback)
 }
 
 getRedPacketThemeList = (callback) => {

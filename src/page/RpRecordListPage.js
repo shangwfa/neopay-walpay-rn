@@ -59,7 +59,9 @@ class RpRecordListPage extends BasePage {
         },isLoadding)
     }
 
-
+    goRpDetail=(item)=>{
+        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode:item.tradeObject});
+    }
 
 
     renderRow = ({item}) => {
@@ -70,7 +72,8 @@ class RpRecordListPage extends BasePage {
                                middleUpValue={item.title} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
                                rightUpValue={item.payDirection==2?'-' + FormatUtils.money(item.amount):'+' + FormatUtils.money(item.amount)} rightBottomValue={item.status}
                                isLine={true}
-                               imgIconUrl={item.bestFlag==1?require("../res/img/rp_max_num.png"):' '}/>
+                               imgIconUrl={item.bestFlag==1?require("../res/img/rp_max_num.png"):' '}
+                               onPress={()=>this.goRpDetail(item)}/>
             </View>
         )
 
