@@ -52,8 +52,7 @@ class BankCardDetailPage extends BasePage {
 
     unBind=()=>{
         this.setState({
-            isShowBottom:false,
-            isPayShow:true
+            showTwoBtnModal:true
         })
     }
 
@@ -101,6 +100,20 @@ class BankCardDetailPage extends BasePage {
         DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
     }
 
+    showTwoBtnModal=()=>{
+        this.setState({
+            showTwoBtnModal:false
+        })
+    }
+
+    handleSureClick=()=>{
+        this.setState({
+            isShowBottom:false,
+            isPayShow:true,
+            showTwoBtnModal:false
+        })
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -119,7 +132,7 @@ class BankCardDetailPage extends BasePage {
                     oneBtnText="关闭弹窗"
                     twoBtnText="确定解绑"
                     onePress={this.handleCloseClick}
-                    twoPress={this.handleExitClick}
+                    twoPress={this.handleSureClick}
                 />
                 <PayPwdModal isShow={this.state.isPayShow} onClose={()=>this.setState({isPayShow:false})}
                              onForgetPwd={()=>{this.forgetPayPwdBtnClicked()}} onEnd={(text)=>this.onEnd(text)} isHiddenBottom={true}/>
