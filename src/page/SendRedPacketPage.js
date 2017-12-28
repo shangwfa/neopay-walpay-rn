@@ -62,7 +62,7 @@ class SendRedPacketPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleRedPacketAmountText();
         this._handleRecentPayTypeRequest();
         this._handleRedPacketTheme();
@@ -584,9 +584,9 @@ class SendRedPacketPage extends BasePage {
                 };
                 ApiManager.checkNeedBindCard(request, (data) => {
                     if (data.needBindCard) {
-                        this.setState({
-                            isShowBindCard: true
-                        });
+                this.setState({
+                    isShowBindCard: true
+                });
                     } else {
                         this._handleShowPayModal();
                     }
