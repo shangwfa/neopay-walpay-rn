@@ -19,6 +19,9 @@
 #import "RCTBridgeModule.h"
 #import <UShareUI/UShareUI.h>
 
+#import <AVFoundation/AVFoundation.h>
+
+
 
 @interface XGQBRNViewController () <CNContactPickerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -213,6 +216,15 @@
 
     kWeakSelf(self);
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        //判断是否有权限访问相机
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        
+        if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+            [SVProgressHUD showInfoWithStatus:@"未获得相机隐私授权"];
+            return;
+        }
+        
         imgPicVC.sourceType = UIImagePickerControllerSourceTypeCamera;
         [weakself presentViewController:imgPicVC animated:YES completion:^{
             JKLog();
