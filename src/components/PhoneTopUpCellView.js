@@ -208,7 +208,7 @@ class PhoneTopUpMoneyView extends Component {
     //处理银行卡信息
     retPayTypeContent=()=>{
         if (this.state.selectedBankId==-1)
-            return '余额';
+            return `余额(${this.state.accountAmount?FormatUtils.money(this.state.accountAmount):FormatUtils.money(this.state.selectedBankCardNo)})`;
         else if(this.state.selectedBankCardNo){
             return this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')';
         }else {
