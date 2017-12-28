@@ -8,8 +8,10 @@ import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.bean.ResetPwdParameterBean;
+import cn.neopay.walpay.android.module.request.GetUserInfoRequestBean;
 import cn.neopay.walpay.android.module.request.ResetLoginPasswordRequestBean;
 import cn.neopay.walpay.android.module.request.ResetPayPasswordRequestBean;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.utils.InputCheckUtils;
 import rx.Observable;
 
@@ -29,6 +31,14 @@ public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
                 .filter(c -> checkPwdOrPayPwd(bean.getForgotPwdType(), bean.getNewPassword()))
                 .subscribe(s -> resetPwdOperate(bean.getForgotPwdType(), bean.getPhone(), bean.getVerificationCode(), bean.getNewPassword(), bean.getRealMsg()));
 
+    }
+
+    @Override
+    public void getUerInfo() {
+        ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(), new BaseSubscriber(mActivity, o -> {
+            UserInfoResponseBean responseBean = (UserInfoResponseBean) o;
+            mView.setUserAuthState(2 == responseBean.getAuthStatus());
+        }));
     }
 
     private Boolean checkRealMag(String forgotPwdType, String realMsg) {

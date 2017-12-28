@@ -22,6 +22,7 @@ export const RouterPaths = {
     BANKCARD_DETAIL: 'bankCardDetail',
     BANKCARD_LIST:'bankCardList',
     ACCOUNT_WITHDRAW_PAGE: 'accountWithdraw',
+    RED_LIST:"redList",
     BIG_RED_PACKET: "bigRedPacket",
     RECEIVE_RED_PACKET: "receiveRedPacket",
     SEND_RED_PACKET: "sendRedPacket",

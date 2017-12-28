@@ -28,6 +28,7 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
     public String userName;
     @Autowired
     public String forgotPwdType;
+    private boolean mIsAuthState = false;
 
     @Override
     public int getLayoutId() {
@@ -36,7 +37,16 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
 
     @Override
     public void initView() {
+        mPresenter.getUerInfo();
         ViewUtils.setEditTextValue(mViewBinding.commonInputPhone.getEditText(), userName);
+        handleChangeView();
+        mViewBinding.commonInputPhone.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PHONE, ResUtils.getText(this, R.string.str_input_phone), R.mipmap.img_phone_gray);
+        mViewBinding.commonInputVerification.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_VERIFICATION_CODE, getString(R.string.str_input_smscode), R.mipmap.img_auth_code);
+        mViewBinding.commonInputVerification.setPhoneEdit(mViewBinding.commonInputPhone.getEditText());
+        handleViewClick();
+    }
+
+    private void handleChangeView() {
         switch (forgotPwdType) {
             case IWalpayConstants.FORGOTPWD_TYPE_NO_LOGIN:
                 mPageBinding.commonHeader.setHeaderLeftImg("重置登录密码");
@@ -57,17 +67,20 @@ public class ForgotPwdActivity extends BaseActivity<ForgotPwdPresenter, Activity
                 mViewBinding.commonInputPhone.getEditText().setEnabled(false);
                 mViewBinding.commonInputPassword.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PAY, "设置支付密码，6位数字", R.mipmap.img_pay_pwd);
                 mViewBinding.commonInputVerification.setVerificationCode(IWalpayConstants.VERIFICATION_CODE_TYPE_RESET_PAY_PWD);
-                mViewBinding.commonRealMsg.setVisibility(View.VISIBLE);
-                mViewBinding.commonRealMsg.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_REAL_MSG, "请输入实名认证的身份证号", R.mipmap.img_id_card);
+                if (mIsAuthState) {
+                    mViewBinding.commonRealMsg.setVisibility(View.VISIBLE);
+                    mViewBinding.commonRealMsg.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_REAL_MSG, "请输入实名认证的身份证号", R.mipmap.img_id_card);
+                }
                 break;
             default:
                 break;
         }
+    }
 
-        mViewBinding.commonInputPhone.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_PHONE, ResUtils.getText(this, R.string.str_input_phone), R.mipmap.img_phone_gray);
-        mViewBinding.commonInputVerification.setInputData(IWalpayConstants.COMMONINPUTVIEW_TYPE_VERIFICATION_CODE, getString(R.string.str_input_smscode), R.mipmap.img_auth_code);
-        mViewBinding.commonInputVerification.setPhoneEdit(mViewBinding.commonInputPhone.getEditText());
-        handleViewClick();
+    @Override
+    public void setUserAuthState(boolean userAuthState) {
+        mIsAuthState = userAuthState;
+        handleChangeView();
     }
 
     private void handleViewClick() {

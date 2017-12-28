@@ -32,6 +32,7 @@ class BankCardListPage extends BasePage {
     }
 
     componentWillMount() {
+        super.componentWillMount();
         this._handleRefresh();
     }
 

@@ -52,6 +52,7 @@ class BankCardDetailPage extends BasePage {
 
     unBind=()=>{
         this.setState({
+            isShowBottom:false,
             showTwoBtnModal:true
         })
     }
@@ -108,7 +109,6 @@ class BankCardDetailPage extends BasePage {
 
     handleSureClick=()=>{
         this.setState({
-            isShowBottom:false,
             isPayShow:true,
             showTwoBtnModal:false
         })
