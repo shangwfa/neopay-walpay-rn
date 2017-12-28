@@ -2,10 +2,6 @@ import React, {Component} from 'react'
 import {
     StyleSheet,
     View,
-    Text,
-    Image,
-    ListView,
-    RefreshControl
 } from 'react-native'
 
 import BasePage from '../page/BasePage'
@@ -13,9 +9,6 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import BankOrderListSectionHeader from '../components/BankOrderListSectionHeader'
 import BankOrderListItem from '../components/BankOrderListItem'
-import {
-    SwRefreshListView,
-} from 'react-native-swRefresh'
 import ApiManager from "../utils/ApiManager";
 import DateUtils from "../utils/DateUtils";
 import RefreshList, {RefreshStatus} from "../components/RefreshList";
@@ -28,10 +21,10 @@ class TradeRecordListPage extends BasePage {
         super(props);
         this.state = {
             dataSource: [],
-            footerStatus: RefreshStatus.IDLE,
             pageType: this.props.navigation.state.params.pageType,
             title: '',
-            cardId: this.props.navigation.state.params.cardId
+            cardId: this.props.navigation.state.params.cardId,
+            isEmpty: false
         }
     }
 
@@ -49,7 +42,8 @@ class TradeRecordListPage extends BasePage {
                     renderItem={this.renderRow}
                     onRefresh={this.onRefresh}
                     onLoadMore={this.onLoadMore}
-                    footerStatus={this.state.footerStatus}
+                    extraData={this.state}
+                    isEmpty={this.state.isEmpty}
                 />
             </View>
         );
@@ -92,10 +86,6 @@ class TradeRecordListPage extends BasePage {
                         this.setState({
                             dataSource: allData,
                         });
-                    } else {
-                        this.setState({
-                            footerStatus: RefreshStatus.END
-                        });
                     }
                 });
                 break;
@@ -106,10 +96,6 @@ class TradeRecordListPage extends BasePage {
                         allData.push(...data);
                         this.setState({
                             dataSource: allData,
-                        });
-                    } else {
-                        this.setState({
-                            footerStatus: RefreshStatus.END
                         });
                     }
                 });
@@ -133,21 +119,26 @@ class TradeRecordListPage extends BasePage {
         switch (this.state.pageType) {
             case 0://余额
                 ApiManager.getBalanceRecordList(params, (data) => {
+                    const empty = !data || data.length <= 0
                     this.setState({
                         dataSource: data,
+                        isEmpty: empty
                     });
                 });
                 txtContent = '余额交易记录';
                 break;
             case 1://银行卡
                 ApiManager.getBankCardRecordPage(params, (data) => {
+                    const empty = !data || data.length <= 0
                     this.setState({
                         dataSource: data,
+                        isEmpty: empty
                     });
                 });
                 txtContent = '银行卡交易记录';
                 break;
         }
+
         this.setState({title: txtContent})
     }
 
