@@ -205,9 +205,10 @@ class AccountWithdrawPage extends BasePage {
                     />
                 </View>
                 <Divider style={{marginTop: 16, marginLeft: 10, marginRight: 10}}/>
-                <Text style={styles.numberRowViewAttachText}>收取0.1%的服务费</Text>
+                <Text style={styles.numberRowViewAttachText}></Text>
             </View>
         )
+        //收取0.1%的服务费
     };
 
     onChangeText = (text) => {
