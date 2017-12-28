@@ -29,6 +29,7 @@ class RedListPage extends BasePage {
     }
 
     componentWillMount() {
+        super.componentWillMount();
         this._handleRefresh();
     }
 

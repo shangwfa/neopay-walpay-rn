@@ -32,8 +32,10 @@ class ReceiveRedPacketPage extends BasePage {
     }
 
     componentWillMount() {
+        super.componentWillMount();
         this._handleRefresh();
     }
+
     emitEvent = (event) => {
         switch (event.type) {
             case "redPacketDetailBack"://红包详情回退redPacketDetailBack
