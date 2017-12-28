@@ -12,6 +12,7 @@ import {colors} from '../constants/index'
 import Header from '../components/Header'
 import ScrnUtil from '../utils/ScreenUtils'
 import {RouterPaths} from "../constants/RouterPaths"
+import FormatUtils from "../utils/FormatUtils";
 class AccountWithdrawResultPage extends BasePage {
 
     constructor(props) {
@@ -33,7 +34,8 @@ class AccountWithdrawResultPage extends BasePage {
                     this.back()
                 }}/>
                 <FlatList
-                    data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:this.state.data.incomeTypeDesc},{key: '提现服务费',data:`${this.state.data.feePay}`}]}
+                    data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:this.state.data.incomeTypeDesc}]}
+                    //{key: '提现服务费',data:`${this.state.data.feePay}
                     renderItem={this._renderItemComponent}
                     ListHeaderComponent ={this.state.retResult?this._renderListHeaderComponentSuc:this._renderListHeaderComponentFail}
                 />
@@ -93,7 +95,7 @@ class AccountWithdrawResultPage extends BasePage {
 
                 <View>
                     <Text style={sucStyles.headerViewNoText}>
-                        {this.state.data.amount}
+                        {`+ ${FormatUtils.money(this.state.data.amount)}`}
                     </Text>
                 </View>
                     <Text style={sucStyles.headerViewDesText}>

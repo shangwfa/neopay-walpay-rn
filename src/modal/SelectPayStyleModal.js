@@ -34,7 +34,7 @@ class SelectPayStyleModal extends Component {
 
     _handleRequest() {
         if (this.props.bankCardOnly === true) {
-            ApiManager.getUserBankCardList({}, (data) => {
+            ApiManager.getUserBankCardList({cardType: 1}, (data) => {
                 this.setState({
                     selectPayStyleData: data,
                 });
