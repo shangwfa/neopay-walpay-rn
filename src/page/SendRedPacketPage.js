@@ -555,7 +555,7 @@ class SendRedPacketPage extends BasePage {
             NativeModules.commModule.toast('付款金额必须大于0');
             return;
         }
-        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : parseInt(this.state.redPacketNum) * parseInt(this.state.redPacketAmount * 100);
+        let tempAmount = this.state.isRandomRedPacket ? parseInt(this.state.redPacketAmount * 100) : parseInt(this.state.redPacketNum) * parseInt(this.state.redPacketAmount * 100);
         this.setState({
             payAllAmount: parseFloat(tempAmount / 100.0),
         });
@@ -597,7 +597,7 @@ class SendRedPacketPage extends BasePage {
     };
     _handleShowPayModal = () => {
         let contentFront = `实付金额`;
-        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.payAllAmount;
+        let tempAmount = this.state.payAllAmount;
         let contentBack = `${FormatUtils.money(tempAmount)}元`;
         this.setState({
             contentFront: contentFront,
