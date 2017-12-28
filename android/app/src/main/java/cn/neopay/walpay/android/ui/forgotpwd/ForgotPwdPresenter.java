@@ -25,8 +25,8 @@ public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
         Observable.just("")
                 .filter(a -> InputCheckUtils.checkPhone(bean.getPhone()))
                 .filter(b -> InputCheckUtils.checkVerificationCode(bean.getVerificationCode()))
-                .filter(c -> checkPwdOrPayPwd(bean.getForgotPwdType(), bean.getNewPassword()))
                 .filter(c -> checkRealMag(bean.getForgotPwdType(), bean.getRealMsg()))
+                .filter(c -> checkPwdOrPayPwd(bean.getForgotPwdType(), bean.getNewPassword()))
                 .subscribe(s -> resetPwdOperate(bean.getForgotPwdType(), bean.getPhone(), bean.getVerificationCode(), bean.getNewPassword(), bean.getRealMsg()));
 
     }

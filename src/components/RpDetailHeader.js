@@ -54,9 +54,9 @@ const RpDetailHeader = props => {
         mid_Image:{
             width:ScreenUtils.width,
             height:itemHeight,
-            resizeMode:'contain',
-            backgroundColor:colors.white,
+            resizeMode:'stretch',
             alignItems:'center',
+            backgroundColor:colors.black,
         },
 
         middle_container: {

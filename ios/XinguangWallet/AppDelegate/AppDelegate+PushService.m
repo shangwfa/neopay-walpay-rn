@@ -37,10 +37,14 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
                  apsForProduction:0];
     
     if([GVUserDefaults standardUserDefaults].uuid){
+//
+//        NSSet *tags = [[NSSet alloc]initWithObjects:[GVUserDefaults standardUserDefaults].uuid, nil];
+//
+//        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+//        } seq:999];
         
-        NSSet *tags = [[NSSet alloc]initWithObjects:[GVUserDefaults standardUserDefaults].uuid, nil];
-        
-        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+        [JPUSHService setAlias:[GVUserDefaults standardUserDefaults].uuid completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            JKLog();
         } seq:999];
     }
 

@@ -127,22 +127,24 @@ class PhoneTopUpMoneyView extends Component {
 
     componentDidMount() {
 
-        if(!this.state.phoneNo){
-            NativeModules.commModule.contactCommNumber((data)=>{
-                this.setState({
-                    phoneNo:data
-                });
-            });
-        }
+        // if(!this.state.phoneNo){
+        //     NativeModules.commModule.contactCommNumber((data)=>{
+        //         this.setState({
+        //             phoneNo:data
+        //         });
+        //     });
+        // }
         //获取上次支付方式和余额
         ApiManager.getRecentPayType({}, (data) => {
             this.setState({
-                // payTypeSourceData: data,
-                // payType: data.payType,
+                selectedPayType:data.payType,
+                selectedBankName: data.payTypeDesc,
                 selectedBankId: data.bankCardId,
                 accountAmount: data.amount
             });
         });
+        //{"retCode":1,"data":{"payType":1,"bankCardId":13,"payTypeDesc":"上海浦东发展银行(8260)"},"retMsg":"成功"}
+        // {"retCode":1,"data":{"payType":1,"bankCardId":13,"payTypeDesc":"银行卡支付"},"retMsg":"成功"}
 
         //获取上次充值手机号
         ApiManager.getRecentPhoneRechargePhone({},(data)=>{
@@ -206,9 +208,13 @@ class PhoneTopUpMoneyView extends Component {
     //处理银行卡信息
     retPayTypeContent=()=>{
         if (this.state.selectedBankId==-1)
-            return this.state.selectedBankName;
-        else
+            return '余额';
+        else if(this.state.selectedBankCardNo){
             return this.state.selectedBankName+'('+this.state.selectedBankCardNo.slice(-4)+')';
+        }else {
+            return this.state.selectedBankName;
+        }
+        // return this.state.selectedBankName;
     }
 
     //处理手机号格式
@@ -285,7 +291,7 @@ class PhoneTopUpMoneyView extends Component {
     renderCelluarCell=()=>{
         let celluarPriceItem =[];
         if(this.props.viewType==true){
-            if(this.state.selectedItemIndex){
+            if(this.state.selectedItemIndex!==null){
                 for(let i=0; i<this.state.CelluarPriceList.length;i++){
                     celluarPriceItem.push(
                         <View>
@@ -356,7 +362,7 @@ class PhoneTopUpMoneyView extends Component {
                 selectedItemIndex:i,
             });
 
-            ApiManager.queryPhoneRechargeDataList({"nameCode":i,"phone":this.state.phoneNo},(data)=>{
+            ApiManager.queryPhoneRechargeDataList({"nameCode":`${i+1}`,"phone":this.state.phoneNo},(data)=>{
 
                     this.setState({
                         CelluarPriceList:data,

@@ -46,10 +46,10 @@ class ImageTitleModal extends Component {
                 onRequestClose={()=>{}}>
                 <View style={styles.modalStyle}>
                     <View style={styles.container}>
-                        <Image style={styles.imageStyle} source = {require("../res/img/emptyBankCard_img.png")}>
+                        <Image style={styles.imageStyle} source = {this.props.imagePath}>
 
                         </Image>
-                        <Text style={styles.textStyle}>xxxxxx</Text>
+                        <Text style={styles.textStyle}>{this.props.title}</Text>
                     </View>
 
                 </View>
@@ -61,7 +61,7 @@ class ImageTitleModal extends Component {
 const styles = StyleSheet.create({
     container: {
         width:200,
-        height:200,
+        height:140,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff',
@@ -73,12 +73,13 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     imageStyle: {
-        width:80,
-        height:80,
+        width:50,
+        height:50,
     },
     textStyle: {
         marginTop:20,
-        color:'#000000'
+        color:'#000000',
+        fontSize:18,
     },
 
 });

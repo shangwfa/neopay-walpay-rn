@@ -19,8 +19,10 @@ import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
 import cn.neopay.walpay.android.module.request.RedPacketStateRequestBean;
 import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.NewsRedPacketItemBean;
 import cn.neopay.walpay.android.ui.RNActivity;
+import cn.neopay.walpay.android.utils.BusniessUtils;
 import cn.neopay.walpay.android.utils.DateHandle;
 
 /**
@@ -47,26 +49,31 @@ public class NewsRedPacketSlimInjector implements SlimInjector<NewsRedPacketItem
     }
 
     private void handleRedPacketClick(NewsRedPacketItemBean data, View view) {
-        //1 未领取
-        if (1 == data.getReceiveStatus()) {
-            ApiManager.getSingleton().updateRedPacketState(new RedPacketStateRequestBean(data.getPacketCode()), new BaseSubscriber((Activity) view.getContext(), o -> {
-                RNActivityParams params = new RNActivityParams();
-                params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
-                RNActivityParams.Data dataParams = new RNActivityParams.Data();
-                dataParams.setPacketCode(data.getPacketCode());
-                params.setData(dataParams);
-                RNActivity.jumpToRNPage(view.getContext(), params);
-            }));
-        } else {//2 成功 3 过期 4 领完 5 无权限
-            RNActivity.jumpToRNPage(view.getContext(), RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
-        }
+        UserInfoResponseBean infoResponseBean = new UserInfoResponseBean();
+        infoResponseBean.setAuthStatus(data.getAuthStatus());
+        BusniessUtils.handleCertification(view.getContext(), infoResponseBean, () -> {
+            //1 未领取
+            if (1 == data.getReceiveStatus()) {
+                ApiManager.getSingleton().updateRedPacketState(new RedPacketStateRequestBean(data.getPacketCode()), new BaseSubscriber((Activity) view.getContext(), o -> {
+                    RNActivityParams params = new RNActivityParams();
+                    params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
+                    RNActivityParams.Data dataParams = new RNActivityParams.Data();
+                    dataParams.setPacketCode(data.getPacketCode());
+                    params.setData(dataParams);
+                    RNActivity.jumpToRNPage(view.getContext(), params);
+                }));
+            } else {//2 成功 3 过期 4 领完 5 无权限
+                RNActivity.jumpToRNPage(view.getContext(), RNActivity.PageType.ACTIVITY_RED_LIST_PAGE);
+            }
 
-        UpdateNewsReadStatusRequestBean requestBean = new UpdateNewsReadStatusRequestBean();
-        requestBean.setId(data.getId());
-        requestBean.setMsgType(data.getMsgType());
-        ApiManager.getSingleton().updateNewsReadStatus(requestBean,
-                new BaseSubscriber((Activity) view.getContext(), o -> {
-                }, false));
+            UpdateNewsReadStatusRequestBean requestBean = new UpdateNewsReadStatusRequestBean();
+            requestBean.setId(data.getId());
+            requestBean.setMsgType(data.getMsgType());
+            ApiManager.getSingleton().updateNewsReadStatus(requestBean,
+                    new BaseSubscriber((Activity) view.getContext(), o -> {
+                    }, false));
+
+        });
     }
 
 

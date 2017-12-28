@@ -83,7 +83,7 @@ class MyOrderPage extends BasePage {
                                middleUpValue={item.title}
                                middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.tradeTimeMs)}
                                rightUpValue={TransactionTypeDescUtils._handleAmountType(item.payDirection) + FormatUtils.money(item.amount)}
-                               rightBottomValue={item.billProcessStatus === 3 ? "" : item.billStatusText}
+                               rightBottomValue={item.billProcessStatus === 3 ? "" : item.billProcessStatusText}
                                rightBottomStyle={{color: BusinessUtils.getColorByBillState(item.billProcessStatus)}}
                                isLine={true}
                                onPress={() => {
