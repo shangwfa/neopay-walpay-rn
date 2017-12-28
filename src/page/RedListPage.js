@@ -29,6 +29,7 @@ class RedListPage extends BasePage {
     }
 
     componentWillMount() {
+        super.componentWillMount();
         this._handleRefresh();
     }
 
@@ -42,6 +43,7 @@ class RedListPage extends BasePage {
                     data={this.state.dataSource}
                     renderItem={this._renderItem}
                     onRefresh={this._onRefresh}
+                    extraData={this.state}
                     onLoadMore={this._onLoadMore}
                     isEmpty={this.state.isEmpty}
                 />
@@ -116,6 +118,13 @@ class RedListPage extends BasePage {
             </TouchableOpacity>
         );
     };
+    emitEvent = (event) => {
+        switch (event.type) {
+            case "redPacketDetailBack"://红包详情回退redPacketDetailBack
+                this._handleRefresh();
+                break;
+        }
+    }
 
 }
 

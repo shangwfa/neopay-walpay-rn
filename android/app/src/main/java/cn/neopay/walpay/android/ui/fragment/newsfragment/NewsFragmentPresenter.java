@@ -2,11 +2,14 @@ package cn.neopay.walpay.android.ui.fragment.newsfragment;
 
 import com.xgjk.common.lib.utils.PageUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
+import cn.neopay.walpay.android.module.event.RefreshBean;
 import cn.neopay.walpay.android.module.request.GetHomeNewsInfoRequestBean;
 import cn.neopay.walpay.android.module.response.GetNewsResponseBean;
 import cn.neopay.walpay.android.module.sliminjector.CommonLineItemBean;
@@ -39,6 +42,7 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
 
     private void handleRefresh(boolean isRefresh, boolean isShowLoading) {
         if (isRefresh) {
+            EventBus.getDefault().post(new RefreshBean());
             mDataPageList.clear();
         }
         GetHomeNewsInfoRequestBean requestBean = new GetHomeNewsInfoRequestBean();
