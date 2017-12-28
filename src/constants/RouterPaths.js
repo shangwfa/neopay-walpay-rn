@@ -44,6 +44,7 @@ export const RouterPaths = {
     RP_MONTH_DETAILRECORD:'rpMonthDetailRecord',
     NEW_BIND_BANKCARD:'newBindBankCard',
     NEW_USER_CERFITY:'userInfoCerfity',
+    MY_BALANCE:'myBalance'
 };
 
 

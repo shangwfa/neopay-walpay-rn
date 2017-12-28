@@ -5,12 +5,13 @@ import {
     Text,
     Image,
     FlatList,
+    DeviceEventEmitter
 } from 'react-native'
 import BasePage from './BasePage'
 import {colors} from '../constants/index'
 import Header from '../components/Header'
 import ScrnUtil from '../utils/ScreenUtils'
-import {StackNavigator, NavigationActions} from 'react-navigation'
+import {RouterPaths} from "../constants/RouterPaths"
 class AccountWithdrawResultPage extends BasePage {
 
     constructor(props) {
@@ -20,11 +21,16 @@ class AccountWithdrawResultPage extends BasePage {
             data:this.props.navigation.state.params.data,
         }
     }
+
+    back=()=>{
+        DeviceEventEmitter.emit(RouterPaths.MY_BALANCE,{type:'refresh'})
+    }
     render() {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title={'提现结果'} onLeftPress={()=>{
                     nav.goBack(backKey)
+                    this.back()
                 }}/>
                 <FlatList
                     data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:this.state.data.incomeTypeDesc},{key: '提现服务费',data:`${this.state.data.feePay}`}]}
