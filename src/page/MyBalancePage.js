@@ -4,8 +4,6 @@ import {
     View,
     Text,
     Image,
-    Button,
-    TouchableHighlight,
 } from 'react-native'
 import BasePage from './BasePage'
 import {colors} from '../constants/index'
@@ -31,6 +29,10 @@ class MyBalancePage extends BasePage {
         }
     }
 
+    emitEvent = (event) => {
+
+        this.loadData()
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -71,7 +73,10 @@ class MyBalancePage extends BasePage {
     }
 
     componentDidMount() {
+        this.loadData()
+    }
 
+    loadData=()=>{
         NetUtil.post('balance/get_user_balance', {}, (data) => {
             this.setState({
                 data: data

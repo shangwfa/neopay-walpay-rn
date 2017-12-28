@@ -44,7 +44,7 @@ class NewBindBankCardPage extends BasePage {
     }
 
     commit = () => {
-        if(isCreditCard == true)
+        if(this.state.isCreditCard == true)
         {
             if(this.state.param.fromPage == 'redPacket') {
                 this.setState({
@@ -56,7 +56,7 @@ class NewBindBankCardPage extends BasePage {
             }else if(this.state.param.fromPage == 'withdrawCash') {
                 this.setState({
                         isShow: true,
-                        contentModal:'提现不可以提现至信用卡'
+                        contentModal:'为保障您的账户安全，账户提现功能只支持绑定储蓄卡'
                     }
                 )
                 return;

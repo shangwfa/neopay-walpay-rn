@@ -3,7 +3,9 @@ import {
     StyleSheet,
     View,
     Text,
-    TextInput, NativeModules,
+    TextInput,
+    NativeModules,
+    DeviceEventEmitter
 } from 'react-native'
 import BasePage from './BasePage'
 import {colors} from '../constants/index'
