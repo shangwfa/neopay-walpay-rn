@@ -44,7 +44,7 @@ class NewBindBankCardPage extends BasePage {
     }
 
     commit = () => {
-        if(isCreditCard == true)
+        if(this.state.isCreditCard == true)
         {
             if(this.state.param.fromPage == 'redPacket') {
                 this.setState({
