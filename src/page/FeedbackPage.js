@@ -4,7 +4,8 @@ import {
     View,
     Text,
     Image,
-    TextInput
+    TextInput,
+    NativeModules
 } from 'react-native'
 import BasePage from '../page/BasePage'
 import Header from '../components/Header'
@@ -24,6 +25,8 @@ class FeedbackPage extends BasePage {
 
     commit = () => {
         NetUtil.post('assist/add_feedback', {content:this.state.inputText}, (data) => {
+            NativeModules.commModule.toast('提交成功')
+            nav.goBack()
         })
     }
 
@@ -37,9 +40,9 @@ class FeedbackPage extends BasePage {
                     placeholder={this.state.placeholder}
                     multiline={true}
                     onChangeText={(text) => {
-                        this.setState = {
+                        this.setState({
                             inputText: text
-                        }
+                        })
                     }}
                 />
                 <CommonButton value='提交' style={{marginTop:50}} onPress={()=>this.commit()}/>

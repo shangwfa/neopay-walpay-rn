@@ -39,6 +39,10 @@ class RedPacketResultPage extends BasePage {
         };
     }
 
+    back=()=>{
+        this.headerLeftBtnPress()
+    }
+
     render() {
         return (
             <View style={[styles.container, {backgroundColor: '#F2F2F2'}]}>

@@ -16,6 +16,8 @@ import ApiManager from '../utils/ApiManager'
 import PayPwdModal from '../modal/PayPwdModal'
 import SelectPayStyleModal from '../modal/SelectPayStyleModal'
 import {RouterPaths} from "../constants/RouterPaths"
+import FormatUtils from "../utils/FormatUtils";
+import TwoButtonModal from "../modal/TwoButtonModal";
 
 const marginBetween=13;
 const marginCellTop= 15*ScreenUtils.height/667.0;
@@ -45,7 +47,9 @@ class PhoneTopUpMoneyView extends Component {
             selectedBankCardNo:'',
             selectedRechargeType:1,
             itemSelectable:false,
-            itemTextColor:'gray'
+            itemTextColor:'gray',
+            isShowBindCard:false,
+            accountAmount:0.0,
         }
     }
 
@@ -81,6 +85,7 @@ class PhoneTopUpMoneyView extends Component {
                 </View>
                 <SelectPayStyleModal
                     title="选择付款方式"
+                    payAmount={this.state.payAmount}
                     selectBankId={this.state.selectedBankId}
                     bankCardFooterItemClick={this.handleBankCardFooterItemClick.bind(this)}
                     bankCardItemClick={this.handleBankCardItemClick.bind(this)}
@@ -94,9 +99,31 @@ class PhoneTopUpMoneyView extends Component {
                              onForgetPwd={()=>this.forgetPayPwdBtnClicked()}
                              onEnd={(text)=>this.pwdInputFinished(text)}
                              selectPayStyleClick={()=>{this.selectPayStyleBtnClick()}}/>
+                <TwoButtonModal
+                    isShow={this.state.isShowBindCard}
+                    title="余额不足，绑定银行卡支付"
+                    content={`账户余额 ${FormatUtils.money(this.state.accountAmount)}元\n\n实付金额 ${FormatUtils.money(this.state.payAmount)}元`}
+                    oneBtnText="关闭弹窗"
+                    twoBtnText="去绑卡"
+                    rightBrtnStyle={{color: "#F34646"}}
+                    onePress={this._handleCloseClick}
+                    twoPress={this._handleExitClick}
+                />
             </View>
         );
     }
+
+    _handleCloseClick = () => {
+        this.setState({
+            isShowBindCard: false,
+            selectedItemIndex:null,
+        })
+    };
+
+    _handleExitClick = () => {
+        this._handleCloseClick();
+        nav.navigate(RouterPaths.NEW_BIND_BANKCARD, {type: 3});
+    };
 
     componentDidMount() {
 
@@ -107,14 +134,21 @@ class PhoneTopUpMoneyView extends Component {
                 });
             });
         }
+        //获取上次支付方式和余额
+        ApiManager.getRecentPayType({}, (data) => {
+            this.setState({
+                // payTypeSourceData: data,
+                // payType: data.payType,
+                selectedBankId: data.bankCardId,
+                accountAmount: data.amount
+            });
+        });
 
         //获取上次充值手机号
         ApiManager.getRecentPhoneRechargePhone({},(data)=>{
-
             this.setState({
                phoneNo:data.phone,
            });
-
         if (this.state.phoneNo.length===11){
                ApiManager.getPhoneRechargeProductList({"phone":this.state.phoneNo,"productType":this.props.viewType?2:1},(data)=>{
                    if(this.props.viewType){
@@ -295,10 +329,22 @@ class PhoneTopUpMoneyView extends Component {
     //冲流量按钮点击
     celluarOrderBtnClicked=(i)=>{
         this.setState({
-            isPayShow:true,
+            // isPayShow:true,
             payAmount:this.state.CelluarPriceList[i].tradeAmount.toFixed(2),
             selectedNameCode:this.state.CelluarPriceList[i].nameCode,
             selectedRechargeType:i===0?3:2,
+        });
+        let request = {amount:this.state.CelluarPriceList[i].tradeAmount.toFixed(2)}
+        ApiManager.checkNeedBindCard(request,(data)=>{
+            if(data.needBindCard){
+                this.setState({
+                    isShowBindCard:true,
+                })
+            }else {
+                this.setState({
+                    isPayShow:true,
+                })
+            }
         });
     };
 
@@ -327,10 +373,22 @@ class PhoneTopUpMoneyView extends Component {
         if(this.state.phoneNo.length==11){
             this.setState({
                 selectedItemIndex:i,
-                isPayShow:true,
+                // isPayShow:true,
                 payAmount:this.state.MoneyItemList[i].tradeAmount.toFixed(2),
                 selectedNameCode:this.state.MoneyItemList[i].nameCode,
                 selectedRechargeType:1,
+            });
+            let request = {amount:this.state.MoneyItemList[i].tradeAmount.toFixed(2)}
+            ApiManager.checkNeedBindCard(request,(data)=>{
+               if(data.needBindCard){
+                   this.setState({
+                       isShowBindCard:true,
+                   })
+               }else {
+                   this.setState({
+                       isPayShow:true,
+                   })
+               }
             });
         }else {
             NativeModules.commModule.toast("请输入正确手机号");

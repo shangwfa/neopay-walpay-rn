@@ -10,8 +10,8 @@ class NetUtil extends Component {
 
     static baseUrl;
 
-    static handleException(code, msg) {
-        let isShowMsg = true
+    static handleException(code, msg,isShowMsg) {
+        // let isShowMsg = true
         switch (code) {
             case 104://用户未登录
                 break
@@ -31,7 +31,7 @@ class NetUtil extends Component {
         })
     }
 
-    static post(urlPath, data, successCallbak, isShowLoading = true, errorCallback, netWorkCallback) {
+    static post(urlPath, data, successCallbak, isShowLoading = true, errorCallback, netWorkCallback,isShowMsg=true) {
         if (isShowLoading) {
             NativeModules.commModule.showLoadingDialog()
         }
@@ -67,7 +67,7 @@ class NetUtil extends Component {
                             retCode: response.retCode,
                             retMsg: response.retMsg,
                         };
-                        errorCallback ? errorCallback(errorData) : this.handleException(response.retCode, response.retMsg)
+                        errorCallback ? errorCallback(errorData) : this.handleException(response.retCode, response.retMsg,isShowMsg)
                     }
                 })
                 .catch((err) => {

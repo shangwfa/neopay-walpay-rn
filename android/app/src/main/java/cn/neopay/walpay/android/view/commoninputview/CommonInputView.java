@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.xgjk.common.lib.utils.StringUtils;
-import com.xgjk.common.lib.utils.ToastUtils;
 import com.xgjk.common.lib.utils.ViewUtils;
 
 import cn.neopay.walpay.android.R;
@@ -90,7 +89,7 @@ public class CommonInputView extends FrameLayout {
                         break;
                     case IWalpayConstants.COMMONINPUTVIEW_TYPE_PAYPWD:
                         if (6 == s.length()) {
-                            ToastUtils.show("支付密码为6位数字");
+                            InputCheckUtils.checkPayPassword(s.toString());
                         }
                         break;
                 }

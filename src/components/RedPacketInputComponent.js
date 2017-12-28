@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         color: "#333"
     },
     text_input_txt: {
-        flex: 1,
+        flex: 3,
         fontSize: 14,
         color: "#666",
     },
