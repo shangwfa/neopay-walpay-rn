@@ -452,9 +452,13 @@ class SendRedPacketPage extends BasePage {
     _handleRedPacketListener = (text) => {
     };
     _handleRedPacketNumListener = (text) => {
-        let reg = /^[1-9]*$/;
+        if (parseFloat(text) === 0) {
+            // NativeModules.commModule.toast('红包个数必须为数字且大于0');
+            return;
+        }
+        let reg = /^[0-9]*$/;
         if (!reg.test(text)) {
-            NativeModules.commModule.toast('红包个数必须为数字且大于0');
+            // NativeModules.commModule.toast('红包个数必须为数字且大于0');
             return;
         }
         if (parseFloat(text.toString()) > 99) {
@@ -466,12 +470,20 @@ class SendRedPacketPage extends BasePage {
         });
     };
     _handleRedPacketAmountListener = (text) => {
-        let reg = /^[1-9]*$\d*(.\d{1,2})?$|^0.\d{1,2}$/;
-        if (!reg.test(text)) {
-            NativeModules.commModule.toast('红包金额必须为数字且保留两位小数');
+        if (text === ".") {
             return;
         }
-        if (parseFloat(text.toString().trim()) > 2000) {
+        const regStr = [
+            ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
+            ['[^\\d\\.]+$', ''], //禁止录入任何非数字和点
+            ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
+            ['^(\\d+\\.\\d{2}).+', '$1'] //禁止录入小数点后两位以上
+        ];
+        for (let i = 0; i < regStr.length; i++) {
+            const reg = new RegExp(regStr[i][0]);
+            text = text.replace(reg, regStr[i][1]);
+        }
+        if (parseFloat(text.toString().trim()) > parseFloat(2000)) {
             NativeModules.commModule.toast('红包金额不能超过2000元');
             return;
         }
@@ -537,12 +549,12 @@ class SendRedPacketPage extends BasePage {
             NativeModules.commModule.toast('付款金额必须大于0');
             return;
         }
-        let tempAmount = this.state.isRandomRedPacket ? parseFloat(this.state.redPacketAmount) : parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount);
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : parseInt(this.state.redPacketNum) * parseInt(this.state.redPacketAmount * 100);
         this.setState({
-            payAllAmount: tempAmount,
+            payAllAmount: parseFloat(tempAmount / 100.0),
         });
-        if (2000 < tempAmount) {
-            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为 ${FormatUtils.money(parseFloat(parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount)))}元`;
+        if (2000 < parseFloat(tempAmount / 100.0)) {
+            let contentModal = `请修改单个红包金额数，或修改红包个数\n\n红包总金额最高限额为 2000.00元\n\n当前红包总金额为 ${FormatUtils.money(parseFloat(tempAmount / 100.0))}元`;
             this.setState({
                 contentModal: contentModal,
                 isShow: true,
@@ -551,7 +563,7 @@ class SendRedPacketPage extends BasePage {
         }
         let request = {
             packetType: this.state.isRandomRedPacket ? 1 : 2,
-            amount: this.state.redPacketAmount,
+            amount: parseFloat(this.state.redPacketAmount),
             totalCount: this.state.redPacketNum,
             themeCode: this.state.redPacketThemeCode,
             message: this.state.redPacketMessage,
@@ -564,23 +576,22 @@ class SendRedPacketPage extends BasePage {
                 let request = {
                     amount: this.state.payAllAmount
                 };
-                // ApiManager.checkNeedBindCard(request, (data) => {
-                //     if (data.needBindCard) {
-                if (true) {
-                    this.setState({
-                        isShowBindCard: true
-                    });
-                } else {
-                    this._handleShowPayModal();
-                }
-                // });
+                ApiManager.checkNeedBindCard(request, (data) => {
+                    if (data.needBindCard) {
+                        this.setState({
+                            isShowBindCard: true
+                        });
+                    } else {
+                        this._handleShowPayModal();
+                    }
+                });
             }
         });
 
     };
     _handleShowPayModal = () => {
         let contentFront = `实付金额`;
-        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : parseFloat(this.state.redPacketNum) * parseFloat(this.state.redPacketAmount);
+        let tempAmount = this.state.isRandomRedPacket ? this.state.redPacketAmount : this.state.payAllAmount;
         let contentBack = `${FormatUtils.money(tempAmount)}元`;
         this.setState({
             contentFront: contentFront,
