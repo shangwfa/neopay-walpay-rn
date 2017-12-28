@@ -182,7 +182,12 @@ class SendRedPacketPage extends BasePage {
     };
     _handleExitClick = () => {
         this._handleCloseClick();
-        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {type: 3});
+        let params = {
+            pageType: 1,
+            type: 3,
+            fromPage: 'redPacket'
+        };
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, params);
     };
 
     _handleRedPacketTheme = () => {
@@ -584,9 +589,9 @@ class SendRedPacketPage extends BasePage {
                 };
                 ApiManager.checkNeedBindCard(request, (data) => {
                     if (data.needBindCard) {
-                this.setState({
-                    isShowBindCard: true
-                });
+                        this.setState({
+                            isShowBindCard: true
+                        });
                     } else {
                         this._handleShowPayModal();
                     }
