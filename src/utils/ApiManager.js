@@ -294,7 +294,7 @@ withdraworder = (request, callback) => {
 getRecentPhoneRechargePhone = (request, callback) => {
     NetUtil.post(APIS.GET_RECENT_PHONE_RECHARGE_PHONE, request, (data) => {
         callback(data);
-    })
+    },false,null,null,false)
 };
 queryMsgBillDetail = (request, callback) => {
     NetUtil.post(APIS.QUERY_MSG_BILL_DETAIL, request, (data) => {
