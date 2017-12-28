@@ -135,12 +135,25 @@
     
     //判断是否跳转消息页
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    JKLog(@"收到通知,开始跳转相应页面%ld",(long)appDelegate.msgType);
+
     if (appDelegate.msgType==XGQBMsgTypeRedPacket) {
-        JKLog(@"开始跳转");
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType=@"redList";
         [appRootVC.rootNAV pushViewController:RNVC animated:YES];
-        [kApplication setApplicationIconBadgeNumber:0];
+    }else if (appDelegate.msgType==XGQBMsgTypePayNotice){
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType=@"payMessage";
+        [appRootVC.rootNAV pushViewController:RNVC animated:YES];
+    }else if (appDelegate.msgType==XGQBMsgTypePhoneRechargeSuccess){
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType=@"topupMsgList";
+        [appRootVC.rootNAV pushViewController:RNVC animated:YES];
+    }else if(appDelegate.msgType==XGQBMsgTypePhoneDataRechargeSuccess){
+        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+        RNVC.pageType=@"topupMsgList";
+        [appRootVC.rootNAV pushViewController:RNVC animated:YES];
     }
 }
 
