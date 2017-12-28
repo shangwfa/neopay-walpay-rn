@@ -106,7 +106,14 @@
     if (indexPath.section==0&&indexPath.row==1&&[GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized) {
         [rootVC closeSideView];
         [rootVC.homeVC checkIDStatus];
-    }else{
+    }
+    //点击我的银行卡,判断是否已经实名
+    else if(indexPath.section==0&&indexPath.row==2&&[GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized)
+    {
+        [rootVC closeSideView];
+        [rootVC.homeVC checkIDStatus];
+    }
+    else{
         [rootVC.rootNAV pushViewController:RNVC animated:YES];
         [rootVC closeSideView];
     }
