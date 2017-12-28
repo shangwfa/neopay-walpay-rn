@@ -113,10 +113,10 @@ getUserBillDetail = (request, callback) => {
         callback(data);
     });
 };
-getRedPacketMessageList = (request, callback) => {
+getRedPacketMessageList = (request, callback, isShowLoading) => {
     NetUtil.post(APIS.QUERY_RED_PACKET_MSG_PAGE, request, (data) => {
         callback(data);
-    });
+    }, isShowLoading);
 };
 getRedPacketList = (request, callback) => {
     NetUtil.post(APIS.QUERY_RECENT_RED_PACKET_LIST, request, (data) => {
@@ -219,10 +219,10 @@ queryPhoneRechargeDataList = (request, callback) => {
         callback(data);
     });
 };
-getUserReceivableRedPacket = (request, callback) => {
+getUserReceivableRedPacket = (request, callback, isShowLoading) => {
     NetUtil.post(APIS.QUERY_USER_RECEIVABLE_RED_PACKET_PAGE, request, (data) => {
         callback(data);
-    });
+    }, isShowLoading);
 };
 getSquareRedPacketList = (request, callback) => {
     NetUtil.post(APIS.QUERY_SQUARE_RED_PACKET_LIST, request, (data) => {

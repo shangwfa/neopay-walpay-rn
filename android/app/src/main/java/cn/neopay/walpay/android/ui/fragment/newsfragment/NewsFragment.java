@@ -123,6 +123,7 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
                         () -> RNActivity.jumpToRNPage(getContext(), RNActivity.PageType.BALANCE)));
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleNewsFragmentEvent(UserInfoResponseBean userInfoBean) {
         if (null != userInfoBean) {
@@ -146,6 +147,12 @@ public class NewsFragment extends BaseFragment<NewsFragmentPresenter, FragmentNe
         }
         mNewsAdapter.updateData(mDataList);
         mNewsAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public UserInfoResponseBean getUserInfo() {
+        return mUserInfoBean;
     }
 
     @Override

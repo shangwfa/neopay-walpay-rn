@@ -8,9 +8,12 @@
 
 #import "AppDelegate.h"
 
+#import "XGQBPushNotiBody.h"
+
 @interface AppDelegate () 
 
 @end
+
 
 @implementation AppDelegate
 
@@ -22,11 +25,19 @@
     NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     
     if (remoteNotification) {
-        if ([remoteNotification[@"noticeType"] integerValue]) {//红包消息
-            _msgType= [remoteNotification[@"noticeType"] integerValue];
-            [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"收到消息类型%ld",(long)_msgType]];
+        
+        NSString *notiStr = remoteNotification[@"extraParam"];
+        
+        XGQBPushNotiBody *notiBody = [XGQBPushNotiBody modelWithJSON:notiStr];
+        
+        if (notiBody) {//红包消息
+            _msgType= notiBody.noticeType;
         }
     }
+    
+    // 注册显示应用程序BadgeNumber的通知
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
+    [application registerUserNotificationSettings:settings];
     
     
     ///初始化用户登录通知和网络改变通知
@@ -81,6 +92,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [JPUSHService resetBadge];
+    [kApplication setApplicationIconBadgeNumber:0];
 }
 
 

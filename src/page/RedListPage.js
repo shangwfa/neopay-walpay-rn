@@ -11,9 +11,8 @@ import Header from "../components/Header";
 import BasePage from "./BasePage";
 import {RouterPaths} from "../constants/RouterPaths";
 import ApiManager from "../utils/ApiManager";
-import {SwRefreshListView} from "react-native-swRefresh";
 import RedPacketTypeComponent from "../components/RedPacketTypeComponent";
-import RefreshList, {RefreshStatus} from "../components/RefreshList";
+import RefreshList from "../components/RefreshList";
 import DateUtils from "../utils/DateUtils";
 import ReceiveRedPacketModal from "../modal/ReceiveRedPacketModal";
 import RecivedRedPacket from '../data/RecivedRedPacket.json'
@@ -24,9 +23,9 @@ class RedListPage extends BasePage {
         super(props);
         this.state = {
             dataSource: [],
-            footerStatus: RefreshStatus.IDLE,
             isShowProcess: false,
-        };
+            isEmpty: false,
+        }
     }
 
     componentWillMount() {
@@ -44,7 +43,7 @@ class RedListPage extends BasePage {
                     renderItem={this._renderItem}
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
-                    footerStatus={this.state.footerStatus}
+                    isEmpty={this.state.isEmpty}
                 />
                 <ReceiveRedPacketModal
                     action={RecivedRedPacket}
@@ -55,32 +54,28 @@ class RedListPage extends BasePage {
     }
 
     _handleRefresh = () => {
-        ApiManager.getRedPacketMessageList({}, (data) => {
-            this.setState({
-                dataSource: data,
-            });
-        });
+        this.loadData(1, false, true);
     };
     _onRefresh = () => {
         this._handleRefresh();
     };
-    _onLoadMore = (pageSize) => {
+    loadData = (pageNo, isLoadMore, isLoadding = false) => {
         let params = {
-            pageSize: pageSize
+            pageNo: pageNo
         };
-        ApiManager.getRedPacketMessageList(params, (data) => {
-            if (data) {
-                let allData = this.state.dataSource;
-                allData.push(...data);
-                this.setState({
-                    dataSource: allData,
-                });
+        ApiManager.getRedPacketMessageList(params, data => {
+            if (isLoadMore) {
+                const arrData = this.state.dataSource;
+                arrData.push(...data);
+                this.setState({dataSource: arrData});
             } else {
-                this.setState({
-                    footerStatus: RefreshStatus.END
-                });
+                const empty = !data || data.length <= 0;
+                this.setState({dataSource: data, isEmpty: empty})
             }
-        });
+        }, isLoadding)
+    };
+    _onLoadMore = (pageSize) => {
+        this.loadData(pageSize, true, false);
     };
     _clickItem = (item) => {
         this.setState({

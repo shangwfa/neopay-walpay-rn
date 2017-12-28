@@ -233,8 +233,8 @@ class RedPacketReceiverPage extends BasePage {
             packetCode: this.props.navigation.state.params.packetCode,
             phones: redPacketPhones,
         };
-        let desMsg = this.state.data[0] ? `${this.state.data[0].phone + this.state.data[0].name}等${this.state.data.length}个人` : "";
         ApiManager.addRedPacketReceiver(request, (data) => {
+            let desMsg = `${this.state.data[0].phone + this.state.data[0].name}${this.state.data.length === 1 ? "" : `等${this.state.data.length}个人`}`;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
                 desMsg: desMsg,
                 isReady: true,
@@ -250,7 +250,7 @@ class RedPacketReceiverPage extends BasePage {
     handleError(errorData) {
         //1、成功 2、失败 3、提醒
         if (2 === errorData.retCode) {
-            let desMsg = `${this.state.data[0].phone + this.state.data[0].name}${this.state.data.length >= 2 ? `等${this.state.data.length}个人` : ""}`;
+            let desMsg = `${this.state.data[0].phone + this.state.data[0].name}${this.state.data.length === 1 ? "" : `等${this.state.data.length}个人`}`;
             nav.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
                 desMsg: desMsg,
                 isReady: false,

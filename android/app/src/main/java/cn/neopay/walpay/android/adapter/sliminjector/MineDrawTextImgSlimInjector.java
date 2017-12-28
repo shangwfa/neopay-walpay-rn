@@ -46,6 +46,7 @@ public class MineDrawTextImgSlimInjector implements SlimInjector<MineTextImgItem
                             handleAuth(data, v, activityParams, RNActivity.PageType.MY_BANK);
                             break;
                         case "about":
+                            RNActivity.jumpToRNPage(v.getContext(), RNActivity.PageType.ABOUT_US);
                             break;
                     }
                 });

@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 import {events} from '../constants/index'
 import ScreenUtils from "../utils/ScreenUtils"
 import list_empty_icon from '../res/img/list_empty_icon.png'
+import Divider from "./Divider";
 
 export const RefreshStatus = {
     IDLE: 'idle',
@@ -66,7 +67,9 @@ class RefreshList extends Component {
             if (this.isEnd()) {
                 return (
                     <View style={styles.footer_container}>
-                        <Text style={styles.footer_text}>———— 没有更多内容啦！————</Text>
+                        <Divider style={{backgroundColor: "#333", width: 60}}/>
+                        <Text style={styles.footer_text}>没有更多内容啦！</Text>
+                        <Divider style={{backgroundColor: "#333", width: 60}}/>
                     </View>
                 )
             } else {

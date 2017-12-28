@@ -28,7 +28,7 @@ class OneButtonModal extends Component {
                     <View style={styles.container}>
                         <Text style={styles.text_content}>{this.props.content}</Text>
                         <View style={styles.line}/>
-                        <TouchableOpacity style={{width: 316,}} onPress={this.props.onPress}>
+                        <TouchableOpacity style={{width: 316, height: 50,justifyContent:"center"}} onPress={this.props.onPress}>
                             <Text style={styles.btn}>{this.props.btnTitle}</Text>
                         </TouchableOpacity>
                     </View>
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     btn: {
         fontSize: 13,
         color: colors.black,
-        height: 50,
         textAlign: 'center',
         textAlignVertical: 'center'
     },

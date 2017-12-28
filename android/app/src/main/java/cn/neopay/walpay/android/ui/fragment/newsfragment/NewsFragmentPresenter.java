@@ -39,9 +39,7 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
 
     private void handleRefresh(boolean isRefresh, boolean isShowLoading) {
         if (isRefresh) {
-            mDataList.clear();
             mDataPageList.clear();
-            mView.setNoMoreData(false);
         }
         GetHomeNewsInfoRequestBean requestBean = new GetHomeNewsInfoRequestBean();
         requestBean.setPageNo(PageUtils.getPageNo(mDataPageList));
@@ -70,6 +68,10 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
 
     @Override
     public void handleNewsData(List<GetNewsResponseBean> newsBeanList, boolean isRefresh) {
+        if (isRefresh) {
+            mDataList.clear();
+            mView.setNoMoreData(false);
+        }
         if (null == newsBeanList) {
             if (isRefresh) {
                 handleNoData();
@@ -161,6 +163,7 @@ public class NewsFragmentPresenter extends NewsFragmentContract.Presenter {
         newsRedPacketItemBean.setReceiveStatus(getNewsResponseBean.getReceiveStatus());
         newsRedPacketItemBean.setId(getNewsResponseBean.getId());
         newsRedPacketItemBean.setMsgType(getNewsResponseBean.getMsgType());
+        newsRedPacketItemBean.setAuthStatus(null != mView.getUserInfo() ? mView.getUserInfo().getAuthStatus() : 1);
         mDataList.add(newsRedPacketItemBean);
     }
 

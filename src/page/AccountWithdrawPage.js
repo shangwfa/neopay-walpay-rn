@@ -143,7 +143,11 @@ class AccountWithdrawPage extends BasePage {
         this.setState({
             isShowSelectPayStyle: false,
         });
-        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡", type: 2});
+        this.props.navigation.navigate(RouterPaths.NEW_BIND_BANKCARD, {
+            pageTitle: "添加绑定银行卡",
+            type: 2,
+            fromPage: 'withdrawCash'
+        });
     }
     handleBankCardItemClick = (bankCardData) => {
         // console.log('点击了选择银行卡')
@@ -211,12 +215,12 @@ class AccountWithdrawPage extends BasePage {
         if (text.length > 0) {
             this.setState({
                 isHaveContent: true,
-                textInputPlaceHolder:""
+                textInputPlaceHolder: ""
             })
         } else if (text.length <= 0) {
             this.setState({
                 isHaveContent: false,
-                textInputPlaceHolder:"请输入提现金额"
+                textInputPlaceHolder: "请输入提现金额"
             })
         }
         this.setState({
@@ -233,7 +237,7 @@ class AccountWithdrawPage extends BasePage {
 
     withdrawBtnClicked() {
 
-        if(this.state.selectedBankId==0){
+        if (this.state.selectedBankId == 0) {
             NativeModules.commModule.toast("请先选择提现银行卡");
         }
         else if (this.state.withdrawAmount > this.state.withdrawBalance) {
