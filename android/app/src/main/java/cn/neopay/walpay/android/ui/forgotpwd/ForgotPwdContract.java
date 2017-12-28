@@ -14,10 +14,12 @@ import cn.neopay.walpay.android.module.bean.ResetPwdParameterBean;
 public interface ForgotPwdContract {
     interface IView extends BaseView {
         void finishActivity();
+        void setUserAuthState(boolean userAuthState);
     }
 
     abstract class Presenter extends BasePresenter<IView> {
         public abstract void resetPassword(ResetPwdParameterBean resetPwdParameterBean);
+        public abstract void getUerInfo();
 
         @Override
         public void onAttached() {

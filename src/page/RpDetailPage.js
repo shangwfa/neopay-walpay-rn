@@ -100,7 +100,10 @@ class RpDetailPage extends BasePage {
         )
 
     }
-
+    back=()=>{
+        DeviceEventEmitter.emit(RouterPaths.RECEIVE_RED_PACKET,{type:'redPacketDetailBack'})
+        DeviceEventEmitter.emit(RouterPaths.RED_LIST,{type:'redPacketDetailBack'})
+    };
     _renderMainView = () =>{
         return(
             <ScrollView style = {{height:ScreenUtils.height - 50}}>
@@ -111,6 +114,7 @@ class RpDetailPage extends BasePage {
                     isWhiteArrow={true}
                     textColor={colors.white}
                     rightTextColor={colors.white}
+                    back={()=>this.back()}
                     title='红包详情'/>
                 <RpDetailHeader imgIconUrl={this.state.dataDetail.bossAvatarUrl}
                                 amountValue={FormatUtils.money(this.state.dataDetail.luckyMoney)}

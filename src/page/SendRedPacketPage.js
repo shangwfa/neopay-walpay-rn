@@ -64,6 +64,11 @@ class SendRedPacketPage extends BasePage {
 
     componentWillMount() {
         this._handleRedPacketAmountText();
+        this._handleRecentPayTypeRequest();
+        this._handleRedPacketTheme();
+    }
+
+    _handleRecentPayTypeRequest = () => {
         ApiManager.getRecentPayType({}, (data) => {
             this.setState({
                 payTypeSourceData: data,
@@ -72,8 +77,7 @@ class SendRedPacketPage extends BasePage {
                 accountAmount: data.amount
             });
         });
-        this._handleRedPacketTheme();
-    }
+    };
 
     render() {
         return (
@@ -292,6 +296,7 @@ class SendRedPacketPage extends BasePage {
                 this._handleShowPayModal();
                 break;
             case "redPacketBindCard"://绑定银行卡redPacketBindCard
+                this._handleRecentPayTypeRequest();
                 this.refs.selectPayStyleModal._handleRequest();
                 this._handleShowPayModal();
                 break;

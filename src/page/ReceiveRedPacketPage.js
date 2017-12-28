@@ -34,6 +34,13 @@ class ReceiveRedPacketPage extends BasePage {
     componentWillMount() {
         this._handleRefresh();
     }
+    emitEvent = (event) => {
+        switch (event.type) {
+            case "redPacketDetailBack"://红包详情回退redPacketDetailBack
+                this._handleRefresh();
+                break;
+        }
+    }
 
     render() {
         return (
@@ -49,6 +56,7 @@ class ReceiveRedPacketPage extends BasePage {
                 <RefreshList
                     data={this.state.dataSource}
                     renderItem={this._renderItem}
+                    extraData={this.state}
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
                     isEmpty={this.state.isEmpty}/>
