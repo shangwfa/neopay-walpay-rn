@@ -14,6 +14,7 @@ class BasePage extends Component {
 
     /*event={type:'xxxxx',data:{}}*/
     componentWillMount() {
+        console.log("----------------->basePage");
         this.emitterListener = DeviceEventEmitter.addListener(nav.state.routeName, (event) => {
             this.emitEvent(event)
         })

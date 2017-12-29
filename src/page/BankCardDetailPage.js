@@ -70,7 +70,7 @@ class BankCardDetailPage extends BasePage {
                     isPayShow:false,
                     isHUDShow:true,
                     imagePath:require("../res/img/wd_chengong.png"),
-                    showTitle:'绑定成功'
+                    showTitle:'解绑成功'
                 })
                 DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
                 this.props.navigation.goBack();
@@ -83,7 +83,7 @@ class BankCardDetailPage extends BasePage {
                     isPayShow:false,
                     isHUDShow:true,
                     imagePath:require("../res/img/wd_shibai.png"),
-                    showTitle:'绑定失败'
+                    showTitle:'解绑失败'
                 })
             },100)
         });

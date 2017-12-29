@@ -199,7 +199,7 @@ class NewBindBankCardPage extends BasePage {
     }
 
     back=()=>{
-        if(this.state.param.type == 3) {
+        if(this.state.param.type === 3) {
             DeviceEventEmitter.emit(RouterPaths.SEND_RED_PACKET, {type: 'redPacketBindCard', data: this.state.choseItem})
             DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'newBindBankCard'})
         }

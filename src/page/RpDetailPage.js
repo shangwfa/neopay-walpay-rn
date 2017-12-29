@@ -37,9 +37,9 @@ class RpDetailPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
-            dataDetail:{},
-            dataSource:[],
-            param:this.props.navigation.state.params.data?this.props.navigation.state.params.data:this.props.navigation.state.params
+            dataDetail: {},
+            dataSource: [],
+            param: this.props.navigation.state.params.data ? this.props.navigation.state.params.data : this.props.navigation.state.params
         }
     }
 
@@ -52,18 +52,18 @@ class RpDetailPage extends BasePage {
         switch (event.type) {
             case "RedPacketDetail"://选择红包主题
                 this.setState({
-                    dataDetail:event.data
+                    dataDetail: event.data
                 });
-                console.log('^^^^'+ this.state.dataDetail.packetCode)
+                console.log('^^^^' + this.state.dataDetail.packetCode)
                 // console.log('^^^^'+ event.data.areaName)
                 break;
         }
 
     };
 
-    _postRpDetail = () =>{
+    _postRpDetail = () => {
         let body = {
-            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
+            packetCode: this.state.param ? this.state.param.packetCode : this.state.dataDetail.packetCode
         };
         ApiManager.getRpDetail(body, (data) => {
             this.setState({
@@ -74,7 +74,7 @@ class RpDetailPage extends BasePage {
 
     _postRpReceiverList = () => {
         let body = {
-            packetCode: this.state.param?this.state.param.packetCode:this.state.dataDetail.packetCode
+            packetCode: this.state.param ? this.state.param.packetCode : this.state.dataDetail.packetCode
         };
         ApiManager.getRpReceiverList(body, (data) => {
             this.setState({
@@ -83,7 +83,7 @@ class RpDetailPage extends BasePage {
         });
     };
 
-    _pushSendRpPage=()=>{
+    _pushSendRpPage = () => {
         this.props.navigation.navigate(RouterPaths.SEND_RED_PACKET);
     }
 
@@ -92,18 +92,22 @@ class RpDetailPage extends BasePage {
         return (
             <View>
                 <CommonItemTwo imgUrl={item.robberAvatar}
-                               middleUpValue={item.robberName} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
-                               rightUpValue={moneyWithTag.money(item.luckyAmount)}
+                               middleUpValue={item.robberName}
+                               middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
+                               rightUpValue={FormatUtils.moneyWithTag(item.luckyAmount)}
                                isLine={true}
-                               imgIconUrl={item.luckyFlag==3?require("../res/img/rp_max_num.png"):' '} />
+                               imgIconUrl={item.luckyFlag == 3 ? require("../res/img/rp_max_num.png") : ' '}/>
             </View>
         )
 
     }
-
-    _renderMainView = () =>{
-        return(
-            <ScrollView style = {{height:ScreenUtils.height - 50}}>
+    back = () => {
+        DeviceEventEmitter.emit(RouterPaths.RECEIVE_RED_PACKET, {type: 'redPacketDetailBack'})
+        DeviceEventEmitter.emit(RouterPaths.RED_LIST, {type: 'redPacketDetailBack'})
+    };
+    _renderMainView = () => {
+        return (
+            <ScrollView style={{height: ScreenUtils.height - 50}}>
                 <Header
                     navigation={this.props.navigation}
                     backgroundColor="#D83E3E"
@@ -111,16 +115,18 @@ class RpDetailPage extends BasePage {
                     isWhiteArrow={true}
                     textColor={colors.white}
                     rightTextColor={colors.white}
+                    back={() => this.back()}
                     title='红包详情'/>
                 <RpDetailHeader imgIconUrl={this.state.dataDetail.bossAvatarUrl}
                                 amountValue={FormatUtils.money(this.state.dataDetail.luckyMoney)}
                                 fromValue={this.state.dataDetail.bossName}
                                 remarkValue={this.state.dataDetail.message}
                                 stateValue={this.state.dataDetail.redPacketReceiveStatusText}
-                                isMax = {this.state.dataDetail.bestLuckyBool}/>
-                <View style = {styles.mid_view}>
-                    <Text style = {styles.num_text}>{'已领取' + this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount +'个'}</Text>
-                    <Text style = {styles.amount_text}>{'总额¥' + FormatUtils.money(this.state.dataDetail.amount)}</Text>
+                                isMax={this.state.dataDetail.bestLuckyBool}/>
+                <View style={styles.mid_view}>
+                    <Text
+                        style={styles.num_text}>{'已领取' + this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount + '个'}</Text>
+                    <Text style={styles.amount_text}>{'总额¥' + FormatUtils.money(this.state.dataDetail.amount)}</Text>
                 </View>
                 <FlatList
                     style={{marginTop: 0,}}
@@ -133,18 +139,24 @@ class RpDetailPage extends BasePage {
         )
     }
 
-    _renderBottom=()=>{
-        if(this.state.dataDetail.ownerBool == false){
+    _renderBottom = () => {
+        if (this.state.dataDetail.ownerBool == false) {
             return (
-                <Image style = {styles.bg_bottom} source = {require("../res/img/rp_shadow.png")}>
-                    <ImageButton value='我也要发红包' style={{marginTop:0.5,marginBottom:0.5,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
+                <Image style={styles.bg_bottom} source={require("../res/img/rp_shadow.png")}>
+                    <ImageButton value='我也要发红包'
+                                 style={{marginTop: 0.5, marginBottom: 0.5, flex: 1, backgroundColor: '#f9f9f9'}}
+                                 textColor={colors.one_color} icon='' onPress={() => this._pushSendRpPage()}/>
                 </Image>
             )
-        }else{
+        } else {
             return (
-                <View style = {styles.bg_bottom}>
-                    <ImageButton value='我也要发红包' style={{marginTop:0.5,marginBottom:0.5,flex:1,backgroundColor:'#f9f9f9'}} textColor = {colors.one_color} icon = '' onPress={()=>this._pushSendRpPage()}/>
-                    <ImageButton value='分享该红包' style={{marginTop:0,marginBottom:0,flex:1,backgroundColor:colors.one_color}} textColor = {colors.white} icon = '' onPress={()=>this.handleShare()}/>
+                <View style={styles.bg_bottom}>
+                    <ImageButton value='我也要发红包'
+                                 style={{marginTop: 0.5, marginBottom: 0.5, flex: 1, backgroundColor: '#f9f9f9'}}
+                                 textColor={colors.one_color} icon='' onPress={() => this._pushSendRpPage()}/>
+                    <ImageButton value='分享该红包'
+                                 style={{marginTop: 0, marginBottom: 0, flex: 1, backgroundColor: colors.one_color}}
+                                 textColor={colors.white} icon='' onPress={() => this.handleShare()}/>
                 </View>
             )
         }
@@ -179,26 +191,26 @@ const styles = StyleSheet.create({
     },
     mid_view: {
         backgroundColor: colors.page_background,
-        height:40,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+        height: 40,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     num_text: {
-        fontSize:15,
-        marginLeft:15,
-        color:colors.balck_more_light,
+        fontSize: 15,
+        marginLeft: 15,
+        color: colors.balck_more_light,
     },
     amount_text: {
-        fontSize:15,
-        marginRight:15,
-        color:colors.balck_more_light
+        fontSize: 15,
+        marginRight: 15,
+        color: colors.balck_more_light
     },
-    bg_bottom:{
-        width:ScreenUtils.width,
-        marginTop:0,
-        flexDirection:'row',
-        backgroundColor:colors.divider
+    bg_bottom: {
+        width: ScreenUtils.width,
+        marginTop: 0,
+        flexDirection: 'row',
+        backgroundColor: colors.divider
     }
 });
 

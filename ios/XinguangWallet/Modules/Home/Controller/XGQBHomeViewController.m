@@ -56,7 +56,11 @@
     self.view.backgroundColor = UIColorHex(EFEFEF);
     
     [self setUpViewComponents];
-    [self checkIDStatus];
+    
+    if ([GVUserDefaults standardUserDefaults].loginFirstTime) {
+        [self checkIDStatus];
+        [GVUserDefaults standardUserDefaults].loginFirstTime=NO;
+    }
     
 
     //接受实名认证通知,跳转至实名认证页面

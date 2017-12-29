@@ -14,11 +14,14 @@ import com.xgjk.common.lib.manager.storage.StoreManager;
 import com.xgjk.common.lib.utils.ScreenUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.databinding.ActivityHomeDrawCoordinatorLayoutBinding;
 import cn.neopay.walpay.android.module.event.MineEventBean;
+import cn.neopay.walpay.android.module.event.RefreshBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 import cn.neopay.walpay.android.ui.fragment.minefragment.MineDrawFragment;
@@ -90,6 +93,11 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
         mPresenter.getUserInfo();
         EventBus.getDefault().post(new MineEventBean());
         super.onResume();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void RefreshPage(RefreshBean refreshBean) {
+        mPresenter.getUserInfo();
     }
 
     private void handleBottomKeyLayout() {

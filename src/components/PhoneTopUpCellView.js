@@ -22,6 +22,7 @@ import TwoButtonModal from "../modal/TwoButtonModal";
 const marginBetween=13;
 const marginCellTop= 15*ScreenUtils.height/667.0;
 const heightRatio = ScreenUtils.height/667.0;
+const dismissKeyboard = require('dismissKeyboard')
 
 class PhoneTopUpMoneyView extends Component {
 
@@ -58,7 +59,8 @@ class PhoneTopUpMoneyView extends Component {
             <View style={styles.container}>
                 <View style={{backgroundColor:'#F1F1F0',height:1}}></View>
                 <View style={styles.phoneNumberTextInputView}>
-                    <TextInput style={styles.phoneNumberTextInput}
+                    <TextInput ref={'phoneNoInput'}
+                               style={styles.phoneNumberTextInput}
                                placeholder={'请输入手机号'}
                                value={this.formatPhoneNo(this.state.phoneNo)}
                                keyboardType='numeric'
@@ -220,12 +222,18 @@ class PhoneTopUpMoneyView extends Component {
     //处理手机号格式
     formatPhoneNo=(phoneNo)=>{
 
-        let newPhoneNo = phoneNo.replace('-','');
+        // let newPhoneNo = phoneNo.replace('-','');
 
-        if (newPhoneNo.length===11){
-            return `${newPhoneNo.substring(0,3)}-${newPhoneNo.substring(3,7)}-${newPhoneNo.substring(7,11)}`;
-        }else
-            return newPhoneNo;
+        // if (newPhoneNo.length===11){
+            // return `${newPhoneNo.substring(0,3)}-${newPhoneNo.substring(3,7)}-${newPhoneNo.substring(7,11)}`;
+        // }else
+        //     return newPhoneNo;
+
+        if (phoneNo.length>11){
+            return phoneNo.substring(0,11);
+        }else {
+            return phoneNo;
+        }
     }
 
     //处理选择银行卡弹窗
@@ -440,6 +448,7 @@ class PhoneTopUpMoneyView extends Component {
         if(text.length===11){
 
             ApiManager.getPhoneRechargeProductList({"phone":text,"productType":this.props.viewType?2:1},(data)=>{
+                dismissKeyboard();
                 if(this.props.viewType){
                     this.setState({
                         CelluarItemList:data,
