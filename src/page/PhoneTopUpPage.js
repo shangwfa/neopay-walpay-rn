@@ -15,23 +15,24 @@ import {RouterPaths} from "../constants/RouterPaths"
 
 class PhoneTopUpPage extends BasePage {
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Header navigation={this.props.navigation} back={() => {
-                    this.back()
-                }} title='手机充值' rightTitle="充值记录" onRightPress={() => {
-                    this.props.navigation.navigate(RouterPaths.TOUUP_RECORD_LIST, {pageType: 0})
-                }}/>
-                <PhoneTopUpTabNavigator/>
-            </View>
-        );
-    }
 
     back = () => {
         const dismissKeyboard = require('dismissKeyboard')
         dismissKeyboard()
     }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Header navigation={this.props.navigation} title='手机充值' rightTitle="充值记录" onRightPress={() => {
+                    this.props.navigation.navigate(RouterPaths.TOUUP_RECORD_LIST, {pageType: 0})
+                }}
+                        back={() => this.back()}/>
+                <PhoneTopUpTabNavigator/>
+            </View>
+        );
+    }
+
 
 }
 
