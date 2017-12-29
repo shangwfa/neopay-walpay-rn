@@ -301,12 +301,30 @@ class SendRedPacketPage extends BasePage {
                 this._handleShowPayModal();
                 break;
             case "redPacketBindCard"://绑定银行卡redPacketBindCard
-                this._handleRecentPayTypeRequest();
-                this.refs.selectPayStyleModal._handleRequest();
-                this._handleShowPayModal();
+                this._handleRefreshBack();
                 break;
         }
 
+    };
+    _handleRefreshBack = () => {
+        this.refs.selectPayStyleModal._handleRequest();
+        ApiManager.getRecentPayType({}, (data) => {
+            this.setState({
+                payTypeSourceData: data,
+                payType: data.payType,
+                bankCardId: data.bankCardId,
+                accountAmount: data.amount
+            });
+            let contentFront = `实付金额`;
+            let tempAmount = this.state.payAllAmount;
+            let contentBack = `${FormatUtils.money(tempAmount)}元`;
+            this.setState({
+                contentFront: contentFront,
+                contentBack: contentBack,
+                payTypeContent: this.state.payTypeSourceData.payTypeDesc,
+                isShowPay: true,
+            });
+        });
     };
     _renderLineView = () => {
         return <View style={{backgroundColor: "#FFF"}}>
@@ -604,6 +622,7 @@ class SendRedPacketPage extends BasePage {
         let contentFront = `实付金额`;
         let tempAmount = this.state.payAllAmount;
         let contentBack = `${FormatUtils.money(tempAmount)}元`;
+        console.log("----this.state.payTypeSourceData.payTypeDesc------->" + this.state.payTypeSourceData.payTypeDesc)
         this.setState({
             contentFront: contentFront,
             contentBack: contentBack,
