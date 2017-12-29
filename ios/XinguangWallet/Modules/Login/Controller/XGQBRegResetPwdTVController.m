@@ -26,6 +26,8 @@
 @property (nonatomic,strong) XGQBTextField *loginPwdTextField;
 @property (nonatomic,strong) XGQBTextField *idNoTextField;
 
+@property (nonatomic,strong) XGQBAccountExistAlertViewController *alertVC;
+
 @end
 
 @implementation XGQBRegResetPwdTVController
@@ -206,7 +208,45 @@
             if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
             {
                 [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-                [self.navigationController popViewControllerAnimated:YES];
+//                [self.navigationController popViewControllerAnimated:YES];
+                
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:10];
+                if (_phoneNoTextField.text) {
+                    [dict setObject:_phoneNoTextField.text forKey:@"phone"];
+                }
+                if (_loginPwdTextField.text) {
+                    [dict setObject:_loginPwdTextField.text forKey:@"password"];
+                }
+                
+                //发送登录请求
+                [MemberCoreService loginUser:dict andSuccessFn:^(id responseAfter, id responseBefore) {
+                    if([[responseBefore objectForKey:@"retCode"] intValue] == 1)
+                        //            NSLog(@"responseBefore:%@",responseBefore);
+                    {
+                        [GVUserDefaults standardUserDefaults].accessToken = [responseAfter objectForKey:@"accessToken"];
+                        
+                        //获取用户信息
+                        [MemberCoreService getUserInfo:@{@"accessToken":[GVUserDefaults standardUserDefaults].accessToken}.mutableCopy andSuccessFn:^(id responseAfter, id responseBefore) {
+                            
+                            //设置公共参数
+                            [GVUserDefaults standardUserDefaults].name=[responseAfter objectForKey:@"name"];
+                            [GVUserDefaults standardUserDefaults].uuid=[responseAfter objectForKey:@"uuid"];
+                            [GVUserDefaults standardUserDefaults].phone=[responseAfter objectForKey:@"phone"];
+                            [GVUserDefaults standardUserDefaults].userStatus=[[responseAfter objectForKey:@"userStatus"]intValue];
+                            [GVUserDefaults standardUserDefaults].nickName=[responseAfter objectForKey:@"nickName"];
+                            [GVUserDefaults standardUserDefaults].authStatus=[[responseAfter objectForKey:@"authStatus"]intValue];
+                            [GVUserDefaults standardUserDefaults].avatarUrl=[responseAfter objectForKey:@"avatarUrl"];
+                            
+                            
+                            [GVUserDefaults standardUserDefaults].loginFirstTime = YES;
+                            //发送登录成功通知,跳转首页
+                            kPostNotification(kNotificationLoginStateChange, @YES);
+                        } andFailerFn:^(NSError *error) {
+                        }];
+                    }
+                } andFailerFn:^(NSError *error) {
+                }];
+                
             }
         } andFailerFn:^(NSError *error) {
             
@@ -412,7 +452,12 @@
 #pragma mark - 手机号存在弹窗
 -(void)alertAccountExist
 {
+    if (_alertVC) {
+        return;
+    }
         XGQBAccountExistAlertViewController *alertVC = [XGQBAccountExistAlertViewController new];
+    
+        _alertVC = alertVC;
     
         alertVC.alertviewDelegate = self;
 

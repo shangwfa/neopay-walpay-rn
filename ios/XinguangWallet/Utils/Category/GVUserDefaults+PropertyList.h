@@ -31,4 +31,6 @@ typedef NS_ENUM(NSInteger, XGQBUserAuthStatus){
 //临时增加RN页面Router选择项
 @property (nonatomic,assign)int RNRouter;
 
+@property (nonatomic,assign) BOOL loginFirstTime;
+
 @end
