@@ -83,6 +83,7 @@ import cn.neopay.walpay.android.module.request.SendResetLoginPasswordCodeRequest
 import cn.neopay.walpay.android.module.request.SendResetPayPasswordCodeRequestBean;
 import cn.neopay.walpay.android.module.request.ShareRequestBean;
 import cn.neopay.walpay.android.module.request.UnbindBankCardRequestBean;
+import cn.neopay.walpay.android.module.request.UpdateJPushMsgRequestBean;
 import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
 import cn.neopay.walpay.android.module.response.SecurityTokenResponseBean;
 import cn.neopay.walpay.android.utils.RxUtils;
@@ -790,12 +791,23 @@ public class ApiManager {
                 .compose(RxUtils.rxNet())
                 .subscribe(subscriber);
     }
+
     /**
      * 跟新红包的状态的信息
      */
     public void updateRedPacketState(RedPacketStateRequestBean requestBean, BaseSubscriber subscriber) {
         Api.getInstance().getApiService()
                 .updateRedPacketStatus(ReflectUtils.convertObjToMap(requestBean))
+                .compose(RxUtils.rxNet())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 更新推送的信息
+     */
+    public void updateJPushMsg(UpdateJPushMsgRequestBean requestBean, BaseSubscriber subscriber) {
+        Api.getInstance().getApiService()
+                .updateJPushMsg(ReflectUtils.convertObjToMap(requestBean))
                 .compose(RxUtils.rxNet())
                 .subscribe(subscriber);
     }
