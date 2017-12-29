@@ -33,6 +33,8 @@
 
 #import "XGQBRNViewController.h"
 
+#import "XGQBRootWebViewController.h"
+
 #define titleViewHeight (kScaledSizeW(134))
 #define cellViewHeight (kScaledSizeW(152))
 #define homeNAVHeight 75
@@ -300,18 +302,24 @@
                 
             }
         }
+        //支付消息
         else if(message.msgType==XGQBMessageTypePayMessage)
         {
             XGQBRNViewController *RNVC = [XGQBRNViewController new];
             RNVC.pageType = @"payMessage";
             [self.navigationController pushViewController:RNVC animated:YES];
-        }else if(message.msgType==XGQBMessageTypePhoneRecharge)
+        }
+        //手机充值消息
+        else if(message.msgType==XGQBMessageTypePhoneRecharge)
         {
             XGQBRNViewController *RNVC = [XGQBRNViewController new];
             RNVC.pageType = @"topupMsgList";
             [self.navigationController pushViewController:RNVC animated:YES];
         }
+        //其他消息
         else{
+            XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURL:[NSURL URLWithString:message.themeUrl] andTitle:message.msgTypeText];
+            [self.navigationController pushViewController:rootWVC animated:YES];
             return;
         }
     }else{//没有消息
