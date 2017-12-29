@@ -475,4 +475,9 @@ public interface ApiService {
      */
     @POST("packet/receive_red_packet")
     Observable<Result<BaseResponse>> updateRedPacketStatus(@QueryMap Map<String, Object> updateReadPacketStatusRequestBean);
+    /**
+     * 更新极光相关的信息
+     */
+    @POST("assist/upload_user_device")
+    Observable<Result<BaseResponse>> updateJPushMsg(@QueryMap Map<String, Object> updateJPushMsgRequestBean);
 }

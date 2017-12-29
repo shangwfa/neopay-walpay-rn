@@ -55,7 +55,7 @@ _tradeTypeItem = (mData, item) => {
         isShowArrows: true,
     };
     tradeType.onclick = () => {
-        nav.navigate(RouterPaths.MY_ORDER_PAGE, {tradeType: item.tradeType});
+        nav.navigate(RouterPaths.MY_ORDER_PAGE, {tradeType: item.queryType});
     };
     mData.push(tradeType);
 };

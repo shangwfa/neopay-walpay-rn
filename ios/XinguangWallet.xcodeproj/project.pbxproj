@@ -51,6 +51,7 @@
 		42DD31DB1F8C71BA00B435EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 424F391E1F8C67CD00079543 /* Assets.xcassets */; };
 		42DE35FA1FB56F2200A73DB3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 42DE35F91FB56F2200A73DB3 /* main.jsbundle */; };
 		42E83F561FF4CD79009311BC /* XGQBPushNotiBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E83F551FF4CD79009311BC /* XGQBPushNotiBody.m */; };
+		42E83F5B1FF5DFA2009311BC /* XGQBRootWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E83F5A1FF5DFA1009311BC /* XGQBRootWebViewController.m */; };
 		6A01A01D1F7A2AF70059D6D3 /* ABNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */; };
 		6A0FF9D61F7F3A0E001A66BA /* commModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0FF9D51F7F3A0E001A66BA /* commModule.m */; };
 		6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C68AC1F7A3CF400170E47 /* XGQBAPPBootViewController.m */; };
@@ -181,6 +182,8 @@
 		42DE35F91FB56F2200A73DB3 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = SOURCE_ROOT; };
 		42E83F541FF4CD79009311BC /* XGQBPushNotiBody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBPushNotiBody.h; sourceTree = "<group>"; };
 		42E83F551FF4CD79009311BC /* XGQBPushNotiBody.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBPushNotiBody.m; sourceTree = "<group>"; };
+		42E83F591FF5DFA1009311BC /* XGQBRootWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRootWebViewController.h; sourceTree = "<group>"; };
+		42E83F5A1FF5DFA1009311BC /* XGQBRootWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRootWebViewController.m; sourceTree = "<group>"; };
 		6A01A0181F7A2AC20059D6D3 /* ABNetworkCofing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkCofing.h; sourceTree = "<group>"; };
 		6A01A0191F7A2AC20059D6D3 /* ABNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABNetworkManager.h; sourceTree = "<group>"; };
 		6A01A01A1F7A2AC20059D6D3 /* ABNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABNetworkManager.m; sourceTree = "<group>"; };
@@ -464,6 +467,15 @@
 				42BCB5C51FC66439002B4FBF /* XGQBSideViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		42E83F581FF5DF77009311BC /* XGQBRootWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42E83F591FF5DFA1009311BC /* XGQBRootWebViewController.h */,
+				42E83F5A1FF5DFA1009311BC /* XGQBRootWebViewController.m */,
+			);
+			path = XGQBRootWebViewController;
 			sourceTree = "<group>";
 		};
 		6A01A0171F7A2AC20059D6D3 /* NetworkingConfig */ = {
@@ -761,6 +773,7 @@
 		6AF9E4491F78E281005E901C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				42E83F581FF5DF77009311BC /* XGQBRootWebViewController */,
 				42BCB5C71FC66932002B4FBF /* APPRootViewController */,
 				6AF9E4881F78ED8E005E901C /* RootNavigationController */,
 				6AF9E45B1F78E858005E901C /* RootViewController */,
@@ -1151,6 +1164,7 @@
 				6AF9E48B1F78EDA9005E901C /* XGQBRootNavigationController.m in Sources */,
 				42395CF11F8E069300D20130 /* XGQBIDAlertTransiton.m in Sources */,
 				6AF9E40D1F78DDB6005E901C /* main.m in Sources */,
+				42E83F5B1FF5DFA2009311BC /* XGQBRootWebViewController.m in Sources */,
 				42D44AA41F8CD3CC0064A32D /* XGQBHomeTitleBtn.m in Sources */,
 				42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */,
 				6A3843CC1F79E46600BFE9B4 /* XGQBLoginViewController.m in Sources */,
