@@ -30,7 +30,7 @@ class ChargeFluxResultPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         ApiManager.getPhoneRechargeOrderQuery({"orderNo": this.state.orderNo}, (data) => {
             this.setState({
                 sourceData: data,

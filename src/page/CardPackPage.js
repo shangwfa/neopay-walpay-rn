@@ -28,7 +28,7 @@ class CardPackPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         ApiManager.getMerchantBannerList({}, (data) => {
             this.setState({
                 dataSourceViewPage: data

@@ -34,7 +34,7 @@ class PhoneTopupMsgListPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getPhoneTopupMsg(1,false,true)
     }
 

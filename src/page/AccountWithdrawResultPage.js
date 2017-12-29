@@ -29,8 +29,8 @@ class AccountWithdrawResultPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title={'提现结果'} onLeftPress={()=>{
-                    nav.goBack(backKey)
                     this.back()
+                    nav.goBack(backKey)
                 }}/>
                 <FlatList
                     data={[{key: '付款方式',data:'余额'}, {key: '收款方式',data:this.state.data.incomeTypeDesc},{key: '提现服务费',data:`${this.state.data.feePay}`}]}

@@ -62,7 +62,7 @@ class SendRedPacketPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleRedPacketAmountText();
         ApiManager.getRecentPayType({}, (data) => {
             this.setState({

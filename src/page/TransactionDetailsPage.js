@@ -32,17 +32,19 @@ class TransactionDetailsPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         //判断是否是由支付消息页面点击过来
         if(this.state.msgType===2||this.state.msgType===3){
             ApiManager.queryMsgBillDetail({"billId": this.state.billId,"msgType":this.state.msgType,"id":this.state.id}, (data) => {
+                this._handleViewData(data);
                 this.setState({
                     sourceData: data,
                 });
             });
         }else{
             ApiManager.getUserBillDetail({"orderNo": this.state.orderNo}, (data) => {
+                this._handleViewData(data);
                 this.setState({
                     sourceData: data,
                 });
@@ -57,11 +59,10 @@ class TransactionDetailsPage extends BasePage {
     }
 
     render() {
-        this._handleViewData(this.state.sourceData);
         return (
             <View style={styles.container}>
                 {/*标题栏*/}
-                <Header navigation={this.props.navigation} title='交易详情'/>
+                <Header title='交易详情'/>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     style={{backgroundColor: "#F5F5F5"}}>

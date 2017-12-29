@@ -31,7 +31,7 @@ class ReceiveRedPacketPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleRefresh();
     }
 

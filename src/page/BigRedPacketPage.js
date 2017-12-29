@@ -33,7 +33,7 @@ class BigRedPacketPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         ApiManager.getSquareRedPacketList({}, (data) => {
             this.setState({
                 dataSourceViewPage: data.slice(0, 5)

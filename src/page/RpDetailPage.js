@@ -43,7 +43,7 @@ class RpDetailPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._postRpDetail();
         this._postRpReceiverList();
     }

@@ -27,7 +27,7 @@ class RedPacketSquarePage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleRefresh();
     }
 
