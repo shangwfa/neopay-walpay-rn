@@ -64,17 +64,17 @@ class BankCardDetailPage extends BasePage {
             payPassword:text
         };
         ApiManager.postUnBindBankCard(params, (data) => {
+            this.setState({
+                isShowBottom:false,
+                isPayShow:false,
+                isHUDShow:true,
+                imagePath:require("../res/img/wd_chengong.png"),
+                showTitle:'解绑成功'
+            })
             setTimeout(()=>{
-                this.setState({
-                    isShowBottom:false,
-                    isPayShow:false,
-                    isHUDShow:true,
-                    imagePath:require("../res/img/wd_chengong.png"),
-                    showTitle:'解绑成功'
-                })
                 DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
                 this.props.navigation.goBack();
-            },100)
+            },1000)
         },(errorData)=>{
 
             setTimeout(()=>{
@@ -85,7 +85,7 @@ class BankCardDetailPage extends BasePage {
                     imagePath:require("../res/img/wd_shibai.png"),
                     showTitle:'解绑失败'
                 })
-            },100)
+            },1000)
         });
     }
 
@@ -101,17 +101,20 @@ class BankCardDetailPage extends BasePage {
         DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
     }
 
-    showTwoBtnModal=()=>{
-        this.setState({
-            showTwoBtnModal:false
-        })
-    }
 
     handleSureClick=()=>{
         this.setState({
             isPayShow:true,
             showTwoBtnModal:false
         })
+    }
+
+
+    handleCloseClick=()=>{
+        this.setState({
+            showTwoBtnModal:false
+        })
+
     }
 
     render() {
