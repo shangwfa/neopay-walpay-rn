@@ -88,6 +88,7 @@ class PhoneTopUpMoneyView extends Component {
                 <SelectPayStyleModal
                     title="选择付款方式"
                     payAmount={this.state.payAmount}
+                    includeCreditCard ={true}
                     selectBankId={this.state.selectedBankId}
                     bankCardFooterItemClick={this.handleBankCardFooterItemClick.bind(this)}
                     bankCardItemClick={this.handleBankCardItemClick.bind(this)}

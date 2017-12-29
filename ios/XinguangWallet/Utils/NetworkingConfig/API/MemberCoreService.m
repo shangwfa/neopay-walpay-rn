@@ -119,5 +119,11 @@
     [self AFPOSTNetworkWithUrl:@"packet/receive_red_packet" andBody:body andSuccess:successFn andFailer:failerFn];
 }
 
+/// 上传极光推送registrationID
++(void)uploadUserDevice:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn
+{
+    [self AFPOSTNetworkWithUrl:@"assist/upload_user_device" andBody:body andSuccess:successFn andFailer:failerFn];
+}
+
 @end
 

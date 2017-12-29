@@ -36,6 +36,7 @@ class RedPacketResultPage extends BasePage {
         super(props);
         this.state = {
             isReady: this.props.navigation.state.params.isReady
+            // isReady:false
         };
     }
 
@@ -130,7 +131,7 @@ class RedPacketResultPage extends BasePage {
                                backgroundColor={'#FFFFFF'}
                                textColor={'#CCCCCC'}
                                value={'重新发送'}
-                               onPress={() => nav.navigate(RouterPaths.RED_PACKET_RECEIVER)}/>
+                               onPress={()=>{this.props.navigation.goBack(backKey)}}/>
                 </View>
             )
         }
