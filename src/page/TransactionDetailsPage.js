@@ -35,14 +35,18 @@ class TransactionDetailsPage extends BasePage {
     componentDidMount() {
 
         //判断是否是由支付消息页面点击过来
-        if(this.state.msgType===2||this.state.msgType===3){
-            ApiManager.queryMsgBillDetail({"billId": this.state.billId,"msgType":this.state.msgType,"id":this.state.id}, (data) => {
+        if (this.state.msgType === 2 || this.state.msgType === 3) {
+            ApiManager.queryMsgBillDetail({
+                "billId": this.state.billId,
+                "msgType": this.state.msgType,
+                "id": this.state.id
+            }, (data) => {
                 this._handleViewData(data);
                 this.setState({
                     sourceData: data,
                 });
             });
-        }else{
+        } else {
             ApiManager.getUserBillDetail({"orderNo": this.state.orderNo}, (data) => {
                 this._handleViewData(data);
                 this.setState({
@@ -248,6 +252,8 @@ class TransactionDetailsPage extends BasePage {
     /*账户提现状态*/
     _handleAccountsReflectType(item) {
         mData = [];//必须清空，否则会重复显示
+        TransactionTypeDescUtils._payTypeItem(mData, item);
+        TransactionTypeDescUtils._incomeTypeItem(mData, item);
         TransactionTypeDescUtils._tradeTypeItem(mData, item);
         TransactionTypeDescUtils._tradeTimeItem(mData, item);
         TransactionTypeDescUtils._tradeOrderNoItem(mData, item);

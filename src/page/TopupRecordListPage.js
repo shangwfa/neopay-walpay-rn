@@ -98,7 +98,7 @@ class TopupRecordListPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='充值记录' onRightPress={() => {
-                    this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
+                    // this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
                 <RefreshList
                     data={this.state.dataSource}
