@@ -68,6 +68,22 @@
     //接受实名认证通知,跳转至实名认证页面
     [kNotificationCenter addObserver:self selector:@selector(registerID) name:kNotificationRegisterIDAction object:nil];
 
+    
+    //上传极光RegistrationID
+
+    NSString *registrationID=[JPUSHService registrationID];
+    
+    if (registrationID) {
+        NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+        [body setObject:registrationID forKey:@"registrationId"];
+        [body setObject:@2 forKey:@"terminal"];
+        
+        [MemberCoreService uploadUserDevice:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            JKLog(@"上传registrationID成功");
+        } andFailerFn:^(NSError *error) {
+            nil;
+        }];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

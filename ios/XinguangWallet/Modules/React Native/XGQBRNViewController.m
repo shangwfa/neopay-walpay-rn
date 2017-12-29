@@ -21,7 +21,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-
+#import <Photos/Photos.h>
 
 @interface XGQBRNViewController () <CNContactPickerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -221,7 +221,8 @@
         AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         
         if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
-            [SVProgressHUD showInfoWithStatus:@"未获得相机隐私授权"];
+//            [SVProgressHUD showInfoWithStatus:@"未获得相机隐私授权"];
+            [self modalPrivacyAlertVCWithType:YES];
             return;
         }
         
@@ -231,6 +232,16 @@
         }];
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        //判断是否有权限访问照片
+        PHAuthorizationStatus authorStatus = [PHPhotoLibrary authorizationStatus];
+        
+        if(authorStatus == PHAuthorizationStatusRestricted || authorStatus == PHAuthorizationStatusDenied){
+//            [SVProgressHUD showInfoWithStatus:@"未获得相册权限"];
+            [self modalPrivacyAlertVCWithType:NO];
+            return;
+        }
+        
         imgPicVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [weakself presentViewController:imgPicVC animated:YES completion:^{
             JKLog();
@@ -247,6 +258,26 @@
 
     [self presentViewController:alertVC animated:YES completion:nil];
     
+}
+
+-(void)modalPrivacyAlertVCWithType:(BOOL)type
+{
+    
+    NSString *mess = [NSString string];
+    if (type) {
+        mess =@"相机权限未开启，如需使用请进入设置中开启相机权限";
+    }else{
+        mess=@"相册权限未开启，如需使用请进入设置中开启相册权限";
+    }
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:mess preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        nil;
+    }];
+    
+    [alertVC addAction:confirmAction];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
