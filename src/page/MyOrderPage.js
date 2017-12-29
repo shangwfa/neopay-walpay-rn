@@ -107,7 +107,7 @@ class MyOrderPage extends BasePage {
 
     renderHeader = () => {
         if (this.isResult) {
-            return (<Header navigation={this.props.navigation} title='我的账单'/>)
+            return (<Header  title='我的账单'/>)
         } else {
             return (
                 <Header navigation={this.props.navigation} title='我的账单' rightTitle='筛选' onRightPress={() => {

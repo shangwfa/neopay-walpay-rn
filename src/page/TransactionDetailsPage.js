@@ -62,7 +62,7 @@ class TransactionDetailsPage extends BasePage {
         return (
             <View style={styles.container}>
                 {/*标题栏*/}
-                <Header title='交易详情'/>
+                <Header navigation={this.props.navigation} title='交易详情'/>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     style={{backgroundColor: "#F5F5F5"}}>

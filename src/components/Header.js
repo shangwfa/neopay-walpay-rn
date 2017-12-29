@@ -58,7 +58,8 @@ class Header extends Component {
             if(this.props.back){
                 this.props.back()
             }
-            nav.goBack()
+
+            this.props.navigation.goBack()
         }
     }
     renderDivider = () => {
