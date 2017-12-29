@@ -117,7 +117,7 @@ class BankCardDetailPage extends BasePage {
     render() {
         return (
             <View style={styles.container}>
-                <Header navigation={this.props.navigation} title='银行卡列表' rightIcon={require("../res/img/moreItemsIcon.png")} onRightPress={()=>this.rightClick()} back={()=>this.back()}/>
+                <Header title='银行卡列表' rightIcon={require("../res/img/moreItemsIcon.png")} onRightPress={()=>this.rightClick()} back={()=>this.back()}/>
                 <BankCardCell imgIconUrl={this.state.param.iconUrl}
                               imgBackGroundUrl = {this.state.param.backgroundUrl}
                               bankNameValue={this.state.param.bankName}

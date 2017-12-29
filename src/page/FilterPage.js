@@ -136,7 +136,7 @@ class FilterPage extends BasePage {
                     source={income_icon}
                     data={this.state.incomeTypes}
                     callbacck={(filter) => {
-                        this.setState = {incomeType: filter}
+                        this.setState({incomeType: filter})
                     }}/>
                 <View style={{height: 15}}/>
                 <CommonItemOne

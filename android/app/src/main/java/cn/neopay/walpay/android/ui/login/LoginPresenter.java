@@ -2,14 +2,17 @@ package cn.neopay.walpay.android.ui.login;
 
 import com.xgjk.common.lib.manager.ActivityManager;
 import com.xgjk.common.lib.manager.storage.StoreManager;
+import com.xgjk.common.lib.utils.StringUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.constans.IWalpayConstants;
 import cn.neopay.walpay.android.http.BaseSubscriber;
 import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.request.LoginUserRequestBean;
+import cn.neopay.walpay.android.module.request.UpdateJPushMsgRequestBean;
 import cn.neopay.walpay.android.module.request.VerifyRegisterPhoneRequestBean;
 import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.module.response.VerifyRegisterPhoneResponseBean;
@@ -35,6 +38,18 @@ public class LoginPresenter extends LoginContract.Presenter {
         StoreManager.getSingleton().putString(false, IWalpayConstants.ACCESS_TOKEN, userInfoResponseBean.getAccessToken());
         ActivityManager.getInstance().killAllActivity();
         MainRouter.getSingleton().jumpToHomeDrawPage();
+        handleJPushID();
+    }
+
+    private void handleJPushID() {
+        String registrationID = JPushInterface.getRegistrationID(mActivity);
+        if (StringUtils.isNoEmpty(registrationID)) {
+            UpdateJPushMsgRequestBean updateJPushMsgRequestBean = new UpdateJPushMsgRequestBean();
+            updateJPushMsgRequestBean.setRegistrationId(registrationID);
+            ApiManager.getSingleton().updateJPushMsg(updateJPushMsgRequestBean, new BaseSubscriber(mActivity, o -> {
+            }));
+        }
+
     }
 
     @Override

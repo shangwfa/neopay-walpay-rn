@@ -35,7 +35,7 @@ class RedPacketReceiverPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         DeviceEventEmitter.addListener(events.CONTACTS_EVENT, (contacts) => {
             let arr = []
             for (let item of contacts.values()) {

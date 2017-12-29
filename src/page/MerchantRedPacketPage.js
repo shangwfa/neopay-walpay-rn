@@ -26,7 +26,7 @@ class MerchantRedPacketPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleRefresh();
     }
 

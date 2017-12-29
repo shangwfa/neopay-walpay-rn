@@ -28,7 +28,7 @@ class TradeRecordListPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleCurrentPageType();
     }
 

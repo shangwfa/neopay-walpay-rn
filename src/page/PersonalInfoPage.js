@@ -29,7 +29,7 @@ class PersonalInfoPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.userInfo()
         this.updatePhotoListener()
         this.updatePageListener()

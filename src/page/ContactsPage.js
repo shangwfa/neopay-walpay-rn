@@ -37,7 +37,7 @@ class ContactsPage extends BasePage {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         Contacts.getAll((err, contacts) => {
             if (err === 'denied') {
                 console.log(err)

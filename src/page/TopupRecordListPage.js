@@ -32,7 +32,7 @@ class TopupRecordListPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleRefresh();
     }
 

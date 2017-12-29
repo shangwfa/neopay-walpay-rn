@@ -18,7 +18,7 @@ class PanResponderDemoPage extends Component {
         }
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this._panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => true,
             onMoveShouldSetPanResponder: ()=> true,

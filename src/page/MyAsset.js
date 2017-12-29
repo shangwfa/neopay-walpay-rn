@@ -23,7 +23,7 @@ class MyAsset extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         NetUtil.post('balance/get_user_asset_info', {}, (data) => {
             this.setState({
                 data: data
