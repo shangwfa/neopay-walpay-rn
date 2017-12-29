@@ -42,13 +42,13 @@ class SelectPayStyleModal extends Component {
         }
         else {
             //判断是否需要返回信用卡
-            if(this.props.includeCreditCard === true){
-                ApiManager.getUserPayTypeList({},(data) => {
+            if (this.props.includeCreditCard === true) {
+                ApiManager.getUserPayTypeList({}, (data) => {
                     this.setState({
                         selectPayStyleData: data,
                     });
                 });
-            }else {
+            } else {
                 ApiManager.getUserPayTypeList({cardType: 1}, (data) => {
                     this.setState({
                         selectPayStyleData: data,
@@ -145,16 +145,20 @@ class SelectPayStyleModal extends Component {
         return <View style={styles.item_container}>
             <TouchableOpacity
                 activeOpacity={0.5}
+                style={{flex: 1}}
                 onPress={this.props.closeClick}>
+                <Space/>
                 <Image
                     style={styles.img_close}
                     source={img_close}/>
+                <Space/>
             </TouchableOpacity>
-            <View style={{flex: 1, alignItems: "center"}}>
+            <View style={{flex: 2, alignItems: "center"}}>
                 <Text
                     style={{fontSize: 16, marginLeft: -11, color: "#000"}}>
                     {this.props.title}</Text>
             </View>
+            <Space/>
         </View>;
     };
     _handleBankCardItemSelectImgView = (item) => {

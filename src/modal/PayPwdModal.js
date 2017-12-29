@@ -14,6 +14,7 @@ import close_icon from '../res/img/close_icon.png'
 import right_arrow from '../res/img/right_arrow.png'
 import PasswordInput from '../components/PasswordInput'
 import ScreenUtils from "../utils/ScreenUtils";
+import Space from "../components/Space";
 class PayPwdModal extends Component {
 
     constructor(props) {
@@ -29,14 +30,19 @@ class PayPwdModal extends Component {
         return (
             <View style={styles.top_container}>
                 <TouchableOpacity style={{flex: 1}} onPress={() => this.props.onClose()}>
+                    <Space/>
                     <Image style={styles.close_icon} source={close_icon}/>
+                    <Space/>
                 </TouchableOpacity>
 
                 <View style={{flex: 2, alignItems: 'center'}}>
                     <Text style={{color: colors.black, fontSize: 14}}>请输入支付密码</Text>
                 </View>
-                <TouchableOpacity style={{flex: 1, alignItems: 'flex-end'}} onPress={() => this.props.onForgetPwd()}>
+                <TouchableOpacity style={{flex: 1, alignItems: 'flex-end'}}
+                                  onPress={() => this.props.onForgetPwd()}>
+                    <Space/>
                     <Text style={{color: colors.balck_more_light, fontSize: 12, marginRight: 10}}>忘记密码</Text>
+                    <Space/>
                 </TouchableOpacity>
             </View>
         )
@@ -52,7 +58,12 @@ class PayPwdModal extends Component {
                         <Text style={styles.select_pay_style_txt}>付款方式</Text>
                         <View style={{flex: 1}}/>
                         <Text style={styles.select_pay_content_txt}>{this.props.payTypeContent}</Text>
-                        <Image style={{marginLeft: 8, width: 7, height: this.props.payTypeBalanceOnly?0:12, marginRight: 10}}
+                        <Image style={{
+                            marginLeft: 8,
+                            width: 7,
+                            height: this.props.payTypeBalanceOnly ? 0 : 12,
+                            marginRight: 10
+                        }}
                                source={right_arrow}/>
                     </View>
                 </TouchableOpacity>
@@ -100,8 +111,9 @@ class PayPwdModal extends Component {
             </Modal>
         );
     }
-    _clearTextInput=()=>{
-      this.refs.textInput._clearTextInputContent();
+
+    _clearTextInput = () => {
+        this.refs.textInput._clearTextInputContent();
     };
     //增加弹窗在键盘聚焦的时候改变位置
     onTextFocus = () => {
