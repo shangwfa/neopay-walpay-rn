@@ -39,12 +39,22 @@ class SelectPayStyleModal extends Component {
                     selectPayStyleData: data,
                 });
             });
-        } else {
-            ApiManager.getUserPayTypeList({cardType: 1}, (data) => {
-                this.setState({
-                    selectPayStyleData: data,
+        }
+        else {
+            //判断是否需要返回信用卡
+            if(this.props.includeCreditCard === true){
+                ApiManager.getUserPayTypeList({},(data) => {
+                    this.setState({
+                        selectPayStyleData: data,
+                    });
                 });
-            });
+            }else {
+                ApiManager.getUserPayTypeList({cardType: 1}, (data) => {
+                    this.setState({
+                        selectPayStyleData: data,
+                    });
+                });
+            }
         }
     }
 

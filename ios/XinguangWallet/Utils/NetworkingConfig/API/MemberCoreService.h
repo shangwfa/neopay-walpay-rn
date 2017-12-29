@@ -58,5 +58,9 @@
 
 /// 已注册用户收红包
 +(void)receiveRedPacket:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
+
+/// 上传极光推送registrationID
++(void)uploadUserDevice:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
+
 @end
 

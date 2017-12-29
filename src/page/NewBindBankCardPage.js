@@ -44,6 +44,7 @@ class NewBindBankCardPage extends BasePage {
     }
 
     commit = () => {
+
         if(this.state.isCreditCard == true)
         {
             if(this.state.param.fromPage == 'redPacket') {
@@ -99,12 +100,19 @@ class NewBindBankCardPage extends BasePage {
                 validDate:this.state.date,
                 smsCode:this.state.smsCode,
             }
-        }else {
+        }
+        else {
             body = {
                 cardNo:this.state.cardNo,
                 phone:this.state.bindPhone,
                 smsCode:this.state.smsCode,
             }
+        }
+
+        if(this.state.param.fromPage == 'withdrawCash'){
+            body.bindCardType=4 //GENERAL(1, "普通绑卡"),VERIFIED(2, "实名认证绑卡"),TRANSACTION(3, "交易绑卡"),WITHDRAW(4, "提现绑卡"),
+        }else {
+            body.bindCardType=1
         }
 
         ApiManager.bindBankCard(body,data=>{
@@ -113,6 +121,7 @@ class NewBindBankCardPage extends BasePage {
                 }else{
                     DeviceEventEmitter.emit(RouterPaths.SEND_RED_PACKET, {type: 'redPacketBindCard', data: this.state.choseItem})
                     DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
+                    DeviceEventEmitter.emit(RouterPaths.ACCOUNT_WITHDRAW_PAGE,{type:'refreshBankCard'})
                     this.props.navigation.goBack();
             }
         })

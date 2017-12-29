@@ -43,6 +43,10 @@ class AccountWithdrawPage extends BasePage {
         }
     }
 
+    emitEvent = (event) => {
+        this.loadBankCardData()
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -212,6 +216,21 @@ class AccountWithdrawPage extends BasePage {
     };
 
     onChangeText = (text) => {
+
+        if (text === ".") {
+            return;
+        }
+        const regStr = [
+            ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
+            ['[^\\d\\.]+$', ''], //禁止录入任何非数字和点
+            ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
+            ['^(\\d+\\.\\d{2}).+', '$1'] //禁止录入小数点后两位以上
+        ];
+        for (let i = 0; i < regStr.length; i++) {
+            const reg = new RegExp(regStr[i][0]);
+            text = text.replace(reg, regStr[i][1]);
+        }
+
         this.setState({
             withdrawAmount: text
         })
@@ -246,7 +265,7 @@ class AccountWithdrawPage extends BasePage {
         else if (this.state.withdrawAmount > this.state.withdrawBalance) {
             NativeModules.commModule.toast("提现金额不能大于可提现余额");
         }
-        else if (this.state.withdrawAmount == 0) {
+        else if (this.state.withdrawAmount <= 0.01) {
             NativeModules.commModule.toast("提现金额必须大于0.01元");
         }
         else if (this.state.withdrawAmount > 20000) {
@@ -273,12 +292,7 @@ class AccountWithdrawPage extends BasePage {
         // this.props.navigation.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE)
     }
 
-    componentDidMount() {
-        ApiManager.getwithdrawbalance({}, (data) => {
-            this.setState({
-                withdrawBalance: data.withdrawBalance
-            })
-        })
+    loadBankCardData = ()=>{
 
         ApiManager.getUserBankCardList({}, (data) => {
             if (data.length > 0) {
@@ -298,10 +312,19 @@ class AccountWithdrawPage extends BasePage {
             }
 
         })
-
-
     }
 
+    componentDidMount() {
+
+        ApiManager.getwithdrawbalance({}, (data) => {
+            this.setState({
+                withdrawBalance: data.withdrawBalance
+            })
+        });
+
+        this.loadBankCardData();
+
+    }
 }
 
 const styles = StyleSheet.create({

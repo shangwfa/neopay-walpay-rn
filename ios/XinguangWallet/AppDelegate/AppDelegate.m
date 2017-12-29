@@ -57,6 +57,7 @@
     
     //初始化Jpush推送服务
     [self initJpushServiceWithOptions:launchOptions];
+    [kNotificationCenter addObserver:self selector:@selector(JpushDidLoginPushServiceSuccWithNotification:) name:kJPFNetworkDidLoginNotification object:nil];
     
     /* 打开调试日志 */
     [[UMSocialManager defaultManager] openLog:YES];
@@ -191,6 +192,24 @@
 {
     JKLog(@"接收到跳转指令");
     return YES;
+}
+
+
+-(void)JpushDidLoginPushServiceSuccWithNotification:(NSNotification*)noti
+{
+    NSString *registrationID=[JPUSHService registrationID];
+    JKLog(@"%@",registrationID);
+    
+    NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+    [body setObject:registrationID forKey:@"registrationId"];
+    [body setObject:@2 forKey:@"terminal"];
+
+    [MemberCoreService uploadUserDevice:body andSuccessFn:^(id responseAfter, id responseBefore) {
+        JKLog(@"上传registrationID成功");
+    } andFailerFn:^(NSError *error) {
+        nil;
+    }];
+    
 }
 
 
