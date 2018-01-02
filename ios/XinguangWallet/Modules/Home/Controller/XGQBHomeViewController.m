@@ -33,6 +33,8 @@
 
 #import "XGQBRNViewController.h"
 
+#import "XGQBRootWebViewController.h"
+
 #define titleViewHeight (kScaledSizeW(134))
 #define cellViewHeight (kScaledSizeW(152))
 #define homeNAVHeight 75
@@ -56,12 +58,32 @@
     self.view.backgroundColor = UIColorHex(EFEFEF);
     
     [self setUpViewComponents];
-    [self checkIDStatus];
+    
+    if ([GVUserDefaults standardUserDefaults].loginFirstTime) {
+        [self checkIDStatus];
+        [GVUserDefaults standardUserDefaults].loginFirstTime=NO;
+    }
     
 
     //接受实名认证通知,跳转至实名认证页面
     [kNotificationCenter addObserver:self selector:@selector(registerID) name:kNotificationRegisterIDAction object:nil];
 
+    
+    //上传极光RegistrationID
+
+    NSString *registrationID=[JPUSHService registrationID];
+    
+    if (registrationID) {
+        NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+        [body setObject:registrationID forKey:@"registrationId"];
+        [body setObject:@2 forKey:@"terminal"];
+        
+        [MemberCoreService uploadUserDevice:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            JKLog(@"上传registrationID成功");
+        } andFailerFn:^(NSError *error) {
+            nil;
+        }];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -296,18 +318,24 @@
                 
             }
         }
+        //支付消息
         else if(message.msgType==XGQBMessageTypePayMessage)
         {
             XGQBRNViewController *RNVC = [XGQBRNViewController new];
             RNVC.pageType = @"payMessage";
             [self.navigationController pushViewController:RNVC animated:YES];
-        }else if(message.msgType==XGQBMessageTypePhoneRecharge)
+        }
+        //手机充值消息
+        else if(message.msgType==XGQBMessageTypePhoneRecharge)
         {
             XGQBRNViewController *RNVC = [XGQBRNViewController new];
             RNVC.pageType = @"topupMsgList";
             [self.navigationController pushViewController:RNVC animated:YES];
         }
+        //其他消息
         else{
+            XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURL:[NSURL URLWithString:message.themeUrl] andTitle:message.msgTypeText];
+            [self.navigationController pushViewController:rootWVC animated:YES];
             return;
         }
     }else{//没有消息

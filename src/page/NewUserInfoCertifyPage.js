@@ -33,8 +33,7 @@ class NewUserInfoCertifyPage extends BasePage {
         };
     }
 
-    componentWillMount() {
-        super.componentWillMount();
+    componentDidMount() {
         this.getUserInfo();
     }
 

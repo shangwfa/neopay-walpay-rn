@@ -27,16 +27,6 @@ class Home extends BasePage {
         }
     }
 
-
-    componentWillMount() {
-        console.log(this.props)
-        // NetUtil.postJson('employee/get_employee_info', {}, (data) => {
-        //     this.setState({
-        //         data: data
-        //     })
-        // })
-    }
-
     /**
      * 接收原生调用
      */

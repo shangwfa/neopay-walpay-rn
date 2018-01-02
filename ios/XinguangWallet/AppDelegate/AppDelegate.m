@@ -57,6 +57,7 @@
     
     //初始化Jpush推送服务
     [self initJpushServiceWithOptions:launchOptions];
+    [kNotificationCenter addObserver:self selector:@selector(JpushDidLoginPushServiceSuccWithNotification:) name:kJPFNetworkDidLoginNotification object:nil];
     
     /* 打开调试日志 */
     [[UMSocialManager defaultManager] openLog:YES];
@@ -111,7 +112,7 @@
         [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
-    JKLog();
+    JKLog(@"接收到系统通知");
 }
 //手动消除以下方法的报警,原因是block参数缺少void
 //#pragma clang diagnostic push
@@ -191,6 +192,26 @@
 {
     JKLog(@"接收到跳转指令");
     return YES;
+}
+
+
+-(void)JpushDidLoginPushServiceSuccWithNotification:(NSNotification*)noti
+{
+    if([GVUserDefaults standardUserDefaults].accessToken){//如果已登录,上传registrationID
+        NSString *registrationID=[JPUSHService registrationID];
+        JKLog(@"%@",registrationID);
+        
+        NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+        [body setObject:registrationID forKey:@"registrationId"];
+        [body setObject:@2 forKey:@"terminal"];
+        
+        [MemberCoreService uploadUserDevice:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            JKLog(@"上传registrationID成功");
+        } andFailerFn:^(NSError *error) {
+            nil;
+        }];
+    }
+    
 }
 
 

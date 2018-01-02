@@ -23,7 +23,6 @@ class BasePage extends Component {
             if(this.back){
                 this.back()
             }
-
         })
     }
 

@@ -59,7 +59,7 @@ class ActivityListPage extends BasePage {
     }
 
 
-    componentWillMount() {
+    componentDidMount() {
         ApiManager.queryBannerList(data=>{
             this.setState({
                 data: data

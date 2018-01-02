@@ -35,29 +35,29 @@ class RedPacketReceiverPage extends BasePage {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         DeviceEventEmitter.addListener(events.CONTACTS_EVENT, (contacts) => {
             let arr = []
             for (let item of contacts.values()) {
-                if(!this.isExistPhone(item.phone)){
+                if (!this.isExistPhone(item.phone)) {
                     arr.push({name: item.name, phone: item.phone})
                 }
             }
-            this.state.data.map(item=>{
+            this.state.data.map(item => {
                 arr.push(item)
             })
-            this.setState({data:arr, tip: arr.length})
+            this.setState({data: arr, tip: arr.length})
         })
     }
 
-    isExistPhone(phone){
-        let result=false
-        for(let item of this.state.data){
-            if(StringUtils.equals(phone,item.phone)){
-                result=true
+    isExistPhone(phone) {
+        let result = false
+        for (let item of this.state.data) {
+            if (StringUtils.equals(phone, item.phone)) {
+                result = true
                 break
-            }else {
-                result=false
+            } else {
+                result = false
             }
         }
         return result
@@ -105,11 +105,11 @@ class RedPacketReceiverPage extends BasePage {
         let arr = this.state.data.filter(value => {
             return !StringUtils.equals(value.phone, item.phone)
         })
-        this.setState({data: arr,tip: arr.length})
+        this.setState({data: arr, tip: arr.length})
     }
 
     clearAllPhones = () => {
-        this.setState({data: [],tip:0})
+        this.setState({data: [], tip: 0})
     }
 
     renderHeader = () => {
@@ -234,7 +234,10 @@ class RedPacketReceiverPage extends BasePage {
             phones: redPacketPhones,
         };
         ApiManager.addRedPacketReceiver(request, (data) => {
-            let desMsg = `${this.state.data[0].phone + this.state.data[0].name}${this.state.data.length === 1 ? "" : `等${this.state.data.length}个人`}`;
+            let phone = this.state.data[0].phone.toString().replace(/\s/g, "");
+            let name = this.state.data[0].name.toString().replace(/\s/g, "");
+            let msg = phone === name ? phone : phone + name;
+            let desMsg = `${msg}${this.state.data.length === 1 ? "" : `等${this.state.data.length}个人`}`;
             this.props.navigation.navigate(RouterPaths.RED_PACKETS_RESULT_PAGE, {
                 desMsg: desMsg,
                 isReady: true,

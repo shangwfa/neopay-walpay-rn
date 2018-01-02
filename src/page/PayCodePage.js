@@ -40,7 +40,7 @@ class PayCodePage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         ApiManager.getUserInfo((data) => {
             this.setState({
                 userInfoData: data,

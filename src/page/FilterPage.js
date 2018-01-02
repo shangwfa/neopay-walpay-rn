@@ -135,8 +135,8 @@ class FilterPage extends BasePage {
                     title='支付方式'
                     source={income_icon}
                     data={this.state.incomeTypes}
-                    callbacck={(filter) => {
-                        this.setState = {incomeType: filter}
+                    callback={(filter) => {
+                        this.setState({incomeType: filter})
                     }}/>
                 <View style={{height: 15}}/>
                 <CommonItemOne

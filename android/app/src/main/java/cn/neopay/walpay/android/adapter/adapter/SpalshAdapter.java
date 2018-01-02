@@ -23,7 +23,7 @@ public class SpalshAdapter extends StaticPagerAdapter {
     private final int[] drawableIds;
 
     public SpalshAdapter() {
-        drawableIds = new int[]{R.drawable.splash_step_one, R.drawable.splash_step_two, R.drawable.splash_step_three};
+        drawableIds = new int[]{R.drawable.splash_step_one, R.drawable.splash_step_two};
     }
 
     @Override

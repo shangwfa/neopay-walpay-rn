@@ -21,4 +21,6 @@
 
 @dynamic runCount;
 @dynamic RNRouter;
+
+@dynamic loginFirstTime;
 @end

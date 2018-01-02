@@ -30,7 +30,6 @@ class MyBalancePage extends BasePage {
     }
 
     emitEvent = (event) => {
-
         this.loadData()
     }
     render() {

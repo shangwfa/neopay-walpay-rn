@@ -28,43 +28,38 @@ class TopupRecordListPage extends BasePage {
         super(props);
         this.state = {
             dataSource: [],
-            footerStatus: RefreshStatus.IDLE,
+            isEmpty: false,
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._handleRefresh();
     }
 
     _handleRefresh = () => {
-        ApiManager.getPhoneTopupRecordList({}, (data) => {
-            this.setState({
-                dataSource: data,
-            });
-        });
+        this.loadData(1, false, true);
     };
 
     _onRefresh = () => {
         this._handleRefresh();
     };
-
-    _onLoadMore = (pageSize) => {
+    loadData = (pageNo, isLoadMore, isLoadding = false) => {
         let params = {
-            pageSize: pageSize
+            pageNo: pageNo
         };
-        ApiManager.getPhoneTopupRecordList(params, (data) => {
-            if (data) {
-                let allData = this.state.dataSource;
-                allData.push(...data);
-                this.setState({
-                    dataSource: allData,
-                });
+        ApiManager.getPhoneTopupRecordList(params, data => {
+            if (isLoadMore) {
+                const arrData = this.state.dataSource;
+                arrData.push(...data);
+                this.setState({dataSource: arrData});
             } else {
-                this.setState({
-                    footerStatus: RefreshStatus.END
-                });
+                const empty = !data || data.length <= 0;
+                this.setState({dataSource: data, isEmpty: empty})
             }
-        });
+        }, isLoadding)
+    };
+    _onLoadMore = (pageNo) => {
+        this.loadData(pageNo, true, false);
     };
 
     _renderRow = ({item}) => {
@@ -72,24 +67,26 @@ class TopupRecordListPage extends BasePage {
             <View>
                 {this.renderSectionHeader(item)}
                 <CommonItemTwo imgUrl={item.iconUrl}
-                               middleUpValue={item.title} middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
+                               middleUpValue={item.title}
+                               middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
                                rightUpValue={'-' + FormatUtils.money(item.amount)} rightBottomValue={item.status}
                                isLine={true}
-                               onPress={()=>this.pressOnItem(item)}
+                               onPress={() => this.pressOnItem(item)}
                 />
             </View>
         )
 
     }
 
-    pressOnItem=(item)=>{
+    pressOnItem = (item) => {
         // console.log('点击了充值记录条目')
-        nav.navigate(RouterPaths.TRANSACTION_DETAILS,{orderNo:item.orderNo});
+        nav.navigate(RouterPaths.TRANSACTION_DETAILS, {orderNo: item.orderNo});
     }
 
     renderSectionHeader = (item) => {
         if (item.disPlayDate) {
-            return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} value={'支出:-' + FormatUtils.money(item.outMoney)} isShowArrow={false}/>
+            return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)}
+                                  value={'支出:-' + FormatUtils.money(item.outMoney)} isShowArrow={false}/>
         }
     }
 
@@ -98,14 +95,15 @@ class TopupRecordListPage extends BasePage {
         return (
             <View style={styles.container}>
                 <Header navigation={this.props.navigation} title='充值记录' onRightPress={() => {
-                    this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
+                    // this.props.navigation.navigate(RouterPaths.FILTER_PAGE)
                 }}/>
                 <RefreshList
                     data={this.state.dataSource}
                     renderItem={this._renderRow}
                     onRefresh={this._onRefresh}
                     onLoadMore={this._onLoadMore}
-                    footerStatus={this.state.footerStatus}
+                    extraData={this.state}
+                    isEmpty={this.state.isEmpty}
                 />
             </View>
         );

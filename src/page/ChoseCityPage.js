@@ -39,7 +39,7 @@ class ChoseCityPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if(this.state.type == 1)
         {
             this._postGetProvinceList();

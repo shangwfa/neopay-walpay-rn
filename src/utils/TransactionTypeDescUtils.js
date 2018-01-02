@@ -20,7 +20,7 @@ _payTypeItem = (mData, item) => {
     };
     payType.onclick = () => {
         let pageType = StringUtils.isContainChildrenStr(item.payTypeDesc, "余额") ? 0 : 1;
-        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType,cardId:item.id});
+        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType, cardId: item.id});
     };
     mData.push(payType);
 };
@@ -43,7 +43,7 @@ _incomeTypeItem = (mData, item) => {
     };
     incomeType.onclick = () => {
         let pageType = StringUtils.isContainChildrenStr(item.incomeTypeDesc, "余额") ? 0 : 1;
-        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType});
+        nav.navigate(RouterPaths.TRADE_RECORD_LIST_PAGE, {pageType: pageType, cardId: item.id});
     };
     mData.push(incomeType);
 };
@@ -51,11 +51,18 @@ _incomeTypeItem = (mData, item) => {
 _tradeTypeItem = (mData, item) => {
     let tradeType = {
         transformType: "交易方式",
-        transformContent: item.tradeTypeText,
+        transformContent: item.queryTypeText,
         isShowArrows: true,
     };
     tradeType.onclick = () => {
-        nav.navigate(RouterPaths.MY_ORDER_PAGE, {tradeType: item.tradeType});
+        switch (item.queryType) {
+            case 5://手机充值
+                nav.navigate(RouterPaths.TOUUP_RECORD_LIST);
+                break;
+            default:
+                nav.navigate(RouterPaths.MY_ORDER_PAGE, {tradeType: item.queryType, isResult: true});
+                break;
+        }
     };
     mData.push(tradeType);
 };

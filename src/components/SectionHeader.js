@@ -13,6 +13,7 @@ const SectionHeader = props => {
     const {
         title,
         value,
+        isShowValue,
         isShowArrow,
         ...attributes
     } = props
@@ -41,30 +42,28 @@ const SectionHeader = props => {
         },
     });
 
-    if(isShowArrow == false){
-        return (
-            <TouchableOpacity activeOpacity={0.8}  {...attributes}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>{title}</Text>
-                    <View style={{flex:1}}/>
-                    <Text style={styles.value}>{value}</Text>
-                </View>
-
-            </TouchableOpacity>
-        );
-    }else {
-        return (
-            <TouchableOpacity activeOpacity={0.8}  {...attributes}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>{title}</Text>
-                    <View style={{flex:1}}/>
-                    <Text style={styles.value}>{value}</Text>
-                    <Image style={styles.img} source={right_arrow}/>
-                </View>
-
-            </TouchableOpacity>
-        );
+    const renderValue=()=>{
+        if(isShowValue){
+            return <Text style={styles.value}>{value}</Text>
+        }
     }
+
+    const renderArrow=()=>{
+        if(isShowArrow){
+            return <Image style={styles.img} source={right_arrow}/>
+        }
+    }
+    return (
+        <TouchableOpacity activeOpacity={0.8}  {...attributes}>
+            <View style={styles.container}>
+                <Text style={styles.title}>{title}</Text>
+                <View style={{flex:1}}/>
+                {renderValue()}
+                {renderArrow()}
+            </View>
+
+        </TouchableOpacity>
+    )
 };
 
 

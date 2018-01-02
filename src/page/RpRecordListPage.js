@@ -28,7 +28,7 @@ class RpRecordListPage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getRpRecordList(1,false,true)
     }
 

@@ -15,6 +15,7 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
 #pragma mark - 初始化Jpush服务
 -(void)initJpushServiceWithOptions:(NSDictionary *)launchOptions
 {
+    
     //Required 初始化APNs代码
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -35,18 +36,6 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
     [JPUSHService setupWithOption:launchOptions appKey:appKey
                           channel:channel
                  apsForProduction:0];
-    
-    if([GVUserDefaults standardUserDefaults].uuid){
-//
-//        NSSet *tags = [[NSSet alloc]initWithObjects:[GVUserDefaults standardUserDefaults].uuid, nil];
-//
-//        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
-//        } seq:999];
-        
-        [JPUSHService setAlias:[GVUserDefaults standardUserDefaults].uuid completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-            JKLog();
-        } seq:999];
-    }
 
 }
 
@@ -55,7 +44,7 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
     
     /// Required - 注册 DeviceToken
     [JPUSHService registerDeviceToken:deviceToken];
-    JKLog();
+    
 }
 
 //optional 实现注册APN失败接口
@@ -78,6 +67,7 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
     [JPUSHService handleRemoteNotification:userInfo];
     JKLog();
 }
+
 
 
 

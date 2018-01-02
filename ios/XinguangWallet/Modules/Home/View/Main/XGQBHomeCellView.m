@@ -11,7 +11,7 @@
 
 #import "XGQBHomeCellCVFlowLayout.h"
 #import "XGQBRNViewController.h"
-
+#import "XGQBRootWebViewController.h"
 #import "XGQBAPPRootViewController.h"
 
 @interface XGQBHomeCellView()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
@@ -157,10 +157,12 @@ static NSString *const cellId = @"cellId";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    XGQBAPPRootViewController *rootVC =(XGQBAPPRootViewController*)kAppWindow.rootViewController;
+
     //点击余额按钮
     if (indexPath.section==0&&indexPath.row==2) {
 
-        XGQBAPPRootViewController *rootVC =(XGQBAPPRootViewController*)kAppWindow.rootViewController;
         
         if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
             [rootVC.homeVC checkIDStatus];
@@ -170,12 +172,12 @@ static NSString *const cellId = @"cellId";
             [rootVC.rootNAV pushViewController:RNVC animated:YES];
         }
     }else if(indexPath.section==0&&indexPath.row==0){//点击了员工贷款
-//        SFSafariViewController *safari = [[SFSafariViewController alloc]initWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-//        XGQBAPPRootViewController *rootVC = (XGQBAPPRootViewController*)kAppWindow.rootViewController;
-//        [rootVC.rootNAV pushViewController:safari animated:YES];
-        JKLog();
+        XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURL:[NSURL URLWithString:@"http://www.xinguang.com"] andTitle:@"员工贷款"];
+        [rootVC.rootNAV pushViewController:rootWVC animated:YES];
+        
     }else if(indexPath.section==0&&indexPath.row==1){//点击了四季严选
-        JKLog();
+        XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURL:[NSURL URLWithString:@"http://www.xinguang.com"] andTitle:@"四季严选"];
+        [rootVC.rootNAV pushViewController:rootWVC animated:YES];
     }else{
         JKLog();
     }

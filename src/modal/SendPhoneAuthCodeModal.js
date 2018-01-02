@@ -17,6 +17,7 @@ import img_phone_gray from "../res/img/img_phone_gray.png";
 import AuthMessageComponent from "../components/AuthMessageComponent";
 import ApiManager from "../utils/ApiManager";
 import StringUtils from "../utils/StringUtils";
+import Space from "../components/Space";
 class SendPhoneAuthCodeModal extends Component {
     constructor(props) {
         super(props);
@@ -45,9 +46,11 @@ class SendPhoneAuthCodeModal extends Component {
                         {/*title*/}
                         <View style={{flexDirection: "row", alignItems: "center", marginTop: 16}}>
                             <TouchableOpacity onPress={this.props.closeClick}>
+                                <Space/>
                                 <Image
                                     style={styles.img_close}
                                     source={img_close}/>
+                                <Space/>
                             </TouchableOpacity>
                             <Text style={{fontSize: 14, color: "#333"}}>{this.props.title}</Text>
                         </View>
