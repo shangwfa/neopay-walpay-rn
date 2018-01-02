@@ -98,6 +98,7 @@ class NewBindBankCardPage extends BasePage {
                 cvv2:this.state.cvv2,
                 validDate:this.state.date,
                 smsCode:this.state.smsCode,
+                bindCardType:this.state.param.type
             }
         }else {
             body = {
