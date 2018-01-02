@@ -8,9 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+#import "XGQBPushNotiParams.h"
+
+
+typedef NS_ENUM(NSInteger,XGQBMsgType){
+    XGQBMsgTypeRedPacket=1,
+    XGQBMsgTypePayNotice,
+    XGQBMsgTypePhoneRechargeSuccess,
+    XGQBMsgTypePhoneDataRechargeSuccess,
+    XGQBMsgTypeMerchantBroadcast,
+    XGQBMsgTypeDiscountsNotice,
+    XGQBMsgTypeSystemNotice,
+    XGQBMsgTypeSystemActNotice,
+};
+
 @interface XGQBPushNotiBody : NSObject
 
 @property (nonatomic,assign) XGQBMsgType noticeType;
-@property (nonatomic,strong) NSDictionary *params;
+@property (nonatomic,strong) XGQBPushNotiParams *params;
+@property (nonatomic,assign) int redirectType;
 
 @end

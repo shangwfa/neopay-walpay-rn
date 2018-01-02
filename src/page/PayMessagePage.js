@@ -98,7 +98,7 @@ class PayMessagePage extends BasePage {
     pressOnItem = (item)=>{
         // console.log('点击了消息条目');
         if(item.payNoticeType==7||item.payNoticeType==8||item.payNoticeType==9){
-            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.packetCode});
+            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.productDesc});
         }else {
             nav.navigate(RouterPaths.TRANSACTION_DETAILS,{billId:item.billId,msgType:item.msgType,id:item.id});
         }
