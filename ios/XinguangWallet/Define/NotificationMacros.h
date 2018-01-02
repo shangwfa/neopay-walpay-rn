@@ -46,6 +46,8 @@
 #define kNotificationRefreshDataForHomePage @"kNotificationRefreshDataForHomePage"
 //原生注册时验证手机号已经注册
 #define kNotificationPhoneNoAlreadyExist @"kNotificationPhoneNoAlreadyExist"
+//收到APN推送消息
+#define kNotificationAPNReceived @"kNotificationAPNReceived"
 
 #pragma mark - ——————— 网络状态相关 ————————
 

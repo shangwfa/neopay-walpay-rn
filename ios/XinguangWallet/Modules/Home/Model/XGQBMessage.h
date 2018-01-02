@@ -67,5 +67,6 @@ typedef NS_ENUM(NSInteger,XGQBMsgReadStatus) {
 @property (nonatomic,strong) NSString *payNoticeTypeText;
 @property (nonatomic,strong) NSString *contentString;
 @property (nonatomic,strong) NSString *noticeImageUrl;
+@property (nonatomic,strong) NSString *noticeUrl;
 
 @end
