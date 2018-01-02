@@ -153,6 +153,11 @@
     [appRootVC.rootNAV popToRootViewControllerAnimated:YES];
     
     if (appDelegate.msgType==XGQBMsgTypeRedPacket) {
+        
+        [appRootVC.homeVC checkIDStatus];
+        if ([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized) {
+            return;
+        }
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType=@"redList";
         [appRootVC.rootNAV pushViewController:RNVC animated:YES];
@@ -169,6 +174,9 @@
         RNVC.pageType=@"topupMsgList";
         [appRootVC.rootNAV pushViewController:RNVC animated:YES];
     }
+    
+    //跳转完成后清空msgType
+    appDelegate.msgType=0;
 }
 
 -(void)logoutUserInfo
