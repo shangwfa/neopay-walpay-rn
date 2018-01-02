@@ -105,6 +105,7 @@ class RpDetailPage extends BasePage {
         DeviceEventEmitter.emit(RouterPaths.RECEIVE_RED_PACKET, {type: 'redPacketDetailBack'})
         DeviceEventEmitter.emit(RouterPaths.RED_LIST, {type: 'redPacketDetailBack'})
     };
+
     _renderMainView = () => {
         return (
             <ScrollView style={{height: ScreenUtils.height - 50}}>
@@ -118,11 +119,12 @@ class RpDetailPage extends BasePage {
                     back={() => this.back()}
                     title='红包详情'/>
                 <RpDetailHeader imgIconUrl={this.state.dataDetail.bossAvatarUrl}
-                                amountValue={FormatUtils.money(this.state.dataDetail.luckyMoney)}
+                                amountValue={this.state.param.type == 1?FormatUtils.money(this.state.dataDetail.leftAmount):FormatUtils.money(this.state.dataDetail.luckyMoney)}
                                 fromValue={this.state.dataDetail.bossName}
                                 remarkValue={this.state.dataDetail.message}
                                 stateValue={this.state.dataDetail.redPacketReceiveStatusText}
-                                isMax={this.state.dataDetail.bestLuckyBool}/>
+                                isMax={this.state.dataDetail.bestLuckyBool}
+                                isRet={this.state.param.type}/>
                 <View style={styles.mid_view}>
                     <Text
                         style={styles.num_text}>{'已领取' + this.state.dataDetail.robberCount + '/' + this.state.dataDetail.totalCount + '个'}</Text>
