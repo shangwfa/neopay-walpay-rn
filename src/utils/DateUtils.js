@@ -132,7 +132,7 @@ yyyyYearMmMonth = (timestamp) => {
     if (isToYearAndMonth(date)) {
         return '本月'
     }
-    return date.getFullYear() + '年' + date.getMonth() + '月'
+    return `${date.getFullYear()}年${date.getMonth() + 1}月`
 };
 
 export default {

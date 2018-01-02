@@ -18,6 +18,24 @@ public class JPushDataExtraBean {
     private String params;
     private String redirectUrl;
     private int redirectType;
+    private Integer msgType;
+    private Long id;
+
+    public int getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(int msgType) {
+        this.msgType = msgType;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getRedirectUrl() {
         return redirectUrl;

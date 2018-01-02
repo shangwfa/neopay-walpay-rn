@@ -1,6 +1,7 @@
 package cn.neopay.walpay.android.http;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.xgjk.common.lib.base.BaseApp;
 import com.xgjk.common.lib.utils.NetWorkUtils;
@@ -30,6 +31,12 @@ public class BaseSubscriber<T> extends Subscriber<T> {
 
     public BaseSubscriber(Activity activity, SuccessCallback<T> mCallback, boolean isShowLoading) {
         this.mActivity = activity;
+        this.mCallback = mCallback;
+        this.mIsShowLoading = isShowLoading;
+    }
+
+    public BaseSubscriber(Context activity, SuccessCallback<T> mCallback, boolean isShowLoading) {
+        this.mActivity = (Activity) activity;
         this.mCallback = mCallback;
         this.mIsShowLoading = isShowLoading;
     }
