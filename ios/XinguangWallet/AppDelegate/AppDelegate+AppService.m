@@ -22,6 +22,9 @@
                                              selector:@selector(loginStateChange:)
                                                  name:kNotificationLoginStateChange
                                                object:nil];
+    
+    //APN推送消息监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAPNNoti) name:kNotificationAPNReceived object:nil];
 
 }
 
@@ -133,11 +136,22 @@
     
     [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
     
-    //判断是否跳转消息页
+    [self didReceiveAPNNoti];
+
+}
+
+-(void)didReceiveAPNNoti
+{
+
+    XGQBAPPRootViewController *appRootVC = (XGQBAPPRootViewController*)self.window.rootViewController;
+    
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     JKLog(@"收到通知,开始跳转相应页面%ld",(long)appDelegate.msgType);
-
+    
+    [appRootVC closeSideView];
+    [appRootVC.rootNAV popToRootViewControllerAnimated:YES];
+    
     if (appDelegate.msgType==XGQBMsgTypeRedPacket) {
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType=@"redList";

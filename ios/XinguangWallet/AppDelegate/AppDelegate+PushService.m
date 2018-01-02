@@ -53,20 +53,20 @@ static NSString * const appKey = @"13dcf601d46a529f33bd1d5f";
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
     JKLog();
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
-    // Required, iOS 7 Support
-    [JPUSHService handleRemoteNotification:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
-    JKLog();
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
-    // Required,For systems with less than or equal to iOS6
-    [JPUSHService handleRemoteNotification:userInfo];
-    JKLog();
-}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//    
+//    // Required, iOS 7 Support
+//    [JPUSHService handleRemoteNotification:userInfo];
+//    completionHandler(UIBackgroundFetchResultNewData);
+//    JKLog();
+//}
+//
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+//    
+//    // Required,For systems with less than or equal to iOS6
+//    [JPUSHService handleRemoteNotification:userInfo];
+//    JKLog();
+//}
 
 
 
