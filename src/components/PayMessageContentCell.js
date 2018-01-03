@@ -113,7 +113,7 @@ const PayMessageContentCell = props => {
                                 <Text style = {styles.detailItem}>交易方式 :</Text>
                                 <Text style = {styles.detailDes}>{tradTypeText}</Text>
                             </View>
-                            {renderAttach()}
+                            {/*{renderAttach()}*/}
                         </View>
 
                     </View>
@@ -161,7 +161,7 @@ const PayMessageContentCell = props => {
             </TouchableWithoutFeedback>
         );
     }
-    else if(payNoticeType==10||payNoticeType==11){
+    else if(payNoticeType==10||payNoticeType==11){//商户活动
         return(
             <TouchableWithoutFeedback onPress={onPress}>
                 <View style = {styles.container}>

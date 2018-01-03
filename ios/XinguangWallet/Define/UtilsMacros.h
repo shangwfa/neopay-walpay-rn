@@ -27,7 +27,7 @@
 //获取屏幕宽高
 #define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
 #define kScreenHeight ([[UIScreen mainScreen] bounds].size.height)
-#define kScreen_Bounds [UIScreen mainScreen].bounds
+#define kScreenBounds [UIScreen mainScreen].bounds
 
 //根据iPhone6的尺寸来缩放
 #define kSizeRatioW (kScreenWidth/375.0)
