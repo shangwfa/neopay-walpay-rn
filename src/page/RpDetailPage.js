@@ -142,25 +142,34 @@ class RpDetailPage extends BasePage {
     }
 
     _renderBottom = () => {
-        if (this.state.dataDetail.ownerBool == false) {
-            return (
-                <Image style={styles.bg_bottom} source={require("../res/img/rp_shadow.png")}>
-                    <ImageButton value='我也要发红包'
-                                 style={{marginTop: 0.5, marginBottom: 0.5, flex: 1, backgroundColor: '#f9f9f9'}}
-                                 textColor={colors.one_color} icon='' onPress={() => this._pushSendRpPage()}/>
-                </Image>
-            )
-        } else {
+        if(this.state.param.type == 1){//明细-退款进入
+            return(null)
+        }else if(this.state.param.type == 2) {//明细-抢到的红包进入
             return (
                 <View style={styles.bg_bottom}>
-                    <ImageButton value='我也要发红包'
-                                 style={{marginTop: 0.5, marginBottom: 0.5, flex: 1, backgroundColor: '#f9f9f9'}}
-                                 textColor={colors.one_color} icon='' onPress={() => this._pushSendRpPage()}/>
                     {this._renderShare()}
                 </View>
             )
+        }else {
+            if (this.state.dataDetail.ownerBool == false) {//抢红包进入
+                return (
+                    <Image style={styles.bg_bottom} source={require("../res/img/rp_shadow.png")}>
+                        <ImageButton value='我也要发红包'
+                                     style={{marginTop: 0.5, marginBottom: 0.5, flex: 1, backgroundColor: '#f9f9f9'}}
+                                     textColor={colors.one_color} icon='' onPress={() => this._pushSendRpPage()}/>
+                    </Image>
+                )
+            } else {
+                return (
+                    <View style={styles.bg_bottom}>
+                        <ImageButton value='我也要发红包'
+                                     style={{marginTop: 0.5, marginBottom: 0.5, flex: 1, backgroundColor: '#f9f9f9'}}
+                                     textColor={colors.one_color} icon='' onPress={() => this._pushSendRpPage()}/>
+                        {this._renderShare()}
+                    </View>
+                )
+            }
         }
-
     }
 
     _renderShare = () => {

@@ -141,7 +141,7 @@ class TransactionDetailsPage extends BasePage {
             case 17://商户付款成功
             case 25://账户提现退款
                 return this._renderButtonView(true, "查看原订单交易详情", () => {
-                    nav.goBack();
+                    nav.navigate(RouterPaths.TRANSACTION_DETAILS, {orderNo: item.oldOrderNo})
                 }, {marginTop: 100});
                 break;
             case 6://红包领取成功

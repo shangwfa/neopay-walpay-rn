@@ -95,7 +95,7 @@ class AccountWithdrawResultPage extends BasePage {
 
                 <View>
                     <Text style={sucStyles.headerViewNoText}>
-                        {`+ ${FormatUtils.money(this.state.data.amount)}`}
+                        {`- ${FormatUtils.money(this.state.data.amount)}`}
                     </Text>
                 </View>
                     <Text style={sucStyles.headerViewDesText}>
