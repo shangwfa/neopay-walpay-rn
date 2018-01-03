@@ -80,7 +80,11 @@ class RpRecordListPage extends BasePage {
     }
     renderSectionHeader = (item) => {
         if (item.displayDate) {
-            return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} value='查看月红包' onPress ={()=>this.pushMontnDetailPage(item)}/>
+            if(this.props.navigation.state.params.QueryType===1 || this.props.navigation.state.params.QueryType ===2){
+                return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} />
+            }else {
+                return <SectionHeader title={DateUtils.getRpRecordList(item.createTimeMs)} value='查看月红包' isShowValue={true} isShowArrow={true} onPress ={()=>this.pushMontnDetailPage(item)}/>
+            }
         }
     }
 
@@ -107,7 +111,7 @@ class RpRecordListPage extends BasePage {
     getTitle=()=>{
         if(this.props.navigation.state.params.QueryType===1){
             return '发出大红包明细';
-        }else if(this.props.navigation.state.params.QueryType ==2){
+        }else if(this.props.navigation.state.params.QueryType ===2){
             return '收到大红包明细';
         }else {
             return '红包交易明细';

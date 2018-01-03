@@ -102,6 +102,8 @@ class RpDetailPage extends BasePage {
 
     }
     back = () => {
+        const dismissKeyboard = require('dismissKeyboard')
+        dismissKeyboard()
         DeviceEventEmitter.emit(RouterPaths.RECEIVE_RED_PACKET, {type: 'redPacketDetailBack'})
         DeviceEventEmitter.emit(RouterPaths.RED_LIST, {type: 'redPacketDetailBack'})
     };
