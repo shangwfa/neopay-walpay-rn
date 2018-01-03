@@ -96,7 +96,7 @@ class RpDetailPage extends BasePage {
                                middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
                                rightUpValue={FormatUtils.moneyWithTag(item.luckyAmount)}
                                isLine={true}
-                               imgIconUrl={item.luckyFlag == 3 ? require("../res/img/rp_max_num.png") : ' '}/>
+                               imgIconUrl={item.luckyFlag == 2 ? require("../res/img/rp_max_num.png") : ' '}/>
             </View>
         )
 
