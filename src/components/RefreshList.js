@@ -31,8 +31,10 @@ class RefreshList extends Component {
         super(props)
         this.state = {
             isError: false,
-            isEmpty: false
+            isEmpty: false,
+            refreshing:false
         }
+
     }
 
     componentDidMount() {
@@ -97,6 +99,15 @@ class RefreshList extends Component {
             </View>)
     }
 
+    refresh=()=>{
+        this.setState({ refreshing:true})
+        this.refreshing=true
+        setTimeout(()=>{
+            this.setState({ refreshing:false})
+        },1000)
+        this.props.onRefresh()
+    }
+
     render() {
         const {data, renderItem, onRefresh, isEmpty, extraData, ...attributes} = this.props
         if (data.length > 0) {
@@ -105,10 +116,10 @@ class RefreshList extends Component {
                     data={data}
                     showsVerticalScrollIndicator={false}
                     renderItem={renderItem}
-                    onRefresh={onRefresh}
+                    onRefresh={this.refresh}
                     onEndReached={this.onEndReached}
                     extraData={extraData}
-                    refreshing={false}
+                    refreshing={this.state.refreshing}
                     onEndReachedThreshold={0.1}
                     ListFooterComponent={this.renderFooter}
                     keyExtractor={(item, index) => {
