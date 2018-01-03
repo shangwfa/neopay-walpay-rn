@@ -100,7 +100,7 @@ queryBannerList = (callback) => {
 getUserInfo = (callback) => {
     NetUtil.post(APIS.GET_USER_INFO, {}, (data) => {
         callback(data)
-    })
+    },false)
 }
 modifyUserAvatarUrl = (request, callback) => {
     NetUtil.post(APIS.MODIFY_USER_AVATAR_URL, request, (data) => {
