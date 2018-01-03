@@ -69,7 +69,7 @@ class TopupRecordListPage extends BasePage {
                 <CommonItemTwo imgUrl={item.iconUrl}
                                middleUpValue={item.title}
                                middleBottomValue={DateUtils.mmDdHhMmDateFmt(item.createTimeMs)}
-                               rightUpValue={'-' + FormatUtils.money(item.amount)} rightBottomValue={item.status}
+                               rightUpValue={item.payDirection=='1'?'+' + FormatUtils.money(item.amount) :'-' + FormatUtils.money(item.amount)} rightBottomValue={item.status}
                                isLine={true}
                                onPress={() => this.pressOnItem(item)}
                 />

@@ -98,6 +98,7 @@ public class HomeDrawCoordinatorActivity extends BaseActivity<HomeDrawCoordinato
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void RefreshPage(RefreshBean refreshBean) {
         mPresenter.getUserInfo();
+        mViewBinding.homeDrawCoordinatorAbl.setExpanded(true, true);
     }
 
     private void handleBottomKeyLayout() {
