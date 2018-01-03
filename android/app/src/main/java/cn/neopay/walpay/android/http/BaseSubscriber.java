@@ -1,7 +1,6 @@
 package cn.neopay.walpay.android.http;
 
 import android.app.Activity;
-import android.content.Context;
 
 import com.xgjk.common.lib.base.BaseApp;
 import com.xgjk.common.lib.utils.NetWorkUtils;
@@ -35,10 +34,10 @@ public class BaseSubscriber<T> extends Subscriber<T> {
         this.mIsShowLoading = isShowLoading;
     }
 
-    public BaseSubscriber(Context activity, SuccessCallback<T> mCallback, boolean isShowLoading) {
-        this.mActivity = (Activity) activity;
+    public BaseSubscriber(SuccessCallback<T> mCallback, boolean isShowLoading) {
         this.mCallback = mCallback;
         this.mIsShowLoading = isShowLoading;
+        mActivity = null;
     }
 
     public BaseSubscriber(Activity activity, SuccessCallback<T> mCallback, ErrorCallback errorCallback) {
@@ -57,7 +56,7 @@ public class BaseSubscriber<T> extends Subscriber<T> {
     @Override
     public void onStart() {
         //检查网络
-        if (!NetWorkUtils.isConnectedByState(BaseApp.application)) {
+        if (!NetWorkUtils.isConnectedByState(BaseApp.application) && null != mActivity) {
             ToastUtils.show(ResUtils.getText(mActivity, R.string.net_not_link));
             return;
         }
@@ -83,7 +82,7 @@ public class BaseSubscriber<T> extends Subscriber<T> {
         try {
             if (!(e instanceof ApiException)) {
                 e.printStackTrace();
-                if (isShowNetErrorToast()) {
+                if (isShowNetErrorToast() && null != mActivity) {
                     ToastUtils.show(ResUtils.getText(mActivity, R.string.net_error));
                 }
             }

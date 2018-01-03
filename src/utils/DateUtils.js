@@ -109,7 +109,7 @@ getRpRecordList = (timestamp) => {
     if (isToYearAndMonth(date)) {//当月
         return `本月`;
     } else if (isToYear(date)) {//今年
-        if (dateFmt("MM", date) == '10' || dateFmt("MM", date) == '11' || dateFmt("MM", date) == '12') {
+        if (dateFmt("MM", date) === '10' || dateFmt("MM", date) === '11' || dateFmt("MM", date) === '12') {
             return dateFmt("MM" + '月', date);
         } else {
             return dateFmt("M" + '月', date);
