@@ -44,7 +44,7 @@ public class KeyBoardUtils {
     }
 
     /**
-     *延迟打开键盘
+     * 延迟打开键盘
      *
      * @param //mEditText输入框
      * @param //mContext上下文
@@ -105,10 +105,27 @@ public class KeyBoardUtils {
     public static void closeKeybord(Activity mContext) {
         try {
             InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            boolean isOpen=imm.isActive();
+            boolean isOpen = imm.isActive();
             View v = mContext.getCurrentFocus();
-            if ((isOpen)&&(v != null)&&(v.getWindowToken()!=null)) {
+            if ((isOpen) && (v != null) && (v.getWindowToken() != null)) {
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 关闭软键盘
+     *
+     * @param //mEditText输入框
+     * @param //mContext上下文
+     */
+    public static void closeAllKeybord(Activity mContext) {
+        try {
+            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(mContext.getWindow().getDecorView().getWindowToken(), 0);
             }
         } catch (Exception e) {
             e.printStackTrace();

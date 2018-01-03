@@ -9,7 +9,7 @@ import {
     View,
     Text,
     Image,
-    ListView, TouchableOpacity, NativeModules
+    ListView, TouchableOpacity, NativeModules,DeviceEventEmitter
 } from 'react-native'
 import ApiManager from "../utils/ApiManager";
 import Header from "../components/Header";
@@ -42,6 +42,9 @@ class ReceiveRedPacketPage extends BasePage {
                 break;
         }
     }
+    back = () => {
+        DeviceEventEmitter.emit(RouterPaths.BIG_RED_PACKET_SIMPLE, {type: 'bigRedPacketRefresh'})
+    };
 
     render() {
         return (
@@ -52,6 +55,9 @@ class ReceiveRedPacketPage extends BasePage {
                     rightIcon={img_question}
                     onRightPress={this._handleRightArrowClick.bind(this)}
                     navigation={this.props.navigation}
+                    back={() => {
+                        this.back()
+                    }}
                     title='领红包'/>
                 {/*消息列表*/}
                 <RefreshList
