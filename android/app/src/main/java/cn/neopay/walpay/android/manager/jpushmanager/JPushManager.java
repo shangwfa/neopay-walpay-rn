@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
+import com.xgjk.common.lib.utils.StringUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,8 +18,14 @@ import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.neopay.walpay.android.WalpayApp;
+import cn.neopay.walpay.android.http.BaseSubscriber;
+import cn.neopay.walpay.android.manager.apimanager.ApiManager;
 import cn.neopay.walpay.android.manager.routermanager.MainRouter;
 import cn.neopay.walpay.android.module.activityParams.RNActivityParams;
+import cn.neopay.walpay.android.module.request.GetUserInfoRequestBean;
+import cn.neopay.walpay.android.module.request.RedPacketStateRequestBean;
+import cn.neopay.walpay.android.module.request.UpdateNewsReadStatusRequestBean;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.ui.RNActivity;
 
 /**
@@ -130,10 +137,22 @@ public class JPushManager extends BroadcastReceiver {
                             handleJumpH5(jPushDataExtraBean);
                             break;
                     }
+                    handleUpdateNewsState(jPushDataExtraBean);
                 }
             }
         } else {
             MainRouter.getSingleton().jumpToHomeDrawPage();
+        }
+    }
+
+    private void handleUpdateNewsState(JPushDataExtraBean jPushDataExtraBean) {
+        if (StringUtils.isNoEmpty(String.valueOf(jPushDataExtraBean.getMsgType()))) {
+            UpdateNewsReadStatusRequestBean requestBean = new UpdateNewsReadStatusRequestBean();
+            requestBean.setId(jPushDataExtraBean.getId());
+            requestBean.setMsgType(jPushDataExtraBean.getMsgType());
+            ApiManager.getSingleton().updateNewsReadStatus(requestBean,
+                    new BaseSubscriber(o -> {
+                    }, false));
         }
     }
 
@@ -152,12 +171,7 @@ public class JPushManager extends BroadcastReceiver {
     private void handleJumpNative(JPushDataExtraBean jPushDataExtraBean, JPushDataParamsBean jPushDataParamsBean) {
         switch (jPushDataExtraBean.getNoticeType()) {
             case 1://"红包来了"
-                RNActivityParams params = new RNActivityParams();
-                params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
-                RNActivityParams.Data data = new RNActivityParams.Data();
-                data.setPacketCode(jPushDataParamsBean.getRedPacketCode());
-                params.setData(data);
-                MainRouter.getSingleton().jumpToRNPage(WalpayApp.application, params);
+                handleRedPacket(jPushDataParamsBean);
                 break;
             case 2://支付消息
                 RNActivity.jumpToRNPage(WalpayApp.application, RNActivity.PageType.PAY_MESSAGE_PAGE);
@@ -172,6 +186,25 @@ public class JPushManager extends BroadcastReceiver {
         }
     }
 
+    private void handleRedPacket(JPushDataParamsBean jPushDataParamsBean) {
+        ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(),
+                new BaseSubscriber(o -> {
+                    UserInfoResponseBean responseBean = (UserInfoResponseBean) o;
+                    if (2 != responseBean.getAuthStatus()) {//未实名
+                        MainRouter.getSingleton().jumpToHomeDrawPage();
+                    } else {//实名
+                        ApiManager.getSingleton().updateRedPacketState(new RedPacketStateRequestBean(jPushDataParamsBean.getRedPacketCode()),
+                                new BaseSubscriber(os -> {
+                                    RNActivityParams params = new RNActivityParams();
+                                    params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
+                                    RNActivityParams.Data dataParams = new RNActivityParams.Data();
+                                    dataParams.setPacketCode(jPushDataParamsBean.getRedPacketCode());
+                                    params.setData(dataParams);
+                                    RNActivity.jumpToRNPage(WalpayApp.application, params);
+                                }, false));
+                    }
+                }, false));
+    }
 
     private void jPushConnectionState(Intent intent) {
         //JPush 服务的连接状态

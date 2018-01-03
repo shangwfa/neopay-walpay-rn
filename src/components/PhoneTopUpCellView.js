@@ -347,7 +347,7 @@ class PhoneTopUpMoneyView extends Component {
             // isPayShow:true,
             payAmount:this.state.CelluarPriceList[i].tradeAmount.toFixed(2),
             selectedNameCode:this.state.CelluarPriceList[i].nameCode,
-            selectedRechargeType:i===0?3:2,
+            selectedRechargeType:i===0?2:3,
         });
         let request = {amount:this.state.CelluarPriceList[i].tradeAmount.toFixed(2)}
         ApiManager.checkNeedBindCard(request,(data)=>{

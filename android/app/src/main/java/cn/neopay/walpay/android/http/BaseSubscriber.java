@@ -34,6 +34,12 @@ public class BaseSubscriber<T> extends Subscriber<T> {
         this.mIsShowLoading = isShowLoading;
     }
 
+    public BaseSubscriber(SuccessCallback<T> mCallback, boolean isShowLoading) {
+        this.mCallback = mCallback;
+        this.mIsShowLoading = isShowLoading;
+        mActivity = null;
+    }
+
     public BaseSubscriber(Activity activity, SuccessCallback<T> mCallback, ErrorCallback errorCallback) {
         this.mActivity = activity;
         this.mCallback = mCallback;
@@ -50,7 +56,7 @@ public class BaseSubscriber<T> extends Subscriber<T> {
     @Override
     public void onStart() {
         //检查网络
-        if (!NetWorkUtils.isConnectedByState(BaseApp.application)) {
+        if (!NetWorkUtils.isConnectedByState(BaseApp.application) && null != mActivity) {
             ToastUtils.show(ResUtils.getText(mActivity, R.string.net_not_link));
             return;
         }
@@ -76,7 +82,7 @@ public class BaseSubscriber<T> extends Subscriber<T> {
         try {
             if (!(e instanceof ApiException)) {
                 e.printStackTrace();
-                if (isShowNetErrorToast()) {
+                if (isShowNetErrorToast() && null != mActivity) {
                     ToastUtils.show(ResUtils.getText(mActivity, R.string.net_error));
                 }
             }

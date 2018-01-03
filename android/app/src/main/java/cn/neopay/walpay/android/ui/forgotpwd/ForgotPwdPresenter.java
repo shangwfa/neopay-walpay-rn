@@ -22,6 +22,9 @@ import rx.Observable;
  */
 
 public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
+
+    private boolean mIsAuthStatus;
+
     @Override
     public void resetPassword(ResetPwdParameterBean bean) {
         Observable.just("")
@@ -37,12 +40,13 @@ public class ForgotPwdPresenter extends ForgotPwdContract.Presenter {
     public void getUerInfo() {
         ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(), new BaseSubscriber(mActivity, o -> {
             UserInfoResponseBean responseBean = (UserInfoResponseBean) o;
-            mView.setUserAuthState(2 == responseBean.getAuthStatus());
+            mIsAuthStatus = 2 == responseBean.getAuthStatus();
+            mView.setUserAuthState(mIsAuthStatus);
         }));
     }
 
     private Boolean checkRealMag(String forgotPwdType, String realMsg) {
-        if (IWalpayConstants.FORGOTPWD_TYPE_PAY.equals(forgotPwdType)) {
+        if (IWalpayConstants.FORGOTPWD_TYPE_PAY.equals(forgotPwdType) && mIsAuthStatus) {
             return InputCheckUtils.checkIdCardNumber(realMsg);
         }
         return true;

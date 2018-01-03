@@ -8,23 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "XGQBPushNotiBody.h"
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-
-typedef NS_ENUM(NSInteger,XGQBMsgType){
-    XGQBMsgTypeRedPacket=1,
-    XGQBMsgTypePayNotice,
-    XGQBMsgTypePhoneRechargeSuccess,
-    XGQBMsgTypePhoneDataRechargeSuccess,
-    XGQBMsgTypeMerchantBroadcast,
-    XGQBMsgTypeDiscountsNotice,
-    XGQBMsgTypeSystemNotice,
-    XGQBMsgTypeSystemActNotice,
-} ;
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, JPUSHRegisterDelegate>
@@ -33,7 +23,7 @@ typedef NS_ENUM(NSInteger,XGQBMsgType){
 
 @property (nonatomic,strong) NSArray *jsCodeLocationArr;
 
-@property (nonatomic,assign) XGQBMsgType msgType;
+@property (nonatomic,strong) XGQBPushNotiBody *notiBody;
 
 @end
 

@@ -67,7 +67,6 @@
     [self configUSharePlatforms];
     
     [self confitUShareSettings];
-
     
     return YES;
 }
@@ -131,7 +130,17 @@
         
         NSString *notiStr = userInfo[@"extraParam"];
         
-        XGQBPushNotiBody *notiBody = [XGQBPushNotiBody modelWithJSON:notiStr];
+        NSData *stringData = [notiStr dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:stringData options:0 error:nil];
+        
+        NSString *notiDict = json[@"params"];
+        
+        XGQBPushNotiParams *notiParams = [XGQBPushNotiParams modelWithJSON:notiDict];
+        //YYModel嵌套解析失败,不知原因
+        XGQBPushNotiBody *notiBody = [XGQBPushNotiBody modelWithJSON:json];
+        
+        notiBody.params = notiParams;
         
         [self handlePageNaviWithNotiBody:notiBody];
         
@@ -210,8 +219,8 @@
 #pragma mark - 处理消息跳转
 -(void)handlePageNaviWithNotiBody:(XGQBPushNotiBody*)body
 {
-        if (body) {//红包消息
-            _msgType= body.noticeType;
+        if (body) {
+            _notiBody= body;
         }
     
     [kNotificationCenter postNotificationName:kNotificationAPNReceived object:nil];

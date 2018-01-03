@@ -19,7 +19,6 @@ import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 import com.orhanobut.logger.Logger;
 import com.xgjk.common.lib.R;
-import com.xgjk.common.lib.utils.NetWorkUtils;
 import com.xgjk.common.lib.view.BaseHeader;
 
 /**
@@ -63,8 +62,7 @@ public abstract class BaseH5Activity extends AppCompatActivity {
 
         long n = System.currentTimeMillis();
         Logger.i("Info", "init used time:" + (n - p));
-
-
+        agentWebHandle();
     }
 
     private WebViewClient mWebViewClient = new WebViewClient() {
@@ -88,6 +86,8 @@ public abstract class BaseH5Activity extends AppCompatActivity {
     };
 
     protected abstract String loadUrl();
+
+    protected abstract void agentWebHandle();
 
     private ChromeClientCallbackManager.ReceivedTitleCallback mCallback = new ChromeClientCallbackManager.ReceivedTitleCallback() {
         @Override

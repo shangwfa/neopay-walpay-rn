@@ -33,6 +33,7 @@ import cn.neopay.walpay.android.module.bean.NetCommonParamsBean;
 import cn.neopay.walpay.android.module.event.CloseRNPageEvent;
 import cn.neopay.walpay.android.module.event.LoadingDialogEvent;
 import cn.neopay.walpay.android.module.request.ShareRequestBean;
+import cn.neopay.walpay.android.module.response.UserInfoResponseBean;
 import cn.neopay.walpay.android.utils.BusniessUtils;
 
 /**
@@ -334,5 +335,14 @@ public class CommModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void isHaveBottomNav(Callback callback) {
         callback.invoke(ScreenUtils.hasSoftKeys(mContext.getCurrentActivity()));
+    }
+
+    @ReactMethod
+    public void isShowAuth(Integer isAuth, Callback callback) {
+        HandlerUtils.runOnUiThread(() -> {
+            UserInfoResponseBean responseBean = new UserInfoResponseBean();
+            responseBean.setAuthStatus(isAuth);
+            BusniessUtils.handleCertification(getCurrentActivity(), responseBean, callback::invoke);
+        });
     }
 }
