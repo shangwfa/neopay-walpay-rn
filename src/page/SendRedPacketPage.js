@@ -69,7 +69,7 @@ class SendRedPacketPage extends BasePage {
     }
 
     _handleRecentPayTypeRequest = () => {
-        ApiManager.getRecentPayType({}, (data) => {
+        ApiManager.getRecentPayType({payType: 1}, (data) => {
             this.setState({
                 payTypeSourceData: data,
                 payType: data.payType,
