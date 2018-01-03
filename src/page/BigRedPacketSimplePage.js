@@ -27,11 +27,23 @@ class BigRedPacketSimplePage extends BasePage {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        this._handleRefresh();
+    }
+
+    _handleRefresh() {
         ApiManager.getUserNotReceivedCount({}, (data) => {
             this.setState({redPacketNum: data.count})
         })
     }
+
+    emitEvent = (event) => {
+        switch (event.type) {
+            case "bigRedPacketRefresh":
+                this._handleRefresh();
+                break;
+        }
+    };
 
     render() {
         return (

@@ -12,6 +12,7 @@ import com.facebook.react.ReactInstanceManager;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
 import com.xgjk.common.lib.base.BaseRNActivity;
+import com.xgjk.common.lib.utils.KeyBoardUtils;
 import com.xgjk.common.lib.utils.PhotoUtils;
 import com.xgjk.common.lib.utils.ToastUtils;
 
@@ -187,5 +188,11 @@ public class RNActivity extends BaseRNActivity {
      */
     public static void jumpToRNPage(Context context, RNActivityParams params) {
         MainRouter.getSingleton().jumpToRNPage(context, params);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        KeyBoardUtils.closeAllKeybord(RNActivity.this);
     }
 }

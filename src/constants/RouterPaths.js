@@ -14,6 +14,7 @@ export const RouterPaths = {
     PERSONAL_INFO_PAGE: 'personalInfo',
     MY_ORDER_PAGE: 'myOrder',
     BIND_BANK_CARD_PAGE: 'bindBankCard',
+    BIG_RED_PACKET_SIMPLE:"bigRedPacketSimple",
     RP_DETAIL_PAGE:"rpDetail",
     MERCHANT_ACTIVITY_LIST: "merchantActivityList",
     ACTIVITY_LIST_PAGE: "activityList",
