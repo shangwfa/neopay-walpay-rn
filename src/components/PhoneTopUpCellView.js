@@ -9,6 +9,7 @@ import {
     Modal,
     NativeModules,
     NativeAppEventEmitter,
+    DeviceEventEmitter,
 } from 'react-native'
 import {colors} from '../constants/index'
 import ScreenUtils from '../utils/ScreenUtils'
@@ -129,6 +130,7 @@ class PhoneTopUpMoneyView extends Component {
         nav.navigate(RouterPaths.NEW_BIND_BANKCARD, {type: 3});
     };
 
+
     componentDidMount() {
 
         // if(!this.state.phoneNo){
@@ -177,7 +179,16 @@ class PhoneTopUpMoneyView extends Component {
 
         NativeAppEventEmitter.addListener('ContactSelected',(data)=>this.receivedContactPhoneNo(data));
 
-
+        DeviceEventEmitter.addListener('BindBankCardNewToPhoneTopUpCellView',()=>{
+            //获取上次支付方式和余额
+            ApiManager.getRecentPayType({}, (data) => {
+                this.setState({
+                    selectedPayType:data.payType,
+                    selectedBankName: data.payTypeDesc,
+                    selectedBankId: data.bankCardId,
+                    accountAmount: data.amount
+                });
+            });})
 
     }
     //接收到手机号

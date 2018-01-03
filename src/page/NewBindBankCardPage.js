@@ -123,6 +123,7 @@ class NewBindBankCardPage extends BasePage {
                     DeviceEventEmitter.emit(RouterPaths.SEND_RED_PACKET, {type: 'redPacketBindCard', data: this.state.choseItem})
                     DeviceEventEmitter.emit(RouterPaths.BANKCARD_LIST,{type:'bankCardDetail'})
                     DeviceEventEmitter.emit(RouterPaths.ACCOUNT_WITHDRAW_PAGE,{type:'refreshBankCard'})
+                    DeviceEventEmitter.emit('BindBankCardNewToPhoneTopUpCellView')
                     this.props.navigation.goBack();
             }
         })
