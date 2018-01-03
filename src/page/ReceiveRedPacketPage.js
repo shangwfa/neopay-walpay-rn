@@ -84,7 +84,7 @@ class ReceiveRedPacketPage extends BasePage {
                 arrData.push(...data);
                 this.setState({dataSource: arrData});
             } else {
-                const empty = !data || data.length <= 0
+                const empty = !data || data.length <= 0;
                 this.setState({dataSource: data, isEmpty: empty})
             }
         }, isLoadding)
@@ -93,24 +93,27 @@ class ReceiveRedPacketPage extends BasePage {
         this.loadData(pageSize, true, false);
     };
     _clickItem = (item) => {
-        this.setState({
-            isShowProcess: true
-        });
         let request = {
             packetCode: item.packetCode
         };
-        ApiManager.receiveRedPacket(request, (data) => {
-            setTimeout(() => {
+        if (item.readStatus === 2) {
+            this.setState({
+                isShowProcess: true
+            });
+            ApiManager.receiveRedPacket(request, (data) => {
+                setTimeout(() => {
+                    this.handleShowProcess();
+                    this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
+                }, 2000);
+            }, (errorData) => {//数据错误
                 this.handleShowProcess();
-                this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
-            }, 2000);
-        }, (errorData) => {//数据错误
-            this.handleShowProcess();
-            NativeModules.commModule.toast(errorData.retMsg)
-        }, (errData) => {//网络超时
-            this.handleShowProcess();
-        });
-
+                NativeModules.commModule.toast(errorData.retMsg);
+            }, (errData) => {//网络超时
+                this.handleShowProcess();
+            });
+        } else {
+            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
+        }
     };
     handleShowProcess = () => {
         this.setState({

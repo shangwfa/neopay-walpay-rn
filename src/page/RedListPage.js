@@ -93,6 +93,7 @@ class RedListPage extends BasePage {
                 }, 2000);
             }, (errorData) => {//数据错误
                 this.handleShowProcess();
+                NativeModules.commModule.toast(errorData.retMsg);
             }, (errData) => {//网络超时
                 this.handleShowProcess();
             });

@@ -137,6 +137,7 @@ class TransactionDetailsPage extends BasePage {
                 }, {marginTop: 50});
                 break;
             case 5://退款
+            case 16://手机充值退款
             case 17://商户付款成功
             case 25://账户提现退款
                 return this._renderButtonView(true, "查看原订单交易详情", () => {
@@ -302,7 +303,7 @@ class TransactionDetailsPage extends BasePage {
     /*手机充值状态--退款*/
     _handlePhoneRechargingRebateType(item) {
         mData = [];//必须清空，否则会重复显示
-        TransactionTypeDescUtils._payTypeItem(mData, item);
+        TransactionTypeDescUtils._incomeTypeItem(mData, item);
         TransactionTypeDescUtils._tradeTypeItem(mData, item);
         TransactionTypeDescUtils._tradeTimeItem(mData, item);
         TransactionTypeDescUtils._tradeOrderNoItem(mData, item);

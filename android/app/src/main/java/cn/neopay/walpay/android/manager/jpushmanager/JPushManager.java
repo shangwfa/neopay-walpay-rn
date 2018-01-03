@@ -151,7 +151,7 @@ public class JPushManager extends BroadcastReceiver {
             requestBean.setId(jPushDataExtraBean.getId());
             requestBean.setMsgType(jPushDataExtraBean.getMsgType());
             ApiManager.getSingleton().updateNewsReadStatus(requestBean,
-                    new BaseSubscriber(WalpayApp.application, o -> {
+                    new BaseSubscriber(o -> {
                     }, false));
         }
     }
@@ -188,13 +188,13 @@ public class JPushManager extends BroadcastReceiver {
 
     private void handleRedPacket(JPushDataParamsBean jPushDataParamsBean) {
         ApiManager.getSingleton().getUserInfo(new GetUserInfoRequestBean(),
-                new BaseSubscriber(WalpayApp.application, o -> {
+                new BaseSubscriber(o -> {
                     UserInfoResponseBean responseBean = (UserInfoResponseBean) o;
                     if (2 != responseBean.getAuthStatus()) {//未实名
                         MainRouter.getSingleton().jumpToHomeDrawPage();
                     } else {//实名
                         ApiManager.getSingleton().updateRedPacketState(new RedPacketStateRequestBean(jPushDataParamsBean.getRedPacketCode()),
-                                new BaseSubscriber(WalpayApp.application, os -> {
+                                new BaseSubscriber(os -> {
                                     RNActivityParams params = new RNActivityParams();
                                     params.setPage(RNActivity.PageType.RP_DETAIL_PAGE);
                                     RNActivityParams.Data dataParams = new RNActivityParams.Data();
