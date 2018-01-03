@@ -79,23 +79,28 @@ class RedListPage extends BasePage {
         this.loadData(pageSize, true, false);
     };
     _clickItem = (item) => {
-        this.setState({
-            isShowProcess: true
-        });
         let request = {
             packetCode: item.packetCode
         };
-        ApiManager.receiveRedPacket(request, (data) => {
-            setTimeout(() => {
+        if (item.readStatus === 2) {
+            this.setState({
+                isShowProcess: true
+            });
+            ApiManager.receiveRedPacket(request, (data) => {
+                setTimeout(() => {
+                    this.handleShowProcess();
+                    this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
+                }, 2000);
+            }, (errorData) => {//数据错误
                 this.handleShowProcess();
-                this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
-            }, 2000);
-        }, (errorData) => {//数据错误
-            this.handleShowProcess();
-        }, (errData) => {//网络超时
-            this.handleShowProcess();
-        });
-    };
+            }, (errData) => {//网络超时
+                this.handleShowProcess();
+            });
+        } else {
+            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
+        }
+    }
+    ;
     handleShowProcess = () => {
         this.setState({
             isShowProcess: false

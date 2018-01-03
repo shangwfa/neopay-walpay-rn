@@ -24,7 +24,7 @@
     
     rootWebViewC.title = title;
     
-    rootWebViewC.url = url?url:[NSURL URLWithString:@"https://www.pgyer.com/walpayiOS"];
+    rootWebViewC.url = url?url:[NSURL URLWithString:@"https://www.xinguang.com"];
 
     return rootWebViewC;
 }

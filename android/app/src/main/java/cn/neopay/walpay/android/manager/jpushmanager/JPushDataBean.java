@@ -42,4 +42,6 @@ public class JPushDataBean {
     public void setExtraParam(String extraParam) {
         this.extraParam = extraParam;
     }
+
+
 }

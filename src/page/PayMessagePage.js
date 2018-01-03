@@ -70,15 +70,20 @@ class PayMessagePage extends BasePage {
         return (
             <View>
                 {this.renderSectionHeader(item)}
-                <PayMessageCell createTime={item.createTime}
-                               payNoticeType={item.payNoticeTypeText} payBy={item.payTypeDesc}
-                               payTo={item.tradObject}
-                                remark = {item.remark}
-                                amount = {item.amount}
-                                payDirection = {item.payDirection}
-                                onPress={()=>this.pressOnItem(item)}
+                {/*<PayMessageCell createTime={item.createTime}*/}
+                               {/*payNoticeType={item.payNoticeTypeText} payBy={item.payTypeDesc}*/}
+                               {/*payTo={item.tradObject}*/}
+                                {/*remark = {item.remark}*/}
+                                {/*amount = {item.amount}*/}
+                                {/*payDirection = {item.payDirection}*/}
+                                {/*onPress={()=>this.pressOnItem(item)}*/}
+                                {/*msgType = {item.payNoticeType}*/}
+                                {/*bossName = {item.bossName}*/}
+                                {/*phone = {item.phone}*/}
+                                {/*productDesc={item.productDesc}*/}
 
-                />
+                {/*/>*/}
+                <PayMessageCell cellItem = {item} onPress={()=>this.pressOnItem(item)}/>
             </View>
         )
 
@@ -92,7 +97,11 @@ class PayMessagePage extends BasePage {
 
     pressOnItem = (item)=>{
         // console.log('点击了消息条目');
-        nav.navigate(RouterPaths.TRANSACTION_DETAILS,{billId:item.billId,msgType:item.msgType,id:item.id});
+        if(item.payNoticeType==7||item.payNoticeType==8||item.payNoticeType==9){
+            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode: item.productDesc});
+        }else {
+            nav.navigate(RouterPaths.TRANSACTION_DETAILS,{billId:item.billId,msgType:item.msgType,id:item.id});
+        }
         // console.log(`点击消息条目billId:${item.billId} msgType:${item.msgType}`);
     };
 

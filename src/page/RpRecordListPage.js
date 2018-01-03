@@ -60,7 +60,7 @@ class RpRecordListPage extends BasePage {
     }
 
     goRpDetail=(item)=>{
-        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode:item.tradeObject});
+        this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, {packetCode:item.tradeObject,type:item.tradeType == 18?1:0});
     }
 
 

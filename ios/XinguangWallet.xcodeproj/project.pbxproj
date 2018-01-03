@@ -21,6 +21,7 @@
 		42655C651FBA917B00E5AB73 /* UIView+Transform.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C621FBA917A00E5AB73 /* UIView+Transform.m */; };
 		42655C681FBAC84F00E5AB73 /* XGQBSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42655C671FBAC84F00E5AB73 /* XGQBSideView.m */; };
 		426BD05C1FC5124000F49282 /* XGQBRNEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 426BD05B1FC5124000F49282 /* XGQBRNEventEmitter.m */; };
+		42702F781FFB9FE600D43F3B /* XGQBPushNotiParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 42702F771FFB9FE600D43F3B /* XGQBPushNotiParams.m */; };
 		427A666E1FBD6D1900E0D92B /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666C1FBD6D1000E0D92B /* Contacts.framework */; };
 		427A66701FBD6D2E00E0D92B /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666F1FBD6D2100E0D92B /* ContactsUI.framework */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
@@ -132,6 +133,8 @@
 		42655C671FBAC84F00E5AB73 /* XGQBSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBSideView.m; sourceTree = "<group>"; };
 		426BD05A1FC5124000F49282 /* XGQBRNEventEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBRNEventEmitter.h; sourceTree = "<group>"; };
 		426BD05B1FC5124000F49282 /* XGQBRNEventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBRNEventEmitter.m; sourceTree = "<group>"; };
+		42702F761FFB9FE600D43F3B /* XGQBPushNotiParams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBPushNotiParams.h; sourceTree = "<group>"; };
+		42702F771FFB9FE600D43F3B /* XGQBPushNotiParams.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBPushNotiParams.m; sourceTree = "<group>"; };
 		427A666C1FBD6D1000E0D92B /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		427A666F1FBD6D2100E0D92B /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
@@ -701,6 +704,8 @@
 				6AF9E4381F78E0E9005E901C /* AppDelegate+PushService.m */,
 				42E83F541FF4CD79009311BC /* XGQBPushNotiBody.h */,
 				42E83F551FF4CD79009311BC /* XGQBPushNotiBody.m */,
+				42702F761FFB9FE600D43F3B /* XGQBPushNotiParams.h */,
+				42702F771FFB9FE600D43F3B /* XGQBPushNotiParams.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -1148,6 +1153,7 @@
 				42BCB5D81FC7AF3C002B4FBF /* XGQBHomeCellCVFlowLayout.m in Sources */,
 				42BCB5CA1FC66955002B4FBF /* XGQBAPPRootViewController.m in Sources */,
 				422A2D821F8F02F500485DB5 /* XGQBHomeTitleView.m in Sources */,
+				42702F781FFB9FE600D43F3B /* XGQBPushNotiParams.m in Sources */,
 				6A792B991F7F6E53009039AF /* XGQBRegRestPwdTVCell.m in Sources */,
 				6A792B9C1F7F98A2009039AF /* XGQBTextField.m in Sources */,
 				6AF9E43C1F78E0E9005E901C /* AppDelegate+PushService.m in Sources */,

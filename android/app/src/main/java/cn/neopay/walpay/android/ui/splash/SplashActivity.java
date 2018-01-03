@@ -5,9 +5,6 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.xgjk.common.lib.base.BaseActivity;
 import com.xgjk.common.lib.manager.storage.StoreManager;
-import com.xgjk.common.lib.utils.DensityUtils;
-import com.xgjk.common.lib.utils.HandlerUtils;
-import com.xgjk.common.lib.view.rollViewPager.hintview.IconHintView;
 
 import cn.neopay.walpay.android.R;
 import cn.neopay.walpay.android.adapter.adapter.SpalshAdapter;
@@ -36,10 +33,10 @@ public class SplashActivity extends BaseActivity<SplashPresenter, ActivitySplash
 
     private void initAdapter() {
         mViewBinding.splashContainer.setAdapter(new SpalshAdapter());
-        final IconHintView hintView = new IconHintView(this, R.drawable.splash_dot_focus, R.drawable.splash_dot, DensityUtils.dip2px(this, 16));
-        mViewBinding.splashContainer.setHintView(hintView);
-        HandlerUtils.runOnUiThread(() -> hintView.setmDotsMargin(DensityUtils.dip2px(this, 10), 0, DensityUtils.dip2px(this, 10), 0));
-        mViewBinding.splashContainer.setHintPadding(DensityUtils.dip2px(this, 10), 0, 0, DensityUtils.dip2px(this, 20));
+//        final IconHintView hintView = new IconHintView(this, R.drawable.splash_dot_focus, R.drawable.splash_dot, DensityUtils.dip2px(this, 16));
+//        mViewBinding.splashContainer.setHintView(hintView);
+//        HandlerUtils.runOnUiThread(() -> hintView.setmDotsMargin(DensityUtils.dip2px(this, 10), 0, DensityUtils.dip2px(this, 10), 0));
+//        mViewBinding.splashContainer.setHintPadding(DensityUtils.dip2px(this, 10), 0, 0, DensityUtils.dip2px(this, 20));
 
         StoreManager.getSingleton().putBoolean(false, IWalpayConstants.IS_FIRST_INSTALL, false);
 

@@ -76,7 +76,7 @@ getRecentDate = (timestamp) => {
     if (isToday(date)) {//当天
         let nowDate = new Date();
         console.log(nowDate.getTime() + '~~~~~~' + timestamp);
-        let con = (nowDate.getTime() - timestamp)/1000/60;
+        let con = (nowDate.getTime() - timestamp) / 1000 / 60;
         return con <= 59 ? `${Math.ceil(con)}分钟前` : dateFmt("HH:mm", date);
     } else if (isYesterday(date)) {//昨天
         return `昨天${dateFmt("HH:mm", date)}`;
@@ -85,7 +85,8 @@ getRecentDate = (timestamp) => {
     } else {//其他
         return dateFmt("yyyy-MM-dd HH:mm", date)
     }
-};/**
+};
+/**
  * @param timestamp
  * @returns 最近的时间日期 (今天 09-01 2016-09-09)
  */
@@ -93,7 +94,7 @@ getPhoneTopupMsgDate = (timestamp) => {
     let date = new Date(timestamp);
     if (isToday(date)) {//当天
         return `今天`;
-    }else if (isToYear(date)) {//今年
+    } else if (isToYear(date)) {//今年
         return dateFmt("MM-dd", date);
     } else {//其他
         return dateFmt("yyyy-MM-dd", date)
@@ -107,12 +108,10 @@ getRpRecordList = (timestamp) => {
     let date = new Date(timestamp);
     if (isToYearAndMonth(date)) {//当月
         return `本月`;
-    }else if (isToYear(date)) {//今年
-        if(dateFmt("MM", date) == '10' || dateFmt("MM", date) == '11' || dateFmt("MM", date) == '12')
-        {
+    } else if (isToYear(date)) {//今年
+        if (dateFmt("MM", date) == '10' || dateFmt("MM", date) == '11' || dateFmt("MM", date) == '12') {
             return dateFmt("MM" + '月', date);
-        }else
-        {
+        } else {
             return dateFmt("M" + '月', date);
         }
     } else {//其他
@@ -133,8 +132,7 @@ yyyyYearMmMonth = (timestamp) => {
     if (isToYearAndMonth(date)) {
         return '本月'
     }
-
-    return date.getYear() + '年' + date.getMonth() + '月'
+    return `${date.getFullYear()}年${date.getMonth() + 1}月`
 };
 
 export default {

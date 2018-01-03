@@ -26,7 +26,7 @@ const RpDetailHeader = props => {
         remarkValue,
         stateValue,
         isMax,
-        isGet,
+        isRet,
         ...attributes
     } = props
 
@@ -79,6 +79,12 @@ const RpDetailHeader = props => {
             color:'#fbd49d',
             backgroundColor:'transparent'
         },
+        amount_White: {
+            marginTop:5,
+            fontSize:amountValue==0?20:40,
+            color:colors.white,
+            backgroundColor:'transparent'
+        },
         iconImg: {
             width: imgWidth,
             height:imgWidth,
@@ -109,6 +115,12 @@ const RpDetailHeader = props => {
             color:'#fbd49d',
             backgroundColor:'transparent',
             marginTop:26,
+        },
+        rmbIconWhite:{
+            fontSize:18,
+            color:colors.white,
+            backgroundColor:'transparent',
+            marginTop:26,
         }
 
     });
@@ -121,31 +133,68 @@ const RpDetailHeader = props => {
         </View>
     }
 
-    return (
-        <View style = {styles.background_container} >
-            <View style = {styles.top_View}>
-                <View style = {styles.middle_container}>
-                    <View style={{width:60}} />
-                    <Text style={styles.remark_value} numberOfLines={1}>{remarkValue}</Text>
-                    <View style={{width:60,alignItems:"flex-end",backgroundColor:'transparent'}}>
-                        <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
+    renderMain=()=>{
+        if(isRet == 1){
+            return (
+                <View style = {styles.background_container} >
+                    <View style = {styles.top_View}>
+                        <View style = {styles.middle_container}>
+                            <View style={{width:60}} />
+                            <Text style={styles.remark_value} numberOfLines={1}>{remarkValue}</Text>
+                            <View style={{width:60,alignItems:"flex-end",backgroundColor:'transparent'}}>
+                                <Image style = {styles.maxImg} source = {require("../res/img/tuikuan.png")} ></Image>
+                            </View>
+
+                        </View>
+                        <View style={styles.amount_bg}>
+                            <Text style={styles.rmbIconWhite}>退款¥</Text>
+                            <Text style={styles.amount_White}>{amountValue}</Text>
+                        </View>
                     </View>
 
-                </View>
-                <View style={styles.amount_bg}>
-                    <Text style={styles.rmbIcon}>{amountValue==0?' ':'¥'}</Text>
-                    <Text style={styles.amount_value}>{amountValue==0?stateValue:amountValue}</Text>
-                </View>
-            </View>
+                    <Image style = {styles.mid_Image} source = {require("../res/img/rp_mid_bg.png")}>
+                        <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
+                    </Image>
 
-            <Image style = {styles.mid_Image} source = {require("../res/img/rp_mid_bg.png")}>
-                <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
-            </Image>
+                    <View style = {styles.bottom_View}>
+                        <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
+                    </View>
+                </View>
+            );
+        }else {
+            return (
+                <View style = {styles.background_container} >
+                    <View style = {styles.top_View}>
+                        <View style = {styles.middle_container}>
+                            <View style={{width:60}} />
+                            <Text style={styles.remark_value} numberOfLines={1}>{remarkValue}</Text>
+                            <View style={{width:60,alignItems:"flex-end",backgroundColor:'transparent'}}>
+                                <Image style = {styles.maxImg} source = {isMax?require("../res/img/rp_max_text.png"):' '} ></Image>
+                            </View>
 
-            <View style = {styles.bottom_View}>
-                <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
-                <Text style={styles.state_value}>{amountValue==0?'':stateValue}</Text>
-            </View>
+                        </View>
+                        <View style={styles.amount_bg}>
+                            <Text style={styles.rmbIcon}>{amountValue==0?' ':'¥'}</Text>
+                            <Text style={styles.amount_value}>{amountValue==0?stateValue:amountValue}</Text>
+                        </View>
+                    </View>
+
+                    <Image style = {styles.mid_Image} source = {require("../res/img/rp_mid_bg.png")}>
+                        <Image style = {styles.iconImg} source = {{uri:imgIconUrl}} ></Image>
+                    </Image>
+
+                    <View style = {styles.bottom_View}>
+                        <Text style={styles.from_value}>来自{fromValue}的大红包</Text>
+                        <Text style={styles.state_value}>{amountValue==0?'':stateValue}</Text>
+                    </View>
+                </View>
+            );
+        }
+    }
+
+    return (
+        <View style = {styles.background_container} >
+            {renderMain()}
         </View>
     );
 };

@@ -21,4 +21,9 @@ public class CommonWebActivity extends BaseH5Activity {
         //TODO 获取url
         return loadUrl;
     }
+
+    @Override
+    protected void agentWebHandle() {
+        mAgentWeb.getJsInterfaceHolder().addJavaObject("NativeRoot", new AndroidJSInterface(mAgentWeb, this));
+    }
 }

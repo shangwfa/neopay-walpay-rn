@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    //
+    //根据点击不同消息类型跳转不同页面
     NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     
     if (remoteNotification) {
@@ -30,9 +30,8 @@
         
         XGQBPushNotiBody *notiBody = [XGQBPushNotiBody modelWithJSON:notiStr];
         
-        if (notiBody) {//红包消息
-            _msgType= notiBody.noticeType;
-        }
+        [self handlePageNaviWithNotiBody:notiBody];
+        
     }
     
     // 注册显示应用程序BadgeNumber的通知
@@ -68,7 +67,6 @@
     [self configUSharePlatforms];
     
     [self confitUShareSettings];
-
     
     return YES;
 }
@@ -103,6 +101,8 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+
 #pragma mark- JPUSHRegisterDelegate
 // iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger options))completionHandler NS_AVAILABLE_IOS(10.0){
@@ -125,27 +125,49 @@
     }
     completionHandler();  // 系统要求执行这个方法
     JKLog();
+    
+    if (userInfo) {
+        
+        NSString *notiStr = userInfo[@"extraParam"];
+        
+        NSData *stringData = [notiStr dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:stringData options:0 error:nil];
+        
+        NSString *notiDict = json[@"params"];
+        
+        XGQBPushNotiParams *notiParams = [XGQBPushNotiParams modelWithJSON:notiDict];
+        //YYModel嵌套解析失败,不知原因
+        XGQBPushNotiBody *notiBody = [XGQBPushNotiBody modelWithJSON:json];
+        
+        notiBody.params = notiParams;
+        
+        [self handlePageNaviWithNotiBody:notiBody];
+        
+    }
+
+    
 }
 
 //#pragma clang diagnostic pop
 
-
-//临时增加RN服务器切换地址
--(NSArray *)jsCodeLocationArr
+-(void)JpushDidLoginPushServiceSuccWithNotification:(NSNotification*)noti
 {
-    if (!_jsCodeLocationArr) {
-        NSString *str1 = [[NSBundle mainBundle]pathForResource:@"main" ofType:@"jsbundle"];
+    if([GVUserDefaults standardUserDefaults].accessToken){//如果已登录,上传registrationID
+        NSString *registrationID=[JPUSHService registrationID];
+        JKLog(@"%@",registrationID);
         
-        NSString *str2 = @"http://localhost:8081/index.ios.bundle?platform=ios";
+        NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+        [body setObject:registrationID forKey:@"registrationId"];
+        [body setObject:@2 forKey:@"terminal"];
         
-        NSString *str3 = @"http://172.16.33.182:8081/index.ios.bundle?platform=ios";
-        
-        NSString *str4 = @"http://172.16.33.247:8081/index.ios.bundle?platform=ios";
-        
-
-        _jsCodeLocationArr = [NSArray arrayWithObjects:str1,str2,str3,str4, nil];
+        [MemberCoreService uploadUserDevice:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            JKLog(@"上传registrationID成功");
+        } andFailerFn:^(NSError *error) {
+            nil;
+        }];
     }
-    return _jsCodeLocationArr;
+    
 }
 
 #pragma mark - UShare
@@ -194,25 +216,36 @@
     return YES;
 }
 
-
--(void)JpushDidLoginPushServiceSuccWithNotification:(NSNotification*)noti
+#pragma mark - 处理消息跳转
+-(void)handlePageNaviWithNotiBody:(XGQBPushNotiBody*)body
 {
-    if([GVUserDefaults standardUserDefaults].accessToken){//如果已登录,上传registrationID
-        NSString *registrationID=[JPUSHService registrationID];
-        JKLog(@"%@",registrationID);
-        
-        NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
-        [body setObject:registrationID forKey:@"registrationId"];
-        [body setObject:@2 forKey:@"terminal"];
-        
-        [MemberCoreService uploadUserDevice:body andSuccessFn:^(id responseAfter, id responseBefore) {
-            JKLog(@"上传registrationID成功");
-        } andFailerFn:^(NSError *error) {
-            nil;
-        }];
-    }
+        if (body) {
+            _notiBody= body;
+        }
+    
+    [kNotificationCenter postNotificationName:kNotificationAPNReceived object:nil];
     
 }
+
+#pragma mark - 临时增加RN服务器切换
+//临时增加RN服务器切换地址
+-(NSArray *)jsCodeLocationArr
+{
+    if (!_jsCodeLocationArr) {
+        NSString *str1 = [[NSBundle mainBundle]pathForResource:@"main" ofType:@"jsbundle"];
+        
+        NSString *str2 = @"http://localhost:8081/index.ios.bundle?platform=ios";
+        
+        NSString *str3 = @"http://172.16.33.182:8081/index.ios.bundle?platform=ios";
+        
+        NSString *str4 = @"http://172.16.33.247:8081/index.ios.bundle?platform=ios";
+        
+        
+        _jsCodeLocationArr = [NSArray arrayWithObjects:str1,str2,str3,str4, nil];
+    }
+    return _jsCodeLocationArr;
+}
+
 
 
 @end

@@ -22,6 +22,9 @@
                                              selector:@selector(loginStateChange:)
                                                  name:kNotificationLoginStateChange
                                                object:nil];
+    
+    //APN推送消息监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAPNNoti) name:kNotificationAPNReceived object:nil];
 
 }
 
@@ -133,28 +136,71 @@
     
     [kAppWindow.layer addAnimation:anima forKey:@"revealAnimation"];
     
-    //判断是否跳转消息页
+    [self didReceiveAPNNoti];
+
+}
+
+-(void)didReceiveAPNNoti
+{
+
+    XGQBAPPRootViewController *appRootVC = (XGQBAPPRootViewController*)self.window.rootViewController;
+    
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
-    JKLog(@"收到通知,开始跳转相应页面%ld",(long)appDelegate.msgType);
+    [appRootVC closeSideView];
+    [appRootVC.rootNAV popToRootViewControllerAnimated:YES];
+    
+    if (appDelegate.notiBody.noticeType==XGQBMsgTypeRedPacket) {
+        
+        [appRootVC.homeVC checkIDStatus];
+        if ([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized) {
+            //跳转完成后清空msgType
+            appDelegate.notiBody=nil;
+            return;
+        }
+        
+        //发送领取红包指令
+        NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+        [body setObject:appDelegate.notiBody.params.redPacketCode forKey:@"packetCode"];
+        [body setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
+        [MemberCoreService receiveRedPacket:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            XGQBRNViewController *RNVC = [[XGQBRNViewController alloc]init];
+            RNVC.pageType = @"rpDetail";
+            RNVC.data=[@{@"packetCode":appDelegate.notiBody.params.redPacketCode} mutableCopy];
+            [appRootVC.rootNAV pushViewController:RNVC animated:YES];
+            //跳转完成后清空msgType
+            appDelegate.notiBody=nil;
+        } andFailerFn:^(NSError *error) {
+            nil;
+            //跳转完成后清空msgType
+            appDelegate.notiBody=nil;
+        }];
 
-    if (appDelegate.msgType==XGQBMsgTypeRedPacket) {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType=@"redList";
-        [appRootVC.rootNAV pushViewController:RNVC animated:YES];
-    }else if (appDelegate.msgType==XGQBMsgTypePayNotice){
+        
+//        XGQBRNViewController *RNVC = [XGQBRNViewController new];
+//        RNVC.pageType=@"redList";
+//        [appRootVC.rootNAV pushViewController:RNVC animated:YES];
+    }else if (appDelegate.notiBody.noticeType==XGQBMsgTypePayNotice){
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType=@"payMessage";
         [appRootVC.rootNAV pushViewController:RNVC animated:YES];
-    }else if (appDelegate.msgType==XGQBMsgTypePhoneRechargeSuccess){
+        //跳转完成后清空msgType
+        appDelegate.notiBody=nil;
+    }else if (appDelegate.notiBody.noticeType==XGQBMsgTypePhoneRechargeSuccess){
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType=@"topupMsgList";
         [appRootVC.rootNAV pushViewController:RNVC animated:YES];
-    }else if(appDelegate.msgType==XGQBMsgTypePhoneDataRechargeSuccess){
+        //跳转完成后清空msgType
+        appDelegate.notiBody=nil;
+    }else if(appDelegate.notiBody.noticeType==XGQBMsgTypePhoneDataRechargeSuccess){
         XGQBRNViewController *RNVC = [XGQBRNViewController new];
         RNVC.pageType=@"topupMsgList";
         [appRootVC.rootNAV pushViewController:RNVC animated:YES];
+        //跳转完成后清空msgType
+        appDelegate.notiBody=nil;
     }
+    
+
 }
 
 -(void)logoutUserInfo

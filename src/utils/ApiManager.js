@@ -43,10 +43,10 @@ getRpReceiverList = (req, callback) => {
     })
 }
 
-getPhoneTopupRecordList = (req, callback) => {
+getPhoneTopupRecordList = (req, callback,isLoadding) => {
     NetUtil.post(APIS.PHONE_TOPUP_RECORD_LIST, req, (data) => {
         callback(data)
-    })
+    },isLoadding)
 }
 
 getPhoneTopupMsg = (req, callback, isLoadding) => {
