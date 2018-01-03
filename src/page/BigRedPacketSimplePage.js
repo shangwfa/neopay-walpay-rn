@@ -15,10 +15,22 @@ import Header from "../components/Header";
 import colors from "../constants/colors";
 import {RouterPaths} from "../constants/RouterPaths";
 import img_big_red_packet_container from "../res/img/img_big_red_packet_container.png"
+import img_red_packet_num from "../res/img/img_red_packet_num.png"
 import ScreenUtils from "../utils/ScreenUtils";
+import Space from "../components/Space";
+import ApiManager from "../utils/ApiManager";
 class BigRedPacketSimplePage extends BasePage {
     constructor(props) {
         super(props);
+        this.state = {
+            redPacketNum: 0,
+        }
+    }
+
+    componentWillMount() {
+        ApiManager.getUserNotReceivedCount({}, (data) => {
+            this.setState({redPacketNum: data.count})
+        })
     }
 
     render() {
@@ -49,12 +61,21 @@ class BigRedPacketSimplePage extends BasePage {
                             style={styles.send_red_packet}>
                             <Text style={{fontSize: 15, color: "#C3304A"}}>我要发红包</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={this._handleGetRedPacketClick.bind(this)}
-                            style={[styles.send_red_packet, {marginTop: 22, marginBottom: 67,}]}>
-                            <Text style={{fontSize: 15, color: "#C3304A"}}>我要领红包</Text>
-                        </TouchableOpacity>
+                        <View style={styles.redPacket_container}>
+                            <TouchableOpacity
+                                onPress={this._handleGetRedPacketClick.bind(this)}
+                                style={[styles.send_red_packet,]}>
+                                <Text style={{fontSize: 15, color: "#C3304A"}}>我要领红包</Text>
+                            </TouchableOpacity>
+                            <Image
+                                style={styles.img}
+                                source={img_red_packet_num}>
+                                <Text
+                                    style={styles.text}>{`${this.state.redPacketNum > 99 ? "99+" : this.state.redPacketNum}`}</Text>
+                            </Image>
+                        </View>
                     </View>
+                    <Space/>
                 </View>
             </View>
         );
@@ -78,7 +99,7 @@ const styles = StyleSheet.create({
     },
     big_red_packet_img: {
         width: ScreenUtils.width - 120,
-        height: ScreenUtils.height - 280,
+        height: (ScreenUtils.width - 120) * 1.4,
         resizeMode: "contain"
     },
     children_container: {
@@ -91,6 +112,25 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         backgroundColor: "#FAD49D",
         alignItems: "center", justifyContent: "center"
+    },
+    text: {
+        color: "#C02642",
+        fontSize: 13
+    },
+    img: {
+        width: 30,
+        height: 30,
+        marginTop: -60,
+        alignItems: "center",
+        justifyContent: "center",
+        resizeMode: "stretch",
+    },
+    redPacket_container: {
+        marginLeft: 30,
+        height: 90,
+        flexDirection: "row",
+        marginBottom: 67,
+        alignItems: "center"
     }
 });
 

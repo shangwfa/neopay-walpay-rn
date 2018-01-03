@@ -37,6 +37,7 @@ export const APIS = {
     CHECK_NEED_BIND_CARD: "pay/check_need_bind_card",//是否需要绑定银行卡
     PAY_RED_PACKET_VERIFY: "packet/pay_red_packet_verify",//支付红包短信验证
     RECEIVE_RED_PACKET: "packet/receive_red_packet",//用户收红包
+    GET_USER_NOT_RECEIVED_COUNT:"packet/get_user_not_received_count",//获取用户未领取红包个数
     ADD_RED_PACKET_RECEIVER: "packet/add_red_packet_receiver",//添加红包领取人
     GET_SERVICE_INFO: "assist/get_service_info",//获取客服电话
     LOGOUT_USER: "user/logout_user",//用户登出

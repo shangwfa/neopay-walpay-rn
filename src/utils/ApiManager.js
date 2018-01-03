@@ -43,10 +43,10 @@ getRpReceiverList = (req, callback) => {
     })
 }
 
-getPhoneTopupRecordList = (req, callback,isLoadding) => {
+getPhoneTopupRecordList = (req, callback, isLoadding) => {
     NetUtil.post(APIS.PHONE_TOPUP_RECORD_LIST, req, (data) => {
         callback(data)
-    },isLoadding)
+    }, isLoadding)
 }
 
 getPhoneTopupMsg = (req, callback, isLoadding) => {
@@ -61,10 +61,10 @@ getRedPacketRecord = (req, callback, isLoadding) => {
     }, isLoadding)
 }
 
-postUnBindBankCard = (req, callback,errorCallback) => {
+postUnBindBankCard = (req, callback, errorCallback) => {
     NetUtil.post(APIS.BANK_UNBIND_BANKCARD, req, (data) => {
         callback(data)
-    },isShowLoading = true, errorCallback)
+    }, isShowLoading = true, errorCallback)
 }
 
 getRedPacketThemeList = (callback) => {
@@ -100,7 +100,7 @@ queryBannerList = (callback) => {
 getUserInfo = (callback) => {
     NetUtil.post(APIS.GET_USER_INFO, {}, (data) => {
         callback(data)
-    },false)
+    }, false)
 }
 modifyUserAvatarUrl = (request, callback) => {
     NetUtil.post(APIS.MODIFY_USER_AVATAR_URL, request, (data) => {
@@ -120,6 +120,11 @@ getRedPacketMessageList = (request, callback, isShowLoading) => {
 };
 getRedPacketList = (request, callback) => {
     NetUtil.post(APIS.QUERY_RECENT_RED_PACKET_LIST, request, (data) => {
+        callback(data);
+    });
+};
+getUserNotReceivedCount = (request, callback) => {
+    NetUtil.post(APIS.GET_USER_NOT_RECEIVED_COUNT, request, (data) => {
         callback(data);
     });
 };
@@ -294,7 +299,7 @@ withdraworder = (request, callback) => {
 getRecentPhoneRechargePhone = (request, callback) => {
     NetUtil.post(APIS.GET_RECENT_PHONE_RECHARGE_PHONE, request, (data) => {
         callback(data);
-    },false,null,null,false)
+    }, false, null, null, false)
 };
 queryMsgBillDetail = (request, callback) => {
     NetUtil.post(APIS.QUERY_MSG_BILL_DETAIL, request, (data) => {
@@ -346,6 +351,7 @@ export default {
     payRedPacket,
     queryUserBill,
     checkNeedBindCard,
+    getUserNotReceivedCount,
     modifyUserAvatarUrl,
     queryPayMessage,
     createPhoneRechargeOrder,
