@@ -24,6 +24,7 @@
 		42702F781FFB9FE600D43F3B /* XGQBPushNotiParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 42702F771FFB9FE600D43F3B /* XGQBPushNotiParams.m */; };
 		427A666E1FBD6D1900E0D92B /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666C1FBD6D1000E0D92B /* Contacts.framework */; };
 		427A66701FBD6D2E00E0D92B /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427A666F1FBD6D2100E0D92B /* ContactsUI.framework */; };
+		42858AA61FFCB3E800573A1D /* XGQBPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 42858AA51FFCB3E800573A1D /* XGQBPageControl.m */; };
 		428F56EF1F99E44500615DFE /* XGQBLoginInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */; };
 		4293F4801FBBE1F4008C1531 /* XGQBHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4293F47F1FBBE1F4008C1531 /* XGQBHomeTableViewController.m */; };
 		42990E761F998F7C00B20EBA /* XGQBNoContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42990E751F998F7C00B20EBA /* XGQBNoContentViewController.m */; };
@@ -137,6 +138,8 @@
 		42702F771FFB9FE600D43F3B /* XGQBPushNotiParams.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBPushNotiParams.m; sourceTree = "<group>"; };
 		427A666C1FBD6D1000E0D92B /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		427A666F1FBD6D2100E0D92B /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+		42858AA41FFCB3E800573A1D /* XGQBPageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBPageControl.h; sourceTree = "<group>"; };
+		42858AA51FFCB3E800573A1D /* XGQBPageControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBPageControl.m; sourceTree = "<group>"; };
 		428F56ED1F99E44500615DFE /* XGQBLoginInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBLoginInputView.h; sourceTree = "<group>"; };
 		428F56EE1F99E44500615DFE /* XGQBLoginInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGQBLoginInputView.m; sourceTree = "<group>"; };
 		4293F47E1FBBE1F4008C1531 /* XGQBHomeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGQBHomeTableViewController.h; sourceTree = "<group>"; };
@@ -505,6 +508,8 @@
 			children = (
 				6A1C68AB1F7A3CF400170E47 /* XGQBAPPBootViewController.h */,
 				6A1C68AC1F7A3CF400170E47 /* XGQBAPPBootViewController.m */,
+				42858AA41FFCB3E800573A1D /* XGQBPageControl.h */,
+				42858AA51FFCB3E800573A1D /* XGQBPageControl.m */,
 			);
 			path = AppBootVC;
 			sourceTree = "<group>";
@@ -1164,6 +1169,7 @@
 				42D44AA11F8CCF060064A32D /* XGQBRNViewController.m in Sources */,
 				4210AF401F95CE6D008132C5 /* XGQBCommissionViewController.m in Sources */,
 				6AF9E4371F78E039005E901C /* AppDelegate.m in Sources */,
+				42858AA61FFCB3E800573A1D /* XGQBPageControl.m in Sources */,
 				6A1C68AD1F7A3CF400170E47 /* XGQBAPPBootViewController.m in Sources */,
 				6AF9E43D1F78E0E9005E901C /* AppDelegate+AppService.m in Sources */,
 				42A0A0E61FF0953D003D66F1 /* XGQBMsgNoContentTableViewCell.m in Sources */,

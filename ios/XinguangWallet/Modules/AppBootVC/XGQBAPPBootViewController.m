@@ -9,11 +9,13 @@
 #import "XGQBAPPBootViewController.h"
 #import "XGQBLoginViewController.h"
 
+#import "XGQBPageControl.h"
+
 #import "XGQBPureColorBtn.h"
 
 @interface XGQBAPPBootViewController ()<UIScrollViewDelegate>
 
-@property (nonatomic,strong)UIPageControl *pageControl;
+@property (nonatomic,strong)XGQBPageControl *pageControl;
 @property (nonatomic,strong)UIScrollView *bootScrollV;
 
 @end
@@ -37,13 +39,14 @@
     [self addPageWithIndex:0];
     [self addPageWithIndex:1];
 
-    UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreenWidth/2.0-50, kScreenHeight-50, 100, 30)];
+    XGQBPageControl *pageControl = [[XGQBPageControl alloc]initWithFrame:CGRectMake(kScreenWidth/2.0-25, kScreenHeight-50, 50, 20)];
     [self.view addSubview:pageControl];
     _pageControl = pageControl;
     pageControl.numberOfPages = 2;
     pageControl.currentPage = (bootScrollV.contentOffset.x/kScreenWidth);
-    pageControl.pageIndicatorTintColor= kWhiteColor;
-    pageControl.currentPageIndicatorTintColor = UIColorHex(F34646);
+//    pageControl.pageIndicatorTintColor= kWhiteColor;
+//    pageControl.currentPageIndicatorTintColor = UIColorHex(F34646);
+//    pageControl.pageIndicatorTintColor=kGrayColor;
     
 }
 
@@ -58,8 +61,8 @@
     UIImageView *icon = [[UIImageView alloc]initWithImage:kIMAGENAMED(iconName)];
     [page addSubview:icon];
     
-    NSString *desStr1 = @"大红包,满天飞";
-    NSString *desStr2 = @"增进你我联系";
+    NSString *desStr1 =index==0?@"大红包，满天飞":@"免费提现，快速到账";
+    NSString *desStr2 =index==1?@"增进你我联系":@"真正免费的钱包";
     
     UILabel *desLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
     UILabel *desLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 250, 70)];
@@ -67,28 +70,28 @@
     desLabel1.text = desStr1;
     desLabel2.text = desStr2;
     
-    desLabel1.font = kSYSTEMFONT(18.0);
-    desLabel1.textColor = UIColorHex(F34646);
-    desLabel2.font = kBOLDSYSTEMFONT(20.0);
-    desLabel2.textColor = UIColorHex(F34646);
+    desLabel1.font = kSYSTEMFONT(20.0);
+    desLabel1.textColor = UIColorHex(F64B4C);
+    desLabel2.font = kSYSTEMFONT(28.0);
+    desLabel2.textColor = UIColorHex(F64B4C);
     
     [page addSubview:desLabel1];
     [page addSubview:desLabel2];
     
     [icon mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 250));
+        make.size.mas_equalTo(CGSizeMake(300, 300));
         make.centerX.equalTo(page);
-        make.centerY.equalTo(page).with.offset(-50);
+        make.top.equalTo(page).with.offset(kScaledSizeH(98));
     }];
     
     [desLabel1 mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(page);
-        make.top.equalTo(icon.mas_bottom).with.offset(20);
+        make.top.equalTo(icon.mas_bottom).with.offset(kScaledSizeH(54));
     }];
     
     [desLabel2 mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(page);
-        make.top.equalTo(desLabel1.mas_bottom).with.offset(20);
+        make.top.equalTo(desLabel1.mas_bottom).with.offset(kScaledSizeH(20));
     }];
     
     if (index==1) {
@@ -98,16 +101,16 @@
         skipButton.backgroundColor= kWhiteColor;
         [skipButton setTitleColor:UIColorHex(F34646) forState:UIControlStateNormal];
         
-        kViewBorderRadius(skipButton, 15, 1, UIColorHex(F34646));
+        kViewBorderRadius(skipButton, 20, 1, UIColorHex(F34646));
         
         [page addSubview:skipButton];
         
         [skipButton addTarget:self action:@selector(btnclicked) forControlEvents:UIControlEventTouchUpInside];
         
         [skipButton mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(120, 36));
+            make.size.mas_equalTo(CGSizeMake(145, 41));
             make.centerX.equalTo(page);
-            make.top.equalTo(desLabel2.mas_bottom).with.offset(50);
+            make.top.equalTo(desLabel2.mas_bottom).with.offset(kScaledSizeH(46));
         }];
         
     }
