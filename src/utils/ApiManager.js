@@ -261,10 +261,12 @@ queryPayMessage = (request, callback) => {
         callback(data);
     })
 };
-createPhoneRechargeOrder = (request, callback) => {
+createPhoneRechargeOrder = (request, callback,errorCallBack) => {
     NetUtil.post(APIS.CREATE_PHONE_RECHARGE_ORDER, request, (data) => {
         callback(data);
-    })
+    },true,(errorData)=>{
+        errorCallBack(errorData);
+    });
 };
 getUserRedPacketStats = (request, callback) => {
     NetUtil.post(APIS.GET_USER_RED_PACKET_STATS, request, (data) => {
@@ -291,9 +293,11 @@ createWithdrawOrder = (request, callback) => {
         callback(data);
     })
 };
-withdraworder = (request, callback) => {
+withdraworder = (request, callback,errorCallback) => {
     NetUtil.post(APIS.WITHDRAW_ORDER, request, (data) => {
         callback(data);
+    },true,(errorData)=>{
+        errorCallback(errorData)
     })
 };
 getRecentPhoneRechargePhone = (request, callback) => {

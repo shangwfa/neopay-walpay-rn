@@ -72,6 +72,7 @@ class AccountWithdrawPage extends BasePage {
                     isShow={this.state.isShowSelectPayStyle}/>
                 <PayPwdModal isShow={this.state.isPayShow}
                              contentFront='提现金额'
+                             ref="payPwdModal"
                              contentBack={FormatUtils.money(this.state.withdrawAmount)}
                              payTypeContent={this.retPayTypeContent()}
                              onClose={() => this.setState({isPayShow: false})}
@@ -123,6 +124,9 @@ class AccountWithdrawPage extends BasePage {
                 isPayShow: false
             });
             nav.navigate(RouterPaths.ACCOUNT_WITHDRAW_RESULT_PAGE, {data: data});
+        },(errorData)=>{
+            this.refs.payPwdModal._clearTextInput();
+            NativeModules.commModule.toast(errorData.retMsg);
         })
 
     }

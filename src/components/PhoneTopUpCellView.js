@@ -96,6 +96,7 @@ class PhoneTopUpMoneyView extends Component {
                     isShow={this.state.isShowSelectPayStyle}/>
                 <PayPwdModal isShow={this.state.isPayShow}
                              contentFront='实付金额'
+                             ref="payPwdModal"
                              contentBack={this.state.payAmount}
                              payTypeContent={this.retPayTypeContent()}
                              onClose={()=>this.setState({isPayShow:false,selectedItemIndex:null})}
@@ -494,8 +495,11 @@ class PhoneTopUpMoneyView extends Component {
             //创建订单成功,跳转结果页
             this.setState({
                 isPayShow:false
-            });
+            })
             nav.navigate(RouterPaths.CHARGE_FLUX_RESULT,{pageTitle:this.props.viewType?'流量充值':'手机充值',orderNo:data['orderNo']});
+        },(errorData)=>{
+            this.refs.payPwdModal._clearTextInput();
+            NativeModules.commModule.toast(errorData.retMsg);
         });
     }
 
