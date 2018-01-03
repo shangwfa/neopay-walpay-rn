@@ -48,9 +48,9 @@ class TopupRecordListPage extends BasePage {
         this._handleRefresh();
     };
 
-    _onLoadMore = (pageSize) => {
+    _onLoadMore = (pageNo) => {
         let params = {
-            pageSize: pageSize
+            pageNo: pageNo
         };
         ApiManager.getPhoneTopupRecordList(params, (data) => {
             if (data) {
