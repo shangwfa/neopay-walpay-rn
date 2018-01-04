@@ -77,15 +77,20 @@ class BankCardDetailPage extends BasePage {
             },1000)
         },(errorData)=>{
 
-            setTimeout(()=>{
-                this.setState({
-                    isShowBottom:false,
-                    isPayShow:false,
-                    isHUDShow:true,
-                    imagePath:require("../res/img/wd_shibai.png"),
-                    showTitle:'解绑失败'
-                })
-            },1000)
+            if(errorData.retCode == 2){
+                NativeModules.commModule.toast(errorData.retMsg);
+                this.refs.payPwdModal._clearTextInput();
+            }else {
+                setTimeout(()=>{
+                    this.setState({
+                        isShowBottom:false,
+                        isPayShow:false,
+                        isHUDShow:true,
+                        imagePath:require("../res/img/wd_shibai.png"),
+                        showTitle:'解绑失败'
+                    })
+                },2000)
+            }
         });
     }
 
@@ -137,7 +142,7 @@ class BankCardDetailPage extends BasePage {
                     onePress={this.handleCloseClick}
                     twoPress={this.handleSureClick}
                 />
-                <PayPwdModal isShow={this.state.isPayShow} onClose={()=>this.setState({isPayShow:false})}
+                <PayPwdModal ref="payPwdModal" isShow={this.state.isPayShow} onClose={()=>this.setState({isPayShow:false})}
                              onForgetPwd={()=>{this.forgetPayPwdBtnClicked()}} onEnd={(text)=>this.onEnd(text)} isHiddenBottom={true}/>
                 <ImageTitleModal  isShow={this.state.isHUDShow} title = {this.state.showTitle} imagePath = {this.state.imagePath}/>
             </View>
