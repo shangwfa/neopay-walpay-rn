@@ -8,7 +8,7 @@ import {
     StyleSheet,
     View,
     Text,
-    Image, Modal, TouchableOpacity, FlatList,
+    Image, Modal, TouchableOpacity, FlatList, DeviceEventEmitter,
 } from 'react-native'
 import img_close from "../res/img/img_close.png";
 import img_bank from "../res/img/img_bank.png";
@@ -30,6 +30,10 @@ class SelectPayStyleModal extends Component {
 
     componentWillMount() {
         this._handleRequest();
+    }
+
+    componentDidMount() {
+        DeviceEventEmitter.addListener('BindBankCardNewToPhoneTopUpCellView',()=>this._handleRequest())
     }
 
     _handleRequest() {

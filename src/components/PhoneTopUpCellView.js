@@ -179,18 +179,23 @@ class PhoneTopUpMoneyView extends Component {
 
         NativeAppEventEmitter.addListener('ContactSelected',(data)=>this.receivedContactPhoneNo(data));
 
-        DeviceEventEmitter.addListener('BindBankCardNewToPhoneTopUpCellView',()=>{
-            //获取上次支付方式和余额
-            ApiManager.getRecentPayType({}, (data) => {
-                this.setState({
-                    selectedPayType:data.payType,
-                    selectedBankName: data.payTypeDesc,
-                    selectedBankId: data.bankCardId,
-                    accountAmount: data.amount
-                });
-            });})
+        DeviceEventEmitter.addListener('BindBankCardNewToPhoneTopUpCellView',()=>this.bindCardFinishToRefreshBankCardList())
 
     }
+
+    bindCardFinishToRefreshBankCardList=()=> {
+
+        //获取上次支付方式和余额
+        ApiManager.getRecentPayType({}, (data) => {
+            this.setState({
+                selectedPayType: data.payType,
+                selectedBankName: data.payTypeDesc,
+                selectedBankId: data.bankCardId,
+                accountAmount: data.amount
+            });
+        });
+    }
+
     //接收到手机号
     receivedContactPhoneNo=(data)=>{
         // console.log('收到手机号'+data);
@@ -255,7 +260,7 @@ class PhoneTopUpMoneyView extends Component {
         this.setState({
             isShowSelectPayStyle: false,
         });
-        nav.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:3});
+        nav.navigate(RouterPaths.NEW_BIND_BANKCARD, {pageTitle: "添加绑定银行卡",type:3,fromPage:'phoneTopUp'});
     }
 
     handleBankCardItemClick=(bankCardData)=>{
