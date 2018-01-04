@@ -39,7 +39,7 @@
     [self addPageWithIndex:0];
     [self addPageWithIndex:1];
 
-    XGQBPageControl *pageControl = [[XGQBPageControl alloc]initWithFrame:CGRectMake(kScreenWidth/2.0-25, kScreenHeight-50, 50, 20)];
+    XGQBPageControl *pageControl = [[XGQBPageControl alloc]initWithFrame:CGRectMake(kScreenWidth/2.0-25, kScreenHeight-kScaledSizeH(30), 50, 20)];
     [self.view addSubview:pageControl];
     _pageControl = pageControl;
     pageControl.numberOfPages = 2;
@@ -64,8 +64,8 @@
     NSString *desStr1 =index==0?@"大红包，满天飞":@"免费提现，快速到账";
     NSString *desStr2 =index==1?@"增进你我联系":@"真正免费的钱包";
     
-    UILabel *desLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
-    UILabel *desLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 250, 70)];
+    UILabel *desLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,kScaledSizeW(200),kScaledSizeW(50))];
+    UILabel *desLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,kScaledSizeW(250),kScaledSizeW(70))];
 
     desLabel1.text = desStr1;
     desLabel2.text = desStr2;
@@ -79,7 +79,7 @@
     [page addSubview:desLabel2];
     
     [icon mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(300, 300));
+        make.size.mas_equalTo(CGSizeMake(kScaledSizeW(300), kScaledSizeW(300)));
         make.centerX.equalTo(page);
         make.top.equalTo(page).with.offset(kScaledSizeH(98));
     }];
@@ -101,14 +101,14 @@
         skipButton.backgroundColor= kWhiteColor;
         [skipButton setTitleColor:UIColorHex(F34646) forState:UIControlStateNormal];
         
-        kViewBorderRadius(skipButton, 20, 1, UIColorHex(F34646));
+        kViewBorderRadius(skipButton,kScaledSizeW(20), 1, UIColorHex(F34646));
         
         [page addSubview:skipButton];
         
         [skipButton addTarget:self action:@selector(btnclicked) forControlEvents:UIControlEventTouchUpInside];
         
         [skipButton mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(145, 41));
+            make.size.mas_equalTo(CGSizeMake(kScaledSizeW(145),kScaledSizeW(41)));
             make.centerX.equalTo(page);
             make.top.equalTo(desLabel2.mas_bottom).with.offset(kScaledSizeH(46));
         }];

@@ -9,7 +9,7 @@ import {
     View,
     Text,
     Image,
-    ListView, TouchableOpacity, NativeModules,DeviceEventEmitter
+    ListView, TouchableOpacity, NativeModules, DeviceEventEmitter
 } from 'react-native'
 import ApiManager from "../utils/ApiManager";
 import Header from "../components/Header";
@@ -102,7 +102,7 @@ class ReceiveRedPacketPage extends BasePage {
         let request = {
             packetCode: item.packetCode
         };
-        if (item.readStatus === 2) {
+        if (item.receiveStatus === 1) {
             this.setState({
                 isShowProcess: true
             });

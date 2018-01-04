@@ -112,7 +112,10 @@ class NewBindBankCardPage extends BasePage {
 
         if(this.state.param.fromPage == 'withdrawCash'){
             body.bindCardType=4 //GENERAL(1, "普通绑卡"),VERIFIED(2, "实名认证绑卡"),TRANSACTION(3, "交易绑卡"),WITHDRAW(4, "提现绑卡"),
-        }else {
+        }else if (this.state.param.fromPage == 'phoneTopUp'){
+            body.bindCardType=3
+        }
+        else {
             body.bindCardType=1
         }
 
