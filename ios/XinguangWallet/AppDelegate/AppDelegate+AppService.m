@@ -142,7 +142,9 @@
 
 -(void)didReceiveAPNNoti
 {
-
+    if(![GVUserDefaults standardUserDefaults].accessToken){//如果没有登录,不做处理
+        return;
+    }
     XGQBAPPRootViewController *appRootVC = (XGQBAPPRootViewController*)self.window.rootViewController;
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];

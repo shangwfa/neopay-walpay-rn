@@ -271,13 +271,21 @@
 -(void)homeHeaderIconBtnClicked:(UIButton *)btn
 {
     if (btn.tag==10001) {
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"bigRedPacketSimple";
-        [self.navigationController pushViewController:RNVC animated:YES];
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"bigRedPacketSimple";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }
     }else if (btn.tag==10002){
-        XGQBRNViewController *RNVC = [XGQBRNViewController new];
-        RNVC.pageType = @"phoneTopUp";
-        [self.navigationController pushViewController:RNVC animated:YES];
+        if([GVUserDefaults standardUserDefaults].authStatus==XGQBUserAuthStatusUnauthorized){
+            [self checkIDStatus];
+        }else{
+            XGQBRNViewController *RNVC = [XGQBRNViewController new];
+            RNVC.pageType = @"phoneTopUp";
+            [self.navigationController pushViewController:RNVC animated:YES];
+        }
     }
 }
 
