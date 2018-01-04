@@ -82,7 +82,7 @@ class RedListPage extends BasePage {
         let request = {
             packetCode: item.packetCode
         };
-        if (item.readStatus === 2) {
+        if (item.receiveStatus === 1) {
             this.setState({
                 isShowProcess: true
             });
