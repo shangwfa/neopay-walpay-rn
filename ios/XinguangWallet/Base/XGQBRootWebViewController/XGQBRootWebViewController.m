@@ -7,13 +7,17 @@
 //
 
 #import "XGQBRootWebViewController.h"
+#import "WebViewJavascriptBridge.h"
+
 
 #import <WebKit/WebKit.h>
 
-@interface XGQBRootWebViewController ()<WKScriptMessageHandler>
+@interface XGQBRootWebViewController ()
 
 @property (nonatomic,strong) NSURL *url;
 @property (nonatomic,strong) WKWebView *webView;
+
+@property WebViewJavascriptBridge* bridge;
 
 @end
 
@@ -44,12 +48,22 @@
     
     [webView loadRequest:[NSURLRequest requestWithURL:_url]];
     
-    [webView.configuration.userContentController addScriptMessageHandler:self name:@"jsCallNativeGetAccessToken"];
-    [webView.configuration.userContentController addScriptMessageHandler:self name:@"jsCallNativeShowMsg"];
-
-    
     self.view = webView;
     _webView = webView;
+    
+    //WebViewJavascriptBridge相关
+    self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
+    [self.bridge registerHandler:@"jsCallNativeGetAccessToken" handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSString *accessToken = [GVUserDefaults standardUserDefaults].accessToken;
+        responseCallback(accessToken);
+    }];
+    [self.bridge registerHandler:@"jsCallNativeShowMsg" handler:^(id data, WVJBResponseCallback responseCallback) {
+        if ([data isKindOfClass:[NSString class]]) {
+            [SVProgressHUD showInfoWithStatus:(NSString*)data];
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"请输出字符串"];
+        }
+    }];
     
 }
 
@@ -58,25 +72,6 @@
 {
     [super viewDidLoad];
 
-}
-
--(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
-{
-    if ([message.name isEqualToString:@"jsCallNativeGetAccessToken"]) {
-        [self sendAccessToken];
-    } else if ([message.name isEqualToString:@"jsCallNativeShowMsg"]) {
-        [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@",message.body]];
-    }
-}
-
--(void)sendAccessToken
-{
-    NSString *jsStr = [NSString stringWithFormat:@"getAccessToken('%@')",[GVUserDefaults standardUserDefaults].accessToken];
-    [self.webView evaluateJavaScript:jsStr completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-        NSLog(@"%@----%@",result, error);
-    }];
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
