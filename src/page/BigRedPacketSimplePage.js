@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "#C02642",
-        fontSize: 13
+        fontSize: 13,
+        backgroundColor:'transparent'
     },
     img: {
         width: 30,
