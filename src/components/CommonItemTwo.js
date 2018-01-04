@@ -10,6 +10,7 @@ import {colors} from '../constants/index'
 import Divider from '../components/Divider'
 import selected_icon from '../res/img/selected_icon.png'
 import unselected_icon from '../res/img/unselected_icon.png'
+import ScreenUtils from '../utils/ScreenUtils'
 
 const CommonItemTwo = props => {
     const {
@@ -57,6 +58,7 @@ const CommonItemTwo = props => {
         },
         middle_container: {
             marginLeft: 9,
+            width:ScreenUtils.width - 140
         },
         content_container: {
             flexDirection: 'row',
@@ -76,7 +78,7 @@ const CommonItemTwo = props => {
     const renderMiddleValue = () => {
         return <View style={styles.middle_container}>
             <View style = {styles.mid_view}>
-                <Text style={styles.middle_up_value}>{middleUpValue}</Text>
+                <Text numberOfLines={1} style={styles.middle_up_value}>{middleUpValue}</Text>
                 <Image style= {{marginLeft:10,width:20,height:20,resizeMode:'contain'}} source = {imgIconUrl}/>
             </View>
             <Text style={styles.middle_bottom_value}>{middleBottomValue}</Text>
