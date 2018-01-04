@@ -34,13 +34,17 @@ typedef NS_ENUM(NSInteger,XGQBMsgReadStatus) {
     XGQBMsgReadStatusUnread=2,
 };
 
-/*
-1      RECEIVING      领取中
-2      RECEIVED      已领取
-3      EXPIRED      已过期
-4      RECEIVE_FINISHED      已领完
-5      NO_PERMISSION      无权限
-*/
+typedef NS_ENUM(NSInteger,XGQBPayNoticeType) {
+    XGQBPayNoticeTypeMerchantActivity=1,
+    XGQBPayNoticeTypeSystemMsg,
+    XGQBPayNoticeTypeSystemActivity,
+    XGQBPayNoticeTypeMerchantBroadcast,
+};
+
+//MERCHANT_ACTIVITY(1, "商家活动/钜惠进行时"),
+//SYSTEM_MSG(2, "系统消息"),
+//SYSTEM_ACTIVITY(3, "系统活动"),
+//MERCHANT_BROADCAST(4, "商家广播"),
 
 @interface XGQBMessage : NSObject
 
@@ -63,7 +67,7 @@ typedef NS_ENUM(NSInteger,XGQBMsgReadStatus) {
 @property (nonatomic,strong) NSString *luckyAmount;
 @property (nonatomic,strong) NSString *createTime;
 @property (nonatomic,strong) NSString *createTimeMs;
-@property (nonatomic,strong) NSString *payNoticeType;
+@property (nonatomic,assign) XGQBPayNoticeType payNoticeType;
 @property (nonatomic,strong) NSString *payNoticeTypeText;
 @property (nonatomic,strong) NSString *contentString;
 @property (nonatomic,strong) NSString *noticeImageUrl;

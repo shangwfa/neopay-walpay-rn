@@ -25,13 +25,13 @@
     XGQBMsgTableViewCell *cell =[[XGQBMsgTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:message.msgTypeText];
     
     //红包消息//商家活动//系统活动
-    if(message.msgType==XGQBMessageTypeRedPacket||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==3)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==1)){
+    if(message.msgType==XGQBMessageTypeRedPacket||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBPayNoticeTypeSystemActivity)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBPayNoticeTypeMerchantActivity)){
     
         //标题栏
         NSString *titleImgName = @"sy_hongbaolaila5";
-        if (message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==3) {
+        if (message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBPayNoticeTypeMerchantActivity) {
             titleImgName = @"sy_juhui";
-        }else if (message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==1){
+        }else if (message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBPayNoticeTypeSystemActivity){
             titleImgName = @"sy_xitong4";
         }
         UIImageView *titleImgV =[[UIImageView alloc]initWithImage:kIMAGENAMED(titleImgName)];
@@ -48,7 +48,7 @@
         UIImageView *bgImgV =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth-2*12, kScaledSizeW(155))];
         NSString *bgImgUrl = message.themeUrl;
         cell.bgImgV=bgImgV;
-        if ((message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==3)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==1)) {
+        if ((message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBPayNoticeTypeSystemActivity)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBPayNoticeTypeMerchantActivity)) {
             bgImgUrl=message.noticeImageUrl;
         }
         [bgImgV sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:bgImg options:SDWebImageRefreshCached];
@@ -212,7 +212,7 @@
         //标题
         UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 66, 16)];
         title.text=message.msgTypeText;
-        if ((message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==4)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType.intValue==2))//商家广播||系统消息
+        if ((message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBMsgTypeMerchantBroadcast)||(message.msgType==XGQBMessageTypeOtherMsg&&message.payNoticeType==XGQBPayNoticeTypeSystemMsg))//商家广播||系统消息
         {
             title.text = message.payNoticeTypeText;
         }

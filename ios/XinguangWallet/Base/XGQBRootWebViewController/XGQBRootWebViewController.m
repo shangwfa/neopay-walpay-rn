@@ -29,8 +29,8 @@
     
     rootWebViewC.title = title;
     
-//    rootWebViewC.url = url?url:[NSURL URLWithString:@"https://www.xinguang.com"];
-    rootWebViewC.url = [NSURL URLWithString:@"http://172.16.33.117:8000/system-message?code=664725ec7b6d4bf4b18a3497de426d7e"];
+    rootWebViewC.url = url?url:[NSURL URLWithString:@"https://www.xinguang.com"];
+//    rootWebViewC.url = [NSURL URLWithString:@"http://172.16.33.117:8000/system-message?code=664725ec7b6d4bf4b18a3497de426d7e"];
 
     return rootWebViewC;
 }
