@@ -11,6 +11,6 @@
 @interface XGQBRootWebViewController : UIViewController
 
 
-+(instancetype)webViewControllerWithURL:(NSURL*)url andTitle:(NSString*)title;
++(instancetype)webViewControllerWithURLStr:(NSString*)urlstr andTitle:(NSString*)title;
 
 @end

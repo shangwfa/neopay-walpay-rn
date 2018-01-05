@@ -342,7 +342,7 @@
         }
         //其他消息
         else{
-            XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURL:[NSURL URLWithString:message.noticeUrl] andTitle:message.msgTypeText];
+            XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURLStr:message.noticeUrl andTitle:message.msgTypeText];
             [self.navigationController pushViewController:rootWVC animated:YES];
             return;
         }

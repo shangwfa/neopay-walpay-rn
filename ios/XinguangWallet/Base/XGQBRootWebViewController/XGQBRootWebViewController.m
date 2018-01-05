@@ -16,6 +16,7 @@
 
 @property (nonatomic,strong) NSURL *url;
 @property (nonatomic,strong) WKWebView *webView;
+@property (nonatomic,strong) UIProgressView *progressView;
 
 @property WebViewJavascriptBridge* bridge;
 
@@ -23,20 +24,25 @@
 
 @implementation XGQBRootWebViewController
 
-+(instancetype)webViewControllerWithURL:(NSURL *)url andTitle:(NSString*)title
++(instancetype)webViewControllerWithURLStr:(NSString *)urlstr andTitle:(NSString *)title
 {
     XGQBRootWebViewController *rootWebViewC = [[XGQBRootWebViewController alloc]init];
     
     rootWebViewC.title = title;
     
-    rootWebViewC.url = url?url:[NSURL URLWithString:@"https://www.xinguang.com"];
-//    rootWebViewC.url = [NSURL URLWithString:@"http://172.16.33.117:8000/system-message?code=664725ec7b6d4bf4b18a3497de426d7e"];
+//
+//    rootWebViewC.url = url?url:[NSURL URLWithString:@"https://www.xinguang.com"];
+    
+//        rootWebViewC.url = [NSURL URLWithString:@"https://www.baidu.com"];
+    
+    urlstr = @"http://172.16.33.117:8000/system-message?code=664725ec7b6d4bf4b18a3497de426d7e";
+    
+    NSString *accessToken = [GVUserDefaults standardUserDefaults].accessToken;
+    
+    NSString *urlStrMixed = [NSString stringWithFormat:@"%@&accessToken=%@",urlstr,accessToken];
+    
+    rootWebViewC.url = [NSURL URLWithString:urlStrMixed];
 
-    return rootWebViewC;
-}
-
--(void)loadView
-{
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     
     WKPreferences *preferences = [WKPreferences new];
@@ -46,18 +52,18 @@
     
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) configuration:config];
     
-    [webView loadRequest:[NSURLRequest requestWithURL:_url]];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStrMixed]]];
     
-    self.view = webView;
-    _webView = webView;
-    
+    [rootWebViewC.view addSubview:webView];
+    rootWebViewC.webView = webView;
+
     //WebViewJavascriptBridge相关
-    self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
-    [self.bridge registerHandler:@"jsCallNativeGetAccessToken" handler:^(id data, WVJBResponseCallback responseCallback) {
+    rootWebViewC.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
+    [rootWebViewC.bridge registerHandler:@"jsCallNativeGetAccessToken" handler:^(id data, WVJBResponseCallback responseCallback) {
         NSString *accessToken = [GVUserDefaults standardUserDefaults].accessToken;
         responseCallback(accessToken);
     }];
-    [self.bridge registerHandler:@"jsCallNativeShowMsg" handler:^(id data, WVJBResponseCallback responseCallback) {
+    [rootWebViewC.bridge registerHandler:@"jsCallNativeShowMsg" handler:^(id data, WVJBResponseCallback responseCallback) {
         if ([data isKindOfClass:[NSString class]]) {
             [SVProgressHUD showInfoWithStatus:(NSString*)data];
         }else{
@@ -65,8 +71,46 @@
         }
     }];
     
+    [rootWebViewC.webView addObserver:rootWebViewC forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    
+    
+    
+    UIProgressView *progressView = [[UIProgressView alloc]initWithFrame:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height+44, kScreenWidth, 2)];
+    
+    [rootWebViewC.view addSubview:progressView];
+    
+    progressView.progressViewStyle = UIProgressViewStyleDefault;
+//
+//    progressView.backgroundColor = kYellowColor;
+//    progressView.progressTintColor = kBlueColor;
+//    progressView.transform = CGAffineTransformMakeScale(1.0f, 1.5f);
+    
+    rootWebViewC.progressView = progressView;
+    
+    return rootWebViewC;
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+
+    kWeakSelf(self);
+    if ([keyPath isEqualToString:@"estimatedProgress"]) {
+        CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
+        if (newprogress==1) {
+            [UIView animateWithDuration:.5f animations:^{
+                weakself.progressView.progress=0;
+                weakself.progressView.hidden = YES;
+            }];
+        }else{
+            [UIView animateWithDuration:.5f animations:^{
+                weakself.progressView.hidden = NO;
+                weakself.progressView.progress = self.webView.estimatedProgress;
+            }];
+        }
+    }else{
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
 -(void)viewDidLoad
 {
@@ -83,7 +127,7 @@
     [super viewWillAppear:animated];
     
     [kNotificationCenter postNotificationName:kNotificationNavPushToSecondLevel object:nil];
-
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -91,5 +135,11 @@
     [super viewWillDisappear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
+
+- (void)dealloc {
+    
+    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+}
+
 
 @end

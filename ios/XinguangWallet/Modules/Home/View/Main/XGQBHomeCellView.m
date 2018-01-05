@@ -172,11 +172,11 @@ static NSString *const cellId = @"cellId";
             [rootVC.rootNAV pushViewController:RNVC animated:YES];
         }
     }else if(indexPath.section==0&&indexPath.row==0){//点击了员工贷款
-        XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURL:[NSURL URLWithString:@"http://www.xinguang.com"] andTitle:@"员工贷款"];
+        XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURLStr:@"http://www.xinguang.com" andTitle:@"员工贷款"];
         [rootVC.rootNAV pushViewController:rootWVC animated:YES];
         
     }else if(indexPath.section==0&&indexPath.row==1){//点击了四季严选
-        XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURL:[NSURL URLWithString:@"http://www.xinguang.com"] andTitle:@"四季严选"];
+        XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURLStr:@"http://www.xinguang.com" andTitle:@"四季严选"];
         [rootVC.rootNAV pushViewController:rootWVC animated:YES];
     }else{
         JKLog();
