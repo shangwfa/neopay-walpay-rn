@@ -62,5 +62,8 @@
 /// 上传极光推送registrationID
 +(void)uploadUserDevice:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
 
+/// 更新消息已读状态
++(void)updateReadStatusMsg:(NSMutableDictionary*)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn;
+
 @end
 

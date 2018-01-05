@@ -54,6 +54,7 @@ typedef NS_ENUM(NSInteger,XGQBPayNoticeType) {
 @property (nonatomic,assign) BOOL disPlayDate;
 @property (nonatomic,strong) NSString *iconUrl;
 @property (nonatomic,strong) NSString *ID;
+@property (nonatomic,strong) NSString *billId;
 @property (nonatomic,strong) NSString *packetCode;
 @property (nonatomic,strong) NSString *uuid;
 @property (nonatomic,assign) XGQBMsgReadStatus readStatus;

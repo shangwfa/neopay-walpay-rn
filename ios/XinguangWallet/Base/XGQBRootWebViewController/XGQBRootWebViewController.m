@@ -35,11 +35,21 @@
     
 //        rootWebViewC.url = [NSURL URLWithString:@"https://www.baidu.com"];
     
-    urlstr = @"http://172.16.33.117:8000/system-message?code=664725ec7b6d4bf4b18a3497de426d7e";
+    urlstr = urlstr?urlstr:@"www.xinguang.com";
     
     NSString *accessToken = [GVUserDefaults standardUserDefaults].accessToken;
     
-    NSString *urlStrMixed = [NSString stringWithFormat:@"%@&accessToken=%@",urlstr,accessToken];
+    NSString *urlStrMixed = [NSString string];
+    
+    if([urlstr containsString:@"walpay"]){
+        urlStrMixed = [NSString stringWithFormat:@"%@&accessToken=%@",urlstr,accessToken];
+    }else{
+        urlStrMixed = urlstr;
+    }
+    
+    if(![[urlStrMixed substringWithRange:NSMakeRange(0, 4)]isEqualToString:@"http"]){
+        urlStrMixed = [urlStrMixed stringByReplacingCharactersInRange:NSMakeRange(0, 0) withString:@"http://"];
+    }
     
     rootWebViewC.url = [NSURL URLWithString:urlStrMixed];
 

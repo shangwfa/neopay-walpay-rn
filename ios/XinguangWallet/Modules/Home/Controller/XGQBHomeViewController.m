@@ -293,6 +293,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_homeTVC.messArr.count) {//如果有消息
+        
         XGQBMessage *message = _homeTVC.messArr[indexPath.row];
         
         //红包消息
@@ -344,8 +345,21 @@
         else{
             XGQBRootWebViewController *rootWVC = [XGQBRootWebViewController webViewControllerWithURLStr:message.noticeUrl andTitle:message.msgTypeText];
             [self.navigationController pushViewController:rootWVC animated:YES];
-            return;
         }
+        
+        //更新消息已读状态
+        NSMutableDictionary *body = [NSMutableDictionary dictionaryWithCapacity:10];
+        [body setObject:message.ID forKey:@"id"];
+        [body setObject:[NSNumber numberWithInteger:message.msgType] forKey:@"msgType"];
+        [body setObject:[GVUserDefaults standardUserDefaults].accessToken forKey:@"accessToken"];
+        //        [body setObject:@"billId" forKey:message.billId];
+        
+        [MemberCoreService updateReadStatusMsg:body andSuccessFn:^(id responseAfter, id responseBefore) {
+            nil;
+        } andFailerFn:^(NSError *error) {
+            nil;
+        }];
+
     }else{//没有消息
         return;
     }

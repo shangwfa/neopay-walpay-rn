@@ -125,5 +125,11 @@
     [self AFPOSTNetworkWithUrl:@"assist/upload_user_device" andBody:body andSuccess:successFn andFailer:failerFn];
 }
 
+/// 更新消息已读状态
++(void)updateReadStatusMsg:(NSMutableDictionary *)body andSuccessFn:(serverSuccessFn)successFn andFailerFn:(serverFailureFn)failerFn
+{
+    [self AFPOSTNetworkWithUrl:@"message/update_read_status_msg" andBody:body andSuccess:successFn andFailer:failerFn];
+}
+
 @end
 

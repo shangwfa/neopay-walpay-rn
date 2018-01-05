@@ -46,15 +46,15 @@ class PayMessagePage extends BasePage {
                 this.setState({data: data})
             }
 
-            if(data.length>0){
-                let firstMsg = data[0];
-                //标记第一条消息已读
-                ApiManager.queryMsgBillDetail({"billId": firstMsg.billId,"msgType":firstMsg.msgType,"id":firstMsg.id}, (data) => {
-                    this.setState({
-                        sourceData: data,
-                    });
-                });
-            }
+            // if(data.length>0){
+            //     let firstMsg = data[0];
+            //     //标记第一条消息已读
+            //     ApiManager.queryMsgBillDetail({"billId": firstMsg.billId,"msgType":firstMsg.msgType,"id":firstMsg.id}, (data) => {
+            //         this.setState({
+            //             sourceData: data,
+            //         });
+            //     });
+            // }
         })
     }
 
