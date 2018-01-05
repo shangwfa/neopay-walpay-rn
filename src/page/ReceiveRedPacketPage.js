@@ -102,24 +102,20 @@ class ReceiveRedPacketPage extends BasePage {
         let request = {
             packetCode: item.packetCode
         };
-        if (item.receiveStatus === 1) {
-            this.setState({
-                isShowProcess: true
-            });
-            ApiManager.receiveRedPacket(request, (data) => {
-                setTimeout(() => {
-                    this.handleShowProcess();
-                    this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
-                }, 2000);
-            }, (errorData) => {//数据错误
+        this.setState({
+            isShowProcess: true
+        });
+        ApiManager.receiveRedPacket(request, (data) => {
+            setTimeout(() => {
                 this.handleShowProcess();
-                NativeModules.commModule.toast(errorData.retMsg);
-            }, (errData) => {//网络超时
-                this.handleShowProcess();
-            });
-        } else {
-            this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
-        }
+                this.props.navigation.navigate(RouterPaths.RP_DETAIL_PAGE, request);
+            }, 2000);
+        }, (errorData) => {//数据错误
+            this.handleShowProcess();
+            NativeModules.commModule.toast(errorData.retMsg);
+        }, (errData) => {//网络超时
+            this.handleShowProcess();
+        });
     };
     handleShowProcess = () => {
         this.setState({
