@@ -202,18 +202,19 @@ class SendRedPacketPage extends BasePage {
     };
     _handleAuthMsgTextChangeClick = (text) => {
         if (text.length === 6) {
+            const {payResultSourceData}=this.state;
             let request = {
                 packetCode: this.state.redPacketSourceData.packetCode,
-                orderNo: this.state.payResultSourceData.orderNo,
+                orderNo: payResultSourceData.orderNo,
                 verifyCode: text,
             };
             let redPacketResult = {
                 redPacketState: false,
-                orderNo: this.state.payResultSourceData.orderNo,
-                packetCode: this.state.payResultSourceData.packetCode,
-                amount: this.state.payResultSourceData.amount,
-                totalCount: this.state.payResultSourceData.totalCount,
-                payTypeDesc: this.state.payResultSourceData.payTypeDesc,
+                orderNo: payResultSourceData.orderNo,
+                packetCode: payResultSourceData.packetCode,
+                amount: payResultSourceData.amount,
+                totalCount: payResultSourceData.totalCount,
+                payTypeDesc: payResultSourceData.payTypeDesc,
             };
             this.setState({
                 isShowWarpAction: true
@@ -308,7 +309,7 @@ class SendRedPacketPage extends BasePage {
     };
     _handleRefreshBack = () => {
         this.refs.selectPayStyleModal._handleRequest();
-        ApiManager.getRecentPayType({}, (data) => {
+        ApiManager.getRecentPayType({payType: 1}, (data) => {
             this.setState({
                 payTypeSourceData: data,
                 payType: data.payType,
@@ -414,17 +415,18 @@ class SendRedPacketPage extends BasePage {
     }
 
     _handlePayRedPacketResult(data) {
-        if (this.state.payResultSourceData) {
+        const {payResultSourceData} = this.state;
+        if (payResultSourceData) {
             this.setState({
                 isShowPay: false,
             });
             let redPacketResult = {
                 redPacketState: false,
-                orderNo: this.state.payResultSourceData.orderNo,
-                packetCode: this.state.payResultSourceData.packetCode,
-                amount: this.state.payResultSourceData.amount,
-                totalCount: this.state.payResultSourceData.totalCount,
-                payTypeDesc: this.state.payResultSourceData.payTypeDesc,
+                orderNo: payResultSourceData.orderNo,
+                packetCode: payResultSourceData.packetCode,
+                amount: payResultSourceData.amount,
+                totalCount: payResultSourceData.totalCount,
+                payTypeDesc: payResultSourceData.payTypeDesc,
             };
             this._handleRedPacketJump(data, redPacketResult);
             this._handleRedPackProcess(data, redPacketResult);
@@ -622,7 +624,6 @@ class SendRedPacketPage extends BasePage {
         let contentFront = `实付金额`;
         let tempAmount = this.state.payAllAmount;
         let contentBack = `${FormatUtils.money(tempAmount)}元`;
-        console.log("----this.state.payTypeSourceData.payTypeDesc------->" + this.state.payTypeSourceData.payTypeDesc)
         this.setState({
             contentFront: contentFront,
             contentBack: contentBack,
